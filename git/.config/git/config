@@ -2,15 +2,19 @@
 [user]
 	name = George Benjamin-Schonberger
 	email = george.benjamin@gmail.com
+
 [http]
 	sslVerify = true
 	sslBackend = openssl
+
 [init]
 	defaultBranch = main
+
 [core]
 	editor = nano
 	# whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	# pager = delta
+
 [alias]
 	cma = "!f() { \
 		trap '[ $? -eq 0 ] && exit 0 || echo \"ERROR: Operation failed\"; exit' EXIT; \
@@ -59,6 +63,17 @@
 		echo \"----> git checkout -b '$1'\"; \
 		git checkout -b \"$1\"; \
 	}; f"
+	############
+	find = log --graph --oneline --all --decorate --date-order --regexp-ignore-case --extended-regexp --grep
+  last = log -1
+  lg = log --color --graph --pretty=custom --abbrev-commit
+  quicklog = log --oneline --decorate -10 --pretty=custom
+  quicklog-long = log --oneline --decorate --pretty=custom
+  rfind = log --graph --oneline --all --decorate --date-order --regexp-ignore-case --extended-regexp --invert-grep --grep
+  search = grep --line-number --ignore-case -E -I
+  today = diff --stat 'HEAD@{midnight}'
+  yesterday = diff --stat 'HEAD@{yesterday}' 'HEAD@{midnight}'
+  clone = git clone -s --single-branch
 	############
 	a = add
 	aa = add --all
@@ -179,3 +194,27 @@
 	wp = show -p
 	wr = show -p --no-color
 	#############
+
+[color "branch"]
+    current = yellow bold
+    local = white bold
+    remote = cyan bold
+
+[color "diff"]
+    meta = 11
+    frag = magenta bold
+    commit = yellow bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+
+[color "status"]
+    added = green bold
+    changed = yellow bold
+    untracked = red bold

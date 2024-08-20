@@ -2,6 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export ZSH="$HOME/.oh-my-zsh"
+export EDITOR="nano"
 
 ZSH_THEME="fox"
 
@@ -25,6 +26,8 @@ source $ZSH/oh-my-zsh.sh
 alias ls='eza -a --icons'
 alias ll='eza -al --icons'
 alias lt='eza -a --tree --level=1 --icons'
+alias pacman="sudo pacman"
+alias systemctl="sudo systemctl"
 
 # homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
