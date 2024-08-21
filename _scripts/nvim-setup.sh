@@ -4,21 +4,28 @@
 # NeoVim dot files setup
 ###
 
-## Init
-declare -A ARGS=(
-    ["action"]=""
-)
-if [[ -d "${0%/*}" ]]; then
-  DIR=${0%/*}
-else
-  DIR="$PWD";
+if [[ -z "$VV" ]]; then
+  ## Init
+  if [[ -d "${0%/*}" ]]; then
+    DIR=${0%/*}
+  else
+    DIR="$PWD";
+  fi
+
+  ## Includes
+  . "$DIR/helpers.sh"
 fi
 
-# Includes
-. "$DIR/helpers.sh"
-secho "ARGS:"
-for x in "${!ARGS[@]}"; do secho ">>$x: ${ARGS[$x]}" ; done
+## Startup debug
+decho "cyan" "Running nvim $ACTION..."
 
 ## Main
-secho "stow --dir="$HOME/.dotfiles" --target="$HOME" ${ARGS["action"]} nvim $(get_vv)"
-stow --dir="$HOME/.dotfiles" --target="$HOME" ${ARGS["action"]} nvim $VERBOSE
+
+STOW_COMMAND=$(get_stow_command nvim)
+decho "magenta" "$STOW_COMMAND"
+if [ "$DRY_RUN" -ne "1" ]; then
+  . "$STOW_COMMAND"
+fi
+
+cecho "green" "nvim setup done"
+
