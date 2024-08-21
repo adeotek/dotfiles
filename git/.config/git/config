@@ -5,7 +5,7 @@
 
 [http]
 	sslVerify = true
-	sslBackend = openssl
+  # sslBackend = openssl
 
 [init]
 	defaultBranch = main
