@@ -1,1 +1,3 @@
-# dotfiles
+# AdeoTEK Linux dotfiles collection
+
+

@@ -1,0 +1,220 @@
+# This is Git's per-user configuration file.
+[user]
+	name = George Benjamin-Schonberger
+	email = george.benjamin@gmail.com
+
+[http]
+	sslVerify = true
+	sslBackend = openssl
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = nano
+	# whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	# pager = delta
+
+[alias]
+	cma = "!f() { \
+		trap '[ $? -eq 0 ] && exit 0 || echo \"ERROR: Operation failed\"; exit' EXIT; \
+		echo \"----> git add --all\"; \
+		git add --all; \
+		echo \"----> git commit -m '$1'\"; \
+		git commit -m \"$1\"; \
+	}; f"
+	pcma = "!f() { \
+		trap '[ $? -eq 0 ] && exit 0 || echo \"ERROR: Operation failed\"; exit' EXIT; \
+		echo \"----> git add --all\"; \
+		git add --all; \
+		echo \"----> git commit -m '$1'\"; \
+		git commit -m \"$1\"; \
+		echo \"----> git push --set-upstream origin\"; \
+		git branch | grep '* ' | awk '{print $2}' | xargs git push --set-upstream origin; \
+	}; f"
+	blp = "!f() { \
+		trap '[ $? -eq 0 ] && exit 0 || echo \"ERROR: Operation failed\"; exit' EXIT; \
+		echo \"----> git fetch --prune\"; \
+		git fetch --prune; \
+		echo \"----> prune local branches deleted from remote/origin\"; \
+		git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs -r git branch -D; \
+	}; f"
+	omblp = "!f() { \
+		trap '[ $? -eq 0 ] && exit 0 || echo \"ERROR: Operation failed\"; exit' EXIT; \
+		echo \"----> git checkout main\"; \
+		git checkout main; \
+		echo \"----> git fetch --prune\"; \
+		git fetch --prune; \
+		echo \"----> prune local branches deleted from remote/origin\"; \
+		git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs -r git branch -D; \
+		echo \"----> git merge origin/main\"; \
+		git merge origin/main; \
+	}; f"
+	omblpob = "!f() { \
+		trap '[ $? -eq 0 ] && exit 0 || echo \"ERROR: Operation failed\"; exit' EXIT; \
+		echo \"----> git checkout main\"; \
+		git checkout main; \
+		echo \"----> git fetch --prune\"; \
+		git fetch --prune; \
+		echo \"----> prune local branches deleted from remote/origin\"; \
+		git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs -r git branch -D; \
+		echo \"----> git merge origin/main\"; \
+		git merge origin/main; \
+		echo \"----> git checkout -b '$1'\"; \
+		git checkout -b \"$1\"; \
+	}; f"
+	############
+	find = log --graph --oneline --all --decorate --date-order --regexp-ignore-case --extended-regexp --grep
+  last = log -1
+  lg = log --color --graph --pretty=custom --abbrev-commit
+  quicklog = log --oneline --decorate -10 --pretty=custom
+  quicklog-long = log --oneline --decorate --pretty=custom
+  rfind = log --graph --oneline --all --decorate --date-order --regexp-ignore-case --extended-regexp --invert-grep --grep
+  search = grep --line-number --ignore-case -E -I
+  today = diff --stat 'HEAD@{midnight}'
+  yesterday = diff --stat 'HEAD@{yesterday}' 'HEAD@{midnight}'
+  clone = git clone -s --single-branch
+	############
+	a = add
+	aa = add --all
+	############
+	b = branch
+	ba = branch -a
+	bd = branch -d
+	bdd = branch -D
+	br = branch -r
+	############
+	c = commit
+	ca = commit -a
+	cm = commit -m
+	cam = commit -am
+	cd = commit --amend
+	cad = commit -a --amend
+	#############
+	cp = cherry-pick
+	cpa = cherry-pick --abort
+	cpc = cherry-pick --continue
+	#############
+	d = diff
+	dp = diff --patience
+	dc = diff --cached
+	dk = diff --check
+	dck = diff --cached --check
+	dt = difftool
+	dct = difftool --cached
+	#############
+	f = fetch
+	fa = fetch --all
+	fp = fetch --prune
+	fo = fetch origin
+	# fu = fetch upstream
+	#############
+	g = grep -p
+	#############
+	l = log --oneline
+	lg = log --oneline --graph --decorate
+	#############
+	ls = ls-files
+	lsf = !git ls-files | grep -i
+	#############
+	m = merge
+	ma = merge --abort
+	mc = merge --continue
+	ms = merge --skip
+    mom = merge origin/main
+	#############
+	o = checkout
+	om = checkout main
+	ob = checkout -b
+	# opr = !sh -c 'git fo pull/$1/head:pr-$1 && git o pr-$1'
+	#############
+	ps = push
+	psu = push --set-upstream
+	psuo = push --set-upstream origin
+	pst = push --tags
+	#############
+	pl = pull
+	pb = pull --rebase
+	#############
+	# rb = rebase
+	# rba = rebase --abort
+	# rbc = rebase --continue
+	# rbi = rebase --interactive
+	# rbs = rebase --skip
+	#############
+	re = reset
+	rh = reset HEAD
+	reh = reset --hard
+	# rem = reset --mixed
+	# res = reset --soft
+	rehh = reset --hard HEAD
+	# remh = reset --mixed HEAD
+	# resh = reset --soft HEAD
+	# rehom = reset --hard origin/main
+	#############
+	r = remote
+	ra = remote add
+	rr = remote rm
+	rv = remote -v
+	rn = remote rename
+	rp = remote prune
+	rs = remote show
+	# rao = remote add origin
+	# rau = remote add upstream
+	# rro = remote remove origin
+	# rru = remote remove upstream
+	# rso = remote show origin
+	# rsu = remote show upstream
+	# rpo = remote prune origin
+	# rpu = remote prune upstream
+	#############
+	# rmf = rm -f
+	# rmrf = rm -r -f
+	#############
+	s = status
+	sb = status -s -b
+	#############
+	sa = stash apply
+	sc = stash clear
+	sd = stash drop
+	sl = stash list
+	sp = stash pop
+	ss = stash save
+	ssk = stash save -k
+	sw = stash show
+	st = !git stash list | wc -l 2>/dev/null | grep -oEi '[0-9][0-9]*'
+	#############
+	sw = switch
+	swc = switch -c
+	#############
+	t = tag
+	td = tag -d
+	#############
+	w = show
+	wp = show -p
+	wr = show -p --no-color
+	#############
+
+[color "branch"]
+    current = yellow bold
+    local = white bold
+    remote = cyan bold
+
+[color "diff"]
+    meta = 11
+    frag = magenta bold
+    commit = yellow bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+
+[color "status"]
+    added = green bold
+    changed = yellow bold
+    untracked = red bold
