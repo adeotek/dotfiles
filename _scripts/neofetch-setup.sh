@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-# yazi setup script
+# neofetch setup script
 ###
 
 # Init
@@ -15,8 +15,8 @@ if [[ -z "$VV" ]]; then
 fi
 
 # Install
-. "$SDIR/yazi-install.sh"
+. "$SDIR/neofetch-install.sh"
 
 # Setup
-stow_package "yazi" "" "$HOME/.config/yazi"
+stow_package "neofetch" "" "$HOME/.config/neofetch"
 

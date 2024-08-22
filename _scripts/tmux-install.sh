@@ -4,17 +4,16 @@
 # tmux install script
 ###
 
+# Init
+if [[ -d "${0%/*}" ]]; then
+  IDIR=${0%/*}
+else
+  IDIR="$PWD";
+fi
 if [[ -z "$VV" ]]; then
-  ## Init
-  if [[ -d "${0%/*}" ]]; then
-    DIR=${0%/*}
-  else
-    DIR="$PWD";
-  fi
-
-  ## Includes
-  . "$DIR/../core/helpers.sh"
+  . "$IDIR/core/helpers.sh"
 fi
 
+# Install
 install_package "tmux" "tmux -V"
 

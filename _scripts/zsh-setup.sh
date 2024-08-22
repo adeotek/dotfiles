@@ -4,20 +4,18 @@
 # zsh setup script
 ###
 
+# Init
+if [[ -d "${0%/*}" ]]; then
+  SDIR=${0%/*}
+else
+  SDIR="$PWD";
+fi
 if [[ -z "$VV" ]]; then
-  ## Init
-  if [[ -d "${0%/*}" ]]; then
-    DIR=${0%/*}
-  else
-    DIR="$PWD";
-  fi
-
-  ## Includes
-  . "$DIR/core/helpers.sh"
+  . "$SDIR/core/helpers.sh"
 fi
 
 # Install
-. "$DIR/zsh-install.sh"
+. "$SDIR/zsh-install.sh"
 
 # Setup
 stow_package "zsh" "" "" "$HOME/.zshrc"
