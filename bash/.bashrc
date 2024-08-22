@@ -5,32 +5,29 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
-### AdeoTEK start
+# Load config and plugins
+source $HOME/.config/bash/config.bash
 
 export LC_ALL='C.UTF-8'
-export EDITOR=nano
+export EDITOR="nvim"
 export PATH=$PATH:~/.local/bin
 
-alias ll='ls -lAF'
+if $(command -v eza >/dev/null 2>&1); then
+  alias ls='eza -a --icons'
+  alias ll='eza -al --icons'
+  alias lt='eza -a --tree --level=1 --icons'
+else
+  alias ls='ls --color=auto'
+  alias grep='grep --color=auto'
+  alias ll='ls -lAF'
+fi
+alias pacman="sudo pacman"
+alias apt="sudo apt"
+alias systemctl="sudo systemctl"
 alias vim="nvim"
 
 # homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-# zoxide
-eval "$(zoxide init bash)"
-# yazi
-function yy() {
-        local tmp="/tmp/yazi-cwd.wDMzCh"
-        yazi "$@" --cwd-file="$tmp"
-        if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-                builtin cd -- "$cwd"
-        fi
-        rm -f -- "$tmp"
-}
 
-# Oh My Posh bash config
-eval "$(oh-my-posh --init --shell bash --config ~/.config/oh-my-posh/gbs.omp.yaml)"

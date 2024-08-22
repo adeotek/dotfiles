@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-# zsh setup script
+# NeoVim setup script
 ###
 
 # Init
@@ -11,12 +11,11 @@ else
   SDIR="$PWD";
 fi
 if [[ -z "$VV" ]]; then
-  . "$SDIR/core/helpers.sh"
+  . "$SDIR/helpers.sh"
 fi
 
 # Install
-. "$SDIR/zsh-install.sh"
+. "$SDIR/nvim-install.sh"
 
 # Setup
-stow_package "zsh" "" "" "$HOME/.zshrc"
-
+stow_package "nvim" "" "$HOME/.config/nvim"

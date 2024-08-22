@@ -11,7 +11,7 @@ else
   SDIR="$PWD";
 fi
 if [[ -z "$VV" ]]; then
-  . "$SDIR/core/helpers.sh"
+  . "$SDIR/helpers.sh"
 fi
 
 # Install

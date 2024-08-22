@@ -4,26 +4,39 @@
 # Set-up zsh
 source $HOME/.config/zsh/config.zsh
 
+export LC_ALL='C.UTF-8'
 export EDITOR="nvim"
+export PATH=$PATH:~/.local/bin
 
 # Display Pokemon-colorscripts
 # Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
 # pokemon-colorscripts --no-title -s -r
 
 # Set-up icons for files/folders in terminal
-alias ls='eza -a --icons'
-alias ll='eza -al --icons'
-alias lt='eza -a --tree --level=1 --icons'
+if $(command -v eza >/dev/null 2>&1); then
+  alias ls='eza -a --icons'
+  alias ll='eza -al --icons'
+  alias lt='eza -a --tree --level=1 --icons'
+else
+  alias ls='ls --color=auto'
+  alias grep='grep --color=auto'
+  alias ll='ls -lAF'
+fi
 alias pacman="sudo pacman"
 alias apt="sudo apt"
 alias systemctl="sudo systemctl"
+alias vim="nvim"
 
-# homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
+
+# homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# start neofetch
 neofetch
+

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-# NeoVim setup script
+# neofetch setup script
 ###
 
 # Init
@@ -11,12 +11,12 @@ else
   SDIR="$PWD";
 fi
 if [[ -z "$VV" ]]; then
-  . "$SDIR/core/helpers.sh"
+  . "$SDIR/helpers.sh"
 fi
 
 # Install
-. "$SDIR/nvim-install.sh"
+. "$SDIR/neofetch-install.sh"
 
 # Setup
-stow_package "nvim" "" "$HOME/.config/nvim"
+stow_package "neofetch" "" "$HOME/.config/neofetch"
 

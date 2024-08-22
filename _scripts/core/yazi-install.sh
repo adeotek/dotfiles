@@ -11,16 +11,18 @@ else
   IDIR="$PWD";
 fi
 if [[ -z "$VV" ]]; then
-  . "$IDIR/core/helpers.sh"
+  . "$IDIR/helpers.sh"
 fi
 
 # Install
 case $CURRENT_OS_ID in
   arch)
+    sudo pacman -S --noconfirm --needed ffmpegthumbnailer p7zip poppler imagemagick
     install_package "yazi" "yazi -V"
   ;;
   debian|ubuntu)
     . "$IDIR/homebrew-install.sh"
+    brew install ffmpegthumbnailer sevenzip poppler imagemagick
     install_package "yazi" "yazi -V" "brew install yazi"
   ;;
   *)

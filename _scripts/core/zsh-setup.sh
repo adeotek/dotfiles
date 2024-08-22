@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-# neofetch setup script
+# zsh setup script
 ###
 
 # Init
@@ -11,12 +11,12 @@ else
   SDIR="$PWD";
 fi
 if [[ -z "$VV" ]]; then
-  . "$SDIR/core/helpers.sh"
+  . "$SDIR/helpers.sh"
 fi
 
 # Install
-. "$SDIR/neofetch-install.sh"
+. "$SDIR/zsh-install.sh"
 
 # Setup
-stow_package "neofetch" "" "$HOME/.config/neofetch"
+stow_package "zsh" "" "" "$HOME/.zshrc"
 
