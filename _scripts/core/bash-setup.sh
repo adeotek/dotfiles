@@ -10,9 +10,9 @@ declare -A ARGS=(
 )
 if [[ -z "$CDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}/_scripts/core"
+    CDIR="${0%/*}"
   else
-    CDIR="$PWD/_scripts/core";
+    CDIR="$PWD";
   fi
   source "$CDIR/_helpers.sh"
 fi
@@ -20,10 +20,10 @@ process_args $@
 
 # Setup
 if [ "${ARGS["prompt"]}" == "oh-my-posh" ]; then
-  . "$CDIR/oh-my-posh-install.sh"
+  . "$CDIR/oh-my-posh-setup.sh"
 fi
 if [ "${ARGS["prompt"]}" == "starship" ]; then
-  . "$CDIR/starship-install.sh"
+  . "$CDIR/starship-setup.sh"
 fi
 stow_package "bash" "" "" "$HOME/.bashrc"
 

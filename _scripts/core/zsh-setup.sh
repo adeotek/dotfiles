@@ -10,9 +10,9 @@ declare -A ARGS=(
 )
 if [[ -z "$CDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}/_scripts/core"
+    CDIR="${0%/*}"
   else
-    CDIR="$PWD/_scripts/core";
+    CDIR="$PWD";
   fi
   source "$CDIR/_helpers.sh"
 fi
@@ -23,10 +23,10 @@ source "$CDIR/zsh-install.sh"
 
 # Setup
 if [ "${ARGS["prompt"]}" == "oh-my-posh" ]; then
-  source "$CDIR/oh-my-posh-install.sh"
+  source "$CDIR/oh-my-posh-setup.sh"
 fi
 if [ "${ARGS["prompt"]}" == "starship" ]; then
-  source "$CDIR/starship-install.sh"
+  source "$CDIR/starship-setup.sh"
 fi
 
 stow_package "zsh" "" "" "$HOME/.zshrc"

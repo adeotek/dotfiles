@@ -4,9 +4,25 @@
 # Helpers for install/setup scripts
 ###
 
+# Global system variables
+CURRENT_OS_ID="$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)"
+CURRENT_OS_VER="$(sed -n 's/^VERSION_ID=\(.*\)/\1/p' /etc/os-release)"
+
+# Global variables and CLI arguments
+VV="0"
+DRY_RUN="0"
+ACTION="init"
+
 # Global functions
 
 function process_args {
+  if [[ "${#1}" -gt 0 && "${1:0:1}" == "-" ]]; then
+    ACTION="init"
+  else
+    ACTION="$1"
+    shift
+  fi
+
   while [[ $# -gt 0 ]]; do
     case $1 in
       -v|--verbose)
@@ -247,21 +263,6 @@ function stow_package() {
 
 # Main
 decho "white" "Loading _helpers.sh..."
-
-# Global system variables
-CURRENT_OS_ID="$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)"
-CURRENT_OS_VER="$(sed -n 's/^VERSION_ID=\(.*\)/\1/p' /etc/os-release)"
-
-# Global variables and CLI arguments
-VV="0"
-DRY_RUN="0"
-if [[ "${#1}" -gt 0 && "${1:0:1}" == "-" ]]; then
-  ACTION="init"
-else
-  ACTION="$1"
-  shift
-fi
-
 if [ ! -z "$@" ]; then
   process_args "$@"
 fi
