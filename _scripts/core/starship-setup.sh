@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-# hyprland setup script
+# Starship setup script
 ###
 
 # Init
@@ -15,4 +15,7 @@ if [[ -z "$CDIR" ]]; then
 fi
 
 # Install
-cecho "yellow" "WARNING: hyprland setup not implemented yet!"
+. "$CDIR/starship-install.sh"
+
+# Setup
+stow_package "starship" "" "$HOME/.config/starship"

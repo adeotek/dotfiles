@@ -7,9 +7,9 @@
 # Init
 if [[ -z "$CDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}/_scripts/core"
+    CDIR="${0%/*}"
   else
-    CDIR="$PWD/_scripts/core";
+    CDIR="$PWD";
   fi
   source "$CDIR/_helpers.sh"
 fi
@@ -20,7 +20,7 @@ case $CURRENT_OS_ID in
     ## Base tools
     sudo pacman -S --noconfirm --needed curl wget mc netcat nano vi whois
     ## CLI tools
-    sudo pacman -S --noconfirm --needed jq fd ripgrep fzf tldr bat tree htop zoxide bash-completion
+    sudo pacman -S --noconfirm --needed jq fd ripgrep fzf tldr bat tree htop zoxide bash-completion stow
     ## eza (ls alternative)
     sudo pacman -S --noconfirm --needed eza
   ;;
@@ -31,7 +31,7 @@ case $CURRENT_OS_ID in
     ## Base tools
     sudo apt install -y curl wget mc netcat-traditional nano whois
     ## CLI tools
-    sudo apt install -y jq fd-find ripgrep tldr bat tree htop zoxide bash-completion
+    sudo apt install -y jq fd-find ripgrep tldr bat tree htop zoxide bash-completion stow
     ln -s $(which fdfind) ~/.local/bin/fd
     brew install fzf
     ## eza (ls alternative)

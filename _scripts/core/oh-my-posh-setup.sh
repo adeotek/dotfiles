@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-# hyprland setup script
+# OhMyPosh setup script
 ###
 
 # Init
@@ -15,4 +15,7 @@ if [[ -z "$CDIR" ]]; then
 fi
 
 # Install
-cecho "yellow" "WARNING: hyprland setup not implemented yet!"
+. "$CDIR/oh-my-posh-install.sh"
+
+# Setup
+stow_package "oh-my-posh" "" "$HOME/.config/oh-my-posh"
