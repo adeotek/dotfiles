@@ -7,6 +7,9 @@
 
 PS1='[\u@\h \W]\$ '
 
+# homebrew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # Load config and plugins
 source $HOME/.config/bash/config.bash
 
@@ -27,7 +30,3 @@ alias pacman="sudo pacman"
 alias apt="sudo apt"
 alias systemctl="sudo systemctl"
 alias vim="nvim"
-
-# homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-

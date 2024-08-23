@@ -7,9 +7,9 @@
 # Init
 if [[ -z "$CDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}/_scripts/core"
+    CDIR="${0%/*}"
   else
-    CDIR="$PWD/_scripts/core";
+    CDIR="$PWD";
   fi
   source "$CDIR/_helpers.sh"
 fi
