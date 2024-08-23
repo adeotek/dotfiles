@@ -8,22 +8,22 @@
 declare -A ARGS=(
     ["prompt"]=""
 )
-if [[ -d "${0%/*}" ]]; then
-  SDIR=${0%/*}
-else
-  SDIR="$PWD";
-fi
-if [[ -z "$VV" ]]; then
-  . "$SDIR/_helpers.sh"
+if [[ -z "$CDIR" ]]; then
+  if [[ -d "${0%/*}" ]]; then
+    CDIR="${0%/*}/_scripts/core"
+  else
+    CDIR="$PWD/_scripts/core";
+  fi
+  source "$CDIR/_helpers.sh"
 fi
 process_args $@
 
 # Setup
 if [ "${ARGS["prompt"]}" == "oh-my-posh" ]; then
-  . "$SDIR/oh-my-posh-install.sh"
+  . "$CDIR/oh-my-posh-install.sh"
 fi
 if [ "${ARGS["prompt"]}" == "starship" ]; then
-  . "$SDIR/starship-install.sh"
+  . "$CDIR/starship-install.sh"
 fi
 stow_package "bash" "" "" "$HOME/.bashrc"
 

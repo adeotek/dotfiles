@@ -49,17 +49,17 @@ else
       SELECTED_PACKAGES=("${MINIMAL_TASKS[@]}")
       ;;
     2)
-      read -p "Do you want to include the extra packages (ansible, docker, golang, powershell, python, tabby, vscode)? [y/N]" INCLUDE_EXTRA
+      read -p "Do you want to include the extra packages (${CONSOLE_EXTRA_TASKS[@]})? [y/N]" INCLUDE_EXTRA
       if [[ "$INCLUDE_EXTRA" == "y" || "$INCLUDE_EXTRA" == "Y" ]]; then
-        SELECTED_PACKAGES=("${CONSOLE_EXTRA_TASKS[@]}")
+        SELECTED_PACKAGES=("${ALL_CONSOLE_TASKS[@]}")
       else
         SELECTED_PACKAGES=("${CONSOLE_TASKS[@]}")
       fi
       ;;
     3)
-      read -p "Do you want to include the extra packages (ansible, docker, golang, powershell, python, tabby, vscode)? [y/N]" INCLUDE_EXTRA
+      read -p "Do you want to include the extra packages (${DESKTOP_EXTRA_TASKS[@]})? [y/N]" INCLUDE_EXTRA
       if [[ "$INCLUDE_EXTRA" == "y" || "$INCLUDE_EXTRA" == "Y" ]]; then
-        SELECTED_PACKAGES+=("${DESKTOP_EXTRA_TASKS[@]}")
+        SELECTED_PACKAGES+=("${ALL_DESKTOP_TASKS[@]}")
       else
         SELECTED_PACKAGES+=("${DESKTOP_TASKS[@]}")
       fi
