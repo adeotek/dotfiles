@@ -5,17 +5,17 @@
 ###
 
 # Init
-if [[ -d "${0%/*}" ]]; then
-  IDIR=${0%/*}
-else
-  IDIR="$PWD";
-fi
-if [[ -z "$VV" ]]; then
-  . "$IDIR/_helpers.sh"
+if [[ -z "$CDIR" ]]; then
+  if [[ -d "${0%/*}" ]]; then
+    CDIR="${0%/*}/_scripts/core"
+  else
+    CDIR="$PWD/_scripts/core";
+  fi
+  source "$CDIR/_helpers.sh"
 fi
 
 # Install
-. "$IDIR/nodejs-install.sh"
+. "$CDIR/nodejs-install.sh"
 
 case $CURRENT_OS_ID in
   arch)
@@ -24,7 +24,7 @@ case $CURRENT_OS_ID in
     install_package "neovim" "nvim -v"
   ;;
   debian|ubuntu)
-    . "$IDIR/homebrew-install.sh"
+    . "$CDIR/homebrew-install.sh"
     sudo apt install -y luarocks python-neovim
     install_package "neovim" "nvim -v" "brew install neovim"
   ;;

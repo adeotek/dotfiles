@@ -4,17 +4,16 @@
 # neofetch install script
 ###
 
-if [[ -z "$VV" ]]; then
-  ## Init
+# Init
+if [[ -z "$CDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    DIR=${0%/*}
+    CDIR="${0%/*}/_scripts/core"
   else
-    DIR="$PWD";
+    CDIR="$PWD/_scripts/core";
   fi
-
-  ## Includes
-  . "$DIR/_helpers.sh"
+  source "$CDIR/_helpers.sh"
 fi
 
+# Install
 install_package "neofetch" "neofetch --version"
 

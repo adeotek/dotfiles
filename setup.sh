@@ -23,16 +23,17 @@ cecho "blue" "Starting dotfiles setup ($ACTION)..."
 
 # Menu
 ## Display main menu
-echo "Setup options:"
+cecho "white" "Setup options:"
 for key in "${MENU_OPTION_KEYS[@]}"
 do
   if [ "$key" == "$DEFAULT_MENU_OPTION" ]; then
-    echo " *[$key] ${MENU_OPTIONS[$key]}"
+    cecho "yellow" " *[$key] ${MENU_OPTIONS[$key]}"
   else
-    echo "  [$key] ${MENU_OPTIONS[$key]}"
+    cecho "white" "  [$key] ${MENU_OPTIONS[$key]}"
   fi
 done
-read -p "Please select setup mode (0-4) [2]: " SETUP_MODE
+cecho "yellow" -n "Please select setup mode (0-4) [2]: "
+read SETUP_MODE
 if [ -z "$SETUP_MODE" ]; then
   SETUP_MODE="$DEFAULT_MENU_OPTION"
 fi
@@ -42,24 +43,39 @@ if [[ "$SETUP_MODE" == "c" || "$SETUP_MODE" == "C" ]]; then
 fi
 
 if [[ "$SETUP_MODE" == "0" ]]; then
-  echo "TODO: manual selection"
+  SELECTED_PACKAGES=()
+  for task in "${ALL_TASKS[@]}"
+  do
+    cecho "yellow" -n "Do you want to include the ["
+    cecho "cyan" -n "$task"
+    cecho "yellow" -n "] package? [y/N]: "
+    read INCLUDE_TASK
+    # read -p "Do you want to include the [$task] package? [y/N]: " INCLUDE_TASK
+    if [[ "$INCLUDE_TASK" == "y" || "$INCLUDE_TASK" == "Y" ]]; then
+      SELECTED_PACKAGES+=($task)
+    fi
+  done
 else
   case $SETUP_MODE in
     1)
       SELECTED_PACKAGES=("${MINIMAL_TASKS[@]}")
       ;;
     2)
-      read -p "Do you want to include the extra packages (ansible, docker, golang, powershell, python, tabby, vscode)? [y/N]" INCLUDE_EXTRA
+      cecho "yellow" "Do you want to include the extra packages? [y/N]"
+      cecho "cyan" -n "-> [${CONSOLE_EXTRA_TASKS[@]}] "
+      read INCLUDE_EXTRA
       if [[ "$INCLUDE_EXTRA" == "y" || "$INCLUDE_EXTRA" == "Y" ]]; then
-        SELECTED_PACKAGES=("${CONSOLE_EXTRA_TASKS[@]}")
+        SELECTED_PACKAGES=("${ALL_CONSOLE_TASKS[@]}")
       else
         SELECTED_PACKAGES=("${CONSOLE_TASKS[@]}")
       fi
       ;;
     3)
-      read -p "Do you want to include the extra packages (ansible, docker, golang, powershell, python, tabby, vscode)? [y/N]" INCLUDE_EXTRA
+      cecho "yellow" "Do you want to include the extra packages? [y/N]"
+      cecho "yellow" -n "-> [${DESKTOP_EXTRA_TASKS[@]}] "
+      read INCLUDE_EXTRA
       if [[ "$INCLUDE_EXTRA" == "y" || "$INCLUDE_EXTRA" == "Y" ]]; then
-        SELECTED_PACKAGES+=("${DESKTOP_EXTRA_TASKS[@]}")
+        SELECTED_PACKAGES+=("${ALL_DESKTOP_TASKS[@]}")
       else
         SELECTED_PACKAGES+=("${DESKTOP_TASKS[@]}")
       fi
@@ -74,9 +90,15 @@ else
   esac
 fi
 
-cecho "yellow" "The following packages will be installed/set up:"
+if [[ -z "${SELECTED_PACKAGES[@]}" ]]; then
+  cecho "magenta" "No package selected. Operation cancelled!"
+  exit 11
+fi
+
+cecho "white" "The following packages will be installed/set up:"
 aecho SELECTED_PACKAGES "- " "yellow" "white"
-read -p "Please confirm package selection [Y/n]: " PACKAGE_SELECTION_CONFIRM
+cecho "yellow" -n "Please confirm package selection [Y/n]: "
+read PACKAGE_SELECTION_CONFIRM
 if [[ "$PACKAGE_SELECTION_CONFIRM" != "y" && "$PACKAGE_SELECTION_CONFIRM" != "Y" && "$PACKAGE_SELECTION_CONFIRM" != "" ]]; then
   cecho "magenta" "Operation cancelled!"
   exit 10

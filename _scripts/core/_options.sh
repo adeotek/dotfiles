@@ -6,16 +6,6 @@
 
 decho "white" "Loading _options.sh..."
 
-MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "c")
-declare -A MENU_OPTIONS=(
-  ["0"]="Manual selection"
-  ["1"]="Minimal (base tools, git, yazi, bash, tmux, nvim)"
-  ["2"]="Console (Minimal + dotnet, neofetch, zsh)"
-  ["3"]="Desktop (Console + kitty, zed, hypr)"
-  ["4"]="ALL"
-  ["c"]="Cancel/Exit"
-)
-
 declare MINIMAL_TASKS=(
   "base-tools"
   "git"
@@ -25,31 +15,39 @@ declare MINIMAL_TASKS=(
   "nvim"
 )
 
-declare CONSOLE_TASKS=(
-  "${MINIMAL_TASKS[@]}"
+declare CONSOLE_ONLY_TASKS=(
   "dotnet"
   "neofetch"
   "zsh"
 )
+declare CONSOLE_TASKS=(
+  "${MINIMAL_TASKS[@]}"
+  "${CONSOLE_ONLY_TASKS[@]}"
+)
 
-declare DESKTOP_TASKS=(
-  "${CONSOLE_TASKS[@]}"
+declare DESKTOP_ONLY_TASKS=(
   "kitty"
   "zed"
   "hypr"
 )
+declare DESKTOP_TASKS=(
+  "${CONSOLE_TASKS[@]}"
+  "${DESKTOP_ONLY_TASKS[@]}"
+)
 
 declare CONSOLE_EXTRA_TASKS=(
-  "${CONSOLE_TASKS[@]}"
   "ansible"
   "docker"
   "golang"
   "powershell"
   "python"
 )
+declare ALL_CONSOLE_TASKS=(
+  "${CONSOLE_TASKS[@]}"
+  "${CONSOLE_EXTRA_TASKS[@]}"
+)
 
 declare DESKTOP_EXTRA_TASKS=(
-  "${DESKTOP_TASKS[@]}"
   "ansible"
   "docker"
   "golang"
@@ -58,8 +56,27 @@ declare DESKTOP_EXTRA_TASKS=(
   "tabby"
   "vscode"
 )
+declare ALL_DESKTOP_TASKS=(
+  "${DESKTOP_TASKS[@]}"
+  "${DESKTOP_EXTRA_TASKS[@]}"
+)
 
-declare ALL_TASKS=("${DESKTOP_EXTRA_TASKS[@]}")
+declare ALL_TASKS=(
+  "${MINIMAL_TASKS[@]}"
+  "${CONSOLE_ONLY_TASKS[@]}"
+  "${DESKTOP_ONLY_TASKS[@]}"
+  "${DESKTOP_EXTRA_TASKS[@]}"
+)
+
+MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "c")
+declare -A MENU_OPTIONS=(
+  ["0"]="Manual selection"
+  ["1"]="Minimal (${MINIMAL_TASKS[@]})"
+  ["2"]="Console (Minimal + "${CONSOLE_ONLY_TASKS[@]}")"
+  ["3"]="Desktop (Console + "${DESKTOP_ONLY_TASKS[@]}")"
+  ["4"]="ALL"
+  ["c"]="Cancel/Exit"
+)
 
 declare -A TASK_TYPES=(
   ["base-tools"]="install"
@@ -92,11 +109,3 @@ declare -A TASK_ARGS=(
   ["bash"]="--prompt oh-my-posh"
   ["zsh"]="--prompt starship"
 )
-
-get_setup_command() {
-  local package="$1"
-  echo "get_setup_command:package: $package"
-  local task_type="${ALL_TASKS[$package]}"
-  echo "get_setup_command:task_type: $task_type"
-
-}

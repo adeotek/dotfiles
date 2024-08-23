@@ -5,17 +5,17 @@
 ###
 
 # Init
-if [[ -d "${0%/*}" ]]; then
-  SDIR=${0%/*}
-else
-  SDIR="$PWD";
-fi
-if [[ -z "$VV" ]]; then
-  . "$SDIR/_helpers.sh"
+if [[ -z "$CDIR" ]]; then
+  if [[ -d "${0%/*}" ]]; then
+    CDIR="${0%/*}/_scripts/core"
+  else
+    CDIR="$PWD/_scripts/core";
+  fi
+  source "$CDIR/_helpers.sh"
 fi
 
 # Install
-. "$SDIR/yazi-install.sh"
+. "$CDIR/yazi-install.sh"
 
 # Setup
 stow_package "yazi" "" "$HOME/.config/yazi"
