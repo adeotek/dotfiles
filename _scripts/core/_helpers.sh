@@ -1,49 +1,40 @@
 #!/bin/bash
 
-# Global system variables
-CURRENT_OS_ID="$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)"
-CURRENT_OS_VER="$(sed -n 's/^VERSION_ID=\(.*\)/\1/p' /etc/os-release)"
-
-# Global variables and CLI arguments
-VV="0"
-DRY_RUN="0"
-#ARGS=()
-if [[ "${#1}" -gt 0 && "${1:0:1}" == "-" ]]; then
-  ACTION="init"
-else
-  ACTION="$1"
-  shift
-fi
-
-while [[ $# -gt 0 ]]; do
-  case $1 in
-    -v|--verbose)
-      VV="1"
-    ;;
-    --dry-run)
-      DRY_RUN="1"
-    ;;
-    --*)
-      if [[ ! -v ARGS[${1:2}] ]]; then
-        echo "ERROR: Invalid argument/flag: $1!"
-        exit 2
-      fi
-      if [[ -z "$2" || "${2:0:2}" == "--" ]]; then
-        ARGS[${1:2}]=1
-      else
-        ARGS[${1:2}]=$2
-        shift
-      fi
-    ;;
-    *)
-      echo "ERROR[0]: Unknown argument/flag: $1!"
-      exit 2
-    ;;
-  esac
-  shift
-done
+###
+# Helpers for install/setup scripts
+###
 
 # Global functions
+
+function process_args {
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      -v|--verbose)
+        VV="1"
+      ;;
+      --dry-run)
+        DRY_RUN="1"
+      ;;
+      --*)
+        if [[ ! -v ARGS[${1:2}] ]]; then
+          echo "ERROR: Invalid argument/flag: $1!"
+          exit 2
+        fi
+        if [[ -z "$2" || "${2:0:2}" == "--" ]]; then
+          ARGS[${1:2}]=1
+        else
+          ARGS[${1:2}]=$2
+          shift
+        fi
+      ;;
+      *)
+        echo "ERROR[0]: Unknown argument/flag: $1!"
+        exit 2
+      ;;
+    esac
+    shift
+  done
+}
 
 function cecho {
   local color=$1
@@ -76,13 +67,32 @@ function cecho {
   fi
 }
 
-decho() {
+function decho() {
   if [[ "$VV" -eq "1" ]]; then
     cecho "$@"
   fi
 }
 
-get_vv() {
+function aecho() {
+  local -n input=$1
+  local prefix="$2"
+  local color="$3"
+  local prefix_color="$4"
+
+  if [ -z "$prefix_color" ]; then
+    prefix_color="$color"
+  fi
+
+  for val in "${input[@]}"
+  do
+    if [ ! -z "$prefix" ]; then
+      cecho "$prefix_color" -n "$prefix"
+    fi
+    cecho "$color" "$val"
+  done
+}
+
+function get_vv() {
   if [[ "$VV" -eq "1" ]]; then
     echo "--verbose"
   else
@@ -90,7 +100,7 @@ get_vv() {
   fi
 }
 
-execute_command() {
+function execute_command() {
   local command="$1"
   local success_message="$2"
  
@@ -103,7 +113,7 @@ execute_command() {
   fi
 }
 
-rename_dir_if_exists() {
+function rename_dir_if_exists() {
   local target="$1"
   local suffix="$2"
 
@@ -123,7 +133,7 @@ rename_dir_if_exists() {
   fi
 }
 
-rename_file_if_exists() {
+function rename_file_if_exists() {
   local target="$1"
   local suffix="$2"
 
@@ -143,7 +153,7 @@ rename_file_if_exists() {
   fi
 }
 
-install_package() {
+function install_package() {
   local package="$1"
   local check_command="$2"
   local install_command="$3"
@@ -171,7 +181,7 @@ install_package() {
   execute_command "$install_command" "[$package] installation done."
 }
 
-get_stow_command() {
+function get_stow_command() {
   local package="$1"
   local stow_action="$2"
   local extra_args="$3"
@@ -199,7 +209,7 @@ get_stow_command() {
   echo "stow --dir="$HOME/.dotfiles" --target="$HOME" $extra_args $stow_arg $package"
 }
 
-stow_package() {
+function stow_package() {
   local package="$1"
   local stow_action="$2"
   local dir_rename="$3"
@@ -235,3 +245,23 @@ stow_package() {
   execute_command "$stow_command" "[$package] setup done."
 }
 
+# Main
+decho "white" "Loading _helpers.sh..."
+
+# Global system variables
+CURRENT_OS_ID="$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)"
+CURRENT_OS_VER="$(sed -n 's/^VERSION_ID=\(.*\)/\1/p' /etc/os-release)"
+
+# Global variables and CLI arguments
+VV="0"
+DRY_RUN="0"
+if [[ "${#1}" -gt 0 && "${1:0:1}" == "-" ]]; then
+  ACTION="init"
+else
+  ACTION="$1"
+  shift
+fi
+
+if [ ! -z "$@" ]; then
+  process_args "$@"
+fi

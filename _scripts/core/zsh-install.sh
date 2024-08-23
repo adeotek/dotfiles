@@ -4,18 +4,17 @@
 # zsh install script
 ###
 
-if [[ -z "$VV" ]]; then
-  ## Init
+# Init
+if [[ -z "$CDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    DIR=${0%/*}
+    CDIR="${0%/*}/_scripts/core"
   else
-    DIR="$PWD";
+    CDIR="$PWD/_scripts/core";
   fi
-
-  ## Includes
-  . "$DIR/helpers.sh"
+  source "$CDIR/_helpers.sh"
 fi
 
+# Install
 install_package "zsh" "zsh --version"
 
 # # Install oh-my-zsh
@@ -30,4 +29,3 @@ install_package "zsh" "zsh --version"
 #   git clone https://github.com/zsh-users/zsh-autosuggestions $ohmyzsh_dir/custom/plugins/zsh-autosuggestions
 #   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ohmyzsh_dir/custom/plugins/zsh-syntax-highlighting
 # fi
-

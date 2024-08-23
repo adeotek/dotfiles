@@ -13,7 +13,7 @@ if [[ -z "$VV" ]]; then
   fi
 
   ## Includes
-  . "$DIR/helpers.sh"
+  . "$DIR/_helpers.sh"
 fi
 
 install_package "neofetch" "neofetch --version"

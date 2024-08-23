@@ -15,8 +15,9 @@ else
   IDIR="$PWD";
 fi
 if [[ -z "$VV" ]]; then
-  . "$IDIR/helpers.sh"
+  . "$IDIR/_helpers.sh"
 fi
+process_args $@
 
 # Install
 if [ -z "${ARGS["font"]}" ]; then

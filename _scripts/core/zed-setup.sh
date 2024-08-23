@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-# Kitty setup script
+# Zed setup script
 ###
 
 # Init
@@ -15,4 +15,4 @@ if [[ -z "$VV" ]]; then
 fi
 
 # Install
-cecho "yellow" "WARNING: Kitty setup not implemented yet!"
+cecho "yellow" "WARNING: Zed setup not implemented yet!"
