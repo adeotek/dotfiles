@@ -78,6 +78,16 @@ declare -A MENU_OPTIONS=(
   ["c"]="Cancel/Exit"
 )
 
+MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "c")
+declare -A MENU_OPTIONS=(
+  ["0"]="Manual selection"
+  ["1"]="Minimal (${MINIMAL_TASKS[@]})"
+  ["2"]="Console (Minimal + "${CONSOLE_ONLY_TASKS[@]}")"
+  ["3"]="Desktop (Console + "${DESKTOP_ONLY_TASKS[@]}")"
+  ["4"]="ALL"
+  ["c"]="Cancel/Exit"
+)
+
 declare -A TASK_TYPES=(
   ["base-tools"]="install"
   ["ansible"]="setup"
