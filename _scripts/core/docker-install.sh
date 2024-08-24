@@ -16,3 +16,7 @@ fi
 
 # Install
 cecho "yellow" "WARNING: Docker install not implemented yet!"
+
+## ARCH
+# # Install .NET SDK
+# sudo dnf install -y dotnet-sdk-8.0
