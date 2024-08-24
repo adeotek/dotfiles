@@ -11,9 +11,12 @@ fi
 # Oh My Zsh (optional)
 #source $DIR/plugins/oh-my-zsh.zsh
 
-# Starship
-export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
-eval "$(starship init zsh)"
+# # Starship
+# export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
+# eval "$(starship init zsh)"
+
+# Oh My Posh
+eval "$(oh-my-posh init zsh)"
 
 # FZF key bindings (CTRL R for fuzzy history finder)
 source <(fzf --zsh)
