@@ -16,3 +16,10 @@ fi
 
 # Install
 cecho "yellow" "WARNING: Python install not implemented yet!"
+
+## ARCH
+# # Setup Python 3
+# sudo pacman -S --noconfirm --needed python python-pip python-pipx sshpass
+# if ! grep -q 'export PATH=$PATH:~/.local/bin' ~/.bashrc; then
+#   (echo; echo 'export PATH=$PATH:~/.local/bin') >> ~/.bashrc
+# fi

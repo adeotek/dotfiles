@@ -1,5 +1,9 @@
 #!/bin/bash
 
+###
+# Arch Linux post-install setup
+###
+
 # Update system
 sudo pacman -Suy --noconfirm
 
@@ -10,50 +14,12 @@ sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
 
 # Install tools
-## Linux base
-sudo pacman -S --noconfirm --needed curl wget mc netcat nano vi git whois
-## CLI tools
-sudo pacman -S --noconfirm --needed jq fd ripgrep fzf yazi tldr bat tree htop zoxide bash-completion neofetch
-## Yazi
-sudo pacman -S --noconfirm --needed yazi ffmpegthumbnailer p7zip poppler imagemagick
-## GUI tools
-sudo pacman -S --noconfirm --needed grub-customizer gnome-tweaks
+## Base tools
+sudo pacman -S --noconfirm --needed curl wget git
+# ## GUI tools
+# sudo pacman -S --noconfirm --needed grub-customizer gnome-tweaks
 # Laptops only
 sudo pacman -S --noconfirm --needed tlp tlp-rdw inxi
-
-# bash profile config
-if ! grep -q "export LC_ALL='C.UTF-8'" ~/.bashrc; then
-  tee -a ~/.bashrc <<EOF
-export LC_ALL='C.UTF-8'
-export EDITOR=nano
-alias ll='ls -lAF'
-EOF
-fi
-## zoxide bash config
-if ! grep -q "# zoxide" ~/.bashrc; then
-  (echo; echo '# zoxide'; echo 'eval "$(zoxide init bash)"') >> ~/.bashrc
-fi
-## yazi config
-mkdir -p ~/.config/yazi
-if [ ! -f ~/.config/yazi/yazi.toml ]; then
-    tee -a ~/.config/yazi/yazi.toml <<EOF
-[manager]
-show_hidden = true
-EOF
-fi
-if ! grep -q "function yy() {" ~/.bashrc; then
-  tee -a ~/.bashrc <<EOF
-# yazi
-function yy() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "\$@" --cwd-file="\$tmp"
-	if cwd="\$(cat -- "\$tmp")" && [ -n "\$cwd" ] && [ "\$cwd" != "\$PWD" ]; then
-		builtin cd -- "\$cwd"
-	fi
-	rm -f -- "\$tmp"
-}
-EOF
-fi
 
 ## Add FlatHub repo
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -68,113 +34,12 @@ flatpak override --user --filesystem=~/.local/share/applications --filesystem=~/
 flatpak install -y com.google.Chrome
 flatpak install -y com.visualstudio.code
 flatpak install -y dev.zed.Zed
+flatpak install -y dev.zed.Zed
 
-# Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/$USER/.bashrc
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-sudo pacman -S --noconfirm --needed base-devel
-brew install gcc
-
-# Install and configure OhMyPosh and CascadiaCode fonts
-## Download fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/CascadiaCode.zip -O ~/CascadiaCode.zip
-## Unpack fonts
-mkdir -p ~/.local/share/fonts/CascadiaCode
-unzip ~/CascadiaCode.zip -d ~/.local/share/fonts/CascadiaCode
-rm ~/CascadiaCode.zip
-## Configure fonts
-fc-cache -fv
-## Install oh-my-posh
-curl -s https://ohmyposh.dev/install.sh | bash -s
-if ! grep -q 'export PATH=$PATH:~/.local/bin' ~/.bashrc; then
-  (echo; echo 'export PATH=$PATH:~/.local/bin') >> ~/.bashrc
-fi
-## Download custom theme
-mkdir -p ~/.config/oh-my-posh
-wget https://gist.githubusercontent.com/adeotek/0cccb275b9a8acd909cdbef367baa8d5/raw/gbs.omp.yaml -O ~/.config/oh-my-posh/gbs.omp.yaml
-# Add bash config in .bashrc
-if ! grep -q '# Oh My Posh bash config' ~/.bashrc; then
-  (echo; echo "# Oh My Posh bash config"; echo "eval \"\$(oh-my-posh --init --shell bash --config ~/.config/oh-my-posh/gbs.omp.yaml)\"") >> ~/.bashrc
-fi
-
-# Set git config
-rm ~/.gitconfig
-wget https://gist.githubusercontent.com/adeotek/66dede2bcd959d9cf93882559e3bd8da/raw/.gitconfig -O ~/.gitconfig
-git config --global http.sslBackend gnutls
-
-# Add GitHub & Azure DevOps SSH keys
-if ! grep -q "github.com" ~/.ssh/known_hosts; then
-  ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-fi
-
-# Configure Kitty
-mkdir -p ~/.config/kitty
-rm ~/.config/kitty/current-theme.conf
-cp ./kitty-current-theme.conf ~/.config/kitty/current-theme.conf
-if ! grep -q "include current-theme.conf" ~/.config/kitty/kitty.conf; then
-  tee -a ~/.bashrc <<EOF
-# BEGIN_KITTY_THEME
-# Catppuccin-Mocha
-include current-theme.conf
-# END_KITTY_THEME
-font_family      CaskaydiaCove Nerd Font Mono
-bold_font        auto
-italic_font      auto
-bold_italic_font auto
-font_size 14.0
-EOF
-fi
-
-# Install and configure tmux
-sudo pacman -S --noconfirm --needed tmux
-mkdir -p ~/.config/tmux
-wget https://gist.githubusercontent.com/adeotek/30a0ab94b2b74a3a7f0fa60470699f9c/raw/.tmux.conf -O ~/.config/tmux/tmux.conf
-wget https://gist.githubusercontent.com/adeotek/30a0ab94b2b74a3a7f0fa60470699f9c/raw/gbs.tmux.conf.local -O ~/.config/tmux/tmux.conf.local
-
-# Setup Python 3
-sudo pacman -S --noconfirm --needed python python-pip python-pipx sshpass
-if ! grep -q 'export PATH=$PATH:~/.local/bin' ~/.bashrc; then
-  (echo; echo 'export PATH=$PATH:~/.local/bin') >> ~/.bashrc
-fi
-
-# Install NodeJs
-brew install node@20
-echo 'export PATH="/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH"' >> /home/$USER/.bash_profile
-source $HOME/.bash_profile
-npm install -g npm
-
-# Install and configure NeoVim
-sudo pacman -R --noconfirm vim
-sudo pacman -S --noconfirm --needed luarocks neovim python-neovim
-npm install -g neovim
-npm install -g tree-sitter-cli
-mkdir -p ~/.config
-git clone https://github.com/adeotek/neovim-adeotek.git ~/.config/nvim
-if ! grep -q 'alias vim="nvim"' ~/.bashrc; then
-  (echo; echo 'alias vim="nvim"') >> ~/.bashrc
-fi
-
-# Install Tabby Terminal
-wget https://github.com/Eugeny/tabby/releases/download/v1.0.211/tabby-1.0.211-linux-x64.pacman
-sudo pacman -U --noconfirm --needed tabby-1.0.211-linux-x64.pacman
-rm tabby-1.0.211-linux-x64.pacman
-
-# # Install Go
-# sudo dnf install -y golang
-# mkdir -p $HOME/go
-# echo 'export GOPATH=$HOME/go' >> $HOME/.bashrc
-# source $HOME/.bashrc
-
-# # Install .NET SDK
-# sudo dnf install -y dotnet-sdk-8.0
-
-# # Install PowerShell Core
-# sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-# curl https://packages.microsoft.com/config/rhel/7/prod.repo | sudo tee /etc/yum.repos.d/microsoft.repo
-# sudo dnf makecache
-# sudo dnf install -y powershell
-
+# Clone and run dotfile setup
+git clone https://github.com/adeotek/dotfiles.git ~/.dotfiles
+chmod +x ~/.dotfiles/setup.sh
+bash ~/.dotfiles/setup.sh
 
 # Configure HL-NAS shares
 smb_usr="ben"
