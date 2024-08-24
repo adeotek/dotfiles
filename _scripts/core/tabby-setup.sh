@@ -15,4 +15,7 @@ if [[ -z "$CDIR" ]]; then
 fi
 
 # Install
-cecho "yellow" "WARNING: Tabby setup not implemented yet!"
+. "$CDIR/tabby-install.sh"
+
+# Setup
+decho "yellow" "No config available to stow for Tabby!"

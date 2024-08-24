@@ -15,4 +15,8 @@ if [[ -z "$CDIR" ]]; then
 fi
 
 # Install
-cecho "yellow" "WARNING: Kitty setup not implemented yet!"
+. "$CDIR/kitty-install.sh"
+. "$CDIR/nerd-fonts-install.sh"
+
+# Setup
+stow_package "kitty" "" "$HOME/.config/kitty"
