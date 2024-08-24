@@ -13,13 +13,8 @@ sudo pacman -S --noconfirm --needed bluez bluez-utils
 sudo systemctl enable bluetooth.service
 sudo systemctl start bluetooth.service
 
-# Install tools
-## Base tools
-sudo pacman -S --noconfirm --needed curl wget git
-# ## GUI tools
-# sudo pacman -S --noconfirm --needed grub-customizer gnome-tweaks
-# Laptops only
-sudo pacman -S --noconfirm --needed tlp tlp-rdw inxi
+# Install base tools
+sudo pacman -S --noconfirm --needed base-devel git curl wget
 
 ## Add FlatHub repo
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -33,8 +28,36 @@ flatpak override --user --filesystem=~/.local/share/applications --filesystem=~/
 # Install Flatpaks
 flatpak install -y com.google.Chrome
 flatpak install -y com.visualstudio.code
-flatpak install -y dev.zed.Zed
-flatpak install -y dev.zed.Zed
+
+# Install yay
+if ! yay --version >/dev/null; then
+  sudo git clone https://aur.archlinux.org/yay.git /opt/yay.git
+  sudo chown -R $USER:$USER /opt/yay.git
+  cd /opt/yay.git
+  makepkg -si
+  cd ~
+fi
+
+# Install JaKooLit Arch-Hyprland
+git clone --depth=1 https://github.com/JaKooLit/Arch-Hyprland.git ~/Arch-Hyprland
+cd ~/Arch-Hyprland
+chmod +x install.sh
+./install.sh
+
+# GUI tools
+read -s -p "Do you want to install [grub-customizer]? [y/N]: " pkg_install
+if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
+  sudo pacman -S --noconfirm --needed grub-customizer
+fi
+read -s -p "Do you want to install [gnome-tweaks]? [y/N]: " pkg_install
+if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
+  sudo pacman -S --noconfirm --needed gnome-tweaks
+fi
+# Laptops only
+read -s -p "Do you want to install the laptop specific tools? [y/N]: " pkg_install
+if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
+  sudo pacman -S --noconfirm --needed tlp tlp-rdw inxi
+fi
 
 # Clone and run dotfile setup
 git clone https://github.com/adeotek/dotfiles.git ~/.dotfiles

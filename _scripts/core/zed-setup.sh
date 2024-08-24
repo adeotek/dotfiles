@@ -15,4 +15,7 @@ if [[ -z "$CDIR" ]]; then
 fi
 
 # Install
-cecho "yellow" "WARNING: Zed setup not implemented yet!"
+. "$CDIR/zed-install.sh"
+
+# Setup
+decho "yellow" "No config available to stow for Zed!"
