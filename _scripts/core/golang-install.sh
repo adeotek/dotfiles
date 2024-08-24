@@ -15,11 +15,16 @@ if [[ -z "$CDIR" ]]; then
 fi
 
 # Install
-cecho "yellow" "WARNING: Go Lang install not implemented yet!"
-
-## ARCH
-# # Install Go
-# sudo dnf install -y golang
-# mkdir -p $HOME/go
-# echo 'export GOPATH=$HOME/go' >> $HOME/.bashrc
-# source $HOME/.bashrc
+case $CURRENT_OS_ID in
+  arch)
+    install_package "go" "go --version"
+  ;;
+  debian|ubuntu)
+    install_package "golang" "go --version"
+  ;;
+  *)
+    cecho "red" "Unsupported OS: $CURRENT_OS_ID"
+    exit 1
+  ;;
+esac
+install_package "golang" "pwsh --version"
