@@ -16,7 +16,7 @@ fi
 
 # Install
 case $CURRENT_OS_ID in
-  arch)arch
+  arch)
     ## Base tools
     sudo pacman -S --noconfirm --needed curl wget mc netcat nano vi whois
     ## CLI tools
