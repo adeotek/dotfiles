@@ -31,6 +31,12 @@ read -p "Do you want to install VS Code from flatpak? [y/N]: " pkg_install
 if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
   flatpak install -y com.visualstudio.code
 fi
+read -p "Do you want to install Yubico Authenticator from AUR? [y/N]: " pkg_install
+if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
+  #sudo pacman -S --noconfirm --needed pcsclite ccid
+  #sudo systemctl enable --now pcscd.service
+  yay -S --noconfirm --needed yubico-authenticator-bin
+fi
 
 # Install yay
 if ! yay --version >/dev/null; then
