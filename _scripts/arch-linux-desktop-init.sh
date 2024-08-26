@@ -44,7 +44,7 @@ fi
 # Install snapshot software (snapper)
 read -p "Do you want to install snapper and related tools? [y/N]: " pkg_install
 if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
-  sudo pacman -S --noconfirm --needed grub-btrfs snapper snap-pac # snapper-rollback??? 
+  sudo pacman -S --noconfirm --needed grub-btrfs snapper snap-pac # snapper-rollback???
   yay -S --noconfirm --needed snapper-gui btrfs-assistant
 fi
 

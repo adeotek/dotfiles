@@ -34,4 +34,4 @@ if ! grep -q "export PATH=""/home/linuxbrew/.linuxbrew/opt/node$TARGET_VERSION/b
   echo "export PATH=""/home/linuxbrew/.linuxbrew/opt/node$TARGET_VERSION/bin:\$PATH""" >> /home/$USER/.bash_profile
   source $HOME/.bash_profile
 fi
-npm install -g npm
+sudo npm install --upgrade -g npm

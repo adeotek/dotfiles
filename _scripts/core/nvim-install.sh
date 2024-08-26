@@ -35,5 +35,5 @@ case $CURRENT_OS_ID in
   ;;
 esac
 
-npm install -g neovim
-npm install -g tree-sitter-cli
+sudo npm install -g neovim
+sudo npm install -g tree-sitter-cli

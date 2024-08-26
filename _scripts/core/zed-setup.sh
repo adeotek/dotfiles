@@ -18,4 +18,4 @@ fi
 . "$CDIR/zed-install.sh"
 
 # Setup
-decho "yellow" "No config available to stow for Zed!"
+stow_package "zed" "" "$HOME/.config/zed"
