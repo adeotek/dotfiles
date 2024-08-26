@@ -22,14 +22,15 @@ if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
   flatpak override --user --filesystem=~/.local/share/applications --filesystem=~/.local/share/icons com.google.Chrome
 fi
 
-# Install Flatpaks
+# Install main GUI Apps
 read -p "Do you want to install Google Chrome from flatpak? [y/N]: " pkg_install
 if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
   flatpak install -y com.google.Chrome
 fi
-read -p "Do you want to install VS Code from flatpak? [y/N]: " pkg_install
+read -p "Do you want to install VS Code from AUR? [y/N]: " pkg_install
 if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
-  flatpak install -y com.visualstudio.code
+  #flatpak install -y com.visualstudio.code
+  yay -S --noconfirm --needed visual-studio-code-bin
 fi
 read -p "Do you want to install Yubico Authenticator from AUR? [y/N]: " pkg_install
 if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
