@@ -53,6 +53,12 @@ read -p "Do you want to install snapper and related tools? [y/N]: " pkg_install
 if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
   sudo pacman -S --noconfirm --needed grub-btrfs snapper snap-pac # snapper-rollback???
   yay -S --noconfirm --needed snapper-gui btrfs-assistant
+  sudo systemctl enable --now snapper-timeline.timer
+  read -p "Do you want to configure snapper? [Y/n]: " pkg_install
+  if [[ "$pkg_install" == "y" || "$pkg_install" == "y" || "$pkg_install" == "" ]]; then
+    sudo snapper -c root create-config /
+    sudo snapper -c home create-config /home
+  fi
 fi
 
 # Install JaKooLit Arch-Hyprland
@@ -73,6 +79,14 @@ if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
   sudo pacman -S --noconfirm --needed bluez bluez-utils
   sudo systemctl enable bluetooth.service
   sudo systemctl start bluetooth.service
+fi
+
+# Install printer drivers
+read -p "Do you want to install printer drivers? [y/N]: " pkg_install
+if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
+  sudo pacman -S --noconfirm --needed cups cups-pdf
+  sudo systemctl enable --now cups.service
+  sudo pacman -S --noconfirm --needed print-manager system-config-printer hplip
 fi
 
 # GUI tools
