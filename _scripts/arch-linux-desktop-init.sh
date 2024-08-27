@@ -38,6 +38,11 @@ if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
   #sudo systemctl enable --now pcscd.service
   yay -S --noconfirm --needed yubico-authenticator-bin
 fi
+read -p "Do you want to install Gnome Extensions Manager from flatpak? [y/N]: " pkg_install
+if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
+  sudo pacman -S --noconfirm --needed fuse
+  flatpak install -y flathub com.mattjakeman.ExtensionManager
+fi
 
 # Install yay
 if ! yay --version >/dev/null; then

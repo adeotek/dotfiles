@@ -22,6 +22,7 @@ else
   mkdir -p ${HOME}/.local/bin
 fi
 
+sudo pacman -S --noconfirm --needed fuse
 set -e
 set -o pipefail
 curl -sL \
