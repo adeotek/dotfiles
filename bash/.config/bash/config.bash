@@ -17,7 +17,7 @@ function yy() {
 eval "$(fzf --bash)"
 
 # Oh My Posh bash config
-eval "$(oh-my-posh --init --shell bash --config ~/.config/oh-my-posh/gbs.omp.yaml)"
+eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/gbs.omp.yaml)"
 
 # Starship
 #eval "$(starship init bash)"

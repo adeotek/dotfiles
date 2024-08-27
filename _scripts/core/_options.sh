@@ -41,6 +41,7 @@ declare CONSOLE_EXTRA_TASKS=(
   "golang"
   "powershell"
   "python"
+  "nodejs"
 )
 declare ALL_CONSOLE_TASKS=(
   "${CONSOLE_TASKS[@]}"
@@ -99,7 +100,7 @@ declare -A TASK_TYPES=(
   ["homebrew"]="install"
   ["hypr"]="setup"
   ["kitty"]="setup"
-  ["neodejs"]="install"
+  ["nodejs"]="install"
   ["neofetch"]="setup"
   ["nerd-fonts"]="install"
   ["nvim"]="setup"

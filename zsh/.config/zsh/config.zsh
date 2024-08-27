@@ -16,7 +16,7 @@ fi
 # eval "$(starship init zsh)"
 
 # Oh My Posh
-eval "$(oh-my-posh init zsh)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/gbs.omp.yaml)"
 
 # FZF key bindings (CTRL R for fuzzy history finder)
 source <(fzf --zsh)

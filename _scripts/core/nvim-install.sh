@@ -16,16 +16,17 @@ fi
 
 # Install
 . "$CDIR/nodejs-install.sh"
+# . "$CDIR/python-install.sh"
 
 case $CURRENT_OS_ID in
   arch)
     sudo pacman -R --noconfirm vim
-    sudo pacman -S --noconfirm --needed luarocks python-neovim
+    sudo pacman -S --noconfirm --needed luarocks # python-neovim
     install_package "neovim" "nvim -v"
   ;;
   debian|ubuntu)
     . "$CDIR/homebrew-install.sh"
-    sudo apt install -y luarocks python-neovim
+    sudo apt install -y luarocks # python-neovim
     install_package "neovim" "nvim -v" "brew install neovim"
   ;;
   *)
@@ -34,5 +35,5 @@ case $CURRENT_OS_ID in
   ;;
 esac
 
-npm install -g neovim
-npm install -g tree-sitter-cli
+sudo npm install -g neovim
+sudo npm install -g tree-sitter-cli
