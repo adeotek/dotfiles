@@ -10,6 +10,9 @@ PS1='[\u@\h \W]\$ '
 # homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+# dotnet tools
+export PATH="$PATH:$HOME/.dotnet/tools"
+
 # Load config and plugins
 source $HOME/.config/bash/config.bash
 

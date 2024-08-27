@@ -8,7 +8,7 @@
 sudo pacman -Suy --noconfirm
 
 # Install base tools
-sudo pacman -S --noconfirm --needed base-devel git curl wget
+sudo pacman -S --noconfirm --needed base-devel git curl wget less
 
 # Flatpak config
 read -p "Do you want to configure flatpak? [y/N]: " pkg_install
