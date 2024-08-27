@@ -27,4 +27,3 @@ case $CURRENT_OS_ID in
     exit 1
   ;;
 esac
-install_package "golang" "pwsh --version"

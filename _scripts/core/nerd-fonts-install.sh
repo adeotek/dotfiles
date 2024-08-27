@@ -26,16 +26,19 @@ else
   TARGET_FONT="${ARGS["font"]}"
 fi
 
-if [ -z "${ARGS["version"]}" ]; then
-  TARGET_VERSION="3.2.1"
+if [[ "$CURRENT_OS_ID" == "arch" && "$TARGET_FONT" == "CascadiaCode" ]]; then
+  sudo pacman -S --noconfirm --needed ttf-cascadia-code-nerd
 else
-  TARGET_VERSION="${ARGS["version"]}"
-fi
+  if [ -z "${ARGS["version"]}" ]; then
+    TARGET_VERSION="3.2.1"
+  else
+    TARGET_VERSION="${ARGS["version"]}"
+  fi
 
-case $CURRENT_OS_ID in
+  case $CURRENT_OS_ID in
   arch)
     sudo pacman -S --noconfirm --needed fontconfig
-    FONTS_DIR=".local/share/fonts"
+    FONTS_DIR=".fonts"
     ;;
   debian|ubuntu)
     sudo apt install -y fontconfig
@@ -49,27 +52,28 @@ case $CURRENT_OS_ID in
     cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
     exit 1
     ;;
-esac
+  esac
 
-SKIP_FONT_INST=""
-if [ -d $HOME/$FONTS_DIR/$TARGET_FONT ]; then
-  if [[ $ACTION == "refresh" ]]; then
-    ## Remove existing fonts
-    rm -rf $HOME/$FONTS_DIR/$TARGET_FONT
+  SKIP_FONT_INST=""
+  if [ -d $HOME/$FONTS_DIR/$TARGET_FONT ]; then
+    if [[ $ACTION == "refresh" ]]; then
+      ## Remove existing fonts
+      rm -rf $HOME/$FONTS_DIR/$TARGET_FONT
+    else
+      SKIP_FONT_INST="1"
+      cecho "yellow" "[$TARGET_FONT] fonts already installed!"
+    fi
   else
-    SKIP_FONT_INST="1"
-    cecho "yellow" "[$TARGET_FONT] fonts already installed!"
+    mkdir -p $HOME/$FONTS_DIR
   fi
-else
-  mkdir -p $HOME/$FONTS_DIR
+  if [ -z "$SKIP_FONT_INST" ]; then
+    ## Download fonts
+    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v$TARGET_VERSION/$TARGET_FONT.zip -O ~/$TARGET_FONT.zip
+    ## Unpack fonts
+    unzip ~/$TARGET_FONT.zip -d $HOME/$FONTS_DIR/$TARGET_FONT
+    rm ~/$TARGET_FONT.zip
+  fi
 fi
-if [ -z "$SKIP_FONT_INST" ]; then
-  ## Download fonts
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v$TARGET_VERSION/$TARGET_FONT.zip -O ~/$TARGET_FONT.zip
-  ## Unpack fonts
-  unzip ~/$TARGET_FONT.zip -d $HOME/$FONTS_DIR/$TARGET_FONT
-  rm ~/$TARGET_FONT.zip
-fi
+
 ## Configure fonts
 fc-cache -fv
-

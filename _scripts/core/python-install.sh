@@ -23,3 +23,11 @@ cecho "yellow" "WARNING: Python install not implemented yet!"
 # if ! grep -q 'export PATH=$PATH:~/.local/bin' ~/.bashrc; then
 #   (echo; echo 'export PATH=$PATH:~/.local/bin') >> ~/.bashrc
 # fi
+
+## DEBIAN
+# sudo apt install -y python3 python3-pip python3-venv pipx sshpass
+# if ! grep -q 'export PATH=$PATH:~/.local/bin' ~/.bashrc; then
+#   echo "" >> ~/.bashrc
+#   echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
+# fi
+# # python3 -m pip install --upgrade pip

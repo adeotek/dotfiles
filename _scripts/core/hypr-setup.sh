@@ -14,5 +14,5 @@ if [[ -z "$CDIR" ]]; then
   source "$CDIR/_helpers.sh"
 fi
 
-# Install
-cecho "yellow" "WARNING: hyprland setup not implemented yet!"
+# Setup
+stow_package "hypr" "" "$HOME/.config/hypr"
