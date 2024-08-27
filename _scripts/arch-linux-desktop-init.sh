@@ -40,7 +40,6 @@ if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
 fi
 read -p "Do you want to install Gnome Extensions Manager from flatpak? [y/N]: " pkg_install
 if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
-  sudo pacman -S --noconfirm --needed fuse
   flatpak install -y flathub com.mattjakeman.ExtensionManager
 fi
 
