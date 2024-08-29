@@ -4,6 +4,9 @@
 # homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+# dotnet tools                                                                              •
+export PATH="$PATH:$HOME/.dotnet/tools"
+
 # Set-up zsh
 source $HOME/.config/zsh/config.zsh
 

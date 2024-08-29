@@ -8,7 +8,7 @@
 sudo pacman -Suy --noconfirm
 
 # Install base tools
-sudo pacman -S --noconfirm --needed base-devel git curl wget
+sudo pacman -S --noconfirm --needed base-devel git curl wget less
 
 # Flatpak config
 read -p "Do you want to configure flatpak? [y/N]: " pkg_install
@@ -37,6 +37,10 @@ if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
   #sudo pacman -S --noconfirm --needed pcsclite ccid
   #sudo systemctl enable --now pcscd.service
   yay -S --noconfirm --needed yubico-authenticator-bin
+fi
+read -p "Do you want to install Gnome Extensions Manager from flatpak? [y/N]: " pkg_install
+if [[ "$pkg_install" == "y" || "$pkg_install" == "y" ]]; then
+  flatpak install -y flathub com.mattjakeman.ExtensionManager
 fi
 
 # Install yay
@@ -172,3 +176,4 @@ EOF
     sudo chmod 644 ~/.ssh/id_rsa_hl.pub
   fi
 fi
+

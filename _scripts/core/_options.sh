@@ -56,6 +56,7 @@ declare DESKTOP_EXTRA_TASKS=(
   "python"
   "tabby"
   "vscode"
+  "jetbrains-toolbox"
 )
 declare ALL_DESKTOP_TASKS=(
   "${DESKTOP_TASKS[@]}"
@@ -100,6 +101,7 @@ declare -A TASK_TYPES=(
   ["homebrew"]="install"
   ["hypr"]="setup"
   ["kitty"]="setup"
+  ["jetbrains-toolbox"]="setup"
   ["nodejs"]="install"
   ["neofetch"]="setup"
   ["nerd-fonts"]="install"
@@ -120,3 +122,4 @@ declare -A TASK_ARGS=(
   ["bash"]="--prompt oh-my-posh"
   ["zsh"]="--prompt starship"
 )
+
