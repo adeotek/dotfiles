@@ -108,6 +108,10 @@ function aecho() {
   done
 }
 
+function is_associative_array() {
+  [[ "$(declare -p "$1" 2>/dev/null)" =~ "declare -A" ]]
+}
+
 function get_vv() {
   if [[ "$VV" -eq "1" ]]; then
     echo "--verbose"

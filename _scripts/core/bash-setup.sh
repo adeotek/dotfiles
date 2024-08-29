@@ -5,9 +5,11 @@
 ###
 
 # Init
-declare -A ARGS=(
-    ["prompt"]=""
-)
+if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
+  ARGS["prompt"]=""
+else
+  declare -A ARGS=(["prompt"]="")
+fi
 if [[ -z "$CDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
     CDIR="${0%/*}"
@@ -16,14 +18,16 @@ if [[ -z "$CDIR" ]]; then
   fi
   source "$CDIR/_helpers.sh"
 fi
+
 process_args $@
 
 # Setup
 if [ "${ARGS["prompt"]}" == "oh-my-posh" ]; then
-  . "$CDIR/oh-my-posh-setup.sh"
+  source "$CDIR/oh-my-posh-setup.sh"
 fi
 if [ "${ARGS["prompt"]}" == "starship" ]; then
-  . "$CDIR/starship-setup.sh"
+  source "$CDIR/starship-setup.sh"
 fi
+
 stow_package "bash" "" "" "$HOME/.bashrc"
 
