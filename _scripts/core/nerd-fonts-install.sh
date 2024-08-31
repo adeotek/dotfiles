@@ -5,10 +5,15 @@
 ###
 
 # Init
-declare -A ARGS=(
-  ["font"]=""
-  ["version"]=""
-)
+if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
+  ARGS["font"]=""
+  ARGS["version"]=""
+else
+  declare -A ARGS=(
+    ["font"]=""
+    ["version"]=""
+  )
+fi
 if [[ -z "$CDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
     CDIR="${0%/*}"

@@ -5,9 +5,11 @@
 ###
 
 # Init
-declare -A ARGS=(
-  ["version"]=""
-)
+if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
+  ARGS["version"]=""
+else
+  declare -A ARGS=(["version"]="")
+fi
 if [[ -z "$CDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
     CDIR="${0%/*}"
