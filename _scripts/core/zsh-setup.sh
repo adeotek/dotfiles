@@ -30,3 +30,9 @@ if [ "${ARGS["prompt"]}" == "starship" ]; then
 fi
 
 stow_package "zsh" "" "" "$HOME/.zshrc"
+
+# Enable custom config
+if ! grep -q 'source $HOME/.config/bash/config.zsh' "$HOME/.zshrc"; then
+  (echo; echo 'source $HOME/.config/bash/config.zsh' >> "$HOME/.zshrc"
+fi
+
