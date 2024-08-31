@@ -15,16 +15,18 @@ if [[ -z "$CDIR" ]]; then
 fi
 
 # Install
-cecho "yellow" -n "Please specify the version to install [8.0]: "
-read DOTNET_VERSION
-if [[ -z "$DOTNET_VERSION" ]]; then
-  DOTNET_VERSION="8.0"
-fi
 case $CURRENT_OS_ID in
   arch)
-    install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
+    install_package "dotnet-sdk" "dotnet --version"
+    sudo pacman -S --noconfirm --needed aspnet-runtime
+    sudo pacman -S --noconfirm --needed aspnet-targeting-pack
   ;;
   debian)
+    cecho "yellow" -n "Please specify the version to install [8.0]: "
+    read DOTNET_VERSION
+    if [[ -z "$DOTNET_VERSION" ]]; then
+      DOTNET_VERSION="8.0"
+    fi
     if [ ! -f /etc/apt/sources.list.d/microsoft-prod.list ]; then
       cecho "cyan" "Installing Microsoft APT source..."
       if [ "$DRY_RUN" -ne "1" ]; then
@@ -46,6 +48,11 @@ case $CURRENT_OS_ID in
     install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
   ;;
   ubuntu)
+    cecho "yellow" -n "Please specify the version to install [8.0]: "
+    read DOTNET_VERSION
+    if [[ -z "$DOTNET_VERSION" ]]; then
+      DOTNET_VERSION="8.0"
+    fi
     install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
   ;;
   *)
