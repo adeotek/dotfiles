@@ -15,8 +15,8 @@ if [[ -z "$CDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/oh-my-posh-install.sh"
-. "$CDIR/nerd-fonts-install.sh"
+source "$CDIR/oh-my-posh-install.sh"
+source "$CDIR/nerd-fonts-install.sh"
 
 # Setup
 stow_package "oh-my-posh" "" "$HOME/.config/oh-my-posh"
