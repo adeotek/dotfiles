@@ -5,9 +5,11 @@
 ###
 
 # Init
-declare -A ARGS=(
-    ["prompt"]=""
-)
+if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
+  ARGS["prompt"]=""
+else
+  declare -A ARGS=(["prompt"]="")
+fi
 if [[ -z "$CDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
     CDIR="${0%/*}"
