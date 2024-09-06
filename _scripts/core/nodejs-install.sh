@@ -32,8 +32,9 @@ else
 fi
 
 install_package "node" "node -v" "brew install node$TARGET_VERSION"
-if ! grep -q "export PATH=""/home/linuxbrew/.linuxbrew/opt/node$TARGET_VERSION/bin:\$PATH""" /home/$USER/.bash_profile; then
-  echo "export PATH=""/home/linuxbrew/.linuxbrew/opt/node$TARGET_VERSION/bin:\$PATH""" >> /home/$USER/.bash_profile
-  source $HOME/.bash_profile
+if ! grep -q "export PATH=""/home/linuxbrew/.linuxbrew/opt/node$TARGET_VERSION/bin:\$PATH""" /home/$USER/.bashrc; then
+  (echo; echo "export PATH=""/home/linuxbrew/.linuxbrew/opt/node$TARGET_VERSION/bin:\$PATH""") >> /home/$USER/.bashrc
+  source $HOME/.bashrc
 fi
 sudo npm install --upgrade -g npm
+

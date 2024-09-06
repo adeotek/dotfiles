@@ -11,15 +11,15 @@ CURRENT_OS_VER="$(sed -n 's/^VERSION_ID=\(.*\)/\1/p' /etc/os-release)"
 # Global variables and CLI arguments
 VV="0"
 DRY_RUN="0"
-ACTION="init"
+DFS_ACTION="init"
 
 # Global functions
 
 function process_args {
-  if [[ "${#1}" -gt 0 && "${1:0:1}" == "-" ]]; then
-    ACTION="init"
+  if [[ "${#1}" -eq 0 || "${1:0:1}" == "-" || "$1" == "" ]]; then
+    DFS_ACTION="init"
   else
-    ACTION="$1"
+    DFS_ACTION="$1"
     shift
   fi
 
@@ -50,6 +50,8 @@ function process_args {
     esac
     shift
   done
+
+  decho "magenta" "process_args() -> DFS_ACTION: [$DFS_ACTION]"
 }
 
 function cecho {
@@ -217,7 +219,7 @@ function get_stow_command() {
       stow_arg="--restow"
     ;;
     *)
-      cecho "red" "Invalid action: $stow_action!"
+      echo "echo ""ERROR: Invalid action: $stow_action!"""
       exit 1
     ;;
   esac
@@ -241,7 +243,7 @@ function stow_package() {
   fi
 
   if [ -z "$stow_action" ]; then
-    stow_action="$ACTION"
+    stow_action="$DFS_ACTION"
   fi
 
   check_result=$(bash -c "$(get_stow_command "$package" "refresh" "-n -v") 2>&1")
@@ -260,6 +262,10 @@ function stow_package() {
     rename_file_if_exists "$file_rename"
   fi
 
+  if [ -z "$stow_action" ]; then
+    cecho "red" "Missing stow action for package [$package]!"
+    return
+  fi
   cecho "cyan" "Running stow $stow_action for [$package]..."
   stow_command=$(get_stow_command "$package" "$stow_action")
   execute_command "$stow_command" "[$package] setup done."

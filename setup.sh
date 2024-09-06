@@ -19,7 +19,7 @@ source "$CDIR/_options.sh"
 DEFAULT_MENU_OPTION="2"
 
 ## Startup debug 
-cecho "blue" "Starting dotfiles setup ($ACTION)..."
+cecho "blue" "Starting dotfiles setup ($DFS_ACTION)..."
 
 # Menu
 ## Display main menu
