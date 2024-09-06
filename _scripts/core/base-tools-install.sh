@@ -18,11 +18,11 @@ fi
 case $CURRENT_OS_ID in
   arch)
     ## Base tools
-    sudo pacman -S --noconfirm --needed curl wget mc netcat nano vi whois
+    sudo pacman -S --noconfirm --needed curl wget mc netcat nano vi whois mandoc
     ## CLI tools
     sudo pacman -S --noconfirm --needed jq fd ripgrep fzf tldr bat tree htop zoxide bash-completion stow
     ## eza (ls alternative)
-    sudo pacman -S --noconfirm --needed eza
+    sudo pacman -S --noconfirm --needed eza 
   ;;
   debian|ubuntu)
     . "$CDIR/homebrew-install.sh"
