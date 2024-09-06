@@ -29,7 +29,7 @@ if [ "${ARGS["prompt"]}" == "starship" ]; then
   source "$CDIR/starship-setup.sh"
 fi
 
-stow_package "bash" "" "" "$HOME/.bashrc"
+stow_package "bash" "" "$HOME/.config/bash"
 
 # Enable custom config
 if ! grep -q 'source $HOME/.config/bash/config.bash' "$HOME/.bashrc"; then
