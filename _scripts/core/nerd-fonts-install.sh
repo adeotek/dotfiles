@@ -61,7 +61,7 @@ else
 
   SKIP_FONT_INST=""
   if [ -d $HOME/$FONTS_DIR/$TARGET_FONT ]; then
-    if [[ $ACTION == "refresh" ]]; then
+    if [[ $DFS_ACTION == "refresh" ]]; then
       ## Remove existing fonts
       rm -rf $HOME/$FONTS_DIR/$TARGET_FONT
     else

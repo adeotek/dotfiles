@@ -32,7 +32,9 @@ case $CURRENT_OS_ID in
     sudo apt install -y curl wget mc netcat-traditional nano whois
     ## CLI tools
     sudo apt install -y jq fd-find ripgrep tldr bat tree htop zoxide bash-completion stow
-    ln -s $(which fdfind) ~/.local/bin/fd
+    if [ ! -f ~/.local/bin/fd ]; then 
+      ln -s $(which fdfind) ~/.local/bin/fd
+    fi
     brew install fzf
     ## eza (ls alternative)
     if [ ! -f /etc/apt/sources.list.d/gierens.list ]; then

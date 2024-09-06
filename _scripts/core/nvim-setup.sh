@@ -19,3 +19,4 @@ fi
 
 # Setup
 stow_package "nvim" "" "$HOME/.config/nvim"
+

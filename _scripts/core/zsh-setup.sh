@@ -31,7 +31,7 @@ if [ "${ARGS["prompt"]}" == "starship" ]; then
   source "$CDIR/starship-setup.sh"
 fi
 
-stow_package "zsh" "" "" "$HOME/.zshrc"
+stow_package "zsh" "" "$HOME/.config/zsh"
 
 # Enable custom config
 if ! grep -q 'source $HOME/.config/zsh/config.zsh' "$HOME/.zshrc"; then
