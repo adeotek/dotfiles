@@ -9,6 +9,8 @@ sudo pacman -Suy --noconfirm
 
 # Install base tools
 sudo pacman -S --noconfirm --needed base-devel git curl wget less
+## Install Gnome config tool
+sudo pacman -S --noconfirm --needed dconf-tools
 
 # Flatpak config
 read -p "Do you want to configure flatpak? [y/N]: " pkg_install
@@ -176,4 +178,10 @@ EOF
     sudo chmod 644 ~/.ssh/id_rsa_hl.pub
   fi
 fi
+
+# GUI settings & configuration
+## Change default Gnome keybindings
+### Using `dconf-editor` change:
+### /org/gnome/desktop/wm/keybindings/switch-to-workspace-right
+### /org/gnome/desktop/wm/keybindings/switch-to-workspace-left
 
