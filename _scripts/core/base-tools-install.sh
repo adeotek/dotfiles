@@ -51,3 +51,9 @@ case $CURRENT_OS_ID in
     exit 1
   ;;
 esac
+
+if [[ "$CURRENT_OS_ID" == "ubuntu" && ! -f "~/.local/bin/bat" ]]; then
+  mkdir -p ~/.local/bin 
+  ln -s /usr/bin/batcat ~/.local/bin/bat
+fi
+

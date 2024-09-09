@@ -249,12 +249,12 @@ function stow_package() {
   check_result=$(bash -c "$(get_stow_command "$package" "refresh" "-n -v") 2>&1")
   if echo "$check_result" | grep -q "UNLINK:" >/dev/null; then
     if [ "$stow_action" == "init" ]; then
-      decho "yellow" "Nothing to do. [$package] already stowed."
+      cecho "yellow" "Nothing to do. [$package] already stowed."
       return
     fi
   else
     if [ "$stow_action" == "remove" ]; then
-      decho "yellow" "Nothing to do. [$package] not stowed."
+      cecho "yellow" "Nothing to do. [$package] not stowed."
       return
     fi
 
