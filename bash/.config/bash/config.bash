@@ -1,10 +1,17 @@
 # Bash configuration file
 
+export PATH=$PATH:~/.local/bin
+
 # homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 # dotnet tools
 export PATH="$PATH:$HOME/.dotnet/tools"
+
+# nodejs
+export PATH=/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH
 
 export LC_ALL='C.UTF-8'
 export EDITOR="nvim"
