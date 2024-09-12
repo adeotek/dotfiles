@@ -35,14 +35,7 @@ case $CURRENT_OS_ID in
     ln -s $(which fdfind) ~/.local/bin/fd
     brew install fzf
     ## eza (ls alternative)
-    if [ ! -f /etc/apt/sources.list.d/gierens.list ]; then
-      sudo mkdir -p /etc/apt/keyrings
-      wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
-      echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
-      sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
-      sudo apt update
-    fi
-    sudo apt install -y eza
+    brew install -y eza
   ;;
   *)
     cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"

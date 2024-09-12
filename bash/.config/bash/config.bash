@@ -1,7 +1,13 @@
 # Bash configuration file
 
+export PATH=$PATH:$HOME/.local/bin
+
 # homebrew
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+export PATH=/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH
+
+# GO lang
+export PATH="$PATH:$HOME/go/bin"
 
 # dotnet tools
 export PATH="$PATH:$HOME/.dotnet/tools"
