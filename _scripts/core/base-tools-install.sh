@@ -37,16 +37,16 @@ case $CURRENT_OS_ID in
     fi
     brew install fzf
     ## eza (ls alternative)
-    brew install -y eza
+    brew install eza
+
+    if [[ ! -f "~/.local/bin/bat" ]]; then
+      mkdir -p ~/.local/bin 
+      ln -s /usr/bin/batcat ~/.local/bin/bat
+    fi
   ;;
   *)
     cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
     exit 1
   ;;
 esac
-
-if [[ "$CURRENT_OS_ID" == "ubuntu" && ! -f "~/.local/bin/bat" ]]; then
-  mkdir -p ~/.local/bin 
-  ln -s /usr/bin/batcat ~/.local/bin/bat
-fi
 
