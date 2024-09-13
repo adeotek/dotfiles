@@ -37,23 +37,16 @@ case $CURRENT_OS_ID in
     fi
     brew install fzf
     ## eza (ls alternative)
-    if [ ! -f /etc/apt/sources.list.d/gierens.list ]; then
-      sudo mkdir -p /etc/apt/keyrings
-      wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
-      echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
-      sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
-      sudo apt update
+    brew install eza
+
+    if [[ ! -f "~/.local/bin/bat" ]]; then
+      mkdir -p ~/.local/bin 
+      ln -s /usr/bin/batcat ~/.local/bin/bat
     fi
-    sudo apt install -y eza
   ;;
   *)
     cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
     exit 1
   ;;
 esac
-
-if [[ "$CURRENT_OS_ID" == "ubuntu" && ! -f "~/.local/bin/bat" ]]; then
-  mkdir -p ~/.local/bin 
-  ln -s /usr/bin/batcat ~/.local/bin/bat
-fi
 
