@@ -38,6 +38,13 @@
 		git fetch --prune; \
 		echo \"----> prune local branches deleted from remote/origin\"; \
 		git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs -r git branch -D; \
+  }; f"
+  fpmom = "!f() { \
+		trap '[ $? -eq 0 ] && exit 0 || echo \"ERROR: Operation failed\"; exit' EXIT; \
+		echo \"----> git fetch --prune\"; \
+		git fetch --prune; \
+		echo \"----> git merge origin/main\"; \
+		git merge origin/main; \
 	}; f"
 	omblp = "!f() { \
 		trap '[ $? -eq 0 ] && exit 0 || echo \"ERROR: Operation failed\"; exit' EXIT; \
