@@ -49,11 +49,18 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+export PATH=$PATH:~/.local/bin
 
-# dotnet tools                                                                              •
+# homebrew
+if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+# dotnet tools
 export PATH="$PATH:$HOME/.dotnet/tools"
+
+# nodejs
+export PATH=/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH
 
 export LC_ALL='C.UTF-8'
 export EDITOR="nvim"
