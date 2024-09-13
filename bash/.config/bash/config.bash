@@ -3,14 +3,20 @@
 export PATH=$PATH:$HOME/.local/bin
 
 # homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-export PATH=/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH
+if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  export PATH=/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH
+fi
 
 # GO lang
-export PATH="$PATH:$HOME/go/bin"
+if [ -d "$PATH:$HOME/go/bin" ]; then
+  export PATH="$PATH:$HOME/go/bin"
+fi
 
 # dotnet tools
-export PATH="$PATH:$HOME/.dotnet/tools"
+if [ -d "$HOME/.dotnet/tools" ]; then
+  export PATH="$PATH:$HOME/.dotnet/tools"
+fi
 
 export LC_ALL='C.UTF-8'
 export EDITOR="nvim"
