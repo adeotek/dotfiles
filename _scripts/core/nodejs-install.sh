@@ -52,7 +52,7 @@ else
       sudo pacman -R --noconfirm nodejs npm
     ;;
     debian)
-      sodo -i
+      sudo -i
       curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh
       bash nodesource_setup.sh
       rm -f nodesource_setup.sh
