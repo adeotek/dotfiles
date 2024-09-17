@@ -53,7 +53,9 @@ function yy() {
 }
 
 # FZF key bindings (CTRL R for fuzzy history finder)
-eval "$(fzf --bash)"
+if [[ -x "$(command -v fzf)" ]]; then
+  eval "$(fzf --bash)"
+fi
 
 # Oh My Posh bash config
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/gbs.omp.yaml)"
