@@ -52,12 +52,10 @@ else
       sudo pacman -R --noconfirm nodejs npm
     ;;
     debian)
-      sudo -i
-      curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh
-      bash nodesource_setup.sh
-      rm -f nodesource_setup.sh
-      apt update && apt install -y nodejs
-      exit
+      sudo curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh
+      sudo bash nodesource_setup.sh
+      sudo rm -f nodesource_setup.sh
+      sudo apt update && sudo apt install -y nodejs
     ;;
     ubuntu)
       curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh
@@ -72,5 +70,5 @@ else
   esac
 fi
 
-sudo npm install --upgrade -g npm
+sudo npm install -g npm
 

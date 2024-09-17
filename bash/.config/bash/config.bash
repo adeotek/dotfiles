@@ -23,8 +23,10 @@ if [ -d "$PATH:$HOME/go/bin" ]; then
   export PATH="$PATH:$HOME/go/bin"
 fi
 
-# dotnet tools
-if [ -d "$HOME/.dotnet/tools" ]; then
+# dotnet & dotnet tools
+if [ -d "$HOME/.dotnet" ]; then
+  export DOTNET_ROOT=$HOME/.dotnet
+  export PATH=$PATH:$HOME/.dotnet
   export PATH="$PATH:$HOME/.dotnet/tools"
 fi
 

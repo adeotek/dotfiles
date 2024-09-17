@@ -15,7 +15,7 @@ if [[ -z "$CDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/nodejs-install.sh"
+#. "$CDIR/nodejs-install.sh"
 # . "$CDIR/python-install.sh"
 
 case $CURRENT_OS_ID in
@@ -27,20 +27,18 @@ case $CURRENT_OS_ID in
   debian|ubuntu)
     sudo apt install -y luarocks # python-neovim
     if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
-      sudo apt install -y ninja-build gettext cmake unzip curl build-essential
-      sudo -i
+      sudo apt install -y ninja-build gettext cmake unzip curl build-essential 
       if [ ! -d "/opt/neovim-src" ]; then
-        mkdir /opt/neovim-src
-        git clone https://github.com/neovim/neovim /opt/neovim-src
+        sudo mkdir /opt/neovim-src
+        sudo git clone https://github.com/neovim/neovim /opt/neovim-src
       fi
       cd /opt/neovim-src
-      git checkout master
-      git pull
-      git checkout stable
-      make CMAKE_BUILD_TYPE=RelWithDebInfo
-      cd build && cpack -G DEB && dpkg -i nvim-linux64.deb
+      sudo git checkout master
+      sudo git pull
+      sudo git checkout stable
+      sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
+      cd build && sudo cpack -G DEB && sudo dpkg -i nvim-linux64.deb
       cd ~
-      exit
     else
       . "$CDIR/homebrew-install.sh"
       install_package "neovim" "nvim -v" "brew install neovim"
