@@ -15,6 +15,11 @@ if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
   fi
 fi
 
+# Rust
+if [ -f "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
+fi
+
 # GO lang
 if [ -d "/usr/local/go/bin" ]; then
   export PATH="$PATH:/usr/local/go/bin"

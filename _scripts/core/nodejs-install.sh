@@ -47,21 +47,43 @@ if [[ "$NJS_INSTALL_MODE" == "brew" ]]; then
     source $HOME/.bashrc
   fi
 else
+  cecho "cyan" "Installing [nodejs]..."
   case $CURRENT_OS_ID in
     arch)
-      sudo pacman -R --noconfirm nodejs npm
+      if [ "$DRY_RUN" -ne "1" ]; then
+        sudo pacman -R --noconfirm nodejs npm
+        cecho "green" "[nodejs] installation done."
+      else
+        cecho "yellow" "DRY-RUN: sudo pacman -R --noconfirm nodejs npm"
+      fi
     ;;
     debian)
-      sudo curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh
-      sudo bash nodesource_setup.sh
-      sudo rm -f nodesource_setup.sh
-      sudo apt update && sudo apt install -y nodejs
+      if [ "$DRY_RUN" -ne "1" ]; then
+        sudo curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh
+        sudo bash nodesource_setup.sh
+        sudo rm -f nodesource_setup.sh
+        sudo apt update && sudo apt install -y nodejs
+        cecho "green" "[nodejs] installation done."
+      else
+        cecho "yellow" "DRY-RUN: sudo curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh"
+        cecho "yellow" "DRY-RUN: sudo bash nodesource_setup.sh"
+        cecho "yellow" "DRY-RUN: sudo rm -f nodesource_setup.sh"
+        cecho "yellow" "DRY-RUN: sudo apt update && sudo apt install -y nodejs"
+      fi
     ;;
     ubuntu)
-      curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh
-      sudo -E bash nodesource_setup.sh
-      rm -f nodesource_setup.sh
-      sudo apt update && sudo apt install -y nodejs
+      if [ "$DRY_RUN" -ne "1" ]; then
+        curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh
+        sudo -E bash nodesource_setup.sh
+        rm -f nodesource_setup.sh
+        sudo apt update && sudo apt install -y nodejs
+        cecho "green" "[nodejs] installation done."
+      else
+        cecho "yellow" "DRY-RUN: curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh"
+        cecho "yellow" "DRY-RUN: sudo -E bash nodesource_setup.sh"
+        cecho "yellow" "DRY-RUN: rm -f nodesource_setup.sh"
+        cecho "yellow" "DRY-RUN: sudo apt update && sudo apt install -y nodejs"
+      fi
     ;;
     *)
       cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
@@ -70,5 +92,10 @@ else
   esac
 fi
 
-sudo npm install -g npm
+if [ "$DRY_RUN" -ne "1" ]; then
+  sudo npm install -g npm
+else
+  cecho "yellow" "DRY-RUN: sudo npm install -g npm"
+fi
+
 
