@@ -25,9 +25,26 @@ case $CURRENT_OS_ID in
     install_package "neovim" "nvim -v"
   ;;
   debian|ubuntu)
-    . "$CDIR/homebrew-install.sh"
     sudo apt install -y luarocks # python-neovim
-    install_package "neovim" "nvim -v" "brew install neovim"
+    if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
+      sudo apt install -y ninja-build gettext cmake unzip curl build-essential
+      sudo -i
+      if [ ! -d "/opt/neovim-src" ]; then
+        mkdir /opt/neovim-src
+        git clone https://github.com/neovim/neovim /opt/neovim-src
+      fi
+      cd /opt/neovim-src
+      git checkout master
+      git pull
+      git checkout stable
+      make CMAKE_BUILD_TYPE=RelWithDebInfo
+      cd build && cpack -G DEB && dpkg -i nvim-linux64.deb
+      cd ~
+      exit
+    else
+      . "$CDIR/homebrew-install.sh"
+      install_package "neovim" "nvim -v" "brew install neovim"
+    fi
   ;;
   *)
     cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"

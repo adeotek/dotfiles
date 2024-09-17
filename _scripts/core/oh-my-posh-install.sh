@@ -15,6 +15,8 @@ if [[ -z "$CDIR" ]]; then
 fi
 
 # Install
+source "$CDIR/nerd-fonts-install.sh"
+
 cecho "cyan" "Installing [oh-my-posh]..."
 if [ oh-my-posh --version >/dev/null 2>&1 ]; then
   decho "yellow" "Package already installed. Updating it..."
