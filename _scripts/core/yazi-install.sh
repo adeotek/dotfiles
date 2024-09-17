@@ -20,7 +20,7 @@ case $CURRENT_OS_ID in
     if [ "$DRY_RUN" -ne "1" ]; then
       sudo pacman -S --noconfirm --needed ffmpegthumbnailer p7zip poppler imagemagick
     else
-
+      cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed ffmpegthumbnailer p7zip poppler imagemagick" 
     fi
     install_package "yazi" "yazi -V"
   ;;

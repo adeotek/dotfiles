@@ -22,9 +22,9 @@ process_args $@
 
 # Install
 if [ -z "${ARGS["version"]}" ]; then
-  TARGET_VERSION="20"
+  TARGET_VERSION="22"
 else
-  if [ "${ARGS["version"]}" == "current" ]; then
+  if [ "${ARGS["version"]}" == "current" || "${ARGS["version"]}" == "lts" ]; then
     TARGET_VERSION="22"
   else
     TARGET_VERSION="${ARGS["version"]}"
