@@ -42,6 +42,10 @@ if [[ -x "$(command -v npm)" ]]; then
   npm install -g npm
 fi
 
+if [[ -x "$(command -v oh-my-posh)" ]]; then
+  sudo oh-my-posh upgrade
+fi
+
 ## End
 cecho "blue" "DONE!"
 
