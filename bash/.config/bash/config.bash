@@ -5,7 +5,19 @@ export PATH=$PATH:$HOME/.local/bin
 # homebrew
 if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  export PATH=/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH
+
+  # NodeJs
+  if [ -d "/home/linuxbrew/.linuxbrew/opt/node@20/bin" ]; then
+    export PATH="/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH"
+  fi
+  if [ -d "/home/linuxbrew/.linuxbrew/opt/node@22/bin" ]; then
+    export PATH="/home/linuxbrew/.linuxbrew/opt/node@22/bin:$PATH"
+  fi
+fi
+
+# Rust
+if [ -f "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
 fi
 
 # GO lang
@@ -16,8 +28,10 @@ if [ -d "$PATH:$HOME/go/bin" ]; then
   export PATH="$PATH:$HOME/go/bin"
 fi
 
-# dotnet tools
-if [ -d "$HOME/.dotnet/tools" ]; then
+# dotnet & dotnet tools
+if [ -d "$HOME/.dotnet" ]; then
+  export DOTNET_ROOT=$HOME/.dotnet
+  export PATH=$PATH:$HOME/.dotnet
   export PATH="$PATH:$HOME/.dotnet/tools"
 fi
 
@@ -53,7 +67,13 @@ function yy() {
 }
 
 # FZF key bindings (CTRL R for fuzzy history finder)
-eval "$(fzf --bash)"
+# Setup fzf
+if [[ -d /home/dev/.fzf/bin && ! "$PATH" == */home/dev/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/home/dev/.fzf/bin"
+fi
+if [[ -x "$(command -v fzf)" ]]; then
+  eval "$(fzf --bash)"
+fi
 
 # Oh My Posh bash config
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/gbs.omp.yaml)"

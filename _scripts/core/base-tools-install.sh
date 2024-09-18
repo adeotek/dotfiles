@@ -18,14 +18,13 @@ fi
 case $CURRENT_OS_ID in
   arch)
     ## Base tools
-    sudo pacman -S --noconfirm --needed curl wget mc netcat nano vi whois mandoc
+    sudo pacman -S --noconfirm --needed curl wget mc netcat nano vi whois mandoc git
     ## CLI tools
     sudo pacman -S --noconfirm --needed jq fd ripgrep fzf tldr bat tree htop zoxide bash-completion stow
     ## eza (ls alternative)
     sudo pacman -S --noconfirm --needed eza 
   ;;
   debian|ubuntu)
-    . "$CDIR/homebrew-install.sh"
     ## Distro tools
     sudo apt install -y software-properties-common apt-transport-https gpg
     ## Base tools
@@ -35,13 +34,19 @@ case $CURRENT_OS_ID in
     if [ ! -f ~/.local/bin/fd ]; then 
       ln -s $(which fdfind) ~/.local/bin/fd
     fi
-    brew install fzf
-    ## eza (ls alternative)
-    brew install eza
-
     if [[ ! -f "~/.local/bin/bat" ]]; then
       mkdir -p ~/.local/bin 
       ln -s /usr/bin/batcat ~/.local/bin/bat
+    fi
+
+    if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
+      git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+      ~/.fzf/install
+    else
+      . "$CDIR/homebrew-install.sh"
+      brew install fzf
+      ## eza (ls alternative)
+      brew install eza
     fi
   ;;
   *)

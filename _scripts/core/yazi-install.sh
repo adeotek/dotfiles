@@ -17,13 +17,30 @@ fi
 # Install
 case $CURRENT_OS_ID in
   arch)
-    sudo pacman -S --noconfirm --needed ffmpegthumbnailer p7zip poppler imagemagick
+    if [ "$DRY_RUN" -ne "1" ]; then
+      sudo pacman -S --noconfirm --needed ffmpegthumbnailer p7zip poppler imagemagick
+    else
+      cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed ffmpegthumbnailer p7zip poppler imagemagick" 
+    fi
     install_package "yazi" "yazi -V"
   ;;
   debian|ubuntu)
-    . "$CDIR/homebrew-install.sh"
-    brew install ffmpegthumbnailer sevenzip poppler imagemagick
-    install_package "yazi" "yazi -V" "brew install yazi"
+    if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
+      source "$CDIR/rustup-install.sh"
+      cecho "cyan" "Installing [yazi]..."
+      if [ "$DRY_RUN" -ne "1" ]; then
+        sudo apt install -y make gcc
+        cargo install --locked yazi-fm yazi-cli
+        cecho "green" "[yazi] installation done."
+      else
+        cecho "yellow" "DRY-RUN: cargo install --locked yazi-fm yazi-cli"
+        cecho "yellow" "DRY-RUN: sudo apt install -y make gcc"
+      fi
+    else
+      . "$CDIR/homebrew-install.sh"
+      brew install ffmpegthumbnailer sevenzip poppler imagemagick
+      install_package "yazi" "yazi -V" "brew install yazi"
+    fi
   ;;
   *)
     cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"

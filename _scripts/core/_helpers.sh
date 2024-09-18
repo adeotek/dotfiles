@@ -7,6 +7,7 @@
 # Global system variables
 CURRENT_OS_ID="$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)"
 CURRENT_OS_VER="$(sed -n 's/^VERSION_ID=\(.*\)/\1/p' /etc/os-release)"
+CURRENT_ARCH="$(uname -m)"
 
 # Global variables and CLI arguments
 VV="0"
