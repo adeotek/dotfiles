@@ -16,7 +16,6 @@ fi
 
 # Install
 source "$CDIR/oh-my-posh-install.sh"
-source "$CDIR/nerd-fonts-install.sh"
 
 # Setup
 stow_package "oh-my-posh" "" "$HOME/.config/oh-my-posh"

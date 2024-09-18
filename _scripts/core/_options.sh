@@ -42,6 +42,7 @@ declare CONSOLE_EXTRA_TASKS=(
   "powershell"
   "python"
   "nodejs"
+  "rustup"
 )
 declare ALL_CONSOLE_TASKS=(
   "${CONSOLE_TASKS[@]}"
@@ -54,6 +55,8 @@ declare DESKTOP_EXTRA_TASKS=(
   "golang"
   "powershell"
   "python"
+  "nodejs"
+  "rustup"
   "tabby"
   "vscode"
   "jetbrains-toolbox"
@@ -109,6 +112,7 @@ declare -A TASK_TYPES=(
   ["oh-my-posh"]="setup"
   ["powershell"]="install"
   ["python"]="install"
+  ["rustup"]="install"
   ["starship"]="install"
   ["tabby"]="setup"
   ["tmux"]="setup"
