@@ -29,3 +29,4 @@ if [ "$DRY_RUN" -ne "1" ]; then
 else
   cecho "yellow" "DRY-RUN: curl -s https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin"
 fi
+
