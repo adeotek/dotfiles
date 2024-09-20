@@ -20,7 +20,9 @@ source "$CDIR/nodejs-install.sh"
 case $CURRENT_OS_ID in
   arch)
     if [ "$DRY_RUN" -ne "1" ]; then
-      sudo pacman -R --noconfirm vim
+      if [[ -x "$(command -v vim)" ]]; then
+        sudo pacman -R --noconfirm vim
+      fi
       sudo pacman -S --noconfirm --needed luarocks # python-neovim
     else
       cecho "yellow" "DRY-RUN: sudo pacman -R --noconfirm vim"
