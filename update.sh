@@ -21,7 +21,7 @@ cecho "blue" "Starting dotfiles update..."
 case $CURRENT_OS_ID in
   arch)
     sudo pacman -Suy --noconfirm
-    yay -Suy --noconfirmation
+    yay -Suy --noconfirm
   ;;
   debian|ubuntu)
     sudo apt update
@@ -39,7 +39,7 @@ if [[ -x "$(command -v brew)" ]]; then
 fi
 
 if [[ -x "$(command -v npm)" ]]; then
-  npm install -g npm
+  sudo npm install -g npm
 fi
 
 if [[ -x "$(command -v oh-my-posh)" ]]; then
