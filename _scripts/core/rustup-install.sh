@@ -23,7 +23,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
     rustup update
     cecho "green" "[rustup] installation done."
   else
-    cecho "yellow" "[rustc] is already present."
+    cecho "yellow" "[rustup] is already present."
   fi
 else
   cecho "yellow" "DRY-RUN: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
