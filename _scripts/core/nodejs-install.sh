@@ -51,10 +51,10 @@ else
   case $CURRENT_OS_ID in
     arch)
       if [ "$DRY_RUN" -ne "1" ]; then
-        sudo pacman -R --noconfirm nodejs npm
+        sudo pacman -S --noconfirm --needed nodejs npm
         cecho "green" "[nodejs] installation done."
       else
-        cecho "yellow" "DRY-RUN: sudo pacman -R --noconfirm nodejs npm"
+        cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed nodejs npm"
       fi
     ;;
     debian)

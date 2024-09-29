@@ -49,18 +49,40 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-export PATH=$PATH:~/.local/bin
+export PATH=$PATH:$HOME/.local/bin
 
 # homebrew
 if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+  # NodeJs
+  if [ -d "/home/linuxbrew/.linuxbrew/opt/node@20/bin" ]; then
+    export PATH="/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH"
+  fi
+  if [ -d "/home/linuxbrew/.linuxbrew/opt/node@22/bin" ]; then
+    export PATH="/home/linuxbrew/.linuxbrew/opt/node@22/bin:$PATH"
+  fi
 fi
 
-# dotnet tools
-export PATH="$PATH:$HOME/.dotnet/tools"
+# Rust
+if [ -f "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
+fi
 
-# nodejs
-export PATH=/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH
+# GO lang
+if [ -d "/usr/local/go/bin" ]; then
+  export PATH="$PATH:/usr/local/go/bin"
+fi
+if [ -d "$HOME/go/bin" ]; then
+  export PATH="$PATH:$HOME/go/bin"
+fi
+
+# dotnet & dotnet tools
+if [ -d "$HOME/.dotnet" ]; then
+  export DOTNET_ROOT=$HOME/.dotnet
+  export PATH=$PATH:$HOME/.dotnet
+  export PATH="$PATH:$HOME/.dotnet/tools"
+fi
 
 export LC_ALL='C.UTF-8'
 export EDITOR="nvim"
