@@ -13,6 +13,7 @@ CURRENT_ARCH="$(uname -m)"
 VV="0"
 DRY_RUN="0"
 DFS_ACTION="init"
+UNATTENDED="0"
 
 # Global functions
 
@@ -190,14 +191,17 @@ function install_package() {
    case $CURRENT_OS_ID in
       arch)
         install_command="sudo pacman -S --noconfirm --needed $package"
-      ;;
+        ;;
       debian|ubuntu)
         install_command="sudo apt install -y $package"
-      ;;
+        ;;
+      redhat|centos|almalinux)
+        install_command="sudo dnf install -y $package"
+        ;;
       *)
         cecho "red" "Unsupported OS: $CURRENT_OS_ID"
         exit 1
-      ;;
+        ;;
     esac
   fi
 
@@ -274,6 +278,6 @@ function stow_package() {
 
 # Main
 decho "white" "Loading _helpers.sh..."
-if [ ! -z "$@" ]; then
+if [ $# -ne 0 ]; then
   process_args "$@"
 fi

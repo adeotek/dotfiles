@@ -18,12 +18,12 @@ fi
 case $CURRENT_OS_ID in
   arch)
     ## Base tools
-    sudo pacman -S --noconfirm --needed curl wget mc netcat nano vi whois mandoc git
+    sudo pacman -S --noconfirm --needed curl wget mc netcat nano vi whois mandoc
     ## CLI tools
     sudo pacman -S --noconfirm --needed jq fd ripgrep fzf tldr bat tree htop zoxide bash-completion stow
     ## eza (ls alternative)
     sudo pacman -S --noconfirm --needed eza 
-  ;;
+    ;;
   debian|ubuntu)
     ## Distro tools
     sudo apt install -y software-properties-common apt-transport-https gpg
@@ -48,10 +48,19 @@ case $CURRENT_OS_ID in
       ## eza (ls alternative)
       brew install eza
     fi
-  ;;
+    ;;
+  redhat|centos|almalinux)
+    ## Distro tools
+    sudo dnf install -y gpg make gcc glibc-devel glibc-headers tar
+    ## Base tools
+    sudo dnf install -y curl wget mc nc nano whois
+    ## CLI tools
+    sudo dnf install -y file jq fd-find  ripgrep tldr bat tree htop zoxide bash-completion stow
+    sudo dnf install -y fzf eza
+    ;;
   *)
     cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
     exit 1
-  ;;
+    ;;
 esac
 

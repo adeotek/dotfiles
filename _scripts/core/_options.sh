@@ -20,6 +20,7 @@ declare CONSOLE_ONLY_TASKS=(
   "neofetch"
   "zsh"
 )
+
 declare CONSOLE_TASKS=(
   "${MINIMAL_TASKS[@]}"
   "${CONSOLE_ONLY_TASKS[@]}"
@@ -30,6 +31,7 @@ declare DESKTOP_ONLY_TASKS=(
   "zed"
   "hypr"
 )
+
 declare DESKTOP_TASKS=(
   "${CONSOLE_TASKS[@]}"
   "${DESKTOP_ONLY_TASKS[@]}"
@@ -44,6 +46,7 @@ declare CONSOLE_EXTRA_TASKS=(
   "nodejs"
   "rustup"
 )
+
 declare ALL_CONSOLE_TASKS=(
   "${CONSOLE_TASKS[@]}"
   "${CONSOLE_EXTRA_TASKS[@]}"
@@ -61,6 +64,7 @@ declare DESKTOP_EXTRA_TASKS=(
   "vscode"
   "jetbrains-toolbox"
 )
+
 declare ALL_DESKTOP_TASKS=(
   "${DESKTOP_TASKS[@]}"
   "${DESKTOP_EXTRA_TASKS[@]}"
@@ -73,23 +77,14 @@ declare ALL_TASKS=(
   "${DESKTOP_EXTRA_TASKS[@]}"
 )
 
-MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "c")
+MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "5" "c")
 declare -A MENU_OPTIONS=(
   ["0"]="Manual selection"
   ["1"]="Minimal (${MINIMAL_TASKS[@]})"
   ["2"]="Console (Minimal + "${CONSOLE_ONLY_TASKS[@]}")"
   ["3"]="Desktop (Console + "${DESKTOP_ONLY_TASKS[@]}")"
-  ["4"]="ALL"
-  ["c"]="Cancel/Exit"
-)
-
-MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "c")
-declare -A MENU_OPTIONS=(
-  ["0"]="Manual selection"
-  ["1"]="Minimal (${MINIMAL_TASKS[@]})"
-  ["2"]="Console (Minimal + "${CONSOLE_ONLY_TASKS[@]}")"
-  ["3"]="Desktop (Console + "${DESKTOP_ONLY_TASKS[@]}")"
-  ["4"]="ALL"
+  ["4"]="Interactive"
+  ["5"]="All"
   ["c"]="Cancel/Exit"
 )
 

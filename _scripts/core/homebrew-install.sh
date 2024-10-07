@@ -37,7 +37,10 @@ else
     ;;
     debian|ubuntu)
       sudo apt install -y build-essential
-    ;;
+      ;;
+    redhat|centos|almalinux)
+      sudo dnf install -y gcc gcc-c++ glibc-devel glibc-headers make
+      ;;
     *)
       cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
       exit 1
@@ -45,4 +48,3 @@ else
   esac
   brew install gcc
 fi
-

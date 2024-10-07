@@ -18,21 +18,7 @@ source "$CDIR/_helpers.sh"
 cecho "blue" "Starting dotfiles update..."
 
 # Main
-case $CURRENT_OS_ID in
-  arch)
-    sudo pacman -Suy --noconfirm
-    yay -Suy --noconfirm
-  ;;
-  debian|ubuntu)
-    sudo apt update
-    sudo apt upgrade -y
-    sudo apt autoremove
-  ;;
-  *)
-    cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
-    exit 1
-  ;;
-esac
+source "$CDIR/system-update.sh"
 
 if [[ -x "$(command -v brew)" ]]; then
   brew upgrade
