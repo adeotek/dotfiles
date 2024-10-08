@@ -51,7 +51,7 @@ case $CURRENT_OS_ID in
     ;;
   fedora|redhat|centos|almalinux)
     ## Distro tools
-    sudo dnf install -y gpg make gcc glibc-devel glibc-headers tar
+    sudo dnf install -y gpg make gcc glibc-devel glibc-headers tar unzip
     ## Base tools
     sudo dnf install -y curl wget mc nc nano whois
     ## CLI tools

@@ -188,7 +188,7 @@ function install_package() {
     decho "yellow" "Package already installed. Updating it..."
   fi
 
-  if [ -z "$install_command" || "$install_command" == "_" ]; then
+  if [[ -z "$install_command" || "$install_command" == "_" ]]; then
    case $CURRENT_OS_ID in
       arch)
         install_command="sudo pacman -S --noconfirm --needed $package $additional_packages"
