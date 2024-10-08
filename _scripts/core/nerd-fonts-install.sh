@@ -49,7 +49,7 @@ else
     sudo apt install -y fontconfig
     FONTS_DIR=".fonts"
     ;;
-  fedora)
+  fedora|redhat|centos|almalinux)
     sudo dnf install -y fontconfig
     FONTS_DIR=".local/share/fonts"
     ;;

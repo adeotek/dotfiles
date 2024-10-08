@@ -6,6 +6,30 @@
 
 decho "white" "Loading _options.sh..."
 
+OPT_DOTNET_DEFAULT_VERSION="8.0"
+OPT_GOLANG_DEFAULT_VERSION="1.23.2"
+OPT_NERDFONTS_DEFAULT_VERSION="3.2.1"
+case $CURRENT_OS_ID in
+  arch)
+    OPT_NODEJS_DEFAULT_VERSION="22"
+  debian)
+    OPT_NODEJS_DEFAULT_VERSION="22"
+    ;;
+  ubuntu)
+    OPT_NODEJS_DEFAULT_VERSION="22"
+    ;;
+  fedora|redhat|centos)
+    OPT_NODEJS_DEFAULT_VERSION="22"
+    ;;
+  almalinux)
+    OPT_NODEJS_DEFAULT_VERSION="20"
+    ;;
+  *)
+    cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
+    exit 1
+    ;;
+esac
+
 declare MINIMAL_TASKS=(
   "base-tools"
   "git"
@@ -122,3 +146,9 @@ declare -A TASK_ARGS=(
   ["zsh"]="--prompt starship"
 )
 
+declare -A TASK_UNATTENDED_ARGS=(
+  ["nodejs"]="--version $OPT_NODEJS_DEFAULT_VERSION --install-mode source"
+  ["dotnet"]="--version $OPT_DOTNET_DEFAULT_VERSION"
+  ["golang"]="--version $OPT_GOLANG_DEFAULT_VERSION"
+  ["nerd-fonts"]="--font CascadiaCode --version $OPT_NERDFONTS_DEFAULT_VERSION"
+)

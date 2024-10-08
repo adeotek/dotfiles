@@ -5,6 +5,11 @@
 ###
 
 # Init
+if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
+  ARGS["version"]=""
+else
+  declare -A ARGS=(["version"]="")
+fi
 if [[ -z "$CDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
     CDIR="${0%/*}"
@@ -15,24 +20,28 @@ if [[ -z "$CDIR" ]]; then
 fi
 
 # Install
+if [[ -z "${ARGS["version"]}" && "$CURRENT_OS_ID" -ne "arch" ]]; then
+  cecho "yellow" -n "Please specify the version to install [8.0]: "
+  read DOTNET_VERSION
+  if [[ -z "$DOTNET_VERSION" ]]; then
+    DOTNET_VERSION="8.0"
+  fi
+else
+  DOTNET_VERSION="${ARGS["version"]}"
+fi
+
 case $CURRENT_OS_ID in
   arch)
-    install_package "dotnet-sdk" "dotnet --version"
-    if [ "$DRY_RUN" -ne "1" ]; then
-      sudo pacman -S --noconfirm --needed aspnet-runtime
-      sudo pacman -S --noconfirm --needed aspnet-targeting-pack
-    else
-      cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed aspnet-runtime"
-      cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed aspnet-targeting-pack"
-    fi
-  ;;
+    install_package "dotnet-sdk" "dotnet --version" "_" "aspnet-runtime aspnet-targeting-pack"
+    # if [ "$DRY_RUN" -ne "1" ]; then
+    #   sudo pacman -S --noconfirm --needed aspnet-runtime
+    #   sudo pacman -S --noconfirm --needed aspnet-targeting-pack
+    # else
+    #   cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed aspnet-runtime"
+    #   cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed aspnet-targeting-pack"
+    # fi
+    ;;
   debian)
-    cecho "yellow" -n "Please specify the version to install [8.0]: "
-    read DOTNET_VERSION
-    if [[ -z "$DOTNET_VERSION" ]]; then
-      DOTNET_VERSION="8.0"
-    fi
-
     if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
       cecho "cyan" "Installing [dotnet-sdk-$DOTNET_VERSION]..."
       if [ "$DRY_RUN" -ne "1" ]; then
@@ -66,18 +75,22 @@ case $CURRENT_OS_ID in
       fi
       install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
     fi
-  ;;
+    ;;
   ubuntu)
-    cecho "yellow" -n "Please specify the version to install [8.0]: "
-    read DOTNET_VERSION
-    if [[ -z "$DOTNET_VERSION" ]]; then
-      DOTNET_VERSION="8.0"
-    fi
     install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
-  ;;
+    ;;
+  fedora|redhat|centos|almalinux)
+    install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
+    ;;
   *)
     cecho "red" "Unsupported OS: $CURRENT_OS_ID"
     exit 1
-  ;;
+    ;;
 esac
 
+# Install Adeotek.DevOpsTools package
+if [ "$DRY_RUN" -ne "1" ]; then
+  dotnet tool install -g Adeotek.DevOpsTools
+else
+  cecho "yellow" "DRY-RUN: dotnet tool install -g Adeotek.DevOpsTools"
+fi

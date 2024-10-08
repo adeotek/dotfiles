@@ -49,7 +49,7 @@ case $CURRENT_OS_ID in
       brew install eza
     fi
     ;;
-  redhat|centos|almalinux)
+  fedora|redhat|centos|almalinux)
     ## Distro tools
     sudo dnf install -y gpg make gcc glibc-devel glibc-headers tar
     ## Base tools

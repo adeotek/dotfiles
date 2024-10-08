@@ -29,4 +29,3 @@ else
   cecho "yellow" "DRY-RUN: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
   cecho "yellow" "DRY-RUN: rustup update" 
 fi
-

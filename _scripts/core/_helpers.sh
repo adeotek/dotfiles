@@ -181,22 +181,23 @@ function install_package() {
   local package="$1"
   local check_command="$2"
   local install_command="$3"
+  local additional_packages="$4"
 
   cecho "cyan" "Installing [$package]..."
   if $check_command >/dev/null 2>&1; then
     decho "yellow" "Package already installed. Updating it..."
   fi
 
-  if [ -z "$install_command" ]; then
+  if [ -z "$install_command" || "$install_command" == "_" ]; then
    case $CURRENT_OS_ID in
       arch)
-        install_command="sudo pacman -S --noconfirm --needed $package"
+        install_command="sudo pacman -S --noconfirm --needed $package $additional_packages"
         ;;
       debian|ubuntu)
-        install_command="sudo apt install -y $package"
+        install_command="sudo apt install -y $package $additional_packages"
         ;;
-      redhat|centos|almalinux)
-        install_command="sudo dnf install -y $package"
+      fedora|redhat|centos|almalinux)
+        install_command="sudo dnf install -y $package $additional_packages"
         ;;
       *)
         cecho "red" "Unsupported OS: $CURRENT_OS_ID"

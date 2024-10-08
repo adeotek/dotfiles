@@ -84,15 +84,22 @@ if [ -d "$HOME/.dotnet" ]; then
   export PATH="$PATH:$HOME/.dotnet/tools"
 fi
 
-export LC_ALL='C.UTF-8'
-export EDITOR="nvim"
 export PATH=$PATH:~/.local/bin
+export LC_ALL='C.UTF-8'
 
 # Display Pokemon-colorscripts
 # Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
 # pokemon-colorscripts --no-title -s -r
 
-# Set-up icons for files/folders in terminal
+# Neovim
+if $(command -v nvim >/dev/null 2>&1); then
+  export EDITOR="nvim"
+  alias vim="nvim"
+else
+  export EDITOR="nano"
+fi
+
+# EZA
 if $(command -v eza >/dev/null 2>&1); then
   alias ls='eza -a --icons'
   alias ll='eza -al --icons'
@@ -102,43 +109,58 @@ else
   alias grep='grep --color=auto'
   alias ll='ls -lAF'
 fi
-alias pacman="sudo pacman"
-alias apt="sudo apt"
-alias systemctl="sudo systemctl"
-alias vim="nvim"
 
+alias systemctl="sudo systemctl"
+case "$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)" in
+  arch)
+    alias pacman="sudo pacman"
+    ;;
+  debian|ubuntu)
+    alias apt="sudo apt"
+    ;;
+  ubuntu)
+    alias dnf="sudo dnf"
+    ;;
+esac
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
-# Oh My Zsh (optional)
-#source $DIR/plugins/oh-my-zsh.zsh
-
-# # Starship
-# export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
-# eval "$(starship init zsh)"
-
-# Oh My Posh
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/gbs.omp.yaml)"
-
 # FZF key bindings (CTRL R for fuzzy history finder)
 source <(fzf --zsh)
 
 # zoxide
-eval "$(zoxide init zsh)"
+if $(command -v zoxide >/dev/null 2>&1); then
+  eval "$(zoxide init zsh)"
+fi
 
 # yazi
-function yy() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
+if $(command -v yazi >/dev/null 2>&1); then
+  function yy() {
+    local tmp="/tmp/yazi-cwd.wDMzCh"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+      builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+  }
+fi
+
+# Oh My Zsh (optional)
+# source $DIR/plugins/oh-my-zsh.zsh
+
+# Oh My Posh bash config
+if $(command -v oh-my-posh >/dev/null 2>&1); then
+  eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/gbs.omp.yaml)"
+fi
+
+# Starship
+# if $(command -v starship >/dev/null 2>&1); then
+#   export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
+#   eval "$(starship init zsh)"
+# fi
 
 # start neofetch
 neofetch
-

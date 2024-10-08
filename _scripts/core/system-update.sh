@@ -25,7 +25,7 @@ case $CURRENT_OS_ID in
     sudo apt upgrade -y
     sudo apt autoremove
     ;;
-  redhat|centos|almalinux)
+  fedora|redhat|centos|almalinux)
     # Check if EPEL repo is installed
     if ! sudo dnf repolist | grep -q "epel"; then
       cecho "yellow" "EPEL repository is not installed. Installing it now..."
