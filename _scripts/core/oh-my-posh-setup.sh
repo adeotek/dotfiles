@@ -18,4 +18,4 @@ fi
 source "$CDIR/oh-my-posh-install.sh"
 
 # Setup
-stow_package "oh-my-posh" "" "$HOME/.config/oh-my-posh"
+stow_package "oh-my-posh" "" "$CURRENT_CONFIG_DIR/oh-my-posh"

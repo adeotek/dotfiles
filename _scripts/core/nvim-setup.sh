@@ -18,5 +18,5 @@ fi
 . "$CDIR/nvim-install.sh"
 
 # Setup
-stow_package "nvim" "" "$HOME/.config/nvim"
+stow_package "nvim" "" "$CURRENT_CONFIG_DIR/nvim"
 

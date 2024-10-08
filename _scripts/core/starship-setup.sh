@@ -18,4 +18,4 @@ fi
 . "$CDIR/starship-install.sh"
 
 # Setup
-stow_package "starship" "" "$HOME/.config/starship"
+stow_package "starship" "" "$CURRENT_CONFIG_DIR/starship"

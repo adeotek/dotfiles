@@ -19,4 +19,4 @@ fi
 . "$CDIR/nerd-fonts-install.sh"
 
 # Setup
-stow_package "kitty" "" "$HOME/.config/kitty"
+stow_package "kitty" "" "$CURRENT_CONFIG_DIR/kitty"

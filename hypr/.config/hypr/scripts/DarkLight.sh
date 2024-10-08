@@ -7,16 +7,16 @@
 wallpaper_base_path="$HOME/Pictures/wallpapers/Dynamic-Wallpapers"
 dark_wallpapers="$wallpaper_base_path/Dark"
 light_wallpapers="$wallpaper_base_path/Light"
-hypr_config_path="$HOME/.config/hypr"
-swaync_style="$HOME/.config/swaync/style.css"
-ags_style="$HOME/.config/ags/user/style.css"
-SCRIPTSDIR="$HOME/.config/hypr/scripts"
-notif="$HOME/.config/swaync/images/bell.png"
-wallust_rofi="$HOME/.config/wallust/templates/colors-rofi.rasi"
+hypr_config_path="$CURRENT_CONFIG_DIR/hypr"
+swaync_style="$CURRENT_CONFIG_DIR/swaync/style.css"
+ags_style="$CURRENT_CONFIG_DIR/ags/user/style.css"
+SCRIPTSDIR="$CURRENT_CONFIG_DIR/hypr/scripts"
+notif="$CURRENT_CONFIG_DIR/swaync/images/bell.png"
+wallust_rofi="$CURRENT_CONFIG_DIR/wallust/templates/colors-rofi.rasi"
 
-kitty_conf="$HOME/.config/kitty/kitty.conf"
+kitty_conf="$CURRENT_CONFIG_DIR/kitty/kitty.conf"
 
-wallust_config="$HOME/.config/wallust/wallust.toml"
+wallust_config="$CURRENT_CONFIG_DIR/wallust/wallust.toml"
 pallete_dark="dark16"
 pallete_light="light16"
 
@@ -61,8 +61,8 @@ fi
 # Function to set Waybar style
 set_waybar_style() {
     theme="$1"
-    waybar_styles="$HOME/.config/waybar/style"
-    waybar_style_link="$HOME/.config/waybar/style.css"
+    waybar_styles="$CURRENT_CONFIG_DIR/waybar/style"
+    waybar_style_link="$CURRENT_CONFIG_DIR/waybar/style.css"
     style_prefix="\\[${theme}\\].*\\.css$"
 
     style_file=$(find "$waybar_styles" -maxdepth 1 -type f -regex ".*$style_prefix" | shuf -n 1)
@@ -127,16 +127,16 @@ $swww "${next_wallpaper}" $effect
 # Set Kvantum Manager theme & QT5/QT6 settings
 if [ "$next_mode" = "Dark" ]; then
     kvantum_theme="Catppuccin-Mocha"
-    qt5ct_color_scheme="$HOME/.config/qt5ct/colors/Catppuccin-Mocha.conf"
-    qt6ct_color_scheme="$HOME/.config/qt6ct/colors/Catppuccin-Mocha.conf"
+    qt5ct_color_scheme="$CURRENT_CONFIG_DIR/qt5ct/colors/Catppuccin-Mocha.conf"
+    qt6ct_color_scheme="$CURRENT_CONFIG_DIR/qt6ct/colors/Catppuccin-Mocha.conf"
 else
     kvantum_theme="Catppuccin-Latte"
-    qt5ct_color_scheme="$HOME/.config/qt5ct/colors/Catppuccin-Latte.conf"
-    qt6ct_color_scheme="$HOME/.config/qt6ct/colors/Catppuccin-Latte.conf"
+    qt5ct_color_scheme="$CURRENT_CONFIG_DIR/qt5ct/colors/Catppuccin-Latte.conf"
+    qt6ct_color_scheme="$CURRENT_CONFIG_DIR/qt6ct/colors/Catppuccin-Latte.conf"
 fi
 
-sed -i "s|^color_scheme_path=.*$|color_scheme_path=$qt5ct_color_scheme|" "$HOME/.config/qt5ct/qt5ct.conf"
-sed -i "s|^color_scheme_path=.*$|color_scheme_path=$qt6ct_color_scheme|" "$HOME/.config/qt6ct/qt6ct.conf"
+sed -i "s|^color_scheme_path=.*$|color_scheme_path=$qt5ct_color_scheme|" "$CURRENT_CONFIG_DIR/qt5ct/qt5ct.conf"
+sed -i "s|^color_scheme_path=.*$|color_scheme_path=$qt6ct_color_scheme|" "$CURRENT_CONFIG_DIR/qt6ct/qt6ct.conf"
 kvantummanager --set "$kvantum_theme"
 
 
@@ -208,8 +208,8 @@ set_custom_gtk_theme() {
         gsettings set $icon_setting "$selected_icon"
         
         ## QT5ct icon_theme
-        sed -i "s|^icon_theme=.*$|icon_theme=$selected_icon|" "$HOME/.config/qt5ct/qt5ct.conf"
-        sed -i "s|^icon_theme=.*$|icon_theme=$selected_icon|" "$HOME/.config/qt6ct/qt6ct.conf"
+        sed -i "s|^icon_theme=.*$|icon_theme=$selected_icon|" "$CURRENT_CONFIG_DIR/qt5ct/qt5ct.conf"
+        sed -i "s|^icon_theme=.*$|icon_theme=$selected_icon|" "$CURRENT_CONFIG_DIR/qt6ct/qt6ct.conf"
 
         # Flatpak GTK apps (icons)
         if command -v flatpak &> /dev/null; then

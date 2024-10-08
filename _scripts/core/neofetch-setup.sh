@@ -18,5 +18,5 @@ fi
 . "$CDIR/neofetch-install.sh"
 
 # Setup
-stow_package "neofetch" "" "$HOME/.config/neofetch"
+stow_package "neofetch" "" "$CURRENT_CONFIG_DIR/neofetch"
 

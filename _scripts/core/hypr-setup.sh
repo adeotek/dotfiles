@@ -15,4 +15,4 @@ if [[ -z "$CDIR" ]]; then
 fi
 
 # Setup
-stow_package "hypr" "" "$HOME/.config/hypr"
+stow_package "hypr" "" "$CURRENT_CONFIG_DIR/hypr"

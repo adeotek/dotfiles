@@ -5,9 +5,10 @@
 ###
 
 # Global system variables
-CURRENT_OS_ID="$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)"
+CURRENT_OS_ID="$(awk -F '=' '/^ID=/ { gsub(/"/, "", $2); print $2 }' /etc/os-release)"
 CURRENT_OS_VER="$(sed -n 's/^VERSION_ID=\(.*\)/\1/p' /etc/os-release)"
 CURRENT_ARCH="$(uname -m)"
+CURRENT_CONFIG_DIR="$HOME/.config"
 
 # Global variables and CLI arguments
 VV="0"
@@ -245,6 +246,10 @@ function stow_package() {
   cecho "cyan" "Stowing [$package]..."
   if ! stow --version >/dev/null 2>&1; then
     install_package "stow" "stow --version"
+  fi
+
+  if [ ! -d "$CURRENT_CONFIG_DIR" ]; then
+    mkdir -p "$CURRENT_CONFIG_DIR"
   fi
 
   if [ -z "$stow_action" ]; then

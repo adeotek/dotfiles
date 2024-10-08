@@ -18,7 +18,7 @@ fi
 install_package "zsh" "zsh --version"
 
 # # Install oh-my-zsh
-# ohmyzsh_dir="$HOME/.config/oh-my-zsh"
+# ohmyzsh_dir="$CURRENT_CONFIG_DIR/oh-my-zsh"
 # ## Set zsh as default shell
 # #chsh -s $(which zsh)
 # ## Install oh-my-zsh from GitHub

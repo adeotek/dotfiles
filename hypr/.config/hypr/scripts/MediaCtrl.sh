@@ -2,7 +2,7 @@
 # /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Playerctl
 
-music_icon="$HOME/.config/swaync/icons/music.png"
+music_icon="$CURRENT_CONFIG_DIR/swaync/icons/music.png"
 
 # Play the next track
 play_next() {

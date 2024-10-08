@@ -1,4 +1,4 @@
-export ZSH="$HOME/.config/oh-my-zsh"
+export ZSH="$CURRENT_CONFIG_DIR/oh-my-zsh"
 
 ZSH_THEME="fox"
 

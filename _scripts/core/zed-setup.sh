@@ -18,4 +18,4 @@ fi
 . "$CDIR/zed-install.sh"
 
 # Setup
-stow_package "zed" "" "$HOME/.config/zed"
+stow_package "zed" "" "$CURRENT_CONFIG_DIR/zed"

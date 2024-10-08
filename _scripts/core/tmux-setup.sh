@@ -28,5 +28,5 @@ if [ ! -f $CDIR/../../tmux/.config/tmux/tmux.conf.local ]; then
   ln -sr $CDIR/../../tmux/.config/tmux/$tmux_local_config.tmux.conf.local $CDIR/../../tmux/.config/tmux/tmux.conf.local
 fi
 
-stow_package "tmux" "" "$HOME/.config/tmux"
+stow_package "tmux" "" "$CURRENT_CONFIG_DIR/tmux"
 

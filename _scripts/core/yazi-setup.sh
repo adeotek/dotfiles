@@ -18,5 +18,5 @@ fi
 . "$CDIR/yazi-install.sh"
 
 # Setup
-stow_package "yazi" "" "$HOME/.config/yazi"
+stow_package "yazi" "" "$CURRENT_CONFIG_DIR/yazi"
 
