@@ -22,9 +22,6 @@ if [[ "$1" == "ls" ]]; then
   exit 0
 fi
 
-# Globals
-UNATTENDED="1"
-
 ## Startup debug 
 cecho "blue" "Starting dotfiles unatended setup ($DFS_ACTION)..."
 
@@ -51,9 +48,9 @@ source "$CDIR/system-update.sh"
 for pkg in "${SELECTED_PACKAGES[@]}"
 do
   pkg_task_type="${TASK_TYPES["$pkg"]}"
-  if [[ -n "${TASK_ARGS[$pkg]}" ]]; then
-    decho "magenta" "source ""$CDIR/$pkg-$pkg_task_type.sh"" ${TASK_ARGS[$pkg]}"
-    source "$CDIR/$pkg-$pkg_task_type.sh" "${TASK_ARGS[$pkg]}"
+  if [[ -n "${TASK_UNATTENDED_ARGS[$pkg]}" ]]; then
+    decho "magenta" "source ""$CDIR/$pkg-$pkg_task_type.sh"" ${TASK_UNATTENDED_ARGS[$pkg]}"
+    source "$CDIR/$pkg-$pkg_task_type.sh" "${TASK_UNATTENDED_ARGS[$pkg]}"
   else
     decho "magenta" "source ""$CDIR/$pkg-$pkg_task_type.sh"""
     source "$CDIR/$pkg-$pkg_task_type.sh"

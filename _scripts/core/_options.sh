@@ -143,12 +143,14 @@ declare -A TASK_TYPES=(
 
 declare -A TASK_ARGS=(
   ["bash"]="--prompt oh-my-posh"
-  ["zsh"]="--prompt starship"
+  ["zsh"]="--prompt oh-my-posh"
 )
 
 declare -A TASK_UNATTENDED_ARGS=(
-  ["nodejs"]="--version $OPT_NODEJS_DEFAULT_VERSION --install-mode source"
+  ["bash"]="--prompt oh-my-posh"
   ["dotnet"]="--version $OPT_DOTNET_DEFAULT_VERSION"
   ["golang"]="--version $OPT_GOLANG_DEFAULT_VERSION"
   ["nerd-fonts"]="--font CascadiaCode --version $OPT_NERDFONTS_DEFAULT_VERSION"
+  ["nodejs"]="--version $OPT_NODEJS_DEFAULT_VERSION --install-mode source"
+  ["zsh"]="--prompt oh-my-posh"
 )

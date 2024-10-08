@@ -23,13 +23,9 @@ case $CURRENT_OS_ID in
       if [[ -x "$(command -v vim)" ]]; then
         sudo pacman -R --noconfirm vim
       fi
-      sudo pacman -S --noconfirm --needed luarocks # python-neovim
-    else
-      cecho "yellow" "DRY-RUN: sudo pacman -R --noconfirm vim"
-      cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed luarocks"
     fi
-    install_package "neovim" "nvim -v"
-  ;;
+    install_package "neovim" "nvim -v" "_" "luarocks" # python-neovim
+    ;;
   debian|ubuntu)
     if [ "$DRY_RUN" -ne "1" ]; then
       sudo apt install -y luarocks # python-neovim
@@ -66,11 +62,20 @@ case $CURRENT_OS_ID in
       source "$CDIR/homebrew-install.sh"
       install_package "neovim" "nvim -v" "brew install neovim"
     fi
-  ;;
+    ;;
+  fedora|redhat|centos|almalinux)
+    source "$CDIR/homebrew-install.sh"
+    if [ "$DRY_RUN" -ne "1" ]; then
+      sudo dnf install -y luarocks # python-neovim
+    else
+      cecho "yellow" "DRY-RUN: sudo dnf install -y luarocks"
+    fi
+    install_package "neovim" "nvim -v" "brew install neovim"
+    ;;
   *)
     cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
     exit 1
-  ;;
+    ;;
 esac
 
 if [ "$DRY_RUN" -ne "1" ]; then

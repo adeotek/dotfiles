@@ -13,7 +13,6 @@ CURRENT_ARCH="$(uname -m)"
 VV="0"
 DRY_RUN="0"
 DFS_ACTION="init"
-UNATTENDED="0"
 
 # Global functions
 
