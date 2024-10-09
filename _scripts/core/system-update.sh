@@ -5,9 +5,9 @@
 ###
 
 # Init
-if [[ -z "$BDIR" ]]; then
+if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
+    RDIR=$(dirname "$(cd "${0%/*}/.." && pwd)")
   else
     RDIR=$(dirname "$PWD")
   fi

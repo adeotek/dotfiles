@@ -10,7 +10,7 @@ if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
 else
   declare -A ARGS=(["version"]="")
 fi
-if [[ -z "$BDIR" ]]; then
+if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
     RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
   else
