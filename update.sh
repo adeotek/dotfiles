@@ -6,7 +6,7 @@
 
 # Init
 if [[ -d "${0%/*}" ]]; then
-  RDIR="${0%/*}"
+  RDIR="$(cd "${0%/*}" && pwd)"
 else
   RDIR="$PWD";
 fi

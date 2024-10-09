@@ -13,7 +13,7 @@ else
 fi
 if [[ -z "$BDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    RDIR=$(dirname "${0%/*}")
+    RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
   else
     RDIR=$(dirname "$PWD")
   fi

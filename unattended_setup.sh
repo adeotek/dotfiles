@@ -7,7 +7,7 @@
 # Init
 declare -A ARGS=(["packages"]="")
 if [[ -d "${0%/*}" ]]; then
-  RDIR="${0%/*}"
+  RDIR="$(cd "${0%/*}" && pwd)"
 else
   RDIR="$PWD";
 fi
@@ -25,6 +25,9 @@ fi
 
 ## Startup debug 
 cecho "blue" "Starting dotfiles unatended setup ($DFS_ACTION)..."
+decho "magenta" "Current OS: $CURRENT_OS_ID"
+decho "magenta" "dotfiles root path: $RDIR"
+decho "magenta" "core scripts path: $CDIR"
 
 if [[ -z "${ARGS["packages"]}" ]]; then
   cecho "magenta" "No packages provided. Operation cancelled!"

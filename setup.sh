@@ -6,7 +6,7 @@
 
 # Init
 if [[ -d "${0%/*}" ]]; then
-  RDIR="${0%/*}"
+  RDIR="$(cd "${0%/*}" && pwd)"
 else
   RDIR="$PWD";
 fi
@@ -21,6 +21,9 @@ DEFAULT_MENU_OPTION="0"
 
 ## Startup debug 
 cecho "blue" "Starting dotfiles setup ($DFS_ACTION)..."
+decho "magenta" "Current OS: $CURRENT_OS_ID"
+decho "magenta" "dotfiles root path: $RDIR"
+decho "magenta" "core scripts path: $CDIR"
 
 # Menu
 ## Display main menu

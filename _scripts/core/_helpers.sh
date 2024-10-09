@@ -52,8 +52,6 @@ function process_args {
     esac
     shift
   done
-
-  decho "magenta" "process_args() -> DFS_ACTION: [$DFS_ACTION]"
 }
 
 function cecho {
