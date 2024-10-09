@@ -256,7 +256,9 @@ function stow_package() {
     stow_action="$DFS_ACTION"
   fi
 
-  check_result=$(bash -c "$(get_stow_command "$package" "refresh" "-n -v") 2>&1")
+  stow_check_command=$(get_stow_command "$package" "refresh" "-n -v")
+  decho "magenta" "$stow_check_command"
+  check_result=$(bash -c "$stow_check_command 2>&1")
   if echo "$check_result" | grep -q "UNLINK:" >/dev/null; then
     if [ "$stow_action" == "init" ]; then
       cecho "yellow" "Nothing to do. [$package] already stowed."
