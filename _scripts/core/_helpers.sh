@@ -254,15 +254,10 @@ function stow_package() {
     stow_action="$DFS_ACTION"
   fi
 
-  stow_check_command=$(get_stow_command "$package" "refresh" "-n -v")
+  stow_check_command=$(get_stow_command "$package" "init" "-n -v")
   decho "magenta" "$stow_check_command"
   check_result=$(bash -c "$stow_check_command 2>&1")
-  if echo "$check_result" | grep -q "UNLINK:" >/dev/null; then
-    if [ "$stow_action" == "init" ]; then
-      cecho "yellow" "Nothing to do. [$package] already stowed."
-      return
-    fi
-  else
+  if echo "$check_result" | grep "LINK: .config/$package" >/dev/null; then
     if [ "$stow_action" == "remove" ]; then
       cecho "yellow" "Nothing to do. [$package] not stowed."
       return
@@ -270,6 +265,11 @@ function stow_package() {
 
     rename_dir_if_exists "$dir_rename"
     rename_file_if_exists "$file_rename"
+  else
+    if [ "$stow_action" == "init" ]; then
+      cecho "yellow" "Nothing to do. [$package] already stowed."
+      return
+    fi
   fi
 
   if [ -z "$stow_action" ]; then
