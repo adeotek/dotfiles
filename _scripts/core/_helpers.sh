@@ -234,7 +234,7 @@ function get_stow_command() {
     extra_args="$(get_vv)"
   fi
 
-  echo "stow --dir="$HOME/.dotfiles" --target="$HOME" $extra_args $stow_arg $package"
+  echo "stow --dir="$RDIR" --target="$HOME" $extra_args $stow_arg $package"
 }
 
 function stow_package() {

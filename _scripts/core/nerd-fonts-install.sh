@@ -14,12 +14,13 @@ else
     ["version"]=""
   )
 fi
-if [[ -z "$CDIR" ]]; then
+if [[ -z "$BDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}"
+    RDIR=$(dirname "${0%/*}")
   else
-    CDIR="$PWD";
+    RDIR=$(dirname "$PWD")
   fi
+  CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
 process_args $@

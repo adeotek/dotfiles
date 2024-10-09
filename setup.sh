@@ -6,10 +6,11 @@
 
 # Init
 if [[ -d "${0%/*}" ]]; then
-  CDIR="${0%/*}/_scripts/core"
+  RDIR="${0%/*}"
 else
-  CDIR="$PWD/_scripts/core";
+  RDIR="$PWD";
 fi
+CDIR="$RDIR/_scripts/core";
 
 ## Includes
 source "$CDIR/_helpers.sh"
