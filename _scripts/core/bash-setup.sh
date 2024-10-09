@@ -33,7 +33,6 @@ fi
 stow_package "bash" "" "$CURRENT_CONFIG_DIR/bash"
 
 # Enable custom config
-if ! grep -q 'source $CURRENT_CONFIG_DIR/bash/config.bash' "$HOME/.bashrc"; then
-  (echo; echo 'source $CURRENT_CONFIG_DIR/bash/config.bash') >> "$HOME/.bashrc"
+if ! grep -q "source $CURRENT_CONFIG_DIR/bash/config.bash" "$HOME/.bashrc"; then
+  (echo; echo "source $CURRENT_CONFIG_DIR/bash/config.bash") >> "$HOME/.bashrc"
 fi
-
