@@ -51,6 +51,7 @@ source "$CDIR/system-update.sh"
 # Main
 for pkg in "${SELECTED_PACKAGES[@]}"
 do
+  pkg=$(echo "$pkg" | xargs)  # Trim whitespace from $id
   pkg_task_type="${TASK_TYPES["$pkg"]}"
   if [[ -n "${TASK_UNATTENDED_ARGS[$pkg]}" ]]; then
     decho "magenta" "source ""$CDIR/$pkg-$pkg_task_type.sh"" ${TASK_UNATTENDED_ARGS[$pkg]}"

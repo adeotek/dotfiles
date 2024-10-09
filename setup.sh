@@ -59,7 +59,7 @@ case $SETUP_MODE in
       fi
     done
     cecho "cyan" "[c] Cancel and exit"
-    cecho "yellow" -n "Please input the selected packages IDs separated by space: "
+    cecho "yellow" -n "Please input the selected packages IDs separated by comma: "
     read TASKS_IDS
     if [[ "$TASKS_IDS" == "c" || "$TASKS_IDS" == "C" ]]; then
       cecho "magenta" "Operation cancelled!"
@@ -69,9 +69,10 @@ case $SETUP_MODE in
       cecho "magenta" "No packages selected. Operation cancelled!"
       exit 10
     fi
-    read -ra SELECTED_INDICES <<< "$TASKS_IDS"
+    IFS=',' read -ra SELECTED_INDICES <<< "$TASKS_IDS"
     for id in "${SELECTED_INDICES[@]}"
     do
+      id=$(echo "$id" | xargs)  # Trim whitespace from $id
       SELECTED_PACKAGES+=(${ALL_TASKS[$id]})
     done
     ;;
