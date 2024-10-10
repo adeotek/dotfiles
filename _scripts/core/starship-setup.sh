@@ -16,7 +16,7 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/starship-install.sh"
+source "$CDIR/starship-install.sh"
 
 # Setup
 stow_package "starship" "" "$CURRENT_CONFIG_DIR/starship"

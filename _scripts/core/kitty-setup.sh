@@ -16,8 +16,8 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/kitty-install.sh"
-. "$CDIR/nerd-fonts-install.sh"
+source "$CDIR/kitty-install.sh"
+source "$CDIR/nerd-fonts-install.sh"
 
 # Setup
 stow_package "kitty" "" "$CURRENT_CONFIG_DIR/kitty"

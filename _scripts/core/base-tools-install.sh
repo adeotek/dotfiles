@@ -44,7 +44,7 @@ case $CURRENT_OS_ID in
       git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
       ~/.fzf/install
     else
-      . "$CDIR/homebrew-install.sh"
+      source "$CDIR/homebrew-install.sh"
       brew install fzf
       ## eza (ls alternative)
       brew install eza

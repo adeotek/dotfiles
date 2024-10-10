@@ -16,7 +16,7 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/neofetch-install.sh"
+source "$CDIR/neofetch-install.sh"
 
 # Setup
 stow_package "neofetch" "" "$CURRENT_CONFIG_DIR/neofetch"

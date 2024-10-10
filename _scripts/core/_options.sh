@@ -43,7 +43,6 @@ declare MINIMAL_TASKS=(
 declare CONSOLE_ONLY_TASKS=(
   "dotnet"
   "neofetch"
-  "zsh"
 )
 
 declare CONSOLE_TASKS=(
@@ -100,6 +99,7 @@ declare ALL_TASKS=(
   "${CONSOLE_ONLY_TASKS[@]}"
   "${DESKTOP_ONLY_TASKS[@]}"
   "${DESKTOP_EXTRA_TASKS[@]}"
+  "zsh"
 )
 
 MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "5" "c")

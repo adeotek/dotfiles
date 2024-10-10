@@ -16,7 +16,7 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/tmux-install.sh"
+source "$CDIR/tmux-install.sh"
 
 # Setup
 if [ ! -f $CDIR/../../tmux/.config/tmux/tmux.conf.local ]; then

@@ -16,7 +16,7 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/nvim-install.sh"
+source "$CDIR/nvim-install.sh"
 
 # Setup
 stow_package "nvim" "" "$CURRENT_CONFIG_DIR/nvim"

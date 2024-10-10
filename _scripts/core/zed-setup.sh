@@ -16,7 +16,7 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/zed-install.sh"
+source "$CDIR/zed-install.sh"
 
 # Setup
 stow_package "zed" "" "$CURRENT_CONFIG_DIR/zed"

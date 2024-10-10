@@ -16,6 +16,6 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/homebrew-install.sh"
+source "$CDIR/homebrew-install.sh"
 install_package "starship" "starship --version" "brew install starship"
 

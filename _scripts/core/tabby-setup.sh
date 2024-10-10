@@ -16,7 +16,7 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/tabby-install.sh"
+source "$CDIR/tabby-install.sh"
 
 # Setup
 decho "yellow" "No config available to stow for Tabby!"

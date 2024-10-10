@@ -16,7 +16,7 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/jetbrains-toolbox-install.sh"
+source "$CDIR/jetbrains-toolbox-install.sh"
 
 # Setup
 decho "yellow" "No config available to stow for JetBrains Toolbox!"

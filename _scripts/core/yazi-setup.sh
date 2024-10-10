@@ -16,7 +16,7 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/yazi-install.sh"
+source "$CDIR/yazi-install.sh"
 
 # Setup
 stow_package "yazi" "" "$CURRENT_CONFIG_DIR/yazi"

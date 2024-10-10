@@ -16,10 +16,11 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-. "$CDIR/git-install.sh"
+source "$CDIR/git-install.sh"
 
 # Setup
 stow_package "git" "" "$CURRENT_CONFIG_DIR/git"
+
 # Add GitHub SSH keys
 if ! grep -q "github.com" ~/.ssh/known_hosts; then
     ssh-keyscan -H github.com >> ~/.ssh/known_hosts
