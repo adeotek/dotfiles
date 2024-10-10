@@ -16,6 +16,10 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
+if [ "$DRY_RUN" -ne "1" ]; then
+  enable_wsl_systemd
+fi
+
 case $CURRENT_OS_ID in
   arch)
     install_package "docker" "sudo docker --version" "_" "docker-compose"

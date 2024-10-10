@@ -8,6 +8,7 @@
 CURRENT_OS_ID="$(awk -F '=' '/^ID=/ { gsub(/"/, "", $2); print $2 }' /etc/os-release)"
 CURRENT_OS_VER="$(sed -n 's/^VERSION_ID=\(.*\)/\1/p' /etc/os-release)"
 CURRENT_ARCH="$(uname -m)"
+IF_WSL2="$(uname -r | grep -q "WSL2" && echo "1" || echo "0")"
 CURRENT_CONFIG_DIR="$HOME/.config"
 
 # Global variables and CLI arguments
@@ -280,6 +281,17 @@ function stow_package() {
   cecho "cyan" "Running stow $stow_action for [$package]..."
   stow_command=$(get_stow_command "$package" "$stow_action")
   execute_command "$stow_command" "[$package] setup done."
+}
+
+function enable_wsl_systemd() {
+  if [[ "$IF_WSL2" == "1" && ! -f /etc/wsl.conf ]]; then
+    sudo tee -a /etc/wsl.conf <<EOF
+[boot]
+systemd=true
+[user]
+default=$USER
+EOF
+  fi
 }
 
 # Main

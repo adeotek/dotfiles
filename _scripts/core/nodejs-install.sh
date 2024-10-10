@@ -83,7 +83,7 @@ else
       fi
       ;;
     fedora|redhat|centos|almalinux)
-      install_package "nodejs:$NODEJS_VERSION" "node -v" "sudo dnf module install nodejs:$NODEJS_VERSION"
+      install_package "nodejs:$NODEJS_VERSION" "node -v" "sudo dnf module install -y nodejs:$NODEJS_VERSION"
       ;;
     *)
       cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
