@@ -10,12 +10,13 @@ if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
 else
   declare -A ARGS=(["prompt"]="")
 fi
-if [[ -z "$CDIR" ]]; then
+if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}"
+    RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
   else
-    CDIR="$PWD";
+    RDIR=$(dirname "$PWD")
   fi
+  CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
 
@@ -29,10 +30,9 @@ if [ "${ARGS["prompt"]}" == "starship" ]; then
   source "$CDIR/starship-setup.sh"
 fi
 
-stow_package "bash" "" "$HOME/.config/bash"
+stow_package "bash" "" "$CURRENT_CONFIG_DIR/bash"
 
 # Enable custom config
-if ! grep -q 'source $HOME/.config/bash/config.bash' "$HOME/.bashrc"; then
-  (echo; echo 'source $HOME/.config/bash/config.bash') >> "$HOME/.bashrc"
+if ! grep -q "source $CURRENT_CONFIG_DIR/bash/config.bash" "$HOME/.bashrc"; then
+  (echo; echo "source $CURRENT_CONFIG_DIR/bash/config.bash") >> "$HOME/.bashrc"
 fi
-

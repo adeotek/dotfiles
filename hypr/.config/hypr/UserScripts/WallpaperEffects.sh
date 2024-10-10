@@ -4,13 +4,13 @@
 # Inspiration from ML4W - Stephan Raabe https://gitlab.com/stephan-raabe/dotfiles
 
 # Variables
-current_wallpaper="$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
-wallpaper_output="$HOME/.config/hypr/wallpaper_effects/.wallpaper_modified"
-SCRIPTSDIR="$HOME/.config/hypr/scripts"
+current_wallpaper="$CURRENT_CONFIG_DIR/hypr/wallpaper_effects/.wallpaper_current"
+wallpaper_output="$CURRENT_CONFIG_DIR/hypr/wallpaper_effects/.wallpaper_modified"
+SCRIPTSDIR="$CURRENT_CONFIG_DIR/hypr/scripts"
 focused_monitor=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
 
 # Directory for swaync
-iDIR="$HOME/.config/swaync/images"
+iDIR="$CURRENT_CONFIG_DIR/swaync/images"
 
 # swww transition config
 FPS=60

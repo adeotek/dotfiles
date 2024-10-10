@@ -10,12 +10,13 @@ if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
 else
   declare -A ARGS=(["prompt"]="")
 fi
-if [[ -z "$CDIR" ]]; then
+if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}"
+    RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
   else
-    CDIR="$PWD";
+    RDIR=$(dirname "$PWD")
   fi
+  CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
 process_args $@
@@ -31,10 +32,10 @@ if [ "${ARGS["prompt"]}" == "starship" ]; then
   source "$CDIR/starship-setup.sh"
 fi
 
-stow_package "zsh" "" "$HOME/.config/zsh"
+stow_package "zsh" "" "$CURRENT_CONFIG_DIR/zsh"
 
 # Enable custom config
-if ! grep -q 'source $HOME/.config/zsh/config.zsh' "$HOME/.zshrc"; then
-  (echo; echo 'source $HOME/.config/zsh/config.zsh') >> "$HOME/.zshrc"
+if ! grep -q "source $CURRENT_CONFIG_DIR/zsh/config.zsh" "$HOME/.zshrc"; then
+  (echo; echo "source $CURRENT_CONFIG_DIR/zsh/config.zsh") >> "$HOME/.zshrc"
 fi
 

@@ -4,7 +4,7 @@
 
 # WALLPAPERS PATH
 wallDIR="$HOME/Pictures/wallpapers"
-SCRIPTSDIR="$HOME/.config/hypr/scripts"
+SCRIPTSDIR="$CURRENT_CONFIG_DIR/hypr/scripts"
 
 # variables
 focused_monitor=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')

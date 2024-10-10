@@ -5,8 +5,8 @@
 editor=${EDITOR:-nano}
 tty=kitty
 
-configs="$HOME/.config/hypr/configs"
-UserConfigs="$HOME/.config/hypr/UserConfigs"
+configs="$CURRENT_CONFIG_DIR/hypr/configs"
+UserConfigs="$CURRENT_CONFIG_DIR/hypr/UserConfigs"
 
 menu(){
   printf "1. edit Env-variables\n"

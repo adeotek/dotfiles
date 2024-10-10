@@ -5,12 +5,13 @@
 ###
 
 # Init
-if [[ -z "$CDIR" ]]; then
+if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}"
+    RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
   else
-    CDIR="$PWD";
+    RDIR=$(dirname "$PWD")
   fi
+  CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
 
@@ -20,14 +21,14 @@ if [[ -x "$(command -v brew)" ]]; then
 else
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   ## Set shell profile
-  if echo $SHELL | grep -q "/zsh" >/dev/null; then
-    SHELL_PROFILE=".zshrc"
-  else
-    SHELL_PROFILE=".bashrc"
-  fi
-  if ! grep -q 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' ~/$SHELL_PROFILE; then
-    (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> ~/$SHELL_PROFILE
-  fi
+  # if echo $SHELL | grep -q "/zsh" >/dev/null; then
+  #   SHELL_PROFILE=".zshrc"
+  # else
+  #   SHELL_PROFILE=".bashrc"
+  # fi
+  # if ! grep -q 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' ~/$SHELL_PROFILE; then
+  #   (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> ~/$SHELL_PROFILE
+  # fi
   ## Activate brew
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   ## Install gcc
@@ -37,7 +38,10 @@ else
     ;;
     debian|ubuntu)
       sudo apt install -y build-essential
-    ;;
+      ;;
+    fedora|redhat|centos|almalinux)
+      sudo dnf install -y gcc gcc-c++ glibc-devel glibc-headers make
+      ;;
     *)
       cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
       exit 1
@@ -45,4 +49,3 @@ else
   esac
   brew install gcc
 fi
-

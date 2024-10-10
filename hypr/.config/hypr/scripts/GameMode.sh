@@ -2,8 +2,8 @@
 # /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Game Mode. Turning off all animations
 
-notif="$HOME/.config/swaync/images/bell.png"
-SCRIPTSDIR="$HOME/.config/hypr/scripts"
+notif="$CURRENT_CONFIG_DIR/swaync/images/bell.png"
+SCRIPTSDIR="$CURRENT_CONFIG_DIR/hypr/scripts"
 
 
 HYPRGAMEMODE=$(hyprctl getoption animations:enabled | awk 'NR==1{print $2}')
@@ -20,7 +20,7 @@ if [ "$HYPRGAMEMODE" = 1 ] ; then
     notify-send -e -u low -i "$notif" "gamemode enabled. All animations off"
     exit
 else
-	swww-daemon --format xrgb && swww img "$HOME/.config/rofi/.current_wallpaper" &
+	swww-daemon --format xrgb && swww img "$CURRENT_CONFIG_DIR/rofi/.current_wallpaper" &
 	sleep 0.1
 	${SCRIPTSDIR}/WallustSwww.sh
 	sleep 0.5

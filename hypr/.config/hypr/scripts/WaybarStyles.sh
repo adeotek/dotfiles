@@ -6,10 +6,10 @@ set -euo pipefail
 IFS=$'\n\t'
 
 # Define directories
-waybar_styles="$HOME/.config/waybar/style"
-waybar_style="$HOME/.config/waybar/style.css"
-SCRIPTSDIR="$HOME/.config/hypr/scripts"
-rofi_config="$HOME/.config/rofi/config-waybar-style.rasi"
+waybar_styles="$CURRENT_CONFIG_DIR/waybar/style"
+waybar_style="$CURRENT_CONFIG_DIR/waybar/style.css"
+SCRIPTSDIR="$CURRENT_CONFIG_DIR/hypr/scripts"
+rofi_config="$CURRENT_CONFIG_DIR/rofi/config-waybar-style.rasi"
 
 # Function to display menu options
 menu() {

@@ -5,14 +5,15 @@
 ###
 
 # Init
-if [[ -z "$CDIR" ]]; then
+if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}"
+    RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
   else
-    CDIR="$PWD";
+    RDIR=$(dirname "$PWD")
   fi
+  CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
 
 # Setup
-stow_package "hypr" "" "$HOME/.config/hypr"
+stow_package "hypr" "" "$CURRENT_CONFIG_DIR/hypr"

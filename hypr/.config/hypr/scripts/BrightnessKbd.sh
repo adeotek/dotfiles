@@ -2,7 +2,7 @@
 # /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Script for keyboard backlights (if supported) using brightnessctl
 
-iDIR="$HOME/.config/swaync/icons"
+iDIR="$CURRENT_CONFIG_DIR/swaync/icons"
 
 # Get keyboard brightness
 get_kbd_backlight() {

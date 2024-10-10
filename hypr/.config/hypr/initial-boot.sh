@@ -6,9 +6,9 @@
 # However, I do highly suggest not to touch it since again, as long as the marker exist, script wont run
 
 # Variables
-scriptsDir=$HOME/.config/hypr/scripts
-wallpaper=$HOME/.config/hypr/wallpaper_effects/.wallpaper_modified
-waybar_style="$HOME/.config/waybar/style/[Dark] Half-Moon.css"
+scriptsDir=$CURRENT_CONFIG_DIR/hypr/scripts
+wallpaper=$CURRENT_CONFIG_DIR/hypr/wallpaper_effects/.wallpaper_modified
+waybar_style="$CURRENT_CONFIG_DIR/waybar/style/[Dark] Half-Moon.css"
 kvantum_theme="Catppuccin-Mocha"
 color_scheme="prefer-dark"
 gtk_theme="Andromeda-dark"
@@ -43,7 +43,7 @@ if [ ! -f ~/.config/hypr/.initial_startup_done ]; then
 
     # Initial waybar style
 	if [ -f "$waybar_style" ]; then
-    	ln -sf "$waybar_style" "$HOME/.config/waybar/style.css"
+    	ln -sf "$waybar_style" "$CURRENT_CONFIG_DIR/waybar/style.css"
 
 		# Refreshing waybar, swaync, rofi etc. 
 		"$scriptsDir/Refresh.sh" > /dev/null 2>&1 & 

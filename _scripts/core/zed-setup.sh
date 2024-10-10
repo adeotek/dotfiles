@@ -5,17 +5,18 @@
 ###
 
 # Init
-if [[ -z "$CDIR" ]]; then
+if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}"
+    RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
   else
-    CDIR="$PWD";
+    RDIR=$(dirname "$PWD")
   fi
+  CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
 
 # Install
-. "$CDIR/zed-install.sh"
+source "$CDIR/zed-install.sh"
 
 # Setup
-stow_package "zed" "" "$HOME/.config/zed"
+stow_package "zed" "" "$CURRENT_CONFIG_DIR/zed"

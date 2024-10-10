@@ -5,17 +5,18 @@
 ###
 
 # Init
-if [[ -z "$CDIR" ]]; then
+if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}"
+    RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
   else
-    CDIR="$PWD";
+    RDIR=$(dirname "$PWD")
   fi
+  CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
 
 # Install
-. "$CDIR/starship-install.sh"
+source "$CDIR/starship-install.sh"
 
 # Setup
-stow_package "starship" "" "$HOME/.config/starship"
+stow_package "starship" "" "$CURRENT_CONFIG_DIR/starship"

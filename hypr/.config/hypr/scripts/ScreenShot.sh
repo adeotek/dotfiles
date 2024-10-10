@@ -2,8 +2,8 @@
 # /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Screenshots scripts
 
-iDIR="$HOME/.config/swaync/icons"
-sDIR="$HOME/.config/hypr/scripts"
+iDIR="$CURRENT_CONFIG_DIR/swaync/icons"
+sDIR="$CURRENT_CONFIG_DIR/hypr/scripts"
 notify_cmd_shot="notify-send -h string:x-canonical-private-synchronous:shot-notify -u low -i ${iDIR}/picture.png"
 
 time=$(date "+%d-%b_%H-%M-%S")

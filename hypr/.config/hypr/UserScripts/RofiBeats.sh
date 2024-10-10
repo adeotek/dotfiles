@@ -6,7 +6,7 @@
 mDIR="$HOME/Music/"
 
 # Directory for icons
-iDIR="$HOME/.config/swaync/icons"
+iDIR="$CURRENT_CONFIG_DIR/swaync/icons"
 
 # Online Stations. Edit as required
 declare -A online_music=(
