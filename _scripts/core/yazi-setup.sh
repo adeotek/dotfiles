@@ -5,18 +5,19 @@
 ###
 
 # Init
-if [[ -z "$CDIR" ]]; then
+if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}"
+    RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
   else
-    CDIR="$PWD";
+    RDIR=$(dirname "$PWD")
   fi
+  CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
 
 # Install
-. "$CDIR/yazi-install.sh"
+source "$CDIR/yazi-install.sh"
 
 # Setup
-stow_package "yazi" "" "$HOME/.config/yazi"
+stow_package "yazi" "" "$CURRENT_CONFIG_DIR/yazi"
 

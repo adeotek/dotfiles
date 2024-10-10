@@ -3,7 +3,7 @@
 # Script for Random Wallpaper ( CTRL ALT W)
 
 wallDIR="$HOME/Pictures/wallpapers"
-scriptsDir="$HOME/.config/hypr/scripts"
+scriptsDir="$CURRENT_CONFIG_DIR/hypr/scripts"
 
 focused_monitor=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
 

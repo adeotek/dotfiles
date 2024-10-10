@@ -3,7 +3,7 @@
 # /* Calculator (using qalculate) and rofi */
 # /* Submitted by: https://github.com/JosephArmas */
 
-rofi_config="$HOME/.config/rofi/config-calc.rasi"
+rofi_config="$CURRENT_CONFIG_DIR/rofi/config-calc.rasi"
 
 # Kill Rofi if already running before execution
 if pgrep -x "rofi" >/dev/null; then

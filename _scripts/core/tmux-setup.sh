@@ -5,17 +5,18 @@
 ###
 
 # Init
-if [[ -z "$CDIR" ]]; then
+if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}"
+    RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
   else
-    CDIR="$PWD";
+    RDIR=$(dirname "$PWD")
   fi
+  CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
 
 # Install
-. "$CDIR/tmux-install.sh"
+source "$CDIR/tmux-install.sh"
 
 # Setup
 if [ ! -f $CDIR/../../tmux/.config/tmux/tmux.conf.local ]; then
@@ -28,5 +29,5 @@ if [ ! -f $CDIR/../../tmux/.config/tmux/tmux.conf.local ]; then
   ln -sr $CDIR/../../tmux/.config/tmux/$tmux_local_config.tmux.conf.local $CDIR/../../tmux/.config/tmux/tmux.conf.local
 fi
 
-stow_package "tmux" "" "$HOME/.config/tmux"
+stow_package "tmux" "" "$CURRENT_CONFIG_DIR/tmux"
 

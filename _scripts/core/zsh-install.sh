@@ -5,12 +5,13 @@
 ###
 
 # Init
-if [[ -z "$CDIR" ]]; then
+if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}"
+    RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
   else
-    CDIR="$PWD";
+    RDIR=$(dirname "$PWD")
   fi
+  CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
 
@@ -18,7 +19,7 @@ fi
 install_package "zsh" "zsh --version"
 
 # # Install oh-my-zsh
-# ohmyzsh_dir="$HOME/.config/oh-my-zsh"
+# ohmyzsh_dir="$CURRENT_CONFIG_DIR/oh-my-zsh"
 # ## Set zsh as default shell
 # #chsh -s $(which zsh)
 # ## Install oh-my-zsh from GitHub

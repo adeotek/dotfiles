@@ -5,12 +5,13 @@
 ###
 
 # Init
-if [[ -z "$CDIR" ]]; then
+if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
-    CDIR="${0%/*}"
+    RDIR=$(dirname "$(cd "${0%/*}" && pwd)")
   else
-    CDIR="$PWD";
+    RDIR=$(dirname "$PWD")
   fi
+  CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
 
@@ -23,7 +24,7 @@ case $CURRENT_OS_ID in
       cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed ffmpegthumbnailer p7zip poppler imagemagick" 
     fi
     install_package "yazi" "yazi -V"
-  ;;
+    ;;
   debian|ubuntu)
     if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
       source "$CDIR/rustup-install.sh"
@@ -37,14 +38,27 @@ case $CURRENT_OS_ID in
         cecho "yellow" "DRY-RUN: sudo apt install -y make gcc"
       fi
     else
-      . "$CDIR/homebrew-install.sh"
-      brew install ffmpegthumbnailer sevenzip poppler imagemagick
+      source "$CDIR/homebrew-install.sh"
+      if [ "$DRY_RUN" -ne "1" ]; then
+        brew install ffmpegthumbnailer sevenzip poppler imagemagick
+      else
+        cecho "yellow" "DRY-RUN: brew install ffmpegthumbnailer sevenzip poppler imagemagick"
+      fi
       install_package "yazi" "yazi -V" "brew install yazi"
     fi
-  ;;
+    ;;
+  fedora|redhat|centos|almalinux)
+    source "$CDIR/homebrew-install.sh"
+    if [ "$DRY_RUN" -ne "1" ]; then
+      brew install ffmpegthumbnailer sevenzip poppler imagemagick
+    else
+      cecho "yellow" "DRY-RUN: brew install ffmpegthumbnailer sevenzip poppler imagemagick"
+    fi
+    install_package "yazi" "yazi -V" "brew install yazi"
+    ;;
   *)
     cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
     exit 1
-  ;;
+    ;;
 esac
 

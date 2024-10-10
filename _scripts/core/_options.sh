@@ -6,6 +6,31 @@
 
 decho "white" "Loading _options.sh..."
 
+OPT_DOTNET_DEFAULT_VERSION="8.0"
+OPT_GOLANG_DEFAULT_VERSION="1.23.2"
+OPT_NERDFONTS_DEFAULT_VERSION="3.2.1"
+case $CURRENT_OS_ID in
+  arch)
+    OPT_NODEJS_DEFAULT_VERSION="22"
+    ;;
+  debian)
+    OPT_NODEJS_DEFAULT_VERSION="22"
+    ;;
+  ubuntu)
+    OPT_NODEJS_DEFAULT_VERSION="22"
+    ;;
+  fedora|redhat|centos)
+    OPT_NODEJS_DEFAULT_VERSION="22"
+    ;;
+  almalinux)
+    OPT_NODEJS_DEFAULT_VERSION="20"
+    ;;
+  *)
+    cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
+    exit 1
+    ;;
+esac
+
 declare MINIMAL_TASKS=(
   "base-tools"
   "git"
@@ -18,8 +43,8 @@ declare MINIMAL_TASKS=(
 declare CONSOLE_ONLY_TASKS=(
   "dotnet"
   "neofetch"
-  "zsh"
 )
+
 declare CONSOLE_TASKS=(
   "${MINIMAL_TASKS[@]}"
   "${CONSOLE_ONLY_TASKS[@]}"
@@ -30,6 +55,7 @@ declare DESKTOP_ONLY_TASKS=(
   "zed"
   "hypr"
 )
+
 declare DESKTOP_TASKS=(
   "${CONSOLE_TASKS[@]}"
   "${DESKTOP_ONLY_TASKS[@]}"
@@ -44,6 +70,7 @@ declare CONSOLE_EXTRA_TASKS=(
   "nodejs"
   "rustup"
 )
+
 declare ALL_CONSOLE_TASKS=(
   "${CONSOLE_TASKS[@]}"
   "${CONSOLE_EXTRA_TASKS[@]}"
@@ -61,6 +88,7 @@ declare DESKTOP_EXTRA_TASKS=(
   "vscode"
   "jetbrains-toolbox"
 )
+
 declare ALL_DESKTOP_TASKS=(
   "${DESKTOP_TASKS[@]}"
   "${DESKTOP_EXTRA_TASKS[@]}"
@@ -71,25 +99,17 @@ declare ALL_TASKS=(
   "${CONSOLE_ONLY_TASKS[@]}"
   "${DESKTOP_ONLY_TASKS[@]}"
   "${DESKTOP_EXTRA_TASKS[@]}"
+  "zsh"
 )
 
-MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "c")
+MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "5" "c")
 declare -A MENU_OPTIONS=(
   ["0"]="Manual selection"
   ["1"]="Minimal (${MINIMAL_TASKS[@]})"
   ["2"]="Console (Minimal + "${CONSOLE_ONLY_TASKS[@]}")"
   ["3"]="Desktop (Console + "${DESKTOP_ONLY_TASKS[@]}")"
-  ["4"]="ALL"
-  ["c"]="Cancel/Exit"
-)
-
-MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "c")
-declare -A MENU_OPTIONS=(
-  ["0"]="Manual selection"
-  ["1"]="Minimal (${MINIMAL_TASKS[@]})"
-  ["2"]="Console (Minimal + "${CONSOLE_ONLY_TASKS[@]}")"
-  ["3"]="Desktop (Console + "${DESKTOP_ONLY_TASKS[@]}")"
-  ["4"]="ALL"
+  ["4"]="Interactive"
+  ["5"]="All"
   ["c"]="Cancel/Exit"
 )
 
@@ -124,6 +144,14 @@ declare -A TASK_TYPES=(
 
 declare -A TASK_ARGS=(
   ["bash"]="--prompt oh-my-posh"
-  ["zsh"]="--prompt starship"
+  ["zsh"]="--prompt oh-my-posh"
 )
 
+declare -A TASK_UNATTENDED_ARGS=(
+  ["bash"]="--prompt oh-my-posh"
+  ["dotnet"]="--version $OPT_DOTNET_DEFAULT_VERSION"
+  ["golang"]="--version $OPT_GOLANG_DEFAULT_VERSION"
+  ["nerd-fonts"]="--font CascadiaCode --version $OPT_NERDFONTS_DEFAULT_VERSION"
+  ["nodejs"]="--version $OPT_NODEJS_DEFAULT_VERSION --install-mode source"
+  ["zsh"]="--prompt oh-my-posh"
+)
