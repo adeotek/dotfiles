@@ -82,8 +82,11 @@ else
         cecho "yellow" "DRY-RUN: sudo apt update && sudo apt install -y nodejs"
       fi
       ;;
-    fedora|redhat|centos|almalinux)
+    fedora|redhat|centos)
       install_package "nodejs:$NODEJS_VERSION" "node -v"
+      ;;
+    almalinux)
+      install_package "nodejs" "node -v"
       ;;
     *)
       cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
