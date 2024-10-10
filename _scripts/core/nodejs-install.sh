@@ -25,12 +25,12 @@ process_args $@
 # Install
 if [ -z "${ARGS["version"]}" ]; then
   cecho "yellow" -n "Please input the NodeJs version you want to install? [22]: "
-  read TARGET_VERSION
+  read NODEJS_VERSION
   if [[ "$INSTALL_MODE_CONFIRM" == "" ]]; then
-    TARGET_VERSION="22"
+    NODEJS_VERSION="22"
   fi
 else
-  TARGET_VERSION="${ARGS["version"]}"
+  NODEJS_VERSION="${ARGS["version"]}"
 fi
 
 NJS_INSTALL_MODE="${ARGS["install-mode"]}"
@@ -43,9 +43,9 @@ if [[ -z "$NJS_INSTALL_MODE" && "$CURRENT_ARCH" != "aarch64" ]]; then
 fi
 
 if [[ "$NJS_INSTALL_MODE" == "brew" ]]; then
-  install_package "node" "node -v" "brew install node@$TARGET_VERSION"
-  if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/node@$TARGET_VERSION/bin* ]]; then
-    (echo; echo "export PATH=""\$PATH:/home/linuxbrew/.linuxbrew/opt/node@$TARGET_VERSION/bin""") >> /home/$USER/.bashrc
+  install_package "node" "node -v" "brew install node@$NODEJS_VERSION"
+  if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/node@$NODEJS_VERSION/bin* ]]; then
+    (echo; echo "export PATH=""\$PATH:/home/linuxbrew/.linuxbrew/opt/node@$NODEJS_VERSION/bin""") >> /home/$USER/.bashrc
     source $HOME/.bashrc
   fi
 else
@@ -56,13 +56,13 @@ else
       ;;
     debian)
       if [ "$DRY_RUN" -ne "1" ]; then
-        sudo curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh
+        sudo curl -fsSL https://deb.nodesource.com/setup_$NODEJS_VERSION.x -o nodesource_setup.sh
         sudo bash nodesource_setup.sh
         sudo rm -f nodesource_setup.sh
         sudo apt update && sudo apt install -y nodejs
         cecho "green" "[nodejs] installation done."
       else
-        cecho "yellow" "DRY-RUN: sudo curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh"
+        cecho "yellow" "DRY-RUN: sudo curl -fsSL https://deb.nodesource.com/setup_$NODEJS_VERSION.x -o nodesource_setup.sh"
         cecho "yellow" "DRY-RUN: sudo bash nodesource_setup.sh"
         cecho "yellow" "DRY-RUN: sudo rm -f nodesource_setup.sh"
         cecho "yellow" "DRY-RUN: sudo apt update && sudo apt install -y nodejs"
@@ -70,20 +70,20 @@ else
       ;;
     ubuntu)
       if [ "$DRY_RUN" -ne "1" ]; then
-        curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh
+        curl -fsSL https://deb.nodesource.com/setup_$NODEJS_VERSION.x -o nodesource_setup.sh
         sudo -E bash nodesource_setup.sh
         rm -f nodesource_setup.sh
         sudo apt update && sudo apt install -y nodejs
         cecho "green" "[nodejs] installation done."
       else
-        cecho "yellow" "DRY-RUN: curl -fsSL https://deb.nodesource.com/setup_$TARGET_VERSION.x -o nodesource_setup.sh"
+        cecho "yellow" "DRY-RUN: curl -fsSL https://deb.nodesource.com/setup_$NODEJS_VERSION.x -o nodesource_setup.sh"
         cecho "yellow" "DRY-RUN: sudo -E bash nodesource_setup.sh"
         cecho "yellow" "DRY-RUN: rm -f nodesource_setup.sh"
         cecho "yellow" "DRY-RUN: sudo apt update && sudo apt install -y nodejs"
       fi
       ;;
     fedora|redhat|centos|almalinux)
-      install_package "nodejs:$TARGET_VERSION" "node -v"
+      install_package "nodejs:$NODEJS_VERSION" "node -v"
       ;;
     *)
       cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
