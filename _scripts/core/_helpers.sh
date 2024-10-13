@@ -258,8 +258,8 @@ function stow_package() {
   stow_check_command=$(get_stow_command "$package" "init" "-n -v")
   decho "magenta" "$stow_check_command"
   check_result=$(bash -c "$stow_check_command 2>&1")
-  if echo "$check_result" | grep "LINK: .config/$package" >/dev/null \
-    || echo "$check_result" | grep "\* cannot stow .*\/$package\/.* over existing target" >/dev/null; then
+  if echo "$check_result" | grep -G "LINK: .config/$package" >/dev/null \
+    || echo "$check_result" | grep -G "\* cannot stow .*/$package/.* over existing target" >/dev/null; then
     if [ "$stow_action" == "remove" ]; then
       cecho "yellow" "Nothing to do. [$package] not stowed."
       return
