@@ -22,7 +22,7 @@ fi
 
 # Install
 if [[ -z "${ARGS["version"]}" ]]; then
-  cecho "yellow" -n "Please specify the version to install [1.23.1]: "
+  cecho "yellow" -n "Please specify the GoLang version to install [1.23.1]: "
   read DOTNET_VERSION
   if [[ -z "$GOLANG_VERSION" ]]; then
     GOLANG_VERSION="1.23.1"
@@ -54,7 +54,7 @@ else
     fi
     if [ "$DRY_RUN" -ne "1" ]; then
       wget https://go.dev/dl/go$GOLANG_VERSION.linux-${GOLANG_ARCH}.tar.gz
-      rm -rf /usr/local/go && tar -C /usr/local -xzf go$GOLANG_VERSION.linux-${GOLANG_ARCH}.tar.gz
+      sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go$GOLANG_VERSION.linux-${GOLANG_ARCH}.tar.gz
       rm -f go$GOLANG_VERSION.linux-${GOLANG_ARCH}.tar.gz
       cecho "green" "[golang] installation done."
     else
