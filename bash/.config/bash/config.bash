@@ -77,6 +77,8 @@ if [[ -d /home/dev/.fzf/bin && ! "$PATH" == */home/dev/.fzf/bin* ]]; then
 fi
 if [[ -x "$(command -v fzf)" ]]; then
   eval "$(fzf --bash)"
+  alias searchf='fzf --preview "bat --color=always --style=header,grid --line-range :500 {}"'
+  alias dpsfzf='docker ps -a | fzf --preview "docker inspect {1}"'
 fi
 
 # zoxide
