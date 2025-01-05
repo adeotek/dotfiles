@@ -43,6 +43,7 @@ declare MINIMAL_TASKS=(
 declare CONSOLE_ONLY_TASKS=(
   "dotnet"
   "neofetch"
+  "onefetch"
 )
 
 declare CONSOLE_TASKS=(
@@ -127,6 +128,7 @@ declare -A TASK_TYPES=(
   ["jetbrains-toolbox"]="setup"
   ["nodejs"]="install"
   ["neofetch"]="setup"
+  ["onefetch"]="install"
   ["nerd-fonts"]="install"
   ["nvim"]="setup"
   ["oh-my-posh"]="setup"

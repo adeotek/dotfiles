@@ -129,7 +129,15 @@ SAVEHIST=10000
 setopt appendhistory
 
 # FZF key bindings (CTRL R for fuzzy history finder)
-source <(fzf --zsh)
+# Setup fzf
+if [[ -d /home/dev/.fzf/bin && ! "$PATH" == */home/dev/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/home/dev/.fzf/bin"
+fi
+if [[ -x "$(command -v fzf)" ]]; then
+  source <(fzf --zsh)
+  alias searchf='fzf --preview "bat --color=always --style=header,grid --line-range :500 {}"'
+  alias dpsfzf='docker ps -a | fzf --preview "docker inspect {1}"'
+fi
 
 # zoxide
 if $(command -v zoxide >/dev/null 2>&1); then
