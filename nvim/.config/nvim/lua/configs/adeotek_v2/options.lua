@@ -7,7 +7,6 @@ vim.g.editorconfig = true
 vim.opt.number = true
 vim.opt.relativenumber = false -- true
 vim.opt.mouse = '' -- 'a'
-vim.opt.clipboard = 'unnamedplus'
 vim.opt.breakindent = true
 vim.opt.undofile = true
 vim.opt.ignorecase = true
@@ -23,6 +22,10 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
+-- System clipboard settings
+vim.opt.clipboard = 'unnamedplus' -- Use system clipboard
+vim.opt.fixeol = true -- Preserve line endings
+
 -- Personal
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
@@ -31,10 +34,6 @@ vim.opt.softtabstop = 0 -- 2
 vim.opt.autoindent = true
 vim.opt.smarttab = true
 vim.opt.showmatch = true -- Show matching braces when text indicator is over them
-
--- System clipboard settings
-vim.opt.clipboard = 'unnamedplus' -- Use system clipboard
-vim.opt.fixeol = true -- Preserve line endings
 
 -- In case xclip is not installed, show a message
 local function has_clipboard()

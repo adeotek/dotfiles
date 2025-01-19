@@ -26,9 +26,6 @@ map('i', '<C-x>', '<C-o>"+dd', { desc = 'Cut line to system clipboard' })
 map({ 'n', 'i' }, '<C-s>', '<cmd>write<cr><esc>', { desc = 'Save file' })
 map({ 'n', 'i' }, '<C-A-s>', '<cmd>browse confirm saveas<cr>', { desc = 'Save as' })
 
--- Comment/Uncomment
-map({ 'n', 'i', 'v' }, '<C-/>', '<cmd>gcc<cr>', { desc = 'Comment/Uncomment line(s)' })
-
 -- Window navigation
 map('n', '<C-h>', '<C-w>h', { desc = 'Move to left window' })
 map('n', '<C-j>', '<C-w>j', { desc = 'Move to lower window' })
@@ -49,7 +46,7 @@ map('n', '<C-p>', '<cmd>Telescope find_files<cr>', { desc = 'Find files' })
 -- File explorer
 map('n', '<leader>e', '<cmd>NvimTreeToggle<cr>', { desc = 'Toggle file explorer' })
 
--- Terminal
+-- -- Terminal
 function _G.set_terminal_keymaps()
     local opts = { noremap = true }
     vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)

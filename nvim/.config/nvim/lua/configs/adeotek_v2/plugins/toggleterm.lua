@@ -3,8 +3,13 @@ return {
   version = "2.*",
   opts = {},
   config = function()
+    local function get_terminal_size()
+      local height = math.floor(vim.o.lines * 0.4)
+      return height
+    end
+
     require("toggleterm").setup({
-      size = 30,
+      size = get_terminal_size, -- 30
       open_mapping = [[<C-\>]],
       hide_numbers = true, -- hide the number column in toggleterm buffers
       autochdir = false,
