@@ -25,13 +25,13 @@ case $CURRENT_OS_ID in
         sudo pacman -R --noconfirm vim
       fi
     fi
-    install_package "neovim" "nvim -v" "_" "luarocks" # python-neovim
+    install_package "neovim" "nvim -v" "_" "luarocks xclip" # python-neovim
     ;;
   debian|ubuntu)
     if [ "$DRY_RUN" -ne "1" ]; then
-      sudo apt install -y luarocks # python-neovim
+      sudo apt install -y luarocks xclip # python-neovim
     else
-      cecho "yellow" "DRY-RUN: sudo apt install -y luarocks"
+      cecho "yellow" "DRY-RUN: sudo apt install -y luarocks xclip"
     fi
     if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
       cecho "cyan" "Installing [neovim]..."
@@ -47,7 +47,7 @@ case $CURRENT_OS_ID in
         sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
         cd build && sudo cpack -G DEB && sudo dpkg -i nvim-linux64.deb
         cd ~
-        cecho "green" "[nodejs] installation done."
+        cecho "green" "[nvim] installation done."
       else
         cecho "yellow" "DRY-RUN: sudo apt install -y ninja-build gettext cmake unzip curl build-essential"
         cecho "yellow" "DRY-RUN: sudo git clone https://github.com/neovim/neovim /opt/neovim-src"
@@ -67,9 +67,9 @@ case $CURRENT_OS_ID in
   fedora|redhat|centos|almalinux)
     source "$CDIR/homebrew-install.sh"
     if [ "$DRY_RUN" -ne "1" ]; then
-      sudo dnf install -y luarocks # python-neovim
+      sudo dnf install -y luarocks xclip # python-neovim
     else
-      cecho "yellow" "DRY-RUN: sudo dnf install -y luarocks"
+      cecho "yellow" "DRY-RUN: sudo dnf install -y luarocks xclip"
     fi
     install_package "neovim" "nvim -v" "brew install neovim"
     ;;
