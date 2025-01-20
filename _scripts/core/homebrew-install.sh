@@ -20,6 +20,7 @@ if [[ -x "$(command -v brew)" ]]; then
   decho "yellow" "HomeBrew is already installed!"
 else
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  
   ## Set shell profile
   # if echo $SHELL | grep -q "/zsh" >/dev/null; then
   #   SHELL_PROFILE=".zshrc"
@@ -29,13 +30,14 @@ else
   # if ! grep -q 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' ~/$SHELL_PROFILE; then
   #   (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> ~/$SHELL_PROFILE
   # fi
+
   ## Activate brew
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  ## Install gcc
+  ## Install build tools
   case $CURRENT_OS_ID in
     arch)
       sudo pacman -S --noconfirm --needed base-devel
-    ;;
+      ;;
     debian|ubuntu)
       sudo apt install -y build-essential
       ;;
@@ -47,5 +49,6 @@ else
       exit 1
     ;;
   esac
+  # Install gcc
   brew install gcc
 fi

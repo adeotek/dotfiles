@@ -26,6 +26,7 @@ case $CURRENT_OS_ID in
     install_package "yazi" "yazi -V"
     ;;
   debian|ubuntu)
+    echo "CURRENT_ARCH: $CURRENT_ARCH"
     if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
       source "$CDIR/rustup-install.sh"
       cecho "cyan" "Installing [yazi]..."
