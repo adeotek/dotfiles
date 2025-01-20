@@ -47,7 +47,7 @@ case $CURRENT_OS_ID in
         sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
         cd build && sudo cpack -G DEB && sudo dpkg -i nvim-linux64.deb
         cd ~
-        cecho "green" "[nodejs] installation done."
+        cecho "green" "[nvim] installation done."
       else
         cecho "yellow" "DRY-RUN: sudo apt install -y ninja-build gettext cmake unzip curl build-essential"
         cecho "yellow" "DRY-RUN: sudo git clone https://github.com/neovim/neovim /opt/neovim-src"
