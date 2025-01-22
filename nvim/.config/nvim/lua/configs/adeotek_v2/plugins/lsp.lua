@@ -27,7 +27,7 @@ return {
           'bashls',
           'pyright',
           'ansiblels',
-          'taplo',
+          'taplo'
         },
         automatic_installation = true,
       })

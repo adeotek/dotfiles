@@ -4,36 +4,39 @@ vim.g.maplocalleader = " "
 vim.g.editorconfig = true
 
 -- Basic settings
+vim.opt.mouse = '' -- 'a'
 vim.opt.number = true
 vim.opt.relativenumber = false -- true
-vim.opt.mouse = '' -- 'a'
-vim.opt.breakindent = true
-vim.opt.undofile = true
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.signcolumn = 'yes'
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-vim.opt.inccommand = 'split'
-vim.opt.cursorline = true
-vim.opt.scrolloff = 10
-
--- System clipboard settings
-vim.opt.clipboard = 'unnamedplus' -- Use system clipboard
-vim.opt.fixeol = true -- Preserve line endings
-
--- Personal
-vim.opt.expandtab = true
 vim.opt.tabstop = 2
+vim.opt.expandtab = true
 vim.opt.shiftwidth = 0 -- 2
 vim.opt.softtabstop = 0 -- 2
 vim.opt.autoindent = true
 vim.opt.smarttab = true
-vim.opt.showmatch = true -- Show matching braces when text indicator is over them
+vim.opt.showmatch = true                                        -- Show matching braces when text indicator is over them
+vim.opt.syntax = 'on'
+vim.opt.showcmd = true
+vim.opt.encoding = 'utf-8'
+vim.opt.showmatch = true
+vim.opt.cursorline = true                                       -- Highlight the current line
+vim.opt.scrolloff = 10                                          -- Keep 10 lines above/below cursor when scrolling
+vim.opt.undofile = true                                         -- Save undo history to file for persistence across sessions
+-- vim.opt.breakindent = true                                      -- Preserve indentation of wrapped lines
+-- vim.opt.ignorecase = true                                       -- Ignore case in search patterns
+-- vim.opt.smartcase = true                                        -- Override ignorecase if search has uppercase
+-- vim.opt.signcolumn = 'yes'                                      -- Always show sign column (for git/diagnostics)
+-- vim.opt.updatetime = 250                                        -- Faster completion and CursorHold events (ms)
+-- vim.opt.timeoutlen = 300                                        -- Time to wait for mapped sequences (ms)
+-- vim.opt.splitright = true                                       -- Open new vertical splits to the right
+-- vim.opt.splitbelow = true                                       -- Open new horizontal splits below
+-- vim.opt.list = true                                             -- Show invisible characters
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }     -- Define how to display invisible characters
+-- vim.opt.inccommand = 'split'                                    -- Show preview of substitutions in split window
+
+
+-- System clipboard settings
+vim.opt.clipboard = 'unnamedplus' -- Use system clipboard
+vim.opt.fixeol = true -- Preserve line endings
 
 -- In case xclip is not installed, show a message
 local function has_clipboard()
