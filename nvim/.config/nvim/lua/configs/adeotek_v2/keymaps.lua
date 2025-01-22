@@ -26,6 +26,9 @@ map('i', '<C-x>', '<C-o>"+dd', { desc = 'Cut line to system clipboard' })
 map({ 'n', 'i' }, '<C-s>', '<cmd>write<cr><esc>', { desc = 'Save file' })
 map({ 'n', 'i' }, '<C-A-s>', '<cmd>browse confirm saveas<cr>', { desc = 'Save as' })
 
+-- Undo with Ctrl+Z (in normal, viwe and insert mode)
+vim.keymap.set({ 'n', 'v', 'i' }, '<C-z>', 'u', { desc = 'Undo' })
+
 -- Window navigation
 map('n', '<C-h>', '<C-w>h', { desc = 'Move to left window' })
 map('n', '<C-j>', '<C-w>j', { desc = 'Move to lower window' })
@@ -40,8 +43,13 @@ map('n', '<C-q>', '<cmd>bdelete<cr>', { desc = 'Close current buffer' })
 map('n', '<C-PageUp>', '<cmd>bnext<cr>', { desc = 'Move buffer tab right' })
 map('n', '<C-PageDown>', '<cmd>bprevious<cr>', { desc = 'Move buffer tab left' })
 
--- Quick file search (similar to VSCode)
+-- Telescope + Quick file search (similar to VSCode)
 map('n', '<C-p>', '<cmd>Telescope find_files<cr>', { desc = 'Find files' })
+map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', {})
+map('n', '<leader>gf', '<cmd>Telescope git_files<cr>', {})
+map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', {})
+map("n", '<leader>fge', ":lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", {})
+map('n', '<leader>vh', '<cmd>Telescope help_tags<cr>', {})
 
 -- File explorer
 map('n', '<leader>e', '<cmd>NvimTreeToggle<cr>', { desc = 'Toggle file explorer' })
