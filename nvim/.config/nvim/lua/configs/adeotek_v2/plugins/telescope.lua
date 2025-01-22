@@ -10,11 +10,16 @@ return {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
       },
+      { 
+        'nvim-telescope/telescope-live-grep-args.nvim',
+        version = '^1.0.0' 
+      },
     },
     config = function()
-      require('telescope').setup({
+      local telescope = require('telescope')
+      telescope.setup({
         defaults = {
-          file_ignore_patterns = { "node_modules", ".git/", ".cache", "tldr" },
+          file_ignore_patterns = { 'node_modules', '.git', '.cache', 'tldr' },
           mappings = {
             i = {
               ['<C-u>'] = false,
@@ -22,8 +27,14 @@ return {
             },
           },
         },
+        pickers = {
+          find_files = {
+            hidden = true
+          }
+        }
       })
-      require('telescope').load_extension('fzf')
+      telescope.load_extension('fzf')
+      telescope.load_extension('live_grep_args')
     end,
   },
 }
