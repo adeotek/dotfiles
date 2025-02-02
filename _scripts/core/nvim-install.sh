@@ -27,7 +27,7 @@ case $CURRENT_OS_ID in
     fi
     install_package "neovim" "nvim -v" "_" "luarocks xclip" # python-neovim
     ;;
-  debian|ubuntu)
+  debian|ubuntu|pop)
     if [ "$DRY_RUN" -ne "1" ]; then
       sudo apt install -y luarocks xclip # python-neovim
     else

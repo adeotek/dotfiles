@@ -35,7 +35,7 @@ cecho "yellow" "WARNING: Ansible install not implemented yet!"
 # sudo apt install -y ansible
 # python3 -m pip install ansible-lint
 #   ;;
-#   ubuntu)
+#   ubuntu|pop)
 #     
 #   ;;
 #   *)

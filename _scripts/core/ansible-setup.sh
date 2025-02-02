@@ -36,7 +36,7 @@ cecho "yellow" "WARNING: Ansible setup not implemented yet!"
 # become=True
 # EOF   
 #   ;;
-#   ubuntu)
+#   ubuntu|pop)
 #     
 #   ;;
 #   *)

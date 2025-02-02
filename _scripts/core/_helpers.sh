@@ -192,7 +192,7 @@ function install_package() {
       arch)
         install_command="sudo pacman -S --noconfirm --needed $package $additional_packages"
         ;;
-      debian|ubuntu)
+      debian|ubuntu|pop)
         install_command="sudo apt install -y $package $additional_packages"
         ;;
       fedora|redhat|centos|almalinux)

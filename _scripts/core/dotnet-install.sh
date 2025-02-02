@@ -80,7 +80,7 @@ else
         install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
       fi
       ;;
-    ubuntu)
+    ubuntu|pop)
       install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
       ;;
     fedora|redhat|centos|almalinux)

@@ -38,7 +38,7 @@ else
     arch)
       sudo pacman -S --noconfirm --needed base-devel
       ;;
-    debian|ubuntu)
+    debian|ubuntu|pop)
       sudo apt install -y build-essential
       ;;
     fedora|redhat|centos|almalinux)

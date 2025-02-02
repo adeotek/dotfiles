@@ -25,7 +25,7 @@ case $CURRENT_OS_ID in
     ## eza (ls alternative)
     sudo pacman -S --noconfirm --needed eza 
     ;;
-  debian|ubuntu)
+  debian|ubuntu|pop)
     ## Distro tools
     sudo apt install -y software-properties-common apt-transport-https gpg
     ## Base tools

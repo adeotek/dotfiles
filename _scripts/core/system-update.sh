@@ -21,7 +21,7 @@ case $CURRENT_OS_ID in
     sudo pacman -Suy --noconfirm
     yay -Suy --noconfirm
     ;;
-  debian|ubuntu)
+  debian|ubuntu|pop)
     sudo apt update
     sudo apt upgrade -y
     sudo apt autoremove

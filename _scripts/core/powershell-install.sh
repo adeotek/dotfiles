@@ -41,7 +41,7 @@ case $CURRENT_OS_ID in
     fi
     install_package "powershell" "pwsh --version"
     ;;
-  ubuntu)
+  ubuntu|pop)
     if [ ! -f /etc/apt/sources.list.d/microsoft-prod.list ]; then
       cecho "cyan" "Installing Microsoft APT source..."
       if [ "$DRY_RUN" -ne "1" ]; then

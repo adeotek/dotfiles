@@ -46,7 +46,7 @@ else
     sudo pacman -S --noconfirm --needed fontconfig
     FONTS_DIR=".fonts"
     ;;
-  debian|ubuntu)
+  debian|ubuntu|pop)
     sudo apt install -y fontconfig
     FONTS_DIR=".fonts"
     ;;
