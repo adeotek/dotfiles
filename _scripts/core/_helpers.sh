@@ -176,6 +176,29 @@ function rename_file_if_exists() {
   fi
 }
 
+function increase_ulimit() {
+  if [ $# -ne 1 ]; then
+    cecho "red" "increase_ulimit() error: No target limit provided (Usage: adjust_ulimit <target_limit>)"
+    return
+  fi
+
+  if ! [[ "$1" =~ ^[0-9]+$ ]]; then
+    cecho "red" "increase_ulimit() error: target limit must be a positive number"
+    return
+  fi
+
+  local target_limit=$1
+  # Get current soft limit
+  local current_limit=$(ulimit -Sn)
+
+  if [ "$current_limit" -lt "$target_limit" ]; then
+    cecho "yellow" "Current ulimit ($current_limit) is below target ($target_limit). Increasing..."
+    ulimit -n "$target_limit"
+  else
+    decho "yellow" "Current limit ($current_limit) is already sufficient"
+  fi
+}
+
 function install_package() {
   local package="$1"
   local check_command="$2"

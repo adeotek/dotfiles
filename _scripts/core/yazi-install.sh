@@ -39,10 +39,13 @@ case $CURRENT_OS_ID in
       fi
     else
       source "$CDIR/homebrew-install.sh"
-      if [ "$DRY_RUN" -ne "1" ]; then
-        brew install ffmpegthumbnailer sevenzip poppler imagemagick
-      else
-        cecho "yellow" "DRY-RUN: brew install ffmpegthumbnailer sevenzip poppler imagemagick"
+      if ! yazi -V >/dev/null 2>&1; then
+        if [ "$DRY_RUN" -ne "1" ]; then
+          increase_ulimit 65535
+          brew install ffmpegthumbnailer sevenzip poppler imagemagick
+        else
+          cecho "yellow" "DRY-RUN: brew install ffmpegthumbnailer sevenzip poppler imagemagick"
+        fi
       fi
       install_package "yazi" "yazi -V" "brew install yazi"
     fi
