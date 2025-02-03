@@ -24,7 +24,7 @@ case $CURRENT_OS_ID in
   debian|ubuntu|pop)
     sudo apt update
     sudo apt upgrade -y
-    sudo apt autoremove
+    sudo apt autoremove -y
     ;;
   fedora|redhat|centos|almalinux)
     # Check if EPEL repo is installed
