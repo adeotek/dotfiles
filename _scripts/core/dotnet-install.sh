@@ -85,10 +85,10 @@ else
         if ! grep -q "^deb.*dotnet/backports" /etc/apt/sources.list.d/*.list 2>/dev/null; then
           cecho "cyan" "Enabling dotnet backports Ubuntu feed..."
           if [ "$DRY_RUN" -ne "1" ]; then
-            sudo add-apt-repository ppa:dotnet/backports -y
+            sudo add-apt-repository -y ppa:dotnet/backports
             sudo apt update
           else
-            cecho "yellow" "DRY-RUN: sudo add-apt-repository ppa:dotnet/backports -y"
+            cecho "yellow" "DRY-RUN: sudo add-apt-repository -y ppa:dotnet/backports"
             cecho "yellow" "DRY-RUN: sudo apt update"
           fi
         fi

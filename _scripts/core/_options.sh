@@ -113,7 +113,7 @@ declare -A MENU_OPTIONS=(
 
 declare -A TASK_TYPES=(
   ["base-tools"]="install"
-  ["ansible"]="setup"
+  ["ansible"]="install"
   ["bash"]="setup"
   ["docker"]="install"
   ["dotnet"]="install"
