@@ -1,7 +1,6 @@
 # This is Git's per-user configuration file.
-[user]
-	name = George Benjamin-Schonberger
-	email = george.benjamin@gmail.com
+[include]
+    path = ~/.config/git/user.config
 
 [http]
 	sslVerify = true

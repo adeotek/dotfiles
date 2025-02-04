@@ -25,19 +25,19 @@ case $CURRENT_OS_ID in
     ## eza (ls alternative)
     sudo pacman -S --noconfirm --needed eza 
     ;;
-  debian|ubuntu)
+  debian|ubuntu|pop)
     ## Distro tools
     sudo apt install -y software-properties-common apt-transport-https gpg
     ## Base tools
     sudo apt install -y curl wget mc netcat-traditional nano whois
     ## CLI tools
     sudo apt install -y jq fd-find ripgrep tldr bat tree htop zoxide bash-completion stow
+    mkdir -p ~/.local/bin
     if [ ! -f ~/.local/bin/fd ]; then 
       ln -s $(which fdfind) ~/.local/bin/fd
     fi
-    if [[ ! -f "~/.local/bin/bat" ]]; then
-      mkdir -p ~/.local/bin 
-      ln -s /usr/bin/batcat ~/.local/bin/bat
+    if [ ! -f ~/.local/bin/bat ]; then
+      ln -s $(which batcat) ~/.local/bin/bat
     fi
 
     if [[ "$CURRENT_ARCH" == "aarch64" ]]; then

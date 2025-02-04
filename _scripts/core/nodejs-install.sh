@@ -75,7 +75,7 @@ else
         cecho "yellow" "DRY-RUN: sudo apt update && sudo apt install -y nodejs"
       fi
       ;;
-    ubuntu)
+    ubuntu|pop)
       if node -v >/dev/null 2>&1; then
         decho "yellow" "Package already installed. Updating it..."
       else

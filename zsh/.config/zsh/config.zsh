@@ -115,10 +115,10 @@ case "$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)" in
   arch)
     alias pacman="sudo pacman"
     ;;
-  debian|ubuntu)
+  debian|ubuntu|pop)
     alias apt="sudo apt"
     ;;
-  ubuntu)
+  fedora|redhat|centos|almalinux)
     alias dnf="sudo dnf"
     ;;
 esac

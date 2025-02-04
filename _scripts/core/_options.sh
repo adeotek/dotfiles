@@ -13,10 +13,7 @@ case $CURRENT_OS_ID in
   arch)
     OPT_NODEJS_DEFAULT_VERSION="22"
     ;;
-  debian)
-    OPT_NODEJS_DEFAULT_VERSION="22"
-    ;;
-  ubuntu)
+  debian|ubuntu|pop)
     OPT_NODEJS_DEFAULT_VERSION="22"
     ;;
   fedora|redhat|centos)
@@ -116,7 +113,7 @@ declare -A MENU_OPTIONS=(
 
 declare -A TASK_TYPES=(
   ["base-tools"]="install"
-  ["ansible"]="setup"
+  ["ansible"]="install"
   ["bash"]="setup"
   ["docker"]="install"
   ["dotnet"]="install"

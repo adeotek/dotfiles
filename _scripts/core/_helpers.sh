@@ -5,8 +5,8 @@
 ###
 
 # Global system variables
-CURRENT_OS_ID="$(awk -F '=' '/^ID=/ { gsub(/"/, "", $2); print $2 }' /etc/os-release)"
-CURRENT_OS_VER="$(sed -n 's/^VERSION_ID=\(.*\)/\1/p' /etc/os-release)"
+CURRENT_OS_ID="$(awk -F= '/^ID=/ { gsub(/"/, "", $2); print $2 }' /etc/os-release)"
+CURRENT_OS_VER="$(awk -F= '/^VERSION_ID=/ {gsub(/"/, "", $2); print $2}' /etc/os-release)"
 CURRENT_ARCH="$(uname -m)"
 IF_WSL2="$(uname -r | grep -q "WSL2" && echo "1" || echo "0")"
 CURRENT_CONFIG_DIR="$HOME/.config"
@@ -176,6 +176,29 @@ function rename_file_if_exists() {
   fi
 }
 
+function increase_ulimit() {
+  if [ $# -ne 1 ]; then
+    cecho "red" "increase_ulimit() error: No target limit provided (Usage: adjust_ulimit <target_limit>)"
+    return
+  fi
+
+  if ! [[ "$1" =~ ^[0-9]+$ ]]; then
+    cecho "red" "increase_ulimit() error: target limit must be a positive number"
+    return
+  fi
+
+  local target_limit=$1
+  # Get current soft limit
+  local current_limit=$(ulimit -Sn)
+
+  if [ "$current_limit" -lt "$target_limit" ]; then
+    cecho "yellow" "Current ulimit ($current_limit) is below target ($target_limit). Increasing..."
+    ulimit -n "$target_limit"
+  else
+    decho "yellow" "Current limit ($current_limit) is already sufficient"
+  fi
+}
+
 function install_package() {
   local package="$1"
   local check_command="$2"
@@ -192,7 +215,7 @@ function install_package() {
       arch)
         install_command="sudo pacman -S --noconfirm --needed $package $additional_packages"
         ;;
-      debian|ubuntu)
+      debian|ubuntu|pop)
         install_command="sudo apt install -y $package $additional_packages"
         ;;
       fedora|redhat|centos|almalinux)

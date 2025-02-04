@@ -41,12 +41,12 @@ case $CURRENT_OS_ID in
     fi
     install_package "powershell" "pwsh --version"
     ;;
-  ubuntu)
+  ubuntu|pop)
     if [ ! -f /etc/apt/sources.list.d/microsoft-prod.list ]; then
       cecho "cyan" "Installing Microsoft APT source..."
       if [ "$DRY_RUN" -ne "1" ]; then
-        decho "magenta" "wget https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb"
-        wget https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+        decho "magenta" "wget https://packages.microsoft.com/config/ubuntu/$CURRENT_OS_VER/packages-microsoft-prod.deb -O packages-microsoft-prod.deb"
+        wget https://packages.microsoft.com/config/ubuntu/$CURRENT_OS_VER/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
         decho "magenta" "sudo dpkg -i packages-microsoft-prod.deb"
         sudo dpkg -i packages-microsoft-prod.deb
         decho "magenta" "rm packages-microsoft-prod.deb"
@@ -54,7 +54,7 @@ case $CURRENT_OS_ID in
         decho "magenta" "sudo apt update"
         sudo apt update
       else
-        cecho "yellow" "DRY-RUN: wget https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb"
+        cecho "yellow" "DRY-RUN: wget https://packages.microsoft.com/config/ubuntu/$CURRENT_OS_VER/packages-microsoft-prod.deb -O packages-microsoft-prod.deb"
         cecho "yellow" "DRY-RUN: sudo dpkg -i packages-microsoft-prod.deb"
         cecho "yellow" "DRY-RUN: rm packages-microsoft-prod.deb"
         cecho "yellow" "DRY-RUN: sudo apt update"

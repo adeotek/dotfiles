@@ -26,7 +26,7 @@ case $CURRENT_OS_ID in
   ;;
   debian|ubuntu)
     cecho "cyan" "Installing [zed]..."
-    if [ kitty --version >/dev/null 2>&1 ]; then
+    if [ zed --version >/dev/null 2>&1 ]; then
       decho "yellow" "Package already installed. Updating it..."
     fi
 
@@ -36,6 +36,13 @@ case $CURRENT_OS_ID in
       cecho "green" "[kitty] installation done."
     else
       cecho "yellow" "DRY-RUN: curl -f https://zed.dev/install.sh | sh"
+    fi
+  ;;
+  pop)
+    if [ flatpak --version >/dev/null 2>&1 ]; then
+      install_package "zed" "zed --version" "flatpak install -y dev.zed.Zed"
+    else
+      install_package "zed" "zed --version"
     fi
   ;;
   *)

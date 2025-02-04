@@ -21,6 +21,10 @@ cecho "blue" "Starting dotfiles update..."
 # Main
 source "$CDIR/system-update.sh"
 
+if [[ -x "$(command -v flatpak)" ]]; then
+  flatpak update -y
+fi
+
 if [[ -x "$(command -v brew)" ]]; then
   brew upgrade
 fi

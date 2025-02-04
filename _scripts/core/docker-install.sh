@@ -42,7 +42,7 @@ case $CURRENT_OS_ID in
     fi
     install_package "docker-ce" "sudo docker --version" "_" "docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
     ;;
-  ubuntu)
+  ubuntu|pop)
     if [ "$DRY_RUN" -ne "1" ]; then
       for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
       # Add Docker's official GPG key:

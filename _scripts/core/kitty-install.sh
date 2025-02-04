@@ -20,7 +20,7 @@ case $CURRENT_OS_ID in
   arch)
     install_package "kitty" "kitty --version"
   ;;
-  debian|ubuntu)
+  debian|ubuntu|pop)
     cecho "cyan" "Installing [kitty]..."
     if [ kitty --version >/dev/null 2>&1 ]; then
       decho "yellow" "Package already installed. Updating it..."
