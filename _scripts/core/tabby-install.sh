@@ -20,10 +20,10 @@ cecho "cyan" "Installing [tabby]..."
 if [ -f /usr/bin/tabby ]; then
   decho "yellow" "Package already installed. Nothing to do."
 else
-  cecho "yellow" -n "Please specify the version to install [1.0.211]: "
+  cecho "yellow" -n "Please specify the version to install [1.0.221]: "
   read TABBY_VERSION
   if [[ -z "$TABBY_VERSION" ]]; then
-    TABBY_VERSION="1.0.211"
+    TABBY_VERSION="1.0.221"
   fi
 
   case $CURRENT_OS_ID in
@@ -43,7 +43,7 @@ else
         cecho "yellow" "DRY-RUN: rm ~/$tabby_package_file"
       fi
     ;;
-    debian|ubuntu)
+    debian|ubuntu|pop)
       tabby_package_file="tabby-$TABBY_VERSION-linux-x64.deb"
       if [ "$DRY_RUN" -ne "1" ]; then
         decho "magenta" "wget https://github.com/Eugeny/tabby/releases/download/v$TABBY_VERSION/$tabby_package_file -O ~/$tabby_package_file"
