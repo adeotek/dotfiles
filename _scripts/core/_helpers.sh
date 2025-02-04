@@ -5,8 +5,8 @@
 ###
 
 # Global system variables
-CURRENT_OS_ID="$(awk -F '=' '/^ID=/ { gsub(/"/, "", $2); print $2 }' /etc/os-release)"
-CURRENT_OS_VER="$(sed -n 's/^VERSION_ID=\(.*\)/\1/p' /etc/os-release)"
+CURRENT_OS_ID="$(awk -F= '/^ID=/ { gsub(/"/, "", $2); print $2 }' /etc/os-release)"
+CURRENT_OS_VER="$(awk -F= '/^VERSION_ID=/ {gsub(/"/, "", $2); print $2}' /etc/os-release)"
 CURRENT_ARCH="$(uname -m)"
 IF_WSL2="$(uname -r | grep -q "WSL2" && echo "1" || echo "0")"
 CURRENT_CONFIG_DIR="$HOME/.config"

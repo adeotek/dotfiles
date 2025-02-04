@@ -82,7 +82,7 @@ else
       ;;
     ubuntu|pop)
       if [[ "$CURRENT_OS_VER" != "24.10" ]]; then
-        if grep -q "^deb.*dotnet/backports" /etc/apt/sources.list /etc/apt/sources.list.d/*.list 2>/dev/null; then
+        if ! grep -q "^deb.*dotnet/backports" /etc/apt/sources.list.d/*.list 2>/dev/null; then
           cecho "cyan" "Enabling dotnet backports Ubuntu feed..."
           if [ "$DRY_RUN" -ne "1" ]; then
             sudo add-apt-repository ppa:dotnet/backports -y
