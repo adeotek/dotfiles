@@ -75,29 +75,7 @@ else
         cecho "yellow" "DRY-RUN: sudo apt update && sudo apt install -y nodejs"
       fi
       ;;
-    ubuntu)
-      if node -v >/dev/null 2>&1; then
-        decho "yellow" "Package already installed. Updating it..."
-      else
-        if [ "$DRY_RUN" -ne "1" ]; then
-          curl -fsSL https://deb.nodesource.com/setup_$NODEJS_VERSION.x -o nodesource_setup.sh
-          sudo -E bash nodesource_setup.sh
-          rm -f nodesource_setup.sh
-        else
-          cecho "yellow" "DRY-RUN: curl -fsSL https://deb.nodesource.com/setup_$NODEJS_VERSION.x -o nodesource_setup.sh"
-          cecho "yellow" "DRY-RUN: sudo -E bash nodesource_setup.sh"
-          cecho "yellow" "DRY-RUN: rm -f nodesource_setup.sh"
-        fi
-      fi
-
-      if [ "$DRY_RUN" -ne "1" ]; then
-        sudo apt update && sudo apt install -y nodejs
-        cecho "green" "[nodejs] installation done."
-      else
-        cecho "yellow" "DRY-RUN: sudo apt update && sudo apt install -y nodejs"
-      fi
-      ;;
-    pop)
+    ubuntu|pop)
       if node -v >/dev/null 2>&1; then
         decho "yellow" "Package already installed. Updating it..."
       else

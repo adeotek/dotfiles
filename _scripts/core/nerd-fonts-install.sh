@@ -36,7 +36,7 @@ if [[ "$CURRENT_OS_ID" == "arch" && "$TARGET_FONT" == "CascadiaCode" ]]; then
   sudo pacman -S --noconfirm --needed ttf-cascadia-code-nerd
 else
   if [ -z "${ARGS["version"]}" ]; then
-    TARGET_VERSION="3.2.1"
+    TARGET_VERSION="3.3.0"
   else
     TARGET_VERSION="${ARGS["version"]}"
   fi

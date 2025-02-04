@@ -81,6 +81,18 @@ else
       fi
       ;;
     ubuntu|pop)
+      if [[ "$CURRENT_OS_VER" != "24.10" ]]; then
+        if grep -q "^deb.*dotnet/backports" /etc/apt/sources.list /etc/apt/sources.list.d/*.list 2>/dev/null; then
+          cecho "cyan" "Enabling dotnet backports Ubuntu feed..."
+          if [ "$DRY_RUN" -ne "1" ]; then
+            sudo add-apt-repository ppa:dotnet/backports -y
+            sudo apt update
+          else
+            cecho "yellow" "DRY-RUN: sudo add-apt-repository ppa:dotnet/backports -y"
+            cecho "yellow" "DRY-RUN: sudo apt update"
+          fi
+        fi
+      fi
       install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
       ;;
     fedora|redhat|centos|almalinux)

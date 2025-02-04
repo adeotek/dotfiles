@@ -25,11 +25,11 @@ case $CURRENT_OS_ID in
         sudo pacman -R --noconfirm vim
       fi
     fi
-    install_package "neovim" "nvim -v" "_" "luarocks xclip" # python-neovim
+    install_package "neovim" "nvim -v" "_" "luarocks xclip"
     ;;
   debian|ubuntu|pop)
     if [ "$DRY_RUN" -ne "1" ]; then
-      sudo apt install -y luarocks xclip # python-neovim
+      sudo apt install -y luarocks xclip
     else
       cecho "yellow" "DRY-RUN: sudo apt install -y luarocks xclip"
     fi
