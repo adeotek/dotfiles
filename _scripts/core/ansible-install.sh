@@ -50,6 +50,10 @@ case $CURRENT_OS_ID in
     fi
     install_package "ansible" "ansible --version" "" "ansible-lint"
   ;;
+  fedora|redhat|centos|almalinux)
+    # EPEL need to be enabled first
+    install_package "ansible" "ansible --version" "" "ansible-lint"
+  ;;
   *)
     cecho "red" "Unsupported OS: $CURRENT_OS_ID"
     exit 1
