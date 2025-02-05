@@ -19,15 +19,17 @@ fi
 source "$CDIR/git-install.sh"
 
 # Setup
-stow_package "git" "" "$CURRENT_CONFIG_DIR/git"
-
 # Copy default user.config, if it doesn't exists
-if [ ! -f ~/.config/git/user.config ]; then
-  cecho "cyan" "Copying user.config file..."
-  cp $RDIR/git/.config/git/user.config ~/.config/git/user.config
+mkdir -p ~/.config/git.user
+if [ ! -f ~/.config/git.user/config ]; then
+  cecho "cyan" "Copying hit.user/config file..."
+  cp $RDIR/_extra/git.user.config ~/.config/git.user/config
 fi
+
+stow_package "git" "" "$CURRENT_CONFIG_DIR/git"
 
 # Add GitHub SSH keys
 if ! grep -q "github.com" ~/.ssh/known_hosts; then
     ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 fi
+
