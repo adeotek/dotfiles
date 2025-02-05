@@ -19,7 +19,7 @@ return {
       local telescope = require('telescope')
       telescope.setup({
         defaults = {
-          file_ignore_patterns = { 'node_modules', '.git', '.cache', 'tldr' },
+          file_ignore_patterns = { 'node_modules/', '.git/', '.cache/', 'tldr/' },
           mappings = {
             i = {
               ['<C-u>'] = false,
