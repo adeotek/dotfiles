@@ -67,7 +67,7 @@ declare CONSOLE_EXTRA_TASKS=(
   "powershell"
   "python"
   "nodejs"
-  "rustup" 
+  "rustup"
 )
 
 declare ALL_CONSOLE_TASKS=(
