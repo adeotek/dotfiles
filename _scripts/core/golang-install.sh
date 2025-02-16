@@ -23,7 +23,7 @@ fi
 # Install
 if [[ -z "${ARGS["version"]}" ]]; then
   cecho "yellow" -n "Please specify the GoLang version to install [1.23.1]: "
-  read DOTNET_VERSION
+  read GOLANG_VERSION
   if [[ -z "$GOLANG_VERSION" ]]; then
     GOLANG_VERSION="1.23.1"
   fi
