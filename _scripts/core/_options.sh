@@ -7,8 +7,8 @@
 decho "white" "Loading _options.sh..."
 
 OPT_DOTNET_DEFAULT_VERSION="8.0"
-OPT_GOLANG_DEFAULT_VERSION="1.23.2"
-OPT_NERDFONTS_DEFAULT_VERSION="3.2.1"
+OPT_GOLANG_DEFAULT_VERSION="1.24.0"
+OPT_NERDFONTS_DEFAULT_VERSION="3.3.0"
 case $CURRENT_OS_ID in
   arch)
     OPT_NODEJS_DEFAULT_VERSION="22"
@@ -60,13 +60,14 @@ declare DESKTOP_TASKS=(
 )
 
 declare CONSOLE_EXTRA_TASKS=(
+  "github-cli"
   "ansible"
   "docker"
   "golang"
   "powershell"
   "python"
   "nodejs"
-  "rustup"
+  "rustup" 
 )
 
 declare ALL_CONSOLE_TASKS=(
@@ -75,6 +76,7 @@ declare ALL_CONSOLE_TASKS=(
 )
 
 declare DESKTOP_EXTRA_TASKS=(
+  "github-cli"
   "ansible"
   "docker"
   "golang"
@@ -118,6 +120,7 @@ declare -A TASK_TYPES=(
   ["docker"]="install"
   ["dotnet"]="install"
   ["git"]="setup"
+  ["github-cli"]="install"
   ["golang"]="install"
   ["homebrew"]="install"
   ["hypr"]="setup"
