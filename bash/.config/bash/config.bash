@@ -58,6 +58,7 @@ else
 fi
 
 alias systemctl="sudo systemctl"
+alias dc='docker compose'
 case "$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)" in
   arch)
     alias pacman="sudo pacman"
@@ -97,6 +98,7 @@ if $(command -v yazi >/dev/null 2>&1); then
     rm -f -- "$tmp"
   }
 fi
+
 
 # Oh My Posh bash config
 if $(command -v oh-my-posh >/dev/null 2>&1); then
