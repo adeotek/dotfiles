@@ -98,6 +98,19 @@ if $(command -v yazi >/dev/null 2>&1); then
   }
 fi
 
+# Cloud CLI tools
+if $(command -v gcloud >/dev/null 2>&1); then
+  # gcloud
+  aliass gc="gcloud"
+  # export CLOUDSDK_PYTHON_SITEPACKAGES=1
+  # export CLOUDSDK_ACTIVE_CONFIG_NAME=default
+  # export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+  # export CLOUDSDK_CORE_LOGGING_LEVEL=info 
+fi
+if $(command -v terraform >/dev/null 2>&1); then
+  # terraform
+  alias tf="terraform"
+fi
 
 # Oh My Posh bash config
 if $(command -v oh-my-posh >/dev/null 2>&1); then
