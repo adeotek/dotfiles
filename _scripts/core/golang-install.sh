@@ -22,10 +22,10 @@ fi
 
 # Install
 if [[ -z "${ARGS["version"]}" ]]; then
-  cecho "yellow" -n "Please specify the GoLang version to install [1.23.1]: "
+  cecho "yellow" -n "Please specify the GoLang version to install [1.24.2]: "
   read GOLANG_VERSION
   if [[ -z "$GOLANG_VERSION" ]]; then
-    GOLANG_VERSION="1.23.1"
+    GOLANG_VERSION="1.24.2"
   fi
 else
   GOLANG_VERSION="${ARGS["version"]}"
