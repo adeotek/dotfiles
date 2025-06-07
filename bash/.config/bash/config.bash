@@ -101,7 +101,8 @@ fi
 # Cloud CLI tools
 if $(command -v gcloud >/dev/null 2>&1); then
   # gcloud
-  aliass gc="gcloud"
+  alias gc="gcloud"
+  alias gcl="gcloud"
   # export CLOUDSDK_PYTHON_SITEPACKAGES=1
   # export CLOUDSDK_ACTIVE_CONFIG_NAME=default
   # export CLOUDSDK_CORE_DISABLE_PROMPTS=1
