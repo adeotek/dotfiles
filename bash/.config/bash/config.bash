@@ -37,13 +37,11 @@ fi
 
 export PATH=$PATH:~/.local/bin
 export LC_ALL='C.UTF-8'
+export EDITOR="nano"
 
 # Neovim
 if $(command -v nvim >/dev/null 2>&1); then
-  export EDITOR="nvim"
   alias vim="nvim"
-else
-  export EDITOR="nano"
 fi
 
 # EZA
@@ -57,7 +55,9 @@ else
   alias ll='ls -lAF'
 fi
 
+alias dud="du -h --max-depth=1 | sort -hr"
 alias systemctl="sudo systemctl"
+alias dc='docker compose'
 case "$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)" in
   arch)
     alias pacman="sudo pacman"
