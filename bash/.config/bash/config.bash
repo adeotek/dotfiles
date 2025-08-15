@@ -37,13 +37,11 @@ fi
 
 export PATH=$PATH:~/.local/bin
 export LC_ALL='C.UTF-8'
+export EDITOR="nano"
 
 # Neovim
 if $(command -v nvim >/dev/null 2>&1); then
-  export EDITOR="nvim"
   alias vim="nvim"
-else
-  export EDITOR="nano"
 fi
 
 # EZA
@@ -57,6 +55,7 @@ else
   alias ll='ls -lAF'
 fi
 
+alias dud="du -h --max-depth=1 | sort -hr"
 alias systemctl="sudo systemctl"
 alias dc='docker compose'
 case "$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)" in
@@ -99,6 +98,20 @@ if $(command -v yazi >/dev/null 2>&1); then
   }
 fi
 
+# Cloud CLI tools
+if $(command -v gcloud >/dev/null 2>&1); then
+  # gcloud
+  alias gc="gcloud"
+  alias gcl="gcloud"
+  # export CLOUDSDK_PYTHON_SITEPACKAGES=1
+  # export CLOUDSDK_ACTIVE_CONFIG_NAME=default
+  # export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+  # export CLOUDSDK_CORE_LOGGING_LEVEL=info 
+fi
+if $(command -v terraform >/dev/null 2>&1); then
+  # terraform
+  alias tf="terraform"
+fi
 
 # Oh My Posh bash config
 if $(command -v oh-my-posh >/dev/null 2>&1); then
