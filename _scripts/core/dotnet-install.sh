@@ -25,7 +25,7 @@ if [[ -z "${ARGS["version"]}" && "$CURRENT_OS_ID" != "arch" ]]; then
   cecho "yellow" -n "Please specify the version to install [8.0]: "
   read DOTNET_VERSION
   if [[ -z "$DOTNET_VERSION" ]]; then
-    DOTNET_VERSION="8.0"
+    DOTNET_VERSION="$OPT_DOTNET_DEFAULT_VERSION"
   fi
 else
   DOTNET_VERSION="${ARGS["version"]}"
