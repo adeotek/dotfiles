@@ -76,6 +76,10 @@ case $CURRENT_OS_ID in
 esac
 
 if [ "$DRY_RUN" -ne "1" ]; then
+  cecho "cyan" "Enabling Docker service..."
   sudo systemctl enable --now docker
-  sudo usermod -aG docker $USER && newgrp docker
+  cecho "cyan" "Adding user to Docker group..."
+  sudo usermod -aG docker $USER
 fi
+
+cecho "green" "Docker installed and configured."
