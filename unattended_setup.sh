@@ -86,7 +86,7 @@
 ###
 
 # Init
-declare -A ARGS=(["packages"]="")
+declare -A ARGS=(["packages"]="" ["unattended"]="1")
 if [[ -d "${0%/*}" ]]; then
   RDIR="$(cd "${0%/*}" && pwd)"
 else
@@ -145,15 +145,8 @@ for pkg in "${SELECTED_PACKAGES[@]}"
 do
   pkg=$(echo "$pkg" | xargs)  # Trim whitespace from package name
   pkg_task_type="${TASK_TYPES["$pkg"]}"  # Get task type (install/setup)
-  
-  # Check if package has predefined unattended arguments
-  if [[ -n "${TASK_UNATTENDED_ARGS[$pkg]}" ]]; then
-    decho "magenta" "Processing $pkg ($pkg_task_type) with args: ${TASK_UNATTENDED_ARGS[$pkg]}"
-    source "$CDIR/$pkg-$pkg_task_type.sh" "${TASK_UNATTENDED_ARGS[$pkg]}"
-  else
-    decho "magenta" "Processing $pkg ($pkg_task_type) with default settings"
-    source "$CDIR/$pkg-$pkg_task_type.sh"
-  fi
+  decho "magenta" "Processing $pkg ($pkg_task_type) with default settings"
+  source "$CDIR/$pkg-$pkg_task_type.sh"
 done
 
 ## End

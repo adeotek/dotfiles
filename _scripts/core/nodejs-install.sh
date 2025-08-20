@@ -6,8 +6,13 @@
 
 # Init
 if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
-  ARGS["version"]=""
-  ARGS["install-mode"]=""
+  if [[ "${ARGS["unattended"]}" -eq "1" ]]; then
+    ARGS["version"]="$OPT_NODEJS_DEFAULT_VERSION"
+    ARGS["install-mode"]="source"
+  else
+    ARGS["version"]=""
+    ARGS["install-mode"]=""
+  fi
 else
   declare -A ARGS=(["version"]="" ["install-mode"]="")
 fi

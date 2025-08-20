@@ -6,8 +6,13 @@
 
 # Init
 if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
-  ARGS["font"]=""
-  ARGS["version"]=""
+  if [[ "${ARGS["unattended"]}" -eq "1" ]]; then
+    ARGS["font"]="$OPT_NERDFONTS_DEFAULT_FONT"
+    ARGS["version"]="$OPT_NERDFONTS_DEFAULT_VERSION"
+  else
+    ARGS["font"]=""
+    ARGS["version"]=""
+  fi
 else
   declare -A ARGS=(
     ["font"]=""
