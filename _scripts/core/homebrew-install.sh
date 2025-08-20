@@ -24,7 +24,7 @@ else
     ## Activate brew
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   else
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
     ## Activate brew
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     ## Install build tools
