@@ -6,7 +6,11 @@
 
 # Init
 if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
-  ARGS["version"]=""
+  if [[ "${ARGS["unattended"]}" -eq "1" ]]; then
+    ARGS["version"]="$OPT_DOTNET_DEFAULT_VERSION"
+  else
+    ARGS["version"]=""
+  fi
 else
   declare -A ARGS=(["version"]="")
 fi
