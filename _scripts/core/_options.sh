@@ -6,9 +6,13 @@
 
 decho "white" "Loading _options.sh..."
 
+OPT_BASH_DEFAULT_PROMPT="oh-my-posh"
+OPT_ZSH_DEFAULT_PROMPT="oh-my-posh"
 OPT_DOTNET_DEFAULT_VERSION="9.0"
 OPT_GOLANG_DEFAULT_VERSION="1.25.0"
 OPT_NERDFONTS_DEFAULT_VERSION="3.4.0"
+OPT_NERDFONTS_DEFAULT_FONT="CascadiaCode"
+OPT_NODEJS_DEFAULT_INSTALL_MODE="source"
 case $CURRENT_OS_ID in
   arch)
     OPT_NODEJS_DEFAULT_VERSION="22"
@@ -151,15 +155,6 @@ declare -A TASK_TYPES=(
 )
 
 declare -A TASK_ARGS=(
-  ["bash"]="--prompt oh-my-posh"
-  ["zsh"]="--prompt oh-my-posh"
-)
-
-declare -A TASK_UNATTENDED_ARGS=(
-  ["bash"]="--prompt oh-my-posh"
-  ["dotnet"]="--version $OPT_DOTNET_DEFAULT_VERSION"
-  ["golang"]="--version $OPT_GOLANG_DEFAULT_VERSION"
-  ["nerd-fonts"]="--font CascadiaCode --version $OPT_NERDFONTS_DEFAULT_VERSION"
-  ["nodejs"]="--version $OPT_NODEJS_DEFAULT_VERSION --install-mode source"
-  ["zsh"]="--prompt oh-my-posh"
+  ["bash"]="--prompt $OPT_BASH_DEFAULT_PROMPT"
+  ["zsh"]="--prompt $OPT_ZSH_DEFAULT_PROMPT"
 )

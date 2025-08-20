@@ -6,7 +6,11 @@
 
 # Init
 if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
-  ARGS["prompt"]=""
+  if [[ "${ARGS["unattended"]}" -eq "1" ]]; then
+    ARGS["prompt"]="$OPT_BASH_DEFAULT_PROMPT"
+  else
+    ARGS["prompt"]=""
+  fi
 else
   declare -A ARGS=(["prompt"]="")
 fi
