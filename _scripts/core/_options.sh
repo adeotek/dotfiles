@@ -72,6 +72,7 @@ declare CONSOLE_EXTRA_TASKS=(
   "python"
   "nodejs"
   "rustup"
+  "aws-cli"
   "gcp-cli"
   "terraform"
 )
@@ -93,6 +94,7 @@ declare DESKTOP_EXTRA_TASKS=(
   "tabby"
   "vscode"
   "jetbrains-toolbox"
+  "aws-cli"
   "gcp-cli"
   "terraform"
 )
@@ -130,6 +132,7 @@ declare -A TASK_TYPES=(
   ["git"]="setup"
   ["github-cli"]="install"
   ["golang"]="install"
+  ["aws-cli"]="install"
   ["gcp-cli"]="install"
   ["homebrew"]="install"
   ["hypr"]="setup"

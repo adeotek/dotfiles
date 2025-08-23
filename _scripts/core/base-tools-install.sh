@@ -21,7 +21,7 @@ case $CURRENT_OS_ID in
     ## Base tools
     sudo pacman -S --noconfirm --needed curl wget mc netcat nano vi whois mandoc
     ## CLI tools
-    sudo pacman -S --noconfirm --needed jq fd ripgrep fzf tldr bat tree htop zoxide bash-completion stow
+    sudo pacman -S --noconfirm --needed jq fd ripgrep fzf tldr bat tree htop hstr zoxide bash-completion stow
     ## eza (ls alternative)
     sudo pacman -S --noconfirm --needed eza 
     ;;
@@ -31,7 +31,7 @@ case $CURRENT_OS_ID in
     ## Base tools
     sudo apt install -y curl wget mc netcat-traditional nano whois
     ## CLI tools
-    sudo apt install -y jq fd-find ripgrep tldr bat tree htop zoxide bash-completion stow
+    sudo apt install -y jq fd-find ripgrep tldr bat tree htop hstr zoxide bash-completion stow
     mkdir -p ~/.local/bin
     if [ ! -f ~/.local/bin/fd ]; then 
       ln -s $(which fdfind) ~/.local/bin/fd
@@ -56,7 +56,7 @@ case $CURRENT_OS_ID in
     ## Base tools
     sudo dnf install -y curl wget mc nc nano whois
     ## CLI tools
-    sudo dnf install -y file jq fd-find  ripgrep tldr bat tree htop zoxide bash-completion stow
+    sudo dnf install -y file jq fd-find  ripgrep tldr bat tree htop hstr zoxide bash-completion stow
     sudo dnf install -y fzf eza
     ;;
   *)
