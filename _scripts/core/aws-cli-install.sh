@@ -43,12 +43,6 @@ fi
 if aws --version >/dev/null 2>&1; then
   IS_AWS_CLI_INSTALLED=true
   decho "yellow" "Package already installed. Updating it..."
-  if [ "$DRY_RUN" -ne "1" ]; then
-    cecho "magenta" "rm -rf ~/aws"
-    rm -rf ~/aws
-  else
-    cecho "yellow" "DRY-RUN: rm -rf ~/aws"
-  fi
 else
   IS_AWS_CLI_INSTALLED=false
 fi
@@ -56,16 +50,16 @@ fi
 if [ "$DRY_RUN" -ne "1" ]; then
   decho "magenta" "curl ""$AWS_CLI_DOWNLOAD_URL"" -o ~/awscliv2.zip"
   curl "$AWS_CLI_DOWNLOAD_URL" -o ~/awscliv2.zip
-  if $IS_AWS_CLI_INSTALLED; then
+  if [ -d ~/aws ]; then
     decho "magenta" "rm -rf ~/aws"
     rm -rf ~/aws
-    decho "magenta" "unzip ~/awscliv2.zip"
-    unzip ~/awscliv2.zip -d ~/aws
+  fi
+  decho "magenta" "unzip ~/awscliv2.zip"
+  unzip ~/awscliv2.zip -d ~/aws
+  if $IS_AWS_CLI_INSTALLED; then
     decho "magenta" "sudo ~/aws/install --update"
     sudo ~/aws/install --update
   else
-    decho "magenta" "unzip ~/awscliv2.zip"
-    unzip ~/awscliv2.zip -d ~/aws
     decho "magenta" "sudo ~/aws/install"
     sudo ~/aws/install
   fi
