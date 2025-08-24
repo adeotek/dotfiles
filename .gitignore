@@ -1,3 +1,4 @@
+*.log
 tmux/.config/tmux/plugins/*
 tmux/.config/tmux/tmux.conf.local
 nvim/.config/nvim/lazy-lock.json
