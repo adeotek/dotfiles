@@ -57,15 +57,9 @@ if [ "$DRY_RUN" -ne "1" ]; then
   decho "magenta" "unzip ~/awscliv2.zip"
   unzip ~/awscliv2.zip -d ~/aws
   if $IS_AWS_CLI_INSTALLED; then
-    decho "magenta" "rm -rf ~/aws"
-    rm -rf ~/aws
-    decho "magenta" "unzip ~/awscliv2.zip"
-    unzip ~/awscliv2.zip -d ~/aws
     decho "magenta" "sudo ~/aws/install --update"
     sudo ~/aws/install --update
   else
-    decho "magenta" "unzip ~/awscliv2.zip"
-    unzip ~/awscliv2.zip -d ~/aws
     decho "magenta" "sudo ~/aws/install"
     sudo ~/aws/install
   fi
