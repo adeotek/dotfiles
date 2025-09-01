@@ -23,7 +23,7 @@ case $CURRENT_OS_ID in
     ## CLI tools
     sudo pacman -S --noconfirm --needed jq fd ripgrep fzf tldr bat tree htop hstr zoxide bash-completion stow
     ## eza (ls alternative)
-    sudo pacman -S --noconfirm --needed eza 
+    sudo pacman -S --noconfirm --needed eza
     ;;
   debian|ubuntu|pop)
     ## Distro tools
@@ -33,7 +33,7 @@ case $CURRENT_OS_ID in
     ## CLI tools
     sudo apt install -y jq fd-find ripgrep tldr bat tree htop hstr zoxide bash-completion stow
     mkdir -p ~/.local/bin
-    if [ ! -f ~/.local/bin/fd ]; then 
+    if [ ! -f ~/.local/bin/fd ]; then
       ln -s $(which fdfind) ~/.local/bin/fd
     fi
     if [ ! -f ~/.local/bin/bat ]; then
@@ -56,7 +56,7 @@ case $CURRENT_OS_ID in
     ## Base tools
     sudo dnf install -y curl wget mc nc nano whois
     ## CLI tools
-    sudo dnf install -y file jq fd-find  ripgrep tldr bat tree htop hstr zoxide bash-completion stow
+    sudo dnf install -y file jq fd  ripgrep tldr bat tree htop hstr zoxide bash-completion stow
     sudo dnf install -y fzf eza
     ;;
   *)
@@ -64,4 +64,3 @@ case $CURRENT_OS_ID in
     exit 1
     ;;
 esac
-
