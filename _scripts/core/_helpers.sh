@@ -18,7 +18,7 @@ DFS_ACTION="init"
 
 # Global functions
 
-function process_args {
+function process_args() {
   if [[ "${#1}" -eq 0 || "${1:0:1}" == "-" || "$1" == "" ]]; then
     DFS_ACTION="init"
   else
@@ -55,7 +55,7 @@ function process_args {
   done
 }
 
-function cecho {
+function cecho() {
   local color=$1
   shift
 
