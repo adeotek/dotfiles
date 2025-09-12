@@ -55,3 +55,14 @@ case $CURRENT_OS_ID in
     exit 1
     ;;
 esac
+
+# Install TFLint
+if ! command -v tflint &> /dev/null; then
+  cecho "cyan" "Installing TFLint..."
+  if [ "$DRY_RUN" -ne "1" ]; then
+    decho "magenta" "curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash"
+    curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+  else
+    cecho "yellow" "DRY-RUN: curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash"
+  fi
+fi
