@@ -216,7 +216,7 @@ function install_package() {
         install_command="sudo pacman -S --noconfirm --needed $package $additional_packages"
         ;;
       debian|ubuntu|pop)
-        install_command="sudo apt install -y $package $additional_packages"
+        install_command="sudo apt-get install -y $package $additional_packages"
         ;;
       fedora|redhat|centos|almalinux)
         install_command="sudo dnf install -y $package $additional_packages"

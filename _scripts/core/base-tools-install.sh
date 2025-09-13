@@ -27,11 +27,14 @@ case $CURRENT_OS_ID in
     ;;
   debian|ubuntu|pop)
     ## Distro tools
-    sudo apt install -y software-properties-common apt-transport-https gpg
+    if [ "$CURRENT_OS_ID" != "debian" ] || [ "$CURRENT_OS_VER" != "13" ]; then
+      sudo apt-get install -y software-properties-common
+    fi
+    sudo apt-get install -y apt-transport-https gpg gnupg
     ## Base tools
-    sudo apt install -y curl wget mc netcat-traditional nano whois
+    sudo apt-get install -y curl wget mc netcat-traditional nano whois
     ## CLI tools
-    sudo apt install -y jq fd-find ripgrep tldr bat tree htop hstr zoxide bash-completion stow
+    sudo apt-get install -y jq fd-find ripgrep tldr bat tree htop hstr zoxide bash-completion stow
     mkdir -p ~/.local/bin
     if [ ! -f ~/.local/bin/fd ]; then
       ln -s $(which fdfind) ~/.local/bin/fd

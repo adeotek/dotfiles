@@ -25,12 +25,12 @@ case $CURRENT_OS_ID in
         curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
         decho "magenta" "echo ""deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main"" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list"
         echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-        decho "magenta" "sudo apt update"
-        sudo apt update
+        decho "magenta" "sudo apt-get update"
+        sudo apt-get update
       else
         cecho "yellow" "DRY-RUN: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg"
         cecho "yellow" "DRY-RUN: echo ""deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main"" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list"
-        cecho "yellow" "DRY-RUN: sudo apt update"
+        cecho "yellow" "DRY-RUN: sudo apt-get update"
       fi
     fi
     install_package "google-cloud-cli" "gcloud --version"

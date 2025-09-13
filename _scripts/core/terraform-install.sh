@@ -21,16 +21,16 @@ case $CURRENT_OS_ID in
     if [ ! -f /etc/apt/sources.list.d/hashicorp.list ]; then
       cecho "cyan" "Installing Hashicorp APT source..."
       if [ "$DRY_RUN" -ne "1" ]; then
-        decho "magenta" "wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg"
-        wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+        decho "magenta" "wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg"
+        wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
         decho "magenta" "echo ""deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main"" | sudo tee /etc/apt/sources.list.d/hashicorp.list"
         echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-        decho "magenta" "sudo apt update"
-        sudo apt update
+        decho "magenta" "sudo apt-get update"
+        sudo apt-get update
       else
         cecho "yellow" "DRY-RUN: wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg"
         cecho "yellow" "DRY-RUN: echo ""deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main"" | sudo tee /etc/apt/sources.list.d/hashicorp.list"
-        cecho "yellow" "DRY-RUN: sudo apt update"
+        cecho "yellow" "DRY-RUN: sudo apt-get update"
       fi
     fi
     install_package "terraform" "terraform --version"

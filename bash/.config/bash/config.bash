@@ -131,6 +131,9 @@ fi
 if $(command -v terraform >/dev/null 2>&1); then
   # terraform
   alias tf="terraform"
+  alias tfa='terraform apply'
+  alias tff='terraform fmt'
+  alias tfp='terraform plan'
 fi
 
 # Oh My Posh bash config

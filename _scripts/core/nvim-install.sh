@@ -29,14 +29,14 @@ case $CURRENT_OS_ID in
     ;;
   debian|ubuntu|pop)
     if [ "$DRY_RUN" -ne "1" ]; then
-      sudo apt install -y luarocks xclip
+      sudo apt-get install -y luarocks xclip
     else
-      cecho "yellow" "DRY-RUN: sudo apt install -y luarocks xclip"
+      cecho "yellow" "DRY-RUN: sudo apt-get install -y luarocks xclip"
     fi
     if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
       cecho "cyan" "Installing [neovim]..."
       if [ "$DRY_RUN" -ne "1" ]; then
-        sudo apt install -y ninja-build gettext cmake unzip curl build-essential
+        sudo apt-get install -y ninja-build gettext cmake unzip curl build-essential
         if [ ! -d "/opt/neovim-src" ]; then
           sudo git clone https://github.com/neovim/neovim /opt/neovim-src
         fi
@@ -49,7 +49,7 @@ case $CURRENT_OS_ID in
         cd ~
         cecho "green" "[nvim] installation done."
       else
-        cecho "yellow" "DRY-RUN: sudo apt install -y ninja-build gettext cmake unzip curl build-essential"
+        cecho "yellow" "DRY-RUN: sudo apt-get install -y ninja-build gettext cmake unzip curl build-essential"
         cecho "yellow" "DRY-RUN: sudo git clone https://github.com/neovim/neovim /opt/neovim-src"
         cecho "yellow" "DRY-RUN: cd /opt/neovim-src"
         cecho "yellow" "DRY-RUN: sudo git checkout master"

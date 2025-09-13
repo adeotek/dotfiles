@@ -20,7 +20,7 @@ fi
 if [ "$DRY_RUN" -ne "1" ]; then
   case $CURRENT_OS_ID in
     debian|ubuntu|pop)
-      sudo apt install -y unzip
+      sudo apt-get install -y unzip
       ;;
     fedora|redhat|centos|almalinux)
       sudo dnf remove -y awscli

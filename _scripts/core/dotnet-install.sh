@@ -72,13 +72,13 @@ else
             sudo dpkg -i packages-microsoft-prod.deb
             decho "magenta" "rm packages-microsoft-prod.deb"
             rm packages-microsoft-prod.deb
-            decho "magenta" "sudo apt update"
-            sudo apt update
+            decho "magenta" "sudo apt-get update"
+            sudo apt-get update
           else
             cecho "yellow" "DRY-RUN: wget https://packages.microsoft.com/config/debian/$CURRENT_OS_VER/packages-microsoft-prod.deb -O packages-microsoft-prod.deb"
             cecho "yellow" "DRY-RUN: sudo dpkg -i packages-microsoft-prod.deb"
             cecho "yellow" "DRY-RUN: rm packages-microsoft-prod.deb"
-            cecho "yellow" "DRY-RUN: sudo apt update"
+            cecho "yellow" "DRY-RUN: sudo apt-get update"
           fi
         fi
         install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
@@ -90,10 +90,10 @@ else
           cecho "cyan" "Enabling dotnet backports Ubuntu feed..."
           if [ "$DRY_RUN" -ne "1" ]; then
             sudo add-apt-repository -y ppa:dotnet/backports
-            sudo apt update
+            sudo apt-get update
           else
             cecho "yellow" "DRY-RUN: sudo add-apt-repository -y ppa:dotnet/backports"
-            cecho "yellow" "DRY-RUN: sudo apt update"
+            cecho "yellow" "DRY-RUN: sudo apt-get update"
           fi
         fi
       fi

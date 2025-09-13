@@ -29,13 +29,13 @@ case $CURRENT_OS_ID in
       if [ "$DRY_RUN" -ne "1" ]; then
         decho "magenta" "wget $FF_DEB_URL -O /tmp/fastfetch.deb"
         wget "$FF_DEB_URL" -O /tmp/fastfetch.deb
-        decho "magenta" "sudo apt install /tmp/fastfetch.deb -y"
-        sudo apt install /tmp/fastfetch.deb -y
+        decho "magenta" "sudo apt-get install /tmp/fastfetch.deb -y"
+        sudo apt-get install /tmp/fastfetch.deb -y
         decho "magenta" "rm -f /tmp/fastfetch.deb"
         rm -f /tmp/fastfetch.deb
       else
         cecho "yellow" "DRY-RUN: wget $FF_DEB_URL -O /tmp/fastfetch.deb"
-        cecho "yellow" "DRY-RUN: sudo apt install /tmp/fastfetch.deb -y"
+        cecho "yellow" "DRY-RUN: sudo apt-get install /tmp/fastfetch.deb -y"
         cecho "yellow" "DRY-RUN: rm -f /tmp/fastfetch.deb"
       fi
     fi
