@@ -30,12 +30,12 @@ case $CURRENT_OS_ID in
       source "$CDIR/rustup-install.sh"
       cecho "cyan" "Installing [yazi]..."
       if [ "$DRY_RUN" -ne "1" ]; then
-        sudo apt install -y make gcc
+        sudo apt-get install -y make gcc
         cargo install --locked yazi-fm yazi-cli
         cecho "green" "[yazi] installation done."
       else
         cecho "yellow" "DRY-RUN: cargo install --locked yazi-fm yazi-cli"
-        cecho "yellow" "DRY-RUN: sudo apt install -y make gcc"
+        cecho "yellow" "DRY-RUN: sudo apt-get install -y make gcc"
       fi
     else
       source "$CDIR/homebrew-install.sh"

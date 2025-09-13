@@ -27,11 +27,11 @@ case $CURRENT_OS_ID in
       if [ "$DRY_RUN" -ne "1" ]; then
         wget -O- "https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=get&search=0x6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367" | sudo gpg --dearmour -o /usr/share/keyrings/ansible-archive-keyring.gpg
         echo "deb [signed-by=/usr/share/keyrings/ansible-archive-keyring.gpg] http://ppa.launchpad.net/ansible/ansible/ubuntu $UBUNTU_CODENAME main" | sudo tee /etc/apt/sources.list.d/ansible.list
-        sudo apt update
+        sudo apt-get update
       else
         cecho "yellow" "DRY-RUN: wget -O- ""https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=get&search=0x6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367"" | sudo gpg --dearmour -o /usr/share/keyrings/ansible-archive-keyring.gpg"
         cecho "yellow" "DRY-RUN: echo ""deb [signed-by=/usr/share/keyrings/ansible-archive-keyring.gpg] http://ppa.launchpad.net/ansible/ansible/ubuntu $UBUNTU_CODENAME main"" | sudo tee /etc/apt/sources.list.d/ansible.list"
-        cecho "yellow" "DRY-RUN: sudo apt update"
+        cecho "yellow" "DRY-RUN: sudo apt-get update"
       fi
     fi
     install_package "ansible" "ansible --version" "" "ansible-lint"
@@ -40,12 +40,12 @@ case $CURRENT_OS_ID in
     if ! grep -q "^deb.*ansible/ansible" /etc/apt/sources.list.d/*.list 2>/dev/null; then
       cecho "cyan" "Enabling ansible ppa repository..."
       if [ "$DRY_RUN" -ne "1" ]; then
-        sudo apt install -y software-properties-common
+        sudo apt-get install -y software-properties-common
         sudo add-apt-repository -y ppa:ansible/ansible
-        sudo apt update
+        sudo apt-get update
       else
         cecho "yellow" "DRY-RUN: sudo add-apt-repository -y ppa:ansible/ansible"
-        cecho "yellow" "DRY-RUN: sudo apt update"
+        cecho "yellow" "DRY-RUN: sudo apt-get update"
       fi
     fi
     install_package "ansible" "ansible --version" "" "ansible-lint"
