@@ -33,7 +33,7 @@ else
         sudo pacman -S --noconfirm --needed base-devel
         ;;
       debian|ubuntu|pop)
-        sudo apt install -y build-essential
+        sudo apt-get install -y build-essential
         ;;
       fedora|redhat|centos|almalinux)
         sudo dnf install -y gcc gcc-c++ glibc-devel glibc-headers make

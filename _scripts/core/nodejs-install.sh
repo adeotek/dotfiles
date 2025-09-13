@@ -74,10 +74,10 @@ else
         fi
       fi
       if [ "$DRY_RUN" -ne "1" ]; then
-        sudo apt update && sudo apt install -y nodejs
+        sudo apt-get update && sudo apt-get install -y nodejs
         cecho "green" "[nodejs] installation done."
       else
-        cecho "yellow" "DRY-RUN: sudo apt update && sudo apt install -y nodejs"
+        cecho "yellow" "DRY-RUN: sudo apt-get update && sudo apt-get install -y nodejs"
       fi
       ;;
     ubuntu|pop)
@@ -96,10 +96,10 @@ else
       fi
 
       if [ "$DRY_RUN" -ne "1" ]; then
-        sudo apt update && sudo apt install -y nodejs
+        sudo apt-get update && sudo apt-get install -y nodejs
         cecho "green" "[nodejs] installation done."
       else
-        cecho "yellow" "DRY-RUN: sudo apt update && sudo apt install -y nodejs"
+        cecho "yellow" "DRY-RUN: sudo apt-get update && sudo apt-get install -y nodejs"
       fi
       ;;
     fedora|redhat|centos|almalinux)

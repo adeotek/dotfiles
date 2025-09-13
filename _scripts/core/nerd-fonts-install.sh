@@ -52,7 +52,7 @@ else
     FONTS_DIR=".fonts"
     ;;
   debian|ubuntu|pop)
-    sudo apt install -y fontconfig
+    sudo apt-get install -y fontconfig
     FONTS_DIR=".fonts"
     ;;
   fedora|redhat|centos|almalinux)
