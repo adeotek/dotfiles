@@ -24,7 +24,7 @@ case $CURRENT_OS_ID in
     if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
       cecho "yellow" "SKIPPED: not available on ARM-based systems."
     else
-      if [ "$CURRENT_OS_ID" != "debian" ] || [ "$CURRENT_OS_VER" != "13" ]; then
+      if [ "$CURRENT_OS_ID" == "debian" ] && [ "$CURRENT_OS_VER" == "13" ]; then
         cecho "yellow" "SKIPPED: not available yet on Debian 13 systems."
       else
         PWSH_PACKAGE_URL="$(curl -s https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r '.assets[] | select(.name | contains(".deb_amd64.deb")) | .browser_download_url')"
