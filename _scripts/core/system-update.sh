@@ -28,7 +28,7 @@ case $CURRENT_OS_ID in
     ;;
   fedora|redhat|centos|almalinux)
     # Check if EPEL repo is installed
-    if [ "$CURRENT_OS_ID" != "fedora" ] && [ ! $(sudo dnf repolist | grep -q "epel") ]; then
+    if [ "$CURRENT_OS_ID" != "fedora" ] && [ ! $(sudo dnf repolist | grep "epel") ]; then
       cecho "yellow" "EPEL repository is not installed. Installing it now..."
       # Enable CRB repository
       sudo dnf config-manager --set-enabled crb
