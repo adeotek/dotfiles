@@ -23,7 +23,22 @@ else
   mkdir -p ${HOME}/.local/bin
 fi
 
-sudo pacman -S --noconfirm --needed fuse
+case $CURRENT_OS_ID in
+  arch)
+    sudo pacman -S --noconfirm --needed fuse
+    ;;
+  debian|ubuntu|pop)
+    sudo apt-get install -y fuse
+    ;;
+  fedora|redhat|centos|almalinux)
+    sudo dnf install -y fuse
+    ;;
+  *)
+    cecho "red" "Unsupported OS: $CURRENT_OS_ID"
+    exit 1
+    ;;
+esac
+
 set -e
 set -o pipefail
 curl -sL \
@@ -33,7 +48,6 @@ curl -sL \
             --directory="${HOME}/.local/bin" \
             --wildcards */jetbrains-toolbox \
             --strip-components=1
-
 
 # Create desktop entry
 if [ ! -f /usr/share/applications/jetbrains-toolbox-icon.png ]; then
@@ -50,4 +64,3 @@ EOF
 fi
 
 cecho "green" "[jetbrains-toolbox] installation done."
-
