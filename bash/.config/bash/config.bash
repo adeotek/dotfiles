@@ -56,7 +56,8 @@ else
 fi
 
 alias dud="du -h --max-depth=1 | sort -hr"
-alias systemctl="sudo systemctl"
+alias service='sudo systemctl'
+alias d='docker'
 alias dc='docker compose'
 case "$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)" in
   arch)
@@ -121,7 +122,7 @@ if $(command -v gcloud >/dev/null 2>&1); then
   # export CLOUDSDK_PYTHON_SITEPACKAGES=1
   # export CLOUDSDK_ACTIVE_CONFIG_NAME=default
   # export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-  # export CLOUDSDK_CORE_LOGGING_LEVEL=info 
+  # export CLOUDSDK_CORE_LOGGING_LEVEL=info
 fi
 if $(command -v terraform >/dev/null 2>&1); then
   # terraform
