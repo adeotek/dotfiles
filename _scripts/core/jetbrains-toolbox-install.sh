@@ -25,13 +25,13 @@ fi
 
 case $CURRENT_OS_ID in
   arch)
-    sudo pacman -S --noconfirm --needed fuse
+    sudo pacman -S --noconfirm --needed fuse libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin tar dbus-user-session
     ;;
   debian|ubuntu|pop)
-    sudo apt-get install -y fuse
+    sudo apt-get install -y libfuse2 libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin tar dbus-user-session
     ;;
   fedora|redhat|centos|almalinux)
-    sudo dnf install -y fuse
+    sudo dnf install -y fuse libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin tar dbus-user-session
     ;;
   *)
     cecho "red" "Unsupported OS: $CURRENT_OS_ID"
