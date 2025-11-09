@@ -35,7 +35,22 @@ case $CURRENT_OS_ID in
     fi
     install_package "terraform" "terraform --version"
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora)
+    if [ ! -f /etc/yum.repos.d/hashicorp.repo ]; then
+      cecho "cyan" "Installing Hashicorp YUM source..."
+      if [ "$DRY_RUN" -ne "1" ]; then
+        decho "magenta" "sudo dnf install -y dnf-plugins-core"
+        sudo dnf install -y dnf-plugins-core
+        decho "magenta" "sudo dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo"
+        sudo dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+      else
+        cecho "yellow" "DRY-RUN: sudo dnf install -y dnf-plugins-core"
+        cecho "yellow" "DRY-RUN: sudo dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo"
+      fi
+    fi
+    install_package "terraform" "terraform --version"
+    ;;
+  redhat|centos|almalinux)
     if [ ! -f /etc/yum.repos.d/hashicorp.repo ]; then
       cecho "cyan" "Installing Hashicorp YUM source..."
       if [ "$DRY_RUN" -ne "1" ]; then
