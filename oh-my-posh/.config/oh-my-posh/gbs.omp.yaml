@@ -150,7 +150,7 @@ blocks:
           windows: 
           wsl: 
         template: "<p:dfg>\ue0b1 </>{{.Icon}} "
-        foreground: p:dfg
+        foreground: p:wfg
         background: p:bg
 
       - type: time

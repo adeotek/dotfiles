@@ -119,7 +119,7 @@ blocks:
       
       - type: os
         style: plain
-        foreground: p:dfg
+        foreground: p:wfg
         background: p:bg
         template: "<p:dfg>> </>{{.Icon}} "
         properties:
