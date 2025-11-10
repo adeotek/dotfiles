@@ -22,9 +22,11 @@ var:
   WinOS: windows
 
 blocks:
+
   - type: prompt
     alignment: left
     segments:
+
       - type: session
         style: plain
         properties:
@@ -33,6 +35,7 @@ blocks:
         background: p:bg
         foreground_templates:
           - "{{if .Root}}p:red{{else}}p:dfg{{end}}"
+
       - type: path
         style: plain
         properties:
@@ -45,6 +48,7 @@ blocks:
         template: " {{ .Path }} "
         foreground: p:fg
         background: p:bg
+
       - type: git
         style: plain
         properties:
@@ -61,6 +65,7 @@ blocks:
           - "{{if and (gt .Ahead 0) (gt .Behind 0)}}p:orange{{end}}"
           - "{{if gt .Ahead 0}}p:yellow{{end}}"
           - "{{if gt .Behind 0}}p:red{{end}}"
+
       - type: dotnet
         style: plain
         properties:
@@ -69,6 +74,7 @@ blocks:
         template: "<p:dfg>\ue0b1 </>\ue77f {{if .Unsupported}}\uf071{{else}}{{.Full}}{{end}} "
         foreground: p:blue
         background: p:bg
+
       - type: node
         style: plain
         properties:
@@ -77,6 +83,7 @@ blocks:
         template: "<p:dfg>\ue0b1 </>\uf898 {{if .PackageManagerIcon}}{{.PackageManagerIcon}} {{end}}{{.Full}} "
         foreground: p:dfg
         background: p:bg
+
       - type: angular
         style: plain
         properties:
@@ -84,6 +91,7 @@ blocks:
         template: "<p:dfg>\ue0b1 </>\ue753 {{if .Error}}{{.Error}}{{else}}{{.Full}}{{end}} "
         foreground: p:yellow
         background: p:bg
+
       - type: nx
         style: plain
         properties:
@@ -91,6 +99,7 @@ blocks:
         template: "<p:dfg>\ue0b1 </>nx {{if .Error}}{{.Error}}{{else}}{{.Full}}{{end}} "
         foreground: p:pink
         background: p:bg
+
       - type: python
         style: plain
         properties:
@@ -100,6 +109,7 @@ blocks:
         template: "<p:dfg>\ue0b1 </>\ue235 {{if .Error}}{{.Error}}{{else}}{{if .Venv}}{{.Venv}}{{end}}{{.Full}}{{end}} "
         foreground: p:orange
         background: p:bg
+
       - type: go
         style: plain
         properties:
@@ -107,6 +117,7 @@ blocks:
         template: "<p:dfg>\ue0b1 </>ﳑ {{if .Error}}{{.Error}}{{else}}{{.Full}}{{end}} "
         foreground: p:blue
         background: p:bg
+
       - type: rust
         style: plain
         properties:
@@ -116,6 +127,7 @@ blocks:
         template: "<p:dfg>\ue0b1 </>\ue7a8 {{if .Error}}{{.Error}}{{else}}{{.Full}}{{end}} "
         foreground: "#99908A"
         background: p:bg
+
       - type: os
         style: plain
         properties:
@@ -140,6 +152,16 @@ blocks:
         template: "<p:dfg>\ue0b1 </>{{.Icon}} "
         foreground: p:dfg
         background: p:bg
+
+      - type: time
+        style: plain
+        template: "<p:dfg>\ue0b1 {{ .CurrentDate | date .Format }}</> "
+        foreground: p:dfg
+        background: p:bg
+        properties:
+          # time_format: "2006-01-02 15:04:05"
+          time_format: 15:04:05
+
       - type: shell
         style: plain
         properties:
@@ -147,10 +169,11 @@ blocks:
           cache_duration: none
           mapped_shell_names:
             pwsh: PS
-        template: "<p:dfg>\ue0b1 {{.Name}} </>\ue23a "
+        template: "<p:dfg>\ue0b1 {{.Name}} </>\ue23a{{if .Code}}({{.Code}}){{end}} "
         background: p:bg
         foreground_templates:
           - "{{if gt .Code 0}}p:red{{else}}p:green{{end}}"
+
       - type: executiontime
         style: diamond
         properties:
@@ -161,13 +184,15 @@ blocks:
         template: "{{.FormattedMs}} "
         foreground: p:fg
         background: p:bg
+
   - type: prompt
     alignment: left
+    newline: true
     segments:
+    
       - type: text
         style: plain
         properties:
           cache_duration: none
         template: ">"
         foreground: p:white
-    newline: true
