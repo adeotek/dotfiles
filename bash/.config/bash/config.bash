@@ -1,5 +1,19 @@
 # Bash configuration file
 
+export LC_ALL='C.UTF-8'
+export EDITOR="nano"
+
+# Global alias
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+# get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4 | head -5'
+# get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3 | head -5'
+
+
 export PATH=$PATH:$HOME/.local/bin
 
 # homebrew
@@ -7,11 +21,11 @@ if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
   # NodeJs
-  if [ -d "/home/linuxbrew/.linuxbrew/opt/node@20/bin" ]; then
-    export PATH="/home/linuxbrew/.linuxbrew/opt/node@20/bin:$PATH"
-  fi
   if [ -d "/home/linuxbrew/.linuxbrew/opt/node@22/bin" ]; then
     export PATH="/home/linuxbrew/.linuxbrew/opt/node@22/bin:$PATH"
+  fi
+  if [ -d "/home/linuxbrew/.linuxbrew/opt/node@24/bin" ]; then
+    export PATH="/home/linuxbrew/.linuxbrew/opt/node@24/bin:$PATH"
   fi
 fi
 
@@ -34,10 +48,6 @@ if [ -d "$HOME/.dotnet" ]; then
   export PATH=$PATH:$HOME/.dotnet
   export PATH="$PATH:$HOME/.dotnet/tools"
 fi
-
-export PATH=$PATH:~/.local/bin
-export LC_ALL='C.UTF-8'
-export EDITOR="nano"
 
 # Neovim
 if $(command -v nvim >/dev/null 2>&1); then
