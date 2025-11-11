@@ -206,6 +206,23 @@ function install_package() {
   local additional_packages="$4"
 
   cecho "cyan" "Installing [$package]..."
+  if [ -z "$check_command" ] || [ "$check_command" == "_" ]; then
+    case $CURRENT_OS_ID in
+      arch)
+        check_command="pacman -Qi $package"
+        ;;
+      debian|ubuntu|pop)
+        check_command="dpkg -s $package"
+        ;;
+      fedora|redhat|centos|almalinux)
+        check_command="rpm -q $package"
+        ;;
+      *)
+        cecho "red" "Unsupported OS: $CURRENT_OS_ID"
+        exit 1
+        ;;
+    esac
+  fi
   if $check_command >/dev/null 2>&1; then
     decho "yellow" "Package already installed. Updating it..."
   fi

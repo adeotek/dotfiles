@@ -4,12 +4,12 @@
 # OctoPrint RaspberryPI Setup
 ###
 
-sudo apt update
-sudo apt upgrade -y
-sudo apt autoremove -y
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get autoremove -y
 
 # OctoPrint install & setup
-sudo apt install -y python3 python3-pip python3-dev python3-setuptools python3-venv git libyaml-dev build-essential libffi-dev libssl-dev
+sudo apt-get install -y python3 python3-pip python3-dev python3-setuptools python3-venv git libyaml-dev build-essential libffi-dev libssl-dev
 sudo usermod -a -G tty pi
 sudo usermod -a -G dialout pi
 if [ ! -f ~/octoprint/bin/activate ]; then
@@ -48,4 +48,3 @@ EOF
 
   sudo reboot
 fi
-

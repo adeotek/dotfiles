@@ -22,7 +22,7 @@ case $CURRENT_OS_ID in
       cecho "cyan" "Installing Hashicorp APT source..."
       if [ "$DRY_RUN" -ne "1" ]; then
         decho "magenta" "wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg"
-        wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+        wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
         decho "magenta" "echo ""deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main"" | sudo tee /etc/apt/sources.list.d/hashicorp.list"
         echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
         decho "magenta" "sudo apt-get update"
@@ -35,7 +35,22 @@ case $CURRENT_OS_ID in
     fi
     install_package "terraform" "terraform --version"
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora)
+    if [ ! -f /etc/yum.repos.d/hashicorp.repo ]; then
+      cecho "cyan" "Installing Hashicorp YUM source..."
+      if [ "$DRY_RUN" -ne "1" ]; then
+        decho "magenta" "sudo dnf install -y dnf-plugins-core"
+        sudo dnf install -y dnf-plugins-core
+        decho "magenta" "sudo dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo"
+        sudo dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+      else
+        cecho "yellow" "DRY-RUN: sudo dnf install -y dnf-plugins-core"
+        cecho "yellow" "DRY-RUN: sudo dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo"
+      fi
+    fi
+    install_package "terraform" "terraform --version"
+    ;;
+  redhat|centos|almalinux)
     if [ ! -f /etc/yum.repos.d/hashicorp.repo ]; then
       cecho "cyan" "Installing Hashicorp YUM source..."
       if [ "$DRY_RUN" -ne "1" ]; then
