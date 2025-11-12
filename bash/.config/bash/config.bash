@@ -103,8 +103,8 @@ fi
 
 # FZF key bindings (CTRL R for fuzzy history finder)
 # Setup fzf
-if [[ -d /home/dev/.fzf/bin && ! "$PATH" == */home/dev/.fzf/bin* ]]; then
-  PATH="${PATH:+${PATH}:}/home/dev/.fzf/bin"
+if [[ -d "$HOME/.fzf/bin" && ! "$PATH" == *"$HOME/.fzf/bin"* ]]; then
+  PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
 fi
 if [[ -x "$(command -v fzf)" ]]; then
   eval "$(fzf --bash)"
