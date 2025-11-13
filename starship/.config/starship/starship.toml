@@ -86,12 +86,10 @@ disabled = false
 [os.symbols]
 Alpaquita = ""
 Alpine = ""
-AlmaLinux = ""
 Amazon = ""
 Android = ""
 Arch = ""
 Artix = ""
-CentOS = ""
 Debian = ""
 DragonFly = ""
 Emscripten = ""

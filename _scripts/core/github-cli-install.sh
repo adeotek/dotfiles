@@ -31,7 +31,7 @@ case $CURRENT_OS_ID in
     fi
     install_package "gh" "gh --version"
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     if [ "$DRY_RUN" -ne "1" ]; then
       sudo dnf install dnf5-plugins
       sudo dnf config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/gh-cli.repo

@@ -134,7 +134,6 @@ blocks:
           alpine: 
           arch: 
           cache_duration: none
-          centos: 
           debian: 
           elementary: 
           fedora: 

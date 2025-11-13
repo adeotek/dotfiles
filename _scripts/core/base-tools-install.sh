@@ -55,7 +55,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
         brew install eza
       fi
       ;;
-    fedora|redhat|centos|almalinux)
+    fedora|redhat)
       ## Distro tools
       sudo dnf install -y gpg make gcc glibc-devel glibc-headers tar unzip
       ## Base tools

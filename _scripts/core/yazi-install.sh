@@ -50,7 +50,7 @@ case $CURRENT_OS_ID in
       install_package "yazi" "yazi -V" "brew install yazi"
     fi
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     source "$CDIR/homebrew-install.sh"
     if [ "$DRY_RUN" -ne "1" ]; then
       brew install ffmpegthumbnailer sevenzip poppler imagemagick

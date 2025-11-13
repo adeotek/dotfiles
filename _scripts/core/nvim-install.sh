@@ -64,7 +64,7 @@ case $CURRENT_OS_ID in
       install_package "neovim" "nvim -v" "brew install neovim"
     fi
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     source "$CDIR/homebrew-install.sh"
     if [ "$DRY_RUN" -ne "1" ]; then
       sudo dnf install -y luarocks xclip # python-neovim

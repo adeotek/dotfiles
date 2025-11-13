@@ -102,7 +102,7 @@ else
         cecho "yellow" "DRY-RUN: sudo apt-get update && sudo apt-get install -y nodejs"
       fi
       ;;
-    fedora|redhat|centos|almalinux)
+    fedora|redhat)
       install_package "nodejs:$NODEJS_VERSION" "node -v" "sudo dnf module install -y nodejs:$NODEJS_VERSION"
       ;;
     *)

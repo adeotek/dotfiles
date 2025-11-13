@@ -50,7 +50,7 @@ case $CURRENT_OS_ID in
     fi
     install_package "ansible" "ansible --version" "" "ansible-lint"
   ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     # EPEL need to be enabled first
     install_package "ansible" "ansible --version" "" "ansible-lint"
   ;;

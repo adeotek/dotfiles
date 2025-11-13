@@ -55,7 +55,7 @@ else
     sudo apt-get install -y fontconfig
     FONTS_DIR=".fonts"
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     sudo dnf install -y fontconfig
     FONTS_DIR=".local/share/fonts"
     ;;

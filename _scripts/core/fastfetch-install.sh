@@ -40,7 +40,7 @@ case $CURRENT_OS_ID in
       fi
     fi
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     install_package "fastfetch" "fastfetch --version"
     ;;
   *)

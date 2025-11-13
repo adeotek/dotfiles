@@ -24,7 +24,7 @@ case $CURRENT_OS_ID in
     source "$CDIR/homebrew-install.sh"
     install_package "onefetch" "onefetch --version" "brew install onefetch"
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     source "$CDIR/homebrew-install.sh"
     install_package "onefetch" "onefetch --version" "brew install onefetch"
     ;;

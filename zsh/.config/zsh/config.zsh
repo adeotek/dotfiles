@@ -239,7 +239,7 @@ case "$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)" in
   debian|ubuntu|pop)
     alias apt="sudo apt"
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     alias dnf="sudo dnf"
     ;;
 esac

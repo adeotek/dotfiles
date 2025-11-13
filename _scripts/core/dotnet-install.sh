@@ -71,7 +71,7 @@ else
       source "$CDIR/microsoft-repo-install.sh"
       install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
       ;;
-    fedora|redhat|centos|almalinux)
+    fedora|redhat)
       install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
       ;;
     *)

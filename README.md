@@ -3,12 +3,12 @@
 A comprehensive, modular collection of Linux dotfiles and automated installation scripts for setting up development environments across multiple distributions.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Distributions](https://img.shields.io/badge/distros-Arch%20%7C%20Debian%20%7C%20Ubuntu%20%7C%20Fedora%20%7C%20AlmaLinux-green.svg)](#supported-distributions)
+[![Distributions](https://img.shields.io/badge/distros-Arch%20%7C%20Debian%20%7C%20Ubuntu%20%7C%20Fedora%20%7C%20RHEL-green.svg)](#supported-distributions)
 
 ## ✨ Features
 
 - 🎯 **Modular Architecture** - 48+ individual installation scripts for granular control
-- 🐧 **Multi-Distribution** - Supports Arch, Debian, Ubuntu, Fedora, RHEL, AlmaLinux
+- 🐧 **Multi-Distribution** - Supports ArchLinux, Debian, Ubuntu, Pop!OS, Fedora and RedHat (RHEL)
 - 🔧 **GNU Stow** - Symlink-based configuration management
 - ⚡ **Interactive & Unattended** - Both modes supported for flexibility
 - 🚀 **Comprehensive Tools** - Development tools, CLI utilities, desktop applications
@@ -110,10 +110,10 @@ dotfiles/
 │   │   ├── *-install.sh        # Tool installation scripts
 │   │   └── *-setup.sh          # Configuration setup scripts
 │   ├── ubuntu-24.04-desktop-init.sh
-│   ├── fedora-40-desktop-init.sh
-│   ├── arch-desktop-init.sh
-│   ├── raspberrypi-init.sh
-│   └── almalinux-init.sh
+│   ├── ubuntu-24.04-wsl-dev-init.sh
+│   ├── fedora-43-desktop-init.sh
+│   ├── arch-linux-desktop-init.sh
+│   └── rpios-octoprint-init.sh
 ├── bash/                       # Bash configuration
 │   └── .config/bash/
 │       └── config.bash
@@ -175,12 +175,11 @@ This project uses **GNU Stow** for symlink-based configuration management:
 | Distribution | Versions | Status |
 |-------------|----------|--------|
 | Arch Linux | Rolling | ✅ Fully Supported |
-| Debian | 11, 12 | ✅ Fully Supported |
+| Debian | 11, 12, 13 | ✅ Fully Supported |
 | Ubuntu | 22.04, 24.04 | ✅ Fully Supported |
 | Pop!_OS | 22.04 | ✅ Fully Supported |
-| Fedora | 39, 40 | ✅ Fully Supported |
+| Fedora | 40, 41, 42, 43 | ✅ Fully Supported |
 | RHEL | 8, 9 | ✅ Fully Supported |
-| AlmaLinux | 8, 9 | ✅ Fully Supported |
 | Raspberry Pi OS | Latest | ✅ Fully Supported |
 
 ## 🎯 Usage Examples
@@ -267,10 +266,11 @@ Enable verbose output for debugging:
 - 📖 **Added**: Comprehensive ZSH documentation
 
 ### Previous
-- Added support for AlmaLinux
-- Enhanced Raspberry Pi OS support
-- Added mise and asdf version managers
-- Expanded Docker and cloud tool support
+- 🚀 **Updated**: Fedora support updated to version 43
+- 🧹 **Cleaned**: Removed AlmaLinux and CentOS specific configurations
+- 📦 **Enhanced**: Raspberry Pi OS support
+- 🔧 **Added**: mise and asdf version managers
+- 🐳 **Expanded**: Docker and cloud tool support
 
 ## 🤝 Contributing
 

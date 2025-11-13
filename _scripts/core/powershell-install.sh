@@ -43,7 +43,7 @@ case $CURRENT_OS_ID in
       fi
     fi
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     PWSH_PACKAGE_URL="$(curl -s https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r '.assets[] | select(.name | contains(".rh.x86_64.rpm")) | .browser_download_url')"
     if [ "$DRY_RUN" -ne "1" ]; then
       decho "magenta" "wget $PWSH_PACKAGE_URL -O /tmp/powershell.rpm"
