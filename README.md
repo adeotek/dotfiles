@@ -19,7 +19,6 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 
 ### Development Tools
 - **Languages**: Node.js, Python, Go, Rust, .NET SDK, PHP
-- **Version Managers**: NVM, mise, asdf
 - **Cloud/DevOps**: Docker, AWS CLI, GCP CLI, Terraform, Ansible
 - **Editors**: Neovim (with custom config), Zed, VS Code, JetBrains Toolbox
 
@@ -32,7 +31,7 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 - **Bash**: Comprehensive configuration with tool integrations
 - **ZSH**: Two configurations available:
   - Standard config with plugin support
-  - **NEW**: Standalone config with all features built-in (no plugin manager needed)
+  - Standalone config with all features built-in (no plugin manager needed)
 
 ### Desktop Applications
 - **Terminals**: Kitty, Tabby, Alacritty, WezTerm
@@ -72,7 +71,8 @@ git clone https://github.com/adeotek/dotfiles.git ~/.dotfiles && ~/.dotfiles/set
 For automated setups (CI/CD, provisioning):
 
 ```bash
-./unattended_setup.sh --base-tools --git --zsh --prompt=oh-my-posh --docker --nodejs
+# use `./unattended_setup.sh ls` to see all available packages
+./unattended_setup.sh --packages base-tools,git,zsh,docker,nodejs
 ```
 
 Available options:
@@ -104,16 +104,11 @@ dotfiles/
 ├── unattended_setup.sh         # Automated setup script
 ├── update.sh                   # Update installed tools
 ├── _scripts/
-│   ├── core/                   # 48 modular install scripts
-│   │   ├── _helpers.sh         # Shared functions library
-│   │   ├── _options.sh         # Package definitions
-│   │   ├── *-install.sh        # Tool installation scripts
-│   │   └── *-setup.sh          # Configuration setup scripts
-│   ├── ubuntu-24.04-desktop-init.sh
-│   ├── ubuntu-24.04-wsl-dev-init.sh
-│   ├── fedora-43-desktop-init.sh
-│   ├── arch-linux-desktop-init.sh
-│   └── rpios-octoprint-init.sh
+│   └── core/                   # 48 modular install scripts
+│       ├── _helpers.sh         # Shared functions library
+│       ├── _options.sh         # Package definitions
+│       ├── *-install.sh        # Tool installation scripts
+│       └── *-setup.sh          # Configuration setup scripts
 ├── bash/                       # Bash configuration
 │   └── .config/bash/
 │       └── config.bash
@@ -133,33 +128,6 @@ dotfiles/
 └── _extra/                     # Additional configs & templates
 ```
 
-## 🎨 Shell Configuration Highlights
-
-### New Standalone ZSH Configuration
-
-A **comprehensive, plugin-manager-free** ZSH setup with modern features:
-
-```bash
-# Use the standalone config
-source ~/.config/zsh/config-standalone.zsh
-```
-
-**Features:**
-- 🎯 Two-line prompt with git integration
-- 📚 50,000 command history with smart deduplication
-- 🔍 Advanced fuzzy completion
-- 🎨 Syntax highlighting (auto-detects system packages)
-- 💡 Auto-suggestions from history
-- 🐳 30+ Docker/Docker Compose aliases
-- 📁 40+ Git aliases and functions
-- ⚡ FZF integration (file/directory/process search)
-- 🧭 Zoxide smart directory jumping
-- 🛠️ Utility functions (extract, mkcd, weather, cheat)
-- ⌨️ Modern key bindings
-- ☁️ Cloud CLI integrations (kubectl, terraform, gcloud)
-
-See [zsh/README.md](zsh/README.md) for detailed documentation.
-
 ## 🔧 Configuration Management
 
 This project uses **GNU Stow** for symlink-based configuration management:
@@ -176,26 +144,12 @@ This project uses **GNU Stow** for symlink-based configuration management:
 |-------------|----------|--------|
 | Arch Linux | Rolling | ✅ Fully Supported |
 | Debian | 11, 12, 13 | ✅ Fully Supported |
-| Ubuntu | 22.04, 24.04 | ✅ Fully Supported |
-| Pop!_OS | 22.04 | ✅ Fully Supported |
-| Fedora | 40, 41, 42, 43 | ✅ Fully Supported |
-| RHEL | 8, 9 | ✅ Fully Supported |
-| Raspberry Pi OS | Latest | ✅ Fully Supported |
+| Ubuntu | 24.04, 25.04, 25.10 | ✅ Fully Supported |
+| Pop!_OS | 22.04, 24.04 | ✅ Fully Supported |
+| Fedora | 42, 43 | ✅ Fully Supported |
+| RHEL | 9 | ✅ Fully Supported |
 
-## 🎯 Usage Examples
-
-### Install Specific Tools
-
-```bash
-# Install just Docker
-./setup.sh
-# Select: docker
-
-# Install development stack
-./unattended_setup.sh --git --nodejs --docker --nvim --tmux
-```
-
-### Update Installed Tools
+## 🎯 Update System and Installed Tools
 
 ```bash
 ./update.sh
@@ -208,20 +162,6 @@ This will:
 - Update cargo packages
 - Update Go tools
 - Update oh-my-posh/starship
-
-### Try the New ZSH Config
-
-```bash
-# Install ZSH and plugins
-./setup.sh
-# Select: zsh
-
-# Add standalone config to ~/.zshrc
-echo 'source ~/.config/zsh/config-standalone.zsh' >> ~/.zshrc
-
-# Reload shell
-exec zsh
-```
 
 ## 🛠️ Customization
 
@@ -256,22 +196,6 @@ Enable verbose output for debugging:
 ./unattended_setup.sh --base-tools --verbose
 ```
 
-## 📝 Recent Updates
-
-### Latest (Current)
-- ✨ **New**: Comprehensive standalone ZSH configuration without plugin managers
-- 🐛 **Fixed**: Multiple bugs in installation scripts (docker, nodejs, golang, git, zsh)
-- ⚡ **Optimized**: Removed hardcoded paths for better portability
-- 📚 **Improved**: Enhanced plugin detection for multi-distro support
-- 📖 **Added**: Comprehensive ZSH documentation
-
-### Previous
-- 🚀 **Updated**: Fedora support updated to version 43
-- 🧹 **Cleaned**: Removed AlmaLinux and CentOS specific configurations
-- 📦 **Enhanced**: Raspberry Pi OS support
-- 🔧 **Added**: mise and asdf version managers
-- 🐳 **Expanded**: Docker and cloud tool support
-
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit issues or pull requests.
@@ -302,16 +226,6 @@ This project is open source and available under the [MIT License](LICENSE).
 - Inspired by various dotfiles repositories across GitHub
 - Built with insights from Oh-My-Zsh, Prezto, and other shell frameworks
 - Thanks to the open source community for the amazing tools
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/adeotek/dotfiles/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/adeotek/dotfiles/discussions)
-
-## 🔗 Related Projects
-
-- [Neovim Config](https://github.com/adeotek/neovim-adeotek) - My Neovim configuration
-- [Oh My Posh Themes](https://github.com/adeotek/oh-my-posh-themes) - Custom prompt themes
 
 ---
 
