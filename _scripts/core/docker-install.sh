@@ -61,14 +61,14 @@ case $CURRENT_OS_ID in
     install_package "docker-ce" "sudo docker --version" "_" "docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
     ;;
   fedora|redhat)
-    if [ "$CURRENT_OS_ID" -eq "redhat" ]; then
+    if [ "$CURRENT_OS_ID" == "redhat" ]; then
       DOCKER_REPO_URL="https://download.docker.com/linux/rhel/docker-ce.repo"
     else
       DOCKER_REPO_URL="https://download.docker.com/linux/fedora/docker-ce.repo"
     fi
     if [ "$DRY_RUN" -ne "1" ]; then
       sudo dnf -y install dnf-plugins-core
-      sudo dnf-3 config-manager --add-repo "$DOCKER_REPO_URL"
+      sudo dnf config-manager --add-repo "$DOCKER_REPO_URL"
     fi
     install_package "docker-ce" "sudo docker --version" "_" "docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
     ;;

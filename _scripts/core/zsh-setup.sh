@@ -7,7 +7,7 @@
 # Init
 if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
   if [[ "${ARGS["unattended"]}" -eq "1" ]]; then
-    ARGS["prompt"]="$OPT_BASH_DEFAULT_PROMPT"
+    ARGS["prompt"]="$OPT_ZSH_DEFAULT_PROMPT"
   else
     ARGS["prompt"]=""
   fi
@@ -23,7 +23,7 @@ if [[ -z "$RDIR" ]]; then
   CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
-process_args $@
+process_args "$@"
 
 # Install
 source "$CDIR/zsh-install.sh"

@@ -25,13 +25,13 @@ if [[ -z "$RDIR" ]]; then
   CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
-process_args $@
+process_args "$@"
 
 # Install
 if [ -z "${ARGS["version"]}" ]; then
   cecho "yellow" -n "Please input the NodeJs version you want to install? [$OPT_NODEJS_DEFAULT_VERSION]: "
   read NODEJS_VERSION
-  if [[ "$INSTALL_MODE_CONFIRM" == "" ]]; then
+  if [[ "$NODEJS_VERSION" == "" ]]; then
     NODEJS_VERSION="$OPT_NODEJS_DEFAULT_VERSION"
   fi
 else
