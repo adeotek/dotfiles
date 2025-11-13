@@ -71,29 +71,16 @@ git clone https://github.com/adeotek/dotfiles.git ~/.dotfiles && ~/.dotfiles/set
 For automated setups (CI/CD, provisioning):
 
 ```bash
-# use `./unattended_setup.sh ls` to see all available packages
+./unattended_setup.sh --packages <package-1>,<package-2>,<package-3>,...
+
+# Example:
 ./unattended_setup.sh --packages base-tools,git,zsh,docker,nodejs
 ```
 
-Available options:
-```
---base-tools      Base CLI tools (git, tmux, fzf, etc.)
---git             Git configuration
---bash            Bash configuration
---zsh             ZSH configuration
---prompt=<name>   oh-my-posh or starship
---docker          Docker and Docker Compose
---nodejs          Node.js
---golang          Go language
---rust            Rust language
---python          Python and pipx
---dotnet          .NET SDK
---nvim            Neovim with custom config
---tmux            Tmux with custom config
---mise            mise version manager
---asdf            asdf version manager
---homebrew        Homebrew package manager
---all             Install everything
+Run the foolowing to list all available packages:
+
+```bash
+./unattended_setup.sh ls
 ```
 
 ## 📁 Project Structure
