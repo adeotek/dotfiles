@@ -35,7 +35,7 @@ case $CURRENT_OS_ID in
     fi
     install_package "google-cloud-cli" "gcloud --version"
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     if [ ! -f /etc/yum.repos.d/google-cloud-sdk.repo ]; then
       cecho "cyan" "Installing Google Cloud SDK YUM source..."
       if [ "$DRY_RUN" -ne "1" ]; then

@@ -20,11 +20,8 @@ case $CURRENT_OS_ID in
   debian|ubuntu|pop)
     OPT_NODEJS_DEFAULT_VERSION="24"
     ;;
-  fedora|redhat|centos)
+  fedora|redhat)
     OPT_NODEJS_DEFAULT_VERSION="24"
-    ;;
-  almalinux)
-    OPT_NODEJS_DEFAULT_VERSION="22"
     ;;
   *)
     cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
