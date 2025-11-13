@@ -50,7 +50,7 @@ case $CURRENT_OS_ID in
     fi
     install_package "terraform" "terraform --version"
     ;;
-  redhat|centos|almalinux)
+  redhat)
     if [ ! -f /etc/yum.repos.d/hashicorp.repo ]; then
       cecho "cyan" "Installing Hashicorp YUM source..."
       if [ "$DRY_RUN" -ne "1" ]; then

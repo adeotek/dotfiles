@@ -161,12 +161,10 @@ format = '\[[$symbol]($style)\]'
 [os.symbols]
 Alpaquita = " "
 Alpine = " "
-AlmaLinux = " "
 Amazon = " "
 Android = " "
 Arch = " "
 Artix = " "
-CentOS = " "
 Debian = " "
 DragonFly = " "
 Emscripten = " "

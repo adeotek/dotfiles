@@ -22,7 +22,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
     debian|ubuntu|pop)
       sudo apt-get install -y unzip
       ;;
-    fedora|redhat|centos|almalinux)
+    fedora|redhat)
       sudo dnf remove -y awscli
       sudo dnf install -y unzip
       ;;

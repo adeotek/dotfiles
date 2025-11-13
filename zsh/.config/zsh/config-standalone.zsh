@@ -308,7 +308,7 @@ if [[ -f /etc/os-release ]]; then
       alias apt='sudo apt'
       alias update='sudo apt update && sudo apt upgrade'
       ;;
-    fedora|redhat|centos|almalinux)
+    fedora|redhat)
       alias dnf='sudo dnf'
       alias update='sudo dnf upgrade'
       ;;

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##
-# Fedora 40 environment installation and setup script
+# Fedora 43 environment installation and setup script
 ##
 
 # Global system variables
