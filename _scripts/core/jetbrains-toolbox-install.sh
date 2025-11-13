@@ -30,7 +30,7 @@ case $CURRENT_OS_ID in
   debian|ubuntu|pop)
     sudo apt-get install -y libfuse2 libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin tar dbus-user-session
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     sudo dnf install -y fuse libxi6 libxrender1 libxtst6 mesa-utils libfontconfig libgtk-3-bin tar dbus-user-session
     ;;
   *)

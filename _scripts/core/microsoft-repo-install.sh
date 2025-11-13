@@ -81,7 +81,7 @@ case $CURRENT_OS_ID in
       fi
     fi
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     cecho "yellow" "SKIPPED: not required on RHEL-based systems."
     ;;
   *)

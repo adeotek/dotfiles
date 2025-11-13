@@ -26,7 +26,7 @@ case $CURRENT_OS_ID in
     sudo apt-get upgrade -y
     sudo apt-get autoremove -y
     ;;
-  fedora|redhat|centos|almalinux)
+  fedora|redhat)
     # Check if EPEL repo is installed
     if [ "$CURRENT_OS_ID" != "fedora" ] && [ ! $(sudo dnf repolist | grep "epel") ]; then
       cecho "yellow" "EPEL repository is not installed. Installing it now..."

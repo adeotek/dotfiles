@@ -35,7 +35,7 @@ else
       debian|ubuntu|pop)
         sudo apt-get install -y build-essential
         ;;
-      fedora|redhat|centos|almalinux)
+      fedora|redhat)
         sudo dnf install -y gcc gcc-c++ glibc-devel glibc-headers make
         ;;
       *)

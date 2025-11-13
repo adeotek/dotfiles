@@ -72,15 +72,6 @@ case $CURRENT_OS_ID in
     fi
     install_package "docker-ce" "sudo docker --version" "_" "docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
     ;;
-  centos|almalinux)
-    if [ "$DRY_RUN" -ne "1" ]; then
-      sudo dnf install -y yum-utils
-      sudo dnf remove -y docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine podman runc
-      sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-      sudo dnf update -y --refresh
-    fi
-    install_package "docker-ce" "sudo docker --version" "_" "docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
-    ;;
   *)
     cecho "red" "Unsupported OS: $CURRENT_OS_ID"
     exit 1

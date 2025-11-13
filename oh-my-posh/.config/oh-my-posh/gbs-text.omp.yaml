@@ -125,7 +125,6 @@ blocks:
         properties:
           alpine: alx
           arch: arx
-          centos: ceo
           debian: deb
           elementary: ele
           fedora: fed

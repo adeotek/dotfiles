@@ -214,7 +214,7 @@ function install_package() {
       debian|ubuntu|pop)
         check_command="dpkg -s $package"
         ;;
-      fedora|redhat|centos|almalinux)
+      fedora|redhat)
         check_command="rpm -q $package"
         ;;
       *)
@@ -235,7 +235,7 @@ function install_package() {
       debian|ubuntu|pop)
         install_command="sudo apt-get install -y $package $additional_packages"
         ;;
-      fedora|redhat|centos|almalinux)
+      fedora|redhat)
         install_command="sudo dnf install -y $package $additional_packages"
         ;;
       *)
