@@ -3,7 +3,7 @@
 A comprehensive, modular collection of Linux dotfiles and automated installation scripts for setting up development environments across multiple distributions.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Distributions](https://img.shields.io/badge/distros-Arch%20%7C%20Debian%20%7C%20Ubuntu%20%7C%20Fedora%20%7C%20AlmaLinux-green.svg)](#supported-distributions)
+[![Distributions](https://img.shields.io/badge/distros-Arch%20%7C%20Debian%20%7C%20Ubuntu%20%7C%20Fedora%20%7C%20RHEL-green.svg)](#supported-distributions)
 
 ## ✨ Features
 
