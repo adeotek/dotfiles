@@ -39,7 +39,7 @@ if [[ -z "$GOLANG_VERSION" ]]; then
   cecho "red" "No GoLang version provided. Skipping..."
 else
   GOLANG_INSTALLED=""
-  if [[ -x "$(command -v gog)" ]]; then
+  if [[ -x "$(command -v go)" ]]; then
     if go version | grep "$GOLANG_VERSION" > /dev/null; then
       cecho "yellow" "[golang] is already present."
       GOLANG_INSTALLED="1"

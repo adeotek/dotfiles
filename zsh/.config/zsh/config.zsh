@@ -162,8 +162,22 @@ alias pscpu='ps auxf | sort -nr -k 3 | head -5'
 export PATH=$PATH:$HOME/.local/bin
 
 # zsh-syntax-highlighting
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Try multiple common locations for plugins
+if [ -f "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ -f "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ -f "$HOME/.local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+  source $HOME/.local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+if [ -f "/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+  source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f "$HOME/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+  source $HOME/.local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 # homebrew
 if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
@@ -197,9 +211,6 @@ if [ -d "$HOME/.dotnet" ]; then
   export PATH=$PATH:$HOME/.dotnet
   export PATH="$PATH:$HOME/.dotnet/tools"
 fi
-
-export LC_ALL='C.UTF-8'
-export EDITOR="nano"
 
 # Neovim
 if $(command -v nvim >/dev/null 2>&1); then
@@ -253,8 +264,8 @@ fi
 
 # FZF key bindings (CTRL R for fuzzy history finder)
 # Setup fzf
-if [[ -d /home/dev/.fzf/bin && ! "$PATH" == */home/dev/.fzf/bin* ]]; then
-  PATH="${PATH:+${PATH}:}/home/dev/.fzf/bin"
+if [[ -d "$HOME/.fzf/bin" && ! "$PATH" == *"$HOME/.fzf/bin"* ]]; then
+  PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
 fi
 if [[ -x "$(command -v fzf)" ]]; then
   source <(fzf --zsh)
