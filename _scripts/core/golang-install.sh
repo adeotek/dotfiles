@@ -26,7 +26,7 @@ fi
 
 # Install
 if [[ -z "${ARGS["version"]}" ]]; then
-  cecho "yellow" -n "Please specify the GoLang version to install [1.24.2]: "
+  cecho "yellow" -n "Please specify the GoLang version to install [$OPT_GOLANG_DEFAULT_VERSION]: "
   read GOLANG_VERSION
   if [[ -z "$GOLANG_VERSION" ]]; then
     GOLANG_VERSION="$OPT_GOLANG_DEFAULT_VERSION"

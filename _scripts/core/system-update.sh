@@ -42,7 +42,9 @@ case $CURRENT_OS_ID in
       fi
     fi
     sudo dnf upgrade -y --refresh
-    sudo dnf groupupdate core -y
+    if [ "$CURRENT_OS_ID" != "fedora" ]; then
+      sudo dnf groupupdate core -y
+    fi
     sudo dnf autoremove -y
     ;;
   *)

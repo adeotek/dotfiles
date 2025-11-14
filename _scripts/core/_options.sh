@@ -21,7 +21,7 @@ case $CURRENT_OS_ID in
     OPT_NODEJS_DEFAULT_VERSION="24"
     ;;
   fedora|redhat)
-    OPT_NODEJS_DEFAULT_VERSION="24"
+    OPT_NODEJS_DEFAULT_VERSION="22"
     ;;
   *)
     cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
