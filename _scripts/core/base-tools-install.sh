@@ -61,14 +61,13 @@ if [ "$DRY_RUN" -ne "1" ]; then
       ## Base tools
       sudo dnf install -y curl wget mc nc nano whois
       ## CLI tools
-      sudo dnf install -y file jq ripgrep bat tree htop hstr zoxide bash-completion stow fzf
+      sudo dnf install -y file jq ripgrep bat tree htop hstr zoxide bash-completion stow fzf fd-find
       if [ "$CURRENT_OS_ID" != "fedora" ]; then
-        sudo dnf install -y fd-find
+        cecho "yellow" "Skipping eza for RHEL-based distros due to missing package"
       else
-        sudo dnf copr enable tkbcopr/fd -y
-        sudo dnf install -y fd
+        sudo dnf copr enable alternateved/eza -y
+        sudo dnf install -y eza
       fi
-      cecho "yellow" "Skipping eza for RHEL-based distros due to missing package"
       ;;
     *)
       cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
