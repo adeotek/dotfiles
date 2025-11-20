@@ -42,6 +42,7 @@ declare CONSOLE_ONLY_TASKS=(
   "dotnet"
   "fastfetch"
   "onefetch"
+  "glow"
 )
 
 declare CONSOLE_TASKS=(
@@ -128,6 +129,7 @@ declare -A TASK_TYPES=(
   ["dotnet"]="install"
   ["git"]="setup"
   ["github-cli"]="install"
+  ["glow"]="install"
   ["golang"]="install"
   ["aws-cli"]="install"
   ["gcp-cli"]="install"
