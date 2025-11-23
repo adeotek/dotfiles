@@ -224,3 +224,5 @@
     added = green bold
     changed = yellow bold
     untracked = red bold
+[pull]
+	rebase = false
