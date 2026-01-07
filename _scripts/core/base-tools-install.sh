@@ -21,7 +21,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
   case $CURRENT_OS_ID in
     arch)
       ## Base tools
-      sudo pacman -S --noconfirm --needed curl wget mc netcat nano vi whois mandoc
+      sudo pacman -S --noconfirm --needed curl wget mc netcat nano vi whois mandoc micro
       ## CLI tools
       sudo pacman -S --noconfirm --needed jq fd ripgrep fzf bat tree htop hstr zoxide bash-completion stow
       ## eza (ls alternative)
@@ -34,7 +34,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
       fi
       sudo apt-get install -y apt-transport-https gpg gnupg
       ## Base tools
-      sudo apt-get install -y curl wget mc netcat-traditional nano whois
+      sudo apt-get install -y curl wget mc netcat-traditional nano whois micro
       ## CLI tools
       sudo apt-get install -y jq fd-find ripgrep bat tree htop hstr zoxide bash-completion stow
       mkdir -p ~/.local/bin
@@ -59,7 +59,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
       ## Distro tools
       sudo dnf install -y gpg make gcc glibc-devel glibc-headers tar unzip
       ## Base tools
-      sudo dnf install -y curl wget mc nc nano whois
+      sudo dnf install -y curl wget mc nc nano whois micro
       ## CLI tools
       sudo dnf install -y file jq ripgrep bat tree htop hstr zoxide bash-completion stow fzf fd-find
       if [ "$CURRENT_OS_ID" != "fedora" ]; then
