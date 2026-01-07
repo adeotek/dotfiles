@@ -39,7 +39,8 @@ if [ -d "/usr/local/go/bin" ]; then
   export PATH="$PATH:/usr/local/go/bin"
 fi
 if [ -d "$HOME/go/bin" ]; then
-  export PATH="$PATH:$HOME/go/bin"
+  export GOPATH="$HOME/go"
+  export PATH="$PATH:$GOPATH/bin"
 fi
 
 # dotnet & dotnet tools
