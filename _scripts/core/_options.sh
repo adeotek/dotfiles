@@ -31,18 +31,20 @@ esac
 
 declare MINIMAL_TASKS=(
   "base-tools"
-  "git"
-  "yazi"
   "bash"
+  "git"
   "tmux"
-  "nvim"
+  "yazi"
 )
 
 declare CONSOLE_ONLY_TASKS=(
+  "nodejs"
   "dotnet"
+  "golang"
   "fastfetch"
   "onefetch"
   "glow"
+  "claude-code"
 )
 
 declare CONSOLE_TASKS=(
@@ -62,17 +64,16 @@ declare DESKTOP_TASKS=(
 )
 
 declare CONSOLE_EXTRA_TASKS=(
-  "github-cli"
   "ansible"
   "docker"
-  "golang"
   "powershell"
   "python"
-  "nodejs"
   "rustup"
+  "github-cli"
   "aws-cli"
   "gcp-cli"
   "terraform"
+  "nvim"
 )
 
 declare ALL_CONSOLE_TASKS=(
@@ -81,20 +82,19 @@ declare ALL_CONSOLE_TASKS=(
 )
 
 declare DESKTOP_EXTRA_TASKS=(
-  "github-cli"
   "ansible"
   "docker"
-  "golang"
   "powershell"
   "python"
-  "nodejs"
   "rustup"
-  "tabby"
-  "vscode"
-  "jetbrains-toolbox"
+  "github-cli"
   "aws-cli"
   "gcp-cli"
   "terraform"
+  "nvim"
+  "tabby"
+  "vscode"
+  "jetbrains-toolbox"
 )
 
 declare ALL_DESKTOP_TASKS=(
