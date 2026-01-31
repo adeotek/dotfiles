@@ -1,0 +1,73 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "opencode",
+  "model": "anthropic/claude-sonnet-4-5",
+  "small_model": "anthropic/claude-haiku-4-5",
+  "autoupdate": true,
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "-y", "@playwright/mcp@latest"],
+      "enabled": true
+    },
+    "context7": {
+      "type": "local",
+      "command": ["npx", "-y", "@upstash/context7-mcp"],
+      "enabled": true
+    },
+    "exa": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp",
+      "enabled": true
+    },
+    "docker": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-docker"],
+      "enabled": true
+    }
+  },
+  "plugin": [
+    // "micode", //https://github.com/vtemian/micode
+    // "opencode-gemini-auth@latest"
+  ],
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "https://ollama.hl.adeotek.cloud/v1",
+        "num_ctx": 32768
+      },
+      "models": {
+        "qwen2.5-coder:32b": {
+          "name": "Qwen 2.5 Coder (32B)",
+        },
+        "mistral-small": {
+          "name": "Mistral Small",
+        }
+      }
+    }
+  },
+  "permission": {
+    "bash": "allow",
+    "edit": "allow",
+    "read": "allow",
+    "grep": "allow",
+    "glob": "allow",
+    "list": "allow",
+    "skill": "allow",
+    "todowrite": "allow",
+    "todoread": "allow",
+    "webfetch": "allow",
+    "question": "allow"
+  },
+  "server": {
+    "port": 4096,
+    "hostname": "0.0.0.0",
+    "mdns": true,
+    "cors": [
+      "http://127.0.0.1:4096",
+      "http://localhost:4096"
+    ]
+  }
+}

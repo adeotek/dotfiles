@@ -323,6 +323,26 @@ function stow_package() {
   execute_command "$stow_command" "[$package] setup done."
 }
 
+function stow_file() {
+  local package="$1"
+  local file="$2"
+
+  if [ ! -d "$CURRENT_CONFIG_DIR/$package" ]; then
+    mkdir -p "$CURRENT_CONFIG_DIR/$package"
+  fi
+
+  # Check if file is already symlinked
+  if [ -L "$CURRENT_CONFIG_DIR/$package/$file" ]; then
+    cecho "yellow" "Nothing to do. File [$file] from package [$package] is already stowed."
+    return
+  fi
+
+  rename_file_if_exists "$CURRENT_CONFIG_DIR/$package/$file"
+
+  stow_command="ln -s $RDIR/$package/$file $CURRENT_CONFIG_DIR/$package/$file"
+  execute_command "$stow_command" "File [$file] from package [$package] stowed."
+}
+
 function enable_wsl_systemd() {
   if [[ "$IF_WSL2" == "1" && ! -f /etc/wsl.conf ]]; then
     sudo tee -a /etc/wsl.conf <<EOF

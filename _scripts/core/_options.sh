@@ -45,6 +45,7 @@ declare CONSOLE_ONLY_TASKS=(
   "onefetch"
   "glow"
   "claude-code"
+  "opencode"
 )
 
 declare CONSOLE_TASKS=(
@@ -122,17 +123,18 @@ declare -A MENU_OPTIONS=(
 )
 
 declare -A TASK_TYPES=(
-  ["base-tools"]="install"
   ["ansible"]="install"
+  ["aws-cli"]="install"
+  ["base-tools"]="install"
   ["bash"]="setup"
+  ["claude-code"]="install"
   ["docker"]="install"
   ["dotnet"]="install"
+  ["gcp-cli"]="install"
   ["git"]="setup"
   ["github-cli"]="install"
   ["glow"]="install"
   ["golang"]="install"
-  ["aws-cli"]="install"
-  ["gcp-cli"]="install"
   ["homebrew"]="install"
   ["hypr"]="setup"
   ["kitty"]="setup"
@@ -143,6 +145,7 @@ declare -A TASK_TYPES=(
   ["nerd-fonts"]="install"
   ["nvim"]="setup"
   ["oh-my-posh"]="setup"
+  ["opencode"]="setup"
   ["powershell"]="install"
   ["python"]="install"
   ["rustup"]="install"
