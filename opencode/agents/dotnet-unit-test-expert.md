@@ -13,11 +13,12 @@ tools:
   webfetch: true
 permission:
   bash:
-    "*": ask
     "dotnet *": allow
     "grep *": allow
     "glob *": allow
     "ls *": allow
+    "sort *": allow
+    "*": ask
   webfetch: ask
 ---
 

@@ -50,10 +50,11 @@
   },
   "permission": {
     "bash": {
-      "*": "ask",
       "grep *": "allow",
       "glob *": "allow",
-      "ls *": "allow"
+      "ls *": "allow",
+      "sort *": "allow",
+      "*": "ask"
     },
     "edit": "allow",
     "read": "allow",
