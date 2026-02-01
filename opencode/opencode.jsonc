@@ -27,8 +27,8 @@
     }
   },
   "plugin": [
-    // "micode", //https://github.com/vtemian/micode
-    // "opencode-gemini-auth@latest"
+    // "micode", // https://github.com/vtemian/micode
+    "oh-my-opencode@latest"
   ],
   "provider": {
     "ollama": {
