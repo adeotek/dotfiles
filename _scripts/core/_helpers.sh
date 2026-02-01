@@ -323,24 +323,90 @@ function stow_package() {
   execute_command "$stow_command" "[$package] setup done."
 }
 
-function stow_file() {
+function symlink_package_directory() {
+  local package="$1"
+  local directory="$2"
+  local stow_action="$3"
+  local dir_rename="$4"
+
+  if [ -z "$stow_action" ]; then
+    stow_action="$DFS_ACTION"
+  fi
+
+  case $stow_action in
+    init|refresh)
+      if [ ! -d "$CURRENT_CONFIG_DIR/$package" ]; then
+        mkdir -p "$CURRENT_CONFIG_DIR/$package"
+      fi
+
+      # Check if directory is already symlinked
+      if [ -L "$CURRENT_CONFIG_DIR/$package/$directory" ]; then
+        cecho "yellow" "Nothing to do. Directory [$directory] from package [$package] is already stowed (using symlink)."
+        return
+      fi
+
+      rename_dir_if_exists "$CURRENT_CONFIG_DIR/$package/$directory"
+      stow_command="ln -s $RDIR/$package/$directory $CURRENT_CONFIG_DIR/$package/$directory"
+      execute_command "$stow_command" "Directory [$directory] from package [$package] stowed (using symlink)."
+    ;;
+    remove)
+      # Check if directory is already symlinked
+      if [ ! -L "$CURRENT_CONFIG_DIR/$package/$directory" ]; then
+        cecho "yellow" "Nothing to do. Directory [$directory] from package [$package] is not stowed (using symlink)."
+        return
+      fi
+
+      stow_command="rm $CURRENT_CONFIG_DIR/$package/$directory"
+      execute_command "$stow_command" "Directory [$directory] from package [$package] was unstowed (using symlink)."
+    ;;
+    *)
+      echo "echo ""ERROR: Invalid action: $stow_action!"""
+      exit 1
+    ;;
+  esac
+}
+
+function symlink_package_file() {
   local package="$1"
   local file="$2"
+  local stow_action="$3"
 
-  if [ ! -d "$CURRENT_CONFIG_DIR/$package" ]; then
-    mkdir -p "$CURRENT_CONFIG_DIR/$package"
+  if [ -z "$stow_action" ]; then
+    stow_action="$DFS_ACTION"
   fi
 
-  # Check if file is already symlinked
-  if [ -L "$CURRENT_CONFIG_DIR/$package/$file" ]; then
-    cecho "yellow" "Nothing to do. File [$file] from package [$package] is already stowed."
-    return
-  fi
+  case $stow_action in
+    init|refresh)
+      if [ ! -d "$CURRENT_CONFIG_DIR/$package" ]; then
+        mkdir -p "$CURRENT_CONFIG_DIR/$package"
+      fi
 
-  rename_file_if_exists "$CURRENT_CONFIG_DIR/$package/$file"
+      # Check if file is already symlinked
+      if [ -L "$CURRENT_CONFIG_DIR/$package/$file" ]; then
+        cecho "yellow" "Nothing to do. File [$file] from package [$package] is already stowed (using symlink)."
+        return
+      fi
 
-  stow_command="ln -s $RDIR/$package/$file $CURRENT_CONFIG_DIR/$package/$file"
-  execute_command "$stow_command" "File [$file] from package [$package] stowed."
+      rename_file_if_exists "$CURRENT_CONFIG_DIR/$package/$file"
+
+      stow_command="ln -s $RDIR/$package/$file $CURRENT_CONFIG_DIR/$package/$file"
+      execute_command "$stow_command" "File [$file] from package [$package] stowed (using symlink)."
+    ;;
+    remove)
+      # Check if file is already symlinked
+      if [ ! -L "$CURRENT_CONFIG_DIR/$package/$file" ]; then
+        cecho "yellow" "Nothing to do. File [$file] from package [$package] is not stowed (using symlink)."
+        return
+      fi
+
+      stow_command="rm $CURRENT_CONFIG_DIR/$package/$file"
+      execute_command "$stow_command" "File [$file] from package [$package] was unstowed (using symlink)."
+    ;;
+    *)
+      echo "echo ""ERROR: Invalid action: $stow_action!"""
+      exit 1
+    ;;
+  esac
 }
 
 function enable_wsl_systemd() {

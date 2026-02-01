@@ -23,7 +23,7 @@
     "docker": {
       "type": "local",
       "command": ["npx", "-y", "@modelcontextprotocol/server-docker"],
-      "enabled": true
+      "enabled": false
     }
   },
   "plugin": [
@@ -49,17 +49,22 @@
     }
   },
   "permission": {
-    "bash": "allow",
+    "bash": {
+      "*": "ask",
+      "grep *": "allow",
+      "glob *": "allow",
+      "ls *": "allow"
+    },
     "edit": "allow",
     "read": "allow",
     "grep": "allow",
     "glob": "allow",
     "list": "allow",
-    "skill": "allow",
     "todowrite": "allow",
     "todoread": "allow",
     "webfetch": "allow",
-    "question": "allow"
+    "question": "allow",
+    "skill": "ask"
   },
   "server": {
     "port": 4096,
