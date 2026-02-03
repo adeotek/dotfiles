@@ -25,5 +25,3 @@ symlink_package_file "opencode" "opencode.jsonc"
 symlink_package_directory "opencode" "agents" "" "$CURRENT_CONFIG_DIR/opencode/agents"
 ## stow skills config directory
 symlink_package_directory "opencode" "skills" "" "$CURRENT_CONFIG_DIR/opencode/skills"
-## stow oh-my-opencode config file
-symlink_package_file "opencode" "oh-my-opencode.json"

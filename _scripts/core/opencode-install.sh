@@ -19,7 +19,7 @@ fi
 cecho "cyan" "Installing [opencode]..."
 
 # Check if already installed
-if command -v opencode >/dev/null 2>&1; then
+if opencode --version >/dev/null 2>&1; then
   cecho "yellow" "[opencode] is already present."
 else
   if [ "$DRY_RUN" -ne "1" ]; then
