@@ -103,7 +103,23 @@ else
       fi
       ;;
     fedora)
-      install_package "nodejs:$NODEJS_VERSION" "node -v" "sudo dnf install -y nodejs$NODEJS_VERSION"
+      cecho "cyan" "Installing [nodejs$NODEJS_VERSION]..."
+      if node -v >/dev/null 2>&1; then
+        decho "yellow" "Package already installed. Updating it..."
+      fi
+
+      if [ "$DRY_RUN" -ne "1" ]; then
+        sudo dnf install -y nodejs$NODEJS_VERSION
+        cecho "cyan" "[nodejs] setting up alternatives for version $NODEJS_VERSION."
+        sudo alternatives --install /usr/bin/node node /usr/bin/node-$NODEJS_VERSION $NODEJS_VERSION
+        sudo alternatives --install /usr/bin/npm npm /usr/bin/npm-$NODEJS_VERSION $NODEJS_VERSION
+        cecho "green" "[nodejs] installation done."
+      else
+        cecho "yellow" "DRY-RUN: sudo dnf install -y nodejs$NODEJS_VERSION"
+        cecho "cyan" "[nodejs] setting up alternatives for version $NODEJS_VERSION."
+        cecho "yellow" "DRY-RUN: sudo alternatives --install /usr/bin/node node /usr/bin/node-$NODEJS_VERSION $NODEJS_VERSION"
+        cecho "yellow" "DRY-RUN: sudo alternatives --install /usr/bin/npm npm /usr/bin/npm-$NODEJS_VERSION $NODEJS_VERSION"
+      fi
       ;;
     redhat)
       install_package "nodejs:$NODEJS_VERSION" "node -v" "sudo dnf module install -y nodejs:$NODEJS_VERSION"
