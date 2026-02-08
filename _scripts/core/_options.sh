@@ -31,18 +31,21 @@ esac
 
 declare MINIMAL_TASKS=(
   "base-tools"
-  "git"
-  "yazi"
   "bash"
+  "git"
   "tmux"
-  "nvim"
+  "yazi"
 )
 
 declare CONSOLE_ONLY_TASKS=(
+  "nodejs"
   "dotnet"
+  "golang"
   "fastfetch"
   "onefetch"
   "glow"
+  "claude-code"
+  "opencode"
 )
 
 declare CONSOLE_TASKS=(
@@ -62,17 +65,16 @@ declare DESKTOP_TASKS=(
 )
 
 declare CONSOLE_EXTRA_TASKS=(
-  "github-cli"
   "ansible"
   "docker"
-  "golang"
   "powershell"
   "python"
-  "nodejs"
   "rustup"
+  "github-cli"
   "aws-cli"
   "gcp-cli"
   "terraform"
+  "nvim"
 )
 
 declare ALL_CONSOLE_TASKS=(
@@ -81,20 +83,19 @@ declare ALL_CONSOLE_TASKS=(
 )
 
 declare DESKTOP_EXTRA_TASKS=(
-  "github-cli"
   "ansible"
   "docker"
-  "golang"
   "powershell"
   "python"
-  "nodejs"
   "rustup"
-  "tabby"
-  "vscode"
-  "jetbrains-toolbox"
+  "github-cli"
   "aws-cli"
   "gcp-cli"
   "terraform"
+  "nvim"
+  "tabby"
+  "vscode"
+  "jetbrains-toolbox"
 )
 
 declare ALL_DESKTOP_TASKS=(
@@ -122,17 +123,18 @@ declare -A MENU_OPTIONS=(
 )
 
 declare -A TASK_TYPES=(
-  ["base-tools"]="install"
   ["ansible"]="install"
+  ["aws-cli"]="install"
+  ["base-tools"]="install"
   ["bash"]="setup"
+  ["claude-code"]="install"
   ["docker"]="install"
   ["dotnet"]="install"
+  ["gcp-cli"]="install"
   ["git"]="setup"
   ["github-cli"]="install"
   ["glow"]="install"
   ["golang"]="install"
-  ["aws-cli"]="install"
-  ["gcp-cli"]="install"
   ["homebrew"]="install"
   ["hypr"]="setup"
   ["kitty"]="setup"
@@ -143,6 +145,7 @@ declare -A TASK_TYPES=(
   ["nerd-fonts"]="install"
   ["nvim"]="setup"
   ["oh-my-posh"]="setup"
+  ["opencode"]="setup"
   ["powershell"]="install"
   ["python"]="install"
   ["rustup"]="install"
