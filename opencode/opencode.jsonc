@@ -40,10 +40,10 @@
       },
       "models": {
         "qwen2.5-coder:32b": {
-          "name": "Qwen 2.5 Coder (32B)",
+          "name": "Qwen 2.5 Coder (32B)"
         },
         "mistral-small": {
-          "name": "Mistral Small",
+          "name": "Mistral Small"
         }
       }
     }
