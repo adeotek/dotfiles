@@ -54,9 +54,8 @@ declare CONSOLE_TASKS=(
 )
 
 declare DESKTOP_ONLY_TASKS=(
-  "kitty"
+  "ghostty"
   "zed"
-  "hypr"
 )
 
 declare DESKTOP_TASKS=(
@@ -93,6 +92,7 @@ declare DESKTOP_EXTRA_TASKS=(
   "gcp-cli"
   "terraform"
   "nvim"
+  "kitty"
   "tabby"
   "vscode"
   "jetbrains-toolbox"
@@ -108,6 +108,7 @@ declare ALL_TASKS=(
   "${CONSOLE_ONLY_TASKS[@]}"
   "${DESKTOP_ONLY_TASKS[@]}"
   "${DESKTOP_EXTRA_TASKS[@]}"
+  "hypr"
   "zsh"
 )
 
@@ -137,6 +138,7 @@ declare -A TASK_TYPES=(
   ["golang"]="install"
   ["homebrew"]="install"
   ["hypr"]="setup"
+  ["ghostty"]="setup"
   ["kitty"]="setup"
   ["jetbrains-toolbox"]="setup"
   ["nodejs"]="install"
