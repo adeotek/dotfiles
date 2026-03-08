@@ -44,6 +44,7 @@ declare CONSOLE_ONLY_TASKS=(
   "fastfetch"
   "onefetch"
   "glow"
+  "kubectl"
   "claude-code"
   "opencode"
 )
@@ -140,6 +141,7 @@ declare -A TASK_TYPES=(
   ["hypr"]="setup"
   ["ghostty"]="setup"
   ["kitty"]="setup"
+  ["kubectl"]="install"
   ["jetbrains-toolbox"]="setup"
   ["nodejs"]="install"
   ["fastfetch"]="setup"
