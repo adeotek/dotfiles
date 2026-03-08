@@ -38,20 +38,34 @@ declare MINIMAL_TASKS=(
 )
 
 declare CONSOLE_ONLY_TASKS=(
-  "nodejs"
-  "dotnet"
-  "golang"
   "fastfetch"
-  "onefetch"
-  "glow"
-  "kubectl"
   "claude-code"
-  "opencode"
+  "glow"
+  "golang"
+  "nodejs"
+  "onefetch"
 )
 
 declare CONSOLE_TASKS=(
   "${MINIMAL_TASKS[@]}"
   "${CONSOLE_ONLY_TASKS[@]}"
+)
+
+declare CONSOLE_EXTRA_TASKS=(
+  "ansible"
+  "aws-cli"
+  "docker"
+  "dotnet"
+  "github-cli"
+  "gcp-cli"
+  "helm"
+  "kubectl"
+  "nvim"
+  "opencode"
+  "powershell"
+  "python"
+  "rustup"
+  "terraform"
 )
 
 declare DESKTOP_ONLY_TASKS=(
@@ -64,35 +78,13 @@ declare DESKTOP_TASKS=(
   "${DESKTOP_ONLY_TASKS[@]}"
 )
 
-declare CONSOLE_EXTRA_TASKS=(
-  "ansible"
-  "docker"
-  "powershell"
-  "python"
-  "rustup"
-  "github-cli"
-  "aws-cli"
-  "gcp-cli"
-  "terraform"
-  "nvim"
-)
-
 declare ALL_CONSOLE_TASKS=(
   "${CONSOLE_TASKS[@]}"
   "${CONSOLE_EXTRA_TASKS[@]}"
 )
 
 declare DESKTOP_EXTRA_TASKS=(
-  "ansible"
-  "docker"
-  "powershell"
-  "python"
-  "rustup"
-  "github-cli"
-  "aws-cli"
-  "gcp-cli"
-  "terraform"
-  "nvim"
+  "${CONSOLE_EXTRA_TASKS[@]}"
   "kitty"
   "tabby"
   "vscode"
@@ -112,15 +104,15 @@ declare ALL_TASKS=(
   "hypr"
   "zsh"
 )
+readarray -t ALL_TASKS < <(printf '%s\n' "${ALL_TASKS[@]}" | sort)
 
-MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "5" "c")
+MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "c")
 declare -A MENU_OPTIONS=(
   ["0"]="Manual selection"
   ["1"]="Minimal (${MINIMAL_TASKS[@]})"
   ["2"]="Console (Minimal + "${CONSOLE_ONLY_TASKS[@]}")"
   ["3"]="Desktop (Console + "${DESKTOP_ONLY_TASKS[@]}")"
   ["4"]="Interactive"
-  ["5"]="All"
   ["c"]="Cancel/Exit"
 )
 
@@ -137,6 +129,7 @@ declare -A TASK_TYPES=(
   ["github-cli"]="install"
   ["glow"]="install"
   ["golang"]="install"
+  ["helm"]="install"
   ["homebrew"]="install"
   ["hypr"]="setup"
   ["ghostty"]="setup"

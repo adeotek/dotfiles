@@ -1,5 +1,6 @@
 # Bash configuration file
 
+export COLORTERM=truecolor
 export LC_ALL='C.UTF-8'
 export EDITOR="nano"
 
