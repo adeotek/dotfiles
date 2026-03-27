@@ -38,7 +38,7 @@ tmux_conf_new_session_retain_current_path=false
 #   - true
 #   - false (default)
 #   - disabled (do not modify new-window bindings)
-tmux_conf_new_window_retain_current_path=false
+tmux_conf_new_window_retain_current_path=true
 
 # new window tries to reconnect ssh sessions, possible values are:
 #   - true
@@ -384,7 +384,7 @@ tmux_conf_theme_clock_style="24"
 #   - false (default)
 #   - disabled
 # on Linux, this requires xsel, xclip or wl-copy
-tmux_conf_copy_to_os_clipboard=false
+tmux_conf_copy_to_os_clipboard=true
 
 
 # -- urlscan -------------------------------------------------------------------
@@ -399,6 +399,9 @@ tmux_conf_urlscan_options="--compact --dedupe"
 
 # increase history size
 set -g history-limit 10000 ## Custom value
+
+# pass through escape sequences to the terminal (needed for Ghostty, OSC52, inline images)
+set -g allow-passthrough on
 
 # start with mouse mode enabled
 #set -g mouse on
@@ -419,8 +422,8 @@ set -gu prefix2
 unbind C-a
 unbind C-s
 unbind C-b
-set -g prefix C-s
-bind C-s send-prefix
+set -g prefix C-a
+bind C-a send-prefix
 # Copy mode Emacs overrides
 bind-key -T copy-mode Space send-keys -X begin-selection
 bind-key -T copy-mode Enter send-keys -X copy-selection
@@ -438,6 +441,7 @@ bind m run "cut -c3- '#{TMUX_CONF}' | sh -s _toggle_mouse" \; display 'mouse #{?
 ## Custom value
 unbind C-h
 unbind C-l
+bind v paste-buffer -p                                # remap paste-buffer (p is rebound below)
 bind -r p previous-window                             # select previous window
 bind -r n next-window                                 # select next window
 
