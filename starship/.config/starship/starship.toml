@@ -4,84 +4,115 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
+# WSL2 filesystem scans are slow — give them more time before warning
+scan_timeout = 30
+
+# Single info line, then prompt on its own line
+format = """
+$username$sudo$hostname$directory$git_branch$git_state$git_status$nodejs$golang$rust$python$dotnet$time$os$shell$cmd_duration$status$line_break$character"""
+
+# Segment separator: [](yellow) / [](yellow)
+
 [username]
 style_user = 'white bold'
-style_root = 'black bold'
-format = 'user: [$user]($style) '
+style_root = 'red bold'
+format = '[$user]($style)'
 disabled = false
 show_always = true
-aliases = { "corpuser034g" = "matchai" }
+
+[sudo]
+style = 'bold red'
+symbol = '!'
+format = '[$symbol]($style)'
+disabled = false
+allow_windows = true
 
 [hostname]
 ssh_only = false
-format = '[$ssh_symbol](bold blue) on [$hostname](bold red) '
-trim_at = '.companyname.com'
+format = '[@](bold yellow)[$hostname](bold white) [](yellow) '
 disabled = false
 
 [directory]
 truncation_length = 8
 truncation_symbol = '…/'
+style = 'bold cyan'
+format = '[$path]($style)[$read_only]($read_only_style) [](yellow) '
+truncate_to_repo = false
+before_repo_root_style = 'bold white'
+repo_root_style = 'bold green'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) [](yellow) '
 
 [git_branch]
-symbol = '🌱 '
-truncation_length = 4
-truncation_symbol = ''
-ignore_branches = ['master', 'main']
+symbol = ''
+style = 'bold purple'
+truncation_length = 50
+truncation_symbol = '…'
+format = '[$symbol$branch(:$remote_branch)]($style) '
 
 [git_state]
+style = 'yellow'
 format = '[\($state( $progress_current of $progress_total)\)]($style) '
-cherry_pick = '[🍒 PICKING](bold red)'
+cherry_pick = '[ ](bold red)'
+merge = '[ ](bold red)'
+revert = '[󰕌 ](bold red)'
+rebase = '[󰑏 ](bold red)'
 
 [git_status]
 conflicted = '🏳'
-ahead = '🏎💨'
-behind = '😰'
-diverged = '😵'
-up_to_date = '✓'
-untracked = '🤷'
-stashed = '📦'
-modified = '📝'
-staged = '[++\($count\)](green)'
-renamed = '👅'
-deleted = '🗑'
-#ahead = '⇡${count}'
-#diverged = '⇕⇡${ahead_count}⇣${behind_count}'
-#behind = '⇣${count}'
+ahead = '⇡${count} '
+behind = '⇣${count} '
+diverged = '⇕${ahead_count}⇣${behind_count} '
+up_to_date = '[󰍕](bold green) '
+untracked = '[?](bold white) '
+stashed = '[\$](bold yellow) '
+modified = '[󱇧](bold red) '
+staged = '[++\($count\)](bold cyan) '
+renamed = '[»](bold yellow) '
+deleted = '[󰗨](bold purple) '
+style = 'bold red'
+format = '[|](yellow) [$all_status$ahead_behind]($style)[](yellow) '
 
 [dotnet]
-symbol = '🥅 '
-style = 'green'
-heuristic = false
+symbol = '.NET '
+detect_extensions = ['cs', 'csproj', 'sln', 'xsln', 'fsproj', 'xproj']
+style = 'bold cyan'
+format = '[$symbol($version )(🎯 $tfm )]($style) [](yellow) '
 
 [nodejs]
-format = 'via [🤖 $version](bold green) '
+symbol = ' '
+style = 'bold green'
+format = '[$symbol($version )]($style) [](yellow) '
 
 [golang]
-format = 'via [🏎💨 $version](bold cyan) '
+symbol = 'GO ' # 🐹
+style = 'bold cyan'
+format = '[$symbol($version )]($style) [](yellow) '
+
+[rust]
+symbol = 'RS ' # 🦀
+style = 'bold #99908A'
+format = '[$symbol($version )]($style) [](yellow) '
 
 [python]
-symbol = '👾 '
+symbol = 'PY ' # 🐍
+style = 'yellow bold'
 pyenv_version_name = true
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style) [](yellow) '
 
-[sudo]
-style = 'bold red'
-symbol = '\[!\]'
+[terraform]
+symbol = 'tf:' # 💠
+style = 'bold 105'
+format = '[$symbol$workspace]($style) [](yellow) '
+
+[time]
 disabled = false
-allow_windows = true
-
-[status]
-# style = 'bg:blue'
-symbol = '🔴'
-success_symbol = '🟢'
-format = '\[[$symbol$common_meaning$signal_name$maybe_int]($style)\]'
-map_symbol = true
-disabled = false
-
-[cmd_duration]
-format = '\[[⏱ $duration]($style)\]'
+style = 'bold white'
+time_format = '%H:%M:%S'
+format = '[$time]($style) '
 
 [os]
-format = '\[[$symbol]($style)\]'
+style = 'bold cyan'
+format = '[$symbol]($style) '
 disabled = false
 [os.symbols]
 Alpaquita = ""
@@ -126,38 +157,32 @@ Unknown = ""
 Void = ""
 Windows = "󰍲"
 
-# Replace the '❯' symbol in the prompt with '➜'
-[character] # The name of the module we are configuring is 'character'
-success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
+[shell]
+bash_indicator = 'bash'
+pwsh_indicator = 'pwsh'
+format = '[$indicator]($style) '
+disabled = false
+
+[cmd_duration]
+disabled = false
+min_time = 100
+show_milliseconds = true
+style = 'bold yellow'
+format = '[ $duration]($style) ' # ⏱
+
+[status]
+style = 'bold red'
+success_style = 'bold green'
+symbol = ' ' # ❌/
+success_symbol = ' ' # ✅/
+format = '[$symbol$status$signal_name]($style) '
+pipestatus = true
+disabled = false
+
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[❯](bold red)'
 
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
-
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"

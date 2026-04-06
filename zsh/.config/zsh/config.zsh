@@ -223,6 +223,7 @@ fi
 
 # --- Starship prompt ---
 if command -v starship >/dev/null 2>&1; then
+  export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
   _starship_cache="${XDG_CACHE_HOME}/zsh/starship_init.zsh"
   if [[ ! -f "$_starship_cache" || "${commands[starship]}" -nt "$_starship_cache" ]]; then
     starship init zsh >| "$_starship_cache"
