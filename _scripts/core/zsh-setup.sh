@@ -39,7 +39,10 @@ fi
 stow_package "zsh" "" "$CURRENT_CONFIG_DIR/zsh"
 
 # Enable custom config
-if ! grep -q "source $CURRENT_CONFIG_DIR/zsh/config.zsh" "$HOME/.zshrc"; then
-  (echo; echo "source $CURRENT_CONFIG_DIR/zsh/config.zsh") >> "$HOME/.zshrc"
+if -f "$HOME/.zshrc"; then
+  if ! grep -q "source $CURRENT_CONFIG_DIR/zsh/config.zsh" "$HOME/.zshrc"; then
+    (echo; echo "source $CURRENT_CONFIG_DIR/zsh/config.zsh") >> "$HOME/.zshrc"
+  fi
+else
+  echo "source $CURRENT_CONFIG_DIR/zsh/config.zsh" > "$HOME/.zshrc"
 fi
-
