@@ -15,9 +15,12 @@ if [[ -z "$RDIR" ]]; then
   source "$CDIR/_helpers.sh"
 fi
 
-# Install
+# Install ZSH
 install_package "zsh" "zsh --version"
 
-## Install plugins and tools
-install_package "zsh-syntax-highlighting" "_"
-install_package "zsh-autosuggestions" "_"
+# FZF and Zoxide are handled by the base tools install script.
+source "$CDIR/base-tools-install.sh"
+
+# Install Antidote via Homebrew
+source "$CDIR/homebrew-install.sh"
+install_package "antidote" "brew list antidote" "brew install antidote"
