@@ -23,7 +23,7 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 
 ### Development Tools
 - **Languages**: Node.js (v22/24), Python, Go (1.25.4), Rust, .NET SDK (10.0), PowerShell
-- **Cloud/DevOps**: Docker, AWS CLI, GCP CLI, Terraform, Ansible
+- **Cloud/DevOps**: Docker, AWS CLI, GCP CLI, Terraform, Ansible, Helm, kubectl
 - **Editors**: Neovim (with custom config), Zed, VS Code, JetBrains Toolbox
 - **AI/Code Assistants**: Claude Code, OpenCode
 
@@ -33,20 +33,20 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 - **Package Managers**: Homebrew (Linux), Rustup
 
 ### Shell Environments
-- **Bash**: Comprehensive configuration with Oh My Posh/Starship prompt support and tool integrations
+- **Bash**: Comprehensive configuration with Oh My Posh prompt (default) and Starship support
 - **ZSH**: Two configurations available (see zsh/README.md for details):
-  - Standard config with Oh My Zsh plugin support
-  - Standalone config with all features built-in (no plugin manager needed)
+  - `config.zsh` — standard config requiring external plugins (zsh-syntax-highlighting, zsh-autosuggestions)
+  - `config-standalone.zsh` — self-contained config with no plugin manager; recommended for new setups
+- Default prompt: **Oh My Posh** for Bash, **Starship** for ZSH
 
 ### Desktop Applications
-- **Terminals**: Kitty, Tabby
+- **Terminals**: Ghostty, Kitty, Tabby
 - **Editors**: VS Code, Zed, JetBrains Toolbox
 - **Window Managers**: Hyprland configuration
 
 ### Prompts & Themes
 - Oh My Posh (with custom themes)
-- Starship
-- Custom ZSH prompt with git integration
+- Starship (with custom config)
 
 ## 🚀 Quick Start
 
@@ -72,8 +72,8 @@ git clone https://github.com/adeotek/dotfiles.git ~/.dotfiles && ~/.dotfiles/set
 3. **Select installation mode:**
    - **Manual selection** - Choose specific packages by ID
    - **Minimal** - Essential tools (base-tools, bash, git, tmux, yazi)
-   - **Console** - Minimal + development tools (nodejs, dotnet, golang, fastfetch, onefetch, glow, claude-code, opencode)
-   - **Desktop** - Console + desktop apps (kitty, zed, hypr)
+   - **Console** - Minimal + development tools (nodejs, golang, fastfetch, onefetch, glow, claude-code)
+   - **Desktop** - Console + desktop apps (ghostty, zed)
    - **Interactive** - Prompted for each package individually
    - **All** - Everything including extra packages
 
@@ -119,6 +119,8 @@ The following packages can be installed individually or in groups:
 - **terraform** - Infrastructure as Code
 - **aws-cli** - Amazon Web Services CLI
 - **gcp-cli** - Google Cloud Platform CLI
+- **helm** - Kubernetes package manager
+- **kubectl** - Kubernetes CLI
 
 ### Editors & IDEs
 - **nvim** - Neovim with custom configuration
@@ -127,8 +129,9 @@ The following packages can be installed individually or in groups:
 - **jetbrains-toolbox** - JetBrains development tools manager
 
 ### Terminal Emulators
-- **kitty** - GPU-accelerated terminal emulator
-- **tabby** - Modern terminal application
+- **ghostty** - Fast, native terminal emulator (Desktop tier)
+- **kitty** - GPU-accelerated terminal emulator (Desktop Extra)
+- **tabby** - Modern terminal application (Desktop Extra)
 
 ### System & Display Tools
 - **fastfetch** - System information display
@@ -148,13 +151,15 @@ The following packages can be installed individually or in groups:
 
 ### Package Groups
 
-Packages are organized into logical groups for easy installation:
+Packages are organized into logical tiers for easy installation:
 
 - **Minimal**: `base-tools,bash,git,tmux,yazi`
-- **Console**: Minimal + `nodejs,dotnet,golang,fastfetch,onefetch,glow,claude-code,opencode`
-- **Desktop**: Console + `kitty,zed,hypr`
-- **Console Extra**: `ansible,docker,powershell,python,rustup,github-cli,aws-cli,gcp-cli,terraform,nvim`
-- **Desktop Extra**: Console Extra + `tabby,vscode,jetbrains-toolbox`
+- **Console**: Minimal + `fastfetch,claude-code,glow,golang,nodejs,onefetch`
+- **Desktop**: Console + `ghostty,zed`
+- **Console Extra**: `ansible,aws-cli,docker,dotnet,github-cli,gcp-cli,helm,kubectl,nvim,opencode,powershell,python,rustup,terraform`
+- **Desktop Extra**: Console Extra + `kitty,tabby,vscode,jetbrains-toolbox`
+- **All Console**: Console + Console Extra
+- **All Desktop**: Desktop + Desktop Extra
 
 To see the complete, current list of available packages:
 ```bash
@@ -258,16 +263,72 @@ Create local configuration files that won't be tracked by git:
 
 The following default versions are configured (see `_scripts/core/_options.sh`):
 
-- Node.js: v22 (Fedora/RHEL) or v24 (Arch/Debian/Ubuntu)
+- Node.js: v24 (all distributions)
 - .NET SDK: v10.0
 - Go: v1.25.4
 - Nerd Fonts: v3.4.0 (CascadiaCode)
 - Bash Prompt: Oh My Posh
-- ZSH Prompt: Oh My Posh
+- ZSH Prompt: Starship
 
 ### Modify Installation Options
 
 Edit `_scripts/core/_options.sh` to change default versions, installation modes, or add new packages.
+
+## 🐚 Changing Your Default Shell
+
+### Switch to ZSH
+
+1. **Install ZSH** if not already present:
+   ```bash
+   # Debian/Ubuntu/Pop!_OS
+   sudo apt install zsh
+
+   # Fedora/RHEL
+   sudo dnf install zsh
+
+   # Arch
+   sudo pacman -S zsh
+   ```
+
+2. **Change your login shell:**
+   ```bash
+   chsh -s $(which zsh)
+   ```
+
+3. **Log out and back in** (or start a new terminal session) for the change to take effect.
+
+4. **Set up the ZSH configuration** via the dotfiles installer:
+   ```bash
+   ./unattended_setup.sh --packages zsh
+   ```
+   This uses Starship as the default prompt. To override:
+   ```bash
+   ./unattended_setup.sh --packages zsh --prompt oh-my-posh
+   ```
+
+### Switch to Bash
+
+1. **Change your login shell:**
+   ```bash
+   chsh -s $(which bash)
+   ```
+
+2. **Log out and back in** for the change to take effect.
+
+3. **Set up the Bash configuration** via the dotfiles installer:
+   ```bash
+   ./unattended_setup.sh --packages bash
+   ```
+   This uses Oh My Posh as the default prompt. To override:
+   ```bash
+   ./unattended_setup.sh --packages bash --prompt starship
+   ```
+
+### Notes
+
+- `chsh` changes your **login shell** — the shell started when you open a terminal or log in.
+- In WSL2, you may need to set the default shell via your Windows Terminal profile or by editing `/etc/passwd` directly if `chsh` is not available.
+- Verify the change took effect with: `echo $SHELL`
 
 ## 💡 Common Use Cases
 
@@ -384,8 +445,9 @@ When adding new installation scripts:
 3. Support all major distributions (or clearly document limitations)
 4. Add dry-run and verbose mode support
 5. Test on multiple distributions
-6. Add the package to `_options.sh` in the appropriate task arrays
-7. Map the task type (install/setup) in the `TASK_TYPES` associative array
+6. Add the package to `_options.sh` in the appropriate tier array(s)
+7. Map the task type (`install` or `setup`) in the `TASK_TYPES` associative array
+8. Optionally add default arguments in the `TASK_ARGS` associative array (e.g. `--prompt starship`)
 
 For detailed coding guidelines for AI agents and developers, see [AGENTS.md](AGENTS.md).
 

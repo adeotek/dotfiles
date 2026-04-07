@@ -149,7 +149,8 @@ do
   pkg_task_type="${TASK_TYPES["$pkg"]}"
   if [[ -n "${TASK_ARGS[$pkg]}" ]]; then
     decho "magenta" "source ""$CDIR/$pkg-$pkg_task_type.sh"" ${TASK_ARGS[$pkg]}"
-    source "$CDIR/$pkg-$pkg_task_type.sh" "${TASK_ARGS[$pkg]}"
+    # shellcheck disable=SC2086  # intentional word-split to pass multiple flags
+    source "$CDIR/$pkg-$pkg_task_type.sh" ${TASK_ARGS[$pkg]}
   else
     decho "magenta" "source ""$CDIR/$pkg-$pkg_task_type.sh"""
     source "$CDIR/$pkg-$pkg_task_type.sh"
