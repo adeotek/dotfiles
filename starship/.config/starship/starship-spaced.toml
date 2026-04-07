@@ -13,7 +13,7 @@ format = """
 $username$sudo$hostname$directory$git_branch$git_state$git_status$nodejs$golang$rust$python$dotnet$os$time$cmd_duration$status$line_break$character"""
 # $shell
 
-# Segment separator: [  ]/[  ]
+# Segment separator: [  ] / [  ]
 
 [username]
 style_user = 'bold yellow'
@@ -31,84 +31,84 @@ allow_windows = true
 
 [hostname]
 ssh_only = false
-format = '[@](bold blue)[$hostname](bold yellow)[|](white)'
+format = '[@](bold blue)[$hostname](bold yellow) [](bold white) '
 disabled = false
 
 [directory]
 truncation_length = 8
 truncation_symbol = '…/'
 style = 'bold cyan'
-format = '[$path]($style)[$read_only]($read_only_style)[|](white)'
+format = '[$path]($style)[$read_only]($read_only_style) [](bold white) '
 truncate_to_repo = false
 before_repo_root_style = 'bold blue'
 repo_root_style = 'bold green'
-repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)[|](white)'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) [](bold white) '
 
 [git_branch]
 symbol = ''
 style = 'bold purple'
 truncation_length = 50
 truncation_symbol = '…'
-format = '[$symbol$branch(:$remote_branch)]($style)'
+format = '[$symbol$branch(:$remote_branch)]($style) '
 
 [git_state]
 style = 'yellow'
-format = '[\($state( $progress_current of $progress_total)\)]($style)'
-cherry_pick = '[](bold red)'
-merge = '[](bold red)'
-revert = '[󰕌](bold red)'
-rebase = '[󰑏](bold red)'
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = '[ ](bold red)'
+merge = '[ ](bold red)'
+revert = '[󰕌 ](bold red)'
+rebase = '[󰑏 ](bold red)'
 
 [git_status]
 conflicted = '🏳'
-ahead = '⇡${count}'
-behind = '⇣${count}'
-diverged = '⇕${ahead_count}⇣${behind_count}'
-up_to_date = '[󰍕](bold green)'
-untracked = '[?](bold blue)'
-stashed = '[\$](bold yellow)'
-modified = '[󱇧](bold red)'
-staged = '[++\($count\)](bold cyan)'
-renamed = '[»](bold yellow)'
-deleted = '[󰗨](bold purple)'
+ahead = '⇡${count} '
+behind = '⇣${count} '
+diverged = '⇕${ahead_count}⇣${behind_count} '
+up_to_date = '[󰍕](bold green) '
+untracked = '[?](bold blue) '
+stashed = '[\$](bold yellow) '
+modified = '[󱇧](bold red) '
+staged = '[++\($count\)](bold cyan) '
+renamed = '[»](bold yellow) '
+deleted = '[󰗨](bold purple) '
 style = 'bold red'
-format = '[](bold white)[$all_status$ahead_behind]($style)[|](white)'
+format = '[|](white) [$all_status$ahead_behind]($style)[](bold white) '
 
 [dotnet]
-symbol = '.NET:'
+symbol = '.NET '
 detect_extensions = ['cs', 'csproj', 'sln', 'xsln', 'fsproj', 'xproj']
 style = 'bold cyan'
-format = '[$symbol($version)]($style)[|](white)'
+format = '[$symbol($version)]($style) [](bold white) '
 
 [nodejs]
-symbol = ''
+symbol = ' '
 style = 'bold green'
-format = '[$symbol($version)]($style)[|](white)'
+format = '[$symbol($version)]($style) [](bold white) '
 
 [golang]
-symbol = 'Go:' # 🐹
+symbol = 'Go ' # 🐹
 style = 'bold cyan'
-format = '[$symbol($version)]($style)[|](white)'
+format = '[$symbol($version)]($style) [](bold white) '
 
 [rust]
-symbol = 'Rs:' # 🦀
+symbol = 'Rs ' # 🦀
 style = 'bold #99908A'
-format = '[$symbol($version)]($style)[|](white)'
+format = '[$symbol($version)]($style) [](bold white) '
 
 [python]
-symbol = 'Py:' # 🐍
+symbol = 'Py ' # 🐍
 style = 'bold yellow'
 pyenv_version_name = true
-format = '[${symbol}(${version})(\($virtualenv\))]($style)[|](white)'
+format = '[${symbol}(${version})( \($virtualenv\))]($style) [](bold white) '
 
 [terraform]
-symbol = 'tf:' # 💠
+symbol = 'tf ' # 💠
 style = 'bold 105'
-format = '[$symbol$workspace]($style)[|](white)'
+format = '[$symbol$workspace]($style) [](bold white) '
 
 [os]
 style = 'bold cyan'
-format = '[$symbol]($style)[|](white)'
+format = '[$symbol]($style) '
 disabled = false
 [os.symbols]
 Alpaquita = ""
@@ -156,28 +156,28 @@ Windows = "󰍲"
 # [shell]
 # bash_indicator = 'bash'
 # pwsh_indicator = 'pwsh'
-# format = '[$indicator]($style)'
+# format = '[$indicator]($style) '
 # disabled = false
 
 [time]
 disabled = false
 style = 'bold yellow'
 time_format = '%H:%M:%S'
-format = '[$time]($style)[|](white)'
+format = '[$time]($style) '
 
 [cmd_duration]
 disabled = false
 min_time = 100
 show_milliseconds = true
-style = 'bold cyan'
-format = '[$duration]($style)[|](white)' # ⏱
+style = 'bold yellow'
+format = '[ $duration]($style) ' # ⏱
 
 [status]
 style = 'bold red'
-success_style = 'bold white'
-symbol = '[](bold red)' # ❌/
-success_symbol = '[](bold green)' # ✅/
-format = '[$symbol$status$signal_name]($style)'
+success_style = 'bold green'
+symbol = ' ' # ❌/
+success_symbol = ' ' # ✅/
+format = '[$symbol$status$signal_name]($style) '
 pipestatus = true
 disabled = false
 
