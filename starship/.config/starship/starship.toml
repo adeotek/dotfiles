@@ -10,8 +10,8 @@ command_timeout = 500
 
 # Single info line, then prompt on its own line
 format = """
-$username\
 $sudo\
+$username\
 $hostname\
 $directory\
 $git_branch\
@@ -32,19 +32,19 @@ $character"""
 # $shell\
 # Segment separator: [  ]/[  ]
 
-[username]
-style_user = 'bold yellow'
-style_root = 'red bold'
-format = '[$user]($style)'
-disabled = false
-show_always = true
-
 [sudo]
 style = 'bold red'
 symbol = '!'
 format = '[$symbol]($style)'
 disabled = false
 allow_windows = true
+
+[username]
+style_user = 'bold yellow'
+style_root = 'red bold'
+format = '[$user]($style)'
+disabled = false
+show_always = true
 
 [hostname]
 ssh_only = false
