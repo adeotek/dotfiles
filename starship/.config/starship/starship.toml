@@ -107,7 +107,7 @@ style = 'bold 105'
 format = '[$symbol$workspace]($style)[|](blue)'
 
 [os]
-style = 'bold cyan'
+style = 'white'
 format = '[$symbol]($style)[|](blue)'
 disabled = false
 [os.symbols]
@@ -175,8 +175,8 @@ format = '[$duration]($style)[|](blue)' # ⏱
 [status]
 style = 'bold red'
 success_style = 'bold white'
-symbol = '[](bold red)' # ❌/
-success_symbol = '[](bold green)' # ✅/
+symbol = '[](bold red)[|](blue)' # ❌/
+success_symbol = '[](bold green)[|](blue)' # ✅/
 format = '[$symbol$status$signal_name]($style)'
 pipestatus = true
 disabled = false
