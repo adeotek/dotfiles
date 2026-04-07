@@ -18,10 +18,11 @@ $git_branch\
 $git_state\
 $git_status\
 $nodejs\
+$dotnet\
 $golang\
 $rust\
 $python\
-$dotnet\
+$terraform\
 $os\
 $time\
 $cmd_duration\
@@ -121,7 +122,9 @@ format = '[${symbol}(${version})(\($virtualenv\))]($style)[|](blue)'
 [terraform]
 symbol = 'tf:' # 💠
 style = 'bold 105'
-format = '[$symbol$workspace]($style)[|](blue)'
+format = '[$symbol$version]($style)[](bold white)[$workspace](bold cyan)[|](blue)'
+detect_extensions =	['tf', 'tfplan', 'tfstate', 'hcl']
+disabled = false
 
 [os]
 style = 'white'
