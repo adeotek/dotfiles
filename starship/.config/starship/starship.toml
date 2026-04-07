@@ -10,9 +10,26 @@ command_timeout = 500
 
 # Single info line, then prompt on its own line
 format = """
-$username$sudo$hostname$directory$git_branch$git_state$git_status$nodejs$golang$rust$python$dotnet$os$time$cmd_duration$status$line_break$character"""
-# $shell
+$username\
+$sudo\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$nodejs\
+$golang\
+$rust\
+$python\
+$dotnet\
+$os\
+$time\
+$cmd_duration\
+$status\
+$line_break\
+$character"""
 
+# $shell\
 # Segment separator: [  ]/[  ]
 
 [username]
