@@ -389,6 +389,9 @@ tmux_conf_urlscan_options="--compact --dedupe"
 # increase history size
 set -g history-limit 10000 ## Custom value
 
+# re-import SSH env vars when attaching to an existing session (prevents stale SSH_AUTH_SOCK)
+set -g update-environment "SSH_AUTH_SOCK SSH_CONNECTION SSH_CLIENT"
+
 # pass through escape sequences to the terminal (needed for Ghostty, OSC52, inline images)
 set -g allow-passthrough on
 
@@ -474,7 +477,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 set -g @plugin 'tmux-plugins/tmux-cpu'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
-set -g @continuum-restore 'on'
+set -g @continuum-restore 'off'
 set -g @plugin 'fcsonline/tmux-thumbs'    # <prefix>Space — highlight & copy text patterns
 set -g @plugin 'omerxx/tmux-sessionx'     # <prefix>o    — fuzzy session/window switcher
 
