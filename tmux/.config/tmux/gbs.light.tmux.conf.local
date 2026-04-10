@@ -384,7 +384,7 @@ tmux_conf_theme_clock_style="24"
 #   - false (default)
 #   - disabled
 # on Linux, this requires xsel, xclip or wl-copy
-tmux_conf_copy_to_os_clipboard=false
+tmux_conf_copy_to_os_clipboard=true
 
 
 # -- urlscan -------------------------------------------------------------------
@@ -399,6 +399,14 @@ tmux_conf_urlscan_options="--compact --dedupe"
 
 # increase history size
 set -g history-limit 10000 ## Custom value
+
+# enable extended key reporting (Ghostty and other modern terminals)
+# the base config only enables this for mintty/iTerm/xterm, missing Ghostty
+set -g extended-keys on
+
+# re-import SSH env vars when attaching to an existing session (prevents stale SSH_AUTH_SOCK)
+set -g update-environment "SSH_AUTH_SOCK SSH_CONNECTION SSH_CLIENT"
+
 
 # pass through escape sequences to the terminal (needed for Ghostty, OSC52, inline images)
 set -g allow-passthrough on
@@ -445,6 +453,10 @@ bind v paste-buffer -p                                # remap paste-buffer (p is
 bind -r p previous-window                             # select previous window
 bind -r n next-window                                 # select next window
 
+# Fix Home/End keys: re-emit xterm sequences that readline (zsh/bash) understands
+bind-key -n Home send-keys "\e[H"
+bind-key -n End  send-keys "\e[F"
+
 
 # -- tpm -----------------------------------------------------------------------
 
@@ -485,7 +497,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 #set -g @plugin 'tmux-plugins/tmux-cpu'
 #set -g @plugin 'tmux-plugins/tmux-resurrect'
 #set -g @plugin 'tmux-plugins/tmux-continuum'
-#set -g @continuum-restore 'on'
+#set -g @continuum-restore 'off'
 
 
 # -- custom variables ----------------------------------------------------------
