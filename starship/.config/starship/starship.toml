@@ -49,7 +49,7 @@ show_always = true
 
 [hostname]
 ssh_only = false
-format = '[@](bold white)[$hostname](bold yellow)[|](blue)'
+format = '[@](bold blue)[$hostname](bold white)[|](blue)'
 disabled = false
 
 [directory]
@@ -181,7 +181,7 @@ Windows = "󰍲"
 
 [time]
 disabled = false
-style = 'bold yellow'
+style = 'bold white'
 time_format = '%H:%M:%S'
 format = '[$time]($style)[|](blue)'
 
@@ -194,7 +194,7 @@ format = '[$duration]($style)[|](blue)' # ⏱
 
 [status]
 style = 'bold red'
-success_style = 'bold white'
+success_style = 'bold black'
 symbol = '[](bold red)[|](blue)' # ❌/
 success_symbol = '[](bold green)[|](blue)' # ✅/
 format = '[$symbol$status$signal_name]($style)'
