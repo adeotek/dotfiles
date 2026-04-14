@@ -109,7 +109,7 @@ format = '[$symbol($version)]($style)[|](blue)'
 
 [golang]
 symbol = '' # 🐹
-style = 'bold cyan'
+style = 'bold yellow'
 version_format = '${raw}'
 format = '[$symbol($version)]($style)[|](blue)'
 
