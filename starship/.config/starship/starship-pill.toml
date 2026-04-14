@@ -10,6 +10,7 @@ command_timeout = 500
 
 # Single info line, then prompt on its own line
 format = """
+[](fg:#1d2230)\
 $sudo\
 $username\
 $hostname\
@@ -29,6 +30,7 @@ $os\
 $time\
 $cmd_duration\
 $status\
+[](fg:#1d2230)\
 $line_break\
 $character"""
 
@@ -36,107 +38,107 @@ $character"""
 # Segment separator: [  ]/[  ]
 
 [sudo]
-style = 'bold red'
+style = 'bg:#1d2230 bold fg:red'
 symbol = '!'
 format = '[$symbol]($style)'
 disabled = false
 allow_windows = true
 
 [username]
-style_user = 'bold yellow'
-style_root = 'red bold'
+style_user = 'bg:#1d2230 bold fg:yellow'
+style_root = 'bg:#1d2230 bold fg:red'
 format = '[$user]($style)'
 disabled = false
 show_always = true
 
 [hostname]
 ssh_only = false
-format = '[@](bold blue)[$hostname](bold white)[  ](blue)'
+format = '[@](bg:#1d2230 bold fg:blue)[$hostname](bg:#1d2230 bold fg:white)[|](bg:#1d2230 fg:blue)'
 disabled = false
 
 [directory]
 truncation_length = 8
 truncation_symbol = '…/'
-style = 'bold cyan'
-format = '[$path]($style)[$read_only]($read_only_style)[ ](blue)'
+style = 'bg:#1d2230 bold fg:cyan'
+format = '[$path]($style)[$read_only]($read_only_style)[|](bg:#1d2230 fg:blue)'
 truncate_to_repo = false
-before_repo_root_style = 'bold white'
-repo_root_style = 'bold green'
-repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)[ ](blue)'
+before_repo_root_style = 'bg:#1d2230 bold fg:white'
+repo_root_style = 'bg:#1d2230 bold fg:green'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)[|](bg:#1d2230 fg:blue)'
 
 [git_branch]
-symbol = ' '
-style = 'bold purple'
+symbol = ''
+style = 'bg:#1d2230 bold fg:purple'
 truncation_length = 50
 truncation_symbol = '…'
-format = '[$symbol$branch(:$remote_branch)]($style) '
+format = '[$symbol$branch(:$remote_branch)]($style)'
 
 [git_state]
-style = 'yellow'
+style = 'bg:#1d2230 bold fg:yellow'
 format = '[\($state( $progress_current of $progress_total)\)]($style)'
-cherry_pick = '[ ](bold red)'
-merge = '[ ](bold red)'
-revert = '[󰕌 ](bold red)'
-rebase = '[󰑏 ](bold red)'
+cherry_pick = '[](bg:#1d2230 bold fg:red)'
+merge = '[](bg:#1d2230 bold fg:red)'
+revert = '[󰕌](bg:#1d2230 bold fg:red)'
+rebase = '[󰑏](bg:#1d2230 bold fg:red)'
 
 [git_status]
 conflicted = '🏳'
-ahead = '⇡${count} '
-behind = '⇣${count} '
-diverged = '⇕${ahead_count}⇣${behind_count} '
-up_to_date = '[󰍕 ](bold green)'
-untracked = '[? ](bold white)'
-stashed = '[\$ ](bold yellow)'
-modified = '[󱇧 ](bold red)'
-staged = '[++\($count\)](bold cyan)'
-renamed = '[» ](bold yellow)'
-deleted = '[󰗨 ](bold purple)'
-style = 'bold red'
-format = '[ ](bold white)[$all_status$ahead_behind]($style)[  ](blue)'
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕${ahead_count}⇣${behind_count}'
+up_to_date = '[󰍕](bg:#1d2230 bold fg:green)'
+untracked = '[?](bg:#1d2230 bold fg:white)'
+stashed = '[\$](bg:#1d2230 bold fg:yellow)'
+modified = '[󱇧](bg:#1d2230 bold fg:red)'
+staged = '[++\($count\)](bg:#1d2230 bold fg:cyan)'
+renamed = '[»](bg:#1d2230 bold fg:yellow)'
+deleted = '[󰗨](bg:#1d2230 bold fg:purple)'
+style = 'bg:#1d2230 bold fg:red'
+format = '[](bg:#1d2230 bold fg:white)[$all_status$ahead_behind]($style)[|](bg:#1d2230 fg:blue)'
 
 [dotnet]
 symbol = ''
 detect_extensions = ['cs', 'csproj', 'sln', 'xsln', 'fsproj', 'xproj']
-style = 'bold cyan'
+style = 'bg:#1d2230 bold fg:cyan'
 version_format = '${raw}'
-format = '[$symbol($version)]($style)[  ](blue)'
+format = '[$symbol($version)]($style)[|](bg:#1d2230 fg:blue)'
 
 [nodejs]
 symbol = ''
-style = 'bold green'
+style = 'bg:#1d2230 bold fg:green'
 version_format = '${raw}'
-format = '[$symbol($version)]($style)[  ](blue)'
+format = '[$symbol($version)]($style)[|](bg:#1d2230 fg:blue)'
 
 [golang]
 symbol = '' # 🐹
-style = 'bold yellow'
+style = 'bg:#1d2230 bold fg:yellow'
 version_format = '${raw}'
-format = '[$symbol($version)]($style)[  ](blue)'
+format = '[$symbol($version)]($style)[|](bg:#1d2230 fg:blue)'
 
 [rust]
 symbol = '' # 🦀
-style = 'bold #99908A'
+style = 'bg:#1d2230 bold fg:#99908A'
 version_format = '${raw}'
-format = '[$symbol($version)]($style)[  ](blue)'
+format = '[$symbol($version)]($style)[|](bg:#1d2230 fg:blue)'
 
 [python]
 symbol = '' # 🐍
-style = 'bold yellow'
+style = 'bg:#1d2230 bold fg:yellow'
 pyenv_version_name = true
 version_format = '${raw}'
-format = '[${symbol}(${version})(\($virtualenv\))]($style)[  ](blue)'
+format = '[${symbol}(${version})(\($virtualenv\))]($style)[|](bg:#1d2230 fg:blue)'
 
 [terraform]
 symbol = '' # 💠
-style = 'bold 105'
+style = 'bg:#1d2230 bold fg:105'
 version_format = '${raw}'
-format = '[$symbol($version)]($style)[  ](bold white)[$workspace](bold cyan)[  ](blue)'
+format = '[$symbol($version)]($style)[](bold white)[$workspace](bold cyan)[|](bg:#1d2230 fg:blue)'
 detect_extensions =	['tf', 'tfplan', 'tfstate', 'hcl']
 disabled = false
 
 [os]
-style = 'white'
-format = '[$symbol]($style)[  ](blue)'
+style = 'bg:#1d2230 bold fg:white'
+format = '[$symbol]($style)[|](bg:#1d2230 fg:blue)'
 disabled = false
 [os.symbols]
 Alpaquita = ""
@@ -189,22 +191,22 @@ Windows = "󰍲"
 
 [time]
 disabled = false
-style = 'bold white'
+style = 'bg:#1d2230 bold fg:white'
 time_format = '%H:%M:%S'
-format = '[$time]($style)[  ](blue)'
+format = '[$time]($style)[|](bg:#1d2230 fg:blue)'
 
 [cmd_duration]
 disabled = false
 min_time = 100
 show_milliseconds = true
-style = 'bold cyan'
-format = '[$duration]($style)[  ](blue)' # ⏱
+style = 'bg:#1d2230 bold fg:cyan'
+format = '[$duration]($style)[|](bg:#1d2230 fg:blue)' # ⏱
 
 [status]
-style = 'bold red'
-success_style = 'bold black'
-symbol = '[](bold red)[  ](blue)' # ❌/
-success_symbol = '[](bold green)[  ](blue)' # ✅/
+style = 'bg:#1d2230 bold fg:red'
+success_style = 'bg:#1d2230 bold fg:#1d2230'
+symbol = '[](bg:#1d2230 bold fg:red)[|](bg:#1d2230 fg:blue)' # ❌/
+success_symbol = '[](bg:#1d2230 bold fg:green)[|](bg:#1d2230 fg:blue)' # ✅/
 format = '[$symbol$status$signal_name]($style)'
 pipestatus = true
 disabled = false
@@ -220,8 +222,8 @@ disabled = true
 [custom.nx]
 description = "NX version (shown when nx.json found in git root)"
 symbol = "nx"
-style = "bold cyan"
-format = '[$symbol($output)]($style)[  ](blue)'
+style = "bg:#1d2230 bold fg:cyan"
+format = '[$symbol($output)]($style)[|](bg:#1d2230 fg:blue)'
 detect_files = []
 detect_folders = []
 detect_extensions = []
@@ -231,8 +233,8 @@ command = 'node -p "require(\"$(git rev-parse --show-toplevel)/node_modules/nx/p
 [custom.angular]
 description = "Angular version (shown when @angular/core is installed at git root)"
 symbol = ""
-style = "bold purple"
-format = '[$symbol($output)]($style)[  ](blue)'
+style = "bg:#1d2230 bold fg:purple"
+format = '[$symbol($output)]($style)[|](bg:#1d2230 fg:blue)'
 detect_files = []
 detect_folders = []
 detect_extensions = []
