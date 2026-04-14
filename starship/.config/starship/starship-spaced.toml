@@ -10,17 +10,30 @@ command_timeout = 500
 
 # Single info line, then prompt on its own line
 format = """
-$username$sudo$hostname$directory$git_branch$git_state$git_status$nodejs$golang$rust$python$dotnet$os$time$cmd_duration$status$line_break$character"""
-# $shell
+$sudo\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$nodejs\
+${custom.nx}\
+${custom.angular}\
+$dotnet\
+$golang\
+$rust\
+$python\
+$terraform\
+$os\
+$time\
+$cmd_duration\
+$status\
+$line_break\
+$character"""
 
-# Segment separator: [  ] / [  ]
-
-[username]
-style_user = 'bold yellow'
-style_root = 'red bold'
-format = '[$user]($style)'
-disabled = false
-show_always = true
+# $shell\
+# Segment separator: [  ]/[  ]
 
 [sudo]
 style = 'bold red'
@@ -29,23 +42,30 @@ format = '[$symbol]($style)'
 disabled = false
 allow_windows = true
 
+[username]
+style_user = 'bold yellow'
+style_root = 'red bold'
+format = '[$user]($style)'
+disabled = false
+show_always = true
+
 [hostname]
 ssh_only = false
-format = '[@](bold blue)[$hostname](bold yellow) [](bold white) '
+format = '[@](bold blue)[$hostname](bold white)[  ](blue)'
 disabled = false
 
 [directory]
 truncation_length = 8
 truncation_symbol = '…/'
 style = 'bold cyan'
-format = '[$path]($style)[$read_only]($read_only_style) [](bold white) '
+format = '[$path]($style)[$read_only]($read_only_style)[ ](blue)'
 truncate_to_repo = false
-before_repo_root_style = 'bold blue'
+before_repo_root_style = 'bold white'
 repo_root_style = 'bold green'
-repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) [](bold white) '
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)[ ](blue)'
 
 [git_branch]
-symbol = ''
+symbol = ' '
 style = 'bold purple'
 truncation_length = 50
 truncation_symbol = '…'
@@ -53,7 +73,7 @@ format = '[$symbol$branch(:$remote_branch)]($style) '
 
 [git_state]
 style = 'yellow'
-format = '[\($state( $progress_current of $progress_total)\)]($style) '
+format = '[\($state( $progress_current of $progress_total)\)]($style)'
 cherry_pick = '[ ](bold red)'
 merge = '[ ](bold red)'
 revert = '[󰕌 ](bold red)'
@@ -64,51 +84,59 @@ conflicted = '🏳'
 ahead = '⇡${count} '
 behind = '⇣${count} '
 diverged = '⇕${ahead_count}⇣${behind_count} '
-up_to_date = '[󰍕](bold green) '
-untracked = '[?](bold blue) '
-stashed = '[\$](bold yellow) '
-modified = '[󱇧](bold red) '
-staged = '[++\($count\)](bold cyan) '
-renamed = '[»](bold yellow) '
-deleted = '[󰗨](bold purple) '
+up_to_date = '[󰍕 ](bold green)'
+untracked = '[? ](bold white)'
+stashed = '[\$ ](bold yellow)'
+modified = '[󱇧 ](bold red)'
+staged = '[++\($count\)](bold cyan)'
+renamed = '[» ](bold yellow)'
+deleted = '[󰗨 ](bold purple)'
 style = 'bold red'
-format = '[|](white) [$all_status$ahead_behind]($style)[](bold white) '
+format = '[ ](bold white)[$all_status$ahead_behind]($style)[  ](blue)'
 
 [dotnet]
-symbol = '.NET '
+symbol = ''
 detect_extensions = ['cs', 'csproj', 'sln', 'xsln', 'fsproj', 'xproj']
 style = 'bold cyan'
-format = '[$symbol($version)]($style) [](bold white) '
+version_format = '${raw}'
+format = '[$symbol($version)]($style)[  ](blue)'
 
 [nodejs]
-symbol = ' '
+symbol = ''
 style = 'bold green'
-format = '[$symbol($version)]($style) [](bold white) '
+version_format = '${raw}'
+format = '[$symbol($version)]($style)[  ](blue)'
 
 [golang]
-symbol = 'Go ' # 🐹
-style = 'bold cyan'
-format = '[$symbol($version)]($style) [](bold white) '
+symbol = '' # 🐹
+style = 'bold yellow'
+version_format = '${raw}'
+format = '[$symbol($version)]($style)[  ](blue)'
 
 [rust]
-symbol = 'Rs ' # 🦀
+symbol = '' # 🦀
 style = 'bold #99908A'
-format = '[$symbol($version)]($style) [](bold white) '
+version_format = '${raw}'
+format = '[$symbol($version)]($style)[  ](blue)'
 
 [python]
-symbol = 'Py ' # 🐍
+symbol = '' # 🐍
 style = 'bold yellow'
 pyenv_version_name = true
-format = '[${symbol}(${version})( \($virtualenv\))]($style) [](bold white) '
+version_format = '${raw}'
+format = '[${symbol}(${version})(\($virtualenv\))]($style)[  ](blue)'
 
 [terraform]
-symbol = 'tf ' # 💠
+symbol = '' # 💠
 style = 'bold 105'
-format = '[$symbol$workspace]($style) [](bold white) '
+version_format = '${raw}'
+format = '[$symbol($version)]($style)[  ](bold white)[$workspace](bold cyan)[  ](blue)'
+detect_extensions =	['tf', 'tfplan', 'tfstate', 'hcl']
+disabled = false
 
 [os]
-style = 'bold cyan'
-format = '[$symbol]($style) '
+style = 'white'
+format = '[$symbol]($style)[  ](blue)'
 disabled = false
 [os.symbols]
 Alpaquita = ""
@@ -156,28 +184,28 @@ Windows = "󰍲"
 # [shell]
 # bash_indicator = 'bash'
 # pwsh_indicator = 'pwsh'
-# format = '[$indicator]($style) '
+# format = '[$indicator]($style)'
 # disabled = false
 
 [time]
 disabled = false
-style = 'bold yellow'
+style = 'bold white'
 time_format = '%H:%M:%S'
-format = '[$time]($style) '
+format = '[$time]($style)[  ](blue)'
 
 [cmd_duration]
 disabled = false
 min_time = 100
 show_milliseconds = true
-style = 'bold yellow'
-format = '[ $duration]($style) ' # ⏱
+style = 'bold cyan'
+format = '[$duration]($style)[  ](blue)' # ⏱
 
 [status]
 style = 'bold red'
-success_style = 'bold green'
-symbol = ' ' # ❌/
-success_symbol = ' ' # ✅/
-format = '[$symbol$status$signal_name]($style) '
+success_style = 'bold black'
+symbol = '[](bold red)[  ](blue)' # ❌/
+success_symbol = '[](bold green)[  ](blue)' # ✅/
+format = '[$symbol$status$signal_name]($style)'
 pipestatus = true
 disabled = false
 
@@ -188,3 +216,25 @@ error_symbol = '[❯](bold red)'
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
+
+[custom.nx]
+description = "NX version (shown when nx.json found in git root)"
+symbol = "nx"
+style = "bold cyan"
+format = '[$symbol($output)]($style)[  ](blue)'
+detect_files = []
+detect_folders = []
+detect_extensions = []
+when = 'root=$(git rev-parse --show-toplevel 2>/dev/null) && test -n "$root" && test -f "$root/nx.json"'
+command = 'node -p "require(\"$(git rev-parse --show-toplevel)/node_modules/nx/package.json\").version" 2>/dev/null'
+
+[custom.angular]
+description = "Angular version (shown when @angular/core is installed at git root)"
+symbol = ""
+style = "bold purple"
+format = '[$symbol($output)]($style)[  ](blue)'
+detect_files = []
+detect_folders = []
+detect_extensions = []
+when = 'root=$(git rev-parse --show-toplevel 2>/dev/null) && test -n "$root" && test -f "$root/node_modules/@angular/core/package.json"'
+command = 'node -p "require(\"$(git rev-parse --show-toplevel)/node_modules/@angular/core/package.json\").version" 2>/dev/null'
