@@ -18,6 +18,8 @@ $git_branch\
 $git_state\
 $git_status\
 $nodejs\
+${custom.nx}\
+${custom.angular}\
 $dotnet\
 $golang\
 $rust\
@@ -93,36 +95,42 @@ style = 'bold red'
 format = '[](bold white)[$all_status$ahead_behind]($style)[|](blue)'
 
 [dotnet]
-symbol = '.NET:'
+symbol = ''
 detect_extensions = ['cs', 'csproj', 'sln', 'xsln', 'fsproj', 'xproj']
 style = 'bold cyan'
+version_format = '${raw}'
 format = '[$symbol($version)]($style)[|](blue)'
 
 [nodejs]
 symbol = ''
 style = 'bold green'
+version_format = '${raw}'
 format = '[$symbol($version)]($style)[|](blue)'
 
 [golang]
-symbol = 'Go:' # 🐹
+symbol = '' # 🐹
 style = 'bold cyan'
+version_format = '${raw}'
 format = '[$symbol($version)]($style)[|](blue)'
 
 [rust]
-symbol = 'Rs:' # 🦀
+symbol = '' # 🦀
 style = 'bold #99908A'
+version_format = '${raw}'
 format = '[$symbol($version)]($style)[|](blue)'
 
 [python]
-symbol = 'Py:' # 🐍
+symbol = '' # 🐍
 style = 'bold yellow'
 pyenv_version_name = true
+version_format = '${raw}'
 format = '[${symbol}(${version})(\($virtualenv\))]($style)[|](blue)'
 
 [terraform]
-symbol = 'tf:' # 💠
+symbol = '' # 💠
 style = 'bold 105'
-format = '[$symbol$version]($style)[](bold white)[$workspace](bold cyan)[|](blue)'
+version_format = '${raw}'
+format = '[$symbol($version)]($style)[](bold white)[$workspace](bold cyan)[|](blue)'
 detect_extensions =	['tf', 'tfplan', 'tfstate', 'hcl']
 disabled = false
 
@@ -208,3 +216,25 @@ error_symbol = '[❯](bold red)'
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
+
+[custom.nx]
+description = "NX version (shown when nx.json found in git root)"
+symbol = "nx"
+style = "bold cyan"
+format = '[$symbol($output)]($style)[|](blue)'
+detect_files = []
+detect_folders = []
+detect_extensions = []
+when = 'root=$(git rev-parse --show-toplevel 2>/dev/null) && test -n "$root" && test -f "$root/nx.json"'
+command = 'node -p "require(\"$(git rev-parse --show-toplevel)/node_modules/nx/package.json\").version" 2>/dev/null'
+
+[custom.angular]
+description = "Angular version (shown when @angular/core is installed at git root)"
+symbol = ""
+style = "bold purple"
+format = '[$symbol($output)]($style)[|](blue)'
+detect_files = []
+detect_folders = []
+detect_extensions = []
+when = 'root=$(git rev-parse --show-toplevel 2>/dev/null) && test -n "$root" && test -f "$root/node_modules/@angular/core/package.json"'
+command = 'node -p "require(\"$(git rev-parse --show-toplevel)/node_modules/@angular/core/package.json\").version" 2>/dev/null'
