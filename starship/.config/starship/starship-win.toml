@@ -220,23 +220,19 @@ error_symbol = '[❯](bold red)'
 disabled = true
 
 [custom.nx]
-description = "NX version (shown when nx.json found in git root)"
+description = "NX version (walks up from cwd looking for nx.json)"
 symbol = "nx"
 style = "bg:#1d2230 bold fg:cyan"
 format = '[$symbol($output)]($style)[|](bg:#1d2230 fg:blue)'
-detect_files = []
-detect_folders = []
-detect_extensions = []
-when = 'root=$(git rev-parse --show-toplevel 2>/dev/null) && test -n "$root" && test -f "$root/nx.json"'
-command = 'node -p "require(\"$(git rev-parse --show-toplevel)/node_modules/nx/package.json\").version" 2>/dev/null'
+shell = ["cmd", "/C", "node", "-e"]
+when = "var p=process.cwd(),d=require('path').dirname;while(p!==d(p)){try{require('fs').accessSync(p+'/nx.json');process.exit(0)}catch(e){p=d(p)}}process.exit(1)"
+command = "var p=process.cwd(),d=require('path').dirname;while(p!==d(p)){try{require('fs').accessSync(p+'/nx.json');break}catch(e){p=d(p)}}try{process.stdout.write(require(p+'/node_modules/nx/package.json').version)}catch(e){}"
 
 [custom.angular]
-description = "Angular version (shown when @angular/core is installed at git root)"
+description = "Angular version (walks up from cwd looking for @angular/core)"
 symbol = ""
 style = "bg:#1d2230 bold fg:purple"
 format = '[$symbol($output)]($style)[|](bg:#1d2230 fg:blue)'
-detect_files = []
-detect_folders = []
-detect_extensions = []
-when = 'root=$(git rev-parse --show-toplevel 2>/dev/null) && test -n "$root" && test -f "$root/node_modules/@angular/core/package.json"'
-command = 'node -p "require(\"$(git rev-parse --show-toplevel)/node_modules/@angular/core/package.json\").version" 2>/dev/null'
+shell = ["cmd", "/C", "node", "-e"]
+when = "var p=process.cwd(),d=require('path').dirname;while(p!==d(p)){try{require('fs').accessSync(p+'/node_modules/@angular/core/package.json');process.exit(0)}catch(e){p=d(p)}}process.exit(1)"
+command = "var p=process.cwd(),d=require('path').dirname;while(p!==d(p)){try{require('fs').accessSync(p+'/node_modules/@angular/core/package.json');break}catch(e){p=d(p)}}try{process.stdout.write(require(p+'/node_modules/@angular/core/package.json').version)}catch(e){}"

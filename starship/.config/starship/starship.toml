@@ -102,7 +102,7 @@ version_format = '${raw}'
 format = '[$symbol($version)]($style)[|](blue)'
 
 [nodejs]
-symbol = ''
+symbol = '󰎙'
 style = 'bold green'
 version_format = '${raw}'
 format = '[$symbol($version)]($style)[|](blue)'
