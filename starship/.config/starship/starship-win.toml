@@ -1,0 +1,238 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# WSL2 filesystem scans are slow — give them more time before warning
+scan_timeout = 500
+command_timeout = 1000
+
+# Single info line, then prompt on its own line
+format = """
+[](fg:#1d2230)\
+$sudo\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$nodejs\
+${custom.nx}\
+${custom.angular}\
+$dotnet\
+$golang\
+$rust\
+$python\
+$terraform\
+$os\
+$time\
+$cmd_duration\
+$status\
+[](fg:#1d2230)\
+$line_break\
+$character"""
+
+# $shell\
+# Segment separator: [  ]/[  ]
+
+[sudo]
+style = 'bg:#1d2230 bold fg:red'
+symbol = '!'
+format = '[$symbol]($style)'
+disabled = false
+allow_windows = true
+
+[username]
+style_user = 'bg:#1d2230 bold fg:yellow'
+style_root = 'bg:#1d2230 bold fg:red'
+format = '[$user]($style)'
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = '[@](bg:#1d2230 bold fg:blue)[$hostname](bg:#1d2230 bold fg:white)[|](bg:#1d2230 fg:blue)'
+disabled = false
+
+[directory]
+truncation_length = 8
+truncation_symbol = '…/'
+style = 'bg:#1d2230 bold fg:cyan'
+format = '[$path]($style)[$read_only]($read_only_style)[|](bg:#1d2230 fg:blue)'
+truncate_to_repo = false
+before_repo_root_style = 'bg:#1d2230 bold fg:white'
+repo_root_style = 'bg:#1d2230 bold fg:green'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)[|](bg:#1d2230 fg:blue)'
+
+[git_branch]
+symbol = ''
+style = 'bg:#1d2230 bold fg:purple'
+truncation_length = 50
+truncation_symbol = '…'
+format = '[$symbol$branch(:$remote_branch)]($style)'
+
+[git_state]
+style = 'bg:#1d2230 bold fg:yellow'
+format = '[\($state( $progress_current of $progress_total)\)]($style)'
+cherry_pick = '[](bg:#1d2230 bold fg:red)'
+merge = '[](bg:#1d2230 bold fg:red)'
+revert = '[󰕌](bg:#1d2230 bold fg:red)'
+rebase = '[󰑏](bg:#1d2230 bold fg:red)'
+
+[git_status]
+conflicted = '🏳'
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕${ahead_count}⇣${behind_count}'
+up_to_date = '[󰍕](bg:#1d2230 bold fg:green)'
+untracked = '[?](bg:#1d2230 bold fg:white)'
+stashed = '[\$](bg:#1d2230 bold fg:yellow)'
+modified = '[󱇧](bg:#1d2230 bold fg:red)'
+staged = '[++\($count\)](bg:#1d2230 bold fg:cyan)'
+renamed = '[»](bg:#1d2230 bold fg:yellow)'
+deleted = '[󰗨](bg:#1d2230 bold fg:purple)'
+style = 'bg:#1d2230 bold fg:red'
+format = '[](bg:#1d2230 bold fg:white)[$all_status$ahead_behind]($style)[|](bg:#1d2230 fg:blue)'
+
+[dotnet]
+symbol = ''
+detect_extensions = ['cs', 'csproj', 'sln', 'xsln', 'fsproj', 'xproj']
+style = 'bg:#1d2230 bold fg:cyan'
+version_format = '${raw}'
+format = '[$symbol($version)]($style)[|](bg:#1d2230 fg:blue)'
+
+[nodejs]
+symbol = '󰎙'
+style = 'bg:#1d2230 bold fg:green'
+version_format = '${raw}'
+format = '[$symbol($version)]($style)[|](bg:#1d2230 fg:blue)'
+
+[golang]
+symbol = '' # 🐹
+style = 'bg:#1d2230 bold fg:yellow'
+version_format = '${raw}'
+format = '[$symbol($version)]($style)[|](bg:#1d2230 fg:blue)'
+
+[rust]
+symbol = '' # 🦀
+style = 'bg:#1d2230 bold fg:#99908A'
+version_format = '${raw}'
+format = '[$symbol($version)]($style)[|](bg:#1d2230 fg:blue)'
+
+[python]
+symbol = '' # 🐍
+style = 'bg:#1d2230 bold fg:yellow'
+pyenv_version_name = true
+version_format = '${raw}'
+format = '[${symbol}(${version})(\($virtualenv\))]($style)[|](bg:#1d2230 fg:blue)'
+
+[terraform]
+symbol = '' # 💠
+style = 'bg:#1d2230 bold fg:105'
+version_format = '${raw}'
+format = '[$symbol($version)]($style)[](bold white)[$workspace](bold cyan)[|](bg:#1d2230 fg:blue)'
+detect_extensions =	['tf', 'tfplan', 'tfstate', 'hcl']
+disabled = false
+
+[os]
+style = 'bg:#1d2230 bold fg:white'
+format = '[$symbol]($style)[|](bg:#1d2230 fg:blue)'
+disabled = false
+[os.symbols]
+Alpaquita = ""
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = ""
+Artix = ""
+Debian = ""
+DragonFly = ""
+Emscripten = ""
+EndeavourOS = ""
+Fedora = ""
+FreeBSD = ""
+Garuda = "󰛓"
+Gentoo = ""
+HardenedBSD = "󰞌"
+Illumos = "󰈸"
+Kali = ""
+Linux = ""
+Mabox = ""
+Macos = ""
+Manjaro = ""
+Mariner = ""
+MidnightBSD = ""
+Mint = ""
+NetBSD = ""
+NixOS = ""
+OpenBSD = "󰈺"
+openSUSE = ""
+OracleLinux = "󰌷"
+Pop = ""
+Raspbian = ""
+Redhat = ""
+RedHatEnterprise = ""
+RockyLinux = ""
+Redox = "󰀘"
+Solus = "󰠳"
+SUSE = ""
+Ubuntu = ""
+Unknown = ""
+Void = ""
+Windows = "󰍲"
+
+# [shell]
+# bash_indicator = 'bash'
+# pwsh_indicator = 'pwsh'
+# format = '[$indicator]($style)'
+# disabled = false
+
+[time]
+disabled = false
+style = 'bg:#1d2230 bold fg:white'
+time_format = '%H:%M:%S'
+format = '[$time]($style)[|](bg:#1d2230 fg:blue)'
+
+[cmd_duration]
+disabled = false
+min_time = 100
+show_milliseconds = true
+style = 'bg:#1d2230 bold fg:cyan'
+format = '[$duration]($style)[|](bg:#1d2230 fg:blue)' # ⏱
+
+[status]
+style = 'bg:#1d2230 bold fg:red'
+success_style = 'bg:#1d2230 bold fg:#1d2230'
+symbol = '[](bg:#1d2230 bold fg:red)[|](bg:#1d2230 fg:blue)' # ❌/
+success_symbol = '[](bg:#1d2230 bold fg:green)[|](bg:#1d2230 fg:blue)' # ✅/
+format = '[$symbol$status$signal_name]($style)'
+pipestatus = true
+disabled = false
+
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[❯](bold red)'
+
+# Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[custom.nx]
+description = "NX version (walks up from cwd looking for nx.json)"
+symbol = "nx"
+style = "bg:#1d2230 bold fg:cyan"
+format = '[$symbol($output)]($style)[|](bg:#1d2230 fg:blue)'
+shell = ["cmd", "/C", "node", "-e"]
+when = "var p=process.cwd(),d=require('path').dirname;while(p!==d(p)){try{require('fs').accessSync(p+'/nx.json');process.exit(0)}catch(e){p=d(p)}}process.exit(1)"
+command = "var p=process.cwd(),d=require('path').dirname;while(p!==d(p)){try{require('fs').accessSync(p+'/nx.json');break}catch(e){p=d(p)}}try{process.stdout.write(require(p+'/node_modules/nx/package.json').version)}catch(e){}"
+
+[custom.angular]
+description = "Angular version (walks up from cwd looking for @angular/core)"
+symbol = ""
+style = "bg:#1d2230 bold fg:purple"
+format = '[$symbol($output)]($style)[|](bg:#1d2230 fg:blue)'
+shell = ["cmd", "/C", "node", "-e"]
+when = "var p=process.cwd(),d=require('path').dirname;while(p!==d(p)){try{require('fs').accessSync(p+'/node_modules/@angular/core/package.json');process.exit(0)}catch(e){p=d(p)}}process.exit(1)"
+command = "var p=process.cwd(),d=require('path').dirname;while(p!==d(p)){try{require('fs').accessSync(p+'/node_modules/@angular/core/package.json');break}catch(e){p=d(p)}}try{process.stdout.write(require(p+'/node_modules/@angular/core/package.json').version)}catch(e){}"

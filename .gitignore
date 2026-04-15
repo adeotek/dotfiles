@@ -9,3 +9,7 @@ fd
 bat
 # Test files
 test.sh
+
+# AI agents
+.claude/
+.playwright/
