@@ -63,8 +63,8 @@ declare CONSOLE_EXTRA_TASKS=(
   "nvim"
   "opencode"
   "powershell"
-  "python"
   "rustup"
+  "uv"
   "terraform"
 )
 
@@ -144,7 +144,7 @@ declare -A TASK_TYPES=(
   ["oh-my-posh"]="setup"
   ["opencode"]="setup"
   ["powershell"]="install"
-  ["python"]="install"
+  ["uv"]="install"
   ["rustup"]="install"
   ["starship"]="install"
   ["tabby"]="setup"
