@@ -125,7 +125,7 @@ case $CURRENT_OS_ID in
       if command -v npm >/dev/null 2>&1; then
         # System deps Chromium requires on Fedora
         sudo dnf install -y nss atk at-spi2-atk gtk3 alsa-lib libdrm \
-          libxkbcommon libxcomposite libxdamage libxrandr mesa-libgbm \
+          libxkbcommon libXcomposite libXdamage libXrandr mesa-libgbm \
           libXScrnSaver cups-libs
         sudo npm install -g @playwright/cli@latest
         npx playwright install chromium
@@ -135,7 +135,7 @@ case $CURRENT_OS_ID in
       fi
     else
       cecho "yellow" "DRY-RUN: sudo dnf install -y nss atk at-spi2-atk gtk3 alsa-lib libdrm \\"
-      cecho "yellow" "   libxkbcommon libxcomposite libxdamage libxrandr mesa-libgbm \\"
+      cecho "yellow" "   libxkbcommon libXcomposite libXdamage libXrandr mesa-libgbm \\"
       cecho "yellow" "   libXScrnSaver cups-libs"
       cecho "yellow" "DRY-RUN: sudo npm install -g @playwright/cli@latest"
       cecho "yellow" "DRY-RUN: npx playwright install chromium"
