@@ -1,0 +1,9 @@
+{
+  "env": {
+    "ENABLE_LSP_TOOL": "1"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline.sh"
+  }
+}
