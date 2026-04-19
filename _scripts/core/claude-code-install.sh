@@ -20,7 +20,12 @@ cecho "cyan" "Installing [claude-code]..."
 
 # Check if already installed
 if command -v claude >/dev/null 2>&1; then
-  cecho "yellow" "[claude-code] is already present."
+  cecho "yellow" "[claude-code] is already present. Upgrading to the latest version..."
+  if [ "$DRY_RUN" -ne "1" ]; then
+    claude --update
+  else
+    cecho "yellow" "DRY-RUN: claude --update"
+  fi
 else
   if [ "$DRY_RUN" -ne "1" ]; then
     curl -fsSL https://claude.ai/install.sh | bash
