@@ -36,7 +36,7 @@ case $CURRENT_OS_ID in
       sudo dnf install dnf5-plugins
       sudo dnf config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/gh-cli.repo
     fi
-    install_packagei "gh" "gh --version" "_" "--repo gh-cli"
+    install_package "gh" "gh --version" "_" "--repo gh-cli"
     ;;
   *)
     cecho "red" "Unsupported OS: $CURRENT_OS_ID"
