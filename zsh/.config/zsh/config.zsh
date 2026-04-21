@@ -34,6 +34,9 @@ path=(
   $path
 )
 
+# Add .tools to path if it exists
+[[ -d "$HOME/.tools" ]] && path+=("$HOME/.tools")
+
 # Homebrew — must come early so brew-installed tools (antidote, starship, zoxide) are findable
 if [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
