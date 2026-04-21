@@ -1,22 +1,24 @@
 #!/bin/bash
 # Compact single-call statusline for Claude Code
 # Output:
-#   <path> | <model> | ctx:<pct>%/<size> | 5h:<pct>% | wk:<pct>% | ext:$<used>/$<limit> | <time> | v<cc-version>
+#   <path> | <git-branch> | <time>
+#   <user@host> | <OS> | <version> | <model> | ctx:<pct>%/<size> | 5h:<pct>% | wk:<pct>% | ext:$<used>/$<limit>
 
 # ANSI color codes
-WHITE='\033[37m'
-CYAN='\033[36m'
-MAGENTA='\033[35m'
-BLUE='\033[34m'
-GREEN='\033[32m'
-YELLOW='\033[33m'
-RED='\033[31m'
-RESET='\033[0m'
-DIM='\033[2m'
+WHITE=$'\033[37m'
+CYAN=$'\033[36m'
+MAGENTA=$'\033[35m'
+BLUE=$'\033[34m'
+GREEN=$'\033[32m'
+YELLOW=$'\033[33m'
+RED=$'\033[31m'
+RESET=$'\033[0m'
+DIM=$'\033[2m'
 
 LBLSEP=":"
 USAGE_CACHE="$HOME/.claude/usage-cache.json"
 USAGE_CACHE_TTL=60
+IS_WINDOWS=$(if uname | grep -qi 'mingw\|cygwin\|msys'; then echo true; else echo false; fi)
 
 get_percent_color() {
     local pct="$1"
@@ -33,30 +35,58 @@ get_percent_color() {
 
 input=$(cat)
 
-eval "$(echo "$input" | jq -r '
-  "current_dir=" + (.workspace.current_dir // .cwd // "." | @sh) + "\n" +
-  "model_name="  + (.model.display_name // "unknown" | @sh) + "\n" +
-  "cc_version="  + (.version // "" | @sh) + "\n" +
-  "context_max=" + (.context_window.context_window_size // 200000 | tostring) + "\n" +
-  "context_pct=" + (.context_window.used_percentage // 0 | tostring)
-' 2>/dev/null)"
-
-# --- Shorten home directory ---
-
-home_prefix="$HOME"
-if [[ "$current_dir" == "$home_prefix"* ]]; then
-  current_dir="~${current_dir#$home_prefix}"
+if [ "$IS_WINDOWS" = "true" ]; then
+  _json() {
+    # $1 = JS expression that produces the desired value from variable `d`
+    # Returns empty string on any error
+    printf '%s' "$input" | node -e "
+      let raw='';
+      process.stdin.setEncoding('utf8');
+      process.stdin.on('data',c=>raw+=c);
+      process.stdin.on('end',()=>{
+        try{
+          const d=JSON.parse(raw);
+          const v=($1);
+          if(v!=null&&v!=='')process.stdout.write(String(v));
+        }catch(e){}
+      });
+    " 2>/dev/null
+  }
+  current_dir=$(_json "d.workspace&&d.workspace.current_dir||d.cwd||''")
+  model_name=$(_json "d.model&&d.model.display_name||''")
+  cc_version=$(_json "d.version||'???'")
+  context_max=$(_json "d.context_window&&d.context_window.context_window_size||''")
+  context_pct=$(_json "d.context_window&&d.context_window.used_percentage!=null?d.context_window.used_percentage:''")
+else
+  eval "$(echo "$input" | jq -r '
+    "current_dir=" + (.workspace.current_dir // .cwd // "." | @sh) + "\n" +
+    "model_name="  + (.model.display_name // "unknown" | @sh) + "\n" +
+    "cc_version="  + (.version // "" | @sh) + "\n" +
+    "context_max=" + (.context_window.context_window_size // 200000 | tostring | @sh) + "\n" +
+    "context_pct=" + (.context_window.used_percentage // 0 | tostring | @sh)
+  ' 2>/dev/null)"
+  # --- Shorten home directory ---
+  home_prefix="$HOME"
+  if [[ "$current_dir" == "$home_prefix"* ]]; then
+    current_dir="~${current_dir#$home_prefix}"
+  fi
 fi
 
 # --- Git branch (from cwd, skip optional locks) ---
 
 git_branch=""
-if command -v git >/dev/null 2>&1; then
-  # Resolve the actual directory (cwd may start with ~)
-  real_dir="${current_dir/#\~/$HOME}"
-  if [[ -d "$real_dir" ]]; then
-    git_branch=$(GIT_OPTIONAL_LOCKS=0 git -C "$real_dir" symbolic-ref --short HEAD 2>/dev/null \
-                 || GIT_OPTIONAL_LOCKS=0 git -C "$real_dir" rev-parse --short HEAD 2>/dev/null)
+if [ "$IS_WINDOWS" = "true" ]; then
+  if [ -n "$current_dir" ] && command -v git >/dev/null 2>&1; then
+    git_branch=$(git -C "$current_dir" --no-optional-locks symbolic-ref --short HEAD 2>/dev/null)
+  fi
+else
+  if command -v git >/dev/null 2>&1; then
+    # Resolve the actual directory (cwd may start with ~)
+    real_dir="${current_dir/#\~/$HOME}"
+    if [[ -d "$real_dir" ]]; then
+      git_branch=$(GIT_OPTIONAL_LOCKS=0 git -C "$real_dir" symbolic-ref --short HEAD 2>/dev/null \
+                  || GIT_OPTIONAL_LOCKS=0 git -C "$real_dir" rev-parse --short HEAD 2>/dev/null)
+    fi
   fi
 fi
 
@@ -92,12 +122,7 @@ cache_age=999999
 [ -f "$USAGE_CACHE" ] && cache_age=$(( $(date +%s) - $(get_mtime "$USAGE_CACHE") ))
 
 if [ "$cache_age" -gt "$USAGE_CACHE_TTL" ]; then
-    cred_json=$(cat "${HOME}/.claude/.credentials.json" 2>/dev/null)
-    token=$(echo "$cred_json" | python3 -c "
-import sys, json
-d = json.load(sys.stdin)
-print(d.get('claudeAiOauth', {}).get('accessToken', ''))
-" 2>/dev/null)
+    token=$(jq -r '.claudeAiOauth.accessToken // empty' "${HOME}/.claude/.credentials.json" 2>/dev/null)
 
     if [ -n "$token" ]; then
         usage_json=$(curl -s --max-time 3 \
@@ -117,16 +142,16 @@ fi
 usage_5h=0
 usage_7d=0
 extra_enabled=false
-extra_used=0
-extra_limit=0
+extra_used_cents=0
+extra_limit_cents=0
 
 if [ -f "$USAGE_CACHE" ]; then
     eval "$(jq -r '
-        "usage_5h="           + (.five_hour.utilization // 0 | tostring) + "\n" +
-        "usage_7d="           + (.seven_day.utilization // 0 | tostring) + "\n" +
-        "extra_enabled="      + (.extra_usage.is_enabled // false | tostring) + "\n" +
-        "extra_used_cents="   + (.extra_usage.used_credits // 0 | tostring) + "\n" +
-        "extra_limit_cents="  + (.extra_usage.monthly_limit // 0 | tostring)
+        "usage_5h="           + (.five_hour.utilization // 0 | tostring | @sh) + "\n" +
+        "usage_7d="           + (.seven_day.utilization // 0 | tostring | @sh) + "\n" +
+        "extra_enabled="      + (.extra_usage.is_enabled // false | tostring | @sh) + "\n" +
+        "extra_used_cents="   + (.extra_usage.used_credits // 0 | tostring | @sh) + "\n" +
+        "extra_limit_cents="  + (.extra_usage.monthly_limit // 0 | tostring | @sh)
     ' "$USAGE_CACHE" 2>/dev/null)"
 fi
 
@@ -144,20 +169,25 @@ sep="${DIM} | ${RESET}"
 out_line_1=""
 out_line_2=""
 
-# -- User@Host --
-current_user="${USERNAME:-$(whoami)}"
-current_host=$(hostname || echo "${HOSTNAME}"); current_host=${current_host%%.*}
-out_line_1+=$(printf "${YELLOW}%s${RESET}${DIM}@${RESET}${WHITE}%s${RESET}" "${current_user}" "${current_host}")
 # -- Path --
-out_line_1+="${sep}"
 out_line_1+=$(printf "${CYAN}%s${RESET}" "$current_dir")
 # -- Git branch --
 if [[ -n "$git_branch" ]]; then
   out_line_1+="${sep}"
   out_line_1+=$(printf "${MAGENTA}%s${RESET}" "$git_branch")
 fi
+# -- Time --
+out_line_1+="${sep}"
+current_time=$(date +"%H:%M:%S")
+out_line_1+=$(printf "${WHITE}%s${RESET}" "$current_time")
+
+# -- User@Host --
+current_user="${USER:-${USERNAME:-$(whoami)}}"
+current_host=$(hostname || echo "${HOSTNAME}"); current_host=${current_host%%.*}
+out_line_2+=$(printf "${YELLOW}%s${RESET}${DIM}@${RESET}${WHITE}%s${RESET}" "${current_user}" "${current_host}")
 # -- OS --
-if uname -s | grep -q MINGW; then
+out_line_2+="${sep}"
+if [ "$IS_WINDOWS" = "true" ]; then
     out_line_2+=$(printf "${BLUE}%s${RESET}" "Windows")
 elif grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
     out_line_2+=$(printf "${MAGENTA}%s${RESET}" "WSL")
@@ -176,29 +206,26 @@ fi
 out_line_2+="${sep}"
 color_ctx=$(get_percent_color "$context_pct_int")
 out_line_2+=$(printf "${DIM}ctx${LBLSEP}${RESET}${color_ctx}%s%%${RESET}${DIM}/${RESET}${CYAN}%s${RESET}" "$context_pct_int" "$context_size_fmt")
-# -- Usage 5h --
-out_line_2+="${sep}"
-color_5h=$(get_percent_color "$usage_5h_int")
-out_line_2+=$(printf "${DIM}5h${LBLSEP}${RESET}${color_5h}%s%%${RESET}" "$usage_5h_int")
-# -- Usage 7d --
-out_line_2+="${sep}"
-color_7d=$(get_percent_color "$usage_7d_int")
-out_line_2+=$(printf "${DIM}wk${LBLSEP}${RESET}${color_7d}%s%%${RESET}" "$usage_7d_int")
+if [ "$usage_7d_int" -gt 0 ] || [ "$usage_5h_int" -gt 0 ]; then
+  # -- Usage 5h --
+  out_line_2+="${sep}"
+  color_5h=$(get_percent_color "$usage_5h_int")
+  out_line_2+=$(printf "${DIM}5h${LBLSEP}${RESET}${color_5h}%s%%${RESET}" "$usage_5h_int")
+  # -- Usage 7d --
+  out_line_2+="${sep}"
+  color_7d=$(get_percent_color "$usage_7d_int")
+  out_line_2+=$(printf "${DIM}wk${LBLSEP}${RESET}${color_7d}%s%%${RESET}" "$usage_7d_int")
+fi
 # -- Extra usage (if enabled) --
 if [ "$extra_enabled" = "true" ]; then
     out_line_2+="${sep}"
-    if [ "$extra_limit_dollars" -eq 0 ]; then
-        pct_extra="${GREEN}"
-    elif [ "$extra_used_dollars" -eq "$extra_limit_dollars" ]; then
-        pct_extra="${RED}"
+    if [ "$extra_limit_dollars" -gt 0 ]; then
+        pct_extra_int=$(( extra_used_dollars * 100 / extra_limit_dollars ))
+        pct_extra=$(get_percent_color "$pct_extra_int")
     else
-        pct_extra="${YELLOW}"
+        pct_extra="${GREEN}"
     fi
     out_line_2+=$(printf "${DIM}ext${LBLSEP}${RESET}${pct_extra}\$%s${RESET}${DIM}/${RESET}${CYAN}\$%s${RESET}" "$extra_used_dollars" "$extra_limit_dollars")
 fi
-# -- Time --
-out_line_1+="${sep}"
-current_time=$(date +"%H:%M:%S")
-out_line_1+=$(printf "${WHITE}%s${RESET}" "$current_time")
 
-printf "%b\n%b\n" "$out_line_1" "$out_line_2"
+printf "%s\n%s\n" "$out_line_1" "$out_line_2"
