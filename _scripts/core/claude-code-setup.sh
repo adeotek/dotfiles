@@ -21,7 +21,6 @@ declare CLAUDECODE_PLUGINS=(
   "feature-dev"
   "typescript-lsp"
   "code-simplifier"
-  "playwright"
   "security-guidance"
   "pr-review-toolkit"
   "superpowers"
@@ -37,7 +36,6 @@ declare CLAUDECODE_PLUGINS=(
   "playground"
   "learning-output-style"
   "microsoft-docs"
-  "terraform"
   "lua-lsp"
 )
 
