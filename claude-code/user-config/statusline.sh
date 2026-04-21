@@ -5,15 +5,15 @@
 #   <user@host> | <OS> | <version> | <model> | ctx:<pct>%/<size> | 5h:<pct>% | wk:<pct>% | ext:$<used>/$<limit>
 
 # ANSI color codes
-WHITE='\033[37m'
-CYAN='\033[36m'
-MAGENTA='\033[35m'
-BLUE='\033[34m'
-GREEN='\033[32m'
-YELLOW='\033[33m'
-RED='\033[31m'
-RESET='\033[0m'
-DIM='\033[2m'
+WHITE=$'\033[37m'
+CYAN=$'\033[36m'
+MAGENTA=$'\033[35m'
+BLUE=$'\033[34m'
+GREEN=$'\033[32m'
+YELLOW=$'\033[33m'
+RED=$'\033[31m'
+RESET=$'\033[0m'
+DIM=$'\033[2m'
 
 LBLSEP=":"
 USAGE_CACHE="$HOME/.claude/usage-cache.json"
@@ -62,8 +62,8 @@ else
     "current_dir=" + (.workspace.current_dir // .cwd // "." | @sh) + "\n" +
     "model_name="  + (.model.display_name // "unknown" | @sh) + "\n" +
     "cc_version="  + (.version // "" | @sh) + "\n" +
-    "context_max=" + (.context_window.context_window_size // 200000 | tostring) + "\n" +
-    "context_pct=" + (.context_window.used_percentage // 0 | tostring)
+    "context_max=" + (.context_window.context_window_size // 200000 | tostring | @sh) + "\n" +
+    "context_pct=" + (.context_window.used_percentage // 0 | tostring | @sh)
   ' 2>/dev/null)"
   # --- Shorten home directory ---
   home_prefix="$HOME"
@@ -76,7 +76,7 @@ fi
 
 git_branch=""
 if [ "$IS_WINDOWS" = "true" ]; then
-  if [ -n "$current_dir" ]; then
+  if [ -n "$current_dir" ] && command -v git >/dev/null 2>&1; then
     git_branch=$(git -C "$current_dir" --no-optional-locks symbolic-ref --short HEAD 2>/dev/null)
   fi
 else
@@ -122,12 +122,7 @@ cache_age=999999
 [ -f "$USAGE_CACHE" ] && cache_age=$(( $(date +%s) - $(get_mtime "$USAGE_CACHE") ))
 
 if [ "$cache_age" -gt "$USAGE_CACHE_TTL" ]; then
-    cred_json=$(cat "${HOME}/.claude/.credentials.json" 2>/dev/null)
-    token=$(echo "$cred_json" | python3 -c "
-import sys, json
-d = json.load(sys.stdin)
-print(d.get('claudeAiOauth', {}).get('accessToken', ''))
-" 2>/dev/null)
+    token=$(jq -r '.claudeAiOauth.accessToken // empty' "${HOME}/.claude/.credentials.json" 2>/dev/null)
 
     if [ -n "$token" ]; then
         usage_json=$(curl -s --max-time 3 \
@@ -152,11 +147,11 @@ extra_limit_cents=0
 
 if [ -f "$USAGE_CACHE" ]; then
     eval "$(jq -r '
-        "usage_5h="           + (.five_hour.utilization // 0 | tostring) + "\n" +
-        "usage_7d="           + (.seven_day.utilization // 0 | tostring) + "\n" +
-        "extra_enabled="      + (.extra_usage.is_enabled // false | tostring) + "\n" +
-        "extra_used_cents="   + (.extra_usage.used_credits // 0 | tostring) + "\n" +
-        "extra_limit_cents="  + (.extra_usage.monthly_limit // 0 | tostring)
+        "usage_5h="           + (.five_hour.utilization // 0 | tostring | @sh) + "\n" +
+        "usage_7d="           + (.seven_day.utilization // 0 | tostring | @sh) + "\n" +
+        "extra_enabled="      + (.extra_usage.is_enabled // false | tostring | @sh) + "\n" +
+        "extra_used_cents="   + (.extra_usage.used_credits // 0 | tostring | @sh) + "\n" +
+        "extra_limit_cents="  + (.extra_usage.monthly_limit // 0 | tostring | @sh)
     ' "$USAGE_CACHE" 2>/dev/null)"
 fi
 
@@ -187,7 +182,7 @@ current_time=$(date +"%H:%M:%S")
 out_line_1+=$(printf "${WHITE}%s${RESET}" "$current_time")
 
 # -- User@Host --
-current_user="${USERNAME:-$(whoami)}"
+current_user="${USER:-${USERNAME:-$(whoami)}}"
 current_host=$(hostname || echo "${HOSTNAME}"); current_host=${current_host%%.*}
 out_line_2+=$(printf "${YELLOW}%s${RESET}${DIM}@${RESET}${WHITE}%s${RESET}" "${current_user}" "${current_host}")
 # -- OS --
@@ -224,12 +219,11 @@ fi
 # -- Extra usage (if enabled) --
 if [ "$extra_enabled" = "true" ]; then
     out_line_2+="${sep}"
-    if [ "$extra_limit_dollars" -eq 0 ]; then
-        pct_extra="${GREEN}"
-    elif [ "$extra_used_dollars" -eq "$extra_limit_dollars" ]; then
-        pct_extra="${RED}"
+    if [ "$extra_limit_dollars" -gt 0 ]; then
+        pct_extra_int=$(( extra_used_dollars * 100 / extra_limit_dollars ))
+        pct_extra=$(get_percent_color "$pct_extra_int")
     else
-        pct_extra="${YELLOW}"
+        pct_extra="${GREEN}"
     fi
     out_line_2+=$(printf "${DIM}ext${LBLSEP}${RESET}${pct_extra}\$%s${RESET}${DIM}/${RESET}${CYAN}\$%s${RESET}" "$extra_used_dollars" "$extra_limit_dollars")
 fi
