@@ -16,39 +16,74 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 declare CLAUDECODE_PLUGINS=(
-  "frontend-design"
-  "code-review"
-  "feature-dev"
-  "typescript-lsp"
-  "code-simplifier"
-  "security-guidance"
-  "pr-review-toolkit"
-  "superpowers"
-  "gopls-lsp"
-  "csharp-lsp"
-  "claude-md-management"
-  "claude-code-setup"
-  "context7"
-  "ralph-loop"
-  "pyright-lsp"
-  "explanatory-output-style"
-  "skill-creator"
-  "playground"
-  "learning-output-style"
-  "microsoft-docs"
-  "lua-lsp"
+  "frontend-design@claude-plugins-official"
+  "code-review@claude-plugins-official"
+  "feature-dev@claude-plugins-official"
+  "typescript-lsp@claude-plugins-official"
+  "code-simplifier@claude-plugins-official"
+  "security-guidance@claude-plugins-official"
+  "pr-review-toolkit@claude-plugins-official"
+  "superpowers@claude-plugins-official"
+  "gopls-lsp@claude-plugins-official"
+  "csharp-lsp@claude-plugins-official"
+  "claude-md-management@claude-plugins-official"
+  "claude-code-setup@claude-plugins-official"
+  "context7@claude-plugins-official"
+  "ralph-loop@claude-plugins-official"
+  "pyright-lsp@claude-plugins-official"
+  "explanatory-output-style@claude-plugins-official"
+  "skill-creator@claude-plugins-official"
+  "playground@claude-plugins-official"
+  "learning-output-style@claude-plugins-official"
+  "microsoft-docs@claude-plugins-official"
+  "lua-lsp@claude-plugins-official"
+  "context-checkpoint@adeotek-plugins"
 )
 
 # Install
 source "$CDIR/claude-code-install.sh"
 
+# Update the official marketplace
+cecho "green" "Updating Claude official marketplace..."
+if [ "$DRY_RUN" -ne "1" ]; then
+  claude plugin marketplace update claude-plugins-official
+else
+  cecho "yellow" "DRY-RUN: claude plugin marketplace update claude-plugins-official"
+fi
+
+# Install ADEOTEK marketplace
+if claude plugin marketplace list | grep -G "adeotek-plugins" >/dev/null; then
+  cecho "green" "ADEOTEK marketplace already added to [claude-code]. Updating it..."
+  if [ "$DRY_RUN" -ne "1" ]; then
+    claude plugin marketplace update adeotek-plugins
+  else
+    cecho "yellow" "DRY-RUN: claude plugin marketplace update adeotek-plugins"
+  fi
+else
+  if [ "$DRY_RUN" -ne "1" ]; then
+    cecho "cyan" "Adding ADEOTEK marketplace to [claude-code]..."
+    claude plugin marketplace add adeotek-plugins
+  else
+    cecho "yellow" "DRY-RUN: claude plugin marketplace add adeotek-plugins"
+  fi
+fi
+
 # Install plugins
 for plugin in "${CLAUDECODE_PLUGINS[@]}"; do
-  if [ "$DRY_RUN" -ne "1" ]; then
-    cecho "cyan" "Installing [claude-code] plugin: $plugin..."
-    claude plugin install "$plugin"
+  if claude plugin list | grep -G "$plugin" >/dev/null; then
+    cecho "green" "[claude-code] Plugin $plugin already installed. Updating it..."
+    if [ "$DRY_RUN" -ne "1" ]; then
+      claude plugin update "$plugin"
+    else
+      cecho "yellow" "DRY-RUN: claude plugin update $plugin"
+    fi
   else
-    cecho "yellow" "DRY-RUN: claude plugin install $plugin"
+    if [ "$DRY_RUN" -ne "1" ]; then
+      cecho "cyan" "Installing [claude-code] plugin: $plugin..."
+      claude plugin install "$plugin"
+    else
+      cecho "yellow" "DRY-RUN: claude plugin install $plugin"
+    fi
   fi
 done
 
