@@ -44,6 +44,7 @@ declare CONSOLE_ONLY_TASKS=(
   "golang"
   "nodejs"
   "onefetch"
+  "tools"
 )
 
 declare CONSOLE_TASKS=(
@@ -150,6 +151,7 @@ declare -A TASK_TYPES=(
   ["tabby"]="setup"
   ["terraform"]="install"
   ["tmux"]="setup"
+  ["tools"]="setup"
   ["vscode"]="install"
   ["yazi"]="setup"
   ["zed"]="setup"
