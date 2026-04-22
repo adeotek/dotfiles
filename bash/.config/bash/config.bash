@@ -17,6 +17,11 @@ alias pscpu='ps auxf | sort -nr -k 3 | head -5'
 
 export PATH=$PATH:$HOME/.local/bin
 
+# Add .tools to path if it exists
+if [ -d "$HOME/.tools" ]; then
+  export PATH=$PATH:$HOME/.tools
+fi
+
 # homebrew
 if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
