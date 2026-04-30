@@ -26,7 +26,7 @@ fi
 
 # Install
 if [[ -z "${ARGS["version"]}" && "$CURRENT_OS_ID" != "arch" ]]; then
-  cecho "yellow" -n "Please specify the version to install [$OPT_DOTNET_DEFAULT_VERSION]: "
+  cecho "yellow" -n "Please specify the .NET version to install [$OPT_DOTNET_DEFAULT_VERSION]: "
   read DOTNET_VERSION
   if [[ -z "$DOTNET_VERSION" ]]; then
     DOTNET_VERSION="$OPT_DOTNET_DEFAULT_VERSION"
