@@ -62,9 +62,9 @@ if claude plugin marketplace list | grep -G "adeotek-plugins" >/dev/null; then
 else
   if [ "$DRY_RUN" -ne "1" ]; then
     cecho "cyan" "Adding ADEOTEK marketplace to [claude-code]..."
-    claude plugin marketplace add adeotek-plugins
+    claude plugin marketplace add adeotek/claude-code
   else
-    cecho "yellow" "DRY-RUN: claude plugin marketplace add adeotek-plugins"
+    cecho "yellow" "DRY-RUN: claude plugin marketplace add adeotek/claude-code"
   fi
 fi
 
