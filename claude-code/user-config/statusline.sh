@@ -2,7 +2,7 @@
 # Compact single-call statusline for Claude Code
 # Output:
 #   <path> | <git-branch> | <time>
-#   <user@host> | <OS> | <version> | <model> | ctx:<pct>%/<size> | 5h:<pct>% | wk:<pct>% | ext:$<used>/$<limit>
+#   <user@host> | <OS> | <version> | <model> | ctx:<pct>%/<size> | 5h:<pct>% | wk:<pct>% | ent:$<spent>/$<limit|∞> (Enterprise) | ext:$<used>/$<limit> (non-Enterprise)
 
 # ANSI color codes
 WHITE=$'\033[37m'
@@ -131,7 +131,7 @@ if [ "$cache_age" -gt "$USAGE_CACHE_TTL" ]; then
             -H "anthropic-beta: oauth-2025-04-20" \
             "https://api.anthropic.com/api/oauth/usage" 2>/dev/null)
 
-        if [ -n "$usage_json" ] && echo "$usage_json" | jq -e '.five_hour' >/dev/null 2>&1; then
+        if [ -n "$usage_json" ] && echo "$usage_json" | jq -e 'has("extra_usage") or has("five_hour")' >/dev/null 2>&1; then
             echo "$usage_json" | jq '.' > "$USAGE_CACHE" 2>/dev/null
         fi
     fi
@@ -151,7 +151,7 @@ if [ -f "$USAGE_CACHE" ]; then
         "usage_7d="           + (.seven_day.utilization // 0 | tostring | @sh) + "\n" +
         "extra_enabled="      + (.extra_usage.is_enabled // false | tostring | @sh) + "\n" +
         "extra_used_cents="   + (.extra_usage.used_credits // 0 | tostring | @sh) + "\n" +
-        "extra_limit_cents="  + (.extra_usage.monthly_limit // 0 | tostring | @sh)
+        "extra_limit_cents="  + (.extra_usage.monthly_limit | tostring | @sh)
     ' "$USAGE_CACHE" 2>/dev/null)"
 fi
 
@@ -160,8 +160,20 @@ usage_7d_int=${usage_7d%%.*}
 [ -z "$usage_5h_int" ]  && usage_5h_int=0
 [ -z "$usage_7d_int" ]  && usage_7d_int=0
 
+# Read subscription type for Enterprise detection (local credentials, no API call)
+subscription_type=$(jq -r '.claudeAiOauth.subscriptionType // empty' "${HOME}/.claude/.credentials.json" 2>/dev/null)
+is_enterprise=false
+[ "$subscription_type" = "enterprise" ] && is_enterprise=true
+
 extra_used_dollars=$(( ${extra_used_cents%%.*} / 100 ))
-extra_limit_dollars=$(( ${extra_limit_cents%%.*} / 100 ))
+# null monthly_limit means unlimited Enterprise spend (no cap set by org admin)
+extra_limit_is_unlimited=false
+if [ "$extra_limit_cents" = "null" ] || [ -z "$extra_limit_cents" ]; then
+    extra_limit_is_unlimited=true
+    extra_limit_dollars=0
+else
+    extra_limit_dollars=$(( ${extra_limit_cents%%.*} / 100 ))
+fi
 
 # --- Build output lines ---
 
@@ -216,8 +228,21 @@ if [ "$usage_7d_int" -gt 0 ] || [ "$usage_5h_int" -gt 0 ]; then
   color_7d=$(get_percent_color "$usage_7d_int")
   out_line_2+=$(printf "${DIM}wk${LBLSEP}${RESET}${color_7d}%s%%${RESET}" "$usage_7d_int")
 fi
-# -- Extra usage (if enabled) --
-if [ "$extra_enabled" = "true" ]; then
+# -- Enterprise usage (Enterprise accounts) or Extra usage (non-Enterprise) --
+if [ "$is_enterprise" = "true" ] && [ "$extra_enabled" = "true" ]; then
+    out_line_2+="${sep}"
+    if [ "$extra_limit_is_unlimited" = "true" ]; then
+        out_line_2+=$(printf "${DIM}ent${LBLSEP}${RESET}${GREEN}\$%s${RESET}${DIM}/∞${RESET}" "$extra_used_dollars")
+    else
+        if [ "$extra_limit_dollars" -gt 0 ]; then
+            pct_ent_int=$(( extra_used_dollars * 100 / extra_limit_dollars ))
+            color_ent=$(get_percent_color "$pct_ent_int")
+        else
+            color_ent="${GREEN}"
+        fi
+        out_line_2+=$(printf "${DIM}ent${LBLSEP}${RESET}${color_ent}\$%s${RESET}${DIM}/${RESET}${CYAN}\$%s${RESET}" "$extra_used_dollars" "$extra_limit_dollars")
+    fi
+elif [ "$extra_enabled" = "true" ]; then
     out_line_2+="${sep}"
     if [ "$extra_limit_dollars" -gt 0 ]; then
         pct_extra_int=$(( extra_used_dollars * 100 / extra_limit_dollars ))
