@@ -41,7 +41,6 @@
 #   Desktop-only packages:
 #     kitty               Terminal emulator
 #     zed                 Zed text editor
-#     hypr                Hyprland window manager
 #
 #   Extra packages (console/desktop):
 #     github-cli          GitHub command-line interface
@@ -62,7 +61,7 @@
 # PACKAGE GROUPS (for reference):
 #   Minimal:    base-tools,git,yazi,bash,tmux,nvim
 #   Console:    Minimal + dotnet,neofetch,onefetch
-#   Desktop:    Console + kitty,zed,hypr
+#   Desktop:    Console + kitty,zed
 #   All:        Desktop + all extra packages + zsh
 #
 # EXAMPLES:
@@ -76,7 +75,7 @@
 #   ./unattended_setup.sh --packages git,nvim,docker,nodejs --verbose
 #
 #   # Install desktop environment
-#   ./unattended_setup.sh --packages git,nvim,tmux,kitty,zed,hypr
+#   ./unattended_setup.sh --packages git,nvim,tmux,kitty,zed
 #
 # NOTES:
 #   - The script requires root/sudo privileges for system package installations

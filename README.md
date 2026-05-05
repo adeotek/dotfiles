@@ -22,7 +22,7 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 ## 📦 What's Included
 
 ### Development Tools
-- **Languages**: Node.js (v22/24), Python, Go (1.25.4), Rust, .NET SDK (10.0), PowerShell
+- **Languages**: Node.js (v24), Go (1.25.4), Rust, .NET SDK (10.0), PowerShell
 - **Cloud/DevOps**: Docker, AWS CLI, GCP CLI, Terraform, Ansible, Helm, kubectl
 - **Editors**: Neovim (with custom config), Zed, VS Code, JetBrains Toolbox
 - **AI/Code Assistants**: Claude Code, OpenCode
@@ -42,7 +42,6 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 ### Desktop Applications
 - **Terminals**: Ghostty, Kitty, Tabby
 - **Editors**: VS Code, Zed, JetBrains Toolbox
-- **Window Managers**: Hyprland configuration
 
 ### Prompts & Themes
 - Oh My Posh (with custom themes)
@@ -106,11 +105,11 @@ The following packages can be installed individually or in groups:
 - **yazi** - Modern file manager
 
 ### Development Languages & Runtimes
-- **nodejs** - Node.js runtime (v22/24, configurable)
-- **python** - Python programming environment
+- **nodejs** - Node.js runtime (v24, configurable)
 - **golang** - Go programming language (v1.25.4)
 - **dotnet** - .NET SDK (v10.0)
 - **rustup** - Rust toolchain installer
+- **uv** - Python package and project manager (Astral)
 - **powershell** - PowerShell cross-platform shell
 
 ### Cloud & DevOps Tools
@@ -140,11 +139,9 @@ The following packages can be installed individually or in groups:
 
 ### Developer Tools
 - **github-cli** - GitHub command-line interface
+- **tools** - Custom scripts and tools bundle
 - **claude-code** - Claude AI coding assistant
 - **opencode** - OpenCode configuration
-
-### Desktop Environment
-- **hypr** - Hyprland window manager configuration
 
 ### Advanced Shell
 - **zsh** - Z shell with Oh My Zsh or standalone configuration
@@ -154,9 +151,9 @@ The following packages can be installed individually or in groups:
 Packages are organized into logical tiers for easy installation:
 
 - **Minimal**: `base-tools,bash,git,tmux,yazi`
-- **Console**: Minimal + `fastfetch,claude-code,glow,golang,nodejs,onefetch`
+- **Console**: Minimal + `fastfetch,claude-code,glow,golang,nodejs,onefetch,tools`
 - **Desktop**: Console + `ghostty,zed`
-- **Console Extra**: `ansible,aws-cli,docker,dotnet,github-cli,gcp-cli,helm,kubectl,nvim,opencode,powershell,python,rustup,terraform`
+- **Console Extra**: `ansible,aws-cli,docker,dotnet,github-cli,gcp-cli,helm,kubectl,nvim,opencode,powershell,rustup,uv,terraform`
 - **Desktop Extra**: Console Extra + `kitty,tabby,vscode,jetbrains-toolbox`
 - **All Console**: Console + Console Extra
 - **All Desktop**: Desktop + Desktop Extra
@@ -174,11 +171,12 @@ dotfiles/
 ├── unattended_setup.sh         # Automated setup script
 ├── update.sh                   # Update installed tools
 ├── _scripts/
-│   └── core/                   # 50+ modular install scripts
-│       ├── _helpers.sh         # Shared functions library
-│       ├── _options.sh         # Package definitions
-│       ├── *-install.sh        # Tool installation scripts
-│       └── *-setup.sh          # Configuration setup scripts
+│   ├── core/                   # 50+ modular install scripts
+│   │   ├── _helpers.sh         # Shared functions library
+│   │   ├── _options.sh         # Package definitions
+│   │   ├── *-install.sh        # Tool installation scripts
+│   │   └── *-setup.sh          # Configuration setup scripts
+│   └── wsl-setup-fedora-dev.sh # Fedora WSL automated setup script
 ├── bash/                       # Bash configuration
 │   └── .config/bash/
 │       └── config.bash
@@ -187,13 +185,16 @@ dotfiles/
 │   └── .config/zsh/
 │       ├── config.zsh          # Standard ZSH config
 │       └── config-standalone.zsh  # Self-contained ZSH config
+├── claude-code/                # Claude Code configuration
 ├── git/                        # Git configuration
+├── neofetch/                   # Neofetch system info config
 ├── nvim/                       # Neovim configuration
 ├── tmux/                       # Tmux configuration
+├── tools/                      # Curated CLI tools config
+├── win-tools/                  # Windows-side tools config
 ├── kitty/                      # Kitty terminal config
 ├── tabby/                      # Tabby terminal config
 ├── zed/                        # Zed editor config
-├── hypr/                       # Hyprland config
 ├── starship/                   # Starship prompt config
 ├── oh-my-posh/                 # Oh My Posh themes
 ├── yazi/                       # Yazi file manager config
@@ -234,7 +235,14 @@ Example: Installing bash configuration creates:
 | Pop!_OS | 22.04+ | ✅ Fully Supported |
 | Fedora | 40+ | ✅ Fully Supported |
 | RHEL | 9+ | ✅ Fully Supported |
-| WSL2 | All supported distros | ✅ Special WSL2 support |
+| WSL2 | All supported distros | ✅ Special WSL2 support** |
+
+** Special WSL2 support:
+— see `_scripts/wsl-setup-fedora-dev.sh` for a turnkey Fedora WSL setup (`--help` for options)
+- run the WSL2 setup script directly from the repository:
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/adeotek/dotfiles/main/_scripts/wsl-setup-fedora-dev.sh) --help
+```
 
 ## 🎯 Update System and Installed Tools
 
@@ -335,7 +343,7 @@ Edit `_scripts/core/_options.sh` to change default versions, installation modes,
 ### Developer Workstation Setup
 ```bash
 # Full development environment with Docker, Node.js, and Python
-./unattended_setup.sh --packages base-tools,git,bash,tmux,nvim,docker,nodejs,python,github-cli
+./unattended_setup.sh --packages base-tools,git,bash,tmux,nvim,docker,nodejs,uv,github-cli
 ```
 
 ### DevOps Engineer Setup
@@ -364,8 +372,8 @@ Edit `_scripts/core/_options.sh` to change default versions, installation modes,
 
 ### Desktop Environment Setup
 ```bash
-# Full desktop with Hyprland
-./unattended_setup.sh --packages base-tools,git,bash,kitty,hypr,zed,vscode
+# Full desktop
+./unattended_setup.sh --packages base-tools,git,bash,kitty,zed,vscode
 ```
 
 ## 🧪 Testing
@@ -386,7 +394,7 @@ Enable verbose output for debugging:
 ./unattended_setup.sh --packages docker,nodejs --verbose
 
 # Combine flags
-./unattended_setup.sh --packages python,golang --verbose --dry-run
+./unattended_setup.sh --packages uv,golang --verbose --dry-run
 ```
 
 ## 🔍 Quick Reference
@@ -407,7 +415,7 @@ Enable verbose output for debugging:
 ./unattended_setup.sh --packages docker,nodejs --dry-run
 
 # Verbose output for debugging
-./unattended_setup.sh --packages python --verbose
+./unattended_setup.sh --packages uv --verbose
 
 # Update all installed tools
 ./update.sh

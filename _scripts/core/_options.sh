@@ -102,7 +102,6 @@ declare ALL_TASKS=(
   "${CONSOLE_ONLY_TASKS[@]}"
   "${DESKTOP_ONLY_TASKS[@]}"
   "${DESKTOP_EXTRA_TASKS[@]}"
-  "hypr"
   "zsh"
 )
 readarray -t ALL_TASKS < <(printf '%s\n' "${ALL_TASKS[@]}" | sort)
@@ -132,7 +131,6 @@ declare -A TASK_TYPES=(
   ["golang"]="install"
   ["helm"]="install"
   ["homebrew"]="install"
-  ["hypr"]="setup"
   ["ghostty"]="setup"
   ["kitty"]="setup"
   ["kubectl"]="install"
