@@ -43,12 +43,22 @@ declare CLAUDECODE_PLUGINS=(
 # Install
 source "$CDIR/claude-code-install.sh"
 
-# Update the official marketplace
-cecho "green" "Updating Claude official marketplace..."
-if [ "$DRY_RUN" -ne "1" ]; then
-  claude plugin marketplace update claude-plugins-official
+# Install Claude official marketplace
+cecho "green" "Installing Claude official marketplace..."
+if claude plugin marketplace list | grep -G "claude-plugins-official" >/dev/null; then
+  cecho "green" "Claude official marketplace already added to [claude-code]. Updating it..."
+  if [ "$DRY_RUN" -ne "1" ]; then
+    claude plugin marketplace update claude-plugins-official
+  else
+    cecho "yellow" "DRY-RUN: claude plugin marketplace update claude-plugins-official"
+  fi
 else
-  cecho "yellow" "DRY-RUN: claude plugin marketplace update claude-plugins-official"
+  if [ "$DRY_RUN" -ne "1" ]; then
+    cecho "cyan" "Adding Claude official marketplace to [claude-code]..."
+    claude plugin marketplace add anthropics/claude-plugins-official
+  else
+    cecho "yellow" "DRY-RUN: claude plugin marketplace add anthropics/claude-plugins-official"
+  fi
 fi
 
 # Install ADEOTEK marketplace
