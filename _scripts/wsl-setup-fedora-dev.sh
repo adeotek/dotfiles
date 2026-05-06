@@ -91,6 +91,21 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+stage_status() {
+  if [ "$1" = true ]; then
+    echo -e "\e[36m[DONE]    $2\e[0m"
+  else
+    echo -e "\e[35m[SKIPPED] $2\e[0m"
+  fi
+}
+echo_warning() {
+  echo -e "\e[33m[WARNING] $1\e[0m"
+}
+echo_error() {
+  echo -e "\e[31m[ERROR]   $1\e[0m"
+  exit 1
+}
+
 # Configuration variables
 SSH_KEY_SRC_PATH="/mnt/c/Users/${WINDOWS_USERNAME}/.ssh"
 CUSTOM_CA_DEST_PATH="/etc/pki/ca-trust/source/anchors"
@@ -118,48 +133,58 @@ declare DOTFILES_PACKAGES=(
 # --- Install base tools ---
 
 sudo dnf install -y nano curl wget mc jq git awk openssl ca-certificates
+stage_status true "Base tools installed"
 
 # --- SSH Keys ---
 
+_changed=false
 if [ -n "${WINDOWS_USERNAME}" ]; then
   if [ ! -d "${SSH_KEY_SRC_PATH}" ]; then
-    echo "Windows username provided (${WINDOWS_USERNAME}), but SSH key source path does not exist: ${SSH_KEY_SRC_PATH}. Skipping SSH key setup."
+    echo_warning "Windows username provided (${WINDOWS_USERNAME}), but SSH key source path does not exist: ${SSH_KEY_SRC_PATH}."
   else
     mkdir -p ~/.ssh
     if [ ! -f ~/.ssh/id_rsa ] && [ -f "${SSH_KEY_SRC_PATH}/id_rsa" ]; then
       cp "${SSH_KEY_SRC_PATH}/id_rsa" ~/.ssh/id_rsa
       chmod 600 ~/.ssh/id_rsa
+      _changed=true
     fi
     if [ ! -f ~/.ssh/id_rsa.pub ] && [ -f "${SSH_KEY_SRC_PATH}/id_rsa.pub" ]; then
       cp "${SSH_KEY_SRC_PATH}/id_rsa.pub" ~/.ssh/id_rsa.pub
       chmod 644 ~/.ssh/id_rsa.pub
+      _changed=true
     fi
     if [ ! -f ~/.ssh/known_hosts ] && [ -f "${SSH_KEY_SRC_PATH}/wsl_known_hosts" ]; then
       cp "${SSH_KEY_SRC_PATH}/wsl_known_hosts" ~/.ssh/known_hosts
       chmod 600 ~/.ssh/known_hosts
+      _changed=true
     fi
   fi
 fi
+stage_status $_changed "SSH keys"
 
 # --- Custom CA certificates ---
 
+_changed=false
 if [ -n "${CUSTOM_CA_SRC_PATH}" ]; then
   if [ ! -d "${CUSTOM_CA_SRC_PATH}" ]; then
-    echo "Custom CA source path does not exist: ${CUSTOM_CA_SRC_PATH}. Skipping custom CA setup."
+    echo_warning "Custom CA source path does not exist: ${CUSTOM_CA_SRC_PATH}."
   else
     sudo mkdir -p "${CUSTOM_CA_DEST_PATH}"
     for crt_file in "${CUSTOM_CA_SRC_PATH}/"*.crt; do
       sudo openssl x509 -in "$crt_file" -out "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
       sudo chown root:root "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
       sudo chmod 644 "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
+      _changed=true
     done
-    sudo update-ca-trust extract
+    if $_changed; then sudo update-ca-trust extract; fi
   fi
 fi
+stage_status $_changed "Custom CA certificates"
 
 # --- Update DNF Packages ---
 
 sudo dnf upgrade -y --refresh
+stage_status true "DNF packages upgrade"
 
 # --- GitHub known_hosts ---
 
@@ -168,19 +193,23 @@ mkdir -p ~/.ssh
 if ! grep -q "github.com" ~/.ssh/known_hosts 2>/dev/null; then
   ssh-keyscan github.com >> ~/.ssh/known_hosts
   chmod 600 ~/.ssh/known_hosts
+  stage_status true "GitHub -> known_hosts"
+else
+  stage_status false "GitHub -> known_hosts"
 fi
 
 # --- .dotfile setup ---
 
+_changed=false
 # Clone dotfiles repository
 if [ ! -d "$HOME/.dotfiles" ]; then
   git clone "${DOTFILES_CLONE_URL}" "$HOME/.dotfiles"
+  _changed=true
 fi
 
 # Check if dotfiles setup script is present
 if [ ! -f "$HOME/.dotfiles/setup.sh" ]; then
-  echo "Dotfiles setup script not found. Please check the repository structure."
-  exit 1
+  echo_error "Dotfiles setup script not found. Please check the repository structure."
 fi
 
 # Set Git local overrides
@@ -193,53 +222,85 @@ if [ ! -f ~/.config/git.user/config ] && [ -n "${GIT_USER_NAME}" ] && [ -n "${GI
     name = ${GIT_USER_NAME}
     email = ${GIT_USER_EMAIL}
 EOF
+  _changed=true
 fi
+stage_status $_changed ".dotfiles setup"
 
 # --- .dotfile packages installation ---
 
 # Install tools using dotfiles setup script
 PACKAGES_LIST=$(printf '%s,' "${DOTFILES_PACKAGES[@]}")
 bash "$HOME/.dotfiles/unattended_setup.sh" --packages "${PACKAGES_LIST%,}"
+stage_status true "Standard .dotfiles packages installed"
 
 # Install Ansible if not already installed
 if [ "$INSTALL_ANSIBLE" = true ] && ! command -v ansible &> /dev/null; then
   bash "$HOME/.dotfiles/unattended_setup.sh" --packages "ansible"
+  stage_status true "Ansible installation"
+else
+  stage_status false "Ansible installation"
 fi
 # Install Claude Code if not already installed
 if [ "$INSTALL_CLAUDECODE" = true ] && ! command -v claude &> /dev/null; then
   bash "$HOME/.dotfiles/unattended_setup.sh" --packages "claude-code"
+  stage_status true "Claude Code installation"
+else
+  stage_status false "Claude Code installation"
 fi
 # Install Docker if not already installed
 if [ "$INSTALL_DOCKER" = true ] && ! command -v docker &> /dev/null; then
   bash "$HOME/.dotfiles/unattended_setup.sh" --packages "docker"
+  stage_status true "Docker installation"
+else
+  stage_status false "Docker installation"
 fi
 # Install Golang if not already installed
 if [ "$INSTALL_GOLANG" = true ] && ! command -v go &> /dev/null; then
   bash "$HOME/.dotfiles/unattended_setup.sh" --packages "golang"
+  stage_status true "Golang installation"
+else
+  stage_status false "Golang installation"
 fi
 # Install Kubectl and Helm if not already installed
 if [ "$INSTALL_KUBECTL" = true ]; then
-  if ! command -v kubectl &> /dev/null; then 
+  if ! command -v kubectl &> /dev/null; then
     bash "$HOME/.dotfiles/unattended_setup.sh" --packages "kubectl"
+    stage_status true "Kubectl installation"
+  else
+    stage_status false "Kubectl installation"
   fi
   if ! command -v helm &> /dev/null; then
     bash "$HOME/.dotfiles/unattended_setup.sh" --packages "helm"
+    stage_status true "Helm installation"
+  else
+    stage_status false "Helm installation"
   fi
+else
+  stage_status false "Kubectl installation"
+  stage_status false "Helm installation"
 fi
 # Install Rust if not already installed
 if [ "$INSTALL_RUST" = true ] && ! command -v rustc &> /dev/null; then
   bash "$HOME/.dotfiles/unattended_setup.sh" --packages "rust"
+  stage_status true "Rust installation"
+else
+  stage_status false "Rust installation"
 fi
 # Install Terraform if not already installed
 if [ "$INSTALL_TERRAFORM" = true ] && ! command -v terraform &> /dev/null; then
   bash "$HOME/.dotfiles/unattended_setup.sh" --packages "terraform"
+  stage_status true "Terraform installation"
+else
+  stage_status false "Terraform installation"
 fi
 
 # --- NPM Global Packages ---
 
+_changed=false
 # Install NX globally if version is specified
 if [ -n "${NX_VERSION}" ]; then
   sudo npm install -g nx@"$NX_VERSION"
+  _changed=true
 
   # Add aliases to .zshrc
   if ! grep -q "DEV Aliases" ~/.zshrc; then
@@ -255,13 +316,19 @@ EOF
     rm ~/.zshrc.bak
   fi
 fi
+stage_status $_changed "NPM NX global package"
+
 # Install Angular CLI globally if version is specified
+_changed=false
 if [ -n "${ANGULAR_VERSION}" ]; then
   sudo npm install -g @angular/cli@"$ANGULAR_VERSION"
+  _changed=true
 fi
+stage_status $_changed "NPM Angular CLI global package"
 
 # --- ZSH Configuration ---
 
+_changed=false
 # Add env variables and aliases to .zshrc, before `source /home/dev/.config/zsh/config.zsh`
 if ! grep -q "DEV environment variables" ~/.zshrc; then
   mv ~/.zshrc ~/.zshrc.bak
@@ -272,14 +339,22 @@ export NX_TUI="false"
 EOF
   cat ~/.zshrc.bak >> ~/.zshrc
   rm ~/.zshrc.bak
+  _changed=true
 fi
 
 # Change default shell to zsh
 if [ "$SHELL" != "/usr/bin/zsh" ]; then
   sudo chsh -s "/usr/bin/zsh" "$USER"
+  _changed=true
 fi
+stage_status $_changed "ZSH configuration"
 
 # --- Projects ---
 
 # Create projects directory
-mkdir -p ~/projects
+if [ ! -d ~/projects ]; then
+  mkdir -p ~/projects
+  stage_status true "Projects directory"
+else
+  stage_status false "Projects directory"
+fi
