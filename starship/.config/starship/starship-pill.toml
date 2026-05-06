@@ -11,6 +11,7 @@ command_timeout = 800
 # Single info line, then prompt on its own line
 format = """
 [](fg:#1d2230)\
+${env_var.WSL_DISTRO_NAME}\
 $sudo\
 $username\
 $hostname\
@@ -36,6 +37,11 @@ $character"""
 
 # $shell\
 # Segment separator: [  ]/[  ]
+
+[env_var.WSL_DISTRO_NAME]
+default = ''
+style = 'bold cyan'
+format = '[($symbol$env_value[|](blue))]($style)'
 
 [sudo]
 style = 'bg:#1d2230 bold fg:red'
