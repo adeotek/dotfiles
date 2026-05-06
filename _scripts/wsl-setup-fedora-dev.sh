@@ -115,9 +115,12 @@ declare DOTFILES_PACKAGES=(
   "zsh"
 )
 
-# --- SSH and Custom CA ---
+# --- Install base tools ---
 
-# Copy SSH key from host and set permissions
+sudo dnf install -y nano curl wget mc jq git awk openssl ca-certificates
+
+# --- SSH Keys ---
+
 if [ -n "${WINDOWS_USERNAME}" ]; then
   if [ ! -d "${SSH_KEY_SRC_PATH}" ]; then
     echo "Windows username provided (${WINDOWS_USERNAME}), but SSH key source path does not exist: ${SSH_KEY_SRC_PATH}. Skipping SSH key setup."
@@ -138,24 +141,25 @@ if [ -n "${WINDOWS_USERNAME}" ]; then
   fi
 fi
 
-# Add Custom CA to trusted certificates
+# --- Custom CA certificates ---
+
 if [ -n "${CUSTOM_CA_SRC_PATH}" ]; then
   if [ ! -d "${CUSTOM_CA_SRC_PATH}" ]; then
     echo "Custom CA source path does not exist: ${CUSTOM_CA_SRC_PATH}. Skipping custom CA setup."
   else
     sudo mkdir -p "${CUSTOM_CA_DEST_PATH}"
-    sudo cp "${CUSTOM_CA_SRC_PATH}/"*.crt "${CUSTOM_CA_DEST_PATH}/"
-    sudo update-ca-trust
+    for crt_file in "${CUSTOM_CA_SRC_PATH}/"*.crt; do
+      sudo openssl x509 -in "$crt_file" -out "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
+      sudo chown root:root "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
+      sudo chmod 644 "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
+    done
+    sudo update-ca-trust extract
   fi
 fi
 
-# --- Base Packages Install and Updates ---
+# --- Update DNF Packages ---
 
-# DNF update && upgrade
 sudo dnf upgrade -y --refresh
-
-# Install base tools
-sudo dnf install -y nano curl wget mc jq git awk
 
 # --- GitHub known_hosts ---
 
