@@ -130,6 +130,33 @@ declare DOTFILES_PACKAGES=(
   "zsh"
 )
 
+# --- WSL configuration ---
+
+_changed=false
+_WSL_CONF="/etc/wsl.conf"
+if ! grep -q "appendWindowsPath" "$_WSL_CONF" 2>/dev/null; then
+  if grep -q "\[interop\]" "$_WSL_CONF" 2>/dev/null; then
+    sudo sed -i '/^\[interop\]/a appendWindowsPath = false' "$_WSL_CONF"
+  else
+    sudo tee -a "$_WSL_CONF" > /dev/null <<'EOF'
+
+[interop]
+appendWindowsPath = false
+EOF
+  fi
+  _changed=true
+fi
+stage_status $_changed "WSL configuration (/etc/wsl.conf)"
+
+# appendWindowsPath only takes effect on distro restart, but we can strip
+# Windows-mounted paths from the current session immediately.
+if echo "$PATH" | grep -q '/mnt/[a-z]/'; then
+  export PATH=$(echo "$PATH" | tr ':' '\n' | grep -v '^/mnt/[a-z]/' | tr '\n' ':' | sed 's/:$//')
+  stage_status true "Windows paths removed from current session PATH"
+else
+  stage_status false "Windows paths removed from current session PATH"
+fi
+
 # --- Install base tools ---
 
 sudo dnf install -y nano curl wget mc jq git awk openssl ca-certificates
@@ -348,6 +375,50 @@ if [ "$SHELL" != "/usr/bin/zsh" ]; then
   _changed=true
 fi
 stage_status $_changed "ZSH configuration"
+
+# --- VS Code (Windows) ---
+
+_changed=false
+_vscode_bin=""
+_vscode_link_name="code"
+
+# Scan typical Windows VS Code install locations: user-local first, then system-wide.
+# Insiders edition checked after stable for each tier.
+declare -a _vscode_candidates=()
+if [ -n "${WINDOWS_USERNAME}" ]; then
+  _vscode_candidates+=(
+    "/mnt/c/Users/${WINDOWS_USERNAME}/AppData/Local/Programs/Microsoft VS Code/bin/code"
+    "/mnt/c/Users/${WINDOWS_USERNAME}/AppData/Local/Programs/Microsoft VS Code Insiders/bin/code-insiders"
+  )
+fi
+_vscode_candidates+=(
+  "/mnt/c/Program Files/Microsoft VS Code/bin/code"
+  "/mnt/c/Program Files/Microsoft VS Code Insiders/bin/code-insiders"
+)
+
+for _candidate in "${_vscode_candidates[@]}"; do
+  if [ -f "$_candidate" ]; then
+    _vscode_bin="$_candidate"
+    [[ "$_candidate" == *"Insiders"* ]] && _vscode_link_name="code-insiders"
+    break
+  fi
+done
+
+if [ -n "$_vscode_bin" ]; then
+  _vscode_wrapper="/usr/local/bin/${_vscode_link_name}"
+  # (Re)create the wrapper if it's missing or points at a different VS Code path
+  if [ ! -f "$_vscode_wrapper" ] || ! grep -qF "${_vscode_bin}" "$_vscode_wrapper" 2>/dev/null; then
+    sudo tee "$_vscode_wrapper" > /dev/null <<EOF
+#!/bin/sh
+exec "${_vscode_bin}" "\$@"
+EOF
+    sudo chmod +x "$_vscode_wrapper"
+    _changed=true
+  fi
+  stage_status $_changed "VS Code (Windows) -> /usr/local/bin/${_vscode_link_name}"
+else
+  stage_status false "VS Code (Windows)"
+fi
 
 # --- Projects ---
 

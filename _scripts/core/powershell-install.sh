@@ -27,7 +27,7 @@ case $CURRENT_OS_ID in
       if [ "$CURRENT_OS_ID" == "debian" ] && [ "$CURRENT_OS_VER" == "13" ]; then
         cecho "yellow" "SKIPPED: not available yet on Debian 13 systems."
       else
-        PWSH_PACKAGE_URL="$(curl -s https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r '.assets[] | select(.name | contains(".deb_amd64.deb")) | .browser_download_url')"
+        PWSH_PACKAGE_URL="$(curl -s https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r '.assets[] | select(.name | contains(".deb_amd64.deb")) | .browser_download_url' | head -n 1)"
         if [ "$DRY_RUN" -ne "1" ]; then
           decho "magenta" "wget $PWSH_PACKAGE_URL -O /tmp/powershell.deb"
           wget "$PWSH_PACKAGE_URL" -O /tmp/powershell.deb
@@ -44,7 +44,7 @@ case $CURRENT_OS_ID in
     fi
     ;;
   fedora|redhat)
-    PWSH_PACKAGE_URL="$(curl -s https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r '.assets[] | select(.name | contains(".rh.x86_64.rpm")) | .browser_download_url')"
+    PWSH_PACKAGE_URL="$(curl -s https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r '.assets[] | select(.name | contains(".rh.x86_64.rpm")) | .browser_download_url' | head -n 1)"
     if [ "$DRY_RUN" -ne "1" ]; then
       decho "magenta" "wget $PWSH_PACKAGE_URL -O /tmp/powershell.rpm"
       wget "$PWSH_PACKAGE_URL" -O /tmp/powershell.rpm
