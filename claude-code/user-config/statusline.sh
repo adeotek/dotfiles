@@ -174,7 +174,8 @@ if [ "$needs_fetch" = "true" ]; then
   fi
 
   if [ -n "$fetch_token" ]; then
-    usage_json=$(curl -s --max-time 3 \
+    # -k: WSL2/Fedora CA bundle may lack the Google Trust Services intermediate
+    usage_json=$(curl -sk --max-time 3 \
         -H "Authorization: Bearer $fetch_token" \
         -H "Content-Type: application/json" \
         -H "anthropic-beta: oauth-2025-04-20" \
