@@ -400,7 +400,7 @@ set -g update-environment "SSH_AUTH_SOCK SSH_CONNECTION SSH_CLIENT"
 set -g allow-passthrough on
 
 # start with mouse mode enabled
-#set -g mouse on
+set -g mouse on
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
