@@ -193,11 +193,11 @@ esac
 # Configure status line
 mkdir -p ~/.claude
 if [ "$DRY_RUN" -ne "1" ]; then
-  cp "$RDIR/claude-code/user-config/statusline.sh" ~/.claude/statusline.sh
+  cp "$RDIR/claude-code/user-config/statusline-linux.sh" ~/.claude/statusline.sh
   chmod +x ~/.claude/statusline.sh
   cecho "green" "Status line configured successfully."
 else
-  cecho "yellow" "DRY-RUN: cp $RDIR/claude-code/user-config/statusline.sh ~/.claude/statusline.sh"
+  cecho "yellow" "DRY-RUN: cp $RDIR/claude-code/user-config/statusline-linux.sh ~/.claude/statusline.sh"
   cecho "yellow" "DRY-RUN: chmod +x ~/.claude/statusline.sh"
 fi
 
