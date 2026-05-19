@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 # Claude Code statusline — Linux / WSL / Windows
 #
+# Configure in .claude/settings.json:
+#   "statusLine": {
+#     "type": "command",
+#     "command": "bash ~/.claude/statusline-command.sh"
+#   }
+#
 # Output — two lines:
 #
 #   Line 1:  ~/path/to/dir  [| branch]  | user@host | v1.x.x | Linux|WSL|Windows | HH:MM
@@ -311,7 +317,7 @@ else
         FH_COLOR=$(pct_color "$RATE_5H_PCT")
         FH_PCT=$(fmt_pct "$RATE_5H_PCT")
         FH_RESET_STR=""
-        [[ -n "$RATE_5H_RESET" ]] && FH_RESET_STR="${LPAREN}${DIM}$(fmt_reset_time "$RATE_5H_RESET")${RESET}${RPAREN}"
+        [[ -n "$RATE_5H_RESET" ]] && FH_RESET_STR="${LPAREN}${LDIM}$(fmt_reset_time "$RATE_5H_RESET")${RESET}${RPAREN}"
         LINE2+=" ${SEP} ${DIM}5h${RESET}${COLON}${FH_COLOR}${FH_PCT}${RESET}${FH_RESET_STR}"
     fi
 
@@ -320,7 +326,7 @@ else
         WK_COLOR=$(pct_color "$RATE_WK_PCT")
         WK_PCT=$(fmt_pct "$RATE_WK_PCT")
         WK_RESET_STR=""
-        [[ -n "$RATE_WK_RESET" ]] && WK_RESET_STR="${LPAREN}${DIM}$(fmt_reset_time "$RATE_WK_RESET")${RESET}${RPAREN}"
+        [[ -n "$RATE_WK_RESET" ]] && WK_RESET_STR="${LPAREN}${LDIM}$(fmt_reset_time "$RATE_WK_RESET")${RESET}${RPAREN}"
         LINE2+=" ${SEP} ${DIM}wk${RESET}${COLON}${WK_COLOR}${WK_PCT}${RESET}${WK_RESET_STR}"
     fi
 

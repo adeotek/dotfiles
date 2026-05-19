@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 # Claude Code statusline — Git Bash / Windows
 #
+# Configure in .claude/settings.json:
+#   "statusLine": {
+#     "type": "command",
+#     "command": "bash ~/.claude/statusline-command-win.sh"
+#   }
+#
 # Output — two lines:
 #
 #   Line 1:  ~/path/to/dir  [| branch]  | user@host | v1.x.x | Linux|WSL|Windows | HH:MM
