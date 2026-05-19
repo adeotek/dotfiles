@@ -14,6 +14,7 @@
 # ── ANSI color helpers ───────────────────────────────────────────────────────
 RESET=$'\033[0m'
 DIM=$'\033[2m'
+LDIM=$'\033[90m'
 RED=$'\033[31m'
 GREEN=$'\033[32m'
 YELLOW=$'\033[33m'
@@ -125,7 +126,7 @@ fi
 
 # Current user and hostname
 CURRENT_USER="${USER:-$(whoami)}"
-HOSTNAME_SHORT=$(hostname -s)
+HOSTNAME_SHORT="${HOSTNAME:-$(hostname -s)}"
 
 # Git branch (fast: no subprocess if not in a git repo)
 GIT_BRANCH=""
@@ -280,14 +281,14 @@ if $IS_ENTERPRISE; then
         FH_COLOR=$(pct_color "$RATE_5H_PCT")
         FH_PCT=$(fmt_pct "$RATE_5H_PCT")
         FH_RESET_STR=""
-        [[ -n "$RATE_5H_RESET" ]] && FH_RESET_STR="${LPAREN}${DIM}$(fmt_reset_time "$RATE_5H_RESET")${RESET}${RPAREN}"
+        [[ -n "$RATE_5H_RESET" ]] && FH_RESET_STR="${LPAREN}${LDIM}$(fmt_reset_time "$RATE_5H_RESET")${RESET}${RPAREN}"
         LINE2+=" ${SEP} ${DIM}5h${RESET}${COLON}${FH_COLOR}${FH_PCT}${RESET}${FH_RESET_STR}"
     fi
     if [[ -n "$RATE_WK_PCT" ]]; then
         WK_COLOR=$(pct_color "$RATE_WK_PCT")
         WK_PCT=$(fmt_pct "$RATE_WK_PCT")
         WK_RESET_STR=""
-        [[ -n "$RATE_WK_RESET" ]] && WK_RESET_STR="${LPAREN}${DIM}$(fmt_reset_time "$RATE_WK_RESET")${RESET}${RPAREN}"
+        [[ -n "$RATE_WK_RESET" ]] && WK_RESET_STR="${LPAREN}${LDIM}$(fmt_reset_time "$RATE_WK_RESET")${RESET}${RPAREN}"
         LINE2+=" ${SEP} ${DIM}wk${RESET}${COLON}${WK_COLOR}${WK_PCT}${RESET}${WK_RESET_STR}"
     fi
     # ent:$used/$limit (or ent:$used/∞)
@@ -342,6 +343,6 @@ if [[ -n "$SESSION_COST" ]]; then
 fi
 
 # tk:<token-count>
-LINE2+=" ${SEP} ${DIM}tk${RESET}${COLON}${WHITE}${TOKEN_COUNT}${RESET}"
+LINE2+=" ${SEP} ${DIM}tk${RESET}${COLON}${LDIM}${TOKEN_COUNT}${RESET}"
 
 printf '%s\n%s\n' "$LINE1" "$LINE2"
