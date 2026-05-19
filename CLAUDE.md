@@ -84,6 +84,19 @@ ALL_TASKS              → deduplicated union of everything (sorted)
 ### GNU Stow Configuration Directories
 Config directories (e.g., `bash/`, `git/`, `nvim/`) mirror the `$HOME` directory structure. Editing files here immediately affects the live symlinked system. `stow_package` helper wraps the stow call with backup logic.
 
+### Claude Code Config (`claude-code/`)
+Not stowed — deployed imperatively by `claude-code-setup.sh`. Files under `claude-code/user-config/` are copied/merged into `~/.claude/`:
+- `statusline-command.sh` / `statusline-command.ps1` — ANSI status-line script that reads Claude Code's JSON payload via stdin and outputs two formatted lines (directory, git branch, model, context %, rate limits, cost). Copied to `~/.claude/statusline-command.sh` and registered via `settings.json` `statusLine.command`.
+- `settings-part.json` — partial `~/.claude/settings.json` merged with `jq -s '.[0] * .[1]'`.
+- `CLAUDE.md` — seeded as `~/.claude/CLAUDE.md` only if the file does not yet exist.
+
+The setup script also installs plugins from two marketplaces (`claude-plugins-official`, `adeotek-plugins`) and LSP servers (gopls, csharp-ls, vtsls/typescript, pyright, lua-language-server).
+
+### Auxiliary Utility Scripts (`tools/`, `win-tools/`)
+These directories contain standalone helper scripts not managed by the task/stow system:
+- `tools/.tools/cc-sessions.sh` — CLI for browsing Claude Code session transcripts.
+- `win-tools/.tools/` — PowerShell utilities for Windows/WSL environments (firewall rules, port tools, GitHub stats, etc.).
+
 ### ZSH Configurations
 `zsh/` contains two configs managed via `zsh-setup.sh`:
 - `config.zsh` — original config requiring external plugins (zsh-syntax-highlighting, zsh-autosuggestions)
