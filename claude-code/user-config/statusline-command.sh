@@ -235,8 +235,7 @@ case "$RATE_TIER" in
     *"max_5x"*)   PLAN_LABEL="Max 5x" ;;
     *"max"*)      PLAN_LABEL="Max" ;;
     *"pro"*)      PLAN_LABEL="Pro" ;;
-    *"enterprise"*) PLAN_LABEL="Enterprise" ;;
-    *)            PLAN_LABEL="" ;;
+    *)            PLAN_LABEL="Enterprise" ;;
 esac
 
 # Session cost from .cost.total_cost_usd

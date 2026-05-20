@@ -163,12 +163,11 @@ if [[ $is_enterprise_creds -eq 1 ]] || \
 fi
 
 case "$rate_tier" in
-    *max_10x*)    plan_label="Max 10x" ;;
-    *max_5x*)     plan_label="Max 5x"  ;;
-    *max*)        plan_label="Max"     ;;
-    *pro*)        plan_label="Pro"     ;;
-    *enterprise*) plan_label="Enterprise" ;;
-    *)            plan_label=""        ;;
+    *max_10x*)    plan_label="Max 10x"    ;;
+    *max_5x*)     plan_label="Max 5x"     ;;
+    *max*)        plan_label="Max"        ;;
+    *pro*)        plan_label="Pro"        ;;
+    *)            plan_label="Enterprise" ;;
 esac
 
 model_color="$Cyan"
