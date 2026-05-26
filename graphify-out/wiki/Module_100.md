@@ -1,0 +1,26 @@
+# Module 100
+
+> 2 nodes
+
+## Key Concepts
+
+- **Run-PortProbe.ps1** (1 connections) — `win-tools/.tools/Run-PortProbe.ps1`
+- **Invoke-PortProbe()** (1 connections) — `win-tools/.tools/Run-PortProbe.ps1`
+
+## Relationships
+
+- No strong cross-community connections detected
+
+## Source Files
+
+- `win-tools/.tools/Run-PortProbe.ps1`
+
+## Audit Trail
+
+- EXTRACTED: 2 (100%)
+- INFERRED: 0 (0%)
+- AMBIGUOUS: 0 (0%)
+
+---
+
+*Part of the graphify knowledge wiki. See [[index]] to navigate.*
