@@ -1,0 +1,3128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>.dotfiles — Complete Call Flow &amp; Architecture Documentation</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+:root {
+  --bg: #0f172a; --surface: #1e293b; --border: #334155;
+  --text: #e2e8f0; --muted: #94a3b8; --accent: #38bdf8;
+  --warn: #fbbf24; --err: #f87171; --ok: #34d399;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+.container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+h1 { font-size: 2.4rem; margin-bottom: 8px; background: linear-gradient(135deg, var(--accent), #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+h2 { font-size: 1.7rem; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+h3 { font-size: 1.25rem; margin: 32px 0 12px; color: var(--accent); }
+h4 { font-size: 1.05rem; margin: 20px 0 8px; color: var(--warn); }
+p { margin: 8px 0; color: var(--muted); }
+.subtitle { color: var(--muted); font-size: 1.1rem; margin-bottom: 32px; }
+.mermaid { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 20px 0; overflow-x: auto; position: relative; }
+.mermaid.is-enhanced { padding: 0; overflow: hidden; min-height: 260px; }
+.mermaid-viewport { padding: 54px 24px 24px; overflow: hidden; cursor: grab; touch-action: none; min-height: 260px; }
+.mermaid-viewport.is-dragging { cursor: grabbing; }
+.mermaid-viewport svg { max-width: none !important; height: auto; transform-origin: 0 0; transition: transform 120ms ease; }
+.mermaid-toolbar { position: absolute; top: 10px; right: 10px; z-index: 3; display: flex; align-items: center; gap: 6px; padding: 6px; background: rgba(15,23,42,0.92); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.28); }
+.mermaid-toolbar button, .mermaid-toolbar .zoom-level { height: 28px; min-width: 32px; border: 1px solid var(--border); border-radius: 6px; background: #1e293b; color: var(--text); font: 600 0.78rem system-ui, sans-serif; display: inline-flex; align-items: center; justify-content: center; }
+.mermaid-toolbar button { cursor: pointer; }
+.mermaid-toolbar button:hover { border-color: var(--accent); color: var(--accent); }
+.mermaid-toolbar .zoom-level { min-width: 52px; color: var(--muted); background: transparent; }
+.call-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.92rem; }
+.call-table th { background: #1a2744; color: var(--accent); text-align: left; padding: 10px 14px; border: 1px solid var(--border); }
+.call-table td { padding: 8px 14px; border: 1px solid var(--border); vertical-align: top; }
+.call-table tr:nth-child(even) { background: rgba(255,255,255,0.02); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+.tag-async { background: #7c3aed33; color: #a78bfa; }
+.tag-class { background: #05966933; color: var(--ok); }
+.tag-func { background: #2563eb33; color: var(--accent); }
+.tag-cmd { background: #d9770633; color: var(--warn); }
+.tag-endpoint { background: #dc262633; color: var(--err); }
+.tag-hook { background: #db277733; color: #f472b6; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 16px 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin: 16px 0; }
+.arrow-chain { font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--accent); padding: 10px; background: rgba(56,189,248,0.06); border-radius: 6px; }
+code { font-family: 'Fira Code', 'Cascadia Code', monospace; background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; }
+ul, ol { margin: 8px 0 8px 24px; color: var(--muted); }
+li { margin: 4px 0; }
+a { color: var(--accent); }
+hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+.nav { position: sticky; top: 0; background: var(--bg); z-index: 10; padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; }
+.nav a { text-decoration: none; }
+.nav a:hover { text-decoration: underline; }
+@media (max-width: 768px) { .container { padding: 16px; } h1 { font-size: 1.8rem; } }
+
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>.dotfiles — Complete Call Flow &amp; Architecture Documentation</h1>
+<p class="subtitle">Generated from graphify knowledge graph: 453 nodes, 326 edges, 184 communities. Commit: 2aeea44</p>
+
+<div class="nav">
+    <a href="#overview">Architecture Overview</a>
+    <a href="#extract-pipeline">Extraction Pipeline</a>
+    <a href="#build-graph">Graph Build</a>
+    <a href="#cli-skills">CLI &amp; Skill Installers</a>
+    <a href="#ingest-cache-update">Ingestion &amp; Updates</a>
+    <a href="#serve-api">Serving API</a>
+    <a href="#tests-fixtures">Tests &amp; Fixtures</a>
+    <a href="#task-tier-hierarchy-options-sh">Task Tier Hierarchy (_options.sh)</a>
+    <a href="#bash-environment-variables">Bash Environment Variables</a>
+    <a href="#wsl2-fedora-dev-setup">WSL2 Fedora Dev Setup</a>
+    <a href="#cc-sessions-sh-session-browser">cc-sessions.sh Session Browser</a>
+    <a href="#windows-env-setup-script">Windows Env Setup Script</a>
+    <a href="#windows-network-firewall-tools">Windows Network/Firewall Tools</a>
+    <a href="#module-21">Module 21</a>
+    <a href="#module-22">Module 22</a>
+    <a href="#other">Other</a>
+</div>
+
+<!-- ====== Architecture Overview ====== -->
+<h2 id="overview">1. Architecture Overview</h2>
+
+<div class="mermaid">
+
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    EXTRACT_PIPELINE_5F350230("Extraction Pipeline<br/><small>27 nodes</small>")
+    class EXTRACT_PIPELINE_5F350230 module;
+    BUILD_GRAPH_321CBB04("Graph Build<br/><small>7 nodes</small>")
+    class BUILD_GRAPH_321CBB04 module;
+    CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>205 nodes</small>")
+    class CLI_SKILLS_9964CBB8 module;
+    INGEST_CACHE_UPDATE_FF457338("Ingestion &amp; Updates<br/><small>22 nodes</small>")
+    class INGEST_CACHE_UPDATE_FF457338 module;
+    SERVE_API_35EC8E86("Serving API<br/><small>11 nodes</small>")
+    class SERVE_API_35EC8E86 module;
+    TESTS_FIXTURES_B84B1DCC("Tests &amp; Fixtures<br/><small>6 nodes</small>")
+    class TESTS_FIXTURES_B84B1DCC module;
+    TASK_TIER_HIERARCHY_OPTIONS_SH_3CF18861("Task Tier Hierarchy (_options.sh)<br/><small>15 nodes</small>")
+    class TASK_TIER_HIERARCHY_OPTIONS_SH_3CF18861 module;
+    BASH_ENVIRONMENT_VARIABLES_EAF9D3F7("Bash Environment Variables<br/><small>8 nodes</small>")
+    class BASH_ENVIRONMENT_VARIABLES_EAF9D3F7 module;
+    WSL2_FEDORA_DEV_SETUP_D6B6BC6C("WSL2 Fedora Dev Setup<br/><small>8 nodes</small>")
+    class WSL2_FEDORA_DEV_SETUP_D6B6BC6C module;
+    CC_SESSIONS_SH_SESSION_BROWSER_459B19BE("cc-sessions.sh Session Browser<br/><small>6 nodes</small>")
+    class CC_SESSIONS_SH_SESSION_BROWSER_459B19BE module;
+    WINDOWS_ENV_SETUP_SCRIPT_B5B623E9("Windows Env Setup Script<br/><small>6 nodes</small>")
+    class WINDOWS_ENV_SETUP_SCRIPT_B5B623E9 module;
+    WINDOWS_NETWORK_FIREWALL_TOOLS_FCB256FC("Windows Network/Firewall Tools<br/><small>5 nodes</small>")
+    class WINDOWS_NETWORK_FIREWALL_TOOLS_FCB256FC module;
+    MODULE_21_58735A85("Module 21<br/><small>3 nodes</small>")
+    class MODULE_21_58735A85 module;
+    MODULE_22_0239F3BE("Module 22<br/><small>3 nodes</small>")
+    class MODULE_22_0239F3BE module;
+    OTHER_D0941E68("Other<br/><small>121 nodes</small>")
+    class OTHER_D0941E68 module;
+    SERVE_API_35EC8E86 -->|calls| EXTRACT_PIPELINE_5F350230
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h4>Architecture Layers</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>Layer</th><th>Nodes</th><th>Communities</th></tr>
+      <tr><td>Extraction Pipeline</td><td>27</td><td><code>0, 115, 133, 146, 182</code></td></tr><tr><td>Graph Build</td><td>7</td><td><code>15, 149</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>205</td><td><code>1, 2, 6, 8, 10, 11, 17, 18, 19, 20, 23, 25, 26, 28, 29, 101, 33, 34, 35, 36, 37, 38, 40, 41, 43, 44, 45, 46, 48, 51, 53, 54, 55, 57, 59, 60, 62, 63, 70, 73, 74, 75, 76, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 90, 91, 92, 93, 96, 97, 99, 127, 154, 155, 157, 158, 159, 161, 163, 164, 165, 166, 174</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>22</td><td><code>3, 56, 67, 121, 160, 171</code></td></tr><tr><td>Serving API</td><td>11</td><td><code>5</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>6</td><td><code>13</code></td></tr><tr><td>Task Tier Hierarchy (_options.sh)</td><td>15</td><td><code>4</code></td></tr><tr><td>Bash Environment Variables</td><td>8</td><td><code>7</code></td></tr><tr><td>WSL2 Fedora Dev Setup</td><td>8</td><td><code>9</code></td></tr><tr><td>cc-sessions.sh Session Browser</td><td>6</td><td><code>12</code></td></tr><tr><td>Windows Env Setup Script</td><td>6</td><td><code>14</code></td></tr><tr><td>Windows Network/Firewall Tools</td><td>5</td><td><code>16</code></td></tr><tr><td>Module 21</td><td>3</td><td><code>21</code></td></tr><tr><td>Module 22</td><td>3</td><td><code>22</code></td></tr><tr><td>Other</td><td>121</td><td><code>24, 27, 30, 100, 102, 103, 31, 32, 39, 42, 47, 49, 50, 52, 58, 61, 64, 65, 66, 68, 69, 71, 72, 77, 78, 89, 94, 95, 98, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 116, 117, 118, 119, 120, 122, 123, 124, 125, 126, 128, 129, 130, 131, 132, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 147, 148, 150, 151, 152, 153, 156, 162, 167, 168, 169, 170, 172, 173, 175, 176, 177, 178, 179, 180, 181, 183</code></td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Core Flow</h4>
+    <div class="arrow-chain">Graph Build -&gt; Extraction Pipeline -&gt; CLI &amp; Skill Installers -&gt; Ingestion &amp; Updates -&gt; Serving API -&gt; Tests &amp; Fixtures -&gt; Task Tier Hierarchy (_options.sh)</div>
+  </div>
+</div>
+<div class="grid">
+  <div class="card">
+    <h4>Graph Report Highlights</h4>
+    <ul>
+      <li>453 nodes · 326 edges · 184 communities (95 shown, 89 thin omitted)</li>
+      <li>Extraction: 78% EXTRACTED · 22% INFERRED · 0% AMBIGUOUS · INFERRED: 73 edges (avg confidence: 0.85)</li>
+      <li>Token cost: 0 input · 0 output</li>
+      <li>1. `_helpers.sh (Shared Utilities)` - 11 edges</li>
+      <li>2. `cecho()` - 9 edges</li>
+      <li>3. `decho()` - 9 edges</li>
+    </ul>
+  </div>
+</div>
+<hr>
+<!-- ====== 2. Extraction Pipeline ====== -->
+<h2 id="extract-pipeline">2. Extraction Pipeline</h2>
+<p>Extraction Pipeline groups implementation around nvim, plugins, adeotek, config, mostly in adeotek_v1/plugins/neo-tree.lua, configs/adeotek_v2/keymaps.lua, adeotek_v2/plugins/lsp.lua. This section covers 27 nodes and 26 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Extraction Pipeline (27 nodes, 26 edges)
+    subgraph extract_pipeline_adeotek_v1_plugins_neo_tree_lua_ab078e9c["adeotek_v1/plugins/neo-tree.lua"]
+        plugins_neo_tree_v1_ef973e54("adeotek_v1/plugins/neo-tree.lua (File E...<br/><small>adeotek_v1/plugins/neo-tree.lua</small>")
+        nvim_config_nvim_lua_configs_adeotek_v1_plugins_35f74536("neo-tree.lua")
+    end
+    subgraph extract_pipeline_adeotek_v2_plugins_lsp_lua_ddb1c9dd["adeotek_v2/plugins/lsp.lua"]
+        concept_lsp_ecosystem_2ddf7ac0("LSP Ecosystem (lspconfig + mason + cmp...<br/><small>adeotek_v2/plugins/lsp.lua</small>")
+        plugins_lsp_v2_7dc164ac("adeotek_v2/plugins/lsp.lua (LSP + Mason...<br/><small>adeotek_v2/plugins/lsp.lua</small>")
+    end
+    subgraph extract_pipeline_adeotek_v2_plugins_nvim_tree_lu_8829316f["adeotek_v2/plugins/nvim-tree.lua"]
+        plugins_nvim_tree_v2_e21630b9("adeotek_v2/plugins/nvim-tree.lua (File...<br/><small>adeotek_v2/plugins/nvim-tree.lua</small>")
+        nvim_config_nvim_lua_configs_adeotek_v2_plugins_b419c2f3("nvim-tree.lua")
+    end
+    subgraph extract_pipeline_adeotek_v2_plugins_theme_lua_52dd9c4d["adeotek_v2/plugins/theme.lua"]
+        concept_theme_integrations_49118812("Theme Integration Pattern (catppuccin i...<br/><small>adeotek_v2/plugins/theme.lua</small>")
+        plugins_theme_v2_fe46c7fa("adeotek_v2/plugins/theme.lua (Catppuccin)<br/><small>adeotek_v2/plugins/theme.lua</small>")
+    end
+    plugins_alpha_v1_eb73741d("adeotek_v1/plugins/alpha.lua (Dashboard)<br/><small>adeotek_v1/plugins/alpha.lua</small>")
+    plugins_telekasten_v1_2e3fd59b("adeotek_v1/plugins/telekasten.lua (Notes)<br/><small>adeotek_v1/plugins/telekasten.lua</small>")
+    plugins_telescope_v1_f7919b70("adeotek_v1/plugins/telescope.lua (Fuzzy...<br/><small>adeotek_v1/plugins/telescope.lua</small>")
+    plugins_treesitter_v1_2d26936e("adeotek_v1/plugins/treesitter.lua (Syntax)<br/><small>adeotek_v1/plugins/treesitter.lua</small>")
+    plugins_alpha_v2_52a0efe3("adeotek_v2/plugins/alpha.lua (Dashboard)<br/><small>adeotek_v2/plugins/alpha.lua</small>")
+    plugins_bufferline_v2_9031edde("adeotek v2/plugins/bufferline.lua")
+    plugins_telescope_v2_29a52885("adeotek_v2/plugins/telescope.lua (Fuzzy...<br/><small>adeotek_v2/plugins/telescope.lua</small>")
+    jakoolit_init_8faf738e("jakoolit/init.lua (3rd-party Config)<br/><small>configs/jakoolit/init.lua</small>")
+    jakoolit_plugins_7510e0ca("jakoolit/plugins.lua (Plugin List)<br/><small>configs/jakoolit/plugins.lua</small>")
+    jakoolit_vim_options_5d903e04("jakoolit/vim-options.lua (Vim Options)<br/><small>configs/jakoolit/vim-options.lua</small>")
+    jakoolit_init_8faf738e -->|calls| jakoolit_plugins_7510e0ca
+    jakoolit_init_8faf738e -->|calls| jakoolit_vim_options_5d903e04
+    %% Omitted for readability: 9 nodes, 0 edges
+    class plugins_neo_tree_v1_ef973e54 function;
+    class nvim_config_nvim_lua_configs_adeotek_v1_plugins_35f74536 function;
+    class concept_lsp_ecosystem_2ddf7ac0 klass;
+    class plugins_lsp_v2_7dc164ac function;
+    class plugins_nvim_tree_v2_e21630b9 function;
+    class nvim_config_nvim_lua_configs_adeotek_v2_plugins_b419c2f3 function;
+    class concept_theme_integrations_49118812 klass;
+    class plugins_theme_v2_fe46c7fa function;
+    class plugins_alpha_v1_eb73741d function;
+    class plugins_telekasten_v1_2e3fd59b function;
+    class plugins_telescope_v1_f7919b70 function;
+    class plugins_treesitter_v1_2d26936e function;
+    class plugins_alpha_v2_52a0efe3 function;
+    class plugins_bufferline_v2_9031edde function;
+    class plugins_telescope_v2_29a52885 function;
+    class jakoolit_init_8faf738e function;
+    class jakoolit_plugins_7510e0ca function;
+    class jakoolit_vim_options_5d903e04 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>adeotek_v1/plugins/alpha.lua (Dashboard)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/alpha.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v1/plugins/alpha.lua (Dashboard) node in adeotek_v1/plugins/alpha.lua.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>adeotek_v1/plugins/neo-tree.lua (File Explorer)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/neo-tree.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v1/plugins/neo-tree.lua (File Explorer) node in adeotek_v1/plugins/neo-tree.lua.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>adeotek_v1/plugins/telekasten.lua (Notes)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/telekasten.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v1/plugins/telekasten.lua (Notes) node in adeotek_v1/plugins/telekasten.lua.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>adeotek_v1/plugins/telescope.lua (Fuzzy Finder)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/telescope.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v1/plugins/telescope.lua (Fuzzy Finder) node in adeotek_v1/plugins/telescope.lua.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>adeotek_v1/plugins/treesitter.lua (Syntax)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/treesitter.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v1/plugins/treesitter.lua (Syntax) node in adeotek_v1/plugins/treesitter.lua.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>adeotek_v2/keymaps.lua (Centralized Keymaps)</code><br><small style="color:var(--muted)">configs/adeotek_v2/keymaps.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v2/keymaps.lua (Centralized Keymaps) node in configs/adeotek_v2/keymaps.lua.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>adeotek_v2/plugins/alpha.lua (Dashboard)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/alpha.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v2/plugins/alpha.lua (Dashboard) node in adeotek_v2/plugins/alpha.lua.</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>adeotek_v2/plugins/bufferline.lua</code><br><small style="color:var(--muted)">adeotek_v2/plugins/bufferline.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v2/plugins/bufferline.lua node in adeotek_v2/plugins/bufferline.lua.</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><code>adeotek_v2/plugins/lsp.lua (LSP + Mason + nvim-cmp)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/lsp.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v2/plugins/lsp.lua (LSP + Mason + nvim-cmp) node in adeotek_v2/plugins/lsp.lua.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><code>adeotek_v2/plugins/nvim-tree.lua (File Explorer)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/nvim-tree.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v2/plugins/nvim-tree.lua (File Explorer) node in adeotek_v2/plugins/nvim-tree.lua.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>adeotek_v2/plugins/telescope.lua (Fuzzy Finder)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/telescope.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v2/plugins/telescope.lua (Fuzzy Finder) node in adeotek_v2/plugins/telescope.lua.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><code>adeotek_v2/plugins/theme.lua (Catppuccin)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/theme.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v2/plugins/theme.lua (Catppuccin) node in adeotek_v2/plugins/theme.lua.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><code>LSP Ecosystem (lspconfig + mason + cmp + LuaSnip)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/lsp.lua</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><code>Centralized Keymap Architecture (v2 pattern)</code><br><small style="color:var(--muted)">configs/adeotek_v2/keymaps.lua</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Centralized Keymap Architecture (v2 pattern) node in configs/adeotek_v2/keymaps.lua.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><code>Theme Integration Pattern (catppuccin integrations)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/theme.lua</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Theme Integration Pattern (catppuccin integrations) node in adeotek_v2/plugins/theme.lua.</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td><code>adeotek_v2/plugins/treesitter.lua (Syntax)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/treesitter.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v2/plugins/treesitter.lua (Syntax) node in adeotek_v2/plugins/treesitter.lua.</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td><code>jakoolit/init.lua (3rd-party Config)</code><br><small style="color:var(--muted)">configs/jakoolit/init.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>jakoolit/plugins.lua (Plugin List)</code><br><small style="color:var(--muted)">configs/jakoolit/plugins.lua</small><br><code>jakoolit/vim-options.lua (Vim Options)</code><br><small style="color:var(--muted)">configs/jakoolit/vim-options.lua</small></td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td><code>jakoolit/plugins.lua (Plugin List)</code><br><small style="color:var(--muted)">configs/jakoolit/plugins.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>jakoolit/init.lua (3rd-party Config)</code><br><small style="color:var(--muted)">configs/jakoolit/init.lua</small></td>
+  <td>No direct outbound edge</td>
+  <td>jakoolit/plugins.lua (Plugin List) node in configs/jakoolit/plugins.lua.</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td><code>jakoolit/vim-options.lua (Vim Options)</code><br><small style="color:var(--muted)">configs/jakoolit/vim-options.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>jakoolit/init.lua (3rd-party Config)</code><br><small style="color:var(--muted)">configs/jakoolit/init.lua</small></td>
+  <td>No direct outbound edge</td>
+  <td>jakoolit/vim-options.lua (Vim Options) node in configs/jakoolit/vim-options.lua.</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><code>jakoolit/plugins/catppuccin.lua (Theme)</code><br><small style="color:var(--muted)">jakoolit/plugins/catppuccin.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>jakoolit/plugins/catppuccin.lua (Theme) node in jakoolit/plugins/catppuccin.lua.</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td><code>jakoolit/plugins/lsp-config.lua (LSP)</code><br><small style="color:var(--muted)">jakoolit/plugins/lsp-config.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td><code>jakoolit/plugins/telescope.lua (Fuzzy Finder)</code><br><small style="color:var(--muted)">jakoolit/plugins/telescope.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>jakoolit/plugins/telescope.lua (Fuzzy Finder) node in jakoolit/plugins/telescope.lua.</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td><code>jakoolit/plugins/treesitter.lua (Syntax)</code><br><small style="color:var(--muted)">jakoolit/plugins/treesitter.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>jakoolit/plugins/treesitter.lua (Syntax) node in jakoolit/plugins/treesitter.lua.</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td><code>neo-tree.lua</code><br><small style="color:var(--muted)">adeotek_v1/plugins/neo-tree.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>neo-tree.lua node in adeotek_v1/plugins/neo-tree.lua.</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td><code>nvim-tree.lua</code><br><small style="color:var(--muted)">adeotek_v2/plugins/nvim-tree.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>nvim-tree.lua node in adeotek_v2/plugins/nvim-tree.lua.</td>
+</tr>
+<tr>
+  <td>26</td>
+  <td><code>neo-tree.lua</code><br><small style="color:var(--muted)">jakoolit/plugins/neo-tree.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>neo-tree.lua node in jakoolit/plugins/neo-tree.lua.</td>
+</tr>
+<tr>
+  <td>27</td>
+  <td><code>jakoolit/plugins/neo-tree.lua (File Explorer)</code><br><small style="color:var(--muted)">jakoolit/plugins/neo-tree.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>jakoolit/plugins/neo-tree.lua (File Explorer) node in jakoolit/plugins/neo-tree.lua.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>adeotek_v1/plugins/neo-tree.lua</code></td><td>2 nodes</td></tr>
+<tr><td><code>configs/adeotek_v2/keymaps.lua</code></td><td>2 nodes</td></tr>
+<tr><td><code>adeotek_v2/plugins/lsp.lua</code></td><td>2 nodes</td></tr>
+<tr><td><code>adeotek_v2/plugins/nvim-tree.lua</code></td><td>2 nodes</td></tr>
+<tr><td><code>adeotek_v2/plugins/theme.lua</code></td><td>2 nodes</td></tr>
+<tr><td><code>jakoolit/plugins/neo-tree.lua</code></td><td>2 nodes</td></tr>
+<tr><td><code>adeotek_v1/plugins/alpha.lua</code></td><td>1 nodes</td></tr>
+<tr><td><code>adeotek_v1/plugins/telekasten.lua</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: references x13, semantically similar to x7, implements x3, calls x2. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 3. Graph Build ====== -->
+<h2 id="build-graph">3. Graph Build</h2>
+<p>Graph Build groups implementation around settings, partjson, config, claude, mostly in claude-code/user-config/settings-part.json, .config/zed/settings.json. This section covers 7 nodes and 5 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Graph Build (7 nodes, 5 edges)
+    subgraph build_graph_claude_code_user_config_settings_par_66b7fb8d["claude-code/user-config/settings-part.json"]
+        claude_code_user_config_settings_part_json_ca71eaa8("settings-part.json")
+        user_config_settings_part_statusline_abdb19e6("statusLine<br/><small>claude-code/user-config/settings-part.json</small>")
+        user_config_settings_part_env_edcd963f("env<br/><small>claude-code/user-config/settings-part.json</small>")
+        user_config_settings_part_env_enable_lsp_tool_bb5e4f61("ENABLE_LSP_TOOL<br/><small>claude-code/user-config/settings-part.json</small>")
+        user_config_settings_part_statusline_type_b61cc0ed("type<br/><small>claude-code/user-config/settings-part.json</small>")
+        user_config_settings_part_statusline_command_b1bb45fd("command<br/><small>claude-code/user-config/settings-part.json</small>")
+    end
+    zed_config_zed_settings_json_7410c16a("settings.json")
+    claude_code_user_config_settings_part_json_ca71eaa8 -->|contains| user_config_settings_part_env_edcd963f
+    claude_code_user_config_settings_part_json_ca71eaa8 -->|contains| user_config_settings_part_statusline_abdb19e6
+    user_config_settings_part_env_edcd963f -->|contains| user_config_settings_part_env_enable_lsp_tool_bb5e4f61
+    user_config_settings_part_statusline_abdb19e6 -->|contains| user_config_settings_part_statusline_type_b61cc0ed
+    user_config_settings_part_statusline_abdb19e6 -->|contains| user_config_settings_part_statusline_command_b1bb45fd
+    class claude_code_user_config_settings_part_json_ca71eaa8 function;
+    class user_config_settings_part_statusline_abdb19e6 function;
+    class user_config_settings_part_env_edcd963f function;
+    class user_config_settings_part_env_enable_lsp_tool_bb5e4f61 klass;
+    class user_config_settings_part_statusline_type_b61cc0ed function;
+    class user_config_settings_part_statusline_command_b1bb45fd entry;
+    class zed_config_zed_settings_json_7410c16a function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>settings-part.json</code><br><small style="color:var(--muted)">claude-code/user-config/settings-part.json</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>settings-part.json node in claude-code/user-config/settings-part.json.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>env</code><br><small style="color:var(--muted)">claude-code/user-config/settings-part.json</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>env node in claude-code/user-config/settings-part.json.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>ENABLE_LSP_TOOL</code><br><small style="color:var(--muted)">claude-code/user-config/settings-part.json</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ENABLE_LSP_TOOL node in claude-code/user-config/settings-part.json.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>statusLine</code><br><small style="color:var(--muted)">claude-code/user-config/settings-part.json</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>statusLine node in claude-code/user-config/settings-part.json.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>type</code><br><small style="color:var(--muted)">claude-code/user-config/settings-part.json</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>type node in claude-code/user-config/settings-part.json.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>command</code><br><small style="color:var(--muted)">claude-code/user-config/settings-part.json</small></td>
+  <td><span class="tag tag-cmd">Entry</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>command node in claude-code/user-config/settings-part.json.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>settings.json</code><br><small style="color:var(--muted)">.config/zed/settings.json</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>settings.json node in .config/zed/settings.json.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>claude-code/user-config/settings-part.json</code></td><td>6 nodes</td></tr>
+<tr><td><code>.config/zed/settings.json</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x5. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 4. CLI & Skill Installers ====== -->
+<h2 id="cli-skills">4. CLI &amp; Skill Installers</h2>
+<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, claude, code, mostly in _scripts/core/_helpers.sh, claude-code/user-config/statusline-command-win.sh, claude-code/user-config/statusline-command.sh. This section covers 205 nodes and 168 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: CLI &amp; Skill Installers (205 nodes, 168 edges)
+    subgraph cli_skills_scripts_core_helpers_sh_347c91c6["_scripts/core/_helpers.sh"]
+        core_helpers_cecho_a6dace64("cecho()<br/><small>_scripts/core/_helpers.sh</small>")
+        core_helpers_decho_421b4e2d("decho()<br/><small>_scripts/core/_helpers.sh</small>")
+        core_helpers_execute_command_89d44241("execute_command()<br/><small>_scripts/core/_helpers.sh</small>")
+        home_georg_dotfiles_scripts_core_helpers_sh_entr_068a0806("_helpers.sh script<br/><small>_scripts/core/_helpers.sh</small>")
+        core_helpers_rename_dir_if_exists_626c09b0("rename_dir_if_exists()<br/><small>_scripts/core/_helpers.sh</small>")
+        core_helpers_rename_file_if_exists_5d5242a7("rename_file_if_exists()<br/><small>_scripts/core/_helpers.sh</small>")
+        core_helpers_process_args_119d3b70("process_args()<br/><small>_scripts/core/_helpers.sh</small>")
+        core_helpers_aecho_314c5ad0("aecho()<br/><small>_scripts/core/_helpers.sh</small>")
+        core_helpers_increase_ulimit_6d909c0c("increase_ulimit()<br/><small>_scripts/core/_helpers.sh</small>")
+        core_helpers_install_package_81a7fb41("install_package()<br/><small>_scripts/core/_helpers.sh</small>")
+        core_helpers_stow_package_28e3d3aa("stow_package()<br/><small>_scripts/core/_helpers.sh</small>")
+        core_helpers_symlink_package_directory_3bdf06d3("symlink_package_directory()<br/><small>_scripts/core/_helpers.sh</small>")
+        core_helpers_symlink_package_file_4218ca53("symlink_package_file()<br/><small>_scripts/core/_helpers.sh</small>")
+    end
+    subgraph cli_skills_config_bash_config_bash_5403829b[".config/bash/config.bash"]
+        bash_config_c5ac05bd("Bash Config (config.bash)<br/><small>.config/bash/config.bash</small>")
+        concept_bash_path_setup_37eaebdd("Shell PATH Setup (Homebrew/Rust/Go/dotnet)<br/><small>.config/bash/config.bash</small>")
+    end
+    tabby_config_0fbe33ef("Tabby Terminal config.yaml")
+    zed_settings_9e2c6806("Zed Editor settings.json")
+    concept_gnu_stow_pattern_145476c2("GNU Stow Symlinking Pattern<br/><small>AGENTS.md</small>")
+    home_georg_dotfiles_scripts_core_helpers_sh_entr_068a0806 -->|calls| core_helpers_decho_421b4e2d
+    home_georg_dotfiles_scripts_core_helpers_sh_entr_068a0806 -->|calls| core_helpers_process_args_119d3b70
+    core_helpers_cecho_a6dace64 -->|calls| core_helpers_decho_421b4e2d
+    core_helpers_cecho_a6dace64 -->|calls| core_helpers_aecho_314c5ad0
+    core_helpers_cecho_a6dace64 -->|calls| core_helpers_execute_command_89d44241
+    core_helpers_cecho_a6dace64 -->|calls| core_helpers_increase_ulimit_6d909c0c
+    core_helpers_cecho_a6dace64 -->|calls| core_helpers_install_package_81a7fb41
+    core_helpers_cecho_a6dace64 -->|calls| core_helpers_stow_package_28e3d3aa
+    core_helpers_cecho_a6dace64 -->|calls| core_helpers_symlink_package_directory_3bdf06d3
+    core_helpers_cecho_a6dace64 -->|calls| core_helpers_symlink_package_file_4218ca53
+    core_helpers_decho_421b4e2d -->|calls| core_helpers_execute_command_89d44241
+    core_helpers_decho_421b4e2d -->|calls| core_helpers_rename_dir_if_exists_626c09b0
+    core_helpers_decho_421b4e2d -->|calls| core_helpers_rename_file_if_exists_5d5242a7
+    core_helpers_decho_421b4e2d -->|calls| core_helpers_increase_ulimit_6d909c0c
+    core_helpers_decho_421b4e2d -->|calls| core_helpers_install_package_81a7fb41
+    core_helpers_decho_421b4e2d -->|calls| core_helpers_stow_package_28e3d3aa
+    core_helpers_execute_command_89d44241 -->|calls| core_helpers_install_package_81a7fb41
+    core_helpers_execute_command_89d44241 -->|calls| core_helpers_stow_package_28e3d3aa
+    core_helpers_execute_command_89d44241 -->|calls| core_helpers_symlink_package_directory_3bdf06d3
+    core_helpers_execute_command_89d44241 -->|calls| core_helpers_symlink_package_file_4218ca53
+    core_helpers_rename_dir_if_exists_626c09b0 -->|calls| core_helpers_stow_package_28e3d3aa
+    core_helpers_rename_dir_if_exists_626c09b0 -->|calls| core_helpers_symlink_package_directory_3bdf06d3
+    core_helpers_rename_file_if_exists_5d5242a7 -->|calls| core_helpers_stow_package_28e3d3aa
+    core_helpers_rename_file_if_exists_5d5242a7 -->|calls| core_helpers_symlink_package_file_4218ca53
+    %% Omitted for readability: 187 nodes, 1 edges
+    class core_helpers_cecho_a6dace64 function;
+    class core_helpers_decho_421b4e2d function;
+    class core_helpers_execute_command_89d44241 entry;
+    class home_georg_dotfiles_scripts_core_helpers_sh_entr_068a0806 function;
+    class core_helpers_rename_dir_if_exists_626c09b0 function;
+    class core_helpers_rename_file_if_exists_5d5242a7 function;
+    class core_helpers_process_args_119d3b70 function;
+    class core_helpers_aecho_314c5ad0 function;
+    class core_helpers_increase_ulimit_6d909c0c function;
+    class core_helpers_install_package_81a7fb41 function;
+    class core_helpers_stow_package_28e3d3aa function;
+    class core_helpers_symlink_package_directory_3bdf06d3 function;
+    class core_helpers_symlink_package_file_4218ca53 function;
+    class bash_config_c5ac05bd klass;
+    class concept_bash_path_setup_37eaebdd klass;
+    class tabby_config_0fbe33ef klass;
+    class zed_settings_9e2c6806 klass;
+    class concept_gnu_stow_pattern_145476c2 klass;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>kitty-install.sh</code><br><small style="color:var(--muted)">_scripts/core/kitty-install.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>kitty-install.sh node in _scripts/core/kitty-install.sh.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>kitty-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/kitty-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>kitty-setup.sh node in _scripts/core/kitty-setup.sh.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>nerd-fonts-install.sh</code><br><small style="color:var(--muted)">_scripts/core/nerd-fonts-install.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>nerd-fonts-install.sh node in _scripts/core/nerd-fonts-install.sh.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>nvim-install.sh</code><br><small style="color:var(--muted)">_scripts/core/nvim-install.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>nvim-install.sh node in _scripts/core/nvim-install.sh.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>nvim-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/nvim-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>nvim-setup.sh node in _scripts/core/nvim-setup.sh.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>oh-my-posh-install.sh</code><br><small style="color:var(--muted)">_scripts/core/oh-my-posh-install.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>oh-my-posh-install.sh node in _scripts/core/oh-my-posh-install.sh.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>oh-my-posh-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/oh-my-posh-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>oh-my-posh-setup.sh node in _scripts/core/oh-my-posh-setup.sh.</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>starship-install.sh</code><br><small style="color:var(--muted)">_scripts/core/starship-install.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>starship-install.sh node in _scripts/core/starship-install.sh.</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><code>starship-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/starship-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>starship-setup.sh node in _scripts/core/starship-setup.sh.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><code>tabby-install.sh</code><br><small style="color:var(--muted)">_scripts/core/tabby-install.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>tabby-install.sh node in _scripts/core/tabby-install.sh.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>tabby-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/tabby-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>tabby-setup.sh node in _scripts/core/tabby-setup.sh.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><code>Install-Then-Setup Pattern</code><br><small style="color:var(--muted)">_scripts/core/kitty-install.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Install-Then-Setup Pattern node in _scripts/core/kitty-install.sh.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><code>Shell Prompt Customization Tool</code><br><small style="color:var(--muted)">_scripts/core/starship-install.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Builds structured prompts for model calls.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><code>Terminal Emulator</code><br><small style="color:var(--muted)">_scripts/core/kitty-install.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Terminal Emulator node in _scripts/core/kitty-install.sh.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><code>zsh-install.sh</code><br><small style="color:var(--muted)">_scripts/core/zsh-install.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>zsh-install.sh node in _scripts/core/zsh-install.sh.</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td><code>zsh-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/zsh-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>zsh-setup.sh node in _scripts/core/zsh-setup.sh.</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td><code>Bash Config (config.bash)</code><br><small style="color:var(--muted)">.config/bash/config.bash</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td><code>Shell PATH Setup (Homebrew/Rust/Go/dotnet)</code><br><small style="color:var(--muted)">.config/bash/config.bash</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Shell PATH Setup (Homebrew/Rust/Go/dotnet) node in .config/bash/config.bash.</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td><code>Tabby Terminal config.yaml</code><br><small style="color:var(--muted)">.config/tabby/config.yaml</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>_helpers.sh node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td><code>_helpers.sh script</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>process_args()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td>_helpers.sh script node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td><code>process_args()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>_helpers.sh script</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>process_args() node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>aecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>execute_command()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br>+5 more</td>
+  <td>cecho() node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>_helpers.sh script</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><code>execute_command()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>increase_ulimit()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>install_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br>+3 more</td>
+  <td>decho() node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td><code>aecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>aecho() node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>26</td>
+  <td><code>is_associative_array()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>is_associative_array() node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>27</td>
+  <td><code>get_vv()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>get_vv() node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>28</td>
+  <td><code>execute_command()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-cmd">Entry</span></td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><code>install_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>stow_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>symlink_package_directory()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br>+1 more</td>
+  <td>execute_command() node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>29</td>
+  <td><code>rename_dir_if_exists()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><code>stow_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>symlink_package_directory()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td>rename_dir_if_exists() node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>30</td>
+  <td><code>rename_file_if_exists()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><code>stow_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>symlink_package_file()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td>rename_file_if_exists() node in _scripts/core/_helpers.sh.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>_scripts/core/_helpers.sh</code></td><td>18 nodes</td></tr>
+<tr><td><code>claude-code/user-config/statusline-command-win.sh</code></td><td>9 nodes</td></tr>
+<tr><td><code>claude-code/user-config/statusline-command.sh</code></td><td>9 nodes</td></tr>
+<tr><td><code>_scripts/core/claude-code-setup.sh</code></td><td>5 nodes</td></tr>
+<tr><td><code>_scripts/core/kitty-install.sh</code></td><td>5 nodes</td></tr>
+<tr><td><code>_scripts/core/claude-code-install.sh</code></td><td>4 nodes</td></tr>
+<tr><td><code>_scripts/core/kubectl-install.sh</code></td><td>4 nodes</td></tr>
+<tr><td><code>_scripts/core/neofetch-install.sh</code></td><td>4 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x44, references x30, defines x29, calls x25. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 5. Ingestion & Updates ====== -->
+<h2 id="ingest-cache-update">5. Ingestion &amp; Updates</h2>
+<p>Ingestion &amp; Updates groups implementation around scripts, updatesh, system, helperssh, mostly in _scripts/core/_helpers.sh, update.sh, _scripts/core/system-update.sh. This section covers 22 nodes and 21 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Ingestion &amp; Updates (22 nodes, 21 edges)
+    subgraph ingest_cache_update_scripts_core_helpers_sh_415184ec["_scripts/core/_helpers.sh"]
+        core_helpers_50efebf9("_helpers.sh (Shared Utilities)<br/><small>_scripts/core/_helpers.sh</small>")
+        concept_dry_run_pattern_30b2eae3("Dry-Run Safety Pattern<br/><small>_scripts/core/_helpers.sh</small>")
+        concept_multi_distro_support_f65e1766("Multi-Distro Support (Arch/Debian/Fedora)<br/><small>_scripts/core/_helpers.sh</small>")
+        concept_wsl2_support_4aef91a9("WSL2 Environment Support<br/><small>_scripts/core/_helpers.sh</small>")
+        concept_os_dispatch_pattern_cb3466dd("OS-Dispatch Pattern (case $CURRENT_OS_ID)<br/><small>_scripts/core/_helpers.sh</small>")
+        concept_stow_package_fn_e5e9570a("stow_package() Helper Function<br/><small>_scripts/core/_helpers.sh</small>")
+    end
+    subgraph ingest_cache_update_update_sh_cfb670a7["update.sh"]
+        dotfiles_update_84d5ec6a("update.sh (System Update)<br/><small>update.sh</small>")
+        update_sh_5f98821f("update.sh")
+        home_georg_dotfiles_update_sh_entry_7b02f370("update.sh script<br/><small>update.sh</small>")
+    end
+    subgraph ingest_cache_update_scripts_core_options_sh_ba8ba5ae["_scripts/core/_options.sh"]
+        core_options_c5236319("_options.sh (Task Arrays &amp; Tiers)<br/><small>_scripts/core/_options.sh</small>")
+        concept_task_tier_hierarchy_eec758db("Task Tier Hierarchy (Minimal/Console/De...<br/><small>_scripts/core/_options.sh</small>")
+    end
+    subgraph ingest_cache_update_scripts_core_system_update_s_7df6b07c["_scripts/core/system-update.sh"]
+        scripts_core_system_update_sh_0dcd599d("system-update.sh")
+        home_georg_dotfiles_scripts_core_system_update_s_ce0aafa2("system-update.sh script<br/><small>_scripts/core/system-update.sh</small>")
+    end
+    subgraph ingest_cache_update_win_tools_tools_Rename_Files_80735726["win-tools/.tools/Rename-Files.ps1"]
+        win_tools_rename_files_42fc557e("Rename-Files.ps1 (Bulk Rename with Dry-...<br/><small>win-tools/.tools/Rename-Files.ps1</small>")
+        concept_dry_run_win_tools_a4a026a9("Dry-Run Pattern in PowerShell Tools<br/><small>win-tools/.tools/Rename-Files.ps1</small>")
+    end
+    scripts_wsl_setup_fedora_dev_67d33f87("wsl-setup-fedora-dev.sh (WSL2 Fedora Se...<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+    dotfiles_setup_16160cbb("setup.sh (Interactive Setup)<br/><small>setup.sh</small>")
+    dotfiles_unattended_setup_1cc95bd4("unattended_setup.sh (Unattended Setup)<br/><small>unattended_setup.sh</small>")
+    dotfiles_setup_16160cbb -->|references| core_helpers_50efebf9
+    dotfiles_setup_16160cbb -->|references| core_options_c5236319
+    dotfiles_unattended_setup_1cc95bd4 -->|references| core_helpers_50efebf9
+    dotfiles_unattended_setup_1cc95bd4 -->|references| core_options_c5236319
+    dotfiles_update_84d5ec6a -->|references| core_helpers_50efebf9
+    dotfiles_update_84d5ec6a -->|references| core_options_c5236319
+    core_helpers_50efebf9 -->|implements| concept_dry_run_pattern_30b2eae3
+    core_helpers_50efebf9 -->|implements| concept_multi_distro_support_f65e1766
+    core_helpers_50efebf9 -->|implements| concept_wsl2_support_4aef91a9
+    core_helpers_50efebf9 -->|implements| concept_os_dispatch_pattern_cb3466dd
+    core_helpers_50efebf9 -->|implements| concept_stow_package_fn_e5e9570a
+    core_helpers_50efebf9 -->|references| core_options_c5236319
+    core_options_c5236319 -->|implements| concept_task_tier_hierarchy_eec758db
+    win_tools_rename_files_42fc557e -->|implements| concept_dry_run_win_tools_a4a026a9
+    update_sh_5f98821f -->|contains| home_georg_dotfiles_update_sh_entry_7b02f370
+    scripts_core_system_update_sh_0dcd599d -->|contains| home_georg_dotfiles_scripts_core_system_update_s_ce0aafa2
+    scripts_wsl_setup_fedora_dev_67d33f87 -->|implements| concept_wsl2_support_4aef91a9
+    scripts_wsl_setup_fedora_dev_67d33f87 -->|references| core_helpers_50efebf9
+    concept_dry_run_pattern_30b2eae3 -->|semantically similar to| win_tools_rename_files_42fc557e
+    %% Omitted for readability: 4 nodes, 0 edges
+    class core_helpers_50efebf9 function;
+    class concept_dry_run_pattern_30b2eae3 klass;
+    class concept_multi_distro_support_f65e1766 klass;
+    class concept_wsl2_support_4aef91a9 klass;
+    class concept_os_dispatch_pattern_cb3466dd klass;
+    class concept_stow_package_fn_e5e9570a function;
+    class dotfiles_update_84d5ec6a function;
+    class update_sh_5f98821f function;
+    class home_georg_dotfiles_update_sh_entry_7b02f370 function;
+    class core_options_c5236319 function;
+    class concept_task_tier_hierarchy_eec758db klass;
+    class scripts_core_system_update_sh_0dcd599d function;
+    class home_georg_dotfiles_scripts_core_system_update_s_ce0aafa2 function;
+    class win_tools_rename_files_42fc557e klass;
+    class concept_dry_run_win_tools_a4a026a9 klass;
+    class scripts_wsl_setup_fedora_dev_67d33f87 function;
+    class dotfiles_setup_16160cbb function;
+    class dotfiles_unattended_setup_1cc95bd4 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>setup.sh (Interactive Setup)</code><br><small style="color:var(--muted)">setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>setup.sh (Interactive Setup) node in setup.sh.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>unattended_setup.sh (Unattended Setup)</code><br><small style="color:var(--muted)">unattended_setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>unattended_setup.sh (Unattended Setup) node in unattended_setup.sh.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>update.sh (System Update)</code><br><small style="color:var(--muted)">update.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>update.sh (System Update) node in update.sh.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>wsl-setup-fedora-dev.sh (WSL2 Fedora Setup)</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>wsl-setup-fedora-dev.sh (WSL2 Fedora Setup) node in _scripts/wsl-setup-fedora-dev.sh.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>_helpers.sh (Shared Utilities)</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>_helpers.sh (Shared Utilities) node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>_options.sh (Task Arrays &amp; Tiers)</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>_options.sh (Task Arrays &amp; Tiers) node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>Dry-Run Safety Pattern</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Dry-Run Safety Pattern node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>Multi-Distro Support (Arch/Debian/Fedora)</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Multi-Distro Support (Arch/Debian/Fedora) node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><code>Task Tier Hierarchy (Minimal/Console/Desktop)</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Task Tier Hierarchy (Minimal/Console/Desktop) node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><code>WSL2 Environment Support</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>WSL2 Environment Support node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>tools-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/tools-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>tools-setup.sh node in _scripts/core/tools-setup.sh.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><code>OS-Dispatch Pattern (case $CURRENT_OS_ID)</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>OS-Dispatch Pattern (case $CURRENT_OS_ID) node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><code>stow_package() Helper Function</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>stow_package() Helper Function node in _scripts/core/_helpers.sh.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><code>Rename-Files.ps1 (Bulk Rename with Dry-Run)</code><br><small style="color:var(--muted)">win-tools/.tools/Rename-Files.ps1</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Rename-Files.ps1 (Bulk Rename with Dry-Run) node in win-tools/.tools/Rename-Files.ps1.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><code>Dry-Run Pattern in PowerShell Tools</code><br><small style="color:var(--muted)">win-tools/.tools/Rename-Files.ps1</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Dry-Run Pattern in PowerShell Tools node in win-tools/.tools/Rename-Files.ps1.</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td><code>system-update.sh</code><br><small style="color:var(--muted)">_scripts/core/system-update.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>system-update.sh node in _scripts/core/system-update.sh.</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td><code>system-update.sh script</code><br><small style="color:var(--muted)">_scripts/core/system-update.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>system-update.sh script node in _scripts/core/system-update.sh.</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td><code>update.sh</code><br><small style="color:var(--muted)">update.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>update.sh node in update.sh.</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td><code>update.sh script</code><br><small style="color:var(--muted)">update.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>update.sh script node in update.sh.</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><code>vim-markdown-toc.lua</code><br><small style="color:var(--muted)">adeotek_v1/plugins/vim-markdown-toc.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Exports documentation data to a target format.</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td><code>system-update.sh</code><br><small style="color:var(--muted)">_scripts/core/system-update.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>system-update.sh node in _scripts/core/system-update.sh.</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td><code>adeotek_v1/plugins/vim-markdown-toc.lua</code><br><small style="color:var(--muted)">adeotek_v1/plugins/vim-markdown-toc.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Exports documentation data to a target format.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>_scripts/core/_helpers.sh</code></td><td>6 nodes</td></tr>
+<tr><td><code>_scripts/core/system-update.sh</code></td><td>3 nodes</td></tr>
+<tr><td><code>update.sh</code></td><td>3 nodes</td></tr>
+<tr><td><code>_scripts/core/_options.sh</code></td><td>2 nodes</td></tr>
+<tr><td><code>adeotek_v1/plugins/vim-markdown-toc.lua</code></td><td>2 nodes</td></tr>
+<tr><td><code>win-tools/.tools/Rename-Files.ps1</code></td><td>2 nodes</td></tr>
+<tr><td><code>_scripts/core/tools-setup.sh</code></td><td>1 nodes</td></tr>
+<tr><td><code>_scripts/wsl-setup-fedora-dev.sh</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: references x9, implements x8, contains x2, semantically similar to x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 6. Serving API ====== -->
+<h2 id="serve-api">6. Serving API</h2>
+<p>Serving API groups implementation around nvim, adeotek, config, initlua, mostly in nvim/lua/config.lua, configs/adeotek_v1/lazy_init.lua, .config/nvim/init.lua. This section covers 11 nodes and 10 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Serving API (11 nodes, 10 edges)
+    subgraph serve_api_configs_adeotek_v1_lazy_init_lua_f36865f5["configs/adeotek_v1/lazy_init.lua"]
+        adeotek_v1_lazy_init_9daeb31b("adeotek_v1/lazy_init.lua (Lazy.nvim Boo...<br/><small>configs/adeotek_v1/lazy_init.lua</small>")
+        concept_lazy_nvim_plugin_manager_1002315d("lazy.nvim Plugin Manager<br/><small>configs/adeotek_v1/lazy_init.lua</small>")
+    end
+    subgraph serve_api_nvim_lua_config_lua_205a71f6["nvim/lua/config.lua"]
+        lua_config_ab355158("lua/config.lua (Config Router)<br/><small>nvim/lua/config.lua</small>")
+        concept_nvim_config_env_router_021d57ae("NVIM_CONFIG Env Var Config Router<br/><small>nvim/lua/config.lua</small>")
+    end
+    nvim_init_359631d1("nvim/init.lua (Neovim Entry Point)<br/><small>.config/nvim/init.lua</small>")
+    plugins_init_v1_40f5a8fe("adeotek_v1/plugins/init.lua (Plugin List)<br/><small>adeotek_v1/plugins/init.lua</small>")
+    adeotek_v1_config_097d65ce("adeotek_v1/config.lua")
+    adeotek_v1_init_1b4a58e7("adeotek_v1/init.lua")
+    adeotek_v1_keymaps_46bf3ee9("adeotek_v1/keymaps.lua")
+    adeotek_v2_init_4122ecfc("adeotek_v2/init.lua (Lazy.nvim Bootstrap)<br/><small>configs/adeotek_v2/init.lua</small>")
+    adeotek_v2_options_78186def("adeotek_v2/options.lua (Vim Options)<br/><small>configs/adeotek_v2/options.lua</small>")
+    nvim_init_359631d1 -->|calls| lua_config_ab355158
+    lua_config_ab355158 -->|calls| adeotek_v1_config_097d65ce
+    adeotek_v1_init_1b4a58e7 -->|calls| adeotek_v1_keymaps_46bf3ee9
+    adeotek_v1_init_1b4a58e7 -->|calls| adeotek_v1_lazy_init_9daeb31b
+    adeotek_v1_lazy_init_9daeb31b -->|calls| plugins_init_v1_40f5a8fe
+    adeotek_v2_init_4122ecfc -->|calls| adeotek_v2_options_78186def
+    class adeotek_v1_lazy_init_9daeb31b function;
+    class concept_lazy_nvim_plugin_manager_1002315d function;
+    class lua_config_ab355158 api;
+    class concept_nvim_config_env_router_021d57ae api;
+    class nvim_init_359631d1 function;
+    class plugins_init_v1_40f5a8fe function;
+    class adeotek_v1_config_097d65ce function;
+    class adeotek_v1_init_1b4a58e7 function;
+    class adeotek_v1_keymaps_46bf3ee9 function;
+    class adeotek_v2_init_4122ecfc function;
+    class adeotek_v2_options_78186def function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>nvim/init.lua (Neovim Entry Point)</code><br><small style="color:var(--muted)">.config/nvim/init.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>lua/config.lua (Config Router)</code><br><small style="color:var(--muted)">nvim/lua/config.lua</small></td>
+  <td>nvim/init.lua (Neovim Entry Point) node in .config/nvim/init.lua.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>lua/config.lua (Config Router)</code><br><small style="color:var(--muted)">nvim/lua/config.lua</small></td>
+  <td><span class="tag tag-endpoint">API</span></td>
+  <td><code>nvim/init.lua (Neovim Entry Point)</code><br><small style="color:var(--muted)">.config/nvim/init.lua</small></td>
+  <td><code>adeotek_v1/config.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/config.lua</small></td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>adeotek_v1/config.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/config.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>lua/config.lua (Config Router)</code><br><small style="color:var(--muted)">nvim/lua/config.lua</small></td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>adeotek_v1/init.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/init.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>adeotek_v1/keymaps.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/keymaps.lua</small><br><code>adeotek_v1/lazy_init.lua (Lazy.nvim Boo...</code><br><small style="color:var(--muted)">configs/adeotek_v1/lazy_init.lua</small></td>
+  <td>adeotek_v1/init.lua node in configs/adeotek_v1/init.lua.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>adeotek_v1/keymaps.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/keymaps.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>adeotek_v1/init.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/init.lua</small></td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v1/keymaps.lua node in configs/adeotek_v1/keymaps.lua.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>adeotek_v1/lazy_init.lua (Lazy.nvim Bootstrap)</code><br><small style="color:var(--muted)">configs/adeotek_v1/lazy_init.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>adeotek_v1/init.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/init.lua</small></td>
+  <td><code>adeotek_v1/plugins/init.lua (Plugin List)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/init.lua</small></td>
+  <td>adeotek_v1/lazy_init.lua (Lazy.nvim Bootstrap) node in configs/adeotek_v1/lazy_init.lua.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>adeotek_v1/plugins/init.lua (Plugin List)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/init.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>adeotek_v1/lazy_init.lua (Lazy.nvim Boo...</code><br><small style="color:var(--muted)">configs/adeotek_v1/lazy_init.lua</small></td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v1/plugins/init.lua (Plugin List) node in adeotek_v1/plugins/init.lua.</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>NVIM_CONFIG Env Var Config Router</code><br><small style="color:var(--muted)">nvim/lua/config.lua</small></td>
+  <td><span class="tag tag-endpoint">API</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><code>lazy.nvim Plugin Manager</code><br><small style="color:var(--muted)">configs/adeotek_v1/lazy_init.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>lazy.nvim Plugin Manager node in configs/adeotek_v1/lazy_init.lua.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><code>adeotek_v2/init.lua (Lazy.nvim Bootstrap)</code><br><small style="color:var(--muted)">configs/adeotek_v2/init.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>adeotek_v2/options.lua (Vim Options)</code><br><small style="color:var(--muted)">configs/adeotek_v2/options.lua</small></td>
+  <td>adeotek_v2/init.lua (Lazy.nvim Bootstrap) node in configs/adeotek_v2/init.lua.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>adeotek_v2/options.lua (Vim Options)</code><br><small style="color:var(--muted)">configs/adeotek_v2/options.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>adeotek_v2/init.lua (Lazy.nvim Bootstrap)</code><br><small style="color:var(--muted)">configs/adeotek_v2/init.lua</small></td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v2/options.lua (Vim Options) node in configs/adeotek_v2/options.lua.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>nvim/lua/config.lua</code></td><td>2 nodes</td></tr>
+<tr><td><code>configs/adeotek_v1/lazy_init.lua</code></td><td>2 nodes</td></tr>
+<tr><td><code>.config/nvim/init.lua</code></td><td>1 nodes</td></tr>
+<tr><td><code>configs/adeotek_v1/config.lua</code></td><td>1 nodes</td></tr>
+<tr><td><code>configs/adeotek_v1/init.lua</code></td><td>1 nodes</td></tr>
+<tr><td><code>configs/adeotek_v1/keymaps.lua</code></td><td>1 nodes</td></tr>
+<tr><td><code>adeotek_v1/plugins/init.lua</code></td><td>1 nodes</td></tr>
+<tr><td><code>configs/adeotek_v2/init.lua</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: calls x6, implements x3, references x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 7. Tests & Fixtures ====== -->
+<h2 id="tests-fixtures">7. Tests &amp; Fixtures</h2>
+<p>Tests &amp; Fixtures groups implementation around tools, get, githubstatsps1, win, mostly in win-tools/.tools/Get-GitHubStats.ps1. This section covers 6 nodes and 6 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Tests &amp; Fixtures (6 nodes, 6 edges)
+    tools_get_githubstats_test_commandexists_30d01121("Test-CommandExists()<br/><small>win-tools/.tools/Get-GitHubStats.ps1</small>")
+    tools_get_githubstats_install_githubcli_62522f40("Install-GitHubCLI()<br/><small>win-tools/.tools/Get-GitHubStats.ps1</small>")
+    win_tools_tools_get_githubstats_ps1_30de2ecc("Get-GitHubStats.ps1")
+    tools_get_githubstats_get_repositorymembers_bee9bc40("Get-RepositoryMembers()<br/><small>win-tools/.tools/Get-GitHubStats.ps1</small>")
+    tools_get_githubstats_get_teammembers_81e71dea("Get-TeamMembers()<br/><small>win-tools/.tools/Get-GitHubStats.ps1</small>")
+    tools_get_githubstats_test_githubauth_c4f7d17b("Test-GitHubAuth()<br/><small>win-tools/.tools/Get-GitHubStats.ps1</small>")
+    tools_get_githubstats_test_commandexists_30d01121 -->|calls| tools_get_githubstats_install_githubcli_62522f40
+    class tools_get_githubstats_test_commandexists_30d01121 entry;
+    class tools_get_githubstats_install_githubcli_62522f40 entry;
+    class win_tools_tools_get_githubstats_ps1_30de2ecc klass;
+    class tools_get_githubstats_get_repositorymembers_bee9bc40 function;
+    class tools_get_githubstats_get_teammembers_81e71dea function;
+    class tools_get_githubstats_test_githubauth_c4f7d17b function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>Get-GitHubStats.ps1</code><br><small style="color:var(--muted)">win-tools/.tools/Get-GitHubStats.ps1</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Turns a local path or remote repository into analysis context.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>Test-CommandExists()</code><br><small style="color:var(--muted)">win-tools/.tools/Get-GitHubStats.ps1</small></td>
+  <td><span class="tag tag-cmd">Entry</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>Install-GitHubCLI()</code><br><small style="color:var(--muted)">win-tools/.tools/Get-GitHubStats.ps1</small></td>
+  <td>Verifies imports, entry points, or version behavior.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>Install-GitHubCLI()</code><br><small style="color:var(--muted)">win-tools/.tools/Get-GitHubStats.ps1</small></td>
+  <td><span class="tag tag-cmd">Entry</span></td>
+  <td><code>Test-CommandExists()</code><br><small style="color:var(--muted)">win-tools/.tools/Get-GitHubStats.ps1</small></td>
+  <td>No direct outbound edge</td>
+  <td>Turns a local path or remote repository into analysis context.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>Test-GitHubAuth()</code><br><small style="color:var(--muted)">win-tools/.tools/Get-GitHubStats.ps1</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Turns a local path or remote repository into analysis context.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>Get-RepositoryMembers()</code><br><small style="color:var(--muted)">win-tools/.tools/Get-GitHubStats.ps1</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Get-RepositoryMembers() node in win-tools/.tools/Get-GitHubStats.ps1.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>Get-TeamMembers()</code><br><small style="color:var(--muted)">win-tools/.tools/Get-GitHubStats.ps1</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Get-TeamMembers() node in win-tools/.tools/Get-GitHubStats.ps1.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>win-tools/.tools/Get-GitHubStats.ps1</code></td><td>6 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x5, calls x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 8. Task Tier Hierarchy (_options.sh) ====== -->
+<h2 id="task-tier-hierarchy-options-sh">8. Task Tier Hierarchy (_options.sh)</h2>
+<p>Task Tier Hierarchy (_options.sh) groups implementation around optionssh, scripts, tasks, console, mostly in _scripts/core/_options.sh. This section covers 15 nodes and 14 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Task Tier Hierarchy (_options.sh) (15 nodes, 14 edges)
+    scripts_core_options_sh_bde8f64f("_options.sh")
+    core_options_minimal_tasks_a8aeb4da("MINIMAL_TASKS<br/><small>_scripts/core/_options.sh</small>")
+    core_options_console_only_tasks_02d6fd4a("CONSOLE_ONLY_TASKS<br/><small>_scripts/core/_options.sh</small>")
+    core_options_console_tasks_b711928e("CONSOLE_TASKS<br/><small>_scripts/core/_options.sh</small>")
+    core_options_console_extra_tasks_0139d896("CONSOLE_EXTRA_TASKS<br/><small>_scripts/core/_options.sh</small>")
+    core_options_desktop_only_tasks_f5228921("DESKTOP_ONLY_TASKS<br/><small>_scripts/core/_options.sh</small>")
+    core_options_desktop_tasks_1332905a("DESKTOP_TASKS<br/><small>_scripts/core/_options.sh</small>")
+    core_options_all_console_tasks_2d50925f("ALL_CONSOLE_TASKS<br/><small>_scripts/core/_options.sh</small>")
+    core_options_desktop_extra_tasks_2753b450("DESKTOP_EXTRA_TASKS<br/><small>_scripts/core/_options.sh</small>")
+    core_options_all_desktop_tasks_856c9260("ALL_DESKTOP_TASKS<br/><small>_scripts/core/_options.sh</small>")
+    core_options_all_tasks_9a9d13d9("ALL_TASKS<br/><small>_scripts/core/_options.sh</small>")
+    core_options_menu_options_74dc2bec("MENU_OPTIONS<br/><small>_scripts/core/_options.sh</small>")
+    core_options_task_types_1ae3be0d("TASK_TYPES<br/><small>_scripts/core/_options.sh</small>")
+    core_options_task_args_d3944ed0("TASK_ARGS<br/><small>_scripts/core/_options.sh</small>")
+    home_georg_dotfiles_scripts_core_options_sh_entr_278a1ebb("_options.sh script<br/><small>_scripts/core/_options.sh</small>")
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_minimal_tasks_a8aeb4da
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_console_only_tasks_02d6fd4a
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_console_tasks_b711928e
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_console_extra_tasks_0139d896
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_desktop_only_tasks_f5228921
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_desktop_tasks_1332905a
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_all_console_tasks_2d50925f
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_desktop_extra_tasks_2753b450
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_all_desktop_tasks_856c9260
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_all_tasks_9a9d13d9
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_menu_options_74dc2bec
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_task_types_1ae3be0d
+    scripts_core_options_sh_bde8f64f -->|defines| core_options_task_args_d3944ed0
+    scripts_core_options_sh_bde8f64f -->|contains| home_georg_dotfiles_scripts_core_options_sh_entr_278a1ebb
+    class scripts_core_options_sh_bde8f64f function;
+    class core_options_minimal_tasks_a8aeb4da klass;
+    class core_options_console_only_tasks_02d6fd4a klass;
+    class core_options_console_tasks_b711928e klass;
+    class core_options_console_extra_tasks_0139d896 klass;
+    class core_options_desktop_only_tasks_f5228921 klass;
+    class core_options_desktop_tasks_1332905a klass;
+    class core_options_all_console_tasks_2d50925f klass;
+    class core_options_desktop_extra_tasks_2753b450 klass;
+    class core_options_all_desktop_tasks_856c9260 klass;
+    class core_options_all_tasks_9a9d13d9 klass;
+    class core_options_menu_options_74dc2bec klass;
+    class core_options_task_types_1ae3be0d klass;
+    class core_options_task_args_d3944ed0 klass;
+    class home_georg_dotfiles_scripts_core_options_sh_entr_278a1ebb function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>_options.sh</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>_options.sh node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>_options.sh script</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>_options.sh script node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>MINIMAL_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>MINIMAL_TASKS node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>CONSOLE_ONLY_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>CONSOLE_ONLY_TASKS node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>CONSOLE_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>CONSOLE_TASKS node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>CONSOLE_EXTRA_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>CONSOLE_EXTRA_TASKS node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>DESKTOP_ONLY_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>DESKTOP_ONLY_TASKS node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>DESKTOP_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>DESKTOP_TASKS node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><code>ALL_CONSOLE_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ALL_CONSOLE_TASKS node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><code>DESKTOP_EXTRA_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>DESKTOP_EXTRA_TASKS node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>ALL_DESKTOP_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ALL_DESKTOP_TASKS node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><code>ALL_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ALL_TASKS node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><code>MENU_OPTIONS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>MENU_OPTIONS node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><code>TASK_TYPES</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>TASK_TYPES node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><code>TASK_ARGS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>TASK_ARGS node in _scripts/core/_options.sh.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>_scripts/core/_options.sh</code></td><td>15 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: defines x13, contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 9. Bash Environment Variables ====== -->
+<h2 id="bash-environment-variables">9. Bash Environment Variables</h2>
+<p>Bash Environment Variables groups implementation around bash, configbash, config, script, mostly in .config/bash/config.bash. This section covers 8 nodes and 7 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Bash Environment Variables (8 nodes, 7 edges)
+    bash_config_bash_config_bash_92601d35("config.bash")
+    bash_config_colorterm_10061d49("COLORTERM<br/><small>.config/bash/config.bash</small>")
+    bash_config_lc_all_fbf1b51c("LC_ALL<br/><small>.config/bash/config.bash</small>")
+    bash_config_editor_ded4e0b1("EDITOR<br/><small>.config/bash/config.bash</small>")
+    bash_config_path_bf16b118("PATH<br/><small>.config/bash/config.bash</small>")
+    bash_config_hstrnotiocsti_ac1f80c6("hstrnotiocsti()<br/><small>.config/bash/config.bash</small>")
+    bash_config_yy_d198378e("yy()<br/><small>.config/bash/config.bash</small>")
+    home_georg_dotfiles_bash_config_bash_config_bash_0ee20fa2("config.bash script<br/><small>.config/bash/config.bash</small>")
+    bash_config_bash_config_bash_92601d35 -->|defines| bash_config_colorterm_10061d49
+    bash_config_bash_config_bash_92601d35 -->|defines| bash_config_lc_all_fbf1b51c
+    bash_config_bash_config_bash_92601d35 -->|defines| bash_config_editor_ded4e0b1
+    bash_config_bash_config_bash_92601d35 -->|defines| bash_config_path_bf16b118
+    bash_config_bash_config_bash_92601d35 -->|defines| bash_config_hstrnotiocsti_ac1f80c6
+    bash_config_bash_config_bash_92601d35 -->|defines| bash_config_yy_d198378e
+    bash_config_bash_config_bash_92601d35 -->|contains| home_georg_dotfiles_bash_config_bash_config_bash_0ee20fa2
+    class bash_config_bash_config_bash_92601d35 function;
+    class bash_config_colorterm_10061d49 klass;
+    class bash_config_lc_all_fbf1b51c klass;
+    class bash_config_editor_ded4e0b1 klass;
+    class bash_config_path_bf16b118 klass;
+    class bash_config_hstrnotiocsti_ac1f80c6 function;
+    class bash_config_yy_d198378e function;
+    class home_georg_dotfiles_bash_config_bash_config_bash_0ee20fa2 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>config.bash</code><br><small style="color:var(--muted)">.config/bash/config.bash</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>config.bash script</code><br><small style="color:var(--muted)">.config/bash/config.bash</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>COLORTERM</code><br><small style="color:var(--muted)">.config/bash/config.bash</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>COLORTERM node in .config/bash/config.bash.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>LC_ALL</code><br><small style="color:var(--muted)">.config/bash/config.bash</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>LC_ALL node in .config/bash/config.bash.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>EDITOR</code><br><small style="color:var(--muted)">.config/bash/config.bash</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>EDITOR node in .config/bash/config.bash.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>PATH</code><br><small style="color:var(--muted)">.config/bash/config.bash</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>PATH node in .config/bash/config.bash.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>hstrnotiocsti()</code><br><small style="color:var(--muted)">.config/bash/config.bash</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>hstrnotiocsti() node in .config/bash/config.bash.</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>yy()</code><br><small style="color:var(--muted)">.config/bash/config.bash</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>yy() node in .config/bash/config.bash.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>.config/bash/config.bash</code></td><td>8 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: defines x6, contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 10. WSL2 Fedora Dev Setup ====== -->
+<h2 id="wsl2-fedora-dev-setup">10. WSL2 Fedora Dev Setup</h2>
+<p>WSL2 Fedora Dev Setup groups implementation around wsl, setup, fedora, devsh, mostly in _scripts/wsl-setup-fedora-dev.sh. This section covers 8 nodes and 11 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: WSL2 Fedora Dev Setup (8 nodes, 11 edges)
+    home_georg_dotfiles_scripts_wsl_setup_fedora_dev_1a9f3626("wsl-setup-fedora-dev.sh script<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+    scripts_wsl_setup_fedora_dev_usage_9ec65e77("usage()<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+    scripts_wsl_setup_fedora_dev_stage_status_cb4b6d7d("stage_status()<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+    scripts_wsl_setup_fedora_dev_echo_warning_ecf0fa58("echo_warning()<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+    scripts_wsl_setup_fedora_dev_echo_error_8f7b3da0("echo_error()<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+    scripts_wsl_setup_fedora_dev_dotfiles_packages_c5729ea3("DOTFILES_PACKAGES<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+    scripts_wsl_setup_fedora_dev_vscode_candidates_85219fa9("_vscode_candidates<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+    scripts_wsl_setup_fedora_dev_sh_5b0e5b60("wsl-setup-fedora-dev.sh")
+    home_georg_dotfiles_scripts_wsl_setup_fedora_dev_1a9f3626 -->|calls| scripts_wsl_setup_fedora_dev_usage_9ec65e77
+    home_georg_dotfiles_scripts_wsl_setup_fedora_dev_1a9f3626 -->|calls| scripts_wsl_setup_fedora_dev_stage_status_cb4b6d7d
+    home_georg_dotfiles_scripts_wsl_setup_fedora_dev_1a9f3626 -->|calls| scripts_wsl_setup_fedora_dev_echo_warning_ecf0fa58
+    home_georg_dotfiles_scripts_wsl_setup_fedora_dev_1a9f3626 -->|calls| scripts_wsl_setup_fedora_dev_echo_error_8f7b3da0
+    class home_georg_dotfiles_scripts_wsl_setup_fedora_dev_1a9f3626 function;
+    class scripts_wsl_setup_fedora_dev_usage_9ec65e77 function;
+    class scripts_wsl_setup_fedora_dev_stage_status_cb4b6d7d function;
+    class scripts_wsl_setup_fedora_dev_echo_warning_ecf0fa58 function;
+    class scripts_wsl_setup_fedora_dev_echo_error_8f7b3da0 function;
+    class scripts_wsl_setup_fedora_dev_dotfiles_packages_c5729ea3 klass;
+    class scripts_wsl_setup_fedora_dev_vscode_candidates_85219fa9 function;
+    class scripts_wsl_setup_fedora_dev_sh_5b0e5b60 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>wsl-setup-fedora-dev.sh</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>wsl-setup-fedora-dev.sh node in _scripts/wsl-setup-fedora-dev.sh.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>wsl-setup-fedora-dev.sh script</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>echo_error()</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small><br><code>echo_warning()</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small><br><code>stage_status()</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small><br>+1 more</td>
+  <td>wsl-setup-fedora-dev.sh script node in _scripts/wsl-setup-fedora-dev.sh.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>usage()</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>wsl-setup-fedora-dev.sh script</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>usage() node in _scripts/wsl-setup-fedora-dev.sh.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>stage_status()</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>wsl-setup-fedora-dev.sh script</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>stage_status() node in _scripts/wsl-setup-fedora-dev.sh.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>echo_warning()</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>wsl-setup-fedora-dev.sh script</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>echo_warning() node in _scripts/wsl-setup-fedora-dev.sh.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>echo_error()</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>wsl-setup-fedora-dev.sh script</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>echo_error() node in _scripts/wsl-setup-fedora-dev.sh.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>DOTFILES_PACKAGES</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>DOTFILES_PACKAGES node in _scripts/wsl-setup-fedora-dev.sh.</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>_vscode_candidates</code><br><small style="color:var(--muted)">_scripts/wsl-setup-fedora-dev.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>_vscode_candidates node in _scripts/wsl-setup-fedora-dev.sh.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>_scripts/wsl-setup-fedora-dev.sh</code></td><td>8 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: defines x6, calls x4, contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 11. cc-sessions.sh Session Browser ====== -->
+<h2 id="cc-sessions-sh-session-browser">11. cc-sessions.sh Session Browser</h2>
+<p>cc-sessions.sh Session Browser groups implementation around tools, sessionssh, projects, script, mostly in tools/.tools/cc-sessions.sh. This section covers 6 nodes and 5 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: cc-sessions.sh Session Browser (6 nodes, 5 edges)
+    tools_tools_cc_sessions_sh_8835c34b("cc-sessions.sh")
+    tools_cc_sessions_rm_files_d1238fa5("rm_files<br/><small>tools/.tools/cc-sessions.sh</small>")
+    tools_cc_sessions_rm_labels_4a01e089("rm_labels<br/><small>tools/.tools/cc-sessions.sh</small>")
+    tools_cc_sessions_seen_projects_e426cbb9("seen_projects<br/><small>tools/.tools/cc-sessions.sh</small>")
+    tools_cc_sessions_ordered_projects_321e658e("ordered_projects<br/><small>tools/.tools/cc-sessions.sh</small>")
+    home_georg_dotfiles_tools_tools_cc_sessions_sh_e_1a6ce888("cc-sessions.sh script<br/><small>tools/.tools/cc-sessions.sh</small>")
+    tools_tools_cc_sessions_sh_8835c34b -->|defines| tools_cc_sessions_rm_files_d1238fa5
+    tools_tools_cc_sessions_sh_8835c34b -->|defines| tools_cc_sessions_rm_labels_4a01e089
+    tools_tools_cc_sessions_sh_8835c34b -->|defines| tools_cc_sessions_seen_projects_e426cbb9
+    tools_tools_cc_sessions_sh_8835c34b -->|defines| tools_cc_sessions_ordered_projects_321e658e
+    tools_tools_cc_sessions_sh_8835c34b -->|contains| home_georg_dotfiles_tools_tools_cc_sessions_sh_e_1a6ce888
+    class tools_tools_cc_sessions_sh_8835c34b function;
+    class tools_cc_sessions_rm_files_d1238fa5 function;
+    class tools_cc_sessions_rm_labels_4a01e089 function;
+    class tools_cc_sessions_seen_projects_e426cbb9 function;
+    class tools_cc_sessions_ordered_projects_321e658e function;
+    class home_georg_dotfiles_tools_tools_cc_sessions_sh_e_1a6ce888 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>cc-sessions.sh</code><br><small style="color:var(--muted)">tools/.tools/cc-sessions.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>cc-sessions.sh node in tools/.tools/cc-sessions.sh.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>cc-sessions.sh script</code><br><small style="color:var(--muted)">tools/.tools/cc-sessions.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>cc-sessions.sh script node in tools/.tools/cc-sessions.sh.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>rm_files</code><br><small style="color:var(--muted)">tools/.tools/cc-sessions.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>rm_files node in tools/.tools/cc-sessions.sh.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>rm_labels</code><br><small style="color:var(--muted)">tools/.tools/cc-sessions.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>rm_labels node in tools/.tools/cc-sessions.sh.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>seen_projects</code><br><small style="color:var(--muted)">tools/.tools/cc-sessions.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>seen_projects node in tools/.tools/cc-sessions.sh.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>ordered_projects</code><br><small style="color:var(--muted)">tools/.tools/cc-sessions.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ordered_projects node in tools/.tools/cc-sessions.sh.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>tools/.tools/cc-sessions.sh</code></td><td>6 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: defines x4, contains x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 12. Windows Env Setup Script ====== -->
+<h2 id="windows-env-setup-script">12. Windows Env Setup Script</h2>
+<p>Windows Env Setup Script groups implementation around tools, run, localwinenvsetupps1, win, mostly in win-tools/.tools/Run-LocalWinEnvSetup.ps1. This section covers 6 nodes and 10 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Windows Env Setup Script (6 nodes, 10 edges)
+    tools_run_localwinenvsetup_write_color_a0d578a1("Write-Color()<br/><small>win-tools/.tools/Run-LocalWinEnvSetup.ps1</small>")
+    tools_run_localwinenvsetup_exitwithmessage_040cc601("ExitWithMessage()<br/><small>win-tools/.tools/Run-LocalWinEnvSetup.ps1</small>")
+    tools_run_localwinenvsetup_readconfigfile_16e73048("ReadConfigFile()<br/><small>win-tools/.tools/Run-LocalWinEnvSetup.ps1</small>")
+    tools_run_localwinenvsetup_add_env_path_944aea45("Add-Env-Path()<br/><small>win-tools/.tools/Run-LocalWinEnvSetup.ps1</small>")
+    tools_run_localwinenvsetup_createalias_151ed286("CreateAlias()<br/><small>win-tools/.tools/Run-LocalWinEnvSetup.ps1</small>")
+    win_tools_tools_run_localwinenvsetup_ps1_edce8599("Run-LocalWinEnvSetup.ps1")
+    tools_run_localwinenvsetup_write_color_a0d578a1 -->|calls| tools_run_localwinenvsetup_exitwithmessage_040cc601
+    tools_run_localwinenvsetup_write_color_a0d578a1 -->|calls| tools_run_localwinenvsetup_readconfigfile_16e73048
+    tools_run_localwinenvsetup_write_color_a0d578a1 -->|calls| tools_run_localwinenvsetup_add_env_path_944aea45
+    tools_run_localwinenvsetup_write_color_a0d578a1 -->|calls| tools_run_localwinenvsetup_createalias_151ed286
+    tools_run_localwinenvsetup_exitwithmessage_040cc601 -->|calls| tools_run_localwinenvsetup_readconfigfile_16e73048
+    class tools_run_localwinenvsetup_write_color_a0d578a1 function;
+    class tools_run_localwinenvsetup_exitwithmessage_040cc601 function;
+    class tools_run_localwinenvsetup_readconfigfile_16e73048 function;
+    class tools_run_localwinenvsetup_add_env_path_944aea45 function;
+    class tools_run_localwinenvsetup_createalias_151ed286 function;
+    class win_tools_tools_run_localwinenvsetup_ps1_edce8599 klass;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>Run-LocalWinEnvSetup.ps1</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Run-LocalWinEnvSetup.ps1 node in win-tools/.tools/Run-LocalWinEnvSetup.ps1.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>Write-Color()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>Add-Env-Path()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small><br><code>CreateAlias()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small><br><code>ExitWithMessage()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small><br>+1 more</td>
+  <td>Write-Color() node in win-tools/.tools/Run-LocalWinEnvSetup.ps1.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>ExitWithMessage()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Write-Color()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small></td>
+  <td><code>ReadConfigFile()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small></td>
+  <td>ExitWithMessage() node in win-tools/.tools/Run-LocalWinEnvSetup.ps1.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>ReadConfigFile()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>ExitWithMessage()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small><br><code>Write-Color()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small></td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>Add-Env-Path()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Write-Color()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small></td>
+  <td>No direct outbound edge</td>
+  <td>Add-Env-Path() node in win-tools/.tools/Run-LocalWinEnvSetup.ps1.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>CreateAlias()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Write-Color()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-LocalWinEnvSetup.ps1</small></td>
+  <td>No direct outbound edge</td>
+  <td>CreateAlias() node in win-tools/.tools/Run-LocalWinEnvSetup.ps1.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>win-tools/.tools/Run-LocalWinEnvSetup.ps1</code></td><td>6 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x5, calls x5. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 13. Windows Network/Firewall Tools ====== -->
+<h2 id="windows-network-firewall-tools">13. Windows Network/Firewall Tools</h2>
+<p>Windows Network/Firewall Tools groups implementation around tools, win, run, add, mostly in win-tools/.tools/Add-WinFirewallRule.ps1, win-tools/.tools/Get-WinFirewallRuleByPort.ps1, win-tools/.tools/Run-PortListen.ps1. This section covers 5 nodes and 6 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Windows Network/Firewall Tools (5 nodes, 6 edges)
+    subgraph windows_network_firewall_tools_win_tools_tools_A_3860566d["win-tools/.tools/Add-WinFirewallRule.ps1"]
+        win_tools_add_firewall_rule_97f096ba("Add-WinFirewallRule.ps1")
+        concept_win_network_tools_829ce728("Windows Network/Firewall Diagnostic Tools<br/><small>win-tools/.tools/Add-WinFirewallRule.ps1</small>")
+    end
+    win_tools_get_firewall_rule_99c22cdf("Get-WinFirewallRuleByPort.ps1")
+    win_tools_run_port_listen_7c87d414("Run-PortListen.ps1 (TCP/UDP Listener)<br/><small>win-tools/.tools/Run-PortListen.ps1</small>")
+    win_tools_run_port_probe_da78470e("Run-PortProbe.ps1 (TCP Connectivity Test)<br/><small>win-tools/.tools/Run-PortProbe.ps1</small>")
+    win_tools_add_firewall_rule_97f096ba -->|implements| concept_win_network_tools_829ce728
+    win_tools_get_firewall_rule_99c22cdf -->|implements| concept_win_network_tools_829ce728
+    win_tools_run_port_listen_7c87d414 -->|implements| concept_win_network_tools_829ce728
+    win_tools_run_port_probe_da78470e -->|implements| concept_win_network_tools_829ce728
+    win_tools_add_firewall_rule_97f096ba -->|semantically similar to| win_tools_get_firewall_rule_99c22cdf
+    win_tools_run_port_listen_7c87d414 -->|semantically similar to| win_tools_run_port_probe_da78470e
+    class win_tools_add_firewall_rule_97f096ba klass;
+    class concept_win_network_tools_829ce728 klass;
+    class win_tools_get_firewall_rule_99c22cdf klass;
+    class win_tools_run_port_listen_7c87d414 klass;
+    class win_tools_run_port_probe_da78470e klass;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>Add-WinFirewallRule.ps1</code><br><small style="color:var(--muted)">win-tools/.tools/Add-WinFirewallRule.ps1</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Add-WinFirewallRule.ps1 node in win-tools/.tools/Add-WinFirewallRule.ps1.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>Get-WinFirewallRuleByPort.ps1</code><br><small style="color:var(--muted)">win-tools/.tools/Get-WinFirewallRuleByPort.ps1</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Get-WinFirewallRuleByPort.ps1 node in win-tools/.tools/Get-WinFirewallRuleByPort.ps1.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>Run-PortListen.ps1 (TCP/UDP Listener)</code><br><small style="color:var(--muted)">win-tools/.tools/Run-PortListen.ps1</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Run-PortListen.ps1 (TCP/UDP Listener) node in win-tools/.tools/Run-PortListen.ps1.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>Run-PortProbe.ps1 (TCP Connectivity Test)</code><br><small style="color:var(--muted)">win-tools/.tools/Run-PortProbe.ps1</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Verifies imports, entry points, or version behavior.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>Windows Network/Firewall Diagnostic Tools</code><br><small style="color:var(--muted)">win-tools/.tools/Add-WinFirewallRule.ps1</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Windows Network/Firewall Diagnostic Tools node in win-tools/.tools/Add-WinFirewallRule.ps1.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>win-tools/.tools/Add-WinFirewallRule.ps1</code></td><td>2 nodes</td></tr>
+<tr><td><code>win-tools/.tools/Get-WinFirewallRuleByPort.ps1</code></td><td>1 nodes</td></tr>
+<tr><td><code>win-tools/.tools/Run-PortListen.ps1</code></td><td>1 nodes</td></tr>
+<tr><td><code>win-tools/.tools/Run-PortProbe.ps1</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: implements x4, semantically similar to x2. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 14. Module 21 ====== -->
+<h2 id="module-21">14. Module 21</h2>
+<p>Module 21 groups implementation around nvim, config, neovim, readmemd, mostly in .config/nvim/README.md, .config/nvim/Cheatsheet.md. This section covers 3 nodes and 2 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Module 21 (3 nodes, 2 edges)
+    subgraph module_21_config_nvim_README_md_247350df[".config/nvim/README.md"]
+        nvim_readme_2ec629bf("Neovim README.md")
+        concept_nvim_three_configs_47ba402a("Three Neovim Config Variants Pattern<br/><small>.config/nvim/README.md</small>")
+    end
+    nvim_cheatsheet_md_e1653931("Neovim Cheatsheet.md")
+    nvim_readme_2ec629bf -->|references| concept_nvim_three_configs_47ba402a
+    class nvim_readme_2ec629bf concept;
+    class concept_nvim_three_configs_47ba402a klass;
+    class nvim_cheatsheet_md_e1653931 concept;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>Neovim Cheatsheet.md</code><br><small style="color:var(--muted)">.config/nvim/Cheatsheet.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing Neovim Cheatsheet.md.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>Neovim README.md</code><br><small style="color:var(--muted)">.config/nvim/README.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing Neovim README.md.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>Three Neovim Config Variants Pattern</code><br><small style="color:var(--muted)">.config/nvim/README.md</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>.config/nvim/README.md</code></td><td>2 nodes</td></tr>
+<tr><td><code>.config/nvim/Cheatsheet.md</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: references x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 15. Module 22 ====== -->
+<h2 id="module-22">15. Module 22</h2>
+<p>Module 22 groups implementation around posh, gbsompyaml, theme, config, mostly in .config/oh-my-posh/gbs.omp.yaml, .config/oh-my-posh/gbs-text.omp.yaml. This section covers 3 nodes and 2 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Module 22 (3 nodes, 2 edges)
+    subgraph module_22_config_oh_my_posh_gbs_omp_yaml_88f3ede5[".config/oh-my-posh/gbs.omp.yaml"]
+        oh_my_posh_gbs_ee0ad8db("oh-my-posh gbs.omp.yaml (Powerline Theme)<br/><small>.config/oh-my-posh/gbs.omp.yaml</small>")
+        concept_oh_my_posh_theme_variants_c87bb5e3("Oh-My-Posh Theme Variants (icon vs text)<br/><small>.config/oh-my-posh/gbs.omp.yaml</small>")
+    end
+    oh_my_posh_gbs_text_1905ab1e("oh-my-posh gbs-text.omp.yaml (Plain Theme)<br/><small>.config/oh-my-posh/gbs-text.omp.yaml</small>")
+    oh_my_posh_gbs_ee0ad8db -->|implements| concept_oh_my_posh_theme_variants_c87bb5e3
+    oh_my_posh_gbs_ee0ad8db -->|semantically similar to| oh_my_posh_gbs_text_1905ab1e
+    class oh_my_posh_gbs_ee0ad8db function;
+    class concept_oh_my_posh_theme_variants_c87bb5e3 klass;
+    class oh_my_posh_gbs_text_1905ab1e function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>oh-my-posh gbs.omp.yaml (Powerline Theme)</code><br><small style="color:var(--muted)">.config/oh-my-posh/gbs.omp.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>oh-my-posh gbs.omp.yaml (Powerline Theme) node in .config/oh-my-posh/gbs.omp.yaml.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>oh-my-posh gbs-text.omp.yaml (Plain Theme)</code><br><small style="color:var(--muted)">.config/oh-my-posh/gbs-text.omp.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>oh-my-posh gbs-text.omp.yaml (Plain Theme) node in .config/oh-my-posh/gbs-text.omp.yaml.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>Oh-My-Posh Theme Variants (icon vs text)</code><br><small style="color:var(--muted)">.config/oh-my-posh/gbs.omp.yaml</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Oh-My-Posh Theme Variants (icon vs text) node in .config/oh-my-posh/gbs.omp.yaml.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>.config/oh-my-posh/gbs.omp.yaml</code></td><td>2 nodes</td></tr>
+<tr><td><code>.config/oh-my-posh/gbs-text.omp.yaml</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: semantically similar to x1, implements x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 16. Other ====== -->
+<h2 id="other">16. Other</h2>
+<p>Other groups implementation around nvim, setupsh, config, adeotek, mostly in unattended_setup.sh, _scripts/core/bash-setup.sh, adeotek_v2/plugins/toggleterm.lua. This section covers 121 nodes and 32 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Other (121 nodes, 32 edges)
+    subgraph other_unattended_setup_sh_a1f334d8["unattended_setup.sh"]
+        unattended_setup_sh_30eddbf1("unattended_setup.sh")
+        dotfiles_unattended_setup_args_cac7d736("ARGS<br/><small>unattended_setup.sh</small>")
+        home_georg_dotfiles_unattended_setup_sh_entry_d438e01f("unattended_setup.sh script<br/><small>unattended_setup.sh</small>")
+    end
+    subgraph other_scripts_core_bash_setup_sh_a13cf8b7["_scripts/core/bash-setup.sh"]
+        scripts_core_bash_setup_sh_39da171f("bash-setup.sh")
+        home_georg_dotfiles_scripts_core_bash_setup_sh_e_04ad7970("bash-setup.sh script<br/><small>_scripts/core/bash-setup.sh</small>")
+    end
+    subgraph other_scripts_core_fastfetch_setup_sh_d71d5cdf["_scripts/core/fastfetch-setup.sh"]
+        scripts_core_fastfetch_setup_sh_ae09ad16("fastfetch-setup.sh")
+        home_georg_dotfiles_scripts_core_fastfetch_setup_2a1d11f3("fastfetch-setup.sh script<br/><small>_scripts/core/fastfetch-setup.sh</small>")
+    end
+    subgraph other_scripts_core_git_setup_sh_02a5505f["_scripts/core/git-setup.sh"]
+        scripts_core_git_setup_sh_efd03f70("git-setup.sh")
+        home_georg_dotfiles_scripts_core_git_setup_sh_en_767c1594("git-setup.sh script<br/><small>_scripts/core/git-setup.sh</small>")
+    end
+    subgraph other_setup_sh_bc2a115c["setup.sh"]
+        setup_sh_8e399598("setup.sh")
+        home_georg_dotfiles_setup_sh_entry_394edd8f("setup.sh script<br/><small>setup.sh</small>")
+    end
+    subgraph other_zsh_README_md_17dd3082["zsh/README.md"]
+        zsh_readme_b485f418("ZSH README.md (Config Guide)<br/><small>zsh/README.md</small>")
+        concept_zsh_standalone_config_bcb93c1a("ZSH Standalone Config (no plugin manager)<br/><small>zsh/README.md</small>")
+    end
+    scripts_core_jetbrains_toolbox_setup_sh_27096846("jetbrains-toolbox-setup.sh")
+    nvim_config_nvim_lua_configs_adeotek_v1_keymaps_30e4a564("keymaps.lua")
+    nvim_config_nvim_lua_configs_adeotek_v2_keymaps_a6c826cc("keymaps.lua")
+    nvim_config_nvim_lua_configs_adeotek_v2_options_8991a442("options.lua")
+    nvim_config_nvim_lua_config_lua_41048ba8("config.lua")
+    unattended_setup_sh_30eddbf1 -->|defines| dotfiles_unattended_setup_args_cac7d736
+    zsh_readme_b485f418 -->|references| concept_zsh_standalone_config_bcb93c1a
+    setup_sh_8e399598 -->|contains| home_georg_dotfiles_setup_sh_entry_394edd8f
+    unattended_setup_sh_30eddbf1 -->|contains| home_georg_dotfiles_unattended_setup_sh_entry_d438e01f
+    scripts_core_bash_setup_sh_39da171f -->|contains| home_georg_dotfiles_scripts_core_bash_setup_sh_e_04ad7970
+    scripts_core_fastfetch_setup_sh_ae09ad16 -->|contains| home_georg_dotfiles_scripts_core_fastfetch_setup_2a1d11f3
+    scripts_core_git_setup_sh_efd03f70 -->|contains| home_georg_dotfiles_scripts_core_git_setup_sh_en_767c1594
+    %% Omitted for readability: 103 nodes, 0 edges
+    class unattended_setup_sh_30eddbf1 function;
+    class dotfiles_unattended_setup_args_cac7d736 klass;
+    class home_georg_dotfiles_unattended_setup_sh_entry_d438e01f function;
+    class scripts_core_bash_setup_sh_39da171f function;
+    class home_georg_dotfiles_scripts_core_bash_setup_sh_e_04ad7970 function;
+    class scripts_core_fastfetch_setup_sh_ae09ad16 function;
+    class home_georg_dotfiles_scripts_core_fastfetch_setup_2a1d11f3 function;
+    class scripts_core_git_setup_sh_efd03f70 function;
+    class home_georg_dotfiles_scripts_core_git_setup_sh_en_767c1594 function;
+    class setup_sh_8e399598 function;
+    class home_georg_dotfiles_setup_sh_entry_394edd8f function;
+    class zsh_readme_b485f418 concept;
+    class concept_zsh_standalone_config_bcb93c1a klass;
+    class scripts_core_jetbrains_toolbox_setup_sh_27096846 function;
+    class nvim_config_nvim_lua_configs_adeotek_v1_keymaps_30e4a564 function;
+    class nvim_config_nvim_lua_configs_adeotek_v2_keymaps_a6c826cc function;
+    class nvim_config_nvim_lua_configs_adeotek_v2_options_8991a442 function;
+    class nvim_config_nvim_lua_config_lua_41048ba8 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>unattended_setup.sh</code><br><small style="color:var(--muted)">unattended_setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>unattended_setup.sh node in unattended_setup.sh.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>unattended_setup.sh script</code><br><small style="color:var(--muted)">unattended_setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>unattended_setup.sh script node in unattended_setup.sh.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>ARGS</code><br><small style="color:var(--muted)">unattended_setup.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ARGS node in unattended_setup.sh.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>adeotek_v1/plugins/catppuccin.lua (Theme)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/catppuccin.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v1/plugins/catppuccin.lua (Theme) node in adeotek_v1/plugins/catppuccin.lua.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>adeotek_v1/plugins/lualine.lua (Statusline)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/lualine.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v1/plugins/lualine.lua (Statusline) node in adeotek_v1/plugins/lualine.lua.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>jakoolit/plugins/lualine.lua (Statusline)</code><br><small style="color:var(--muted)">jakoolit/plugins/lualine.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>jakoolit/plugins/lualine.lua (Statusline) node in jakoolit/plugins/lualine.lua.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>ZSH README.md (Config Guide)</code><br><small style="color:var(--muted)">zsh/README.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing ZSH README.md (Config Guide).</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>zsh_plugins.txt (Plugin List)</code><br><small style="color:var(--muted)">.config/zsh/zsh_plugins.txt</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>zsh_plugins.txt (Plugin List) node in .config/zsh/zsh_plugins.txt.</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><code>ZSH Standalone Config (no plugin manager)</code><br><small style="color:var(--muted)">zsh/README.md</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><code>Run-PortProbe.ps1</code><br><small style="color:var(--muted)">win-tools/.tools/Run-PortProbe.ps1</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Run-PortProbe.ps1 node in win-tools/.tools/Run-PortProbe.ps1.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>Invoke-PortProbe()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-PortProbe.ps1</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Invoke-PortProbe() node in win-tools/.tools/Run-PortProbe.ps1.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><code>Get-ClaudeCodeSessions.ps1</code><br><small style="color:var(--muted)">win-tools/.tools/Get-ClaudeCodeSessions.ps1</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Get-ClaudeCodeSessions.ps1 node in win-tools/.tools/Get-ClaudeCodeSessions.ps1.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><code>Get-JsonField()</code><br><small style="color:var(--muted)">win-tools/.tools/Get-ClaudeCodeSessions.ps1</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Get-JsonField() node in win-tools/.tools/Get-ClaudeCodeSessions.ps1.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><code>Run-PortListen.ps1</code><br><small style="color:var(--muted)">win-tools/.tools/Run-PortListen.ps1</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Run-PortListen.ps1 node in win-tools/.tools/Run-PortListen.ps1.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><code>Invoke-Portlistener()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-PortListen.ps1</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Invoke-Portlistener() node in win-tools/.tools/Run-PortListen.ps1.</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td><code>keymaps.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/keymaps.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>keymaps.lua node in configs/adeotek_v1/keymaps.lua.</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td><code>_G.set_terminal_keymaps()</code><br><small style="color:var(--muted)">configs/adeotek_v1/keymaps.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>_G.set_terminal_keymaps() node in configs/adeotek_v1/keymaps.lua.</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td><code>options.lua</code><br><small style="color:var(--muted)">configs/adeotek_v2/options.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>options.lua node in configs/adeotek_v2/options.lua.</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td><code>has_clipboard()</code><br><small style="color:var(--muted)">configs/adeotek_v2/options.lua</small></td>
+  <td><span class="tag tag-cmd">Entry</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>has_clipboard() node in configs/adeotek_v2/options.lua.</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><code>bash-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/bash-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bash-setup.sh node in _scripts/core/bash-setup.sh.</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td><code>bash-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/bash-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bash-setup.sh script node in _scripts/core/bash-setup.sh.</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td><code>fastfetch-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/fastfetch-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>fastfetch-setup.sh node in _scripts/core/fastfetch-setup.sh.</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td><code>fastfetch-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/fastfetch-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>fastfetch-setup.sh script node in _scripts/core/fastfetch-setup.sh.</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td><code>jetbrains-toolbox-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/jetbrains-toolbox-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>jetbrains-toolbox-setup.sh node in _scripts/core/jetbrains-toolbox-setup.sh.</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td><code>jetbrains-toolbox-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/jetbrains-toolbox-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>jetbrains-toolbox-setup.sh script node in _scripts/core/jetbrains-toolbox-setup.sh.</td>
+</tr>
+<tr>
+  <td>26</td>
+  <td><code>kitty-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/kitty-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>kitty-setup.sh node in _scripts/core/kitty-setup.sh.</td>
+</tr>
+<tr>
+  <td>27</td>
+  <td><code>kitty-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/kitty-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>kitty-setup.sh script node in _scripts/core/kitty-setup.sh.</td>
+</tr>
+<tr>
+  <td>28</td>
+  <td><code>neofetch-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/neofetch-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>neofetch-setup.sh node in _scripts/core/neofetch-setup.sh.</td>
+</tr>
+<tr>
+  <td>29</td>
+  <td><code>neofetch-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/neofetch-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>neofetch-setup.sh script node in _scripts/core/neofetch-setup.sh.</td>
+</tr>
+<tr>
+  <td>30</td>
+  <td><code>oh-my-posh-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/oh-my-posh-setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>oh-my-posh-setup.sh node in _scripts/core/oh-my-posh-setup.sh.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>_scripts/core/bash-setup.sh</code></td><td>3 nodes</td></tr>
+<tr><td><code>adeotek_v2/plugins/toggleterm.lua</code></td><td>3 nodes</td></tr>
+<tr><td><code>unattended_setup.sh</code></td><td>3 nodes</td></tr>
+<tr><td><code>_scripts/core/fastfetch-setup.sh</code></td><td>2 nodes</td></tr>
+<tr><td><code>_scripts/core/ghostty-setup.sh</code></td><td>2 nodes</td></tr>
+<tr><td><code>_scripts/core/git-setup.sh</code></td><td>2 nodes</td></tr>
+<tr><td><code>_scripts/core/jetbrains-toolbox-setup.sh</code></td><td>2 nodes</td></tr>
+<tr><td><code>_scripts/core/kitty-setup.sh</code></td><td>2 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x26, references x3, semantically similar to x2, defines x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<h2 id="hyperedges">Group Relationships (Hyperedges)</h2>
+<div class="grid">
+
+  <div class="card">
+    <h4>Entry Points Using Shared Core</h4>
+    <p><code>participate_in</code> — 5 participants</p>
+    <ul>
+      <li><code>dotfiles_setup</code></li>
+      <li><code>dotfiles_unattended_setup</code></li>
+      <li><code>dotfiles_update</code></li>
+      <li><code>core__helpers</code></li>
+      <li><code>core__options</code></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Setup-Wraps-Install Pattern</h4>
+    <p><code>implement</code> — 6 participants</p>
+    <ul>
+      <li><code>core_fastfetch_setup</code></li>
+      <li><code>core_fastfetch_install</code></li>
+      <li><code>core_git_setup</code></li>
+      <li><code>core_git_install</code></li>
+      <li><code>core_jetbrains_toolbox_setup</code></li>
+      <li>... and 1 more</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Shell Prompt Tools with Nerd Fonts</h4>
+    <p><code>participate_in</code> — 3 participants</p>
+    <ul>
+      <li><code>core_starship_install</code></li>
+      <li><code>core_oh_my_posh_install</code></li>
+      <li><code>core_nerd_fonts_install</code></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Tools Using Homebrew as Fallback</h4>
+    <p><code>participate_in</code> — 5 participants</p>
+    <ul>
+      <li><code>core_starship_install</code></li>
+      <li><code>core_nvim_install</code></li>
+      <li><code>core_onefetch_install</code></li>
+      <li><code>core_yazi_install</code></li>
+      <li><code>core_homebrew_install</code></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Terminal Emulator Tools</h4>
+    <p><code>participate_in</code> — 3 participants</p>
+    <ul>
+      <li><code>core_kitty_install</code></li>
+      <li><code>core_tabby_install</code></li>
+      <li><code>core_zed_install</code></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Kubernetes Toolchain</h4>
+    <p><code>form</code> — 3 participants</p>
+    <ul>
+      <li><code>core_k8s_repo_install</code></li>
+      <li><code>core_kubectl_install</code></li>
+      <li><code>core_helm_install</code></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>AI Coding Tools</h4>
+    <p><code>participate_in</code> — 4 participants</p>
+    <ul>
+      <li><code>core_claude_code_install</code></li>
+      <li><code>core_claude_code_setup</code></li>
+      <li><code>core_opencode_install</code></li>
+      <li><code>core_opencode_setup</code></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>_helpers.sh as Universal Hub</h4>
+    <p><code>participate_in</code> — 6 participants</p>
+    <ul>
+      <li><code>core__helpers</code></li>
+      <li><code>core__options</code></li>
+      <li><code>core_zed_setup</code></li>
+      <li><code>core_ghostty_setup</code></li>
+      <li><code>core_tmux_setup</code></li>
+      <li>... and 1 more</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>adeotek_v1 Initialization Chain</h4>
+    <p><code>form</code> — 6 participants</p>
+    <ul>
+      <li><code>nvim_init</code></li>
+      <li><code>lua_config</code></li>
+      <li><code>adeotek_v1_init</code></li>
+      <li><code>adeotek_v1_config</code></li>
+      <li><code>adeotek_v1_lazy_init</code></li>
+      <li>... and 1 more</li>
+    </ul>
+  </div>
+</div>
+<hr>
+<h2 id="stats">Project Statistics</h2>
+
+<div class="grid">
+  <div class="card">
+    <h4>Graph</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><td>Nodes</td><td>453</td></tr>
+      <tr><td>Edges</td><td>326</td></tr>
+      <tr><td>Hyperedges</td><td>20</td></tr>
+      <tr><td>Communities</td><td>184</td></tr>
+      <tr><td>Documented Sections</td><td>15</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Edge Confidence</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><td>EXTRACTED</td><td>253</td></tr>
+      <tr><td>INFERRED</td><td>73</td></tr>
+      <tr><td>AMBIGUOUS</td><td>0</td></tr>
+    </table>
+  </div>
+</div>
+
+<div style="text-align:center; padding:40px 0; color: var(--muted); font-size:0.9rem;">
+  <p>.dotfiles — Architecture Documentation</p>
+  <p>Generated: 2026-05-26 21:52 UTC · graphify callflow-html</p>
+</div>
+
+</div><!-- .container -->
+
+<script>
+(function () {
+  const mermaidConfig = {
+    startOnLoad: false,
+    theme: 'dark',
+    securityLevel: 'loose',
+    flowchart: { htmlLabels: true, useMaxWidth: true },
+    themeVariables: {
+      primaryColor: '#1e293b',
+      primaryTextColor: '#e2e8f0',
+      primaryBorderColor: '#38bdf8',
+      secondaryColor: '#0f172a',
+      tertiaryColor: '#334155',
+      lineColor: '#64748b',
+      textColor: '#e2e8f0',
+    }
+  };
+
+  mermaid.initialize(mermaidConfig);
+
+  function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
+  }
+
+  function enhanceMermaidDiagrams() {
+    document.querySelectorAll('.mermaid').forEach((container) => {
+      if (container.dataset.zoomReady === 'true') return;
+      const svg = container.querySelector('svg');
+      if (!svg) return;
+
+      container.dataset.zoomReady = 'true';
+      container.classList.add('is-enhanced');
+
+      const viewport = document.createElement('div');
+      viewport.className = 'mermaid-viewport';
+      svg.parentNode.insertBefore(viewport, svg);
+      viewport.appendChild(svg);
+
+      const toolbar = document.createElement('div');
+      toolbar.className = 'mermaid-toolbar';
+      toolbar.innerHTML = [
+        '<button type="button" data-action="zoom-out" title="Zoom out">-</button>',
+        '<span class="zoom-level" data-role="level">100%</span>',
+        '<button type="button" data-action="zoom-in" title="Zoom in">+</button>',
+        '<button type="button" data-action="fit" title="Fit width">Fit</button>',
+        '<button type="button" data-action="reset" title="Reset view">Reset</button>'
+      ].join('');
+      container.insertBefore(toolbar, viewport);
+
+      const state = { scale: 1, x: 0, y: 0, dragging: false, startX: 0, startY: 0, originX: 0, originY: 0 };
+      const level = toolbar.querySelector('[data-role="level"]');
+
+      function applyTransform() {
+        svg.style.transform = `translate(${state.x}px, ${state.y}px) scale(${state.scale})`;
+        level.textContent = `${Math.round(state.scale * 100)}%`;
+      }
+
+      function zoomBy(delta) {
+        state.scale = clamp(state.scale + delta, 0.25, 3);
+        applyTransform();
+      }
+
+      function reset() {
+        state.scale = 1;
+        state.x = 0;
+        state.y = 0;
+        applyTransform();
+      }
+
+      function fitWidth() {
+        const rawWidth = svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.width
+          ? svg.viewBox.baseVal.width
+          : svg.getBoundingClientRect().width / state.scale;
+        if (!rawWidth) {
+          reset();
+          return;
+        }
+        state.scale = clamp((viewport.clientWidth - 48) / rawWidth, 0.25, 1.4);
+        state.x = 0;
+        state.y = 0;
+        applyTransform();
+      }
+
+      toolbar.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-action]');
+        if (!button) return;
+        const action = button.dataset.action;
+        if (action === 'zoom-in') zoomBy(0.15);
+        if (action === 'zoom-out') zoomBy(-0.15);
+        if (action === 'fit') fitWidth();
+        if (action === 'reset') reset();
+      });
+
+      viewport.addEventListener('wheel', (event) => {
+        if (!event.ctrlKey && !event.metaKey) return;
+        event.preventDefault();
+        zoomBy(event.deltaY < 0 ? 0.1 : -0.1);
+      }, { passive: false });
+
+      viewport.addEventListener('pointerdown', (event) => {
+        if (event.button !== 0) return;
+        state.dragging = true;
+        state.startX = event.clientX;
+        state.startY = event.clientY;
+        state.originX = state.x;
+        state.originY = state.y;
+        viewport.classList.add('is-dragging');
+        viewport.setPointerCapture(event.pointerId);
+      });
+
+      viewport.addEventListener('pointermove', (event) => {
+        if (!state.dragging) return;
+        state.x = state.originX + event.clientX - state.startX;
+        state.y = state.originY + event.clientY - state.startY;
+        applyTransform();
+      });
+
+      function endDrag(event) {
+        if (!state.dragging) return;
+        state.dragging = false;
+        viewport.classList.remove('is-dragging');
+        if (viewport.hasPointerCapture(event.pointerId)) {
+          viewport.releasePointerCapture(event.pointerId);
+        }
+      }
+
+      viewport.addEventListener('pointerup', endDrag);
+      viewport.addEventListener('pointercancel', endDrag);
+      applyTransform();
+    });
+  }
+
+  function renderMermaid() {
+    const result = mermaid.run
+      ? mermaid.run({ querySelector: '.mermaid' })
+      : Promise.resolve();
+    Promise.resolve(result)
+      .then(enhanceMermaidDiagrams)
+      .catch((error) => {
+        console.error('Mermaid render failed:', error);
+        enhanceMermaidDiagrams();
+      });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderMermaid);
+  } else {
+    renderMermaid();
+  }
+})();
+</script>
+
+</body>
+</html>

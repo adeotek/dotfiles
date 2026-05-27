@@ -18,5 +18,19 @@ bat
 test.sh
 
 # AI agents
-.claude/
-.playwright/
+**/.claude/
+**/.memory/
+**/.playwright/
+**/.playwright-cli/
+**/.worktree/
+**/docs/plans/*
+**/docs/specs/*
+**/docs/superpowers/*
+
+# graphify
+**/graphify-out/*
+!**/graphify-out/GRAPH_REPORT.md
+!**/graphify-out/graph.html
+!**/graphify-out/graph.json
+!**/graphify-out/*-callflow.html
+!**/graphify-out/wiki/
