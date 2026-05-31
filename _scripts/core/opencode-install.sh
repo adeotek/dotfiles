@@ -20,11 +20,10 @@ cecho "cyan" "Installing [opencode]..."
 
 # Check if already installed
 if opencode --version >/dev/null 2>&1; then
-  cecho "yellow" "[opencode] is already present."
+  cecho "yellow" "[opencode] is already present. Updating it..."
+fi
+if [ "$DRY_RUN" -ne "1" ]; then
+  curl -fsSL https://opencode.ai/install | bash
 else
-  if [ "$DRY_RUN" -ne "1" ]; then
-    curl -fsSL https://opencode.ai/install | bash
-  else
-    cecho "yellow" "DRY-RUN: curl -fsSL https://opencode.ai/install | bash"
-  fi
+  cecho "yellow" "DRY-RUN: curl -fsSL https://opencode.ai/install | bash"
 fi
