@@ -3,7 +3,8 @@
   // "model": "",
   // "small_model": "",
   "plugin": [
-    "./plugins/graphify.js"
+    "./plugins/graphify.js",
+    "superpowers@git+https://github.com/obra/superpowers.git"
   ],
   "server": {
     "port": 9991,
@@ -12,49 +13,5 @@
       "http://localhost:9991",
       "http://127.0.0.1:9991"
     ]
-  },
-  "agent": {
-    "build": {
-      "mode": "primary",
-      "prompt": "{file:./AGENTS.md}",
-      "permission": {
-        "edit": "allow",
-        "bash": "allow",
-        "task": { "*": "allow" }
-      },
-      "description": "Primary build/orchestrator agent. Full tool access. Delegates analysis to Plan and review to @code-review."
-    },
-    "plan": {
-      "mode": "primary",
-      "temperature": 0.1,
-      "permission": {
-        "edit": "deny",
-        "write": "deny",
-        "bash": {
-          "which *": "allow",
-          "ls *": "allow",
-          "rg *": "allow",
-          "git diff *": "allow",
-          "git log *": "allow",
-          "git status": "allow",
-          "git show *": "allow",
-          "find *": "allow",
-          "*": "deny"
-        }
-      },
-      "description": "Restricted plan/analysis mode. Read-only. For codebase analysis and planning before making changes."
-    },
-    "code-review": {
-      "mode": "subagent",
-      "temperature": 0.1,
-      "permission": {
-        "edit": "deny",
-        "write": "deny",
-        "bash": "deny",
-        "task": "deny"
-      },
-      "description": "Read-only code review subagent. Inspects diffs for correctness, security, and best practices. Invoke via @code-review.",
-      "color": "accent"
-    }
   }
 }

@@ -43,10 +43,34 @@ else
   cecho "yellow" "DRY-RUN: cp $RDIR/opencode/AGENTS.md.sample $HOME/.config/opencode/AGENTS.md"
 fi
 
+# Copy skill subdirectories from source to dest if SKILL.md doesn't already exist
+# Usage: copy_skills_if_missing <src_dir> <dest_dir>
+copy_skills_if_missing() {
+  local src_dir="$1"
+  local dest_dir="$2"
+  if [ "$DRY_RUN" -ne "1" ]; then
+    mkdir -p "$dest_dir"
+  fi
+  for src_subdir in "$src_dir"/*/; do
+    [[ -d "$src_subdir" ]] || continue
+    local skill_name
+    skill_name=$(basename "$src_subdir")
+    local dest_subdir="$dest_dir/$skill_name"
+    if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ ! -f "$dest_subdir/SKILL.md" ]]; then
+        mkdir -p "$dest_subdir"
+        cp -r "$src_subdir"* "$dest_subdir/"
+        cecho "green" "Skill $skill_name copied to $dest_dir/"
+      else
+        cecho "yellow" "Skill $skill_name already exists at $dest_dir/"
+      fi
+    else
+      cecho "yellow" "DRY-RUN: cp -r $src_subdir $dest_subdir/ (if not exists)"
+    fi
+  done
+}
+
 # Create missing skills/plugins/agents
-if [ "$DRY_RUN" -ne "1" ]; then
-  mkdir -p "$HOME/.config/opencode/{skills,plugins,agents}"
-  # TODO
-else
-  cecho "yellow" "DRY-RUN: mkdir -p $HOME/.config/opencode/{skills,plugins,agents}"
-fi
+copy_files_if_missing "$RDIR/opencode/agents"  "$HOME/.config/opencode/agents"  "*.md"
+copy_files_if_missing "$RDIR/opencode/plugins" "$HOME/.config/opencode/plugins" "*.js"
+copy_skills_if_missing  "$RDIR/opencode/skills" "$HOME/.config/opencode/skills"
