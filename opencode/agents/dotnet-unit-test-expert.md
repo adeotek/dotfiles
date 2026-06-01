@@ -3,26 +3,21 @@ description: Expert .NET test engineer specializing in xUnit, NSubstitute, and c
 mode: all
 model: opencode/deepseek-v4-flash # or free version if available
 temperature: 0.3
-maxSteps: 50
-tools:
-  read: true
-  write: true
-  edit: true
-  bash: true
-  lsp: true
-  grep: true
-  glob: true
-  webfetch: false
+steps: 50
 permission:
+  read: allow
+  write: allow
+  edit: allow
+  lsp: allow
+  grep: allow
+  glob: allow
+  webfetch: deny
   bash:
     "dotnet test *": allow
     "dotnet build *": allow
-    "grep *": allow
-    "glob *": allow
     "ls *": allow
     "sort *": allow
     "*": ask
-  webfetch: deny
 ---
 
 # .NET Unit Test Expert Agent

@@ -3,28 +3,23 @@ description: Expert .NET 9/10 backend developer for Web APIs, Entity Framework C
 mode: all
 model: opencode/qwen3.6-plus # or free version if available
 temperature: 0.4
-maxSteps: 100
-tools:
-  read: true
-  write: true
-  edit: true
-  bash: true
-  lsp: true
-  grep: true
-  glob: true
-  webfetch: true
+steps: 100
 permission:
+  read: allow
+  write: allow
+  edit: allow
+  lsp: allow
+  grep: allow
+  glob: allow
+  webfetch: allow
   bash:
     "dotnet *": allow
     "dotnet ef *": allow
-    "grep *": allow
-    "glob *": allow
     "sort *": allow
     "ls *": allow
     "git status": allow
     "git diff *": allow
     "*": ask
-  webfetch: allow
 ---
 
 # .NET Backend Expert Agent
