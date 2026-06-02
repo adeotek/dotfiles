@@ -23,4 +23,13 @@ source "$CDIR/zellij-install.sh"
 # If the config file already exists, we assume the user has already set it up and we don't overwrite it.
 if [ ! -e "$HOME/.config/zellij/config.kdl" ]; then
   cp "$RDIR/zellij/.config/zellij/config.gbs.kdl" "$HOME/.config/zellij/config.kdl"
+else
+  if [[ "${ARGS["unattended"]}" -ne "1" ]]; then
+    echo "Zellij config already exists. Do you want to overwrite it? (y/N)"
+    read -r overwrite_config
+    if [[ "$overwrite_config" =~ ^[Yy]$ ]]; then
+      cp "$RDIR/zellij/.config/zellij/config.gbs.kdl" "$HOME/.config/zellij/config.kdl"
+      echo "Zellij config overwritten."
+    fi
+  fi
 fi
