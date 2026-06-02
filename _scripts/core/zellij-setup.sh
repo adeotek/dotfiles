@@ -21,6 +21,16 @@ source "$CDIR/zellij-install.sh"
 # Setup
 # Stow is not used for Zellij as it rewrites the config file on first run, so we need to copy our config before that happens.
 # If the config file already exists, we assume the user has already set it up and we don't overwrite it.
-if [ ! -e "$HOME/.config/zellij/config.kdl" ]; then
+if [ ! -f "$HOME/.config/zellij/config.kdl" ]; then
   cp "$RDIR/zellij/.config/zellij/config.gbs.kdl" "$HOME/.config/zellij/config.kdl"
+  cecho "green" "Zellij config created."
+else
+  if [[ "${ARGS["unattended"]}" -ne "1" ]]; then
+    cecho "yellow" "Zellij config already exists. Do you want to overwrite it? (y/N)"
+    read -r overwrite_config
+    if [[ "$overwrite_config" =~ ^[Yy]$ ]]; then
+      cp "$RDIR/zellij/.config/zellij/config.gbs.kdl" "$HOME/.config/zellij/config.kdl"
+      cecho "green" "Zellij config overwritten."
+    fi
+  fi
 fi
