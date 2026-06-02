@@ -1,7 +1,7 @@
 ---
 description: Primary build/orchestrator agent. Full tool access. Delegates analysis to Plan and review to @code-review.
 mode: primary
-model: opencode/gemini-3.5-flash
+model: opencode/kimi-k2.6
 permission:
   edit: allow
   bash: allow

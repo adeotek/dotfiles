@@ -22,25 +22,37 @@ source "$CDIR/opencode-install.sh"
 # Create global opencode.jsonc file if it doesn't exist
 if [ "$DRY_RUN" -ne "1" ]; then
   if [ ! -f "$HOME/.config/opencode/opencode.jsonc" ]; then
-    cp "$RDIR/opencode/opencode.jsonc.sample" "$HOME/.config/opencode/opencode.jsonc"
+    cp "$RDIR/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
     cecho "green" "Global opencode.jsonc file created at ~/.config/opencode/opencode.jsonc"
   else
     cecho "yellow" "Global opencode.jsonc file already exists at ~/.config/opencode/opencode.jsonc"
   fi
 else
-  cecho "yellow" "DRY-RUN: cp $RDIR/opencode/opencode.jsonc.sample $HOME/.config/opencode/opencode.jsonc"
+  cecho "yellow" "DRY-RUN: cp $RDIR/opencode/opencode.jsonc $HOME/.config/opencode/opencode.jsonc"
+fi
+
+# Create global tui.json file if it doesn't exist
+if [ "$DRY_RUN" -ne "1" ]; then
+  if [ ! -f "$HOME/.config/opencode/tui.json" ]; then
+    cp "$RDIR/opencode/tui.json" "$HOME/.config/opencode/tui.json"
+    cecho "green" "Global tui.json file created at ~/.config/opencode/tui.json"
+  else
+    cecho "yellow" "Global tui.json file already exists at ~/.config/opencode/tui.json"
+  fi
+else
+  cecho "yellow" "DRY-RUN: cp $RDIR/opencode/tui.json $HOME/.config/opencode/tui.json"
 fi
 
 # Create global AGENTS.md file if it doesn't exist
 if [ "$DRY_RUN" -ne "1" ]; then
   if [ ! -f "$HOME/.config/opencode/AGENTS.md" ]; then
-    cp "$RDIR/opencode/AGENTS.md.sample" "$HOME/.config/opencode/AGENTS.md"
+    cp "$RDIR/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
     cecho "green" "Global AGENTS.md file created at ~/.config/opencode/AGENTS.md"
   else
     cecho "yellow" "Global AGENTS.md file already exists at ~/.config/opencode/AGENTS.md"
   fi
 else
-  cecho "yellow" "DRY-RUN: cp $RDIR/opencode/AGENTS.md.sample $HOME/.config/opencode/AGENTS.md"
+  cecho "yellow" "DRY-RUN: cp $RDIR/opencode/AGENTS.md $HOME/.config/opencode/AGENTS.md"
 fi
 
 # Copy skill subdirectories from source to dest if SKILL.md doesn't already exist
