@@ -92,6 +92,12 @@ Not stowed — deployed imperatively by `claude-code-setup.sh`. Files under `cla
 
 The setup script also installs plugins from two marketplaces (`claude-plugins-official`, `adeotek-plugins`) and LSP servers (gopls, csharp-ls, vtsls/typescript, pyright, lua-language-server).
 
+### OpenCode Config (`opencode/`)
+Not stowed — deployed imperatively by `opencode-setup.sh`. Samples are copied to `~/.config/opencode/` only if the target does not yet exist:
+- `opencode.jsonc.sample` → `~/.config/opencode/opencode.jsonc` — global config with model, plugins, server, and multi-agent definitions (`build`, `plan`, `code-review`)
+- `AGENTS.md.sample` → `~/.config/opencode/AGENTS.md` — system prompt for the primary agent
+- `agents/`, `skills/`, `plugins/` — agent definitions, skill files, and JS plugins (e.g. `plugins/graphify.js`)
+
 ### Auxiliary Utility Scripts (`tools/`, `win-tools/`)
 These directories contain standalone helper scripts not managed by the task/stow system:
 - `tools/.tools/cc-sessions.sh` — CLI for browsing Claude Code session transcripts.
@@ -108,6 +114,16 @@ Default prompt for ZSH is `starship` (`OPT_ZSH_DEFAULT_PROMPT`); bash defaults t
 - `~/.bashrc.local` / `~/.zshrc.local` — shell customizations
 - `~/.config/git.user/config` — user git identity (template in `_extra/git.user.config`)
 
+### Shell Code Conventions
+- `[[ ]]` for all conditionals (never `[ ]` or `test`)
+- Always quote variable expansions: `"$var"`, `"${ARGS[key]}"`
+- 2-space indentation; no tabs; Unix LF line endings
+- `set -e` is **not** used — scripts allow graceful failures; check return codes explicitly
+- Exit codes: `exit 1` (error), `exit 10` (user cancelled)
+- Output helpers (from `_helpers.sh`): `cecho "color" "msg"`, `decho "color" "msg"` (verbose-only), `aecho ARRAY "prefix" "color" "pfx_color"`
+- Key helper functions: `install_package`, `stow_package`, `execute_command`, `rename_dir_if_exists`, `rename_file_if_exists`
+- Argument parsing: `declare -A ARGS=(["flag"]="")` then `process_args "$@"` — populates `ARGS` and sets `VV`/`DRY_RUN`
+
 ### Commit Message Convention
 Format: `[type:scope] description` (e.g., `[fix:config] ghostty config fixes`, `[feat:scripts] helm install script`)
 
@@ -117,6 +133,7 @@ This project has a knowledge graph at graphify-out/ with god nodes, community st
 
 Rules:
 - For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
+- Dirty graphify-out/ files are expected after hooks or incremental updates — not a reason to skip graphify. Only skip if the task is about stale graph output or the user says not to use it.
 - If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
 - Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
 - After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).

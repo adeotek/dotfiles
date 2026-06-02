@@ -409,6 +409,32 @@ function symlink_package_file() {
   esac
 }
 
+# Copy files from source dir to dest dir if they don't already exist
+# Usage: copy_files_if_missing <src_dir> <dest_dir> <glob> <label>
+function copy_files_if_missing() {
+  local src_dir="$1"
+  local dest_dir="$2"
+  local glob="$3"
+  local label="$(basename "$src_dir")"
+  if [ "$DRY_RUN" -ne "1" ]; then
+    mkdir -p "$dest_dir"
+  fi
+  for src_file in "$src_dir"/$glob; do
+    [[ -f "$src_file" ]] || continue
+    local dest_file="$dest_dir/$(basename "$src_file")"
+    if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ ! -f "$dest_file" ]]; then
+        cp "$src_file" "$dest_file"
+        cecho "green" "$label $(basename "$src_file") copied to $dest_dir/"
+      else
+        cecho "yellow" "$label $(basename "$src_file") already exists at $dest_dir/"
+      fi
+    else
+      cecho "yellow" "DRY-RUN: cp $src_file $dest_file (if not exists)"
+    fi
+  done
+}
+
 function enable_wsl_systemd() {
   if [[ "$IF_WSL2" == "1" && ! -f /etc/wsl.conf ]]; then
     sudo tee -a /etc/wsl.conf <<EOF

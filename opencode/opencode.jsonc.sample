@@ -1,0 +1,17 @@
+{  
+  "$schema": "https://opencode.ai/config.json",
+  // "model": "",
+  // "small_model": "",
+  "plugin": [
+    "./plugins/graphify.js",
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ],
+  "server": {
+    "port": 9991,
+    "hostname": "0.0.0.0",
+    "cors": [
+      "http://localhost:9991",
+      "http://127.0.0.1:9991"
+    ]
+  }
+}
