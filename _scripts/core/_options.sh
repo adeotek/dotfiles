@@ -67,6 +67,7 @@ declare CONSOLE_EXTRA_TASKS=(
   "rustup"
   "uv"
   "terraform"
+  "zellij"
 )
 
 declare DESKTOP_ONLY_TASKS=(
@@ -153,6 +154,7 @@ declare -A TASK_TYPES=(
   ["vscode"]="install"
   ["yazi"]="setup"
   ["zed"]="setup"
+  ["zellij"]="setup"
   ["zsh"]="setup"
 )
 
