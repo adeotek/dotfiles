@@ -1,0 +1,16 @@
+[Unit]
+Description=Headroom LLM Proxy — context compression for AI agents
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/headroom proxy --host 127.0.0.1 --port 8787
+Restart=on-failure
+RestartSec=5
+Environment=HEADROOM_TELEMETRY=off
+Environment=HEADROOM_LOG_LEVEL=INFO
+# Load provider-specific configuration (OPENAI_TARGET_API_URL, backend flags, etc.)
+EnvironmentFile=-%h/.config/headroom/proxy.env
+
+[Install]
+WantedBy=default.target
