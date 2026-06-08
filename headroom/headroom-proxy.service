@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=%h/.local/bin/headroom proxy --host 127.0.0.1 --port 8787
+ExecStart=%h/.local/bin/headroom proxy --host 0.0.0.0 --port 8787
 Restart=on-failure
 RestartSec=5
 Environment=HEADROOM_TELEMETRY=off

@@ -26,38 +26,65 @@ if [ "$DRY_RUN" -ne "1" ]; then
   mkdir -p "$HOME/.config/systemd/user"
 fi
 
-# --- Deploy providers.env (imperative copy, only if missing) ---
+OVERRIDE_EXISTING=false
+SERVICE_FILE="$HOME/.config/systemd/user/headroom-proxy.service"
+if [ -f "$HOME/.config/headroom/proxy.env" ] || [ -f "$SERVICE_FILE" ]; then
+  cecho "yellow" -n "Headroom config already exists. Do you want to overwrite it? (y/N):"
+  read -r overwrite_config
+  if [[ "$overwrite_config" =~ ^[Yy]$ ]]; then
+    OVERRIDE_EXISTING=true
+  fi
+fi
+
+# --- Deploy providers.env ---
 if [ "$DRY_RUN" -ne "1" ]; then
-  if [ ! -f "$HOME/.config/headroom/proxy.env" ]; then
+  if [ -f "$HOME/.config/headroom/proxy.env" ]; then
+    if [ "$OVERRIDE_EXISTING" = true ]; then
+      cp "$RDIR/headroom/providers.env" "$HOME/.config/headroom/proxy.env"
+      cecho "green" "Headroom provider config overwritten to ~/.config/headroom/proxy.env"
+    else
+      cecho "yellow" "Headroom provider config already exists at ~/.config/headroom/proxy.env"
+    fi
+  else
     cp "$RDIR/headroom/providers.env" "$HOME/.config/headroom/proxy.env"
     cecho "green" "Headroom provider config deployed to ~/.config/headroom/proxy.env"
-  else
-    cecho "yellow" "Headroom provider config already exists at ~/.config/headroom/proxy.env"
   fi
 else
   cecho "yellow" "DRY-RUN: cp $RDIR/headroom/providers.env $HOME/.config/headroom/proxy.env (if not exists)"
 fi
 
-# --- Deploy models.json (imperative copy, only if missing) ---
+# --- Deploy models.json ---
 if [ "$DRY_RUN" -ne "1" ]; then
-  if [ ! -f "$HOME/.headroom/models.json" ]; then
+  if [ -f "$HOME/.headroom/models.json" ]; then
+    if [ "$OVERRIDE_EXISTING" = true ]; then
+      cp "$RDIR/headroom/models.json" "$HOME/.headroom/models.json"
+      cecho "green" "Headroom models.json overwritten to ~/.headroom/models.json"
+    else
+      cecho "yellow" "Headroom models.json already exists at ~/.headroom/models.json"
+    fi
+  else
     cp "$RDIR/headroom/models.json" "$HOME/.headroom/models.json"
     cecho "green" "Headroom models.json deployed to ~/.headroom/models.json"
-  else
-    cecho "yellow" "Headroom models.json already exists at ~/.headroom/models.json"
   fi
 else
   cecho "yellow" "DRY-RUN: cp $RDIR/headroom/models.json $HOME/.headroom/models.json (if not exists)"
 fi
 
-# --- Deploy systemd service file (managed config: backup + replace) ---
-SERVICE_FILE="$HOME/.config/systemd/user/headroom-proxy.service"
+# --- Deploy systemd service file ---
 if [ "$DRY_RUN" -ne "1" ]; then
-  rename_file_if_exists "$SERVICE_FILE"
-  cp "$RDIR/headroom/headroom-proxy.service" "$SERVICE_FILE"
-  cecho "green" "Headroom systemd service deployed to $SERVICE_FILE"
+  if [ -f "$SERVICE_FILE" ]; then
+    if [ "$OVERRIDE_EXISTING" = true ]; then
+      cp "$RDIR/headroom/headroom-proxy.service" "$SERVICE_FILE"
+      cecho "green" "Headroom systemd service overwritten to $SERVICE_FILE"
+    else
+      cecho "yellow" "headroom-proxy.service already exists at $SERVICE_FILE."
+    fi
+  else
+    cp "$RDIR/headroom/headroom-proxy.service" "$SERVICE_FILE"
+    cecho "green" "Headroom systemd service deployed to $SERVICE_FILE"
+  fi  
 else
-  cecho "yellow" "DRY-RUN: backup $SERVICE_FILE if exists, then cp $RDIR/headroom/headroom-proxy.service $SERVICE_FILE"
+  cecho "yellow" "DRY-RUN: cp $RDIR/headroom/headroom-proxy.service $SERVICE_FILE"
 fi
 
 # --- Reload systemd user daemon ---
@@ -74,7 +101,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
     loginctl enable-linger "$USER"
     cecho "green" "User lingering enabled — headroom-proxy will survive logout."
   else
-    decho "yellow" "User lingering already enabled."
+    cecho "yellow" "User lingering already enabled."
   fi
 else
   cecho "yellow" "DRY-RUN: loginctl enable-linger $USER"
@@ -82,8 +109,14 @@ fi
 
 # --- Enable and start the service ---
 if [ "$DRY_RUN" -ne "1" ]; then
-  systemctl --user enable --now headroom-proxy.service
-  cecho "green" "headroom-proxy.service enabled and started."
+  if systemctl --user is-enabled --quiet headroom-proxy.service; then
+    cecho "yellow" "headroom-proxy.service is already enabled. It will be restarted."
+    systemctl --user restart headroom-proxy.service
+    cecho "green" "headroom-proxy.service restarted."
+  else
+    systemctl --user enable --now headroom-proxy.service
+    cecho "green" "headroom-proxy.service enabled and started."
+  fi
 else
   cecho "yellow" "DRY-RUN: systemctl --user enable --now headroom-proxy.service"
 fi
