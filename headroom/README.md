@@ -2,6 +2,16 @@
 
 Headroom is an LLM context compression proxy that runs as a systemd user service. All LLM traffic from OpenCode, Hermes Agent, and other compatible tools flows through it automatically.
 
+## Installation
+
+```bash
+# Via the dotfiles setup script:
+./unattended_setup.sh --packages headroom
+
+# Or manually via uv:
+uv tool install --python python3.13 'headroom-ai[all]'
+```
+
 ## Compatible tools
 
 - **OpenCode** — uses `ANTHROPIC_BASE_URL` / `OPENAI_BASE_URL`
@@ -70,9 +80,9 @@ systemctl --user restart headroom-proxy
 
 ```bash
 # ~/.config/headroom/proxy.env
-OPENAI_TARGET_API_URL=https://opencode.ai/zen/v1/chat/completions
+OPENAI_TARGET_API_URL=https://opencode.ai/zen/v1
 # For Claude models via Zen, also set:
-# ANTHROPIC_BASE_URL=https://opencode.ai/zen/v1/messages
+# ANTHROPIC_BASE_URL=https://opencode.ai/zen/v1
 ```
 
 Then restart the proxy.
@@ -93,7 +103,7 @@ systemctl --user edit headroom-proxy.service --drop-in=override.conf
 # Add:
 # [Service]
 # ExecStart=
-# ExecStart=%h/.local/bin/headroom proxy --host 127.0.0.1 --port 8787 --backend vertex_ai
+# ExecStart=%h/.local/bin/headroom proxy --host 0.0.0.0 --port 8787 --backend vertex_ai
 ```
 
 For Google AI Studio (OpenAI-compatible endpoint):
@@ -169,7 +179,7 @@ opencode
 - `~/.config/headroom/proxy.env` — provider-specific configuration (API keys, target URLs)
 - `~/.headroom/models.json` — custom model context limits and pricing
 - `~/.config/systemd/user/headroom-proxy.service` — systemd service configuration
-- Environment variables: `HEADROOM_PORT`, `HEADROOM_HOST`, `HEADROOM_LOG_LEVEL`
+- Environment variables: `HEADROOM_LOG_LEVEL` (INFO, DEBUG, WARN, ERROR), `HEADROOM_TELEMETRY` (on/off)
 
 ## Documentation
 
