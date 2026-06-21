@@ -1,7 +1,7 @@
 ---
 description: Expert .NET test engineer specializing in xUnit, NSubstitute, and comprehensive unit test coverage
 mode: all
-model: opencode/deepseek-v4-flash # or free version if available
+model: opencode-go/deepseek-v4-pro # or deepseek-v4-flash
 temperature: 0.3
 steps: 50
 permission:
