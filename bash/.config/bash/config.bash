@@ -57,12 +57,12 @@ if [ -d "$HOME/.dotnet" ]; then
 fi
 
 # Neovim
-if $(command -v nvim >/dev/null 2>&1); then
+if command -v nvim >/dev/null 2>&1; then
   alias vim="nvim"
 fi
 
 # EZA
-if $(command -v eza >/dev/null 2>&1); then
+if command -v eza >/dev/null 2>&1; then
   alias ls='eza -a --icons'
   alias ll='eza -al --icons'
   alias lt='eza -a --tree --level=1 --icons'
@@ -89,7 +89,7 @@ case "$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)" in
 esac
 
 # hstr configuration
-if $(command -v hstr >/dev/null 2>&1); then
+if command -v hstr >/dev/null 2>&1; then
   # HSTR configuration - add this to ~/.bashrc
   alias hh=hstr                    # hh to be alias for hstr
   export HSTR_CONFIG=hicolor       # get more colors
@@ -120,9 +120,10 @@ if [[ -x "$(command -v fzf)" ]]; then
 fi
 
 # yazi
-if $(command -v yazi >/dev/null 2>&1); then
+if command -v yazi >/dev/null 2>&1; then
   function yy() {
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    local tmp cwd
+    tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
     command yazi "$@" --cwd-file="$tmp"
     IFS= read -r -d '' cwd < "$tmp"
     [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
@@ -131,7 +132,7 @@ if $(command -v yazi >/dev/null 2>&1); then
 fi
 
 # Cloud CLI tools
-if $(command -v gcloud >/dev/null 2>&1); then
+if command -v gcloud >/dev/null 2>&1; then
   # gcloud
   alias gc="gcloud"
   alias gcl="gcloud"
@@ -140,7 +141,7 @@ if $(command -v gcloud >/dev/null 2>&1); then
   # export CLOUDSDK_CORE_DISABLE_PROMPTS=1
   # export CLOUDSDK_CORE_LOGGING_LEVEL=info
 fi
-if $(command -v terraform >/dev/null 2>&1); then
+if command -v terraform >/dev/null 2>&1; then
   # terraform
   alias tf="terraform"
   alias tfa='terraform apply'
@@ -149,16 +150,22 @@ if $(command -v terraform >/dev/null 2>&1); then
 fi
 
 # Oh My Posh bash config
-if $(command -v oh-my-posh >/dev/null 2>&1); then
+if command -v oh-my-posh >/dev/null 2>&1; then
   eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/gbs.omp.yaml)"
 fi
 
 # Starship
-# if $(command -v starship >/dev/null 2>&1); then
+# if command -v starship >/dev/null 2>&1; then
 #   eval "$(starship init bash)"
 # fi
 
 # zoxide
-if $(command -v zoxide >/dev/null 2>&1); then
+if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init bash)"
 fi
+
+# AI tools configuration
+[ -f "${HOME}/.config/bash/ai-config.bash" ] && source "${HOME}/.config/bash/ai-config.bash"
+
+# Local overrides (untracked)
+[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"

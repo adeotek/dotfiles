@@ -14,6 +14,7 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 - 🔧 **GNU Stow** - Symlink-based configuration management
 - ⚡ **Interactive & Unattended** - Both modes supported for flexibility
 - 🚀 **Comprehensive Tools** - Development tools, CLI utilities, desktop applications, AI coding assistants
+- 🔄 **LLM Context Compression** - Headroom proxy automatically compresses AI agent context, reducing token usage by 40-90%
 - 🎨 **Shell Configurations** - Bash and advanced ZSH configurations with Oh My Posh/Starship prompts
 - 🔒 **WSL2 Support** - Special handling for Windows Subsystem for Linux
 - 🧪 **Dry Run & Verbose Modes** - Test installations and debug with detailed output
@@ -25,7 +26,8 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 - **Languages**: Node.js (v24), Go (1.25.4), Rust, .NET SDK (10.0), PowerShell
 - **Cloud/DevOps**: Docker, AWS CLI, GCP CLI, Terraform, Ansible, Helm, kubectl
 - **Editors**: Neovim (with custom config), Zed, VS Code, JetBrains Toolbox
-- **AI/Code Assistants**: Claude Code, OpenCode
+- **AI/Code Assistants**: Claude Code, OpenCode, Hermes Agent
+- **LLM Context Compression**: Headroom proxy (systemd service, 40-90% token savings)
 
 ### CLI Utilities
 - **Core**: git, tmux, fzf, ripgrep, bat, fd, eza, zoxide, yazi
@@ -142,6 +144,18 @@ The following packages can be installed individually or in groups:
 - **tools** - Custom scripts and tools bundle
 - **claude-code** - Claude AI coding assistant
 - **opencode** - OpenCode configuration
+- **headroom** - LLM context compression proxy (systemd service, supports OpenAI, Anthropic, OpenRouter, OpenCode Zen, Google Gemini, GitHub Copilot)
+- **hermes** - Hermes Agent AI coding assistant (Nous Research)
+
+### LLM Provider Support
+
+Headroom supports all major LLM providers through its configurable proxy:
+- **OpenAI** — native via `OPENAI_BASE_URL`
+- **Anthropic** — native via `ANTHROPIC_BASE_URL`
+- **OpenRouter** — via `--backend openrouter`
+- **OpenCode Zen** — OpenAI-compatible endpoint
+- **Google Gemini / Vertex AI** — via `--backend vertex_ai`
+- **GitHub Copilot** — via `headroom wrap copilot`
 
 ### Advanced Shell
 - **zsh** - Z shell with Oh My Zsh or standalone configuration
@@ -151,9 +165,9 @@ The following packages can be installed individually or in groups:
 Packages are organized into logical tiers for easy installation:
 
 - **Minimal**: `base-tools,bash,git,tmux,yazi`
-- **Console**: Minimal + `fastfetch,claude-code,glow,golang,nodejs,onefetch,tools`
+- **Console**: Minimal + `fastfetch,claude-code,glow,golang,headroom,nodejs,onefetch,tools`
 - **Desktop**: Console + `ghostty,zed`
-- **Console Extra**: `ansible,aws-cli,docker,dotnet,github-cli,gcp-cli,helm,kubectl,nvim,opencode,powershell,rustup,uv,terraform`
+- **Console Extra**: `ansible,aws-cli,docker,dotnet,github-cli,gcp-cli,helm,hermes,kubectl,nvim,opencode,powershell,rustup,uv,terraform`
 - **Desktop Extra**: Console Extra + `kitty,tabby,vscode,jetbrains-toolbox`
 - **All Console**: Console + Console Extra
 - **All Desktop**: Desktop + Desktop Extra
@@ -186,6 +200,8 @@ dotfiles/
 │       ├── config.zsh          # Standard ZSH config
 │       └── config-standalone.zsh  # Self-contained ZSH config
 ├── claude-code/                # Claude Code configuration
+├── headroom/                   # Headroom LLM compression proxy (service + model config)
+├── hermes/                     # Hermes Agent AI coding assistant (config template)
 ├── git/                        # Git configuration
 ├── neofetch/                   # Neofetch system info config
 ├── nvim/                       # Neovim configuration
@@ -431,6 +447,8 @@ Enable verbose output for debugging:
 - **Kitty**: `~/.config/kitty/kitty.conf`
 - **Yazi**: `~/.config/yazi/`
 - **Oh My Posh**: `~/.config/oh-my-posh/themes/`
+- **Headroom**: `~/.config/headroom/proxy.env` (provider config), `~/.headroom/models.json` (model limits + pricing)
+- **Headroom Dashboard**: `http://localhost:8787/dashboard` (live compression stats)
 
 ### Local Override Files
 

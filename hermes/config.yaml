@@ -1,0 +1,32 @@
+# Hermes Agent configuration with Headroom proxy
+# This file is deployed by the dotfiles setup script.
+# Hermes reads this on startup. Missing keys fall back to built-in defaults.
+
+# Model configuration — using "main" provider routes through Headroom proxy
+# via the OPENAI_BASE_URL environment variable.
+model:
+  default: "anthropic/claude-sonnet-4"
+  provider: "main"              # "main" reads OPENAI_BASE_URL + OPENAI_API_KEY
+  # base_url: "http://localhost:8787/v1"  # Alternative: set explicitly instead of env var
+
+# Auxiliary models (vision, web extract, etc.) also route through Headroom
+# when provider is "main" or "anthropic".
+auxiliary:
+  vision:
+    provider: "main"
+  web_extract:
+    provider: "main"
+  approval:
+    provider: "main"
+  compression:
+    provider: "main"
+  skills_hub:
+    provider: "main"
+  mcp:
+    provider: "main"
+  triage_spec:
+    provider: "main"
+
+# Toolsets
+platform_toolsets:
+  cli: [terminal, web, file]

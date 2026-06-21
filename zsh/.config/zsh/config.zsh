@@ -3,15 +3,17 @@
 # --- Environment ---
 export LC_ALL='C.UTF-8'
 export EDITOR="nano"
+export VISUAL="${EDITOR}"
 
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 # --- History ---
 HISTFILE="${XDG_DATA_HOME}/zsh/.zsh_history"
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=50000
+SAVEHIST=50000
 mkdir -p "${HISTFILE:h}"  # :h is ZSH's built-in dirname — no subshell fork
 
 setopt EXTENDED_HISTORY       # Record timestamp with each history entry
@@ -145,6 +147,7 @@ if command -v eza >/dev/null 2>&1; then
   alias ls='eza -a --icons'
   alias ll='eza -al --icons --git'
   alias lt='eza -a --tree --level=1 --icons'
+  alias tree='eza --tree --icons'
 else
   alias ls='ls --color=auto'
   alias ll='ls -lAhF'
@@ -189,6 +192,13 @@ if command -v terraform >/dev/null 2>&1; then
   alias tfp='terraform plan'
 fi
 
+# --- Man upgrade ---
+if command -v bat >/dev/null 2>&1; then
+  export MANPAGER="bat -l man -p"
+elif command -v batcat >/dev/null 2>&1; then
+  export MANPAGER="batcat -l man -p"
+fi
+
 # --- Yazi (cd-on-exit wrapper) ---
 if command -v yazi >/dev/null 2>&1; then
   function yy() {
@@ -231,6 +241,9 @@ if command -v starship >/dev/null 2>&1; then
   source "$_starship_cache"
   unset _starship_cache
 fi
+
+# --- AI tools configuration ---
+[[ -f "${XDG_CONFIG_HOME}/zsh/ai-config.zsh" ]] && source "${XDG_CONFIG_HOME}/zsh/ai-config.zsh"
 
 # --- Local overrides ---
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

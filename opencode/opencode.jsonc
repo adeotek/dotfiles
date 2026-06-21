@@ -6,6 +6,11 @@
     "./plugins/graphify.js",
     "superpowers@git+https://github.com/obra/superpowers.git"
   ],
+  // // Route LLM traffic through Headroom proxy for context compression
+  // "provider": {
+  //   "opencode": { "options": { "baseURL": "http://localhost:8787/v1" } },
+  //   "opencode-go": { "options": { "baseURL": "http://localhost:8787/v1" } }
+  // },
   "server": {
     "port": 9991,
     "hostname": "0.0.0.0",
