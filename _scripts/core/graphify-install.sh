@@ -63,6 +63,33 @@ if command -v claude >/dev/null 2>&1; then
   fi
 fi
 
+# Register the OpenCode skill and command
+if command -v opencode >/dev/null 2>&1; then
+  if [ "$DRY_RUN" -ne "1" ]; then
+    graphify install --platform opencode
+    cecho "green" "[opencode] graphify skill registered."
+  else
+    cecho "yellow" "DRY-RUN: graphify install --platform opencode"
+  fi
+  if [[ ! -f "$HOME/.config/opencode/commands/graphify.md" ]]; then
+    if [ "$DRY_RUN" -ne "1" ]; then
+      mkdir -p "$HOME/.config/opencode/commands"
+      tee <<EOF > "$HOME/.config/opencode/commands/graphify.md"
+---
+description: Build, query, and manage a knowledge graph of any codebase, repo, or document set
+---
+
+You MUST load the graphify skill via the skill tool before doing anything else. Then follow the skill's instructions exactly to process the user's request.
+
+Arguments: $ARGUMENTS
+EOF
+      cecho "green" "[opencode] graphify command registered."
+    else
+      cecho "yellow" "DRY-RUN: Create $HOME/.config/opencode/commands/graphify.md with graphify command definition"
+    fi
+  fi
+fi
+
 # Verify
 if [ "$DRY_RUN" -ne "1" ]; then
   if command -v graphify >/dev/null 2>&1; then
