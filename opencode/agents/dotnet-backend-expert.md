@@ -1,8 +1,8 @@
 ---
 description: Expert .NET 9/10 backend developer for Web APIs, Entity Framework Core, authentication, and modern .NET architecture
 mode: all
-# alt: kimi-k2.6
-model: opencode-go/qwen3.7-plus
+# alt: qwen3.7-plus
+model: opencode-go/kimi-k2.6
 temperature: 0.4
 steps: 100
 permission:

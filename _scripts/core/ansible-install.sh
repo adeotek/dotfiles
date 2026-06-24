@@ -2,6 +2,7 @@
 
 ###
 # Ansible install script
+# Installs ansible and ansible-lint via uv tool install
 ###
 
 # Init
@@ -16,46 +17,55 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-case $CURRENT_OS_ID in
-  arch)
-    cecho "yellow" "WARNING: Ansible install not implemented yet!"  
-  ;;
-  debian)
-    if [ ! -f /etc/apt/sources.list.d/ansible.list ]; then
-      cecho "cyan" "Enabling ansible ppa repository..."
-      UBUNTU_CODENAME="jammy"
-      if [ "$DRY_RUN" -ne "1" ]; then
-        wget -O- "https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=get&search=0x6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367" | sudo gpg --dearmour -o /usr/share/keyrings/ansible-archive-keyring.gpg
-        echo "deb [signed-by=/usr/share/keyrings/ansible-archive-keyring.gpg] http://ppa.launchpad.net/ansible/ansible/ubuntu $UBUNTU_CODENAME main" | sudo tee /etc/apt/sources.list.d/ansible.list
-        sudo apt-get update
-      else
-        cecho "yellow" "DRY-RUN: wget -O- ""https://keyserver.ubuntu.com/pks/lookup?fingerprint=on&op=get&search=0x6125E2A8C77F2818FB7BD15B93C4A3FD7BB9C367"" | sudo gpg --dearmour -o /usr/share/keyrings/ansible-archive-keyring.gpg"
-        cecho "yellow" "DRY-RUN: echo ""deb [signed-by=/usr/share/keyrings/ansible-archive-keyring.gpg] http://ppa.launchpad.net/ansible/ansible/ubuntu $UBUNTU_CODENAME main"" | sudo tee /etc/apt/sources.list.d/ansible.list"
-        cecho "yellow" "DRY-RUN: sudo apt-get update"
-      fi
-    fi
-    install_package "ansible" "ansible --version" "" "ansible-lint"
-  ;;
-  ubuntu|pop)
-    if ! grep -q "^deb.*ansible/ansible" /etc/apt/sources.list.d/*.list 2>/dev/null; then
-      cecho "cyan" "Enabling ansible ppa repository..."
-      if [ "$DRY_RUN" -ne "1" ]; then
-        sudo apt-get install -y software-properties-common
-        sudo add-apt-repository -y ppa:ansible/ansible
-        sudo apt-get update
-      else
-        cecho "yellow" "DRY-RUN: sudo add-apt-repository -y ppa:ansible/ansible"
-        cecho "yellow" "DRY-RUN: sudo apt-get update"
-      fi
-    fi
-    install_package "ansible" "ansible --version" "" "ansible-lint"
-  ;;
-  fedora|redhat)
-    # EPEL need to be enabled first
-    install_package "ansible" "ansible --version" "" "ansible-lint"
-  ;;
-  *)
-    cecho "red" "Unsupported OS: $CURRENT_OS_ID"
+cecho "cyan" "Installing [ansible]..."
+
+# Ensure uv is available
+if ! command -v uv >/dev/null 2>&1; then
+  source "$CDIR/uv-install.sh"
+fi
+
+# Clean up old package manager installations
+source "$CDIR/ansible-cleanup.sh"
+
+# Install ansible via uv tool install
+if command -v ansible >/dev/null 2>&1; then
+  cecho "yellow" "[ansible] is already present. Updating it..."
+fi
+
+if [ "$DRY_RUN" -ne "1" ]; then
+  uv tool install ansible
+  cecho "green" "[ansible] installation done."
+else
+  cecho "yellow" "DRY-RUN: uv tool install ansible"
+fi
+
+# Install ansible-lint via uv tool install
+if command -v ansible-lint >/dev/null 2>&1; then
+  cecho "yellow" "[ansible-lint] is already present. Updating it..."
+fi
+
+if [ "$DRY_RUN" -ne "1" ]; then
+  uv tool install ansible-lint
+  cecho "green" "[ansible-lint] installation done."
+else
+  cecho "yellow" "DRY-RUN: uv tool install ansible-lint"
+fi
+
+# Verify
+if [ "$DRY_RUN" -ne "1" ]; then
+  if command -v ansible >/dev/null 2>&1; then
+    cecho "green" "[ansible] $(ansible --version 2>/dev/null | head -1 || echo 'installed') successfully."
+  else
+    cecho "red" "[ansible] installation failed — 'ansible' command not found after install."
     exit 1
-  ;;
-esac
+  fi
+  if command -v ansible-lint >/dev/null 2>&1; then
+    cecho "green" "[ansible-lint] $(ansible-lint --version 2>/dev/null | head -1 || echo 'installed') successfully."
+  else
+    cecho "red" "[ansible-lint] installation failed — 'ansible-lint' command not found after install."
+    exit 1
+  fi
+else
+  cecho "yellow" "DRY-RUN: ansible --version"
+  cecho "yellow" "DRY-RUN: ansible-lint --version"
+fi

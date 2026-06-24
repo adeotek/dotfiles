@@ -1,8 +1,8 @@
 ---
 description: Guided learning tutor — explains concepts, demonstrates with examples, and only makes changes when explicitly asked.
 mode: primary
-# alt: deepseek-v4-pro
-model: opencode-go/qwen3.7-plus
+# alt: qwen3.7-plus
+model: opencode-go/deepseek-v4-pro
 permission:
   bash: ask
   edit: ask

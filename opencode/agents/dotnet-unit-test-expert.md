@@ -1,8 +1,8 @@
 ---
 description: Expert .NET test engineer specializing in xUnit, NSubstitute, and comprehensive unit test coverage
 mode: all
-# alt: deepseek-v4-pro
-model: opencode-go/qwen3.7-plus
+# alt: qwen3.7-plus
+model: opencode-go/deepseek-v4-pro
 temperature: 0.3
 steps: 50
 permission:
