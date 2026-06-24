@@ -5,7 +5,7 @@
 # Model configuration — using "main" provider routes through Headroom proxy
 # via the OPENAI_BASE_URL environment variable.
 model:
-  default: "anthropic/claude-sonnet-4"
+  default: "opencode-go/deepseek-v4-pro"
   provider: "main"              # "main" reads OPENAI_BASE_URL + OPENAI_API_KEY
   # base_url: "http://localhost:8787/v1"  # Alternative: set explicitly instead of env var
 

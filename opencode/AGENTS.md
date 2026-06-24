@@ -16,11 +16,12 @@ For any non-trivial change (cross-file, >10 lines changed, refactoring, new feat
 - Simple changes (typo fix, single-line refactor, docs update) may skip this phase.
 
 ## 3. Lazy-Loading Sub-Rules
-Do not load the following proactively. Only read them via the Read tool when the task explicitly requires them:
+If the project has these docs:
 - `docs/architecture.md` — System architecture documentation (load before cross-module work)
 - `docs/design.md` — UI design rules (load before adding/modifying UI components)
 - `docs/language-style.md` — Language-specific style guides (load before writing in that language)
 - `docs/testing.md` — Testing conventions (load before writing/modifying tests)
+Do not load them proactively. Only read them via the Read tool when the task explicitly requires them.
 
 ## 4. General Conduct
 - Be concise, direct, and use bullet points for plans.
