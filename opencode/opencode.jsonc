@@ -5,6 +5,7 @@
   "default_agent": "build",
   "agent": {
     "build": {
+      "description": "Primary build/orchestrator agent. Full tool access. Delegates analysis to @plan and review to @code-review.",
       "mode": "primary",
       // alt: qwen3.7-plus
       "model": "opencode-go/kimi-k2.6"
@@ -33,7 +34,8 @@
       "temperature": 0.2
     },
     "compaction": {
-      "model": "opencode-go/deepseek-v4-pro"
+      "model": "opencode-go/deepseek-v4-flash",
+      "thinking": { "type": "disabled" }
     },
     "summary": {
       "model": "opencode-go/deepseek-v4-flash",
@@ -45,8 +47,7 @@
     }
   },
   "plugin": [
-    "./plugins/graphify.js",
-    "superpowers@git+https://github.com/obra/superpowers.git"
+    "./plugins/graphify.js"
   ],
   // // Route LLM traffic through Headroom proxy for context compression
   // "provider": {
