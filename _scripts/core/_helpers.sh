@@ -411,7 +411,7 @@ function symlink_package_file() {
 }
 
 # Copy files from source dir to dest dir if they don't already exist
-# Usage: copy_files_if_missing <src_dir> <dest_dir> <glob> <label>
+# Usage: copy_files_if_missing <src_dir> <dest_dir> <glob> [override]
 function copy_files_if_missing() {
   local src_dir="$1"
   local dest_dir="$2"

@@ -45,7 +45,7 @@ case $CURRENT_OS_ID in
       apt_cleanup_needed=1
     fi
 
-    if grep -q "^deb.*ansible/ansible" /etc/apt/sources.list.d/*.list 2>/dev/null; then
+    if grep -rq "^deb.*ansible/ansible" /etc/apt/sources.list.d/ 2>/dev/null; then
       apt_cleanup_needed=1
     fi
 

@@ -7,7 +7,7 @@ reasoningEffort: max
 temperature: 0.1
 permission:
   edit: deny
-  bash: 
+  bash:
     "echo *": allow
     "git diff *": allow
     "grep *": allow

@@ -5,7 +5,7 @@
 ###
 
 # Copy skill subdirectories from source to dest if SKILL.md doesn't already exist
-# Usage: copy_skills_if_missing <src_dir> <dest_dir>
+# Usage: copy_skills_if_missing <src_dir> <dest_dir> [override]
 copy_skills_if_missing() {
   local src_dir="$1"
   local dest_dir="$2"
@@ -49,10 +49,10 @@ source "$CDIR/opencode-install.sh"
 # Setup
 mkdir -p "$HOME/.config/opencode"
 OC_OVERRIDE_CONFIG=false
-if [[ -f "$HOME/.config/opencode/opencode.jsonc" ]] && [[ "${ARGS["unattended"]}" -ne "1" ]]; then
+if [[ -f "$HOME/.config/opencode/opencode.jsonc" ]] && [[ "${ARGS["unattended"]}" != "1" ]]; then
   cecho "yellow" -n "OpenCode already configured. Do you want to overwrite the existing configuration? (y/N): "
-  read -r OC_OVERWRITE
-  if [[ "$OC_OVERWRITE" =~ ^[Yy]$ ]]; then
+  read -r OC_OVERRIDE_RESPONSE
+  if [[ "$OC_OVERRIDE_RESPONSE" =~ ^[Yy]$ ]]; then
     OC_OVERRIDE_CONFIG=true
   fi
 fi
