@@ -1,12 +1,29 @@
 ---
 description: Dotfiles agent. Full tool access. Manages deployment automation scripts, tools, and configuration.
 mode: all
-model: opencode/kimi-k2.6
 permission:
   edit: allow
-  bash: allow
+  read: allow
+  lsp: allow
+  glob: allow
+  grep: allow
+  bash:
+    "find *": allow
+    "git diff *": allow
+    "git log *": allow
+    "git show *": allow
+    "git status": allow
+    "git stash list": allow
+    "git branch *": allow
+    "git remote *": allow
+    "graphify *": allow
+    "ls *": allow
+    "rg *": allow
+    "sort *": allow
+    "which *": allow
+    "*": ask
   task:
-    "*": allow
+    "*": ask
 ---
 
 # Dotfiles Expert Agent

@@ -1,12 +1,12 @@
 ---
 description: Expert .NET test engineer specializing in xUnit, NSubstitute, and comprehensive unit test coverage
 mode: all
-model: opencode-go/deepseek-v4-pro # or deepseek-v4-flash
+# alt: qwen3.7-plus
+model: opencode-go/deepseek-v4-pro
 temperature: 0.3
 steps: 50
 permission:
   read: allow
-  write: allow
   edit: allow
   lsp: allow
   grep: allow
@@ -16,6 +16,7 @@ permission:
     "dotnet test *": allow
     "dotnet build *": allow
     "ls *": allow
+    "graphify *": allow
     "sort *": allow
     "*": ask
 ---

@@ -1,7 +1,49 @@
 {  
   "$schema": "https://opencode.ai/config.json",
-  // "model": "",
-  // "small_model": "",
+  "model": "opencode-go/deepseek-v4-pro",
+  "small_model": "opencode-go/deepseek-v4-flash",
+  "default_agent": "build",
+  "agent": {
+    "build": {
+      "mode": "primary",
+      // alt: qwen3.7-plus
+      "model": "opencode-go/kimi-k2.6"
+    },
+    "plan": {
+      "mode": "primary",
+      // alt: deepseek-v4-pro + reasoningEffort: max
+      "model": "opencode-go/glm-5.2",
+      "temperature": 0.1
+    },
+    "general": {
+      "mode": "subagent",
+      // alt: qwen3.7-plus
+      "model": "opencode-go/deepseek-v4-pro",
+      "temperature": 0.3
+    },
+    "explore": {
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-flash",
+      "reasoningEffort": "max",
+      "temperature": 0.1
+    },
+    "scout": {
+      "mode": "subagent",
+      "model": "opencode-go/deepseek-v4-flash",
+      "temperature": 0.2
+    },
+    "compaction": {
+      "model": "opencode-go/deepseek-v4-pro"
+    },
+    "summary": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "thinking": { "type": "disabled" }
+    },
+    "title": {
+      "model": "opencode-go/deepseek-v4-flash",
+      "thinking": { "type": "disabled" }
+    }
+  },
   "plugin": [
     "./plugins/graphify.js",
     "superpowers@git+https://github.com/obra/superpowers.git"
