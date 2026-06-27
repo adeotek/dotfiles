@@ -2,7 +2,10 @@
 
 ###
 # Hermes Agent install script
-# Installs Hermes Agent (Nous Research) via the official curl installer
+#
+# Installs Hermes Agent via the official install script.
+# Hermes is an open-source AI agent framework by Nous Research.
+# Homepage: https://github.com/NousResearch/hermes-agent
 ###
 
 # Init
@@ -12,7 +15,7 @@ if [[ -z "$RDIR" ]]; then
   else
     RDIR=$(dirname "$PWD")
   fi
-  CDIR="$RDIR/_scripts/core";
+  CDIR="$RDIR/_scripts/core"
   source "$CDIR/_helpers.sh"
 fi
 
