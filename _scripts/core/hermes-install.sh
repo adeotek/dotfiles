@@ -19,17 +19,35 @@ if [[ -z "$RDIR" ]]; then
   source "$CDIR/_helpers.sh"
 fi
 
-decho "cyan" "Installing Hermes Agent..."
+# Install
+cecho "cyan" "Installing [hermes]..."
 
-if [ "$DRY_RUN" -ne "1" ]; then
-  if command -v hermes >/dev/null 2>&1; then
-    cecho "green" "Hermes Agent already installed ($(hermes --version 2>/dev/null || echo 'unknown version')). Updating..."
+# Check if already installed
+if command -v hermes >/dev/null 2>&1; then
+  cecho "yellow" "[hermes] is already present. Updating it..."
+  if [ "$DRY_RUN" -ne "1" ]; then
     hermes update
+    cecho "green" "[hermes] update done."
   else
-    cecho "cyan" "Installing Hermes Agent..."
-    curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
-    cecho "green" "Hermes Agent installed successfully."
+    cecho "yellow" "DRY-RUN: hermes update"
   fi
 else
-  cecho "yellow" "DRY-RUN: curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash"
+  if [ "$DRY_RUN" -ne "1" ]; then
+    curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+    cecho "green" "[hermes] installation done."
+  else
+    cecho "yellow" "DRY-RUN: curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash"
+  fi
+fi
+
+# Verify
+if [ "$DRY_RUN" -ne "1" ]; then
+  if command -v hermes >/dev/null 2>&1; then
+    cecho "green" "[hermes] $(hermes --version 2>/dev/null || echo 'installed') successfully."
+  else
+    cecho "red" "[hermes] installation failed — 'hermes' command not found after install."
+    exit 1
+  fi
+else
+  cecho "yellow" "DRY-RUN: hermes --version"
 fi
