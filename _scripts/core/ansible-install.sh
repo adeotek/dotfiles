@@ -25,7 +25,17 @@ if ! command -v uv >/dev/null 2>&1; then
 fi
 
 # Clean up old package manager installations
-source "$CDIR/ansible-cleanup.sh"
+ANS_CLEANUP=false
+if [[ "${ARGS["unattended"]}" != "1" ]]; then
+  cecho "yellow" -n "Do you want to run the clean-up for old installations? (y/N): "
+  read -r ANS_CLEANUP_RESPONSE
+  if [[ "$ANS_CLEANUP_RESPONSE" =~ ^[Yy]$ ]]; then
+    ANS_CLEANUP=true
+  fi
+fi
+if [[ "$ANS_CLEANUP" == true ]]; then
+  source "$CDIR/ansible-cleanup.sh"
+fi
 
 # Install ansible via uv tool install
 if command -v ansible >/dev/null 2>&1; then
