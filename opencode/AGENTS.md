@@ -24,6 +24,7 @@ If the project has these docs:
 Do not load them proactively. Only read them via the Read tool when the task explicitly requires them.
 
 ## 4. General Conduct
+- **Verify, then answer**: When your response depends on API signatures, library behavior, project conventions, config values, or file contents, verify the relevant information by reading actual files, running commands, or checking live documentation. Never rely on memory alone when the ground truth is one tool call away.
 - Be concise, direct, and use bullet points for plans.
 - For errors: include the command, the full error output, and the proposed fix.
 - When uncertain about intent, ask rather than assume.

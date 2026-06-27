@@ -6,14 +6,25 @@ model: opencode-go/deepseek-v4-pro
 reasoningEffort: max
 temperature: 0.1
 permission:
+  read: allow
+  lsp: allow
+  glob: allow
+  grep: allow
   edit: deny
   bash:
-    "echo *": allow
+    "find *": allow
     "git diff *": allow
-    "grep *": allow
+    "git log *": allow
+    "git show *": allow
+    "git status": allow
+    "git stash list": allow
+    "git branch *": allow
+    "git remote *": allow
     "graphify *": allow
     "ls *": allow
+    "rg *": allow
     "sort *": allow
+    "which *": allow
     "*": ask
   task: deny
 color: accent
