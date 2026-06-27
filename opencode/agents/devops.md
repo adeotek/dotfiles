@@ -1,6 +1,7 @@
 ---
 description: Primary devops and infrastructure agent. Full tool access. Manages CI/CD pipelines, infrastructure as code, and deployment automation, Linux and Windows hosts, networks, etc.
 mode: primary
+# alt: kimi-k2.6
 model: opencode-go/glm-5.2
 permission:
   edit: allow
