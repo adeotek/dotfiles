@@ -16,6 +16,7 @@ permission:
     "dotnet test *": allow
     "dotnet build *": allow
     "ls *": allow
+    "graphify *": allow
     "sort *": allow
     "*": ask
 ---

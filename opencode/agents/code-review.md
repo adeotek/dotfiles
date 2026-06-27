@@ -7,7 +7,14 @@ reasoningEffort: max
 temperature: 0.1
 permission:
   edit: deny
-  bash: deny
+  bash: 
+    "echo *": allow
+    "git diff *": allow
+    "grep *": allow
+    "graphify *": allow
+    "ls *": allow
+    "sort *": allow
+    "*": ask
   task: deny
 color: accent
 ---

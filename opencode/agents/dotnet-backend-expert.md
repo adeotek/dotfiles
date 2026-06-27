@@ -17,6 +17,7 @@ permission:
     "dotnet ef *": allow
     "sort *": allow
     "ls *": allow
+    "graphify *": allow
     "git status": allow
     "git diff *": allow
     "*": ask
