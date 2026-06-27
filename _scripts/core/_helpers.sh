@@ -80,9 +80,9 @@ function cecho() {
   esac
   
   if [ -z "$color_code" ]; then
-    echo $args "$@"
+    echo "$args" "$@"
   else
-    echo -e $args "\e[${color_code}m$@\e[0m"
+    echo -e "$args" "\e[${color_code}m${*}\e[0m"
   fi
 }
 
@@ -189,7 +189,8 @@ function increase_ulimit() {
 
   local target_limit=$1
   # Get current soft limit
-  local current_limit=$(ulimit -Sn)
+  local current_limit
+  current_limit=$(ulimit -Sn)
 
   if [ "$current_limit" -lt "$target_limit" ]; then
     cecho "yellow" "Current ulimit ($current_limit) is below target ($target_limit). Increasing..."
@@ -273,7 +274,7 @@ function get_stow_command() {
     extra_args="$(get_vv)"
   fi
 
-  echo "stow --dir="$RDIR" --target="$HOME" $extra_args $stow_arg $package"
+  echo "stow --dir=$RDIR --target=$HOME $extra_args $stow_arg $package"
 }
 
 function stow_package() {
@@ -415,13 +416,15 @@ function copy_files_if_missing() {
   local src_dir="$1"
   local dest_dir="$2"
   local glob="$3"
-  local label="$(basename "$src_dir")"
+  local label
+  label="$(basename "$src_dir")"
   if [ "$DRY_RUN" -ne "1" ]; then
     mkdir -p "$dest_dir"
   fi
   for src_file in "$src_dir"/$glob; do
     [[ -f "$src_file" ]] || continue
-    local dest_file="$dest_dir/$(basename "$src_file")"
+    local dest_file
+    dest_file="$dest_dir/$(basename "$src_file")"
     if [ "$DRY_RUN" -ne "1" ]; then
       if [[ ! -f "$dest_file" ]]; then
         cp "$src_file" "$dest_file"

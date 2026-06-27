@@ -1,7 +1,7 @@
 ---
 description: Restricted plan/analysis mode. Read-only. For codebase analysis and planning before making changes.
 mode: primary
-model: opencode/gemini-3.1-pro
+model: opencode-go/glm-5.2
 temperature: 0.1
 permission:
   edit: deny
