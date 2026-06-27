@@ -26,7 +26,7 @@ if [[ -x "$(command -v flatpak)" ]]; then
 fi
 
 if [[ -x "$(command -v brew)" ]]; then
-  brew upgrade
+  brew upgrade -y
 fi
 
 if [[ -x "$(command -v npm)" ]]; then
