@@ -416,6 +416,7 @@ function copy_files_if_missing() {
   local src_dir="$1"
   local dest_dir="$2"
   local glob="$3"
+  local override="${4:-false}"
   local label
   label="$(basename "$src_dir")"
   if [ "$DRY_RUN" -ne "1" ]; then
@@ -426,7 +427,7 @@ function copy_files_if_missing() {
     local dest_file
     dest_file="$dest_dir/$(basename "$src_file")"
     if [ "$DRY_RUN" -ne "1" ]; then
-      if [[ ! -f "$dest_file" ]]; then
+      if [[ ! -f "$dest_file" ]] || [[ "$override" == true ]]; then
         cp "$src_file" "$dest_file"
         cecho "green" "$label $(basename "$src_file") copied to $dest_dir/"
       else
