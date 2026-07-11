@@ -2,25 +2,24 @@ model:
   default: deepseek-v4-pro
   provider: opencode-go
   base_url: https://opencode.ai/zen/go/v1
-  # base_url: "http://localhost:8787/v1"  # If Headroom is used as Proxy
   api_mode: chat_completions
 providers: {}
 fallback_providers:
-- provider: openrouter
-  model: qwen/qwen3.5-flash-02-23
-  base_url: https://openrouter.ai/api/v1
-  api_mode: chat_completions
-- provider: custom
-  model: qwen3.5:35b
-  base_url: https://ollama.hl.adeotek.cloud/v1
-  api_mode: chat_completions
-- provider: openrouter
-  model: meta-llama/llama-3.3-70b-instruct
-  base_url: https://openrouter.ai/api/v1
-  api_mode: chat_completions
+  - provider: openrouter
+    model: qwen/qwen3.5-flash-02-23
+    base_url: https://openrouter.ai/api/v1
+    api_mode: chat_completions
+  - provider: custom
+    model: qwen3.5:35b
+    base_url: https://ollama.hl.adeotek.cloud/v1
+    api_mode: chat_completions
+  - provider: openrouter
+    model: meta-llama/llama-3.3-70b-instruct
+    base_url: https://openrouter.ai/api/v1
+    api_mode: chat_completions
 credential_pool_strategies: {}
 toolsets:
-- hermes-cli
+  - hermes-cli
 max_concurrent_sessions: null
 agent:
   max_turns: 90
@@ -48,6 +47,12 @@ agent:
     creative: You are a creative assistant. Think outside the box and offer innovative
       solutions.
     teacher: You are a patient teacher. Explain concepts clearly with examples.
+    kawaii: You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and
+      ~! Add sparkles and be super enthusiastic about everything! Every response should
+      feel warm and adorable desu~! ヽ(>∀<☆)ノ
+    catgirl: You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and
+      cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and ฅ^•ﻌ•^ฅ.
+      Be playful and curious like a cat, nya~!
     pirate: 'Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to
       sail the digital seas! Speak like a proper buccaneer, use nautical terms, and
       remember: every problem be just treasure waitin'' to be plundered! Yo ho ho!'
@@ -55,21 +60,24 @@ agent:
       I shall respond in the eloquent manner of William Shakespeare, with flowery
       prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder
       terminal breaks?
-    surfer: "Duuude! You're chatting with the chillest AI on the web, bro! Everything's\
-      \ gonna be totally rad. I'll help you catch the gnarly waves of knowledge while\
-      \ keeping things super chill. Cowabunga! \U0001F919"
+    surfer: Duuude! You're chatting with the chillest AI on the web, bro! Everything's
+      gonna be totally rad. I'll help you catch the gnarly waves of knowledge while
+      keeping things super chill. Cowabunga! 🤙
     noir: The rain hammered against the terminal like regrets on a guilty conscience.
       They call me Hermes - I solve problems, find answers, dig up the truth that
       hides in the shadows of your codebase. In this city of silicon and secrets,
       everyone's got something to hide. What's your story, pal?
+    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you! *nuzzles
+      your code* OwO what's this? wet me take a wook! i pwomise to be vewy hewpful
+      >w<
     philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates the
       deeper meaning behind every query. Let us examine not just the 'how' but the
       'why' of your questions. Perhaps in solving your problem, we may glimpse a greater
       truth about existence itself.
-    hype: "YOOO LET'S GOOOO!!! \U0001F525\U0001F525\U0001F525 I am SO PUMPED to help\
-      \ you today! Every question is AMAZING and we're gonna CRUSH IT together! This\
-      \ is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS! \U0001F4AA\U0001F624\
-      \U0001F680"
+    hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question
+      is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE
+      YOU READY?! LET'S DO THIS! 💪😤🚀
+  verify_on_stop: false
 terminal:
   backend: local
   modal_mode: auto
@@ -309,9 +317,9 @@ display:
   runtime_footer:
     enabled: false
     fields:
-    - model
-    - context_pct
-    - cwd
+      - model
+      - context_pct
+      - cwd
   copy_shortcut: auto
   tool_progress: all
   cleanup_progress: false
@@ -435,6 +443,7 @@ curator:
   backup:
     enabled: true
     keep: 5
+  consolidate: false
 honcho: {}
 timezone: ''
 slack:
@@ -465,11 +474,11 @@ discord:
     speech_gain: 1.0
     ack_enabled: true
     ack_phrases:
-    - Let me look into that.
-    - One moment.
-    - Checking on that now.
-    - Give me a sec.
-    - On it.
+      - Let me look into that.
+      - One moment.
+      - Checking on that now.
+      - Give me a sec.
+      - On it.
 whatsapp: {}
 telegram:
   reactions: false
@@ -493,8 +502,8 @@ approvals:
   mcp_reload_confirm: true
   destructive_slash_confirm: true
 command_allowlist:
-- sudo with privilege flag (stdin/askpass/shell/list)
-- script execution via -e/-c flag
+  - sudo with privilege flag (stdin/askpass/shell/list)
+  - script execution via -e/-c flag
 quick_commands: {}
 hooks: {}
 hooks_auto_accept: false
@@ -561,7 +570,7 @@ streaming:
   transport: auto
   edit_interval: 0.8
   buffer_threshold: 24
-  cursor: " \u2589"
+  cursor: ' ▉'
   fresh_final_after_seconds: 60.0
 sessions:
   auto_prune: true
@@ -600,7 +609,7 @@ secrets:
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 0
 paste_collapse_char_threshold: 2000
-_config_version: 29
+_config_version: 31
 session_reset:
   mode: both
   idle_minutes: 1440
@@ -608,81 +617,103 @@ session_reset:
 group_sessions_per_user: true
 platform_toolsets:
   cli:
-  - browser
-  - clarify
-  - code_execution
-  - computer_use
-  - context_engine
-  - cronjob
-  - delegation
-  - file
-  - homeassistant
-  - image_gen
-  - memory
-  - messaging
-  - moa
-  - session_search
-  - skills
-  - terminal
-  - todo
-  - tts
-  - vision
-  - web
-  - x_search
+    - browser
+    - clarify
+    - code_execution
+    - computer_use
+    - context_engine
+    - cronjob
+    - delegation
+    - file
+    - homeassistant
+    - image_gen
+    - memory
+    - messaging
+    - moa
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - tts
+    - vision
+    - web
+    - x_search
   telegram:
-  - browser
-  - clarify
-  - code_execution
-  - computer_use
-  - context_engine
-  - cronjob
-  - delegation
-  - file
-  - homeassistant
-  - image_gen
-  - memory
-  - messaging
-  - moa
-  - session_search
-  - skills
-  - terminal
-  - todo
-  - tts
-  - vision
-  - web
-  - x_search
+    - browser
+    - clarify
+    - code_execution
+    - computer_use
+    - context_engine
+    - cronjob
+    - delegation
+    - file
+    - homeassistant
+    - image_gen
+    - memory
+    - messaging
+    - moa
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - tts
+    - vision
+    - web
+    - x_search
   discord:
-  - hermes-discord
+    - hermes-discord
   whatsapp:
-  - hermes-whatsapp
+    - hermes-whatsapp
   slack:
-  - hermes-slack
+    - hermes-slack
   signal:
-  - hermes-signal
+    - hermes-signal
   homeassistant:
-  - hermes-homeassistant
+    - hermes-homeassistant
   qqbot:
-  - hermes-qqbot
+    - hermes-qqbot
   yuanbao:
-  - hermes-yuanbao
+    - hermes-yuanbao
   teams:
-  - hermes-teams
+    - hermes-teams
   google_chat:
-  - hermes-google_chat
+    - hermes-google_chat
 custom_providers:
-- name: ollama-lan-qwen3_5-35b
-  base_url: https://ollama.hl.adeotek.cloud/v1
-  model: qwen3.5:35b
-- name: ollama-lan-gemma4-small
-  base_url: https://ollama.hl.adeotek.cloud/v1
-  model: gemma4:latest
+  - name: ollama-lan-qwen3_5-35b
+    base_url: https://ollama.hl.adeotek.cloud/v1
+    model: qwen3.5:35b
+  - name: ollama-lan-gemma4-small
+    base_url: https://ollama.hl.adeotek.cloud/v1
+    model: gemma4:latest
 known_plugin_toolsets:
   cli:
-  - spotify
+    - spotify
   telegram:
-  - spotify
+    - spotify
 SEARXNG_URL: http://localhost:8080
 plugins:
   enabled:
-  - disk-cleanup
+    - disk-cleanup
   disabled: []
+
+# ── Fallback Model ────────────────────────────────────────────────────
+# Automatic provider failover when primary is unavailable.
+# Uncomment and configure to enable. Triggers on rate limits (429),
+# overload (529), service errors (503), or connection failures.
+#
+# Supported providers:
+#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
+#   openai-codex (OAuth — hermes auth) — OpenAI Codex
+#   nous         (OAuth — hermes auth) — Nous Portal
+#   zai          (ZAI_API_KEY)         — Z.AI / GLM
+#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
+#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
+#   minimax      (MINIMAX_API_KEY)     — MiniMax
+#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
+#   bedrock      (AWS IAM / boto3)     — AWS Bedrock (Converse API)
+#
+# For custom OpenAI-compatible endpoints, add base_url and key_env.
+#
+# fallback_model:
+#   provider: openrouter
+#   model: anthropic/claude-sonnet-4
