@@ -20,6 +20,9 @@
 .PARAMETER ProjectsOnly
     Output only deduplicated project paths. Respects -Project and -Filter.
 
+.PARAMETER EmptyName
+    Filter to sessions that have no AI-generated title.
+
 .PARAMETER Remove
     Interactively remove matched sessions and all associated UUID-keyed data.
 
@@ -58,6 +61,8 @@ param(
     [Alias('r')]
     [switch]$Remove,
 
+    [switch]$EmptyName,
+
     [Alias('h')]
     [switch]$Help
 )
@@ -80,6 +85,7 @@ if ($Help) {
     Write-Host "  -p, -Project <str>   Filter by project path (partial match, case-insensitive)"
     Write-Host "  -f, -Filter <str>    Filter by session ID, name, or summary (case-insensitive)"
     Write-Host "      -ProjectsOnly    Output only project paths (respects -Project and -Filter)"
+    Write-Host "      -EmptyName       Filter to sessions with no AI-generated title"
     Write-Host "  -r, -Remove          Remove matched sessions and their associated data (requires confirmation)"
     exit 0
 }
@@ -174,6 +180,8 @@ foreach ($projDir in Get-ChildItem $projectsDir -Directory -ErrorAction Silently
             $summaryMatch = $summary -ilike "*$Filter*"
             if (-not ($idMatch -or $nameMatch -or $summaryMatch)) { continue }
         }
+
+        if ($EmptyName -and $name) { continue }
 
         # ── Mode dispatch ─────────────────────────────────────────────────────
 
