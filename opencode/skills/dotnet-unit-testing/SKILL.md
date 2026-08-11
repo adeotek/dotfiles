@@ -69,3 +69,4 @@ public class {ClassName}Tests
         await _dependency.Received(1).SomeMethod(Arg.Any<string>());
     }
 }
+```
