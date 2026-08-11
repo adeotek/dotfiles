@@ -47,7 +47,6 @@
     }
   },
   "plugin": [
-    "./plugins/graphify.js",
     "superpowers@git+https://github.com/obra/superpowers.git"
   ],
   // // Route LLM traffic through Headroom proxy for context compression
