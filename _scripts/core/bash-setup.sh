@@ -24,7 +24,7 @@ if [[ -z "$RDIR" ]]; then
   source "$CDIR/_helpers.sh"
 fi
 
-process_args $@
+process_args "$@"
 
 # Setup
 if [ "${ARGS["prompt"]}" == "oh-my-posh" ]; then

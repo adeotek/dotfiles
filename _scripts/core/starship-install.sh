@@ -17,5 +17,6 @@ fi
 
 # Install
 source "$CDIR/homebrew-install.sh"
-install_package "starship" "starship --version" "brew install starship"
+source "$CDIR/nerd-fonts-install.sh"
 
+install_package "starship" "starship --version" "brew install starship"

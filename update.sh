@@ -33,6 +33,11 @@ if [[ -x "$(command -v npm)" ]]; then
   sudo npm install -g npm
 fi
 
+if [[ -x "$(command -v uv)" ]]; then
+  uv self update
+  uv tool upgrade --all
+fi
+
 if [[ -x "$(command -v oh-my-posh)" ]]; then
   sudo oh-my-posh upgrade
 fi
