@@ -72,14 +72,14 @@
 	############
 	find = log --graph --oneline --all --decorate --date-order --regexp-ignore-case --extended-regexp --grep
   last = log -1
-  lg = log --color --graph --pretty=custom --abbrev-commit
+  lgc = log --color --graph --pretty=custom --abbrev-commit
   quicklog = log --oneline --decorate -10 --pretty=custom
   quicklog-long = log --oneline --decorate --pretty=custom
   rfind = log --graph --oneline --all --decorate --date-order --regexp-ignore-case --extended-regexp --invert-grep --grep
   search = grep --line-number --ignore-case -E -I
   today = diff --stat 'HEAD@{midnight}'
   yesterday = diff --stat 'HEAD@{yesterday}' 'HEAD@{midnight}'
-  clone = git clone -s --single-branch
+  clones = git clone -s --single-branch
 	############
 	a = add
 	aa = add --all
