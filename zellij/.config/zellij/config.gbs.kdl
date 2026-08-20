@@ -339,6 +339,15 @@ default_mode "locked"
 //   - false
 // 
 // pane_frames false
+
+// The style of the pane frames when pane_frames is enabled.
+// Options:
+//   - "titles" (default) - a single title line above each pane
+//   - "full" - a full border around each pane (the pre-0.45.0 look)
+//   - "none" - no frames at all (identical to pane_frames false)
+// Setting pane_frames false forces the style to none regardless of this option.
+//
+pane_frame_style "full"
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
@@ -510,6 +519,13 @@ default_mode "locked"
 // Default: true
 // 
 // stacked_resize false
+
+// Whether stacked panes are rendered as a list of one-line titles with the
+// expanded pane pinned to the bottom of the stack (0.45.0 default), or
+// rendered in place inside the stack (pre-0.45.0 behavior)
+// Default: true
+//
+stacked_pane_list false
  
 // Whether to show tips on startup
 // Default: true

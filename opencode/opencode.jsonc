@@ -7,18 +7,16 @@
     "build": {
       "description": "Primary build/orchestrator agent. Full tool access. Delegates analysis to @plan and review to @code-review.",
       "mode": "primary",
-      // alt: qwen3.7-plus
-      "model": "opencode-go/kimi-k3"
+      "model": "opencode-go/deepseek-v4-pro"
     },
     "plan": {
       "mode": "primary",
       // alt: deepseek-v4-pro + reasoningEffort: max
-      "model": "opencode-go/glm-5.2",
+      "model": "opencode-go/glm-5.3",
       "temperature": 0.1
     },
     "general": {
       "mode": "subagent",
-      // alt: qwen3.7-plus
       "model": "opencode-go/deepseek-v4-pro",
       "temperature": 0.3
     },
