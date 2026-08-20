@@ -30,7 +30,7 @@ process_args "$@"
 # Install
 if [ -z "${ARGS["version"]}" ]; then
   cecho "yellow" -n "Please input the NodeJs version you want to install? [$OPT_NODEJS_DEFAULT_VERSION]: "
-  read NODEJS_VERSION
+  read -r NODEJS_VERSION
   if [[ "$NODEJS_VERSION" == "" ]]; then
     NODEJS_VERSION="$OPT_NODEJS_DEFAULT_VERSION"
   fi
@@ -41,7 +41,7 @@ fi
 NJS_INSTALL_MODE="${ARGS["install-mode"]}"
 if [[ -z "$NJS_INSTALL_MODE" && "$CURRENT_ARCH" != "aarch64" ]]; then
   cecho "yellow" -n "Do you want to install NodeJs with Homebrew? [y/N]: "
-  read INSTALL_MODE_CONFIRM
+  read -r INSTALL_MODE_CONFIRM
   if [[ "$INSTALL_MODE_CONFIRM" == "y" || "$INSTALL_MODE_CONFIRM" == "Y" ]]; then
     NJS_INSTALL_MODE="brew"
   fi
@@ -103,22 +103,22 @@ else
       fi
       ;;
     fedora)
-      cecho "cyan" "Installing [nodejs$NODEJS_VERSION]..."
+      cecho "cyan" "Installing [nodejs]..."
       if node -v >/dev/null 2>&1; then
         decho "yellow" "Package already installed. Updating it..."
       fi
 
       if [ "$DRY_RUN" -ne "1" ]; then
-        sudo dnf install -y nodejs$NODEJS_VERSION
-        cecho "cyan" "[nodejs] setting up alternatives for version $NODEJS_VERSION."
-        sudo alternatives --install /usr/bin/node node /usr/bin/node-$NODEJS_VERSION $NODEJS_VERSION
-        sudo alternatives --install /usr/bin/npm npm /usr/bin/npm-$NODEJS_VERSION $NODEJS_VERSION
+        decho "yellow" "Removing old nodejs$NODEJS_VERSION package if exists..."
+        sudo dnf remove -y nodejs$NODEJS_VERSION
+        curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
+        sudo dnf install -y nodejs
         cecho "green" "[nodejs] installation done."
       else
-        cecho "yellow" "DRY-RUN: sudo dnf install -y nodejs$NODEJS_VERSION"
-        cecho "cyan" "[nodejs] setting up alternatives for version $NODEJS_VERSION."
-        cecho "yellow" "DRY-RUN: sudo alternatives --install /usr/bin/node node /usr/bin/node-$NODEJS_VERSION $NODEJS_VERSION"
-        cecho "yellow" "DRY-RUN: sudo alternatives --install /usr/bin/npm npm /usr/bin/npm-$NODEJS_VERSION $NODEJS_VERSION"
+        decho "yellow" "Removing old nodejs$NODEJS_VERSION package if exists..."
+        cecho "yellow" "DRY-RUN: sudo dnf remove -y nodejs$NODEJS_VERSION"
+        cecho "yellow" "DRY-RUN: curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -"
+        cecho "yellow" "DRY-RUN: sudo dnf install -y nodejs"
       fi
       ;;
     redhat)
