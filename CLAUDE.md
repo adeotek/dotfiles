@@ -90,7 +90,7 @@ Not stowed — deployed imperatively by `claude-code-setup.sh`. Files under `cla
 - `settings-part.json` — partial `~/.claude/settings.json` merged with `jq -s '.[0] * .[1]'`.
 - `CLAUDE.md` — seeded as `~/.claude/CLAUDE.md` only if the file does not yet exist.
 
-The setup script also installs plugins from two marketplaces (`claude-plugins-official`, `adeotek-plugins`) and LSP servers (gopls, csharp-ls, vtsls/typescript, pyright, lua-language-server).
+The setup script also installs plugins from two marketplaces (`claude-plugins-official`, `adeotek-plugins`) and sources `lsp-servers-install.sh`, which installs language servers for languages present on the machine (YAML/TOML/HTML/CSS/JSON format servers always; bash, JS/TS, Python, Go, C#, Rust, PowerShell, Terraform, Docker, Ansible, Lua servers when the respective toolchain is available).
 
 ### OpenCode Config (`opencode/`)
 Not stowed — deployed imperatively by `opencode-setup.sh`. Samples are copied to `~/.config/opencode/` only if the target does not yet exist:

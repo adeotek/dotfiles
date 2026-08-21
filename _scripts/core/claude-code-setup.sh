@@ -98,54 +98,7 @@ for plugin in "${CLAUDECODE_PLUGINS[@]}"; do
 done
 
 # Install LSP servers
-if [ "$DRY_RUN" -ne "1" ]; then
-  if command -v dotnet >/dev/null 2>&1; then
-    dotnet tool install --global csharp-ls
-    cecho "green" "[claude-code] .NET LSP server installed successfully."
-  else
-    cecho "yellow" "Skipping .NET LSP servers since [dotnet] is not available."
-  fi
-
-  if command -v go >/dev/null 2>&1; then
-    go install golang.org/x/tools/gopls@latest
-    cecho "green" "[claude-code] Go Lang LSP server installed successfully."
-  else
-    cecho "yellow" "Skipping Go Lang LSP servers since [go] is not available."
-  fi
-
-  if command -v npm >/dev/null 2>&1; then
-    sudo npm install -g @vtsls/language-server typescript
-    cecho "green" "[claude-code] JavaScript/TypeScript LSP servers installed successfully."
-    sudo npm install -g pyright
-    cecho "green" "[claude-code] Python LSP server installed successfully."
-  else
-    cecho "yellow" "Skipping JavaScript/TypeScript and Python LSP servers since [npm] is not available."
-  fi
-else
-  cecho "yellow" "DRY-RUN: dotnet tool install --global csharp-ls"
-  cecho "yellow" "DRY-RUN: go install golang.org/x/tools/gopls@latest"
-  cecho "yellow" "DRY-RUN: sudo npm install -g @vtsls/language-server typescript"
-  cecho "yellow" "DRY-RUN: sudo npm install -g pyright"
-fi
-
-case $CURRENT_OS_ID in
-  debian|ubuntu|pop)
-    if [ "$DRY_RUN" -ne "1" ]; then
-      sudo apt-get update
-      sudo apt-get install -y lua-language-server
-    else
-      cecho "yellow" "DRY-RUN: sudo apt-get install -y lua-language-server"
-    fi
-    ;;
-  fedora|redhat)
-    source "$CDIR/homebrew-install.sh"
-    install_package "lua-language-server" "brew list lua-language-server" "brew install lua-language-server"
-    ;;
-  *)
-    cecho "red" "Unsupported OS: $CURRENT_OS_ID"
-    exit 1
-    ;;
-esac
+source "$CDIR/lsp-servers-install.sh"
 
 # Install CLI tools
 source "$CDIR/playwright-install.sh"

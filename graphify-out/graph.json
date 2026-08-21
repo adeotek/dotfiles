@@ -347,11 +347,158 @@
       "source_location": "L6"
     },
     {
+      "id": "nvim_config_nvim_init",
+      "label": "nvim/init.lua",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
+      "file_type": "code",
+      "norm_label": "nvim/init.lua",
+      "source_file": "nvim/.config/nvim/init.lua",
+      "source_location": "L1"
+    },
+    {
+      "id": "nvim_config_nvim_lua_config",
+      "label": "lua/config.lua",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
+      "file_type": "code",
+      "norm_label": "lua/config.lua",
+      "source_file": "nvim/.config/nvim/lua/config.lua",
+      "source_location": "L1"
+    },
+    {
+      "id": "nvim_config_nvim_lua_configs_adeotek_v1_config",
+      "label": "adeotek_v1/config.lua",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
+      "file_type": "code",
+      "norm_label": "adeotek_v1/config.lua",
+      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v1/config.lua",
+      "source_location": "L1"
+    },
+    {
+      "id": "nvim_config_nvim_lua_configs_adeotek_v1_init",
+      "label": "adeotek_v1/init.lua",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
+      "file_type": "code",
+      "norm_label": "adeotek_v1/init.lua",
+      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v1/init.lua",
+      "source_location": "L1"
+    },
+    {
+      "id": "nvim_config_nvim_lua_configs_adeotek_v1_keymaps",
+      "label": "adeotek_v1/keymaps.lua",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
+      "file_type": "code",
+      "norm_label": "adeotek_v1/keymaps.lua",
+      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v1/keymaps.lua",
+      "source_location": "L1"
+    },
+    {
+      "id": "nvim_config_nvim_lua_configs_adeotek_v1_lazy_init",
+      "label": "lazy_init.lua",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
+      "file_type": "code",
+      "norm_label": "lazy_init.lua",
+      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v1/lazy_init.lua",
+      "source_location": "L1"
+    },
+    {
+      "id": "nvim_config_nvim_lua_configs_adeotek_v2_init",
+      "label": "adeotek_v2/init.lua",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
+      "file_type": "code",
+      "norm_label": "adeotek_v2/init.lua",
+      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v2/init.lua",
+      "source_location": "L1"
+    },
+    {
+      "id": "nvim_config_nvim_lua_configs_adeotek_v2_keymaps",
+      "label": "adeotek_v2/keymaps.lua",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
+      "file_type": "code",
+      "norm_label": "adeotek_v2/keymaps.lua",
+      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v2/keymaps.lua",
+      "source_location": "L1"
+    },
+    {
+      "id": "nvim_config_nvim_lua_configs_adeotek_v2_options",
+      "label": "options.lua",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
+      "file_type": "code",
+      "norm_label": "options.lua",
+      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v2/options.lua",
+      "source_location": "L1"
+    },
+    {
+      "id": "nvim_config_nvim_lua_configs_jakoolit_init",
+      "label": "jakoolit/init.lua",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
+      "file_type": "code",
+      "norm_label": "jakoolit/init.lua",
+      "source_file": "nvim/.config/nvim/lua/configs/jakoolit/init.lua",
+      "source_location": "L1"
+    },
+    {
+      "id": "nvim_config_nvim_lua_configs_jakoolit_plugins",
+      "label": "plugins.lua",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
+      "file_type": "code",
+      "norm_label": "plugins.lua",
+      "source_file": "nvim/.config/nvim/lua/configs/jakoolit/plugins.lua",
+      "source_location": "L1"
+    },
+    {
+      "id": "nvim_config_nvim_lua_configs_jakoolit_vim_options",
+      "label": "vim-options.lua",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
+      "file_type": "code",
+      "norm_label": "vim-options.lua",
+      "source_file": "nvim/.config/nvim/lua/configs/jakoolit/vim-options.lua",
+      "source_location": "L1"
+    },
+    {
+      "id": "bash_config_bash_config",
+      "label": "config.bash",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "config.bash",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "config.bash",
+      "source_file": "bash/.config/bash/config.bash",
+      "source_location": "L1"
+    },
+    {
       "id": "bash_config_bash_config_bash__entry",
       "label": "config.bash script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -366,7 +513,7 @@
       "label": "COLORTERM",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -381,7 +528,7 @@
       "label": "EDITOR",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -396,7 +543,7 @@
       "label": "hstrnotiocsti()",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -411,7 +558,7 @@
       "label": "LC_ALL",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -426,7 +573,7 @@
       "label": "PATH",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -441,7 +588,7 @@
       "label": "yy()",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -452,11 +599,26 @@
       "source_location": "L124"
     },
     {
+      "id": "scripts_core_bash_setup",
+      "label": "bash-setup.sh",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "config.bash",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "bash-setup.sh",
+      "source_file": "_scripts/core/bash-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_bash_setup_sh__entry",
       "label": "bash-setup.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -471,7 +633,7 @@
       "label": "process_args()",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -486,7 +648,7 @@
       "label": "_helpers.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -497,18 +659,18 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_kitty_setup_sh__entry",
-      "label": "kitty-setup.sh script",
+      "id": "scripts_core_nerd_fonts_install",
+      "label": "nerd-fonts-install.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
-        "kind": "bash_entrypoint"
+        "kind": "file"
       },
-      "norm_label": "kitty-setup.sh script",
-      "source_file": "_scripts/core/kitty-setup.sh",
+      "norm_label": "nerd-fonts-install.sh",
+      "source_file": "_scripts/core/nerd-fonts-install.sh",
       "source_location": "L1"
     },
     {
@@ -516,7 +678,7 @@
       "label": "nerd-fonts-install.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -527,11 +689,41 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_oh_my_posh_install",
+      "label": "oh-my-posh-install.sh",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "config.bash",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "oh-my-posh-install.sh",
+      "source_file": "_scripts/core/oh-my-posh-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_oh_my_posh_setup",
+      "label": "oh-my-posh-setup.sh",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "config.bash",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "oh-my-posh-setup.sh",
+      "source_file": "_scripts/core/oh-my-posh-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_oh_my_posh_setup_sh__entry",
       "label": "oh-my-posh-setup.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -542,11 +734,26 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_starship_install",
+      "label": "starship-install.sh",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "config.bash",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "starship-install.sh",
+      "source_file": "_scripts/core/starship-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_starship_install_sh__entry",
       "label": "starship-install.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -557,11 +764,26 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_starship_setup",
+      "label": "starship-setup.sh",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "config.bash",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "starship-setup.sh",
+      "source_file": "_scripts/core/starship-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_starship_setup_sh__entry",
       "label": "starship-setup.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -572,11 +794,26 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_zsh_setup",
+      "label": "zsh-setup.sh",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "config.bash",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "zsh-setup.sh",
+      "source_file": "_scripts/core/zsh-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_zsh_setup_sh__entry",
       "label": "zsh-setup.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -584,6 +821,81 @@
       },
       "norm_label": "zsh-setup.sh script",
       "source_file": "_scripts/core/zsh-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_kitty_install",
+      "label": "kitty-install.sh",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "kitty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "kitty-install.sh",
+      "source_file": "_scripts/core/kitty-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_kitty_setup",
+      "label": "kitty-setup.sh",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "kitty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "kitty-setup.sh",
+      "source_file": "_scripts/core/kitty-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_kitty_setup_sh__entry",
+      "label": "kitty-setup.sh script",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "kitty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "kitty-setup.sh script",
+      "source_file": "_scripts/core/kitty-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_tabby_install",
+      "label": "tabby-install.sh",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "kitty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "tabby-install.sh",
+      "source_file": "_scripts/core/tabby-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_tabby_setup",
+      "label": "tabby-setup.sh",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "kitty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "tabby-setup.sh",
+      "source_file": "_scripts/core/tabby-setup.sh",
       "source_location": "L1"
     },
     {
@@ -599,6 +911,36 @@
       },
       "norm_label": "tabby-setup.sh script",
       "source_file": "_scripts/core/tabby-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_github_cli_install",
+      "label": "github-cli-install.sh",
+      "_origin": "ast",
+      "community": 101,
+      "community_name": "github-cli-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "github-cli-install.sh",
+      "source_file": "_scripts/core/github-cli-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_claude_code_install",
+      "label": "claude-code-install.sh",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "claude-code-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "claude-code-install.sh",
+      "source_file": "_scripts/core/claude-code-install.sh",
       "source_location": "L1"
     },
     {
@@ -632,6 +974,21 @@
       "source_location": "L415"
     },
     {
+      "id": "scripts_core_opencode_install",
+      "label": "opencode-install.sh",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "claude-code-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "opencode-install.sh",
+      "source_file": "_scripts/core/opencode-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_opencode_install_sh__entry",
       "label": "opencode-install.sh script",
       "_origin": "ast",
@@ -644,6 +1001,21 @@
       },
       "norm_label": "opencode-install.sh script",
       "source_file": "_scripts/core/opencode-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_opencode_setup",
+      "label": "opencode-setup.sh",
+      "_origin": "ast",
+      "community": 11,
+      "community_name": "claude-code-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "opencode-setup.sh",
+      "source_file": "_scripts/core/opencode-setup.sh",
       "source_location": "L1"
     },
     {
@@ -972,6 +1344,21 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_ansible_install",
+      "label": "ansible-install.sh",
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "uv-install.sh (Python Package Manager)",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "ansible-install.sh",
+      "source_file": "_scripts/core/ansible-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_ansible_install_sh__entry",
       "label": "ansible-install.sh script",
       "_origin": "ast",
@@ -1077,6 +1464,21 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_uv_install",
+      "label": "uv-install.sh",
+      "_origin": "ast",
+      "community": 154,
+      "community_name": "uv-install.sh (Python Package Manager)",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "uv-install.sh",
+      "source_file": "_scripts/core/uv-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_uv_install_sh__entry",
       "label": "uv-install.sh script",
       "_origin": "ast",
@@ -1089,6 +1491,21 @@
       },
       "norm_label": "uv-install.sh script",
       "source_file": "_scripts/core/uv-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_docker_install",
+      "label": "docker-install.sh",
+      "_origin": "ast",
+      "community": 157,
+      "community_name": "docker-install.sh script",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "docker-install.sh",
+      "source_file": "_scripts/core/docker-install.sh",
       "source_location": "L1"
     },
     {
@@ -1120,6 +1537,21 @@
       "norm_label": "enable_wsl_systemd()",
       "source_file": "_scripts/core/_helpers.sh",
       "source_location": "L442"
+    },
+    {
+      "id": "scripts_core_golang_install",
+      "label": "golang-install.sh",
+      "_origin": "ast",
+      "community": 159,
+      "community_name": "golang-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "golang-install.sh",
+      "source_file": "_scripts/core/golang-install.sh",
+      "source_location": "L1"
     },
     {
       "id": "scripts_core_golang_install_sh__entry",
@@ -1159,6 +1591,21 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_system_update",
+      "label": "system-update.sh",
+      "_origin": "ast",
+      "community": 160,
+      "community_name": "system-update.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "system-update.sh",
+      "source_file": "_scripts/core/system-update.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_system_update_sh__entry",
       "label": "system-update.sh script",
       "_origin": "ast",
@@ -1171,6 +1618,36 @@
       },
       "norm_label": "system-update.sh script",
       "source_file": "_scripts/core/system-update.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_ghostty_install",
+      "label": "ghostty-install.sh",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "ghostty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "ghostty-install.sh",
+      "source_file": "_scripts/core/ghostty-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_ghostty_setup",
+      "label": "ghostty-setup.sh",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "ghostty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "ghostty-setup.sh",
+      "source_file": "_scripts/core/ghostty-setup.sh",
       "source_location": "L1"
     },
     {
@@ -1189,6 +1666,36 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_zed_install",
+      "label": "zed-install.sh",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "ghostty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "zed-install.sh",
+      "source_file": "_scripts/core/zed-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_zed_setup",
+      "label": "zed-setup.sh",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "ghostty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "zed-setup.sh",
+      "source_file": "_scripts/core/zed-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_zed_setup_sh__entry",
       "label": "zed-setup.sh script",
       "_origin": "ast",
@@ -1201,6 +1708,21 @@
       },
       "norm_label": "zed-setup.sh script",
       "source_file": "_scripts/core/zed-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "claude_code_user_config_statusline_command",
+      "label": "statusline-command.sh",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "statusline-command.sh (Linux/WSL)",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "statusline-command.sh",
+      "source_file": "claude-code/user-config/statusline-command.sh",
       "source_location": "L1"
     },
     {
@@ -1291,6 +1813,21 @@
       },
       "norm_label": "statusline-command.sh script",
       "source_file": "claude-code/user-config/statusline-command.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "claude_code_user_config_statusline_command_win",
+      "label": "statusline-command-win.sh",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "statusline-command.sh (Linux/WSL)",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "statusline-command-win.sh",
+      "source_file": "claude-code/user-config/statusline-command-win.sh",
       "source_location": "L1"
     },
     {
@@ -1396,6 +1933,21 @@
       },
       "norm_label": "statusline-command-win.sh script",
       "source_file": "claude-code/user-config/statusline-command-win.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "claude_code_user_config_statusline_slim",
+      "label": "statusline-slim.sh",
+      "_origin": "ast",
+      "community": 19,
+      "community_name": "statusline-command.sh (Linux/WSL)",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "statusline-slim.sh",
+      "source_file": "claude-code/user-config/statusline-slim.sh",
       "source_location": "L1"
     },
     {
@@ -1669,6 +2221,36 @@
       "source_location": "L89"
     },
     {
+      "id": "scripts_core_helm_install",
+      "label": "helm-install.sh",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "k8s-repo-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "helm-install.sh",
+      "source_file": "_scripts/core/helm-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_k8s_repo_install",
+      "label": "k8s-repo-install.sh",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "k8s-repo-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "k8s-repo-install.sh",
+      "source_file": "_scripts/core/k8s-repo-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_k8s_repo_install_sh__entry",
       "label": "k8s-repo-install.sh script",
       "_origin": "ast",
@@ -1681,6 +2263,21 @@
       },
       "norm_label": "k8s-repo-install.sh script",
       "source_file": "_scripts/core/k8s-repo-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_kubectl_install",
+      "label": "kubectl-install.sh",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "k8s-repo-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "kubectl-install.sh",
+      "source_file": "_scripts/core/kubectl-install.sh",
       "source_location": "L1"
     },
     {
@@ -1726,21 +2323,6 @@
       },
       "norm_label": "aws-cli-install.sh script",
       "source_file": "_scripts/core/aws-cli-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_claude_code_setup_sh__entry",
-      "label": "claude-code-setup.sh script",
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "claude-code-setup.sh script",
-      "source_file": "_scripts/core/claude-code-setup.sh",
       "source_location": "L1"
     },
     {
@@ -2044,6 +2626,21 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_lsp_servers_install_sh__entry",
+      "label": "lsp-servers-install.sh script",
+      "_origin": "ast",
+      "community": 23,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "lsp-servers-install.sh script",
+      "source_file": "_scripts/core/lsp-servers-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_microsoft_repo_install_sh__entry",
       "label": "microsoft-repo-install.sh script",
       "_origin": "ast",
@@ -2176,21 +2773,6 @@
       },
       "norm_label": "tools-setup.sh script",
       "source_file": "_scripts/core/tools-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_vscode_install_sh__entry",
-      "label": "vscode-install.sh script",
-      "_origin": "ast",
-      "community": 23,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "vscode-install.sh script",
-      "source_file": "_scripts/core/vscode-install.sh",
       "source_location": "L1"
     },
     {
@@ -2344,6 +2926,21 @@
       "source_location": "L1"
     },
     {
+      "id": "tools_tools_cc_sessions",
+      "label": "cc-sessions.sh",
+      "_origin": "ast",
+      "community": 29,
+      "community_name": "cc-sessions.sh (Claude Code Session Browser)",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "cc-sessions.sh",
+      "source_file": "tools/.tools/cc-sessions.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "tools_tools_cc_sessions_ordered_projects",
       "label": "ordered_projects",
       "_origin": "ast",
@@ -2419,6 +3016,21 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_options",
+      "label": "_options.sh",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "_options.sh (Task Arrays & Tiers)",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "_options.sh",
+      "source_file": "_scripts/core/_options.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_options_all_console_tasks",
       "label": "ALL_CONSOLE_TASKS",
       "_origin": "ast",
@@ -2431,7 +3043,7 @@
       },
       "norm_label": "all_console_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L87"
+      "source_location": "L88"
     },
     {
       "id": "scripts_core_options_all_desktop_tasks",
@@ -2446,7 +3058,7 @@
       },
       "norm_label": "all_desktop_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L100"
+      "source_location": "L101"
     },
     {
       "id": "scripts_core_options_all_tasks",
@@ -2461,7 +3073,7 @@
       },
       "norm_label": "all_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L105"
+      "source_location": "L106"
     },
     {
       "id": "scripts_core_options_console_extra_tasks",
@@ -2521,7 +3133,7 @@
       },
       "norm_label": "desktop_extra_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L92"
+      "source_location": "L93"
     },
     {
       "id": "scripts_core_options_desktop_only_tasks",
@@ -2536,7 +3148,7 @@
       },
       "norm_label": "desktop_only_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L77"
+      "source_location": "L78"
     },
     {
       "id": "scripts_core_options_desktop_tasks",
@@ -2551,7 +3163,7 @@
       },
       "norm_label": "desktop_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L82"
+      "source_location": "L83"
     },
     {
       "id": "scripts_core_options_menu_options",
@@ -2566,7 +3178,7 @@
       },
       "norm_label": "menu_options",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L115"
+      "source_location": "L116"
     },
     {
       "id": "scripts_core_options_minimal_tasks",
@@ -2611,7 +3223,7 @@
       },
       "norm_label": "task_args",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L169"
+      "source_location": "L171"
     },
     {
       "id": "scripts_core_options_task_types",
@@ -2626,7 +3238,7 @@
       },
       "norm_label": "task_types",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L124"
+      "source_location": "L125"
     },
     {
       "id": "opencode_tui",
@@ -2707,6 +3319,36 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_fastfetch_install",
+      "label": "fastfetch-install.sh",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "fastfetch-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "fastfetch-install.sh",
+      "source_file": "_scripts/core/fastfetch-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_fastfetch_setup",
+      "label": "fastfetch-setup.sh",
+      "_origin": "ast",
+      "community": 33,
+      "community_name": "fastfetch-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "fastfetch-setup.sh",
+      "source_file": "_scripts/core/fastfetch-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_fastfetch_setup_sh__entry",
       "label": "fastfetch-setup.sh script",
       "_origin": "ast",
@@ -2719,6 +3361,21 @@
       },
       "norm_label": "fastfetch-setup.sh script",
       "source_file": "_scripts/core/fastfetch-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_git_install",
+      "label": "git-install.sh",
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "git-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "git-install.sh",
+      "source_file": "_scripts/core/git-install.sh",
       "source_location": "L1"
     },
     {
@@ -2737,11 +3394,86 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_git_setup",
+      "label": "git-setup.sh",
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "git-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "git-setup.sh",
+      "source_file": "_scripts/core/git-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_aws_cli_install",
+      "label": "aws-cli-install.sh",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "aws-cli-install.sh",
+      "source_file": "_scripts/core/aws-cli-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_dotnet_install",
+      "label": "dotnet-install.sh",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "dotnet-install.sh",
+      "source_file": "_scripts/core/dotnet-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_gcp_cli_install",
+      "label": "gcp-cli-install.sh",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "gcp-cli-install.sh",
+      "source_file": "_scripts/core/gcp-cli-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_helpers",
+      "label": "_helpers.sh",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "_helpers.sh",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_helpers_aecho",
       "label": "aecho()",
       "_origin": "ast",
       "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2756,7 +3488,7 @@
       "label": "get_stow_command()",
       "_origin": "ast",
       "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2771,7 +3503,7 @@
       "label": "get_vv()",
       "_origin": "ast",
       "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2786,7 +3518,7 @@
       "label": "is_associative_array()",
       "_origin": "ast",
       "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2797,18 +3529,108 @@
       "source_location": "L114"
     },
     {
-      "id": "scripts_core_jetbrains_toolbox_setup_sh__entry",
-      "label": "jetbrains-toolbox-setup.sh script",
+      "id": "scripts_core_microsoft_repo_install",
+      "label": "microsoft-repo-install.sh",
       "_origin": "ast",
       "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "microsoft-repo-install.sh",
+      "source_file": "_scripts/core/microsoft-repo-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_powershell_install",
+      "label": "powershell-install.sh",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "powershell-install.sh",
+      "source_file": "_scripts/core/powershell-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_terraform_install",
+      "label": "terraform-install.sh",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "terraform-install.sh",
+      "source_file": "_scripts/core/terraform-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_tools_setup",
+      "label": "tools-setup.sh",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "tools-setup.sh",
+      "source_file": "_scripts/core/tools-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_vscode_install",
+      "label": "vscode-install.sh",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "vscode-install.sh",
+      "source_file": "_scripts/core/vscode-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_vscode_install_sh__entry",
+      "label": "vscode-install.sh script",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "jetbrains-toolbox-setup.sh script",
-      "source_file": "_scripts/core/jetbrains-toolbox-setup.sh",
+      "norm_label": "vscode-install.sh script",
+      "source_file": "_scripts/core/vscode-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_tmux_install",
+      "label": "tmux-install.sh",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "tmux-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "tmux-install.sh",
+      "source_file": "_scripts/core/tmux-install.sh",
       "source_location": "L1"
     },
     {
@@ -2824,6 +3646,21 @@
       },
       "norm_label": "tmux-install.sh script",
       "source_file": "_scripts/core/tmux-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_tmux_setup",
+      "label": "tmux-setup.sh",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "tmux-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "tmux-setup.sh",
+      "source_file": "_scripts/core/tmux-setup.sh",
       "source_location": "L1"
     },
     {
@@ -3648,6 +4485,21 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_base_tools_install",
+      "label": "base-tools-install.sh",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "base-tools-install.sh",
+      "source_file": "_scripts/core/base-tools-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_base_tools_install_sh__entry",
       "label": "base-tools-install.sh script",
       "_origin": "ast",
@@ -3660,6 +4512,21 @@
       },
       "norm_label": "base-tools-install.sh script",
       "source_file": "_scripts/core/base-tools-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_claude_code_setup",
+      "label": "claude-code-setup.sh",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "claude-code-setup.sh",
+      "source_file": "_scripts/core/claude-code-setup.sh",
       "source_location": "L1"
     },
     {
@@ -3678,6 +4545,36 @@
       "source_location": "L18"
     },
     {
+      "id": "scripts_core_claude_code_setup_sh__entry",
+      "label": "claude-code-setup.sh script",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "claude-code-setup.sh script",
+      "source_file": "_scripts/core/claude-code-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_glow_install",
+      "label": "glow-install.sh",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "glow-install.sh",
+      "source_file": "_scripts/core/glow-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_glow_install_sh__entry",
       "label": "glow-install.sh script",
       "_origin": "ast",
@@ -3693,33 +4590,78 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_neofetch_install_sh__entry",
-      "label": "neofetch-install.sh script",
+      "id": "scripts_core_homebrew_install",
+      "label": "homebrew-install.sh",
       "_origin": "ast",
       "community": 6,
       "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
-        "kind": "bash_entrypoint"
+        "kind": "file"
       },
-      "norm_label": "neofetch-install.sh script",
-      "source_file": "_scripts/core/neofetch-install.sh",
+      "norm_label": "homebrew-install.sh",
+      "source_file": "_scripts/core/homebrew-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_neofetch_setup_sh__entry",
-      "label": "neofetch-setup.sh script",
+      "id": "scripts_core_lsp_servers_install",
+      "label": "lsp-servers-install.sh",
       "_origin": "ast",
       "community": 6,
       "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
-        "kind": "bash_entrypoint"
+        "kind": "file"
       },
-      "norm_label": "neofetch-setup.sh script",
-      "source_file": "_scripts/core/neofetch-setup.sh",
+      "norm_label": "lsp-servers-install.sh",
+      "source_file": "_scripts/core/lsp-servers-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_nodejs_install",
+      "label": "nodejs-install.sh",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "nodejs-install.sh",
+      "source_file": "_scripts/core/nodejs-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_nvim_install",
+      "label": "nvim-install.sh",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "nvim-install.sh",
+      "source_file": "_scripts/core/nvim-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_nvim_setup",
+      "label": "nvim-setup.sh",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "nvim-setup.sh",
+      "source_file": "_scripts/core/nvim-setup.sh",
       "source_location": "L1"
     },
     {
@@ -3765,6 +4707,141 @@
       },
       "norm_label": "playwright-install.sh script",
       "source_file": "_scripts/core/playwright-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_rustup_install",
+      "label": "rustup-install.sh",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "rustup-install.sh",
+      "source_file": "_scripts/core/rustup-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_rustup_install_sh__entry",
+      "label": "rustup-install.sh script",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "rustup-install.sh script",
+      "source_file": "_scripts/core/rustup-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_yazi_install",
+      "label": "yazi-install.sh",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "yazi-install.sh",
+      "source_file": "_scripts/core/yazi-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_yazi_setup",
+      "label": "yazi-setup.sh",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "yazi-setup.sh",
+      "source_file": "_scripts/core/yazi-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_yazi_setup_sh__entry",
+      "label": "yazi-setup.sh script",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "yazi-setup.sh script",
+      "source_file": "_scripts/core/yazi-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_zellij_install",
+      "label": "zellij-install.sh",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "zellij-install.sh",
+      "source_file": "_scripts/core/zellij-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_zellij_setup",
+      "label": "zellij-setup.sh",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "zellij-setup.sh",
+      "source_file": "_scripts/core/zellij-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_zellij_setup_sh__entry",
+      "label": "zellij-setup.sh script",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "zellij-setup.sh script",
+      "source_file": "_scripts/core/zellij-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_zsh_install",
+      "label": "zsh-install.sh",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "zsh-install.sh",
+      "source_file": "_scripts/core/zsh-install.sh",
       "source_location": "L1"
     },
     {
@@ -4100,78 +5177,78 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_rustup_install_sh__entry",
-      "label": "rustup-install.sh script",
+      "id": "scripts_core_neofetch_install",
+      "label": "neofetch-install.sh",
       "_origin": "ast",
       "community": 8,
-      "community_name": "yazi-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "rustup-install.sh script",
-      "source_file": "_scripts/core/rustup-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_yazi_setup_sh__entry",
-      "label": "yazi-setup.sh script",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "yazi-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "yazi-setup.sh script",
-      "source_file": "_scripts/core/yazi-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_zellij_install",
-      "label": "zellij-install.sh",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "yazi-install.sh",
+      "community_name": "neofetch-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "zellij-install.sh",
-      "source_file": "_scripts/core/zellij-install.sh",
+      "norm_label": "neofetch-install.sh",
+      "source_file": "_scripts/core/neofetch-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_zellij_setup",
-      "label": "zellij-setup.sh",
+      "id": "scripts_core_neofetch_install_sh__entry",
+      "label": "neofetch-install.sh script",
       "_origin": "ast",
       "community": 8,
-      "community_name": "yazi-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "zellij-setup.sh",
-      "source_file": "_scripts/core/zellij-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_zellij_setup_sh__entry",
-      "label": "zellij-setup.sh script",
-      "_origin": "ast",
-      "community": 8,
-      "community_name": "yazi-install.sh",
+      "community_name": "neofetch-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "zellij-setup.sh script",
-      "source_file": "_scripts/core/zellij-setup.sh",
+      "norm_label": "neofetch-install.sh script",
+      "source_file": "_scripts/core/neofetch-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_neofetch_setup",
+      "label": "neofetch-setup.sh",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "neofetch-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "neofetch-setup.sh",
+      "source_file": "_scripts/core/neofetch-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_neofetch_setup_sh__entry",
+      "label": "neofetch-setup.sh script",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "neofetch-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "neofetch-setup.sh script",
+      "source_file": "_scripts/core/neofetch-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_onefetch_install",
+      "label": "onefetch-install.sh",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "neofetch-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "onefetch-install.sh",
+      "source_file": "_scripts/core/onefetch-install.sh",
       "source_location": "L1"
     },
     {
@@ -4451,6 +5528,51 @@
       "source_location": "L387"
     },
     {
+      "id": "scripts_core_jetbrains_toolbox_install",
+      "label": "jetbrains-toolbox-install.sh",
+      "_origin": "ast",
+      "community": 90,
+      "community_name": "jetbrains-toolbox-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "jetbrains-toolbox-install.sh",
+      "source_file": "_scripts/core/jetbrains-toolbox-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_jetbrains_toolbox_setup",
+      "label": "jetbrains-toolbox-setup.sh",
+      "_origin": "ast",
+      "community": 90,
+      "community_name": "jetbrains-toolbox-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "jetbrains-toolbox-setup.sh",
+      "source_file": "_scripts/core/jetbrains-toolbox-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_jetbrains_toolbox_setup_sh__entry",
+      "label": "jetbrains-toolbox-setup.sh script",
+      "_origin": "ast",
+      "community": 90,
+      "community_name": "jetbrains-toolbox-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "jetbrains-toolbox-setup.sh script",
+      "source_file": "_scripts/core/jetbrains-toolbox-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "jakoolit_catppuccin",
       "label": "jakoolit/plugins/catppuccin.lua (Theme)",
       "_origin": "semantic",
@@ -4507,96 +5629,6 @@
       "file_type": "code",
       "norm_label": "jakoolit/plugins/treesitter.lua (syntax)",
       "source_file": "nvim/.config/nvim/lua/configs/jakoolit/plugins/treesitter.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "nvim_config_nvim_init",
-      "label": "nvim/init.lua (Neovim Entry Point)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "nvim/init.lua (neovim entry point)",
-      "source_file": "nvim/.config/nvim/init.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "nvim_config_nvim_lua_config",
-      "label": "lua/config.lua (Config Router)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "lua/config.lua (config router)",
-      "source_file": "nvim/.config/nvim/lua/config.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "nvim_config_nvim_lua_configs_adeotek_v1_config",
-      "label": "adeotek_v1/config.lua",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "adeotek_v1/config.lua",
-      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v1/config.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "nvim_config_nvim_lua_configs_adeotek_v1_init",
-      "label": "adeotek_v1/init.lua",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "adeotek_v1/init.lua",
-      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v1/init.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "nvim_config_nvim_lua_configs_adeotek_v1_keymaps",
-      "label": "adeotek_v1/keymaps.lua",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "adeotek_v1/keymaps.lua",
-      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v1/keymaps.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "nvim_config_nvim_lua_configs_adeotek_v1_lazy_init",
-      "label": "adeotek_v1/lazy_init.lua (Lazy.nvim Bootstrap)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "adeotek_v1/lazy_init.lua (lazy.nvim bootstrap)",
-      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v1/lazy_init.lua",
       "source_location": null,
       "source_url": null
     },
@@ -4687,51 +5719,6 @@
       "file_type": "code",
       "norm_label": "adeotek_v1/plugins/treesitter.lua (syntax)",
       "source_file": "nvim/.config/nvim/lua/configs/adeotek_v1/plugins/treesitter.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "nvim_config_nvim_lua_configs_adeotek_v2_init",
-      "label": "adeotek_v2/init.lua (Lazy.nvim Bootstrap)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "adeotek_v2/init.lua (lazy.nvim bootstrap)",
-      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v2/init.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "nvim_config_nvim_lua_configs_adeotek_v2_keymaps",
-      "label": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "adeotek_v2/keymaps.lua (centralized keymaps)",
-      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v2/keymaps.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "nvim_config_nvim_lua_configs_adeotek_v2_options",
-      "label": "adeotek_v2/options.lua (Vim Options)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "adeotek_v2/options.lua (vim options)",
-      "source_file": "nvim/.config/nvim/lua/configs/adeotek_v2/options.lua",
       "source_location": null,
       "source_url": null
     },
@@ -4841,51 +5828,6 @@
       "source_url": null
     },
     {
-      "id": "nvim_config_nvim_lua_configs_jakoolit_init",
-      "label": "jakoolit/init.lua (3rd-party Config)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "jakoolit/init.lua (3rd-party config)",
-      "source_file": "nvim/.config/nvim/lua/configs/jakoolit/init.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "nvim_config_nvim_lua_configs_jakoolit_plugins",
-      "label": "jakoolit/plugins.lua (Plugin List)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "jakoolit/plugins.lua (plugin list)",
-      "source_file": "nvim/.config/nvim/lua/configs/jakoolit/plugins.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "nvim_config_nvim_lua_configs_jakoolit_vim_options",
-      "label": "jakoolit/vim-options.lua (Vim Options)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 0,
-      "community_name": "adeotek_v2/keymaps.lua (Centralized Keymaps)",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "jakoolit/vim-options.lua (vim options)",
-      "source_file": "nvim/.config/nvim/lua/configs/jakoolit/vim-options.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "concept_centralized_keymaps",
       "label": "Centralized Keymap Architecture (v2 pattern)",
       "_origin": "semantic",
@@ -4961,203 +5903,17 @@
       "source_url": null
     },
     {
-      "id": "bash_config_bash_config",
-      "label": "Bash Config (config.bash)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Bash Config (config.bash)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "bash config (config.bash)",
-      "source_file": "bash/.config/bash/config.bash",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_bash_setup",
-      "label": "bash-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Bash Config (config.bash)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "bash-setup.sh",
-      "source_file": "_scripts/core/bash-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_kitty_setup",
-      "label": "kitty-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Bash Config (config.bash)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "kitty-setup.sh",
-      "source_file": "_scripts/core/kitty-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_nerd_fonts_install",
-      "label": "nerd-fonts-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Bash Config (config.bash)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "nerd-fonts-install.sh",
-      "source_file": "_scripts/core/nerd-fonts-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_oh_my_posh_install",
-      "label": "oh-my-posh-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Bash Config (config.bash)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "oh-my-posh-install.sh",
-      "source_file": "_scripts/core/oh-my-posh-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_oh_my_posh_setup",
-      "label": "oh-my-posh-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Bash Config (config.bash)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "oh-my-posh-setup.sh",
-      "source_file": "_scripts/core/oh-my-posh-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_starship_install",
-      "label": "starship-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Bash Config (config.bash)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "starship-install.sh",
-      "source_file": "_scripts/core/starship-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_starship_setup",
-      "label": "starship-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Bash Config (config.bash)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "starship-setup.sh",
-      "source_file": "_scripts/core/starship-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_zsh_setup",
-      "label": "zsh-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Bash Config (config.bash)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "zsh-setup.sh",
-      "source_file": "_scripts/core/zsh-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "concept_bash_path_setup",
       "label": "Shell PATH Setup (Homebrew/Rust/Go/dotnet)",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "shell path setup (homebrew/rust/go/dotnet)",
       "source_file": "bash/.config/bash/config.bash",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "concept_install_then_setup_pattern",
-      "label": "Install-Then-Setup Pattern",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 1,
-      "community_name": "Bash Config (config.bash)",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "install-then-setup pattern",
-      "source_file": "_scripts/core/kitty-install.sh",
       "source_location": null,
       "source_url": null
     },
@@ -5168,68 +5924,11 @@
       "author": null,
       "captured_at": null,
       "community": 1,
-      "community_name": "Bash Config (config.bash)",
+      "community_name": "config.bash",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "shell prompt customization tool",
       "source_file": "_scripts/core/starship-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_kitty_install",
-      "label": "kitty-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 10,
-      "community_name": "kitty-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "kitty-install.sh",
-      "source_file": "_scripts/core/kitty-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_tabby_install",
-      "label": "tabby-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 10,
-      "community_name": "kitty-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "tabby-install.sh",
-      "source_file": "_scripts/core/tabby-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_tabby_setup",
-      "label": "tabby-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 10,
-      "community_name": "kitty-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "tabby-setup.sh",
-      "source_file": "_scripts/core/tabby-setup.sh",
       "source_location": null,
       "source_url": null
     },
@@ -5249,6 +5948,21 @@
       "source_url": null
     },
     {
+      "id": "concept_install_then_setup_pattern",
+      "label": "Install-Then-Setup Pattern",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 10,
+      "community_name": "kitty-install.sh",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "install-then-setup pattern",
+      "source_file": "_scripts/core/kitty-install.sh",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "concept_terminal_emulator",
       "label": "Terminal Emulator",
       "_origin": "semantic",
@@ -5260,25 +5974,6 @@
       "file_type": "concept",
       "norm_label": "terminal emulator",
       "source_file": "_scripts/core/kitty-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_github_cli_install",
-      "label": "github-cli-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 101,
-      "community_name": "github-cli-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "github-cli-install.sh",
-      "source_file": "_scripts/core/github-cli-install.sh",
       "source_location": null,
       "source_url": null
     },
@@ -5298,63 +5993,6 @@
       "source_url": null
     },
     {
-      "id": "scripts_core_claude_code_install",
-      "label": "claude-code-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 11,
-      "community_name": "claude-code-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "claude-code-install.sh",
-      "source_file": "_scripts/core/claude-code-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_opencode_install",
-      "label": "opencode-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 11,
-      "community_name": "claude-code-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "opencode-install.sh",
-      "source_file": "_scripts/core/opencode-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_opencode_setup",
-      "label": "opencode-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 11,
-      "community_name": "claude-code-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "opencode-setup.sh",
-      "source_file": "_scripts/core/opencode-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "concept_ai_coding_tools",
       "label": "AI Coding Tools (claude-code + opencode)",
       "_origin": "semantic",
@@ -5366,82 +6004,6 @@
       "file_type": "concept",
       "norm_label": "ai coding tools (claude-code + opencode)",
       "source_file": "_scripts/core/claude-code-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_ansible_install",
-      "label": "ansible-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 154,
-      "community_name": "uv-install.sh (Python Package Manager)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "ansible-install.sh",
-      "source_file": "_scripts/core/ansible-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_uv_install",
-      "label": "uv-install.sh (Python Package Manager)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 154,
-      "community_name": "uv-install.sh (Python Package Manager)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "uv-install.sh (python package manager)",
-      "source_file": "_scripts/core/uv-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_docker_install",
-      "label": "docker-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 157,
-      "community_name": "docker-install.sh script",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "docker-install.sh",
-      "source_file": "_scripts/core/docker-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_golang_install",
-      "label": "golang-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 159,
-      "community_name": "golang-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "golang-install.sh",
-      "source_file": "_scripts/core/golang-install.sh",
       "source_location": null,
       "source_url": null
     },
@@ -5487,25 +6049,6 @@
       "file_type": "concept",
       "norm_label": "windows network/firewall diagnostic tools",
       "source_file": "win-tools/.tools/Add-WinFirewallRule.ps1",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_system_update",
-      "label": "system-update.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 160,
-      "community_name": "system-update.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "system-update.sh",
-      "source_file": "_scripts/core/system-update.sh",
       "source_location": null,
       "source_url": null
     },
@@ -5581,82 +6124,6 @@
       "file_type": "code",
       "norm_label": "adeotek_v1/plugins/indent_line.lua",
       "source_file": "nvim/.config/nvim/lua/configs/adeotek_v1/plugins/indent_line.lua",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_ghostty_install",
-      "label": "ghostty-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 17,
-      "community_name": "ghostty-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "ghostty-install.sh",
-      "source_file": "_scripts/core/ghostty-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_ghostty_setup",
-      "label": "ghostty-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 17,
-      "community_name": "ghostty-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "ghostty-setup.sh",
-      "source_file": "_scripts/core/ghostty-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_zed_install",
-      "label": "zed-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 17,
-      "community_name": "ghostty-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "zed-install.sh",
-      "source_file": "_scripts/core/zed-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_zed_setup",
-      "label": "zed-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 17,
-      "community_name": "ghostty-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "zed-setup.sh",
-      "source_file": "_scripts/core/zed-setup.sh",
       "source_location": null,
       "source_url": null
     },
@@ -5961,63 +6428,6 @@
       "source_url": null
     },
     {
-      "id": "claude_code_user_config_statusline_command",
-      "label": "statusline-command.sh (Linux/WSL)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 19,
-      "community_name": "statusline-command.sh (Linux/WSL)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "statusline-command.sh (linux/wsl)",
-      "source_file": "claude-code/user-config/statusline-command.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_code_user_config_statusline_command_win",
-      "label": "statusline-command-win.sh (Windows/Git-Bash)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 19,
-      "community_name": "statusline-command.sh (Linux/WSL)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "statusline-command-win.sh (windows/git-bash)",
-      "source_file": "claude-code/user-config/statusline-command-win.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "claude_code_user_config_statusline_slim",
-      "label": "statusline-slim.sh (Compact Statusline)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 19,
-      "community_name": "statusline-command.sh (Linux/WSL)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "statusline-slim.sh (compact statusline)",
-      "source_file": "claude-code/user-config/statusline-slim.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "concept_statusline_json_payload",
       "label": "Claude Code JSON Statusline Payload",
       "_origin": "semantic",
@@ -6029,63 +6439,6 @@
       "file_type": "concept",
       "norm_label": "claude code json statusline payload",
       "source_file": "claude-code/user-config/statusline-command.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_helm_install",
-      "label": "helm-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 20,
-      "community_name": "k8s-repo-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "helm-install.sh",
-      "source_file": "_scripts/core/helm-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_k8s_repo_install",
-      "label": "k8s-repo-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 20,
-      "community_name": "k8s-repo-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "k8s-repo-install.sh",
-      "source_file": "_scripts/core/k8s-repo-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_kubectl_install",
-      "label": "kubectl-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 20,
-      "community_name": "k8s-repo-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "kubectl-install.sh",
-      "source_file": "_scripts/core/kubectl-install.sh",
       "source_location": null,
       "source_url": null
     },
@@ -6191,82 +6544,6 @@
       "file_type": "concept",
       "norm_label": "oh-my-posh theme variants (icon vs text)",
       "source_file": "oh-my-posh/.config/oh-my-posh/gbs.omp.yaml",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_dotnet_install",
-      "label": "dotnet-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 23,
-      "community_name": "cecho",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "dotnet-install.sh",
-      "source_file": "_scripts/core/dotnet-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_microsoft_repo_install",
-      "label": "microsoft-repo-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 23,
-      "community_name": "cecho",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "microsoft-repo-install.sh",
-      "source_file": "_scripts/core/microsoft-repo-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_powershell_install",
-      "label": "powershell-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 23,
-      "community_name": "cecho",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "powershell-install.sh",
-      "source_file": "_scripts/core/powershell-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_vscode_install",
-      "label": "vscode-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 23,
-      "community_name": "cecho",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "vscode-install.sh",
-      "source_file": "_scripts/core/vscode-install.sh",
       "source_location": null,
       "source_url": null
     },
@@ -6406,25 +6683,6 @@
       "source_url": null
     },
     {
-      "id": "tools_tools_cc_sessions",
-      "label": "cc-sessions.sh (Claude Code Session Browser)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 29,
-      "community_name": "cc-sessions.sh (Claude Code Session Browser)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "cc-sessions.sh (claude code session browser)",
-      "source_file": "tools/.tools/cc-sessions.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "win_tools_get_cc_sessions",
       "label": "Get-ClaudeCodeSessions.ps1 (Win Session Browser)",
       "_origin": "semantic",
@@ -6500,25 +6758,6 @@
       "source_url": null
     },
     {
-      "id": "scripts_core_options",
-      "label": "_options.sh (Task Arrays & Tiers)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 3,
-      "community_name": "_options.sh (Task Arrays & Tiers)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "_options.sh (task arrays & tiers)",
-      "source_file": "_scripts/core/_options.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "concept_task_tier_hierarchy",
       "label": "Task Tier Hierarchy (Minimal/Console/Desktop)",
       "_origin": "semantic",
@@ -6579,222 +6818,13 @@
       "source_url": null
     },
     {
-      "id": "scripts_core_fastfetch_install",
-      "label": "fastfetch-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 33,
-      "community_name": "fastfetch-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "fastfetch-install.sh",
-      "source_file": "_scripts/core/fastfetch-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_fastfetch_setup",
-      "label": "fastfetch-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 33,
-      "community_name": "fastfetch-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "fastfetch-setup.sh",
-      "source_file": "_scripts/core/fastfetch-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_git_install",
-      "label": "git-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 34,
-      "community_name": "git-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "git-install.sh",
-      "source_file": "_scripts/core/git-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_git_setup",
-      "label": "git-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 34,
-      "community_name": "git-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "git-setup.sh",
-      "source_file": "_scripts/core/git-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_aws_cli_install",
-      "label": "aws-cli-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "aws-cli-install.sh",
-      "source_file": "_scripts/core/aws-cli-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_gcp_cli_install",
-      "label": "gcp-cli-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "gcp-cli-install.sh",
-      "source_file": "_scripts/core/gcp-cli-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_helpers",
-      "label": "_helpers.sh (Shared Utilities)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "_helpers.sh (shared utilities)",
-      "source_file": "_scripts/core/_helpers.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_jetbrains_toolbox_install",
-      "label": "jetbrains-toolbox-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "jetbrains-toolbox-install.sh",
-      "source_file": "_scripts/core/jetbrains-toolbox-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_jetbrains_toolbox_setup",
-      "label": "jetbrains-toolbox-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "jetbrains-toolbox-setup.sh",
-      "source_file": "_scripts/core/jetbrains-toolbox-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_terraform_install",
-      "label": "terraform-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "terraform-install.sh",
-      "source_file": "_scripts/core/terraform-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_tools_setup",
-      "label": "tools-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "tools-setup.sh",
-      "source_file": "_scripts/core/tools-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "concept_multi_distro_support",
       "label": "Multi-Distro Support (Arch/Debian/Fedora)",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
+      "community_name": "_helpers.sh",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "multi-distro support (arch/debian/fedora)",
@@ -6809,7 +6839,7 @@
       "author": null,
       "captured_at": null,
       "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
+      "community_name": "_helpers.sh",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "os-dispatch pattern (case $current_os_id)",
@@ -6824,258 +6854,11 @@
       "author": null,
       "captured_at": null,
       "community": 35,
-      "community_name": "_helpers.sh (Shared Utilities)",
+      "community_name": "_helpers.sh",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "stow_package() helper function",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_tmux_install",
-      "label": "tmux-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 36,
-      "community_name": "tmux-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "tmux-install.sh",
-      "source_file": "_scripts/core/tmux-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_tmux_setup",
-      "label": "tmux-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 36,
-      "community_name": "tmux-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "tmux-setup.sh",
-      "source_file": "_scripts/core/tmux-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_base_tools_install",
-      "label": "base-tools-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 6,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "base-tools-install.sh",
-      "source_file": "_scripts/core/base-tools-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_claude_code_setup",
-      "label": "claude-code-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 6,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "claude-code-setup.sh",
-      "source_file": "_scripts/core/claude-code-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_glow_install",
-      "label": "glow-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 6,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "glow-install.sh",
-      "source_file": "_scripts/core/glow-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_homebrew_install",
-      "label": "homebrew-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 6,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "homebrew-install.sh",
-      "source_file": "_scripts/core/homebrew-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_neofetch_install",
-      "label": "neofetch-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 6,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "neofetch-install.sh",
-      "source_file": "_scripts/core/neofetch-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_neofetch_setup",
-      "label": "neofetch-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 6,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "neofetch-setup.sh",
-      "source_file": "_scripts/core/neofetch-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_nodejs_install",
-      "label": "nodejs-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 6,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "nodejs-install.sh",
-      "source_file": "_scripts/core/nodejs-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_nvim_install",
-      "label": "nvim-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 6,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "nvim-install.sh",
-      "source_file": "_scripts/core/nvim-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_nvim_setup",
-      "label": "nvim-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 6,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "nvim-setup.sh",
-      "source_file": "_scripts/core/nvim-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_onefetch_install",
-      "label": "onefetch-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 6,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "onefetch-install.sh",
-      "source_file": "_scripts/core/onefetch-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_zsh_install",
-      "label": "zsh-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 6,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "zsh-install.sh",
-      "source_file": "_scripts/core/zsh-install.sh",
       "source_location": null,
       "source_url": null
     },
@@ -7110,21 +6893,6 @@
       "source_url": null
     },
     {
-      "id": "concept_system_info_tool",
-      "label": "System Information Display Tool",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 6,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "system information display tool",
-      "source_file": "_scripts/core/neofetch-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "nvim_config_nvim_lua_configs_adeotek_v1_plugins_toggleterm_v1",
       "label": "adeotek_v1/plugins/toggleterm.lua (Terminal)",
       "_origin": "semantic",
@@ -7155,59 +6923,17 @@
       "source_url": null
     },
     {
-      "id": "scripts_core_rustup_install",
-      "label": "rustup-install.sh",
+      "id": "concept_system_info_tool",
+      "label": "System Information Display Tool",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 8,
-      "community_name": "yazi-install.sh",
+      "community_name": "neofetch-install.sh",
       "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "rustup-install.sh",
-      "source_file": "_scripts/core/rustup-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_yazi_install",
-      "label": "yazi-install.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 8,
-      "community_name": "yazi-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "yazi-install.sh",
-      "source_file": "_scripts/core/yazi-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "scripts_core_yazi_setup",
-      "label": "yazi-setup.sh",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 8,
-      "community_name": "yazi-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "yazi-setup.sh",
-      "source_file": "_scripts/core/yazi-setup.sh",
+      "file_type": "concept",
+      "norm_label": "system information display tool",
+      "source_file": "_scripts/core/neofetch-install.sh",
       "source_location": null,
       "source_url": null
     },
@@ -7334,18 +7060,6 @@
       "context": "call",
       "source_file": "_scripts/core/claude-code-install.sh",
       "source_location": "L19",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_core_claude_code_setup_sh__entry",
-      "target": "scripts_core_helpers_install_package",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "_scripts/core/claude-code-setup.sh",
-      "source_location": "L142",
       "weight": 1.0
     },
     {
@@ -8162,6 +7876,30 @@
       "context": "call",
       "source_file": "_scripts/core/kubectl-install.sh",
       "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_lsp_servers_install_sh__entry",
+      "target": "scripts_core_helpers_install_package",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "_scripts/core/lsp-servers-install.sh",
+      "source_location": "L120",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_lsp_servers_install_sh__entry",
+      "target": "scripts_core_helpers_cecho",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "_scripts/core/lsp-servers-install.sh",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -10212,6 +9950,17 @@
       "weight": 1.0
     },
     {
+      "source": "scripts_core_lsp_servers_install",
+      "target": "scripts_core_lsp_servers_install_sh__entry",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_scripts/core/lsp-servers-install.sh",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
       "source": "scripts_core_microsoft_repo_install",
       "target": "scripts_core_microsoft_repo_install_sh__entry",
       "relation": "contains",
@@ -11231,7 +10980,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L100",
+      "source_location": "L101",
       "weight": 1.0
     },
     {
@@ -11242,7 +10991,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L105",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -11253,7 +11002,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L115",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -11264,7 +11013,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L124",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -11275,7 +11024,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L169",
+      "source_location": "L171",
       "weight": 1.0
     },
     {
@@ -11330,7 +11079,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L77",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -11341,7 +11090,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L82",
+      "source_location": "L83",
       "weight": 1.0
     },
     {
@@ -11352,7 +11101,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L87",
+      "source_location": "L88",
       "weight": 1.0
     },
     {
@@ -11363,7 +11112,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L92",
+      "source_location": "L93",
       "weight": 1.0
     },
     {
@@ -11665,14 +11414,26 @@
     },
     {
       "source": "scripts_core_claude_code_setup",
-      "target": "scripts_core_homebrew_install",
+      "target": "scripts_core_lsp_servers_install",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "INFERRED",
       "confidence_score": 0.55,
       "context": "import",
       "source_file": "_scripts/core/claude-code-setup.sh",
-      "source_location": "L141",
+      "source_location": "L101",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_claude_code_setup",
+      "target": "scripts_core_playwright_install",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.55,
+      "context": "import",
+      "source_file": "_scripts/core/claude-code-setup.sh",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -11685,18 +11446,6 @@
       "context": "import",
       "source_file": "_scripts/core/claude-code-setup.sh",
       "source_location": "L15",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_core_claude_code_setup",
-      "target": "scripts_core_playwright_install",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.55,
-      "context": "import",
-      "source_file": "_scripts/core/claude-code-setup.sh",
-      "source_location": "L151",
       "weight": 1.0
     },
     {
@@ -12177,6 +11926,42 @@
       "context": "import",
       "source_file": "_scripts/core/kubectl-install.sh",
       "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_lsp_servers_install",
+      "target": "scripts_core_helpers",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.55,
+      "context": "import",
+      "source_file": "_scripts/core/lsp-servers-install.sh",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_lsp_servers_install",
+      "target": "scripts_core_homebrew_install",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.55,
+      "context": "import",
+      "source_file": "_scripts/core/lsp-servers-install.sh",
+      "source_location": "L183",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_lsp_servers_install",
+      "target": "scripts_core_nodejs_install",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.55,
+      "context": "import",
+      "source_file": "_scripts/core/lsp-servers-install.sh",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -14436,5 +14221,5 @@
       "source_file": "win-tools/.tools/Add-WinFirewallRule.ps1"
     }
   ],
-  "built_at_commit": "a5122f25b03699ebc0555463047f23f0ff8efb44"
+  "built_at_commit": "7b19273128d8e7dfe82e5ab172776eb50d397e75"
 }
