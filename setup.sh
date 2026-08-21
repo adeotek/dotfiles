@@ -37,7 +37,7 @@ do
   fi
 done
 cecho "yellow" -n "Please select setup mode (0-4) [$DEFAULT_MENU_OPTION]: "
-read SETUP_MODE
+read -r SETUP_MODE
 if [ -z "$SETUP_MODE" ]; then
   SETUP_MODE="$DEFAULT_MENU_OPTION"
 fi
@@ -60,7 +60,7 @@ case $SETUP_MODE in
     done
     cecho "cyan" "[c] Cancel and exit"
     cecho "yellow" -n "Please input the selected packages IDs separated by comma: "
-    read TASKS_IDS
+    read -r TASKS_IDS
     if [[ "$TASKS_IDS" == "c" || "$TASKS_IDS" == "C" ]]; then
       cecho "magenta" "Operation cancelled!"
       exit 10
@@ -73,7 +73,7 @@ case $SETUP_MODE in
     for id in "${SELECTED_INDICES[@]}"
     do
       id=$(echo "$id" | xargs)  # Trim whitespace from $id
-      SELECTED_PACKAGES+=(${ALL_TASKS[$id]})
+      SELECTED_PACKAGES+=("${ALL_TASKS[$id]}")
     done
     ;;
   1)
@@ -81,8 +81,8 @@ case $SETUP_MODE in
     ;;
   2)
     cecho "yellow" "Do you want to include the extra packages? [y/N]"
-    cecho "cyan" -n "-> [${CONSOLE_EXTRA_TASKS[@]}] "
-    read INCLUDE_EXTRA
+    cecho "cyan" -n "-> [${CONSOLE_EXTRA_TASKS[*]}] "
+    read -r INCLUDE_EXTRA
     if [[ "$INCLUDE_EXTRA" == "y" || "$INCLUDE_EXTRA" == "Y" ]]; then
       SELECTED_PACKAGES=("${ALL_CONSOLE_TASKS[@]}")
     else
@@ -91,8 +91,8 @@ case $SETUP_MODE in
     ;;
   3)
     cecho "yellow" "Do you want to include the extra packages? [y/N]"
-    cecho "yellow" -n "-> [${DESKTOP_EXTRA_TASKS[@]}] "
-    read INCLUDE_EXTRA
+    cecho "yellow" -n "-> [${DESKTOP_EXTRA_TASKS[*]}] "
+    read -r INCLUDE_EXTRA
     if [[ "$INCLUDE_EXTRA" == "y" || "$INCLUDE_EXTRA" == "Y" ]]; then
       SELECTED_PACKAGES+=("${ALL_DESKTOP_TASKS[@]}")
     else
@@ -106,10 +106,10 @@ case $SETUP_MODE in
       cecho "yellow" -n "Do you want to include the ["
       cecho "cyan" -n "$task"
       cecho "yellow" -n "] package? [y/N]: "
-      read INCLUDE_TASK
+      read -r INCLUDE_TASK
       # read -p "Do you want to include the [$task] package? [y/N]: " INCLUDE_TASK
       if [[ "$INCLUDE_TASK" == "y" || "$INCLUDE_TASK" == "Y" ]]; then
-        SELECTED_PACKAGES+=($task)
+        SELECTED_PACKAGES+=("$task")
       fi
     done
     ;;
@@ -122,7 +122,7 @@ case $SETUP_MODE in
     ;;
 esac
 
-if [[ -z "${SELECTED_PACKAGES[@]}" ]]; then
+if [[ -z "${SELECTED_PACKAGES[*]}" ]]; then
   cecho "magenta" "No package selected. Operation cancelled!"
   exit 11
 fi
@@ -130,7 +130,7 @@ fi
 cecho "white" "The following packages will be installed/set up:"
 aecho SELECTED_PACKAGES "- " "yellow" "white"
 cecho "yellow" -n "Please confirm package selection [Y/n]: "
-read PACKAGE_SELECTION_CONFIRM
+read -r PACKAGE_SELECTION_CONFIRM
 if [[ "$PACKAGE_SELECTION_CONFIRM" != "y" && "$PACKAGE_SELECTION_CONFIRM" != "Y" && "$PACKAGE_SELECTION_CONFIRM" != "" ]]; then
   cecho "magenta" "Operation cancelled!"
   exit 10
@@ -150,9 +150,11 @@ do
   if [[ -n "${TASK_ARGS[$pkg]}" ]]; then
     decho "magenta" "source ""$CDIR/$pkg-$pkg_task_type.sh"" ${TASK_ARGS[$pkg]}"
     # shellcheck disable=SC2086  # intentional word-split to pass multiple flags
+    # shellcheck source=/dev/null
     source "$CDIR/$pkg-$pkg_task_type.sh" ${TASK_ARGS[$pkg]}
   else
     decho "magenta" "source ""$CDIR/$pkg-$pkg_task_type.sh"""
+    # shellcheck source=/dev/null
     source "$CDIR/$pkg-$pkg_task_type.sh"
   fi
 done
