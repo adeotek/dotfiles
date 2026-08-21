@@ -1,29 +1,29 @@
 # Graph Report - .dotfiles  (2026-08-21)
 
 ## Corpus Check
-- 164 files · ~45,537 words
+- 165 files · ~46,233 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 470 nodes · 606 edges · 113 communities (84 shown, 29 thin omitted)
-- Extraction: 73% EXTRACTED · 27% INFERRED · 0% AMBIGUOUS · INFERRED: 163 edges (avg confidence: 0.61)
+- 472 nodes · 611 edges · 114 communities (84 shown, 30 thin omitted)
+- Extraction: 73% EXTRACTED · 27% INFERRED · 0% AMBIGUOUS · INFERRED: 166 edges (avg confidence: 0.61)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a5122f25`
+- Built from commit: `7b192731`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - adeotek_v2/keymaps.lua (Centralized Keymaps)
-- Bash Config (config.bash)
+- config.bash
 - Hermes Agent
 - _options.sh (Task Arrays & Tiers)
 - Headroom
 - AdeoTEK Scripting Best Practices (Strictly Enforced)
 - homebrew-install.sh
 - AGENTS.md — Operational Rules for AI Agents
-- yazi-install.sh
+- neofetch-install.sh
 - wsl-setup-fedora-dev.sh
 - kitty-install.sh
 - claude-code-install.sh
@@ -50,7 +50,7 @@
 - unattended_setup.sh
 - fastfetch-install.sh
 - git-install.sh
-- _helpers.sh (Shared Utilities)
+- _helpers.sh
 - tmux-install.sh
 - rules/graphify.md
 - workflows/graphify.md
@@ -60,6 +60,7 @@
 - setup.sh
 - update.sh
 - adeotek_v1/plugins/toggleterm.lua (Terminal)
+- jetbrains-toolbox-install.sh
 - github-cli-install.sh
 - uv-install.sh (Python Package Manager)
 - docker-install.sh script
@@ -76,63 +77,63 @@
 - jakoolit/plugins/neo-tree.lua (File Explorer)
 
 ## God Nodes (most connected - your core abstractions)
-1. `_helpers.sh (Shared Utilities)` - 94 edges
-2. `cecho()` - 56 edges
-3. `decho()` - 28 edges
-4. `install_package()` - 28 edges
-5. `stow_package()` - 20 edges
-6. `_options.sh (Task Arrays & Tiers)` - 19 edges
-7. `statusline-command.sh (Linux/WSL)` - 10 edges
-8. `Headroom` - 10 edges
-9. `Bash Config (config.bash)` - 9 edges
-10. `statusline-command-win.sh (Windows/Git-Bash)` - 9 edges
+1. `cecho()` - 57 edges
+2. `decho()` - 28 edges
+3. `install_package()` - 28 edges
+4. `stow_package()` - 20 edges
+5. `Headroom` - 10 edges
+6. `Hermes Agent` - 9 edges
+7. `execute_command()` - 8 edges
+8. `AGENTS.md — Operational Rules for AI Agents` - 8 edges
+9. `AdeoTEK Scripting Best Practices (Strictly Enforced)` - 7 edges
+10. `process_args()` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `cc-sessions.sh (Claude Code Session Browser)` --semantically_similar_to--> `Get-ClaudeCodeSessions.ps1 (Win Session Browser)`  [INFERRED] [semantically similar]
-  tools/.tools/cc-sessions.sh → win-tools/.tools/Get-ClaudeCodeSessions.ps1
-- `setup.sh (Interactive Setup)` --semantically_similar_to--> `unattended_setup.sh (Unattended Setup)`  [INFERRED] [semantically similar]
-  setup.sh → unattended_setup.sh
 - `Rename-Files.ps1 (Bulk Rename with Dry-Run)` --semantically_similar_to--> `Dry-Run Safety Pattern`  [INFERRED] [semantically similar]
   win-tools/.tools/Rename-Files.ps1 → _scripts/core/_helpers.sh
-- `update.sh (System Update)` --references--> `_helpers.sh (Shared Utilities)`  [EXTRACTED]
-  update.sh → _scripts/core/_helpers.sh
-- `setup.sh (Interactive Setup)` --references--> `_helpers.sh (Shared Utilities)`  [EXTRACTED]
-  setup.sh → _scripts/core/_helpers.sh
+- `setup.sh (Interactive Setup)` --semantically_similar_to--> `unattended_setup.sh (Unattended Setup)`  [INFERRED] [semantically similar]
+  setup.sh → unattended_setup.sh
+- `adeotek_v2/plugins/telescope.lua (Fuzzy Finder)` --semantically_similar_to--> `jakoolit/plugins/telescope.lua (Fuzzy Finder)`  [INFERRED] [semantically similar]
+  nvim/.config/nvim/lua/configs/adeotek_v2/plugins/telescope.lua → nvim/.config/nvim/lua/configs/jakoolit/plugins/telescope.lua
+- `adeotek_v1/plugins/telescope.lua (Fuzzy Finder)` --semantically_similar_to--> `adeotek_v2/plugins/telescope.lua (Fuzzy Finder)`  [INFERRED] [semantically similar]
+  nvim/.config/nvim/lua/configs/adeotek_v1/plugins/telescope.lua → nvim/.config/nvim/lua/configs/adeotek_v2/plugins/telescope.lua
+- `ansible-install.sh script` --calls--> `cecho()`  [EXTRACTED]
+  _scripts/core/ansible-install.sh → _scripts/core/_helpers.sh
 
 ## Import Cycles
 - None detected.
 
 ## Hyperedges (group relationships)
 - **Entry Points Using Shared Core** — dotfiles_setup, dotfiles_unattended_setup, dotfiles_update, scripts_core_helpers, scripts_core_options [EXTRACTED 1.00]
+- **_helpers.sh as Universal Hub** — scripts_core_helpers, scripts_core_options, scripts_core_zed_setup, scripts_core_ghostty_setup, scripts_core_tmux_setup, scripts_core_claude_code_setup [EXTRACTED 1.00]
+- **LSP Ecosystem (v2)** — nvim_config_nvim_lua_configs_adeotek_v2_plugins_lsp_v2, nvim_config_nvim_lua_configs_adeotek_v2_plugins_bufferline_v2, nvim_config_nvim_lua_configs_adeotek_v2_plugins_theme_v2, concept_lsp_ecosystem [EXTRACTED 1.00]
+- **adeotek_v1 Initialization Chain** — nvim_config_nvim_init, nvim_config_nvim_lua_config, nvim_config_nvim_lua_configs_adeotek_v1_init, nvim_config_nvim_lua_configs_adeotek_v1_config, nvim_config_nvim_lua_configs_adeotek_v1_lazy_init, nvim_config_nvim_lua_configs_adeotek_v1_keymaps [EXTRACTED 1.00]
+- **ZSH Plugin Suite** — zsh_config_zsh_zsh_plugins_txt, zsh_readme, concept_zsh_standalone_config [EXTRACTED 1.00]
+- **Terminal Emulator Tools** — scripts_core_kitty_install, scripts_core_tabby_install, scripts_core_zed_install [INFERRED 0.65]
+- **Tools Using Homebrew as Fallback** — scripts_core_starship_install, scripts_core_nvim_install, scripts_core_onefetch_install, scripts_core_yazi_install, scripts_core_homebrew_install [INFERRED 0.75]
+- **AI Coding Tools** — scripts_core_claude_code_install, scripts_core_claude_code_setup, scripts_core_opencode_install, scripts_core_opencode_setup [INFERRED 0.85]
+- **dotnet Testing Expertise (agent + skill)** — opencode_agent_dotnet_backend, opencode_agent_dotnet_tests, opencode_skill_dotnet_testing [INFERRED 0.85]
+- **File Navigation & Fuzzy Find Cluster** — nvim_config_nvim_lua_configs_adeotek_v1_plugins_telescope_v1, nvim_config_nvim_lua_configs_adeotek_v2_plugins_telescope_v2, nvim_config_nvim_lua_configs_adeotek_v1_plugins_neo_tree_v1, nvim_config_nvim_lua_configs_adeotek_v2_plugins_nvim_tree_v2 [INFERRED 0.85]
+- **adeotek_v1 UI Plugin Suite** — nvim_config_nvim_lua_configs_adeotek_v1_plugins_catppuccin_v1, nvim_config_nvim_lua_configs_adeotek_v1_plugins_lualine_v1, nvim_config_nvim_lua_configs_adeotek_v1_plugins_bufferline_v1, nvim_config_nvim_lua_configs_adeotek_v1_plugins_alpha_v1, nvim_config_nvim_lua_configs_adeotek_v1_plugins_nvim_scrollbar_v1 [INFERRED 0.85]
 - **Setup-Wraps-Install Pattern** — scripts_core_fastfetch_setup, scripts_core_fastfetch_install, scripts_core_git_setup, scripts_core_git_install, scripts_core_jetbrains_toolbox_setup, scripts_core_jetbrains_toolbox_install [INFERRED 0.85]
 - **Shell Prompt Tools with Nerd Fonts** — scripts_core_starship_install, scripts_core_oh_my_posh_install, scripts_core_nerd_fonts_install [INFERRED 0.85]
-- **Tools Using Homebrew as Fallback** — scripts_core_starship_install, scripts_core_nvim_install, scripts_core_onefetch_install, scripts_core_yazi_install, scripts_core_homebrew_install [INFERRED 0.75]
-- **Terminal Emulator Tools** — scripts_core_kitty_install, scripts_core_tabby_install, scripts_core_zed_install [INFERRED 0.65]
-- **Kubernetes Toolchain** — scripts_core_k8s_repo_install, scripts_core_kubectl_install, scripts_core_helm_install [INFERRED 0.95]
-- **AI Coding Tools** — scripts_core_claude_code_install, scripts_core_claude_code_setup, scripts_core_opencode_install, scripts_core_opencode_setup [INFERRED 0.85]
-- **_helpers.sh as Universal Hub** — scripts_core_helpers, scripts_core_options, scripts_core_zed_setup, scripts_core_ghostty_setup, scripts_core_tmux_setup, scripts_core_claude_code_setup [EXTRACTED 1.00]
-- **adeotek_v1 Initialization Chain** — nvim_config_nvim_init, nvim_config_nvim_lua_config, nvim_config_nvim_lua_configs_adeotek_v1_init, nvim_config_nvim_lua_configs_adeotek_v1_config, nvim_config_nvim_lua_configs_adeotek_v1_lazy_init, nvim_config_nvim_lua_configs_adeotek_v1_keymaps [EXTRACTED 1.00]
-- **Claude Code Statusline Variants** — claude_code_user_config_statusline_command, claude_code_user_config_statusline_command_win, claude_code_user_config_statusline_slim [INFERRED 0.95]
-- **adeotek_v1 UI Plugin Suite** — nvim_config_nvim_lua_configs_adeotek_v1_plugins_catppuccin_v1, nvim_config_nvim_lua_configs_adeotek_v1_plugins_lualine_v1, nvim_config_nvim_lua_configs_adeotek_v1_plugins_bufferline_v1, nvim_config_nvim_lua_configs_adeotek_v1_plugins_alpha_v1, nvim_config_nvim_lua_configs_adeotek_v1_plugins_nvim_scrollbar_v1 [INFERRED 0.85]
-- **LSP Ecosystem (v2)** — nvim_config_nvim_lua_configs_adeotek_v2_plugins_lsp_v2, nvim_config_nvim_lua_configs_adeotek_v2_plugins_bufferline_v2, nvim_config_nvim_lua_configs_adeotek_v2_plugins_theme_v2, concept_lsp_ecosystem [EXTRACTED 1.00]
-- **File Navigation & Fuzzy Find Cluster** — nvim_config_nvim_lua_configs_adeotek_v1_plugins_telescope_v1, nvim_config_nvim_lua_configs_adeotek_v2_plugins_telescope_v2, nvim_config_nvim_lua_configs_adeotek_v1_plugins_neo_tree_v1, nvim_config_nvim_lua_configs_adeotek_v2_plugins_nvim_tree_v2 [INFERRED 0.85]
 - **Theme Integration Cluster (catppuccin + dependents)** — nvim_config_nvim_lua_configs_adeotek_v2_plugins_theme_v2, nvim_config_nvim_lua_configs_adeotek_v2_plugins_nvim_tree_v2, nvim_config_nvim_lua_configs_adeotek_v2_plugins_telescope_v2, nvim_config_nvim_lua_configs_adeotek_v2_plugins_lsp_v2, nvim_config_nvim_lua_configs_adeotek_v1_plugins_catppuccin_v1 [INFERRED 0.85]
-- **Treesitter Across All Neovim Configs** — nvim_config_nvim_lua_configs_adeotek_v1_plugins_treesitter_v1, nvim_config_nvim_lua_configs_adeotek_v2_plugins_treesitter_v2, jakoolit_treesitter [INFERRED 0.95]
-- **Telescope Fuzzy Finder Across All Configs** — nvim_config_nvim_lua_configs_adeotek_v1_plugins_telescope_v1, nvim_config_nvim_lua_configs_adeotek_v2_plugins_telescope_v2, jakoolit_telescope [INFERRED 0.95]
-- **dotnet Testing Expertise (agent + skill)** — opencode_agent_dotnet_backend, opencode_agent_dotnet_tests, opencode_skill_dotnet_testing [INFERRED 0.85]
-- **Windows Network & Firewall Tools** — win_tools_tools_add_winfirewallrule, win_tools_tools_get_winfirewallrulebyport, win_tools_run_port_listen, win_tools_run_port_probe [INFERRED 0.95]
 - **Cross-Platform Claude Code Session Browsers** — tools_tools_cc_sessions, win_tools_get_cc_sessions [INFERRED 0.95]
-- **ZSH Plugin Suite** — zsh_config_zsh_zsh_plugins_txt, zsh_readme, concept_zsh_standalone_config [EXTRACTED 1.00]
+- **Kubernetes Toolchain** — scripts_core_k8s_repo_install, scripts_core_kubectl_install, scripts_core_helm_install [INFERRED 0.95]
+- **Claude Code Statusline Variants** — claude_code_user_config_statusline_command, claude_code_user_config_statusline_command_win, claude_code_user_config_statusline_slim [INFERRED 0.95]
+- **Telescope Fuzzy Finder Across All Configs** — nvim_config_nvim_lua_configs_adeotek_v1_plugins_telescope_v1, nvim_config_nvim_lua_configs_adeotek_v2_plugins_telescope_v2, jakoolit_telescope [INFERRED 0.95]
+- **Treesitter Across All Neovim Configs** — nvim_config_nvim_lua_configs_adeotek_v1_plugins_treesitter_v1, nvim_config_nvim_lua_configs_adeotek_v2_plugins_treesitter_v2, jakoolit_treesitter [INFERRED 0.95]
+- **Windows Network & Firewall Tools** — win_tools_tools_add_winfirewallrule, win_tools_tools_get_winfirewallrulebyport, win_tools_run_port_listen, win_tools_run_port_probe [INFERRED 0.95]
 
-## Communities (113 total, 29 thin omitted)
+## Communities (114 total, 30 thin omitted)
 
 ### Community 0 - "adeotek_v2/keymaps.lua (Centralized Keymaps)"
 Cohesion: 0.06
-Nodes (30): Centralized Keymap Architecture (v2 pattern), lazy.nvim Plugin Manager, LSP Ecosystem (lspconfig + mason + cmp + LuaSnip), NVIM_CONFIG Env Var Config Router, Theme Integration Pattern (catppuccin integrations), jakoolit/plugins/catppuccin.lua (Theme), jakoolit/plugins/lsp-config.lua (LSP), jakoolit/plugins/telescope.lua (Fuzzy Finder) (+22 more)
+Nodes (21): Centralized Keymap Architecture (v2 pattern), lazy.nvim Plugin Manager, LSP Ecosystem (lspconfig + mason + cmp + LuaSnip), NVIM_CONFIG Env Var Config Router, Theme Integration Pattern (catppuccin integrations), jakoolit/plugins/catppuccin.lua (Theme), jakoolit/plugins/lsp-config.lua (LSP), jakoolit/plugins/telescope.lua (Fuzzy Finder) (+13 more)
 
-### Community 1 - "Bash Config (config.bash)"
-Cohesion: 0.09
-Nodes (18): Bash Config (config.bash), config.bash script, COLORTERM, EDITOR, LC_ALL, PATH, Shell PATH Setup (Homebrew/Rust/Go/dotnet), Install-Then-Setup Pattern (+10 more)
+### Community 1 - "config.bash"
+Cohesion: 0.10
+Nodes (15): config.bash script, COLORTERM, EDITOR, LC_ALL, PATH, Shell PATH Setup (Homebrew/Rust/Go/dotnet), Shell Prompt Customization Tool, bash-setup.sh script (+7 more)
 
 ### Community 2 - "Hermes Agent"
 Cohesion: 0.10
@@ -140,7 +141,7 @@ Nodes (19): API Server (port 8642), Architecture, config.yaml, Configuration, Co
 
 ### Community 3 - "_options.sh (Task Arrays & Tiers)"
 Cohesion: 0.11
-Nodes (19): Task Tier Hierarchy (Minimal/Console/Desktop), setup.sh (Interactive Setup), unattended_setup.sh (Unattended Setup), update.sh (System Update), _options.sh (Task Arrays & Tiers), ALL_CONSOLE_TASKS, ALL_DESKTOP_TASKS, ALL_TASKS (+11 more)
+Nodes (18): Task Tier Hierarchy (Minimal/Console/Desktop), setup.sh (Interactive Setup), unattended_setup.sh (Unattended Setup), update.sh (System Update), ALL_CONSOLE_TASKS, ALL_DESKTOP_TASKS, ALL_TASKS, CONSOLE_EXTRA_TASKS (+10 more)
 
 ### Community 4 - "Headroom"
 Cohesion: 0.11
@@ -152,23 +153,23 @@ Nodes (10): 1. Robust Conditional Logic, 2. Error Handling & Indentation, 3. Fun
 
 ### Community 6 - "homebrew-install.sh"
 Cohesion: 0.09
-Nodes (11): Claude Code Plugin Marketplace, System Information Display Tool, base-tools-install.sh script, CLAUDECODE_PLUGINS, glow-install.sh script, neofetch-install.sh script, neofetch-setup.sh script, nvim-setup.sh script (+3 more)
+Nodes (12): Claude Code Plugin Marketplace, base-tools-install.sh script, CLAUDECODE_PLUGINS, claude-code-setup.sh script, glow-install.sh script, nvim-setup.sh script, playwright-install.sh script, rustup-install.sh script (+4 more)
 
 ### Community 7 - "AGENTS.md — Operational Rules for AI Agents"
 Cohesion: 0.22
 Nodes (8): 1. Git Commit Policy — ALWAYS FOLLOW, 2. Verification Before Done, 3. Analysis/Plan Phase, 4. Lazy-Loading Sub-Rules, 5. General Conduct, 6. Code Intelligence and Navigation, 7. Browser Automation, AGENTS.md — Operational Rules for AI Agents
 
-### Community 8 - "yazi-install.sh"
-Cohesion: 0.25
-Nodes (3): rustup-install.sh script, yazi-setup.sh script, zellij-setup.sh script
+### Community 8 - "neofetch-install.sh"
+Cohesion: 0.33
+Nodes (3): System Information Display Tool, neofetch-install.sh script, neofetch-setup.sh script
 
 ### Community 9 - "wsl-setup-fedora-dev.sh"
 Cohesion: 0.33
 Nodes (8): WSL2 Environment Support, DOTFILES_PACKAGES, echo_error(), echo_warning(), wsl-setup-fedora-dev.sh script, stage_status(), usage(), _vscode_candidates
 
 ### Community 10 - "kitty-install.sh"
-Cohesion: 0.40
-Nodes (3): Terminal Emulator, tabby-setup.sh script, Tabby Terminal config.yaml
+Cohesion: 0.28
+Nodes (5): Install-Then-Setup Pattern, Terminal Emulator, kitty-setup.sh script, tabby-setup.sh script, Tabby Terminal config.yaml
 
 ### Community 11 - "claude-code-install.sh"
 Cohesion: 0.28
@@ -200,7 +201,7 @@ Nodes (5): GNU Stow Symlinking Pattern, Script Initialization Guard Pattern, AGE
 
 ### Community 19 - "statusline-command.sh (Linux/WSL)"
 Cohesion: 0.11
-Nodes (8): settings-part.json (Claude Code Settings), statusline-command.sh (Linux/WSL), statusline-command.sh script, statusline-command-win.sh (Windows/Git-Bash), statusline-command-win.sh script, statusline-slim.sh (Compact Statusline), statusline-slim.sh script, Claude Code JSON Statusline Payload
+Nodes (5): settings-part.json (Claude Code Settings), statusline-command.sh script, statusline-command-win.sh script, statusline-slim.sh script, Claude Code JSON Statusline Payload
 
 ### Community 20 - "k8s-repo-install.sh"
 Cohesion: 0.40
@@ -215,8 +216,8 @@ Cohesion: 0.67
 Nodes (3): Oh-My-Posh Theme Variants (icon vs text), oh-my-posh gbs.omp.yaml (Powerline Theme), oh-my-posh gbs-text.omp.yaml (Plain Theme)
 
 ### Community 23 - "cecho"
-Cohesion: 0.12
-Nodes (36): ansible-cleanup.sh script, aws-cli-install.sh script, claude-code-setup.sh script, dotnet-install.sh script, fastfetch-install.sh script, gcp-cli-install.sh script, ghostty-install.sh script, git-setup.sh script (+28 more)
+Cohesion: 0.14
+Nodes (35): ansible-cleanup.sh script, aws-cli-install.sh script, dotnet-install.sh script, fastfetch-install.sh script, gcp-cli-install.sh script, ghostty-install.sh script, git-setup.sh script, github-cli-install.sh script (+27 more)
 
 ### Community 25 - "Dry-Run Safety Pattern"
 Cohesion: 0.67
@@ -232,39 +233,39 @@ Nodes (3): jakoolit/plugins/lualine.lua (Statusline), adeotek_v1/plugins/catppuc
 
 ### Community 29 - "cc-sessions.sh (Claude Code Session Browser)"
 Cohesion: 0.29
-Nodes (8): Claude Code Session Browser (cross-platform), cc-sessions.sh (Claude Code Session Browser), ordered_projects, rm_files, rm_labels, seen_projects, cc-sessions.sh script, Get-ClaudeCodeSessions.ps1 (Win Session Browser)
+Nodes (7): Claude Code Session Browser (cross-platform), ordered_projects, rm_files, rm_labels, seen_projects, cc-sessions.sh script, Get-ClaudeCodeSessions.ps1 (Win Session Browser)
 
 ### Community 30 - "ZSH README.md (Config Guide)"
 Cohesion: 0.67
 Nodes (3): ZSH Standalone Config (no plugin manager), zsh_plugins.txt (Plugin List), ZSH README.md (Config Guide)
 
-### Community 35 - "_helpers.sh (Shared Utilities)"
+### Community 35 - "_helpers.sh"
 Cohesion: 0.14
-Nodes (6): Multi-Distro Support (Arch/Debian/Fedora), OS-Dispatch Pattern (case $CURRENT_OS_ID), stow_package() Helper Function, _helpers.sh (Shared Utilities), aecho(), jetbrains-toolbox-setup.sh script
+Nodes (5): Multi-Distro Support (Arch/Debian/Fedora), OS-Dispatch Pattern (case $CURRENT_OS_ID), stow_package() Helper Function, aecho(), vscode-install.sh script
 
 ### Community 154 - "uv-install.sh (Python Package Manager)"
 Cohesion: 0.18
-Nodes (6): ansible-install.sh script, graphify-install.sh script, headroom-install.sh script, headroom-setup.sh script, uv-install.sh (Python Package Manager), uv-install.sh script
+Nodes (5): ansible-install.sh script, graphify-install.sh script, headroom-install.sh script, headroom-setup.sh script, uv-install.sh script
 
 ## Knowledge Gaps
-- **138 isolated node(s):** `_options.sh script`, `MINIMAL_TASKS`, `CONSOLE_ONLY_TASKS`, `CONSOLE_TASKS`, `CONSOLE_EXTRA_TASKS` (+133 more)
+- **136 isolated node(s):** `_options.sh script`, `MINIMAL_TASKS`, `CONSOLE_ONLY_TASKS`, `CONSOLE_TASKS`, `CONSOLE_EXTRA_TASKS` (+131 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **29 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **30 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `_helpers.sh (Shared Utilities)` connect `_helpers.sh (Shared Utilities)` to `Bash Config (config.bash)`, `_options.sh (Task Arrays & Tiers)`, `homebrew-install.sh`, `yazi-install.sh`, `wsl-setup-fedora-dev.sh`, `kitty-install.sh`, `claude-code-install.sh`, `ghostty-install.sh`, `k8s-repo-install.sh`, `cecho`, `hermes-install.sh`, `Dry-Run Safety Pattern`, `uv-install.sh (Python Package Manager)`, `docker-install.sh script`, `golang-install.sh`, `system-update.sh`, `fastfetch-install.sh`, `git-install.sh`, `tmux-install.sh`, `github-cli-install.sh`?**
-  _High betweenness centrality (0.147) - this node is a cross-community bridge._
-- **Why does `cecho()` connect `cecho` to `system-update.sh`, `Bash Config (config.bash)`, `_helpers.sh (Shared Utilities)`, `homebrew-install.sh`, `yazi-install.sh`, `claude-code-install.sh`, `k8s-repo-install.sh`, `hermes-install.sh`, `uv-install.sh (Python Package Manager)`, `docker-install.sh script`, `golang-install.sh`?**
-  _High betweenness centrality (0.040) - this node is a cross-community bridge._
-- **Why does `_options.sh (Task Arrays & Tiers)` connect `_options.sh (Task Arrays & Tiers)` to `_helpers.sh (Shared Utilities)`?**
-  _High betweenness centrality (0.027) - this node is a cross-community bridge._
-- **Are the 67 inferred relationships involving `_helpers.sh (Shared Utilities)` (e.g. with `ansible-cleanup.sh` and `ansible-install.sh`) actually correct?**
-  _`_helpers.sh (Shared Utilities)` has 67 INFERRED edges - model-reasoned connections that need verification._
+- **Why does `cecho()` connect `cecho` to `system-update.sh`, `config.bash`, `_helpers.sh`, `homebrew-install.sh`, `claude-code-install.sh`, `k8s-repo-install.sh`, `hermes-install.sh`, `uv-install.sh (Python Package Manager)`, `docker-install.sh script`, `golang-install.sh`?**
+  _High betweenness centrality (0.042) - this node is a cross-community bridge._
+- **Why does `install_package()` connect `cecho` to `config.bash`, `git-install.sh`, `_helpers.sh`, `tmux-install.sh`, `homebrew-install.sh`, `neofetch-install.sh`, `k8s-repo-install.sh`, `docker-install.sh script`?**
+  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+- **Why does `stow_package()` connect `cecho` to `config.bash`, `fastfetch-install.sh`, `_helpers.sh`, `tmux-install.sh`, `homebrew-install.sh`, `neofetch-install.sh`, `kitty-install.sh`, `ghostty-install.sh`?**
+  _High betweenness centrality (0.015) - this node is a cross-community bridge._
 - **What connects `_options.sh script`, `MINIMAL_TASKS`, `CONSOLE_ONLY_TASKS` to the rest of the system?**
-  _138 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _136 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `adeotek_v2/keymaps.lua (Centralized Keymaps)` be split into smaller, more focused modules?**
   _Cohesion score 0.05832147937411095 - nodes in this community are weakly interconnected._
-- **Should `Bash Config (config.bash)` be split into smaller, more focused modules?**
-  _Cohesion score 0.09259259259259259 - nodes in this community are weakly interconnected._
+- **Should `config.bash` be split into smaller, more focused modules?**
+  _Cohesion score 0.10333333333333333 - nodes in this community are weakly interconnected._
+- **Should `Hermes Agent` be split into smaller, more focused modules?**
+  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
