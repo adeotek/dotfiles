@@ -146,6 +146,7 @@ The following packages can be installed individually or in groups:
 - **opencode** - OpenCode configuration
 - **headroom** - LLM context compression proxy (systemd service, supports OpenAI, Anthropic, OpenRouter, OpenCode Zen, Google Gemini, GitHub Copilot)
 - **hermes** - Hermes Agent AI coding assistant (Nous Research)
+- **playwright** - Playwright CLI for browser automation (used by AI tools)
 
 ### LLM Provider Support
 
@@ -165,9 +166,9 @@ Headroom supports all major LLM providers through its configurable proxy:
 Packages are organized into logical tiers for easy installation:
 
 - **Minimal**: `base-tools,bash,git,tmux,yazi`
-- **Console**: Minimal + `fastfetch,claude-code,glow,golang,headroom,nodejs,onefetch,tools`
+- **Console**: Minimal + `fastfetch,claude-code,glow,golang,nodejs,onefetch,tools`
 - **Desktop**: Console + `ghostty,zed`
-- **Console Extra**: `ansible,aws-cli,docker,dotnet,github-cli,gcp-cli,helm,hermes,kubectl,nvim,opencode,powershell,rustup,uv,terraform`
+- **Console Extra**: `ansible,aws-cli,docker,dotnet,github-cli,gcp-cli,graphify,headroom,helm,hermes,kubectl,nvim,opencode,playwright,powershell,rustup,uv,terraform,zellij`
 - **Desktop Extra**: Console Extra + `kitty,tabby,vscode,jetbrains-toolbox`
 - **All Console**: Console + Console Extra
 - **All Desktop**: Desktop + Desktop Extra
