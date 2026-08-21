@@ -123,7 +123,7 @@ fi
 
 # Parse and validate package list
 IFS=',' read -ra SELECTED_PACKAGES <<< "${ARGS["packages"]}"
-if [[ -z "${SELECTED_PACKAGES[@]}" ]]; then
+if [[ -z "${SELECTED_PACKAGES[*]}" ]]; then
   cecho "red" "ERROR: No valid packages found in package list!"
   cecho "white" "Use '$0 ls' to list all available packages"
   exit 10
@@ -136,7 +136,11 @@ if [[ "$VV" -eq 1 ]]; then
 fi
 
 # System update (performed before package installations)
-source "$CDIR/system-update.sh"
+if [ "$DRY_RUN" -ne "1" ]; then
+  source "$CDIR/system-update.sh"
+else
+  cecho "yellow" "Dry run mode enabled. System update will be skipped."
+fi
 
 # Main package processing loop
 # Each package is processed individually using its corresponding install/setup script
@@ -145,6 +149,7 @@ do
   pkg=$(echo "$pkg" | xargs)  # Trim whitespace from package name
   pkg_task_type="${TASK_TYPES["$pkg"]}"  # Get task type (install/setup)
   decho "magenta" "Processing $pkg ($pkg_task_type) with default settings"
+  # shellcheck source=/dev/null
   source "$CDIR/$pkg-$pkg_task_type.sh"
 done
 

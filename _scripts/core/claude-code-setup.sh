@@ -148,47 +148,7 @@ case $CURRENT_OS_ID in
 esac
 
 # Install CLI tools
-case $CURRENT_OS_ID in
-  debian|ubuntu|pop)
-    if [ "$DRY_RUN" -ne "1" ]; then
-      if command -v npm >/dev/null 2>&1; then
-        sudo npm install -g @playwright/cli@latest
-        npx playwright install --with-deps chromium
-        cecho "green" "[claude-code] Playwright CLI and dependencies installed successfully."
-      else
-        cecho "yellow" "Skipping CLI tools since [npm] is not available."
-      fi
-    else
-      cecho "yellow" "DRY-RUN: sudo npm install -g @playwright/cli@latest"
-      cecho "yellow" "DRY-RUN: npx playwright install --with-deps chromium"
-    fi
-    ;;
-  fedora|redhat)
-    if [ "$DRY_RUN" -ne "1" ]; then
-      if command -v npm >/dev/null 2>&1; then
-        # System deps Chromium requires on Fedora
-        sudo dnf install -y nss atk at-spi2-atk gtk3 alsa-lib libdrm \
-          libxkbcommon libXcomposite libXdamage libXrandr mesa-libgbm \
-          libXScrnSaver cups-libs
-        sudo npm install -g @playwright/cli@latest
-        npx playwright install chromium
-        cecho "green" "[claude-code] Playwright CLI and dependencies installed successfully."
-      else
-        cecho "yellow" "Skipping CLI tools since [npm] is not available."
-      fi
-    else
-      cecho "yellow" "DRY-RUN: sudo dnf install -y nss atk at-spi2-atk gtk3 alsa-lib libdrm \\"
-      cecho "yellow" "   libxkbcommon libXcomposite libXdamage libXrandr mesa-libgbm \\"
-      cecho "yellow" "   libXScrnSaver cups-libs"
-      cecho "yellow" "DRY-RUN: sudo npm install -g @playwright/cli@latest"
-      cecho "yellow" "DRY-RUN: npx playwright install chromium"
-    fi
-    ;;
-  *)
-    cecho "red" "Unsupported OS: $CURRENT_OS_ID"
-    exit 1
-    ;;
-esac
+source "$CDIR/playwright-install.sh"
 
 # Configure status line
 mkdir -p ~/.claude
