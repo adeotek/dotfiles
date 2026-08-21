@@ -60,7 +60,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 <div class="container">
 
 <h1>.dotfiles — Complete Call Flow &amp; Architecture Documentation</h1>
-<p class="subtitle">Generated from graphify knowledge graph: 470 nodes, 606 edges, 113 communities. Commit: a5122f2</p>
+<p class="subtitle">Generated from graphify knowledge graph: 472 nodes, 611 edges, 114 communities. Commit: 7b19273</p>
 
 <div class="nav">
     <a href="#overview">Architecture Overview</a>
@@ -92,7 +92,7 @@ flowchart LR
     class EXTRACT_PIPELINE_5F350230 module;
     BUILD_GRAPH_321CBB04("Graph Build<br/><small>3 nodes</small>")
     class BUILD_GRAPH_321CBB04 module;
-    CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>288 nodes</small>")
+    CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>290 nodes</small>")
     class CLI_SKILLS_9964CBB8 module;
     INGEST_CACHE_UPDATE_FF457338("Ingestion &amp; Updates<br/><small>25 nodes</small>")
     class INGEST_CACHE_UPDATE_FF457338 module;
@@ -119,9 +119,9 @@ flowchart LR
     OTHER_D0941E68("Other<br/><small>68 nodes</small>")
     class OTHER_D0941E68 module;
     INGEST_CACHE_UPDATE_FF457338 -->|references x5| CLI_SKILLS_9964CBB8
-    WSL_SETUP_FEDORA_DEV_SH_E3795175 -->|references| CLI_SKILLS_9964CBB8
     CLI_SKILLS_9964CBB8 -->|implements| DRY_RUN_SAFETY_PATTERN_97ACFA1E
     CLI_SKILLS_9964CBB8 -->|implements| WSL_SETUP_FEDORA_DEV_SH_E3795175
+    WSL_SETUP_FEDORA_DEV_SH_E3795175 -->|references| CLI_SKILLS_9964CBB8
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -138,7 +138,7 @@ flowchart LR
     <h4>Architecture Layers</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>Layer</th><th>Nodes</th><th>Communities</th></tr>
-      <tr><td>Extraction Pipeline</td><td>42</td><td><code>0, 182, 55, 74, 83</code></td></tr><tr><td>Graph Build</td><td>3</td><td><code>31</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>288</td><td><code>23, 1, 6, 19, 2, 4, 35, 154, 5, 11, 7, 29, 8, 17, 10, 12, 20, 18, 15, 24, 36, 157, 26, 28, 33, 34, 101, 159, 41, 42, 166, 174, 66</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>25</td><td><code>3, 160, 44, 171, 61</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>6</td><td><code>13</code></td></tr><tr><td>wsl-setup-fedora-dev.sh</td><td>9</td><td><code>9</code></td></tr><tr><td>Run-LocalWinEnvSetup.ps1</td><td>6</td><td><code>14</code></td></tr><tr><td>Windows Network/Firewall Diagnostic Tools</td><td>5</td><td><code>16</code></td></tr><tr><td>Neovim README.md</td><td>3</td><td><code>21</code></td></tr><tr><td>oh-my-posh gbs.omp.yaml (Powerline Theme)</td><td>3</td><td><code>22</code></td></tr><tr><td>Dry-Run Safety Pattern</td><td>3</td><td><code>25</code></td></tr><tr><td>adeotek_v1/plugins/lualine.lua (Statusline)</td><td>3</td><td><code>27</code></td></tr><tr><td>ZSH README.md (Config Guide)</td><td>3</td><td><code>30</code></td></tr><tr><td>unattended_setup.sh</td><td>3</td><td><code>32</code></td></tr><tr><td>Other</td><td>68</td><td><code>37, 38, 39, 40, 43, 45, 46, 47, 72, 162, 167, 168, 169, 170, 172, 173, 175, 176, 177, 178, 179, 180, 181, 48, 49, 50, 51, 52, 53, 54, 56, 57, 58, 59, 60, 62, 63, 64, 65, 67, 68, 69, 70, 71, 73, 75, 76, 77, 78, 79, 80, 81, 82, 84, 85, 86, 87, 88, 89</code></td></tr>
+      <tr><td>Extraction Pipeline</td><td>42</td><td><code>0, 182, 55, 74, 83</code></td></tr><tr><td>Graph Build</td><td>3</td><td><code>31</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>290</td><td><code>23, 6, 1, 19, 2, 4, 35, 154, 5, 10, 11, 7, 29, 17, 12, 20, 8, 18, 15, 24, 36, 157, 26, 28, 33, 34, 90, 101, 159, 41, 42, 166, 174, 66</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>25</td><td><code>3, 160, 44, 171, 61</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>6</td><td><code>13</code></td></tr><tr><td>wsl-setup-fedora-dev.sh</td><td>9</td><td><code>9</code></td></tr><tr><td>Run-LocalWinEnvSetup.ps1</td><td>6</td><td><code>14</code></td></tr><tr><td>Windows Network/Firewall Diagnostic Tools</td><td>5</td><td><code>16</code></td></tr><tr><td>Neovim README.md</td><td>3</td><td><code>21</code></td></tr><tr><td>oh-my-posh gbs.omp.yaml (Powerline Theme)</td><td>3</td><td><code>22</code></td></tr><tr><td>Dry-Run Safety Pattern</td><td>3</td><td><code>25</code></td></tr><tr><td>adeotek_v1/plugins/lualine.lua (Statusline)</td><td>3</td><td><code>27</code></td></tr><tr><td>ZSH README.md (Config Guide)</td><td>3</td><td><code>30</code></td></tr><tr><td>unattended_setup.sh</td><td>3</td><td><code>32</code></td></tr><tr><td>Other</td><td>68</td><td><code>37, 38, 39, 40, 43, 45, 46, 47, 72, 162, 167, 168, 169, 170, 172, 173, 175, 176, 177, 178, 179, 180, 181, 48, 49, 50, 51, 52, 53, 54, 56, 57, 58, 59, 60, 62, 63, 64, 65, 67, 68, 69, 70, 71, 73, 75, 76, 77, 78, 79, 80, 81, 82, 84, 85, 86, 87, 88, 89</code></td></tr>
     </table>
   </div>
   <div class="card">
@@ -150,12 +150,12 @@ flowchart LR
   <div class="card">
     <h4>Graph Report Highlights</h4>
     <ul>
-      <li>470 nodes · 606 edges · 113 communities (84 shown, 29 thin omitted)</li>
-      <li>Extraction: 73% EXTRACTED · 27% INFERRED · 0% AMBIGUOUS · INFERRED: 163 edges (avg confidence: 0.61)</li>
+      <li>472 nodes · 611 edges · 114 communities (84 shown, 30 thin omitted)</li>
+      <li>Extraction: 73% EXTRACTED · 27% INFERRED · 0% AMBIGUOUS · INFERRED: 166 edges (avg confidence: 0.61)</li>
       <li>Token cost: 0 input · 0 output</li>
-      <li>1. `_helpers.sh (Shared Utilities)` - 94 edges</li>
-      <li>2. `cecho()` - 56 edges</li>
-      <li>3. `decho()` - 28 edges</li>
+      <li>1. `cecho()` - 57 edges</li>
+      <li>2. `decho()` - 28 edges</li>
+      <li>3. `install_package()` - 28 edges</li>
     </ul>
   </div>
 </div>
@@ -172,7 +172,7 @@ flowchart LR
         nvim_config_nvim_lua_configs_adeotek_v1_plugins_2c456b18("adeotek v1/plugins/neo-tree.lua")
         nvim_config_nvim_lua_configs_adeotek_v1_plugins_f72a38fd("adeotek_v1/plugins/neo-tree.lua (File E...<br/><small>adeotek_v1/plugins/neo-tree.lua</small>")
     end
-    nvim_config_nvim_init_3e625a8d("nvim/init.lua (Neovim Entry Point)<br/><small>.config/nvim/init.lua</small>")
+    nvim_config_nvim_init_3e625a8d("nvim/init.lua")
     nvim_config_nvim_lua_configs_adeotek_v1_plugins_dbb3b018("adeotek_v1/plugins/alpha.lua (Dashboard)<br/><small>adeotek_v1/plugins/alpha.lua</small>")
     nvim_config_nvim_lua_configs_adeotek_v1_plugins_0061150f("adeotek_v1/plugins/init.lua (Plugin List)<br/><small>adeotek_v1/plugins/init.lua</small>")
     nvim_config_nvim_lua_configs_adeotek_v1_plugins_9b9212e5("adeotek_v1/plugins/telekasten.lua (Notes)<br/><small>adeotek_v1/plugins/telekasten.lua</small>")
@@ -180,14 +180,14 @@ flowchart LR
     nvim_config_nvim_lua_configs_adeotek_v1_config_eecec4e2("adeotek_v1/config.lua")
     nvim_config_nvim_lua_configs_adeotek_v1_init_6d4b5d5d("adeotek_v1/init.lua")
     nvim_config_nvim_lua_configs_adeotek_v1_keymaps_afbeb36c("adeotek_v1/keymaps.lua")
-    nvim_config_nvim_lua_configs_adeotek_v1_lazy_ini_5e4714aa("adeotek_v1/lazy_init.lua (Lazy.nvim Boo...<br/><small>configs/adeotek_v1/lazy_init.lua</small>")
-    nvim_config_nvim_lua_configs_adeotek_v2_init_dbb5d2e0("adeotek_v2/init.lua (Lazy.nvim Bootstrap)<br/><small>configs/adeotek_v2/init.lua</small>")
-    nvim_config_nvim_lua_configs_adeotek_v2_keymaps_6fd7fdc9("adeotek_v2/keymaps.lua (Centralized Key...<br/><small>configs/adeotek_v2/keymaps.lua</small>")
-    nvim_config_nvim_lua_configs_adeotek_v2_options_3206d9bc("adeotek_v2/options.lua (Vim Options)<br/><small>configs/adeotek_v2/options.lua</small>")
-    nvim_config_nvim_lua_configs_jakoolit_init_d2e055c1("jakoolit/init.lua (3rd-party Config)<br/><small>configs/jakoolit/init.lua</small>")
-    nvim_config_nvim_lua_configs_jakoolit_plugins_923386c3("jakoolit/plugins.lua (Plugin List)<br/><small>configs/jakoolit/plugins.lua</small>")
-    nvim_config_nvim_lua_configs_jakoolit_vim_option_280f9068("jakoolit/vim-options.lua (Vim Options)<br/><small>configs/jakoolit/vim-options.lua</small>")
-    nvim_config_nvim_lua_config_6173d107("lua/config.lua (Config Router)<br/><small>nvim/lua/config.lua</small>")
+    nvim_config_nvim_lua_configs_adeotek_v1_lazy_ini_5e4714aa("lazy_init.lua")
+    nvim_config_nvim_lua_configs_adeotek_v2_init_dbb5d2e0("adeotek_v2/init.lua")
+    nvim_config_nvim_lua_configs_adeotek_v2_keymaps_6fd7fdc9("adeotek_v2/keymaps.lua")
+    nvim_config_nvim_lua_configs_adeotek_v2_options_3206d9bc("options.lua")
+    nvim_config_nvim_lua_configs_jakoolit_init_d2e055c1("jakoolit/init.lua")
+    nvim_config_nvim_lua_configs_jakoolit_plugins_923386c3("plugins.lua")
+    nvim_config_nvim_lua_configs_jakoolit_vim_option_280f9068("vim-options.lua")
+    nvim_config_nvim_lua_config_6173d107("lua/config.lua")
     nvim_config_nvim_init_3e625a8d -->|calls| nvim_config_nvim_lua_config_6173d107
     nvim_config_nvim_lua_config_6173d107 -->|calls| nvim_config_nvim_lua_configs_adeotek_v1_config_eecec4e2
     nvim_config_nvim_lua_configs_adeotek_v1_init_6d4b5d5d -->|calls| nvim_config_nvim_lua_configs_adeotek_v1_keymaps_afbeb36c
@@ -215,7 +215,7 @@ flowchart LR
     class nvim_config_nvim_lua_configs_jakoolit_init_d2e055c1 function;
     class nvim_config_nvim_lua_configs_jakoolit_plugins_923386c3 function;
     class nvim_config_nvim_lua_configs_jakoolit_vim_option_280f9068 function;
-    class nvim_config_nvim_lua_config_6173d107 api;
+    class nvim_config_nvim_lua_config_6173d107 function;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -271,70 +271,38 @@ flowchart LR
 </tr>
 <tr>
   <td>5</td>
-  <td><code>jakoolit/plugins/catppuccin.lua (Theme)</code><br><small style="color:var(--muted)">jakoolit/plugins/catppuccin.lua</small></td>
+  <td><code>nvim/init.lua</code><br><small style="color:var(--muted)">.config/nvim/init.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>jakoolit/plugins/catppuccin.lua (Theme) node in jakoolit/plugins/catppuccin.lua.</td>
+  <td><code>lua/config.lua</code><br><small style="color:var(--muted)">nvim/lua/config.lua</small></td>
+  <td>nvim/init.lua node in .config/nvim/init.lua.</td>
 </tr>
 <tr>
   <td>6</td>
-  <td><code>jakoolit/plugins/lsp-config.lua (LSP)</code><br><small style="color:var(--muted)">jakoolit/plugins/lsp-config.lua</small></td>
+  <td><code>lua/config.lua</code><br><small style="color:var(--muted)">nvim/lua/config.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
+  <td><code>nvim/init.lua</code><br><small style="color:var(--muted)">.config/nvim/init.lua</small></td>
+  <td><code>adeotek_v1/config.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/config.lua</small></td>
   <td>Reads, resolves, or persists project configuration.</td>
 </tr>
 <tr>
   <td>7</td>
-  <td><code>jakoolit/plugins/telescope.lua (Fuzzy Finder)</code><br><small style="color:var(--muted)">jakoolit/plugins/telescope.lua</small></td>
+  <td><code>adeotek_v1/config.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/config.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
+  <td><code>lua/config.lua</code><br><small style="color:var(--muted)">nvim/lua/config.lua</small></td>
   <td>No direct outbound edge</td>
-  <td>jakoolit/plugins/telescope.lua (Fuzzy Finder) node in jakoolit/plugins/telescope.lua.</td>
+  <td>Reads, resolves, or persists project configuration.</td>
 </tr>
 <tr>
   <td>8</td>
-  <td><code>jakoolit/plugins/treesitter.lua (Syntax)</code><br><small style="color:var(--muted)">jakoolit/plugins/treesitter.lua</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>jakoolit/plugins/treesitter.lua (Syntax) node in jakoolit/plugins/treesitter.lua.</td>
-</tr>
-<tr>
-  <td>9</td>
-  <td><code>nvim/init.lua (Neovim Entry Point)</code><br><small style="color:var(--muted)">.config/nvim/init.lua</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>lua/config.lua (Config Router)</code><br><small style="color:var(--muted)">nvim/lua/config.lua</small></td>
-  <td>nvim/init.lua (Neovim Entry Point) node in .config/nvim/init.lua.</td>
-</tr>
-<tr>
-  <td>10</td>
-  <td><code>lua/config.lua (Config Router)</code><br><small style="color:var(--muted)">nvim/lua/config.lua</small></td>
-  <td><span class="tag tag-endpoint">API</span></td>
-  <td><code>nvim/init.lua (Neovim Entry Point)</code><br><small style="color:var(--muted)">.config/nvim/init.lua</small></td>
-  <td><code>adeotek_v1/config.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/config.lua</small></td>
-  <td>Reads, resolves, or persists project configuration.</td>
-</tr>
-<tr>
-  <td>11</td>
-  <td><code>adeotek_v1/config.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/config.lua</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>lua/config.lua (Config Router)</code><br><small style="color:var(--muted)">nvim/lua/config.lua</small></td>
-  <td>No direct outbound edge</td>
-  <td>Reads, resolves, or persists project configuration.</td>
-</tr>
-<tr>
-  <td>12</td>
   <td><code>adeotek_v1/init.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/init.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>adeotek_v1/keymaps.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/keymaps.lua</small><br><code>adeotek_v1/lazy_init.lua (Lazy.nvim Boo...</code><br><small style="color:var(--muted)">configs/adeotek_v1/lazy_init.lua</small></td>
+  <td><code>adeotek_v1/keymaps.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/keymaps.lua</small><br><code>lazy_init.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/lazy_init.lua</small></td>
   <td>adeotek_v1/init.lua node in configs/adeotek_v1/init.lua.</td>
 </tr>
 <tr>
-  <td>13</td>
+  <td>9</td>
   <td><code>adeotek_v1/keymaps.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/keymaps.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>adeotek_v1/init.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/init.lua</small></td>
@@ -342,15 +310,95 @@ flowchart LR
   <td>adeotek_v1/keymaps.lua node in configs/adeotek_v1/keymaps.lua.</td>
 </tr>
 <tr>
-  <td>14</td>
-  <td><code>adeotek_v1/lazy_init.lua (Lazy.nvim Bootstrap)</code><br><small style="color:var(--muted)">configs/adeotek_v1/lazy_init.lua</small></td>
+  <td>10</td>
+  <td><code>lazy_init.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/lazy_init.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>adeotek_v1/init.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/init.lua</small></td>
   <td><code>adeotek_v1/plugins/init.lua (Plugin List)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/init.lua</small></td>
-  <td>adeotek_v1/lazy_init.lua (Lazy.nvim Bootstrap) node in configs/adeotek_v1/lazy_init.lua.</td>
+  <td>lazy_init.lua node in configs/adeotek_v1/lazy_init.lua.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>adeotek_v2/init.lua</code><br><small style="color:var(--muted)">configs/adeotek_v2/init.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>adeotek_v2/keymaps.lua</code><br><small style="color:var(--muted)">configs/adeotek_v2/keymaps.lua</small><br><code>options.lua</code><br><small style="color:var(--muted)">configs/adeotek_v2/options.lua</small></td>
+  <td>adeotek_v2/init.lua node in configs/adeotek_v2/init.lua.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><code>adeotek_v2/keymaps.lua</code><br><small style="color:var(--muted)">configs/adeotek_v2/keymaps.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>adeotek_v2/init.lua</code><br><small style="color:var(--muted)">configs/adeotek_v2/init.lua</small></td>
+  <td>No direct outbound edge</td>
+  <td>adeotek_v2/keymaps.lua node in configs/adeotek_v2/keymaps.lua.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><code>options.lua</code><br><small style="color:var(--muted)">configs/adeotek_v2/options.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>adeotek_v2/init.lua</code><br><small style="color:var(--muted)">configs/adeotek_v2/init.lua</small></td>
+  <td>No direct outbound edge</td>
+  <td>options.lua node in configs/adeotek_v2/options.lua.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><code>jakoolit/init.lua</code><br><small style="color:var(--muted)">configs/jakoolit/init.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>plugins.lua</code><br><small style="color:var(--muted)">configs/jakoolit/plugins.lua</small><br><code>vim-options.lua</code><br><small style="color:var(--muted)">configs/jakoolit/vim-options.lua</small></td>
+  <td>jakoolit/init.lua node in configs/jakoolit/init.lua.</td>
 </tr>
 <tr>
   <td>15</td>
+  <td><code>plugins.lua</code><br><small style="color:var(--muted)">configs/jakoolit/plugins.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>jakoolit/init.lua</code><br><small style="color:var(--muted)">configs/jakoolit/init.lua</small></td>
+  <td>No direct outbound edge</td>
+  <td>plugins.lua node in configs/jakoolit/plugins.lua.</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td><code>vim-options.lua</code><br><small style="color:var(--muted)">configs/jakoolit/vim-options.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>jakoolit/init.lua</code><br><small style="color:var(--muted)">configs/jakoolit/init.lua</small></td>
+  <td>No direct outbound edge</td>
+  <td>vim-options.lua node in configs/jakoolit/vim-options.lua.</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td><code>jakoolit/plugins/catppuccin.lua (Theme)</code><br><small style="color:var(--muted)">jakoolit/plugins/catppuccin.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>jakoolit/plugins/catppuccin.lua (Theme) node in jakoolit/plugins/catppuccin.lua.</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td><code>jakoolit/plugins/lsp-config.lua (LSP)</code><br><small style="color:var(--muted)">jakoolit/plugins/lsp-config.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td><code>jakoolit/plugins/telescope.lua (Fuzzy Finder)</code><br><small style="color:var(--muted)">jakoolit/plugins/telescope.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>jakoolit/plugins/telescope.lua (Fuzzy Finder) node in jakoolit/plugins/telescope.lua.</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><code>jakoolit/plugins/treesitter.lua (Syntax)</code><br><small style="color:var(--muted)">jakoolit/plugins/treesitter.lua</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>jakoolit/plugins/treesitter.lua (Syntax) node in jakoolit/plugins/treesitter.lua.</td>
+</tr>
+<tr>
+  <td>21</td>
   <td><code>adeotek_v1/plugins/alpha.lua (Dashboard)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/alpha.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -358,15 +406,15 @@ flowchart LR
   <td>adeotek_v1/plugins/alpha.lua (Dashboard) node in adeotek_v1/plugins/alpha.lua.</td>
 </tr>
 <tr>
-  <td>16</td>
+  <td>22</td>
   <td><code>adeotek_v1/plugins/init.lua (Plugin List)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/init.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>adeotek_v1/lazy_init.lua (Lazy.nvim Boo...</code><br><small style="color:var(--muted)">configs/adeotek_v1/lazy_init.lua</small></td>
+  <td><code>lazy_init.lua</code><br><small style="color:var(--muted)">configs/adeotek_v1/lazy_init.lua</small></td>
   <td>No direct outbound edge</td>
   <td>adeotek_v1/plugins/init.lua (Plugin List) node in adeotek_v1/plugins/init.lua.</td>
 </tr>
 <tr>
-  <td>17</td>
+  <td>23</td>
   <td><code>adeotek_v1/plugins/neo-tree.lua (File Explorer)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/neo-tree.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -374,7 +422,7 @@ flowchart LR
   <td>adeotek_v1/plugins/neo-tree.lua (File Explorer) node in adeotek_v1/plugins/neo-tree.lua.</td>
 </tr>
 <tr>
-  <td>18</td>
+  <td>24</td>
   <td><code>adeotek_v1/plugins/telekasten.lua (Notes)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/telekasten.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -382,7 +430,7 @@ flowchart LR
   <td>adeotek_v1/plugins/telekasten.lua (Notes) node in adeotek_v1/plugins/telekasten.lua.</td>
 </tr>
 <tr>
-  <td>19</td>
+  <td>25</td>
   <td><code>adeotek_v1/plugins/telescope.lua (Fuzzy Finder)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/telescope.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -390,7 +438,7 @@ flowchart LR
   <td>adeotek_v1/plugins/telescope.lua (Fuzzy Finder) node in adeotek_v1/plugins/telescope.lua.</td>
 </tr>
 <tr>
-  <td>20</td>
+  <td>26</td>
   <td><code>adeotek_v1/plugins/treesitter.lua (Syntax)</code><br><small style="color:var(--muted)">adeotek_v1/plugins/treesitter.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -398,31 +446,7 @@ flowchart LR
   <td>adeotek_v1/plugins/treesitter.lua (Syntax) node in adeotek_v1/plugins/treesitter.lua.</td>
 </tr>
 <tr>
-  <td>21</td>
-  <td><code>adeotek_v2/init.lua (Lazy.nvim Bootstrap)</code><br><small style="color:var(--muted)">configs/adeotek_v2/init.lua</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>adeotek_v2/keymaps.lua (Centralized Key...</code><br><small style="color:var(--muted)">configs/adeotek_v2/keymaps.lua</small><br><code>adeotek_v2/options.lua (Vim Options)</code><br><small style="color:var(--muted)">configs/adeotek_v2/options.lua</small></td>
-  <td>adeotek_v2/init.lua (Lazy.nvim Bootstrap) node in configs/adeotek_v2/init.lua.</td>
-</tr>
-<tr>
-  <td>22</td>
-  <td><code>adeotek_v2/keymaps.lua (Centralized Keymaps)</code><br><small style="color:var(--muted)">configs/adeotek_v2/keymaps.lua</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>adeotek_v2/init.lua (Lazy.nvim Bootstrap)</code><br><small style="color:var(--muted)">configs/adeotek_v2/init.lua</small></td>
-  <td>No direct outbound edge</td>
-  <td>adeotek_v2/keymaps.lua (Centralized Keymaps) node in configs/adeotek_v2/keymaps.lua.</td>
-</tr>
-<tr>
-  <td>23</td>
-  <td><code>adeotek_v2/options.lua (Vim Options)</code><br><small style="color:var(--muted)">configs/adeotek_v2/options.lua</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>adeotek_v2/init.lua (Lazy.nvim Bootstrap)</code><br><small style="color:var(--muted)">configs/adeotek_v2/init.lua</small></td>
-  <td>No direct outbound edge</td>
-  <td>adeotek_v2/options.lua (Vim Options) node in configs/adeotek_v2/options.lua.</td>
-</tr>
-<tr>
-  <td>24</td>
+  <td>27</td>
   <td><code>adeotek_v2/plugins/alpha.lua (Dashboard)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/alpha.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -430,7 +454,7 @@ flowchart LR
   <td>adeotek_v2/plugins/alpha.lua (Dashboard) node in adeotek_v2/plugins/alpha.lua.</td>
 </tr>
 <tr>
-  <td>25</td>
+  <td>28</td>
   <td><code>adeotek_v2/plugins/bufferline.lua</code><br><small style="color:var(--muted)">adeotek_v2/plugins/bufferline.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -438,7 +462,7 @@ flowchart LR
   <td>adeotek_v2/plugins/bufferline.lua node in adeotek_v2/plugins/bufferline.lua.</td>
 </tr>
 <tr>
-  <td>26</td>
+  <td>29</td>
   <td><code>adeotek_v2/plugins/lsp.lua (LSP + Mason + nvim-cmp)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/lsp.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -446,36 +470,12 @@ flowchart LR
   <td>adeotek_v2/plugins/lsp.lua (LSP + Mason + nvim-cmp) node in adeotek_v2/plugins/lsp.lua.</td>
 </tr>
 <tr>
-  <td>27</td>
+  <td>30</td>
   <td><code>adeotek_v2/plugins/nvim-tree.lua (File Explorer)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/nvim-tree.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
   <td>adeotek_v2/plugins/nvim-tree.lua (File Explorer) node in adeotek_v2/plugins/nvim-tree.lua.</td>
-</tr>
-<tr>
-  <td>28</td>
-  <td><code>adeotek_v2/plugins/telescope.lua (Fuzzy Finder)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/telescope.lua</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>adeotek_v2/plugins/telescope.lua (Fuzzy Finder) node in adeotek_v2/plugins/telescope.lua.</td>
-</tr>
-<tr>
-  <td>29</td>
-  <td><code>adeotek_v2/plugins/theme.lua (Catppuccin)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/theme.lua</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>adeotek_v2/plugins/theme.lua (Catppuccin) node in adeotek_v2/plugins/theme.lua.</td>
-</tr>
-<tr>
-  <td>30</td>
-  <td><code>adeotek_v2/plugins/treesitter.lua (Syntax)</code><br><small style="color:var(--muted)">adeotek_v2/plugins/treesitter.lua</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>adeotek_v2/plugins/treesitter.lua (Syntax) node in adeotek_v2/plugins/treesitter.lua.</td>
 </tr>
 </table>
 
@@ -581,12 +581,12 @@ flowchart LR
 
 <!-- ====== 4. CLI & Skill Installers ====== -->
 <h2 id="cli-skills">4. CLI &amp; Skill Installers</h2>
-<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, setupsh, script, mostly in _scripts/core/_helpers.sh, hermes/README.md, headroom/README.md. This section covers 288 nodes and 478 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, setupsh, script, mostly in _scripts/core/_helpers.sh, hermes/README.md, headroom/README.md. This section covers 290 nodes and 483 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: CLI &amp; Skill Installers (288 nodes, 478 edges)
+    %% Section: CLI &amp; Skill Installers (290 nodes, 483 edges)
     subgraph cli_skills_scripts_core_helpers_sh_347c91c6["_scripts/core/_helpers.sh"]
         scripts_core_helpers_process_args_2849d49d("process_args()<br/><small>_scripts/core/_helpers.sh</small>")
         scripts_core_helpers_stow_package_6093c77a("stow_package()<br/><small>_scripts/core/_helpers.sh</small>")
@@ -599,24 +599,25 @@ flowchart LR
     scripts_core_docker_install_sh_entry_59bebea1("docker-install.sh script<br/><small>_scripts/core/docker-install.sh</small>")
     scripts_core_fastfetch_install_sh_entry_35a1eb7d("fastfetch-install.sh script<br/><small>_scripts/core/fastfetch-install.sh</small>")
     scripts_core_gcp_cli_install_sh_entry_84a88106("gcp-cli-install.sh script<br/><small>_scripts/core/gcp-cli-install.sh</small>")
-    scripts_core_kitty_setup_sh_entry_8fcbead1("kitty-setup.sh script<br/><small>_scripts/core/kitty-setup.sh</small>")
     scripts_core_nerd_fonts_install_sh_entry_a32c9b62("nerd-fonts-install.sh script<br/><small>_scripts/core/nerd-fonts-install.sh</small>")
     scripts_core_nodejs_install_sh_entry_8b7e045c("nodejs-install.sh script<br/><small>_scripts/core/nodejs-install.sh</small>")
     scripts_core_oh_my_posh_setup_sh_entry_212c54e7("oh-my-posh-setup.sh script<br/><small>_scripts/core/oh-my-posh-setup.sh</small>")
     scripts_core_starship_install_sh_entry_b9f68cfd("starship-install.sh script<br/><small>_scripts/core/starship-install.sh</small>")
     scripts_core_starship_setup_sh_entry_3ccce606("starship-setup.sh script<br/><small>_scripts/core/starship-setup.sh</small>")
     scripts_core_tools_setup_sh_entry_1bfb3c53("tools-setup.sh script<br/><small>_scripts/core/tools-setup.sh</small>")
+    scripts_core_zsh_setup_sh_entry_41aae49f("zsh-setup.sh script<br/><small>_scripts/core/zsh-setup.sh</small>")
     scripts_headroom_uninstall_sh_entry_2631ac52("headroom-uninstall.sh script<br/><small>_scripts/headroom-uninstall.sh</small>")
     scripts_core_bash_setup_sh_entry_55632e04 -->|calls| scripts_core_helpers_process_args_2849d49d
     scripts_core_bash_setup_sh_entry_55632e04 -->|calls| scripts_core_helpers_stow_package_6093c77a
     scripts_core_helpers_sh_entry_be2a6d3a -->|calls| scripts_core_helpers_decho_3a11e880
     scripts_core_helpers_sh_entry_be2a6d3a -->|calls| scripts_core_helpers_process_args_2849d49d
-    scripts_core_kitty_setup_sh_entry_8fcbead1 -->|calls| scripts_core_helpers_stow_package_6093c77a
     scripts_core_nerd_fonts_install_sh_entry_a32c9b62 -->|calls| scripts_core_helpers_process_args_2849d49d
     scripts_core_nerd_fonts_install_sh_entry_a32c9b62 -->|calls| scripts_core_helpers_cecho_42476bc7
     scripts_core_oh_my_posh_setup_sh_entry_212c54e7 -->|calls| scripts_core_helpers_stow_package_6093c77a
     scripts_core_starship_install_sh_entry_b9f68cfd -->|calls| scripts_core_helpers_install_package_13a3fee4
     scripts_core_starship_setup_sh_entry_3ccce606 -->|calls| scripts_core_helpers_stow_package_6093c77a
+    scripts_core_zsh_setup_sh_entry_41aae49f -->|calls| scripts_core_helpers_process_args_2849d49d
+    scripts_core_zsh_setup_sh_entry_41aae49f -->|calls| scripts_core_helpers_stow_package_6093c77a
     scripts_core_docker_install_sh_entry_59bebea1 -->|calls| scripts_core_helpers_install_package_13a3fee4
     scripts_core_docker_install_sh_entry_59bebea1 -->|calls| scripts_core_helpers_cecho_42476bc7
     scripts_core_fastfetch_install_sh_entry_35a1eb7d -->|calls| scripts_core_helpers_install_package_13a3fee4
@@ -630,8 +631,7 @@ flowchart LR
     scripts_core_helpers_install_package_13a3fee4 -->|calls| scripts_core_helpers_decho_3a11e880
     scripts_core_helpers_stow_package_6093c77a -->|calls| scripts_core_helpers_cecho_42476bc7
     scripts_core_helpers_stow_package_6093c77a -->|calls| scripts_core_helpers_install_package_13a3fee4
-    scripts_core_helpers_stow_package_6093c77a -->|calls| scripts_core_helpers_decho_3a11e880
-    %% Omitted for readability: 270 nodes, 7 edges
+    %% Omitted for readability: 272 nodes, 8 edges
     class scripts_core_helpers_process_args_2849d49d function;
     class scripts_core_helpers_stow_package_6093c77a function;
     class scripts_core_helpers_sh_entry_be2a6d3a function;
@@ -642,13 +642,13 @@ flowchart LR
     class scripts_core_docker_install_sh_entry_59bebea1 function;
     class scripts_core_fastfetch_install_sh_entry_35a1eb7d function;
     class scripts_core_gcp_cli_install_sh_entry_84a88106 entry;
-    class scripts_core_kitty_setup_sh_entry_8fcbead1 function;
     class scripts_core_nerd_fonts_install_sh_entry_a32c9b62 function;
     class scripts_core_nodejs_install_sh_entry_8b7e045c function;
     class scripts_core_oh_my_posh_setup_sh_entry_212c54e7 function;
     class scripts_core_starship_install_sh_entry_b9f68cfd function;
     class scripts_core_starship_setup_sh_entry_3ccce606 function;
     class scripts_core_tools_setup_sh_entry_1bfb3c53 function;
+    class scripts_core_zsh_setup_sh_entry_41aae49f function;
     class scripts_headroom_uninstall_sh_entry_2631ac52 function;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
@@ -689,14 +689,6 @@ flowchart LR
 </tr>
 <tr>
   <td>3</td>
-  <td><code>claude-code-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/claude-code-setup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>install_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>claude-code-setup.sh script node in _scripts/core/claude-code-setup.sh.</td>
-</tr>
-<tr>
-  <td>4</td>
   <td><code>dotnet-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/dotnet-install.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -704,7 +696,7 @@ flowchart LR
   <td>dotnet-install.sh script node in _scripts/core/dotnet-install.sh.</td>
 </tr>
 <tr>
-  <td>5</td>
+  <td>4</td>
   <td><code>fastfetch-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/fastfetch-install.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -712,7 +704,7 @@ flowchart LR
   <td>fastfetch-install.sh script node in _scripts/core/fastfetch-install.sh.</td>
 </tr>
 <tr>
-  <td>6</td>
+  <td>5</td>
   <td><code>gcp-cli-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/gcp-cli-install.sh</small></td>
   <td><span class="tag tag-cmd">Entry</span></td>
   <td>External entry / no inbound edge</td>
@@ -720,7 +712,7 @@ flowchart LR
   <td>gcp-cli-install.sh script node in _scripts/core/gcp-cli-install.sh.</td>
 </tr>
 <tr>
-  <td>7</td>
+  <td>6</td>
   <td><code>ghostty-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/ghostty-install.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -728,7 +720,7 @@ flowchart LR
   <td>ghostty-install.sh script node in _scripts/core/ghostty-install.sh.</td>
 </tr>
 <tr>
-  <td>8</td>
+  <td>7</td>
   <td><code>git-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/git-setup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -736,7 +728,7 @@ flowchart LR
   <td>Turns a local path or remote repository into analysis context.</td>
 </tr>
 <tr>
-  <td>9</td>
+  <td>8</td>
   <td><code>github-cli-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/github-cli-install.sh</small></td>
   <td><span class="tag tag-cmd">Entry</span></td>
   <td>External entry / no inbound edge</td>
@@ -744,7 +736,7 @@ flowchart LR
   <td>Turns a local path or remote repository into analysis context.</td>
 </tr>
 <tr>
-  <td>10</td>
+  <td>9</td>
   <td><code>helm-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/helm-install.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -752,15 +744,15 @@ flowchart LR
   <td>helm-install.sh script node in _scripts/core/helm-install.sh.</td>
 </tr>
 <tr>
-  <td>11</td>
+  <td>10</td>
   <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>aecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>ansible-cleanup.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small><br><code>ansible-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-install.sh</small><br>+52 more</td>
+  <td><code>aecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>ansible-cleanup.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small><br><code>ansible-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-install.sh</small><br>+53 more</td>
   <td>No direct outbound edge</td>
   <td>cecho() node in _scripts/core/_helpers.sh.</td>
 </tr>
 <tr>
-  <td>12</td>
+  <td>11</td>
   <td><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>_helpers.sh script</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>ansible-cleanup.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small><br><code>aws-cli-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/aws-cli-install.sh</small><br>+23 more</td>
@@ -768,7 +760,7 @@ flowchart LR
   <td>decho() node in _scripts/core/_helpers.sh.</td>
 </tr>
 <tr>
-  <td>13</td>
+  <td>12</td>
   <td><code>execute_command()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td><span class="tag tag-cmd">Entry</span></td>
   <td><code>install_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>stow_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>symlink_package_directory()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br>+2 more</td>
@@ -776,7 +768,7 @@ flowchart LR
   <td>execute_command() node in _scripts/core/_helpers.sh.</td>
 </tr>
 <tr>
-  <td>14</td>
+  <td>13</td>
   <td><code>increase_ulimit()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>yazi-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/yazi-install.sh</small></td>
@@ -784,15 +776,15 @@ flowchart LR
   <td>increase_ulimit() node in _scripts/core/_helpers.sh.</td>
 </tr>
 <tr>
-  <td>15</td>
+  <td>14</td>
   <td><code>install_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>claude-code-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/claude-code-setup.sh</small><br><code>docker-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/docker-install.sh</small><br><code>dotnet-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/dotnet-install.sh</small><br>+21 more</td>
+  <td><code>docker-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/docker-install.sh</small><br><code>dotnet-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/dotnet-install.sh</small><br><code>fastfetch-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/fastfetch-install.sh</small><br>+21 more</td>
   <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>execute_command()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td>install_package() node in _scripts/core/_helpers.sh.</td>
 </tr>
 <tr>
-  <td>16</td>
+  <td>15</td>
   <td><code>rename_dir_if_exists()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>stow_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>symlink_package_directory()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>tools-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/tools-setup.sh</small></td>
@@ -800,7 +792,7 @@ flowchart LR
   <td>rename_dir_if_exists() node in _scripts/core/_helpers.sh.</td>
 </tr>
 <tr>
-  <td>17</td>
+  <td>16</td>
   <td><code>rename_file_if_exists()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>stow_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>symlink_package_file()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
@@ -808,7 +800,7 @@ flowchart LR
   <td>rename_file_if_exists() node in _scripts/core/_helpers.sh.</td>
 </tr>
 <tr>
-  <td>18</td>
+  <td>17</td>
   <td><code>stow_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>bash-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/bash-setup.sh</small><br><code>fastfetch-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/fastfetch-setup.sh</small><br><code>ghostty-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/ghostty-setup.sh</small><br>+10 more</td>
@@ -816,7 +808,7 @@ flowchart LR
   <td>stow_package() node in _scripts/core/_helpers.sh.</td>
 </tr>
 <tr>
-  <td>19</td>
+  <td>18</td>
   <td><code>symlink_package_directory()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -824,7 +816,7 @@ flowchart LR
   <td>symlink_package_directory() node in _scripts/core/_helpers.sh.</td>
 </tr>
 <tr>
-  <td>20</td>
+  <td>19</td>
   <td><code>symlink_package_file()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -832,7 +824,7 @@ flowchart LR
   <td>symlink_package_file() node in _scripts/core/_helpers.sh.</td>
 </tr>
 <tr>
-  <td>21</td>
+  <td>20</td>
   <td><code>homebrew-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/homebrew-install.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -840,7 +832,7 @@ flowchart LR
   <td>homebrew-install.sh script node in _scripts/core/homebrew-install.sh.</td>
 </tr>
 <tr>
-  <td>22</td>
+  <td>21</td>
   <td><code>jetbrains-toolbox-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/jetbrains-toolbox-install.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -848,12 +840,20 @@ flowchart LR
   <td>jetbrains-toolbox-install.sh script node in _scripts/core/jetbrains-toolbox-install.sh.</td>
 </tr>
 <tr>
-  <td>23</td>
+  <td>22</td>
   <td><code>kitty-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/kitty-install.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>install_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td>kitty-install.sh script node in _scripts/core/kitty-install.sh.</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td><code>lsp-servers-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/lsp-servers-install.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>install_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td>lsp-servers-install.sh script node in _scripts/core/lsp-servers-install.sh.</td>
 </tr>
 <tr>
   <td>24</td>
@@ -930,21 +930,21 @@ flowchart LR
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: calls x140, contains x132, defines x46, implements x24. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: calls x141, contains x133, defines x46, implements x24. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
 
 <!-- ====== 5. Ingestion & Updates ====== -->
 <h2 id="ingest-cache-update">5. Ingestion &amp; Updates</h2>
-<p>Ingestion &amp; Updates groups implementation around scripts, optionssh, tasks, updatesh, mostly in _scripts/core/_options.sh, update.sh, _scripts/core/system-update.sh. This section covers 25 nodes and 21 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Ingestion &amp; Updates groups implementation around optionssh, scripts, tasks, updatesh, mostly in _scripts/core/_options.sh, update.sh, _scripts/core/system-update.sh. This section covers 25 nodes and 21 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
     %% Section: Ingestion &amp; Updates (25 nodes, 21 edges)
     subgraph ingest_cache_update_scripts_core_options_sh_ba8ba5ae["_scripts/core/_options.sh"]
-        scripts_core_options_31679c59("_options.sh (Task Arrays &amp; Tiers)<br/><small>_scripts/core/_options.sh</small>")
+        scripts_core_options_31679c59("_options.sh")
         scripts_core_options_all_desktop_tasks_82a3aa04("ALL_DESKTOP_TASKS<br/><small>_scripts/core/_options.sh</small>")
         scripts_core_options_all_tasks_8a49a6b5("ALL_TASKS<br/><small>_scripts/core/_options.sh</small>")
         scripts_core_options_menu_options_e572e3db("MENU_OPTIONS<br/><small>_scripts/core/_options.sh</small>")
@@ -965,9 +965,6 @@ flowchart LR
     scripts_core_system_update_eea48e39("system-update.sh")
     dotfiles_setup_16160cbb("setup.sh (Interactive Setup)<br/><small>setup.sh</small>")
     dotfiles_unattended_setup_1cc95bd4("unattended_setup.sh (Unattended Setup)<br/><small>unattended_setup.sh</small>")
-    dotfiles_setup_16160cbb -->|references| scripts_core_options_31679c59
-    dotfiles_unattended_setup_1cc95bd4 -->|references| scripts_core_options_31679c59
-    dotfiles_update_84d5ec6a -->|references| scripts_core_options_31679c59
     scripts_core_options_31679c59 -->|defines| scripts_core_options_all_desktop_tasks_82a3aa04
     scripts_core_options_31679c59 -->|defines| scripts_core_options_all_tasks_8a49a6b5
     scripts_core_options_31679c59 -->|defines| scripts_core_options_menu_options_e572e3db
@@ -980,6 +977,9 @@ flowchart LR
     scripts_core_options_31679c59 -->|defines| scripts_core_options_desktop_only_tasks_178deb49
     scripts_core_options_31679c59 -->|defines| scripts_core_options_desktop_tasks_a5f0a6bb
     scripts_core_options_31679c59 -->|defines| scripts_core_options_all_console_tasks_cdb59454
+    dotfiles_setup_16160cbb -->|references| scripts_core_options_31679c59
+    dotfiles_unattended_setup_1cc95bd4 -->|references| scripts_core_options_31679c59
+    dotfiles_update_84d5ec6a -->|references| scripts_core_options_31679c59
     %% Omitted for readability: 7 nodes, 0 edges
     class scripts_core_options_31679c59 function;
     class scripts_core_options_all_desktop_tasks_82a3aa04 klass;
@@ -1022,6 +1022,14 @@ flowchart LR
 </tr>
 <tr>
   <td>1</td>
+  <td><code>_options.sh</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>_options.sh node in _scripts/core/_options.sh.</td>
+</tr>
+<tr>
+  <td>2</td>
   <td><code>ALL_CONSOLE_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1029,7 +1037,7 @@ flowchart LR
   <td>ALL_CONSOLE_TASKS node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>2</td>
+  <td>3</td>
   <td><code>ALL_DESKTOP_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1037,7 +1045,7 @@ flowchart LR
   <td>ALL_DESKTOP_TASKS node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>3</td>
+  <td>4</td>
   <td><code>ALL_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1045,7 +1053,7 @@ flowchart LR
   <td>ALL_TASKS node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>4</td>
+  <td>5</td>
   <td><code>CONSOLE_EXTRA_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1053,7 +1061,7 @@ flowchart LR
   <td>CONSOLE_EXTRA_TASKS node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>5</td>
+  <td>6</td>
   <td><code>CONSOLE_ONLY_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1061,7 +1069,7 @@ flowchart LR
   <td>CONSOLE_ONLY_TASKS node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>6</td>
+  <td>7</td>
   <td><code>CONSOLE_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1069,7 +1077,7 @@ flowchart LR
   <td>CONSOLE_TASKS node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>7</td>
+  <td>8</td>
   <td><code>DESKTOP_EXTRA_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1077,7 +1085,7 @@ flowchart LR
   <td>DESKTOP_EXTRA_TASKS node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>8</td>
+  <td>9</td>
   <td><code>DESKTOP_ONLY_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1085,7 +1093,7 @@ flowchart LR
   <td>DESKTOP_ONLY_TASKS node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>9</td>
+  <td>10</td>
   <td><code>DESKTOP_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1093,7 +1101,7 @@ flowchart LR
   <td>DESKTOP_TASKS node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>10</td>
+  <td>11</td>
   <td><code>MENU_OPTIONS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1101,7 +1109,7 @@ flowchart LR
   <td>MENU_OPTIONS node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>11</td>
+  <td>12</td>
   <td><code>MINIMAL_TASKS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1109,7 +1117,7 @@ flowchart LR
   <td>MINIMAL_TASKS node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>12</td>
+  <td>13</td>
   <td><code>_options.sh script</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -1117,7 +1125,7 @@ flowchart LR
   <td>_options.sh script node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>13</td>
+  <td>14</td>
   <td><code>TASK_ARGS</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1125,7 +1133,7 @@ flowchart LR
   <td>TASK_ARGS node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>14</td>
+  <td>15</td>
   <td><code>TASK_TYPES</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1133,7 +1141,7 @@ flowchart LR
   <td>TASK_TYPES node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
-  <td>15</td>
+  <td>16</td>
   <td><code>setup.sh (Interactive Setup)</code><br><small style="color:var(--muted)">setup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -1141,7 +1149,7 @@ flowchart LR
   <td>setup.sh (Interactive Setup) node in setup.sh.</td>
 </tr>
 <tr>
-  <td>16</td>
+  <td>17</td>
   <td><code>unattended_setup.sh (Unattended Setup)</code><br><small style="color:var(--muted)">unattended_setup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -1149,20 +1157,12 @@ flowchart LR
   <td>unattended_setup.sh (Unattended Setup) node in unattended_setup.sh.</td>
 </tr>
 <tr>
-  <td>17</td>
+  <td>18</td>
   <td><code>update.sh (System Update)</code><br><small style="color:var(--muted)">update.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
   <td>update.sh (System Update) node in update.sh.</td>
-</tr>
-<tr>
-  <td>18</td>
-  <td><code>_options.sh (Task Arrays &amp; Tiers)</code><br><small style="color:var(--muted)">_scripts/core/_options.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>_options.sh (Task Arrays &amp; Tiers) node in _scripts/core/_options.sh.</td>
 </tr>
 <tr>
   <td>19</td>
@@ -1174,19 +1174,19 @@ flowchart LR
 </tr>
 <tr>
   <td>20</td>
+  <td><code>system-update.sh</code><br><small style="color:var(--muted)">_scripts/core/system-update.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td>system-update.sh node in _scripts/core/system-update.sh.</td>
+</tr>
+<tr>
+  <td>21</td>
   <td><code>system-update.sh script</code><br><small style="color:var(--muted)">_scripts/core/system-update.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td>system-update.sh script node in _scripts/core/system-update.sh.</td>
-</tr>
-<tr>
-  <td>21</td>
-  <td><code>system-update.sh</code><br><small style="color:var(--muted)">_scripts/core/system-update.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh (Shared Utilities)</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>system-update.sh node in _scripts/core/system-update.sh.</td>
 </tr>
 <tr>
   <td>22</td>
@@ -2644,18 +2644,18 @@ flowchart LR
   <div class="card">
     <h4>Graph</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>Nodes</td><td>470</td></tr>
-      <tr><td>Edges</td><td>606</td></tr>
+      <tr><td>Nodes</td><td>472</td></tr>
+      <tr><td>Edges</td><td>611</td></tr>
       <tr><td>Hyperedges</td><td>20</td></tr>
-      <tr><td>Communities</td><td>113</td></tr>
+      <tr><td>Communities</td><td>114</td></tr>
       <tr><td>Documented Sections</td><td>15</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Edge Confidence</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>EXTRACTED</td><td>443</td></tr>
-      <tr><td>INFERRED</td><td>163</td></tr>
+      <tr><td>EXTRACTED</td><td>445</td></tr>
+      <tr><td>INFERRED</td><td>166</td></tr>
       <tr><td>AMBIGUOUS</td><td>0</td></tr>
     </table>
   </div>
@@ -2663,7 +2663,7 @@ flowchart LR
 
 <div style="text-align:center; padding:40px 0; color: var(--muted); font-size:0.9rem;">
   <p>.dotfiles — Architecture Documentation</p>
-  <p>Generated: 2026-08-21 13:08 UTC · graphify callflow-html</p>
+  <p>Generated: 2026-08-21 17:10 UTC · graphify callflow-html</p>
 </div>
 
 </div><!-- .container -->
