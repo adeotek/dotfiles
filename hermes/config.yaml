@@ -717,12 +717,3 @@ plugins:
 # fallback_model:
 #   provider: openrouter
 #   model: anthropic/claude-sonnet-4
-# InfraMP MCP server (embedded in the local InfraMP instance, v0.6.0+).
-# Token minted in InfraMP UI (Settings > API Tokens); admin role => full access.
-mcp_servers:
-  inframp:
-    url: "https://infra-mp.hl.adeotek.cloud/mcp"
-    headers:
-      Authorization: "Bearer imp_<REPLACE_WITH_TOKEN_FROM_INFRAMP_UI>"
-    timeout: 120
-    connect_timeout: 30
