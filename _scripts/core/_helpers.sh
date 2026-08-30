@@ -367,44 +367,54 @@ function symlink_package_directory() {
   esac
 }
 
+# Symlink a single file from a package directory into $HOME (mirrors the stow layout).
+# Unlike stow_package, only the given file is linked — the rest of the package dir stays untouched.
+# Usage: symlink_package_file <package> <repo-relative-file-path> [init|refresh|remove]
 function symlink_package_file() {
   local package="$1"
   local file="$2"
   local stow_action="$3"
+  local source_file target_file target_dir
 
-  if [ -z "$stow_action" ]; then
+  if [[ -z "$stow_action" ]]; then
     stow_action="$DFS_ACTION"
   fi
 
+  source_file="$RDIR/$package/$file"
+  target_file="$HOME/$file"
+  target_dir="$(dirname "$target_file")"
+
   case $stow_action in
     init|refresh)
-      if [ ! -d "$CURRENT_CONFIG_DIR/$package" ]; then
-        mkdir -p "$CURRENT_CONFIG_DIR/$package"
+      if [[ "$DRY_RUN" -ne "1" ]]; then
+        mkdir -p "$target_dir"
       fi
 
       # Check if file is already symlinked
-      if [ -L "$CURRENT_CONFIG_DIR/$package/$file" ]; then
+      if [[ -L "$target_file" ]]; then
         cecho "yellow" "Nothing to do. File [$file] from package [$package] is already stowed (using symlink)."
         return
       fi
 
-      rename_file_if_exists "$CURRENT_CONFIG_DIR/$package/$file"
+      if [[ "$DRY_RUN" -ne "1" ]]; then
+        rename_file_if_exists "$target_file"
+      fi
 
-      stow_command="ln -s $RDIR/$package/$file $CURRENT_CONFIG_DIR/$package/$file"
+      stow_command="ln -s $source_file $target_file"
       execute_command "$stow_command" "File [$file] from package [$package] stowed (using symlink)."
     ;;
     remove)
       # Check if file is already symlinked
-      if [ ! -L "$CURRENT_CONFIG_DIR/$package/$file" ]; then
+      if [[ ! -L "$target_file" ]]; then
         cecho "yellow" "Nothing to do. File [$file] from package [$package] is not stowed (using symlink)."
         return
       fi
 
-      stow_command="rm $CURRENT_CONFIG_DIR/$package/$file"
+      stow_command="rm $target_file"
       execute_command "$stow_command" "File [$file] from package [$package] was unstowed (using symlink)."
     ;;
     *)
-      echo "echo ""ERROR: Invalid action: $stow_action!"""
+      echo "ERROR: Invalid action: $stow_action!"
       exit 1
     ;;
   esac
