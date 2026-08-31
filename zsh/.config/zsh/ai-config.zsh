@@ -1,4 +1,12 @@
 # =============================================================================
+# OpenCode config
+# =============================================================================
+if [[ -f "$HOME/.opencode/bin/opencode" ]]; then
+  export PATH=$HOME/.opencode/bin:$PATH
+fi
+
+
+# =============================================================================
 # Headroom LLM proxy — automatic context compression
 # =============================================================================
 # Headroom runs on localhost:8787 and compresses LLM context before sending
