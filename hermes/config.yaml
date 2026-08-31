@@ -5,17 +5,17 @@ model:
   api_mode: chat_completions
 providers: {}
 fallback_providers:
+  - provider: opencode
+    model: qwen3.7-plus
+    base_url: https://opencode.ai/zen/v1
+    api_mode: chat_completions
   - provider: openrouter
-    model: qwen/qwen3.5-flash-02-23
+    model: meta-llama/llama-3.3-70b-instruct
     base_url: https://openrouter.ai/api/v1
     api_mode: chat_completions
   - provider: custom
     model: qwen3.5:35b
     base_url: https://ollama.hl.adeotek.cloud/v1
-    api_mode: chat_completions
-  - provider: openrouter
-    model: meta-llama/llama-3.3-70b-instruct
-    base_url: https://openrouter.ai/api/v1
     api_mode: chat_completions
 credential_pool_strategies: {}
 toolsets:
@@ -204,42 +204,42 @@ auxiliary:
     extra_body: {}
   skills_hub:
     provider: opencode-go
-    model: qwen3.5-plus
+    model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 30
     extra_body: {}
   approval:
     provider: opencode-go
-    model: qwen3.5-plus
+    model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 30
     extra_body: {}
   mcp:
     provider: opencode-go
-    model: qwen3.5-plus
+    model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 30
     extra_body: {}
   title_generation:
     provider: opencode-go
-    model: qwen3.5-plus
+    model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 30
     extra_body: {}
   tts_audio_tags:
     provider: opencode-go
-    model: qwen3.5-plus
+    model: qwen3.7-plus
     base_url: ''
     api_key: ''
     timeout: 30
     extra_body: {}
   triage_specifier:
     provider: opencode-go
-    model: qwen3.5-plus
+    model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 120
@@ -253,7 +253,7 @@ auxiliary:
     extra_body: {}
   profile_describer:
     provider: opencode-go
-    model: qwen3.5-plus
+    model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 60
@@ -267,7 +267,7 @@ auxiliary:
     extra_body: {}
   monitor:
     provider: opencode-go
-    model: qwen3.5-plus
+    model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 60
