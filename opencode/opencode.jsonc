@@ -7,7 +7,7 @@
     "build": {
       "description": "Primary build/orchestrator agent. Full tool access. Delegates analysis to @plan and review to @code-review.",
       "mode": "primary",
-      "model": "opencode-go/deepseek-v4-pro"
+      "model": "opencode-go/qwen3.7-plus"
     },
     "plan": {
       "mode": "primary",
@@ -17,7 +17,7 @@
     },
     "general": {
       "mode": "subagent",
-      "model": "opencode-go/deepseek-v4-pro",
+      "model": "opencode-go/qwen3.8-flash",
       "temperature": 0.3
     },
     "explore": {
