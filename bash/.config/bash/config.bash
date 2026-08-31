@@ -167,5 +167,9 @@ fi
 # AI tools configuration
 [ -f "${HOME}/.config/bash/ai-config.bash" ] && source "${HOME}/.config/bash/ai-config.bash"
 
+if [[ -f "$HOME/.local/bin/mise" ]]; then
+  eval "$("$HOME"/.local/bin/mise activate bash)" # added by https://mise.run/bash
+fi
+
 # Local overrides (untracked)
 [ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"

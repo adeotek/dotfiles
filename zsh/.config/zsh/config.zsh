@@ -245,5 +245,10 @@ fi
 # --- AI tools configuration ---
 [[ -f "${XDG_CONFIG_HOME}/zsh/ai-config.zsh" ]] && source "${XDG_CONFIG_HOME}/zsh/ai-config.zsh"
 
+# --- mise configuration ---
+if [[ -f "$HOME/.local/bin/mise" ]]; then
+  eval "$($HOME/.local/bin/mise activate zsh)" # added by https://mise.run/zsh
+fi
+
 # --- Local overrides ---
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
