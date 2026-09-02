@@ -4,8 +4,6 @@ mode: all
 model: opencode-go/deepseek-v4-pro
 reasoningEffort: max
 permission:
-  edit: allow
-  bash: allow
   task:
     "*": allow
 ---

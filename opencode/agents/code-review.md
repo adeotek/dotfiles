@@ -6,10 +6,6 @@ model: opencode-go/deepseek-v4-pro
 reasoningEffort: max
 temperature: 0.1
 permission:
-  read: allow
-  lsp: allow
-  glob: allow
-  grep: allow
   edit: deny
   bash:
     "find *": allow

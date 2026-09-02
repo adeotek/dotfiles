@@ -6,19 +6,8 @@ model: opencode-go/qwen3.8-flash
 temperature: 0.3
 steps: 50
 permission:
-  read: allow
-  edit: allow
-  lsp: allow
-  grep: allow
-  glob: allow
-  webfetch: deny
-  bash:
-    "dotnet test *": allow
-    "dotnet build *": allow
-    "ls *": allow
-    "graphify *": allow
-    "sort *": allow
-    "*": ask
+  task:
+    "*": allow
 ---
 
 # .NET Unit Test Expert Agent

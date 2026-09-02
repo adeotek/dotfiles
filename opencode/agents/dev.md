@@ -4,8 +4,6 @@ mode: primary
 # alt: kimi-k3/deepseek-v4-pro
 model: opencode-go/qwen3.7-plus
 permission:
-  edit: allow
-  bash: allow
   task:
     "*": allow
 ---

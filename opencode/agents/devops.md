@@ -3,8 +3,6 @@ description: Primary devops and infrastructure agent. Full tool access. Manages 
 mode: primary
 model: opencode-go/glm-5.3
 permission:
-  edit: allow
-  bash: allow
   task:
     "*": allow
 ---
