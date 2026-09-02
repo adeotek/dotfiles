@@ -6,21 +6,8 @@ model: opencode-go/qwen3.7-plus
 temperature: 0.4
 steps: 100
 permission:
-  read: allow
-  edit: allow
-  lsp: allow
-  grep: allow
-  glob: allow
-  webfetch: allow
-  bash:
-    "dotnet *": allow
-    "dotnet ef *": allow
-    "sort *": allow
-    "ls *": allow
-    "graphify *": allow
-    "git status": allow
-    "git diff *": allow
-    "*": ask
+  task:
+    "*": allow
 ---
 
 # .NET Backend Expert Agent
