@@ -6,17 +6,20 @@ StartLimitIntervalSec=0
 
 [Service]
 Type=simple
-ExecStart=<HERMES_VENV_PYTHON> -m hermes_cli.main gateway run
-WorkingDirectory=%h/.hermes
-Environment="PATH=<HERMES_VENV_BIN>:<HERMES_NODE_BIN>:/usr/bin:%h/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-Environment="VIRTUAL_ENV=<HERMES_VENV>"
-Environment="HERMES_HOME=%h/.hermes"
+ExecStart=/home/toor/.hermes/hermes-agent/venv/bin/python -m hermes_cli.main gateway run
+WorkingDirectory=/home/toor/.hermes
+Environment="PATH=/home/toor/.hermes/hermes-agent/venv/bin:/home/toor/.hermes/hermes-agent/node_modules/.bin:/home/toor/.hermes/node/bin:/home/toor/.hermes/node:/home/toor/.local/bin:/home/toor/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="VIRTUAL_ENV=/home/toor/.hermes/hermes-agent/venv"
+Environment="HERMES_HOME=/home/toor/.hermes"
+Environment="HERMES_SUPERVISED_CHILD=1"
 Restart=always
 RestartSec=5
 RestartForceExitStatus=75
+RestartPreventExitStatus=78
 KillMode=mixed
 KillSignal=SIGTERM
 ExecReload=/bin/kill -USR1 $MAINPID
+ExecStopPost=-/home/toor/.hermes/hermes-agent/venv/bin/python -m gateway.cgroup_cleanup
 TimeoutStopSec=210
 StandardOutput=journal
 StandardError=journal

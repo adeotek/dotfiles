@@ -6,11 +6,11 @@ StartLimitIntervalSec=0
 
 [Service]
 Type=simple
-ExecStart=<HERMES_VENV_PYTHON> -m hermes_cli.main dashboard --no-open --host 0.0.0.0 --port 9119
-WorkingDirectory=%h/.hermes
-Environment="PATH=<HERMES_VENV_BIN>:<HERMES_NODE_BIN>:/usr/bin:%h/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-Environment="VIRTUAL_ENV=<HERMES_VENV>"
-Environment="HERMES_HOME=%h/.hermes"
+ExecStart=/home/toor/.hermes/hermes-agent/venv/bin/python -m hermes_cli.main dashboard --no-open --host 0.0.0.0 --port 9119
+WorkingDirectory=/home/toor/.hermes
+Environment="PATH=/home/toor/.hermes/hermes-agent/venv/bin:/home/toor/.hermes/hermes-agent/node_modules/.bin:/usr/bin:/home/toor/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="VIRTUAL_ENV=/home/toor/.hermes/hermes-agent/venv"
+Environment="HERMES_HOME=/home/toor/.hermes"
 EnvironmentFile=%h/.hermes/.env
 Restart=always
 RestartSec=5
