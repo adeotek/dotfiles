@@ -3,6 +3,9 @@
 ###
 # AdeoTEK dotfiles unattended setup
 #
+
+# shellcheck disable=SC1091
+#
 # DESCRIPTION:
 #   This script performs an unattended (non-interactive) setup of dotfiles and packages.
 #   It automatically installs and configures the specified packages without user prompts.

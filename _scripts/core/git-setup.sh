@@ -23,7 +23,7 @@ source "$CDIR/git-install.sh"
 mkdir -p ~/.config/git.user
 if [ ! -f ~/.config/git.user/config ]; then
   cecho "cyan" "Copying git.user/config file..."
-  cp $RDIR/_extra/git.user.config ~/.config/git.user/config
+  cp "$RDIR/_extra/git.user.config" ~/.config/git.user/config
 fi
 
 stow_package "git" "" "$CURRENT_CONFIG_DIR/git"

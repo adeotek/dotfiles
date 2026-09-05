@@ -39,10 +39,10 @@ if [ "$DRY_RUN" -ne "1" ]; then
       sudo apt-get install -y jq fd-find ripgrep bat tree htop hstr zoxide bash-completion stow
       mkdir -p ~/.local/bin
       if [ ! -f ~/.local/bin/fd ]; then
-        ln -s $(which fdfind) ~/.local/bin/fd
+        ln -s "$(which fdfind)" ~/.local/bin/fd
       fi
       if [ ! -f ~/.local/bin/bat ]; then
-        ln -s $(which batcat) ~/.local/bin/bat
+        ln -s "$(which batcat)" ~/.local/bin/bat
       fi
 
       if [[ "$CURRENT_ARCH" == "aarch64" ]]; then

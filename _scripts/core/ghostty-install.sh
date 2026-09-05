@@ -22,7 +22,7 @@ case $CURRENT_OS_ID in
   ;;
   debian|ubuntu|pop)
     cecho "cyan" "Installing [ghostty]..."
-    if [ ghostty --version >/dev/null 2>&1 ]; then
+    if command -v ghostty >/dev/null 2>&1; then
       decho "yellow" "Package already installed. Updating it..."
     fi
 

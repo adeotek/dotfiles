@@ -27,7 +27,7 @@ fi
 # Install
 if [[ -z "${ARGS["version"]}" ]]; then
   cecho "yellow" -n "Please specify the GoLang version to install [$OPT_GOLANG_DEFAULT_VERSION]: "
-  read GOLANG_VERSION
+  read -r GOLANG_VERSION
   if [[ -z "$GOLANG_VERSION" ]]; then
     GOLANG_VERSION="$OPT_GOLANG_DEFAULT_VERSION"
   fi
@@ -57,12 +57,12 @@ else
       GOLANG_ARCH="amd64"
     fi
     if [ "$DRY_RUN" -ne "1" ]; then
-      wget https://go.dev/dl/go$GOLANG_VERSION.linux-${GOLANG_ARCH}.tar.gz
-      sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go$GOLANG_VERSION.linux-${GOLANG_ARCH}.tar.gz
-      rm -f go$GOLANG_VERSION.linux-${GOLANG_ARCH}.tar.gz
+      wget "https://go.dev/dl/go${GOLANG_VERSION}.linux-${GOLANG_ARCH}.tar.gz"
+      sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf "go${GOLANG_VERSION}.linux-${GOLANG_ARCH}.tar.gz"
+      rm -f "go${GOLANG_VERSION}.linux-${GOLANG_ARCH}.tar.gz"
       cecho "green" "[golang] installation done."
     else
-      cecho "yellow" "DRY-RUN: rm -rf /usr/local/go && tar -C /usr/local -xzf go$GOLANG_VERSION.linux-${GOLANG_ARCH}.tar.gz"
+      cecho "yellow" "DRY-RUN: rm -rf /usr/local/go && tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-${GOLANG_ARCH}.tar.gz"
     fi
   fi
 fi

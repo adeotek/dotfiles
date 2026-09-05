@@ -40,13 +40,13 @@ case $CURRENT_OS_ID in
         if [ ! -d "/opt/neovim-src" ]; then
           sudo git clone https://github.com/neovim/neovim /opt/neovim-src
         fi
-        cd /opt/neovim-src
+        cd /opt/neovim-src || exit 1
         sudo git checkout master
         sudo git pull
         sudo git checkout stable
         sudo make CMAKE_BUILD_TYPE=RelWithDebInfo
         cd build && sudo cpack -G DEB && sudo dpkg -i nvim-linux64.deb
-        cd ~
+        cd ~ || return 1
         cecho "green" "[nvim] installation done."
       else
         cecho "yellow" "DRY-RUN: sudo apt-get install -y ninja-build gettext cmake unzip curl build-essential"

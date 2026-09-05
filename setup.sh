@@ -4,6 +4,8 @@
 # AdeoTEK dotfiles setup
 ###
 
+# shellcheck disable=SC1091
+
 # Init
 if [[ -d "${0%/*}" ]]; then
   RDIR="$(cd "${0%/*}" && pwd)"

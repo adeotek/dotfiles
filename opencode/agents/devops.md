@@ -1,7 +1,8 @@
 ---
 description: Primary devops and infrastructure agent. Full tool access. Manages CI/CD pipelines, infrastructure as code, and deployment automation, Linux and Windows hosts, networks, etc.
 mode: primary
-model: opencode-go/glm-5.3
+# alt: opencode-go/glm-5.3
+model: opencode/nemotron-3-ultra-free
 permission:
   task:
     "*": allow

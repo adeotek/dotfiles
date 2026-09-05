@@ -19,7 +19,7 @@ fi
 case $CURRENT_OS_ID in
   arch|debian|ubuntu|pop|fedora)
     cecho "cyan" "Installing [zed]..."
-    if [ zed --version >/dev/null 2>&1 ]; then
+    if command -v zed >/dev/null 2>&1; then
       decho "yellow" "Package already installed. Updating it..."
     fi
 
