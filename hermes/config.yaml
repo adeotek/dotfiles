@@ -13,11 +13,11 @@ fallback_providers:
     base_url: https://opencode.ai/zen/v1
     api_mode: chat_completions
   - provider: custom
-    model: qwen3.8:27b
+    model: nemotron-3.5-lightning:30b
     base_url: https://ollama.hl.adeotek.cloud/v1
     api_mode: chat_completions
   - provider: custom
-    model: qwen3-coder:30b
+    model: qwen3.8:27b
     base_url: https://ollama.hl.adeotek.cloud/v1
     api_mode: chat_completions
 toolsets:
