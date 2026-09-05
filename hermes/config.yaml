@@ -3,7 +3,6 @@ model:
   provider: opencode-go
   base_url: https://opencode.ai/zen/go/v1
   api_mode: chat_completions
-providers: {}
 fallback_providers:
   - provider: opencode
     model: qwen3.7-plus
@@ -14,13 +13,15 @@ fallback_providers:
     base_url: https://opencode.ai/zen/v1
     api_mode: chat_completions
   - provider: custom
-    model: qwen3.5:35b
+    model: nemotron-3.5-lightning:30b
     base_url: https://ollama.hl.adeotek.cloud/v1
     api_mode: chat_completions
-credential_pool_strategies: {}
+  - provider: custom
+    model: qwen3.8:27b
+    base_url: https://ollama.hl.adeotek.cloud/v1
+    api_mode: chat_completions
 toolsets:
   - hermes-cli
-max_concurrent_sessions: null
 agent:
   max_turns: 90
   gateway_timeout: 1800
@@ -32,6 +33,7 @@ agent:
   environment_probe: true
   environment_hint: ''
   coding_context: auto
+  verify_on_stop: false
   gateway_timeout_warning: 900
   clarify_timeout: 600
   gateway_notify_interval: 180
@@ -39,7 +41,7 @@ agent:
   image_input_mode: auto
   disabled_toolsets: []
   verbose: false
-  reasoning_effort: medium
+  reasoning_effort: xhigh
   personalities:
     helpful: You are a helpful, friendly AI assistant.
     concise: You are a concise assistant. Keep responses brief and to the point.
@@ -77,7 +79,6 @@ agent:
     hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question
       is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE
       YOU READY?! LET'S DO THIS! 💪😤🚀
-  verify_on_stop: false
 terminal:
   backend: local
   modal_mode: auto
@@ -89,10 +90,10 @@ terminal:
   auto_source_bashrc: true
   docker_image: nikolaik/python-nodejs:python3.11-nodejs20
   docker_forward_env: []
-  docker_env: {}
   singularity_image: docker://nikolaik/python-nodejs:python3.11-nodejs20
   modal_image: nikolaik/python-nodejs:python3.11-nodejs20
   daytona_image: nikolaik/python-nodejs:python3.11-nodejs20
+  vercel_runtime: node24
   container_cpu: 1
   container_memory: 5120
   container_disk: 51200
@@ -102,7 +103,6 @@ terminal:
   docker_extra_args: []
   docker_run_as_host_user: false
   persistent_shell: true
-  vercel_runtime: node24
   lifetime_seconds: 300
 web:
   backend: firecrawl
@@ -135,8 +135,8 @@ checkpoints:
   max_file_size_mb: 10
   auto_prune: true
   retention_days: 7
-  delete_orphans: true
   min_interval_hours: 24
+  delete_orphans: true
 file_read_max_chars: 100000
 tool_output:
   max_bytes: 50000
@@ -186,7 +186,6 @@ auxiliary:
     base_url: ''
     api_key: ''
     timeout: 120
-    extra_body: {}
     download_timeout: 30
   web_extract:
     provider: opencode-go
@@ -194,84 +193,72 @@ auxiliary:
     base_url: ''
     api_key: ''
     timeout: 360
-    extra_body: {}
   compression:
     provider: opencode-go
     model: deepseek-v4-flash
     base_url: ''
     api_key: ''
     timeout: 120
-    extra_body: {}
   skills_hub:
     provider: opencode-go
     model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 30
-    extra_body: {}
   approval:
     provider: opencode-go
     model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 30
-    extra_body: {}
   mcp:
     provider: opencode-go
     model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 30
-    extra_body: {}
   title_generation:
     provider: opencode-go
     model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 30
-    extra_body: {}
   tts_audio_tags:
     provider: opencode-go
-    model: qwen3.7-plus
+    model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 30
-    extra_body: {}
   triage_specifier:
     provider: opencode-go
     model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 120
-    extra_body: {}
   kanban_decomposer:
     provider: opencode-go
     model: deepseek-v4-flash
     base_url: ''
     api_key: ''
     timeout: 180
-    extra_body: {}
   profile_describer:
     provider: opencode-go
     model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 60
-    extra_body: {}
   curator:
     provider: opencode-go
     model: deepseek-v4-flash
     base_url: ''
     api_key: ''
     timeout: 600
-    extra_body: {}
   monitor:
     provider: opencode-go
     model: qwen3.8-flash
     base_url: ''
     api_key: ''
     timeout: 60
-    extra_body: {}
 display:
   compact: false
   personality: technical
@@ -287,6 +274,7 @@ display:
   tui_agents_nudge: true
   bell_on_complete: false
   show_reasoning: false
+  background_process_notifications: concise
   streaming: true
   timestamps: false
   final_response_markdown: strip
@@ -306,7 +294,6 @@ display:
     last_lines: 2
   interim_assistant_messages: true
   tool_progress_command: false
-  tool_progress_overrides: {}
   tool_preview_length: 0
   ephemeral_system_ttl: 0
   platforms:
@@ -323,7 +310,6 @@ display:
   copy_shortcut: auto
   tool_progress: all
   cleanup_progress: false
-  background_process_notifications: all
 dashboard:
   theme: cyberpunk
   show_token_analytics: false
@@ -372,7 +358,6 @@ tts:
   use_gateway: false
 stt:
   enabled: true
-  provider: local
   local:
     model: base
     language: ''
@@ -385,13 +370,14 @@ stt:
     language_code: ''
     tag_audio_events: false
     diarize: false
+  provider: local
 voice:
   record_key: ctrl+b
   max_recording_seconds: 120
   auto_tts: false
   beep_enabled: true
   silence_threshold: 200
-  silence_duration: 3.0
+  silence_duration: 3
 human_delay:
   mode: 'off'
   min_ms: 800
@@ -404,8 +390,8 @@ memory:
   write_approval: false
   memory_char_limit: 2200
   user_char_limit: 1375
-  provider: ''
   nudge_interval: 10
+  provider: ''
   flush_min_turns: 6
 delegation:
   model: deepseek-v4-flash
@@ -414,11 +400,10 @@ delegation:
   api_key: ''
   api_mode: ''
   inherit_mcp_toolsets: true
-  max_iterations: 50
+  max_iterations: 250
   child_timeout_seconds: 600
   reasoning_effort: ''
-  max_concurrent_children: 3
-  max_async_children: 3
+  max_concurrent_children: 10
   max_spawn_depth: 1
   orchestrator_enabled: true
   subagent_auto_approve: false
@@ -439,18 +424,16 @@ curator:
   min_idle_hours: 2
   stale_after_days: 30
   archive_after_days: 90
+  consolidate: false
   prune_builtins: true
   backup:
     enabled: true
     keep: 5
-  consolidate: false
-honcho: {}
 timezone: ''
 slack:
   require_mention: true
   free_response_channels: ''
   allowed_channels: ''
-  channel_prompts: {}
 discord:
   require_mention: true
   free_response_channels: ''
@@ -460,7 +443,6 @@ discord:
   history_backfill: true
   history_backfill_limit: 50
   reactions: true
-  channel_prompts: {}
   dm_role_auth_guild: ''
   server_actions: ''
   allow_any_attachment: false
@@ -471,7 +453,7 @@ discord:
     ambient_path: ''
     ambient_gain: 0.18
     duck_gain: 0.06
-    speech_gain: 1.0
+    speech_gain: 1
     ack_enabled: true
     ack_phrases:
       - Let me look into that.
@@ -479,10 +461,8 @@ discord:
       - Checking on that now.
       - Give me a sec.
       - On it.
-whatsapp: {}
 telegram:
   reactions: false
-  channel_prompts: {}
   allowed_chats: ''
   extra:
     rich_messages: false
@@ -490,7 +470,6 @@ mattermost:
   require_mention: true
   free_response_channels: ''
   allowed_channels: ''
-  channel_prompts: {}
 matrix:
   require_mention: true
   free_response_rooms: ''
@@ -504,10 +483,7 @@ approvals:
 command_allowlist:
   - sudo with privilege flag (stdin/askpass/shell/list)
   - script execution via -e/-c flag
-quick_commands: {}
-hooks: {}
 hooks_auto_accept: false
-personalities: {}
 security:
   allow_private_urls: false
   redact_secrets: true
@@ -523,7 +499,6 @@ security:
   allow_lazy_installs: true
 cron:
   wrap_response: true
-  max_parallel_jobs: null
 kanban:
   dispatch_in_gateway: true
   dispatch_interval_seconds: 60
@@ -532,7 +507,6 @@ kanban:
   worker_log_backup_count: 1
   orchestrator_profile: ''
   default_assignee: ''
-  max_in_progress_per_profile: null
   auto_decompose: true
   auto_decompose_per_tick: 3
   dispatch_stale_timeout_seconds: 14400
@@ -556,8 +530,6 @@ logging:
 model_catalog:
   enabled: true
   url: https://hermes-agent.nousresearch.com/docs/api/model-catalog.json
-  ttl_hours: 1
-  providers: {}
 network:
   force_ipv4: false
 gateway:
@@ -571,7 +543,7 @@ streaming:
   edit_interval: 0.8
   buffer_threshold: 24
   cursor: ' ▉'
-  fresh_final_after_seconds: 60.0
+  fresh_final_after_seconds: 60
 sessions:
   auto_prune: true
   retention_days: 90
@@ -590,9 +562,8 @@ updates:
 lsp:
   enabled: true
   wait_mode: document
-  wait_timeout: 5.0
+  wait_timeout: 5
   install_strategy: auto
-  servers: {}
 x_search:
   model: grok-4.20-reasoning
   timeout_seconds: 180
@@ -609,7 +580,7 @@ secrets:
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 0
 paste_collapse_char_threshold: 2000
-_config_version: 31
+_config_version: 40
 session_reset:
   mode: both
   idle_minutes: 1440
@@ -679,12 +650,15 @@ platform_toolsets:
   google_chat:
     - hermes-google_chat
 custom_providers:
-  - name: ollama-lan-qwen3_5-35b
+  - name: ollama-lan
     base_url: https://ollama.hl.adeotek.cloud/v1
-    model: qwen3.5:35b
-  - name: ollama-lan-gemma4-small
-    base_url: https://ollama.hl.adeotek.cloud/v1
-    model: gemma4:latest
+    model: qwen3.8:27b
+    models:
+      - qwen3.8:27b
+      - qwen3-coder:30b
+      - nemotron-3.5-lightning:30b
+      - deepseek-r1:32b
+      - gemma4:latest
 known_plugin_toolsets:
   cli:
     - spotify
@@ -694,7 +668,23 @@ SEARXNG_URL: http://localhost:8080
 plugins:
   enabled:
     - disk-cleanup
+    - rtk-rewrite
   disabled: []
+mcp_servers:
+  inframp:
+    url: https://infra-mp.hl.adeotek.cloud/mcp
+    headers:
+      Authorization: Bearer ''
+    timeout: 120
+    connect_timeout: 30
+platforms:
+  telegram:
+    enabled: true
+    home_channel:
+      platform: telegram
+      chat_id: '8383493577'
+      name: George Benjamin
+      user_id: '8383493577'
 
 # ── Fallback Model ────────────────────────────────────────────────────
 # Automatic provider failover when primary is unavailable.
