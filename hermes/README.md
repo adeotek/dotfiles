@@ -185,8 +185,10 @@ journalctl --user -u hermes-dashboard -f
 
 ### Service files location
 
-The templates are in `<dotfiles>/hermes/.config/systemd/user/`. They use
-`<HERMES_*>` placeholders that the setup script resolves to absolute paths.
+The templates are in `<dotfiles>/hermes/.config/systemd/user/`. All paths use
+the portable `%h` specifier, so the units work for any user on any host;
+`hermes gateway install` generates the equivalent absolute-path units on
+this machine.
 
 ### Daily update (`hermes-update.timer`)
 
