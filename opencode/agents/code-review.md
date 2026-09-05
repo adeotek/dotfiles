@@ -21,6 +21,8 @@ permission:
     "rg *": allow
     "sort *": allow
     "which *": allow
+    "rtk rm *": ask
+    "rtk *": allow
     "*": ask
   task: deny
 color: accent

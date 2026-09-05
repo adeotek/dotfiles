@@ -55,12 +55,12 @@ else
         if [ "$DRY_RUN" -ne "1" ]; then
           wget https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh -O dotnet-install.sh
           chmod +x dotnet-install.sh
-          ./dotnet-install.sh --channel $DOTNET_VERSION
+./dotnet-install.sh --channel "$DOTNET_VERSION"
           cecho "green" "[nodejs] installation done."
         else
           cecho "yellow" "DRY-RUN: wget https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh -O dotnet-install.sh"
           cecho "yellow" "DRY-RUN: chmod +x dotnet-install.sh"
-          cecho "yellow" "DRY-RUN: ./dotnet-install.sh --channel $DOTNET_VERSION"
+          cecho "yellow" "DRY-RUN: ./dotnet-install.sh --channel \"$DOTNET_VERSION\""
         fi
       else
         source "$CDIR/microsoft-repo-install.sh"

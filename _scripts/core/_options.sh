@@ -4,6 +4,7 @@
 # Options and helpers for script composition
 ###
 
+# shellcheck disable=SC2034,SC1091
 decho "white" "Loading _options.sh..."
 
 OPT_BASH_DEFAULT_PROMPT="oh-my-posh"
@@ -118,9 +119,9 @@ readarray -t ALL_TASKS < <(printf '%s\n' "${ALL_TASKS[@]}" | sort)
 MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "c")
 declare -A MENU_OPTIONS=(
   ["0"]="Manual selection"
-  ["1"]="Minimal (${MINIMAL_TASKS[@]})"
-  ["2"]="Console (Minimal + "${CONSOLE_ONLY_TASKS[@]}")"
-  ["3"]="Desktop (Console + "${DESKTOP_ONLY_TASKS[@]}")"
+  ["1"]="Minimal (${MINIMAL_TASKS[*]})"
+  ["2"]="Console (Minimal + ${CONSOLE_ONLY_TASKS[*]})"
+  ["3"]="Desktop (Console + ${DESKTOP_ONLY_TASKS[*]})"
   ["4"]="Interactive"
   ["c"]="Cancel/Exit"
 )

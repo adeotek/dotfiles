@@ -46,13 +46,29 @@
     }
   },
   "plugin": [
+    "@dietrichgebert/ponytail",
     "superpowers@git+https://github.com/obra/superpowers.git"
   ],
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (LAN)",
+      "options": {
+        "baseURL": "https://ollama.hl.adeotek.cloud/v1"
+      },
+      // context = native ctx window from Ollama /api/show; output = ctx/4 (cap 64k)
+      "models": {
+        "nemotron-3.5-lightning:30b": { "name": "Nemotron 3.5 Lightning 30B (OLL)", "tool_call": true, "limit": { "context": 1048576, "output": 65536 } },
+        "qwen3.8:27b": { "name": "Qwen3.8 27B (OLL)", "tool_call": true, "attachment": true, "limit": { "context": 262144, "output": 65536 } },
+        "qwen3-coder:30b": { "name": "Qwen3 Coder 30B (OLL)", "tool_call": true, "limit": { "context": 262144, "output": 65536 } },
+        "deepseek-r1:32b": { "name": "DeepSeek R1 32B (OLL)", "tool_call": true, "limit": { "context": 131072, "output": 32768 } },
+        "gemma4:latest": { "name": "Gemma4 8B (OLL)", "tool_call": true, "attachment": true, "limit": { "context": 131072, "output": 32768 } }
+      }
+    }
   // // Route LLM traffic through Headroom proxy for context compression
-  // "provider": {
   //   "opencode": { "options": { "baseURL": "http://localhost:8787/v1" } },
   //   "opencode-go": { "options": { "baseURL": "http://localhost:8787/v1" } }
-  // },
+  },
   "server": {
     "port": 9991,
     "hostname": "0.0.0.0",

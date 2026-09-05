@@ -17,10 +17,10 @@ fi
 
 # Install
 cecho "cyan" "Installing [jetbrains-toolbox]..."
-if [ -f ${HOME}/.local/bin/jetbrains-toolbox ]; then
+if [ -f "${HOME}/.local/bin/jetbrains-toolbox" ]; then
   decho "yellow" "Package already installed. Updating it..."
 else
-  mkdir -p ${HOME}/.local/bin
+  mkdir -p "${HOME}/.local/bin"
 fi
 
 case $CURRENT_OS_ID in
@@ -42,11 +42,11 @@ esac
 set -e
 set -o pipefail
 curl -sL \
-    $(curl -s 'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' \
-        | jq -r '.TBA[0].downloads.linux.link') \
+    "$(curl -s 'https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release' \
+        | jq -r '.TBA[0].downloads.linux.link')" \
         | tar xzvf - \
             --directory="${HOME}/.local/bin" \
-            --wildcards */jetbrains-toolbox \
+            --wildcards -- */jetbrains-toolbox \
             --strip-components=1
 
 # Create desktop entry
