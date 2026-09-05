@@ -28,7 +28,7 @@ if [[ -z "$RDIR" ]]; then
   CDIR="$RDIR/_scripts/core";
   source "$CDIR/_helpers.sh"
 fi
-process_args $@
+process_args "$@"
 
 # Install
 if [ -z "${ARGS["font"]}" ]; then
@@ -66,23 +66,23 @@ else
   esac
 
   SKIP_FONT_INST=""
-  if [ -d $HOME/$FONTS_DIR/$TARGET_FONT ]; then
+  if [ -d "$HOME/$FONTS_DIR/$TARGET_FONT" ]; then
     if [[ $DFS_ACTION == "refresh" ]]; then
       ## Remove existing fonts
-      rm -rf $HOME/$FONTS_DIR/$TARGET_FONT
+      rm -rf -- "${HOME:?}/${FONTS_DIR:?}/${TARGET_FONT:?}"
     else
       SKIP_FONT_INST="1"
       cecho "yellow" "[$TARGET_FONT] fonts already installed!"
     fi
   else
-    mkdir -p $HOME/$FONTS_DIR
+    mkdir -p "$HOME/$FONTS_DIR"
   fi
   if [ -z "$SKIP_FONT_INST" ]; then
     ## Download fonts
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v$TARGET_VERSION/$TARGET_FONT.zip -O ~/$TARGET_FONT.zip
+    wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v$TARGET_VERSION/$TARGET_FONT.zip" -O "$HOME/$TARGET_FONT.zip"
     ## Unpack fonts
-    unzip ~/$TARGET_FONT.zip -d $HOME/$FONTS_DIR/$TARGET_FONT
-    rm ~/$TARGET_FONT.zip
+    unzip "$HOME/$TARGET_FONT.zip" -d "$HOME/$FONTS_DIR/$TARGET_FONT"
+    rm "$HOME/$TARGET_FONT.zip"
   fi
 fi
 

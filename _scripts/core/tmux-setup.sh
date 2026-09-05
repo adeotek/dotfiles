@@ -20,7 +20,7 @@ source "$CDIR/tmux-install.sh"
 
 # Setup
 if [ ! -e "$CDIR/../../tmux/.config/tmux/tmux.conf.local" ]; then
-  read -p "Please select tmux local config: light/full [l/F] " tmux_local_mode
+  read -r -p "Please select tmux local config: light/full [l/F] " tmux_local_mode
   if [[ "$tmux_local_mode" == "l" ]]; then
     tmux_local_config="gbs.light"
   else
