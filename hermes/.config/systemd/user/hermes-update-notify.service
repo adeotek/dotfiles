@@ -1,0 +1,6 @@
+[Unit]
+Description=Telegram notification for abnormal hermes-update unit failures
+
+[Service]
+Type=oneshot
+ExecStart=%h/.hermes/scripts/hermes-update-notify.sh "⚠️ hermes-update.service failed or timed out (unit-level failure) — check: journalctl --user -u hermes-update.service -e"

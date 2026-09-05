@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily Hermes Agent update at 08:00 local time
+
+[Timer]
+OnCalendar=*-*-* 08:00:00
+Persistent=true
+Unit=hermes-update.service
+
+[Install]
+WantedBy=timers.target

@@ -160,12 +160,14 @@ In the Hermes Desktop app:
 
 ## Systemd Services
 
-Two user-level systemd services are managed by this dotfiles module:
+User-level systemd units managed by this dotfiles module:
 
-| Service | Port | Description |
-|---------|------|-------------|
-| `hermes-gateway` | 8642 | Telegram bot + API Server |
-| `hermes-dashboard` | 9119 | Web UI + Remote Desktop backend |
+| Unit | Port | Description |
+|------|------|-------------|
+| `hermes-gateway.service` | 8642 | Telegram bot + API Server |
+| `hermes-dashboard.service` | 9119 | Web UI + Remote Desktop backend |
+| `hermes-update.timer` + `.service` | — | Daily `hermes update` at 08:00 local |
+| `hermes-update-notify.service` | — | Telegram failure notifications for the update job |
 
 ### Management
 
@@ -185,6 +187,26 @@ journalctl --user -u hermes-dashboard -f
 
 The templates are in `<dotfiles>/hermes/.config/systemd/user/`. They use
 `<HERMES_*>` placeholders that the setup script resolves to absolute paths.
+
+### Daily update (`hermes-update.timer`)
+
+Fires `hermes-update.service` every day at 08:00 local time
+(`OnCalendar=*-*-* 08:00:00`; `Persistent=true` catches up if the host was
+off at 08:00). It runs as its own unit — outside the gateway cgroup — so
+`hermes update` can safely drain and restart the gateway fleet without
+killing its own process. Support scripts deploy to `~/.hermes/scripts/`
+(templates in `hermes/.hermes/scripts/`).
+
+Behavior:
+- Already up to date → silent (full log in the journal)
+- New version pulled → Telegram ✅ ping with the commit range
+- Update failed → Telegram ⚠️ ping with the exit code
+- Unit-level failure (timeout, start failure) → `OnFailure` fires the notifier unit
+
+```bash
+systemctl --user daemon-reload
+systemctl --user enable --now hermes-update.timer
+```
 
 > **Important:** `systemctl restart` from inside the gateway process is
 > blocked (the agent can't kill itself). Run restart commands from an SSH
