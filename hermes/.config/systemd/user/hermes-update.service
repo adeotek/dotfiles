@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Hermes Agent update (git pull + deps + gateway fleet restart)
+Wants=network-online.target
+After=network-online.target
+OnFailure=hermes-update-notify.service
+
+[Service]
+Type=oneshot
+ExecStart=%h/.hermes/scripts/hermes-update-daily.sh
+TimeoutStartSec=30min
+Nice=10
