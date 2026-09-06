@@ -51,7 +51,7 @@ curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 The full Hermes config. Managed by `hermes config` / `hermes model` interactively.
 This template includes the current working setup:
 
-- **Primary provider**: OpenCode Go (`deepseek-v4-pro`)
+- **Primary provider**: OpenCode Go (`deepseek-v4-flash`)
 - **Fallback chain**: OpenRouter → custom (Ollama LAN) → OpenRouter Llama
 - **Web search**: DuckDuckGo (search) + Firecrawl self-hosted (extract)
 - **Terminal**: Local backend

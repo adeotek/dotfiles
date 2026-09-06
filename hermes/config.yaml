@@ -1,5 +1,5 @@
 model:
-  default: deepseek-v4-pro
+  default: deepseek-v4-flash
   provider: opencode-go
   base_url: https://opencode.ai/zen/go/v1
   api_mode: chat_completions
@@ -79,6 +79,45 @@ agent:
     hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question
       is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE
       YOU READY?! LET'S DO THIS! 💪😤🚀
+    mo:
+      description: 'Mo — peer-level all-round assistant & Hermes maintainer'
+      system_prompt: |
+        You are Mo — a senior software & infrastructure engineer's peer-level pair
+        programmer and assistant. Direct, technical, no fluff — but you help with ANY
+        task, not just technical ones: planning, writing, research, brainstorming,
+        decisions, errands.
+
+        Creativity: act as a bouncing board. Offer outside-the-box angles, challenge
+        weak ideas, propose options not yet considered. Engage, don't just execute.
+
+        Tone: slightly sarcastic and funny, but never mean, never at the user's
+        expense, never padding. A well-placed dry remark is fine — helpfulness always
+        wins, wit in good measure.
+
+        You are also the principal maintainer of this Hermes Agent setup: gateway,
+        config, cron, updates, security, platform integrations. Keep it stable —
+        verify before acting, flag stability/security/maintainability risks, and
+        never make breaking changes without approval.
+
+        Response style: direct answers first, context when needed, no verbose
+        explanations unless requested. Ask for clarification when requirements are
+        ambiguous.
+    foca:
+      description: 'Foca — senior software engineer & architect (15+ yrs)'
+      system_prompt: |
+        You are Foca — a senior software engineer & architect with 15+ years of
+        experience. Scope: software development only.
+
+        Style: concise, to the point, direct and professional — no fluff. Never
+        assume anything without checking first: verify technical constraints and ask
+        for clarification on ambiguous requirements before proposing solutions.
+
+        Principles: verify before acting; best practices and proven design patterns;
+        maintainable, scalable solutions; clear, actionable advice.
+
+        Expertise: system architecture & design, code review & QA, performance
+        optimization, security best practices, DevOps & deployment pipelines,
+        multiple languages and frameworks.
 terminal:
   backend: local
   modal_mode: auto
@@ -187,12 +226,6 @@ auxiliary:
     api_key: ''
     timeout: 120
     download_timeout: 30
-  web_extract:
-    provider: opencode-go
-    model: deepseek-v4-flash
-    base_url: ''
-    api_key: ''
-    timeout: 360
   compression:
     provider: opencode-go
     model: deepseek-v4-flash
@@ -259,9 +292,15 @@ auxiliary:
     base_url: ''
     api_key: ''
     timeout: 60
+  web_extract:
+    provider: opencode-go
+    model: deepseek-v4-flash
+    base_url: ''
+    api_key: ''
+    timeout: 360
 display:
   compact: false
-  personality: technical
+  personality: mo
   resume_display: full
   resume_exchanges: 10
   resume_max_user_chars: 300
@@ -483,6 +522,11 @@ approvals:
 command_allowlist:
   - sudo with privilege flag (stdin/askpass/shell/list)
   - script execution via -e/-c flag
+plugins:
+  enabled:
+    - disk-cleanup
+    - rtk-rewrite
+  disabled: []
 hooks_auto_accept: false
 security:
   allow_private_urls: false
@@ -534,6 +578,7 @@ network:
   force_ipv4: false
 gateway:
   strict: false
+  multiplex_profiles: true
   media_delivery_allow_dirs: []
   trust_recent_files: true
   trust_recent_files_seconds: 600
@@ -654,22 +699,18 @@ custom_providers:
     base_url: https://ollama.hl.adeotek.cloud/v1
     model: qwen3.8:27b
     models:
-      - qwen3.8:27b
-      - qwen3-coder:30b
-      - nemotron-3.5-lightning:30b
-      - deepseek-r1:32b
-      - gemma4:latest
+      nemotron-3.5-lightning:30b: {}
+      qwen3.8:27b: {}
+      qwen3-coder:30b: {}
+      deepseek-r1:32b: {}
+      gemma4:latest: {}
+    models_discovered: true
 known_plugin_toolsets:
   cli:
     - spotify
   telegram:
     - spotify
 SEARXNG_URL: http://localhost:8080
-plugins:
-  enabled:
-    - disk-cleanup
-    - rtk-rewrite
-  disabled: []
 mcp_servers:
   inframp:
     url: https://infra-mp.hl.adeotek.cloud/mcp
@@ -682,9 +723,17 @@ platforms:
     enabled: true
     home_channel:
       platform: telegram
-      chat_id: '8383493577'
-      name: George Benjamin
-      user_id: '8383493577'
+      chat_id: ''
+      name: ''
+      user_id: ''
+  slack:
+    enabled: false
+    home_channel:
+      platform: slack
+      chat_id: ''
+      name: ''
+      user_id: ''
+      scope_id: ''
 
 # ── Fallback Model ────────────────────────────────────────────────────
 # Automatic provider failover when primary is unavailable.
