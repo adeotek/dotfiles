@@ -723,17 +723,17 @@ platforms:
     enabled: false
     home_channel:
       platform: telegram
-      chat_id: '8383493577'
-      name: George Benjamin
-      user_id: '8383493577'
+      chat_id: ''
+      name: ''
+      user_id: ''
   slack:
     enabled: true
     home_channel:
       platform: slack
-      chat_id: C0BUVC8S6H5
-      name: C0BUVC8S6H5
-      user_id: U09457QLUDV
-      scope_id: T09457QLUCX
+      chat_id: ''
+      name: ''
+      user_id: ''
+      scope_id: ''
 
 # ── Fallback Model ────────────────────────────────────────────────────
 # Automatic provider failover when primary is unavailable.
