@@ -1,5 +1,5 @@
 model:
-  default: deepseek-v4-pro
+  default: deepseek-v4-flash
   provider: opencode-go
   base_url: https://opencode.ai/zen/go/v1
   api_mode: chat_completions
@@ -187,12 +187,6 @@ auxiliary:
     api_key: ''
     timeout: 120
     download_timeout: 30
-  web_extract:
-    provider: opencode-go
-    model: deepseek-v4-flash
-    base_url: ''
-    api_key: ''
-    timeout: 360
   compression:
     provider: opencode-go
     model: deepseek-v4-flash
@@ -259,6 +253,12 @@ auxiliary:
     base_url: ''
     api_key: ''
     timeout: 60
+  web_extract:
+    provider: opencode-go
+    model: deepseek-v4-flash
+    base_url: ''
+    api_key: ''
+    timeout: 360
 display:
   compact: false
   personality: technical
@@ -483,6 +483,11 @@ approvals:
 command_allowlist:
   - sudo with privilege flag (stdin/askpass/shell/list)
   - script execution via -e/-c flag
+plugins:
+  enabled:
+    - disk-cleanup
+    - rtk-rewrite
+  disabled: []
 hooks_auto_accept: false
 security:
   allow_private_urls: false
@@ -654,22 +659,18 @@ custom_providers:
     base_url: https://ollama.hl.adeotek.cloud/v1
     model: qwen3.8:27b
     models:
-      - qwen3.8:27b
-      - qwen3-coder:30b
-      - nemotron-3.5-lightning:30b
-      - deepseek-r1:32b
-      - gemma4:latest
+      nemotron-3.5-lightning:30b: {}
+      qwen3.8:27b: {}
+      qwen3-coder:30b: {}
+      deepseek-r1:32b: {}
+      gemma4:latest: {}
+    models_discovered: true
 known_plugin_toolsets:
   cli:
     - spotify
   telegram:
     - spotify
 SEARXNG_URL: http://localhost:8080
-plugins:
-  enabled:
-    - disk-cleanup
-    - rtk-rewrite
-  disabled: []
 mcp_servers:
   inframp:
     url: https://infra-mp.hl.adeotek.cloud/mcp
@@ -685,6 +686,14 @@ platforms:
       chat_id: '8383493577'
       name: George Benjamin
       user_id: '8383493577'
+  slack:
+    enabled: true
+    home_channel:
+      platform: slack
+      chat_id: C0BUVC8S6H5
+      name: C0BUVC8S6H5
+      user_id: U09457QLUDV
+      scope_id: T09457QLUCX
 
 # ── Fallback Model ────────────────────────────────────────────────────
 # Automatic provider failover when primary is unavailable.
