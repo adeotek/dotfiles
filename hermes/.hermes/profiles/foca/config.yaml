@@ -300,7 +300,7 @@ auxiliary:
     timeout: 360
 display:
   compact: false
-  personality: mo
+  personality: foca
   resume_display: full
   resume_exchanges: 10
   resume_max_user_chars: 300
@@ -578,7 +578,7 @@ network:
   force_ipv4: false
 gateway:
   strict: false
-  multiplex_profiles: true
+  multiplex_profiles: false
   media_delivery_allow_dirs: []
   trust_recent_files: true
   trust_recent_files_seconds: 600
@@ -720,14 +720,14 @@ mcp_servers:
     connect_timeout: 30
 platforms:
   telegram:
-    enabled: true
+    enabled: false
     home_channel:
       platform: telegram
       chat_id: ''
       name: ''
       user_id: ''
   slack:
-    enabled: false
+    enabled: true
     home_channel:
       platform: slack
       chat_id: ''
