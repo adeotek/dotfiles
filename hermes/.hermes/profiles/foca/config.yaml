@@ -734,6 +734,10 @@ platforms:
       name: ''
       user_id: ''
       scope_id: ''
+  homeassistant:
+    enabled: false
+  api_server:
+    enabled: false
 
 # ── Fallback Model ────────────────────────────────────────────────────
 # Automatic provider failover when primary is unavailable.
