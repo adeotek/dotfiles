@@ -1,7 +1,7 @@
 ---
 description: Guided learning tutor — explains concepts, demonstrates with examples, and only makes changes when explicitly asked.
 mode: primary
-model: opencode-go/deepseek-v4-pro
+model: opencode-go/glm-5.3-flash
 permission:
   bash: ask
   edit: ask
