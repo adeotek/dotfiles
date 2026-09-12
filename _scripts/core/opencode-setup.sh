@@ -57,13 +57,25 @@ if [[ -f "$HOME/.config/opencode/opencode.jsonc" ]] && [[ "${ARGS["unattended"]}
   fi
 fi
 
-# Create global opencode.jsonc file if it doesn't exist
+# Create global opencode.jsonc file if it doesn't exist;
+# on explicit override MERGE template into the existing config so custom
+# plugins/provider options/credentials are never lost (plain cp clobbers them).
 if [[ ! -f "$HOME/.config/opencode/opencode.jsonc" ]] || [[ "$OC_OVERRIDE_CONFIG" == true ]]; then
   if [ "$DRY_RUN" -ne "1" ]; then
-    cp "$RDIR/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
-    cecho "green" "Global opencode.jsonc file created at ~/.config/opencode/opencode.jsonc"
+    if [[ -f "$HOME/.config/opencode/opencode.jsonc" ]]; then
+      if command -v python3 >/dev/null 2>&1; then
+        python3 "$RDIR/opencode/merge-opencode-config.py" \
+          "$RDIR/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
+        cecho "green" "Merged template into existing opencode.jsonc (custom config preserved)"
+      else
+        cecho "red" "python3 not found — cannot merge; existing opencode.jsonc kept, template NOT applied."
+      fi
+    else
+      cp "$RDIR/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
+      cecho "green" "Global opencode.jsonc file created at ~/.config/opencode/opencode.jsonc"
+    fi
   else
-    cecho "yellow" "DRY-RUN: cp $RDIR/opencode/opencode.jsonc $HOME/.config/opencode/opencode.jsonc"
+    cecho "yellow" "DRY-RUN: merge or cp opencode.jsonc -> $HOME/.config/opencode/opencode.jsonc"
   fi
 else
   cecho "yellow" "Global opencode.jsonc file already exists at ~/.config/opencode/opencode.jsonc"

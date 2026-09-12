@@ -56,7 +56,7 @@ Not stowed — deployed imperatively by their respective setup scripts. Files co
 - Also installs plugins (`claude-plugins-official`, `adeotek-plugins`) and LSP servers
 
 **`opencode/`** — deployed by `opencode-setup.sh` into `~/.config/opencode/`:
-- `opencode.jsonc.sample` → global config with model, plugins, server, multi-agent defs (`build`, `plan`, `code-review`)
+- `opencode.jsonc` → global config with model, plugins, server, multi-agent defs (`build`, `plan`, `code-review`); on re-run with the override prompt, the template is **merged** into the existing live config (see `opencode/merge-opencode-config.py`) — never a plain overwrite, so local plugins/credentials survive
 - `AGENTS.md.sample` → system prompt for the primary agent
 - `agents/`, `skills/`, `plugins/` — agent definitions, skill files, JS plugins
 

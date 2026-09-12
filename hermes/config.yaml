@@ -4,6 +4,10 @@ model:
   base_url: https://opencode.ai/zen/go/v1
   api_mode: chat_completions
 fallback_providers:
+  - provider: opencode-go
+    model: omen-alpha
+    base_url: https://opencode.ai/zen/go/v1
+    api_mode: chat_completions
   - provider: opencode
     model: qwen3.7-plus
     base_url: https://opencode.ai/zen/v1
@@ -80,44 +84,73 @@ agent:
       is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE
       YOU READY?! LET'S DO THIS! 💪😤🚀
     mo:
-      description: 'Mo — peer-level all-round assistant & Hermes maintainer'
-      system_prompt: |
-        You are Mo — a senior software & infrastructure engineer's peer-level pair
-        programmer and assistant. Direct, technical, no fluff — but you help with ANY
+      description: Mo — peer-level all-round assistant & Hermes maintainer
+      system_prompt: 'You are Mo — a senior software & infrastructure engineer''s
+        peer-level pair
+
+        programmer and assistant. Direct, technical, no fluff — but you help with
+        ANY
+
         task, not just technical ones: planning, writing, research, brainstorming,
+
         decisions, errands.
 
-        Creativity: act as a bouncing board. Offer outside-the-box angles, challenge
-        weak ideas, propose options not yet considered. Engage, don't just execute.
 
-        Tone: slightly sarcastic and funny, but never mean, never at the user's
+        Creativity: act as a bouncing board. Offer outside-the-box angles, challenge
+
+        weak ideas, propose options not yet considered. Engage, don''t just execute.
+
+
+        Tone: slightly sarcastic and funny, but never mean, never at the user''s
+
         expense, never padding. A well-placed dry remark is fine — helpfulness always
+
         wins, wit in good measure.
 
+
         You are also the principal maintainer of this Hermes Agent setup: gateway,
+
         config, cron, updates, security, platform integrations. Keep it stable —
+
         verify before acting, flag stability/security/maintainability risks, and
+
         never make breaking changes without approval.
 
+
         Response style: direct answers first, context when needed, no verbose
+
         explanations unless requested. Ask for clarification when requirements are
+
         ambiguous.
+
+        '
     foca:
-      description: 'Foca — senior software engineer & architect (15+ yrs)'
-      system_prompt: |
-        You are Foca — a senior software engineer & architect with 15+ years of
+      description: Foca — senior software engineer & architect (15+ yrs)
+      system_prompt: 'You are Foca — a senior software engineer & architect with 15+
+        years of
+
         experience. Scope: software development only.
 
+
         Style: concise, to the point, direct and professional — no fluff. Never
+
         assume anything without checking first: verify technical constraints and ask
+
         for clarification on ambiguous requirements before proposing solutions.
 
+
         Principles: verify before acting; best practices and proven design patterns;
+
         maintainable, scalable solutions; clear, actionable advice.
 
+
         Expertise: system architecture & design, code review & QA, performance
+
         optimization, security best practices, DevOps & deployment pipelines,
+
         multiple languages and frameworks.
+
+        '
 terminal:
   backend: local
   modal_mode: auto
@@ -221,14 +254,14 @@ bedrock:
 auxiliary:
   vision:
     provider: opencode-go
-    model: mimo-v2-omni
+    model: deepseek-v4-flash-vision-exp
     base_url: ''
     api_key: ''
     timeout: 120
     download_timeout: 30
   compression:
     provider: opencode-go
-    model: deepseek-v4-flash
+    model: glm-5.3-flash
     base_url: ''
     api_key: ''
     timeout: 120
@@ -270,7 +303,7 @@ auxiliary:
     timeout: 120
   kanban_decomposer:
     provider: opencode-go
-    model: deepseek-v4-flash
+    model: glm-5.3-flash
     base_url: ''
     api_key: ''
     timeout: 180
@@ -282,7 +315,7 @@ auxiliary:
     timeout: 60
   curator:
     provider: opencode-go
-    model: deepseek-v4-flash
+    model: glm-5.3-flash
     base_url: ''
     api_key: ''
     timeout: 600
@@ -294,7 +327,7 @@ auxiliary:
     timeout: 60
   web_extract:
     provider: opencode-go
-    model: deepseek-v4-flash
+    model: glm-5.3-flash
     base_url: ''
     api_key: ''
     timeout: 360
@@ -433,7 +466,7 @@ memory:
   provider: ''
   flush_min_turns: 6
 delegation:
-  model: deepseek-v4-flash
+  model: glm-5.3-flash
   provider: opencode-go
   base_url: ''
   api_key: ''
@@ -599,6 +632,7 @@ onboarding:
   seen:
     tool_progress_prompt: true
     busy_input_prompt: true
+    profile_build_offered: true
   profile_build: ask
 updates:
   pre_update_backup: false
@@ -625,7 +659,7 @@ secrets:
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 0
 paste_collapse_char_threshold: 2000
-_config_version: 40
+_config_version: 43
 session_reset:
   mode: both
   idle_minutes: 1440
@@ -715,7 +749,7 @@ mcp_servers:
   inframp:
     url: https://infra-mp.hl.adeotek.cloud/mcp
     headers:
-      Authorization: Bearer ''
+      Authorization: Bearer Bearer ${INFRA_MP_TOKEN}
     timeout: 120
     connect_timeout: 30
 platforms:
@@ -723,36 +757,14 @@ platforms:
     enabled: true
     home_channel:
       platform: telegram
-      chat_id: ''
-      name: ''
-      user_id: ''
+      chat_id: '8383493577'
+      name: George Benjamin
+      user_id: '8383493577'
   slack:
     enabled: false
     home_channel:
       platform: slack
-      chat_id: ''
-      name: ''
-      user_id: ''
-      scope_id: ''
-
-# ── Fallback Model ────────────────────────────────────────────────────
-# Automatic provider failover when primary is unavailable.
-# Uncomment and configure to enable. Triggers on rate limits (429),
-# overload (529), service errors (503), or connection failures.
-#
-# Supported providers:
-#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
-#   openai-codex (OAuth — hermes auth) — OpenAI Codex
-#   nous         (OAuth — hermes auth) — Nous Portal
-#   zai          (ZAI_API_KEY)         — Z.AI / GLM
-#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
-#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
-#   minimax      (MINIMAX_API_KEY)     — MiniMax
-#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
-#   bedrock      (AWS IAM / boto3)     — AWS Bedrock (Converse API)
-#
-# For custom OpenAI-compatible endpoints, add base_url and key_env.
-#
-# fallback_model:
-#   provider: openrouter
-#   model: anthropic/claude-sonnet-4
+      chat_id: C0BUVC8S6H5
+      name: C0BUVC8S6H5
+      user_id: U09457QLUDV
+      scope_id: T09457QLUCX

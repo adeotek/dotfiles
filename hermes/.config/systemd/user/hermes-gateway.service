@@ -1,6 +1,7 @@
 [Unit]
 Description=Hermes Agent Gateway - Messaging Platform Integration
 After=network-online.target
+After=hermes-update.service
 Wants=network-online.target
 StartLimitIntervalSec=0
 

@@ -1,7 +1,7 @@
 ---
 description: Primary build/orchestrator agent. Full tool access. Delegates analysis to @plan and review to @code-review.
 mode: all
-model: opencode-go/deepseek-v4-pro
+model: opencode-go/minimax-m3
 reasoningEffort: max
 permission:
   task:

@@ -1,19 +1,19 @@
 {  
   "$schema": "https://opencode.ai/config.json",
-  "model": "opencode-go/deepseek-v4-pro",
-  "small_model": "opencode-go/deepseek-v4-flash",
+  "model": "opencode-go/deepseek-v4-flash",
+  "small_model": "opencode-go/mimo-v2.5",
   "lsp": {},
   "default_agent": "build",
   "agent": {
     "build": {
       "description": "Primary build/orchestrator agent. Full tool access. Delegates analysis to @plan and review to @code-review.",
       "mode": "primary",
-      "model": "opencode-go/qwen3.7-plus"
+      "model": "opencode-go/deepseek-v4-flash"
     },
     "plan": {
       "mode": "primary",
-      // alt: deepseek-v4-pro + reasoningEffort: max
-      "model": "opencode-go/glm-5.3",
+      // alt: minimax-m3 (balanced strong) / gpt-5.6-luna (frontier, $15 cap)
+      "model": "opencode-go/glm-5.3-flash",
       "temperature": 0.1
     },
     "general": {
@@ -23,25 +23,25 @@
     },
     "explore": {
       "mode": "subagent",
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/glm-5.3-flash",
       "reasoningEffort": "max",
       "temperature": 0.1
     },
     "scout": {
       "mode": "subagent",
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/glm-5.3-flash",
       "temperature": 0.2
     },
     "compaction": {
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/qwen3.8-flash",
       "thinking": { "type": "disabled" }
     },
     "summary": {
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/qwen3.8-flash",
       "thinking": { "type": "disabled" }
     },
     "title": {
-      "model": "opencode-go/deepseek-v4-flash",
+      "model": "opencode-go/qwen3.8-flash",
       "thinking": { "type": "disabled" }
     }
   },
