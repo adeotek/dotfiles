@@ -1,28 +1,36 @@
 #!/usr/bin/env python3
-"""Merge a template opencode.jsonc into an existing live config.
+"""Merge a template opencode config into an existing live config.
 
-Used by opencode-setup.sh when the user chooses to OVERRIDE the existing
-~/.config/opencode/opencode.jsonc: instead of a plain `cp` (which would
-destroy local customizations such as extra plugins, provider options, or
-embedded credentials), this merges template values INTO the live file.
+Used by opencode-setup.sh when the user chooses to OVERRIDE an existing
+~/.config/opencode/*.jsonc: instead of a plain `cp` (which would destroy
+local customizations such as extra plugins, provider options, web UI
+host/auth, or embedded credentials), this merges template values INTO the
+live file.
 
 Merge semantics:
-  - Objects      : recursive merge; template wins on conflicting keys,
-                   live-only keys are kept (custom config is never dropped)
-  - Scalars      : template value wins
+  - Objects      : recursive merge; live-only keys are kept (custom config
+                   is never dropped)
+  - Scalars      : template value wins, unless --live-wins is passed
   - Arrays       : ordered union (live entries first, template-only entries
                    appended, deduplicated) — e.g. the plugin list keeps
                    live-only plugins like ./plugins/graphify.js
 
+--live-wins: flip the scalar/conflict preference so the live file wins and
+  the template only fills in missing keys. Use for configs the user owns and
+  edits (e.g. opencode-mem.jsonc: webServerHost/webServerAuth*) where the
+  live values must never be reset to the template defaults.
+
 Notes:
   - JSONC comments are stripped (they are documentation; the template keeps
     them). The merged file is plain pretty-printed JSON, valid for OpenCode.
+  - If the merge changes nothing, the live file is left byte-for-byte intact
+    (so its comments survive) and no backup is written.
   - A timestamped .bak is written next to the live file before replacing it.
   - Credentials: OpenCode keeps auth (API keys, OAuth) in auth.json, which
     this script never touches; any credential-like key inside the jsonc
     itself survives via the object merge (live-only keys are kept).
 
-Usage: merge-opencode-config.py <template> <live>
+Usage: merge-opencode-config.py [--live-wins] <template> <live>
 """
 import json
 import os
@@ -69,13 +77,13 @@ def _key(k):
     return json.dumps(k, sort_keys=True)
 
 
-def merge(template, live):
-    """Deep merge: template wins on conflicts, live-only content kept."""
+def merge(template, live, prefer_live=False):
+    """Deep merge: live-only content kept; conflict winner depends on mode."""
     if isinstance(template, dict) and isinstance(live, dict):
         result = dict(live)  # live-only keys survive untouched
         for k, tv in template.items():
             if k in live:
-                result[k] = merge(tv, live[k])
+                result[k] = merge(tv, live[k], prefer_live)
             else:
                 result[k] = tv
         return result
@@ -88,14 +96,17 @@ def merge(template, live):
                 result.append(x)
                 seen.add(_key(x))
         return result
-    return template  # scalar / type mismatch: template wins
+    # scalar / type mismatch: template wins unless --live-wins
+    return live if prefer_live else template
 
 
 def main():
-    if len(sys.argv) != 3:
-        print(f"usage: {sys.argv[0]} <template> <live>", file=sys.stderr)
+    prefer_live = "--live-wins" in sys.argv[1:]
+    paths = [a for a in sys.argv[1:] if not a.startswith("--")]
+    if len(paths) != 2:
+        print(f"usage: {sys.argv[0]} [--live-wins] <template> <live>", file=sys.stderr)
         return 2
-    tpl_path, live_path = sys.argv[1], sys.argv[2]
+    tpl_path, live_path = paths
 
     try:
         with open(tpl_path) as f:
@@ -106,13 +117,17 @@ def main():
         print(f"ERROR: cannot parse configs ({e}); live file left untouched", file=sys.stderr)
         return 1
 
-    merged = merge(template, live)
+    merged = merge(template, live, prefer_live)
 
     # safety net: never drop a live-only top-level key
     dropped = [k for k in live if k not in merged]
     if dropped:
         print(f"ERROR: merge would drop live keys {dropped}; aborting", file=sys.stderr)
         return 1
+
+    if merged == live:
+        print(f"no changes: {live_path} already has every template key")
+        return 0
 
     backup = f"{live_path}.bak.{int(time.time())}"
     with open(backup, "w") as f:
