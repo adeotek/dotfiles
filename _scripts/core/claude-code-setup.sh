@@ -104,13 +104,20 @@ source "$CDIR/lsp-servers-install.sh"
 source "$CDIR/playwright-install.sh"
 
 # Configure status line
-mkdir -p ~/.claude
 if [ "$DRY_RUN" -ne "1" ]; then
-  cp "$RDIR/claude-code/user-config/statusline-command.sh" ~/.claude/statusline-command.sh
-  chmod +x ~/.claude/statusline-command.sh
-  cecho "green" "Status line configured successfully."
+  mkdir -p ~/.claude
+  if [ ! -f "$HOME/.claude/statusline-command.sh" ]; then
+    if cp "$RDIR/claude-code/user-config/statusline-command.sh" ~/.claude/statusline-command.sh; then
+      chmod +x ~/.claude/statusline-command.sh
+      cecho "green" "Status line configured successfully."
+    else
+      cecho "red" "Failed to copy statusline-command.sh."
+    fi
+  else
+    cecho "yellow" "Status line script already exists at ~/.claude/statusline-command.sh"
+  fi
 else
-  cecho "yellow" "DRY-RUN: cp $RDIR/claude-code/user-config/statusline-command.sh ~/.claude/statusline-command.sh"
+  cecho "yellow" "DRY-RUN: cp $RDIR/claude-code/user-config/statusline-command.sh ~/.claude/statusline-command.sh (if not exists)"
   cecho "yellow" "DRY-RUN: chmod +x ~/.claude/statusline-command.sh"
 fi
 
@@ -130,11 +137,20 @@ fi
 if [ "$DRY_RUN" -ne "1" ]; then
   SETTINGS_FILE="$HOME/.claude/settings.json"
   if [ -f "$SETTINGS_FILE" ]; then
-    jq -s '.[0] * .[1]' "$SETTINGS_FILE" "$RDIR/claude-code/user-config/settings-part.json" > "$SETTINGS_FILE.tmp" && mv "$SETTINGS_FILE.tmp" "$SETTINGS_FILE"
-    cecho "green" "User settings patched successfully."
+    if command -v jq >/dev/null 2>&1 && \
+       jq -s '.[0] * .[1]' "$SETTINGS_FILE" "$RDIR/claude-code/user-config/settings-part.json" > "$SETTINGS_FILE.tmp"; then
+      mv "$SETTINGS_FILE.tmp" "$SETTINGS_FILE"
+      cecho "green" "User settings patched successfully."
+    else
+      rm -f "$SETTINGS_FILE.tmp"
+      cecho "red" "Failed to patch user settings (jq missing or merge failed)."
+    fi
   else
-    cp "$RDIR/claude-code/user-config/settings-part.json" "$SETTINGS_FILE"
-    cecho "green" "User settings file created at $SETTINGS_FILE"
+    if cp "$RDIR/claude-code/user-config/settings-part.json" "$SETTINGS_FILE"; then
+      cecho "green" "User settings file created at $SETTINGS_FILE"
+    else
+      cecho "red" "Failed to create user settings file at $SETTINGS_FILE"
+    fi
   fi
 else
   cecho "yellow" "DRY-RUN: Patch $HOME/.claude/settings.json with $RDIR/claude-code/user-config/settings-part.json using jq"

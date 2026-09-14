@@ -26,7 +26,7 @@ case $CURRENT_OS_ID in
     ;;
   debian)
     if [ "$DRY_RUN" -ne "1" ]; then
-      for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+      for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove -y "$pkg"; done
       # Add Docker's official GPG key:
       sudo apt-get update
       sudo apt-get install -y ca-certificates curl
@@ -44,7 +44,7 @@ case $CURRENT_OS_ID in
     ;;
   ubuntu|pop)
     if [ "$DRY_RUN" -ne "1" ]; then
-      for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+      for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove -y "$pkg"; done
       # Add Docker's official GPG key:
       sudo apt-get update
       sudo apt-get install -y ca-certificates curl

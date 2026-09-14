@@ -95,20 +95,18 @@ for proj_dir in "$PROJECTS_DIR"/*/; do
   for session_file in "$proj_dir"*.jsonl; do
     [[ -f "$session_file" ]] || continue
 
-    project=$(grep -m1 '"cwd"' "$session_file" 2>/dev/null \
-      | grep -o '"cwd":"[^"]*"' \
-      | cut -d'"' -f4)
+    # Parse all session metadata in a single jq pass (JSON-escaped chars are
+    # decoded correctly, unlike the previous grep/cut extraction).
+    IFS=$'\t' read -r project name summary < <(jq -rs '
+      (map(select(.cwd)) | first | .cwd // "") as $p
+      | (map(select(.type == "ai-title")) | first | .aiTitle // "") as $n
+      | (map(select(.type == "last-prompt")) | first | .lastPrompt // "") as $s
+      | [$p, $n, $s] | @tsv
+    ' "$session_file" 2>/dev/null)
     [[ -z "$project" ]] && project="$proj_slug"
 
     session_id=$(basename "$session_file" .jsonl)
 
-    name=$(grep -m1 '"type":"ai-title"' "$session_file" 2>/dev/null \
-      | grep -o '"aiTitle":"[^"]*"' \
-      | cut -d'"' -f4)
-
-    summary=$(grep -m1 '"type":"last-prompt"' "$session_file" 2>/dev/null \
-      | grep -o '"lastPrompt":"[^"]*"' \
-      | cut -d'"' -f4)
     [[ -z "$summary" ]] && summary="No summary available"
 
     if [[ -n "$PROJECT_FILTER" ]] && [[ "${project,,}" != *"${PROJECT_FILTER,,}"* ]]; then

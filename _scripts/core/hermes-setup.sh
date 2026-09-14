@@ -95,4 +95,32 @@ else
   cecho "yellow" "DRY-RUN: cp $RDIR/hermes/.env.template $HOME/.hermes/.env (if not exists)"
 fi
 
+# --- Deploy systemd user units ---
+copy_files_if_missing "$RDIR/hermes/.config/systemd/user" "$HOME/.config/systemd/user" "*.service"
+copy_files_if_missing "$RDIR/hermes/.config/systemd/user" "$HOME/.config/systemd/user" "*.timer"
+
+# --- Deploy support scripts and assets ---
+copy_files_if_missing "$RDIR/hermes/.hermes/scripts" "$HOME/.hermes/scripts" "*.sh"
+if [ "$DRY_RUN" -ne "1" ]; then
+  chmod +x "$HOME/.hermes/scripts"/*.sh 2>/dev/null || true
+fi
+copy_files_if_missing "$RDIR/hermes/.hermes" "$HOME/.hermes" "SOUL.md"
+if [ -d "$RDIR/hermes/.hermes/profiles" ]; then
+  for profile_dir in "$RDIR/hermes/.hermes/profiles"/*/; do
+    [[ -d "$profile_dir" ]] || continue
+    copy_files_if_missing "$profile_dir" "$HOME/.hermes/profiles/$(basename "$profile_dir")" "*"
+  done
+fi
+
+# --- Reload systemd user daemon ---
+if [ "$DRY_RUN" -ne "1" ]; then
+  if systemctl --user daemon-reload; then
+    cecho "green" "systemd user daemon reloaded."
+  else
+    cecho "red" "Failed to reload systemd user daemon (is a systemd user session available?)."
+  fi
+else
+  cecho "yellow" "DRY-RUN: systemctl --user daemon-reload"
+fi
+
 cecho "green" "[hermes] setup complete. Headroom proxy is ready for Hermes Agent."

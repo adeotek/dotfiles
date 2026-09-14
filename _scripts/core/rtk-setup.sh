@@ -19,26 +19,47 @@ fi
 source "$CDIR/rtk-install.sh"
 
 # Setup
+if ! command -v rtk >/dev/null 2>&1; then
+  cecho "red" "ERROR: [rtk] executable not found after install. Skipping rtk setup."
+  exit 1
+fi
+
 ## Disable rtk telemetry
-rtk telemetry disable
+if [ "$DRY_RUN" -ne "1" ]; then
+  rtk telemetry disable
+else
+  cecho "yellow" "DRY-RUN: rtk telemetry disable"
+fi
 
 if command -v opencode &> /dev/null; then
   cecho "yellow" "Setting up rtk for opencode..."
-  rtk init -g --opencode
+  if [ "$DRY_RUN" -ne "1" ]; then
+    rtk init -g --opencode
+  else
+    cecho "yellow" "DRY-RUN: rtk init -g --opencode"
+  fi
 else
   cecho "yellow" "opencode is not installed. Skipping rtk opencode setup."
 fi
 
 if command -v claude &> /dev/null; then
   cecho "yellow" "Setting up rtk for claude..."
-  rtk init -g --auto-patch
+  if [ "$DRY_RUN" -ne "1" ]; then
+    rtk init -g --auto-patch
+  else
+    cecho "yellow" "DRY-RUN: rtk init -g --auto-patch"
+  fi
 else
   cecho "yellow" "claude is not installed. Skipping rtk claude setup."
 fi
 
 if command -v hermes &> /dev/null; then
   cecho "yellow" "Setting up rtk for hermes..."
-  rtk init --agent hermes
+  if [ "$DRY_RUN" -ne "1" ]; then
+    rtk init --agent hermes
+  else
+    cecho "yellow" "DRY-RUN: rtk init --agent hermes"
+  fi
 else
   cecho "yellow" "hermes is not installed. Skipping rtk hermes setup."
 fi

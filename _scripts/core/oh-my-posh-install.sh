@@ -24,10 +24,10 @@ if command -v oh-my-posh >/dev/null 2>&1; then
 fi
 
 if [ "$DRY_RUN" -ne "1" ]; then
-  decho "magenta" "curl -s https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin"
-  curl -s https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin
+  decho "magenta" "curl -fsSL https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin"
+  curl -fsSL https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin
   cecho "green" "[oh-my-posh] installation done."
 else
-  cecho "yellow" "DRY-RUN: curl -s https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin"
+  cecho "yellow" "DRY-RUN: curl -fsSL https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin"
 fi
 

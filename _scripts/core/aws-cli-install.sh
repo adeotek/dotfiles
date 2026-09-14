@@ -48,8 +48,8 @@ else
 fi
 
 if [ "$DRY_RUN" -ne "1" ]; then
-  decho "magenta" "curl ""$AWS_CLI_DOWNLOAD_URL"" -o ~/awscliv2.zip"
-  curl "$AWS_CLI_DOWNLOAD_URL" -o ~/awscliv2.zip
+  decho "magenta" "curl -fsSL $AWS_CLI_DOWNLOAD_URL -o ~/awscliv2.zip"
+  curl -fsSL "$AWS_CLI_DOWNLOAD_URL" -o ~/awscliv2.zip
   if [ -d ~/aws ]; then
     decho "magenta" "rm -rf ~/aws"
     rm -rf ~/aws
@@ -66,7 +66,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
   decho "magenta" "rm -f ~/awscliv2.zip"
   rm -f ~/awscliv2.zip
 else
-  cecho "yellow" "DRY-RUN: curl ""$AWS_CLI_DOWNLOAD_URL"" -o ~/awscliv2.zip"
+  cecho "yellow" "DRY-RUN: curl -fsSL $AWS_CLI_DOWNLOAD_URL -o ~/awscliv2.zip"
   cecho "yellow" "DRY-RUN: unzip ~/awscliv2.zip -d ~/aws"
   if $IS_AWS_CLI_INSTALLED; then
     cecho "yellow" "DRY-RUN: sudo ~/aws/install --update"

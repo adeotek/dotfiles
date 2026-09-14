@@ -53,14 +53,17 @@ else
       if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
         cecho "cyan" "Installing [dotnet-sdk-$DOTNET_VERSION]..."
         if [ "$DRY_RUN" -ne "1" ]; then
-          wget https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh -O dotnet-install.sh
-          chmod +x dotnet-install.sh
-./dotnet-install.sh --channel "$DOTNET_VERSION"
-          cecho "green" "[nodejs] installation done."
+          DOTNET_INSTALL_SCRIPT="$(mktemp /tmp/dotnet-install.XXXXXX.sh)"
+          if wget -q https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh -O "$DOTNET_INSTALL_SCRIPT" \
+             && chmod +x "$DOTNET_INSTALL_SCRIPT"; then
+            "$DOTNET_INSTALL_SCRIPT" --channel "$DOTNET_VERSION"
+            cecho "green" "[dotnet] installation done."
+          else
+            cecho "red" "Failed to download dotnet-install.sh."
+          fi
+          rm -f "$DOTNET_INSTALL_SCRIPT"
         else
-          cecho "yellow" "DRY-RUN: wget https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh -O dotnet-install.sh"
-          cecho "yellow" "DRY-RUN: chmod +x dotnet-install.sh"
-          cecho "yellow" "DRY-RUN: ./dotnet-install.sh --channel \"$DOTNET_VERSION\""
+          cecho "yellow" "DRY-RUN: wget https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh -O <tmp>/dotnet-install.sh && <tmp>/dotnet-install.sh --channel \"$DOTNET_VERSION\""
         fi
       else
         source "$CDIR/microsoft-repo-install.sh"

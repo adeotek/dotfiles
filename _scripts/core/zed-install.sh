@@ -26,7 +26,7 @@ case $CURRENT_OS_ID in
     if [ "$DRY_RUN" -ne "1" ]; then
       decho "magenta" "curl -f https://zed.dev/install.sh | sh"
       curl -f https://zed.dev/install.sh | sh
-      cecho "green" "[kitty] installation done."
+      cecho "green" "[zed] installation done."
     else
       cecho "yellow" "DRY-RUN: curl -f https://zed.dev/install.sh | sh"
     fi

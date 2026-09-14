@@ -30,49 +30,68 @@
 # AVAILABLE PACKAGES:
 #   Core/Minimal packages:
 #     base-tools          Essential command-line tools
-#     git                 Git version control system
-#     yazi                File manager
 #     bash                Bash shell configuration
+#     git                 Git version control system
 #     tmux                Terminal multiplexer
-#     nvim                Neovim text editor
+#     yazi                File manager
 #
 #   Console-only packages:
-#     dotnet              .NET SDK (default: 8.0)
-#     neofetch            System information display
+#     claude-code         Claude Code CLI and plugins
+#     fastfetch           System information display
+#     glow                Markdown renderer
+#     golang              Go programming language (default: 1.26.5)
+#     nodejs              Node.js runtime (default: 24)
 #     onefetch            Git repository information display
+#     tools               Auxiliary utility scripts
+#
+#   Console extra packages:
+#     ansible             Automation tool
+#     aws-cli             AWS command-line interface
+#     docker              Container platform
+#     dotnet              .NET SDK (default: 10.0)
+#     github-cli          GitHub command-line interface
+#     gcp-cli             Google Cloud Platform CLI
+#     graphify            Codebase knowledge graph tool
+#     headroom            Headroom LLM proxy
+#     helm                Kubernetes package manager
+#     herdr               herdr CLI
+#     hermes              Hermes Agent
+#     kubectl             Kubernetes CLI
+#     lsp-servers         Language server protocol servers
+#     mise                Polyglot tool version manager
+#     nvim                Neovim text editor
+#     opencode            OpenCode CLI
+#     playwright          Playwright browser automation
+#     powershell          PowerShell
+#     rtk                 rtk CLI
+#     rustup              Rust toolchain installer
+#     uv                  Python package/tool manager
+#     terraform           Infrastructure as Code tool
+#     zellij              Terminal workspace manager
 #
 #   Desktop-only packages:
-#     kitty               Terminal emulator
+#     ghostty             Ghostty terminal emulator
 #     zed                 Zed text editor
+#     kitty               Terminal emulator
+#     tabby               Terminal application
+#     vscode              Visual Studio Code
+#     jetbrains-toolbox   JetBrains development tools
 #
-#   Extra packages (console/desktop):
-#     github-cli          GitHub command-line interface
-#     ansible             Automation tool
-#     docker              Container platform
-#     golang              Go programming language (default: 1.24.0)
-#     powershell          PowerShell
-#     python              Python programming language
-#     nodejs              Node.js runtime (default: 22)
-#     rustup              Rust toolchain installer
-#     tabby               Terminal application (desktop only)
-#     vscode              Visual Studio Code (desktop only)
-#     jetbrains-toolbox   JetBrains development tools (desktop only)
-#     gcp-cli             Google Cloud Platform CLI
-#     terraform           Infrastructure as Code tool
+#   Shell:
 #     zsh                 Z shell
 #
 # PACKAGE GROUPS (for reference):
-#   Minimal:    base-tools,git,yazi,bash,tmux,nvim
-#   Console:    Minimal + dotnet,neofetch,onefetch
-#   Desktop:    Console + kitty,zed
-#   All:        Desktop + all extra packages + zsh
+#   Minimal:    base-tools,bash,git,tmux,yazi
+#   Console:    Minimal + claude-code,fastfetch,glow,golang,nodejs,onefetch,tools
+#   Desktop:    Console + ghostty,zed
+#   All:        Console + all extra packages + zsh
 #
 # EXAMPLES:
 #   # List all available packages
 #   ./unattended_setup.sh ls
 #
 #   # Install minimal development environment
-#   ./unattended_setup.sh --packages base-tools,git,nvim,tmux
+#   ./unattended_setup.sh --packages base-tools,bash,git,tmux,yazi
 #
 #   # Install development environment with Docker and Node.js
 #   ./unattended_setup.sh --packages git,nvim,docker,nodejs --verbose
@@ -132,6 +151,18 @@ if [[ -z "${SELECTED_PACKAGES[*]}" ]]; then
   exit 10
 fi
 
+# Validate package names against known tasks
+for pkg in "${SELECTED_PACKAGES[@]}"
+do
+  pkg="${pkg// /}"
+  [[ -z "$pkg" ]] && continue
+  if [[ -z "${TASK_TYPES[$pkg]:-}" ]]; then
+    cecho "red" "ERROR: Unknown package: [$pkg]!"
+    cecho "white" "Use '$0 ls' to list all available packages"
+    exit 10
+  fi
+done
+
 # Display selected packages in verbose mode
 if [[ "$VV" -eq 1 ]]; then
   cecho "white" "The following packages will be installed/set up:"
@@ -149,7 +180,8 @@ fi
 # Each package is processed individually using its corresponding install/setup script
 for pkg in "${SELECTED_PACKAGES[@]}"
 do
-  pkg=$(echo "$pkg" | xargs)  # Trim whitespace from package name
+  pkg="${pkg// /}"  # Trim whitespace from package name
+  [[ -z "$pkg" ]] && continue
   pkg_task_type="${TASK_TYPES["$pkg"]}"  # Get task type (install/setup)
   decho "magenta" "Processing $pkg ($pkg_task_type) with default settings"
   # shellcheck source=/dev/null

@@ -20,13 +20,20 @@ source "$CDIR/tmux-install.sh"
 
 # Setup
 if [ ! -e "$CDIR/../../tmux/.config/tmux/tmux.conf.local" ]; then
-  read -r -p "Please select tmux local config: light/full [l/F] " tmux_local_mode
-  if [[ "$tmux_local_mode" == "l" ]]; then
-    tmux_local_config="gbs.light"
-  else
-    tmux_local_config="gbs.full"
+  tmux_local_config="gbs.full"
+  if [[ "${ARGS["unattended"]}" != "1" ]]; then
+    read -r -p "Please select tmux local config: light/full [l/F] " tmux_local_mode || tmux_local_mode=""
+    if [[ "$tmux_local_mode" == "l" ]]; then
+      tmux_local_config="gbs.light"
+    fi
   fi
-  ln -sr "$CDIR/../../tmux/.config/tmux/$tmux_local_config.tmux.conf.local" "$CDIR/../../tmux/.config/tmux/tmux.conf.local"
+  if [ "$DRY_RUN" -ne "1" ]; then
+    if ! ln -sr "$CDIR/../../tmux/.config/tmux/$tmux_local_config.tmux.conf.local" "$CDIR/../../tmux/.config/tmux/tmux.conf.local"; then
+      cecho "red" "Failed to create tmux.conf.local link."
+    fi
+  else
+    cecho "yellow" "DRY-RUN: ln -sr .../tmux/$tmux_local_config.tmux.conf.local .../tmux/tmux.conf.local"
+  fi
 fi
 
 stow_package "tmux" "" "$CURRENT_CONFIG_DIR/tmux"

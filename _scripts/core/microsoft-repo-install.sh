@@ -26,7 +26,7 @@ case $CURRENT_OS_ID in
     else
       if [ ! -f /etc/apt/sources.list.d/microsoft-prod.list ]; then
         cecho "cyan" "Installing Microsoft APT source..."
-        if [ "$CURRENT_OS_VER" != "13" ]; then
+        if [ "$CURRENT_OS_VER" == "13" ]; then
           cecho "yellow" "SKIPPED: not available yet on Debian 13 systems."
         else
           if [ "$DRY_RUN" -ne "1" ]; then

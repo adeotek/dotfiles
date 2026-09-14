@@ -74,7 +74,7 @@ if command -v opencode >/dev/null 2>&1; then
   if [[ ! -f "$HOME/.config/opencode/commands/graphify.md" ]]; then
     if [ "$DRY_RUN" -ne "1" ]; then
       mkdir -p "$HOME/.config/opencode/commands"
-      tee <<EOF > "$HOME/.config/opencode/commands/graphify.md"
+      tee <<'EOF' > "$HOME/.config/opencode/commands/graphify.md"
 ---
 description: Build, query, and manage a knowledge graph of any codebase, repo, or document set
 ---

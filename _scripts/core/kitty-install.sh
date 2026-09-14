@@ -27,11 +27,11 @@ case $CURRENT_OS_ID in
     fi
 
     if [ "$DRY_RUN" -ne "1" ]; then
-      decho "magenta" "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
-      curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+      decho "magenta" "curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
+      curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
       cecho "green" "[kitty] installation done."
     else
-      cecho "yellow" "DRY-RUN: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
+      cecho "yellow" "DRY-RUN: curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
     fi
   ;;
   *)

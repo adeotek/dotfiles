@@ -19,6 +19,11 @@ fi
 # Install
 source "$CDIR/headroom-install.sh"
 
+# --- WSL systemd ---
+if [ "$DRY_RUN" -ne "1" ]; then
+  enable_wsl_systemd
+fi
+
 # --- Config directories ---
 if [ "$DRY_RUN" -ne "1" ]; then
   mkdir -p "$HOME/.headroom"
@@ -29,10 +34,12 @@ fi
 OVERRIDE_EXISTING=false
 SERVICE_FILE="$HOME/.config/systemd/user/headroom-proxy.service"
 if [ -f "$HOME/.config/headroom/proxy.env" ] || [ -f "$SERVICE_FILE" ]; then
-  cecho "yellow" -n "Headroom config already exists. Do you want to overwrite it? (y/N):"
-  read -r overwrite_config
-  if [[ "$overwrite_config" =~ ^[Yy]$ ]]; then
-    OVERRIDE_EXISTING=true
+  if [ "$DRY_RUN" -ne "1" ] && [ "${ARGS["unattended"]}" != "1" ]; then
+    cecho "yellow" -n "Headroom config already exists. Do you want to overwrite it? (y/N):"
+    read -r overwrite_config
+    if [[ "$overwrite_config" =~ ^[Yy]$ ]]; then
+      OVERRIDE_EXISTING=true
+    fi
   fi
 fi
 
@@ -89,8 +96,11 @@ fi
 
 # --- Reload systemd user daemon ---
 if [ "$DRY_RUN" -ne "1" ]; then
-  systemctl --user daemon-reload
-  cecho "green" "systemd user daemon reloaded."
+  if systemctl --user daemon-reload; then
+    cecho "green" "systemd user daemon reloaded."
+  else
+    cecho "red" "Failed to reload systemd user daemon (is a systemd user session available?)."
+  fi
 else
   cecho "yellow" "DRY-RUN: systemctl --user daemon-reload"
 fi
@@ -111,11 +121,17 @@ fi
 if [ "$DRY_RUN" -ne "1" ]; then
   if systemctl --user is-enabled --quiet headroom-proxy.service; then
     cecho "yellow" "headroom-proxy.service is already enabled. It will be restarted."
-    systemctl --user restart headroom-proxy.service
-    cecho "green" "headroom-proxy.service restarted."
+    if systemctl --user restart headroom-proxy.service; then
+      cecho "green" "headroom-proxy.service restarted."
+    else
+      cecho "red" "Failed to restart headroom-proxy.service."
+    fi
   else
-    systemctl --user enable --now headroom-proxy.service
-    cecho "green" "headroom-proxy.service enabled and started."
+    if systemctl --user enable --now headroom-proxy.service; then
+      cecho "green" "headroom-proxy.service enabled and started."
+    else
+      cecho "red" "Failed to enable/start headroom-proxy.service."
+    fi
   fi
 else
   cecho "yellow" "DRY-RUN: systemctl --user enable --now headroom-proxy.service"

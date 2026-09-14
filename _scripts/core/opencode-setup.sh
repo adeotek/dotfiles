@@ -47,7 +47,9 @@ fi
 source "$CDIR/opencode-install.sh"
 
 # Setup
-mkdir -p "$HOME/.config/opencode"
+if [ "$DRY_RUN" -ne "1" ]; then
+  mkdir -p "$HOME/.config/opencode"
+fi
 OC_OVERRIDE_CONFIG=false
 if [[ -f "$HOME/.config/opencode/opencode.jsonc" ]] && [[ "${ARGS["unattended"]}" != "1" ]]; then
   cecho "yellow" -n "OpenCode already configured. Do you want to overwrite the existing configuration? (y/N): "
@@ -64,15 +66,21 @@ if [[ ! -f "$HOME/.config/opencode/opencode.jsonc" ]] || [[ "$OC_OVERRIDE_CONFIG
   if [ "$DRY_RUN" -ne "1" ]; then
     if [[ -f "$HOME/.config/opencode/opencode.jsonc" ]]; then
       if command -v python3 >/dev/null 2>&1; then
-        python3 "$RDIR/opencode/merge-opencode-config.py" \
-          "$RDIR/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
-        cecho "green" "Merged template into existing opencode.jsonc (custom config preserved)"
+        if python3 "$RDIR/opencode/merge-opencode-config.py" \
+          "$RDIR/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"; then
+          cecho "green" "Merged template into existing opencode.jsonc (custom config preserved)"
+        else
+          cecho "red" "Failed to merge template into existing opencode.jsonc; existing config kept."
+        fi
       else
         cecho "red" "python3 not found — cannot merge; existing opencode.jsonc kept, template NOT applied."
       fi
     else
-      cp "$RDIR/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"
-      cecho "green" "Global opencode.jsonc file created at ~/.config/opencode/opencode.jsonc"
+      if cp "$RDIR/opencode/opencode.jsonc" "$HOME/.config/opencode/opencode.jsonc"; then
+        cecho "green" "Global opencode.jsonc file created at ~/.config/opencode/opencode.jsonc"
+      else
+        cecho "red" "Failed to create global opencode.jsonc file."
+      fi
     fi
   else
     cecho "yellow" "DRY-RUN: merge or cp opencode.jsonc -> $HOME/.config/opencode/opencode.jsonc"
@@ -88,15 +96,21 @@ if [[ ! -f "$HOME/.config/opencode/opencode-mem.jsonc" ]] || [[ "$OC_OVERRIDE_CO
   if [ "$DRY_RUN" -ne "1" ]; then
     if [[ -f "$HOME/.config/opencode/opencode-mem.jsonc" ]]; then
       if command -v python3 >/dev/null 2>&1; then
-        python3 "$RDIR/opencode/merge-opencode-config.py" --live-wins \
-          "$RDIR/opencode/opencode-mem.jsonc" "$HOME/.config/opencode/opencode-mem.jsonc"
-        cecho "green" "Merged template into existing opencode-mem.jsonc (live config preserved)"
+        if python3 "$RDIR/opencode/merge-opencode-config.py" --live-wins \
+          "$RDIR/opencode/opencode-mem.jsonc" "$HOME/.config/opencode/opencode-mem.jsonc"; then
+          cecho "green" "Merged template into existing opencode-mem.jsonc (live config preserved)"
+        else
+          cecho "red" "Failed to merge template into existing opencode-mem.jsonc; existing config kept."
+        fi
       else
         cecho "red" "python3 not found — cannot merge; existing opencode-mem.jsonc kept, template NOT applied."
       fi
     else
-      cp "$RDIR/opencode/opencode-mem.jsonc" "$HOME/.config/opencode/opencode-mem.jsonc"
-      cecho "green" "Global opencode-mem.jsonc file created at ~/.config/opencode/opencode-mem.jsonc"
+      if cp "$RDIR/opencode/opencode-mem.jsonc" "$HOME/.config/opencode/opencode-mem.jsonc"; then
+        cecho "green" "Global opencode-mem.jsonc file created at ~/.config/opencode/opencode-mem.jsonc"
+      else
+        cecho "red" "Failed to create global opencode-mem.jsonc file."
+      fi
     fi
   else
     cecho "yellow" "DRY-RUN: merge or cp opencode-mem.jsonc -> $HOME/.config/opencode/opencode-mem.jsonc"
@@ -108,8 +122,11 @@ fi
 # Create global tui.json file if it doesn't exist
 if [[ ! -f "$HOME/.config/opencode/tui.json" ]] || [[ "$OC_OVERRIDE_CONFIG" == true ]]; then
   if [ "$DRY_RUN" -ne "1" ]; then
-    cp "$RDIR/opencode/tui.json" "$HOME/.config/opencode/tui.json"
-    cecho "green" "Global tui.json file created at ~/.config/opencode/tui.json"
+    if cp "$RDIR/opencode/tui.json" "$HOME/.config/opencode/tui.json"; then
+      cecho "green" "Global tui.json file created at ~/.config/opencode/tui.json"
+    else
+      cecho "red" "Failed to create global tui.json file."
+    fi
   else
     cecho "yellow" "DRY-RUN: cp $RDIR/opencode/tui.json $HOME/.config/opencode/tui.json"
   fi
@@ -120,8 +137,11 @@ fi
 # Create global AGENTS.md file if it doesn't exist
 if [[ ! -f "$HOME/.config/opencode/AGENTS.md" ]] || [[ "$OC_OVERRIDE_CONFIG" == true ]]; then
   if [ "$DRY_RUN" -ne "1" ]; then
-    cp "$RDIR/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
-    cecho "green" "Global AGENTS.md file created at ~/.config/opencode/AGENTS.md"
+    if cp "$RDIR/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"; then
+      cecho "green" "Global AGENTS.md file created at ~/.config/opencode/AGENTS.md"
+    else
+      cecho "red" "Failed to create global AGENTS.md file."
+    fi
   else
     cecho "yellow" "DRY-RUN: cp $RDIR/opencode/AGENTS.md $HOME/.config/opencode/AGENTS.md"
   fi

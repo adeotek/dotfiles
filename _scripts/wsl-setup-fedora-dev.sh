@@ -150,8 +150,9 @@ stage_status $_changed "WSL configuration (/etc/wsl.conf)"
 
 # appendWindowsPath only takes effect on distro restart, but we can strip
 # Windows-mounted paths from the current session immediately.
-if echo "$PATH" | grep -q '/mnt/[a-z]/'; then
-  export PATH=$(echo "$PATH" | tr ':' '\n' | grep -v '^/mnt/[a-z]/' | tr '\n' ':' | sed 's/:$//')
+if echo "$PATH" | grep -q '/mnt/[a-zA-Z]/'; then
+  _path_clean="$(echo "$PATH" | tr ':' '\n' | grep -v '^/mnt/[a-zA-Z]/' | tr '\n' ':' | sed 's/:$//')"
+  export PATH="$_path_clean"
   stage_status true "Windows paths removed from current session PATH"
 else
   stage_status false "Windows paths removed from current session PATH"
@@ -198,10 +199,15 @@ if [ -n "${CUSTOM_CA_SRC_PATH}" ]; then
   else
     sudo mkdir -p "${CUSTOM_CA_DEST_PATH}"
     for crt_file in "${CUSTOM_CA_SRC_PATH}/"*.crt; do
-      sudo openssl x509 -in "$crt_file" -out "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
-      sudo chown root:root "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
-      sudo chmod 644 "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
-      _changed=true
+      # Guard against the unexpanded glob when no *.crt files match
+      [ -f "$crt_file" ] || continue
+      if sudo openssl x509 -in "$crt_file" -out "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"; then
+        sudo chown root:root "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
+        sudo chmod 644 "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
+        _changed=true
+      else
+        echo_warning "Failed to import CA certificate: $crt_file"
+      fi
     done
     if $_changed; then sudo update-ca-trust extract; fi
   fi
@@ -329,18 +335,20 @@ if [ -n "${NX_VERSION}" ]; then
   sudo npm install -g nx@"$NX_VERSION"
   _changed=true
 
-  # Add aliases to .zshrc
+  # Add aliases to .zshrc (build into a temp file, then swap atomically)
   if ! grep -q "DEV Aliases" ~/.zshrc; then
-    mv ~/.zshrc ~/.zshrc.bak
-    tee -a ~/.zshrc &> /dev/null <<'EOF'
+    _zshrc_tmp="$(mktemp)"
+    {
+      cat <<'EOF'
 # DEV aliases
 alias nxrl='nx run-many --target=lint --max-warnings=0'
 alias nxrt='nx run-many --target=test'
 alias nxrlt='nx run-many --target=lint --max-warnings=0 & nx run-many --target=test'
 
 EOF
-    cat ~/.zshrc.bak >> ~/.zshrc
-    rm ~/.zshrc.bak
+      [ -f ~/.zshrc ] && cat ~/.zshrc
+    } > "$_zshrc_tmp"
+    mv "$_zshrc_tmp" ~/.zshrc
   fi
 fi
 stage_status $_changed "NPM NX global package"
@@ -358,14 +366,16 @@ stage_status $_changed "NPM Angular CLI global package"
 _changed=false
 # Add env variables and aliases to .zshrc, before `source /home/dev/.config/zsh/config.zsh`
 if ! grep -q "DEV environment variables" ~/.zshrc; then
-  mv ~/.zshrc ~/.zshrc.bak
-  tee -a ~/.zshrc &> /dev/null <<'EOF'
+  _zshrc_tmp="$(mktemp)"
+  {
+    cat <<'EOF'
 # DEV environment variables
 export NX_TUI="false"
 
 EOF
-  cat ~/.zshrc.bak >> ~/.zshrc
-  rm ~/.zshrc.bak
+    [ -f ~/.zshrc ] && cat ~/.zshrc
+  } > "$_zshrc_tmp"
+  mv "$_zshrc_tmp" ~/.zshrc
   _changed=true
 fi
 

@@ -21,14 +21,14 @@ case $CURRENT_OS_ID in
     if [ ! -f /etc/apt/sources.list.d/google-cloud-sdk.list ]; then
       cecho "cyan" "Installing Google Cloud SDK APT source..."
       if [ "$DRY_RUN" -ne "1" ]; then
-        decho "magenta" "curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg"
-        curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+        decho "magenta" "curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg"
+        curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
         decho "magenta" "echo ""deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main"" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list"
         echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
         decho "magenta" "sudo apt-get update"
         sudo apt-get update
       else
-        cecho "yellow" "DRY-RUN: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg"
+        cecho "yellow" "DRY-RUN: curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg"
         cecho "yellow" "DRY-RUN: echo ""deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main"" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list"
         cecho "yellow" "DRY-RUN: sudo apt-get update"
       fi

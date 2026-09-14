@@ -33,8 +33,15 @@ case $CURRENT_OS_ID in
     ;;
   fedora|redhat)
     if [ "$DRY_RUN" -ne "1" ]; then
-      sudo dnf install dnf5-plugins
-      sudo dnf config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/gh-cli.repo
+      if command -v dnf5 >/dev/null 2>&1; then
+        sudo dnf install -y dnf5-plugins
+        sudo dnf config-manager addrepo --from-repofile="https://cli.github.com/packages/rpm/gh-cli.repo"
+      else
+        sudo dnf install -y dnf-plugins-core
+        sudo dnf -y config-manager --add-repo "https://cli.github.com/packages/rpm/gh-cli.repo"
+      fi
+    else
+      cecho "yellow" "DRY-RUN: add GitHub CLI dnf repository (dnf5 or dnf4 config-manager)"
     fi
     install_package "gh" "gh --version" "_" "--repo gh-cli"
     ;;

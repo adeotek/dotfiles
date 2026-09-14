@@ -17,6 +17,9 @@ fi
 
 # Install
 case $CURRENT_OS_ID in
+  arch)
+    install_package "fastfetch" "fastfetch --version"
+    ;;
   debian|ubuntu|pop)
     if [ "$CURRENT_OS_ID" == "debian" ] && [ "$CURRENT_OS_VER" == "13" ]; then
       install_package "fastfetch" "fastfetch --version"

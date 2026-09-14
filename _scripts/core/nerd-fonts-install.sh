@@ -38,7 +38,7 @@ else
 fi
 
 if [[ "$CURRENT_OS_ID" == "arch" && "$TARGET_FONT" == "CascadiaCode" ]]; then
-  sudo pacman -S --noconfirm --needed ttf-cascadia-code-nerd
+  install_package "ttf-cascadia-code-nerd" "_"
 else
   if [ -z "${ARGS["version"]}" ]; then
     TARGET_VERSION="$OPT_NERDFONTS_DEFAULT_VERSION"
@@ -48,15 +48,15 @@ else
 
   case $CURRENT_OS_ID in
   arch)
-    sudo pacman -S --noconfirm --needed fontconfig
+    install_package "fontconfig" "_"
     FONTS_DIR=".fonts"
     ;;
   debian|ubuntu|pop)
-    sudo apt-get install -y fontconfig
+    install_package "fontconfig" "_"
     FONTS_DIR=".fonts"
     ;;
   fedora|redhat)
-    sudo dnf install -y fontconfig
+    install_package "fontconfig" "_"
     FONTS_DIR=".local/share/fonts"
     ;;
   *)
@@ -69,22 +69,38 @@ else
   if [ -d "$HOME/$FONTS_DIR/$TARGET_FONT" ]; then
     if [[ $DFS_ACTION == "refresh" ]]; then
       ## Remove existing fonts
-      rm -rf -- "${HOME:?}/${FONTS_DIR:?}/${TARGET_FONT:?}"
+      if [ "$DRY_RUN" -ne "1" ]; then
+        rm -rf -- "${HOME:?}/${FONTS_DIR:?}/${TARGET_FONT:?}"
+      else
+        cecho "yellow" "DRY-RUN: rm -rf -- ${HOME}/${FONTS_DIR}/${TARGET_FONT}"
+      fi
     else
       SKIP_FONT_INST="1"
       cecho "yellow" "[$TARGET_FONT] fonts already installed!"
     fi
   else
-    mkdir -p "$HOME/$FONTS_DIR"
+    if [ "$DRY_RUN" -ne "1" ]; then
+      mkdir -p "$HOME/$FONTS_DIR"
+    fi
   fi
   if [ -z "$SKIP_FONT_INST" ]; then
-    ## Download fonts
-    wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v$TARGET_VERSION/$TARGET_FONT.zip" -O "$HOME/$TARGET_FONT.zip"
-    ## Unpack fonts
-    unzip "$HOME/$TARGET_FONT.zip" -d "$HOME/$FONTS_DIR/$TARGET_FONT"
-    rm "$HOME/$TARGET_FONT.zip"
+    if [ "$DRY_RUN" -ne "1" ]; then
+      ## Download fonts
+      wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v$TARGET_VERSION/$TARGET_FONT.zip" -O "$HOME/$TARGET_FONT.zip"
+      ## Unpack fonts
+      unzip "$HOME/$TARGET_FONT.zip" -d "$HOME/$FONTS_DIR/$TARGET_FONT"
+      rm "$HOME/$TARGET_FONT.zip"
+    else
+      cecho "yellow" "DRY-RUN: wget https://github.com/ryanoasis/nerd-fonts/releases/download/v$TARGET_VERSION/$TARGET_FONT.zip -O $HOME/$TARGET_FONT.zip"
+      cecho "yellow" "DRY-RUN: unzip $HOME/$TARGET_FONT.zip -d $HOME/$FONTS_DIR/$TARGET_FONT"
+      cecho "yellow" "DRY-RUN: rm $HOME/$TARGET_FONT.zip"
+    fi
   fi
 fi
 
 ## Configure fonts
-fc-cache -fv
+if [ "$DRY_RUN" -ne "1" ]; then
+  fc-cache -fv
+else
+  cecho "yellow" "DRY-RUN: fc-cache -fv"
+fi

@@ -50,8 +50,14 @@ fi
 if [[ "$NJS_INSTALL_MODE" == "brew" ]]; then
   install_package "node" "node -v" "brew install node@$NODEJS_VERSION"
   if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/node@$NODEJS_VERSION/bin* ]]; then
-    (echo; echo "export PATH=""\$PATH:/home/linuxbrew/.linuxbrew/opt/node@$NODEJS_VERSION/bin""") >> "$HOME/.bashrc"
-    source "$HOME/.bashrc"
+    if [ "$DRY_RUN" -ne "1" ]; then
+      if ! grep -qF "/home/linuxbrew/.linuxbrew/opt/node@$NODEJS_VERSION/bin" "$HOME/.bashrc" 2>/dev/null; then
+        (echo; echo "export PATH=\"\$PATH:/home/linuxbrew/.linuxbrew/opt/node@$NODEJS_VERSION/bin\"") >> "$HOME/.bashrc"
+      fi
+      export PATH="$PATH:/home/linuxbrew/.linuxbrew/opt/node@$NODEJS_VERSION/bin"
+    else
+      cecho "yellow" "DRY-RUN: add /home/linuxbrew/.linuxbrew/opt/node@$NODEJS_VERSION/bin to PATH in ~/.bashrc"
+    fi
   fi
 else
   cecho "cyan" "Installing [nodejs]..."

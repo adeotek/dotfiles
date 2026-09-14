@@ -6,7 +6,7 @@
 
 # Init
 if [[ "$(declare -p "ARGS" 2>/dev/null)" =~ "declare -A" ]]; then
-  if [[ "${ARGS["unattended"]}" -eq "1" ]]; then
+  if [[ "${ARGS["unattended"]}" == "1" ]]; then
     ARGS["prompt"]="$OPT_ZSH_DEFAULT_PROMPT"
   else
     ARGS["prompt"]=""

@@ -24,26 +24,34 @@ else
     ## Activate brew
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   else
-    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
-    ## Activate brew
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    if [ "$DRY_RUN" -ne "1" ]; then
+      curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
+      ## Activate brew
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    else
+      cecho "yellow" "DRY-RUN: curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash"
+    fi
     ## Install build tools
     case $CURRENT_OS_ID in
       arch)
-        sudo pacman -S --noconfirm --needed base-devel
+        install_package "base-devel" "_"
         ;;
       debian|ubuntu|pop)
-        sudo apt-get install -y build-essential
+        install_package "build-essential" "_"
         ;;
       fedora|redhat)
-        sudo dnf install -y gcc gcc-c++ glibc-devel glibc-headers make
+        install_package "gcc" "_" "_" "gcc-c++ glibc-devel glibc-headers make"
         ;;
       *)
         cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
         exit 1
       ;;
     esac
-    # Install gcc
-    brew install gcc
+    if [ "$DRY_RUN" -ne "1" ]; then
+      # Install gcc
+      brew install gcc
+    else
+      cecho "yellow" "DRY-RUN: brew install gcc"
+    fi
   fi
 fi

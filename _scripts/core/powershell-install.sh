@@ -44,7 +44,12 @@ case $CURRENT_OS_ID in
     fi
     ;;
   fedora|redhat)
-    PWSH_PACKAGE_URL="$(curl -s https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r '.assets[] | select(.name | contains(".rh.x86_64.rpm")) | .browser_download_url' | head -n 1)"
+    if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
+      PWSH_RPM_ARCH="aarch64"
+    else
+      PWSH_RPM_ARCH="x86_64"
+    fi
+    PWSH_PACKAGE_URL="$(curl -fsSL https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r --arg arch "$PWSH_RPM_ARCH" '.assets[] | select(.name | contains(".rh." + $arch + ".rpm")) | .browser_download_url' | head -n 1)"
     if [ "$DRY_RUN" -ne "1" ]; then
       decho "magenta" "wget $PWSH_PACKAGE_URL -O /tmp/powershell.rpm"
       wget "$PWSH_PACKAGE_URL" -O /tmp/powershell.rpm

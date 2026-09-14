@@ -130,8 +130,12 @@ function execute_command() {
  
   if [ "$DRY_RUN" -ne "1" ]; then
     decho "magenta" "$command"
-    bash -c "$command"
-    cecho "green" "$success_message"
+    if bash -c "$command"; then
+      cecho "green" "$success_message"
+    else
+      cecho "red" "ERROR: command failed: $command"
+      return 1
+    fi
   else
     cecho "yellow" "DRY-RUN: $command"
   fi
@@ -266,7 +270,7 @@ function get_stow_command() {
       stow_arg="--restow"
     ;;
     *)
-      echo "echo ""ERROR: Invalid action: $stow_action!"""
+      cecho "red" "ERROR: Invalid action: $stow_action!"
       exit 1
     ;;
   esac
@@ -300,16 +304,27 @@ function stow_package() {
   stow_check_command=$(get_stow_command "$package" "init" "-n -v")
   decho "magenta" "$stow_check_command"
   check_result=$(bash -c "$stow_check_command 2>&1")
-  if echo "$check_result" | grep -G "LINK: .config/$package" >/dev/null \
-    || echo "$check_result" | grep -G "\* cannot stow .*/$package/.* over existing target" >/dev/null; then
+  # Only a genuine conflict (an existing non-symlink target) requires renaming the target.
+  # Matching stow's "LINK:" lines here also matches folded file links when merging into an
+  # existing real directory, which wrongly renamed a mergeable target.
+  if echo "$check_result" | grep -G "\* cannot stow .*/$package/.* over existing target" >/dev/null; then
     if [ "$stow_action" == "remove" ]; then
       cecho "yellow" "Nothing to do. [$package] not stowed."
       return
     fi
 
-    rename_dir_if_exists "$dir_rename"
-    rename_file_if_exists "$file_rename"
-  else
+    if [ "$DRY_RUN" -ne "1" ]; then
+      rename_dir_if_exists "$dir_rename"
+      rename_file_if_exists "$file_rename"
+    else
+      if [ -n "$dir_rename" ]; then
+        cecho "yellow" "DRY-RUN: mv $dir_rename $dir_rename-<timestamp>-bak (if exists)"
+      fi
+      if [ -n "$file_rename" ]; then
+        cecho "yellow" "DRY-RUN: mv $file_rename $file_rename.<timestamp>.bak (if exists)"
+      fi
+    fi
+  elif ! echo "$check_result" | grep -q "LINK:"; then
     if [ "$stow_action" == "init" ]; then
       cecho "yellow" "Nothing to do. [$package] already stowed."
       return
@@ -348,7 +363,7 @@ function symlink_package_directory() {
       fi
 
       rename_dir_if_exists "$CURRENT_CONFIG_DIR/$package/$directory"
-      stow_command="ln -s $RDIR/$package/$directory $CURRENT_CONFIG_DIR/$package/$directory"
+      stow_command="ln -s \"$RDIR/$package/$directory\" \"$CURRENT_CONFIG_DIR/$package/$directory\""
       execute_command "$stow_command" "Directory [$directory] from package [$package] stowed (using symlink)."
     ;;
     remove)
@@ -358,11 +373,11 @@ function symlink_package_directory() {
         return
       fi
 
-      stow_command="rm $CURRENT_CONFIG_DIR/$package/$directory"
+      stow_command="rm \"$CURRENT_CONFIG_DIR/$package/$directory\""
       execute_command "$stow_command" "Directory [$directory] from package [$package] was unstowed (using symlink)."
     ;;
     *)
-      echo "echo ""ERROR: Invalid action: $stow_action!"""
+      cecho "red" "ERROR: Invalid action: $stow_action!"
       exit 1
     ;;
   esac
@@ -391,17 +406,22 @@ function symlink_package_file() {
         mkdir -p "$target_dir"
       fi
 
-      # Check if file is already symlinked
+      # Check if file is already correctly symlinked. A dangling or stale
+      # symlink (e.g. the dotfiles checkout moved) must be relinked, not skipped.
       if [[ -L "$target_file" ]]; then
-        cecho "yellow" "Nothing to do. File [$file] from package [$package] is already stowed (using symlink)."
-        return
-      fi
-
-      if [[ "$DRY_RUN" -ne "1" ]]; then
+        if [[ "$(readlink -f "$target_file")" == "$(readlink -f "$source_file")" ]]; then
+          cecho "yellow" "Nothing to do. File [$file] from package [$package] is already stowed (using symlink)."
+          return
+        fi
+        # Stale symlink: drop it so the correct link can be created below.
+        if [[ "$DRY_RUN" -ne "1" ]]; then
+          rm -f "$target_file"
+        fi
+      elif [[ "$DRY_RUN" -ne "1" ]]; then
         rename_file_if_exists "$target_file"
       fi
 
-      stow_command="ln -s $source_file $target_file"
+      stow_command="ln -s \"$source_file\" \"$target_file\""
       execute_command "$stow_command" "File [$file] from package [$package] stowed (using symlink)."
     ;;
     remove)
@@ -411,7 +431,7 @@ function symlink_package_file() {
         return
       fi
 
-      stow_command="rm $target_file"
+      stow_command="rm \"$target_file\""
       execute_command "$stow_command" "File [$file] from package [$package] was unstowed (using symlink)."
     ;;
     *)
