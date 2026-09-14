@@ -57,7 +57,8 @@ Not stowed — deployed imperatively by their respective setup scripts. Files co
 
 **`opencode/`** — deployed by `opencode-setup.sh` into `~/.config/opencode/`:
 - `opencode.jsonc` → global config with model, plugins, server, multi-agent defs (`build`, `plan`, `code-review`); on re-run with the override prompt, the template is **merged** into the existing live config (see `opencode/merge-opencode-config.py`) — never a plain overwrite, so local plugins/credentials survive
-- `AGENTS.md.sample` → system prompt for the primary agent
+- `opencode-mem.jsonc` → config for the `opencode-mem` plugin (auto-capture provider, web UI, profile/retention). On override it is merged with `--live-wins`, so live values such as `webServerHost`/`webServerAuth*` are preserved and the template only fills in missing keys
+- `AGENTS.md` → system prompt for the primary agent
 - `agents/`, `skills/`, `plugins/` — agent definitions, skill files, JS plugins
 
 ### ZSH Configurations
