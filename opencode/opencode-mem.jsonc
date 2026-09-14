@@ -106,9 +106,9 @@
    //   GitHub Copilot:            "opencodeProvider": "github-copilot",  "opencodeModel": "gpt-4o-mini"
    //
    // "opencodeProvider": "anthropic",
-     // "opencodeModel": "claude-haiku-4-5-20251001",
-      "opencodeProvider": "opencode-go",
-      "opencodeModel": "mimo-v2.5",
+   // "opencodeModel": "claude-haiku-4-5-20251001",
+  "opencodeProvider": "opencode-go",
+  "opencodeModel": "mimo-v2.5",
 
    // ============================================
    // Auto-Capture Settings
