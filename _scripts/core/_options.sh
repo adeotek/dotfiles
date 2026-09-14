@@ -32,20 +32,17 @@ esac
 
 declare MINIMAL_TASKS=(
   "base-tools"
-  "bash"
   "git"
-  "tmux"
   "yazi"
+  "zellij"
+  "zsh"
 )
 
 declare CONSOLE_ONLY_TASKS=(
   "fastfetch"
-  "claude-code"
   "glow"
-  "golang"
   "nodejs"
   "onefetch"
-  "tools"
 )
 
 declare CONSOLE_TASKS=(
@@ -56,27 +53,35 @@ declare CONSOLE_TASKS=(
 declare CONSOLE_EXTRA_TASKS=(
   "ansible"
   "aws-cli"
+  "bash"
+  "claude-code"
   "docker"
   "dotnet"
-  "github-cli"
   "gcp-cli"
+  "github-cli"
+  "golang"
   "graphify"
   "headroom"
   "helm"
   "herdr"
   "hermes"
+  "homebrew"
   "kubectl"
   "lsp-servers"
   "mise"
+  "nerd-fonts"
   "nvim"
+  "oh-my-posh"
   "opencode"
   "playwright"
   "powershell"
   "rtk"
   "rustup"
-  "uv"
+  "starship"
   "terraform"
-  "zellij"
+  "tmux"
+  "tools"
+  "uv"
 )
 
 declare DESKTOP_ONLY_TASKS=(
@@ -112,7 +117,6 @@ declare ALL_TASKS=(
   "${CONSOLE_ONLY_TASKS[@]}"
   "${DESKTOP_ONLY_TASKS[@]}"
   "${DESKTOP_EXTRA_TASKS[@]}"
-  "zsh"
 )
 readarray -t ALL_TASKS < <(printf '%s\n' "${ALL_TASKS[@]}" | sort)
 

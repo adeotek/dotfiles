@@ -21,7 +21,7 @@ source "$CDIR/_options.sh"
 # Globals
 DEFAULT_MENU_OPTION="0"
 
-## Startup debug 
+## Startup debug
 cecho "blue" "Starting dotfiles setup ($DFS_ACTION)..."
 decho "magenta" "Current OS: $CURRENT_OS_ID"
 decho "magenta" "dotfiles root path: $RDIR"
@@ -114,9 +114,6 @@ case $SETUP_MODE in
         SELECTED_PACKAGES+=("$task")
       fi
     done
-    ;;
-  5)
-    SELECTED_PACKAGES+=("${ALL_TASKS[@]}")
     ;;
   *)
     cecho "red" "Invalid option selection: $SETUP_MODE"

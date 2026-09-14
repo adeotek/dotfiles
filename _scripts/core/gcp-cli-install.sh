@@ -39,11 +39,16 @@ case $CURRENT_OS_ID in
     if [ ! -f /etc/yum.repos.d/google-cloud-sdk.repo ]; then
       cecho "cyan" "Installing Google Cloud SDK YUM source..."
       if [ "$DRY_RUN" -ne "1" ]; then
+        if [ "$CURRENT_ARCH" == "aarch64" ]; then
+          GC_ARCH="aarch64"
+        else
+          GC_ARCH="x86_64"
+        fi
         decho "magenta" "tee -a /etc/yum.repos.d/google-cloud-sdk.repo << ..."
         sudo tee -a /etc/yum.repos.d/google-cloud-sdk.repo << EOM
 [google-cloud-cli]
 name=Google Cloud CLI
-baseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el9-x86_64
+baseurl=https://packages.cloud.google.com/yum/repos/cloud-sdk-el${CURRENT_OS_VER}-${GC_ARCH}
 enabled=1
 gpgcheck=1
 repo_gpgcheck=0

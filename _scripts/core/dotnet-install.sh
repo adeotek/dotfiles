@@ -41,13 +41,6 @@ else
   case $CURRENT_OS_ID in
     arch)
       install_package "dotnet-sdk" "dotnet --version" "_" "aspnet-runtime aspnet-targeting-pack"
-      # if [ "$DRY_RUN" -ne "1" ]; then
-      #   sudo pacman -S --noconfirm --needed aspnet-runtime
-      #   sudo pacman -S --noconfirm --needed aspnet-targeting-pack
-      # else
-      #   cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed aspnet-runtime"
-      #   cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed aspnet-targeting-pack"
-      # fi
       ;;
     debian)
       if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
@@ -71,7 +64,16 @@ else
       fi
       ;;
     ubuntu|pop)
-      source "$CDIR/microsoft-repo-install.sh"
+      if ! grep -q "^deb.*dotnet/backports" /etc/apt/sources.list.d/*.list 2>/dev/null; then
+        cecho "cyan" "Enabling dotnet backports Ubuntu feed..."
+        if [ "$DRY_RUN" -ne "1" ]; then
+          sudo add-apt-repository -y ppa:dotnet/backports
+          sudo apt-get update
+        else
+          cecho "yellow" "DRY-RUN: sudo add-apt-repository -y ppa:dotnet/backports"
+          cecho "yellow" "DRY-RUN: sudo apt-get update"
+        fi
+      fi
       install_package "dotnet-sdk-$DOTNET_VERSION" "dotnet --version"
       ;;
     fedora|redhat)
