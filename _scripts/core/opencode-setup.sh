@@ -81,6 +81,30 @@ else
   cecho "yellow" "Global opencode.jsonc file already exists at ~/.config/opencode/opencode.jsonc"
 fi
 
+# Create global opencode-mem.jsonc file if it doesn't exist;
+# on explicit override MERGE template into the existing config with --live-wins
+# so the user's live values (web UI host/auth, provider, …) are never reset.
+if [[ ! -f "$HOME/.config/opencode/opencode-mem.jsonc" ]] || [[ "$OC_OVERRIDE_CONFIG" == true ]]; then
+  if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ -f "$HOME/.config/opencode/opencode-mem.jsonc" ]]; then
+      if command -v python3 >/dev/null 2>&1; then
+        python3 "$RDIR/opencode/merge-opencode-config.py" --live-wins \
+          "$RDIR/opencode/opencode-mem.jsonc" "$HOME/.config/opencode/opencode-mem.jsonc"
+        cecho "green" "Merged template into existing opencode-mem.jsonc (live config preserved)"
+      else
+        cecho "red" "python3 not found — cannot merge; existing opencode-mem.jsonc kept, template NOT applied."
+      fi
+    else
+      cp "$RDIR/opencode/opencode-mem.jsonc" "$HOME/.config/opencode/opencode-mem.jsonc"
+      cecho "green" "Global opencode-mem.jsonc file created at ~/.config/opencode/opencode-mem.jsonc"
+    fi
+  else
+    cecho "yellow" "DRY-RUN: merge or cp opencode-mem.jsonc -> $HOME/.config/opencode/opencode-mem.jsonc"
+  fi
+else
+  cecho "yellow" "Global opencode-mem.jsonc file already exists at ~/.config/opencode/opencode-mem.jsonc"
+fi
+
 # Create global tui.json file if it doesn't exist
 if [[ ! -f "$HOME/.config/opencode/tui.json" ]] || [[ "$OC_OVERRIDE_CONFIG" == true ]]; then
   if [ "$DRY_RUN" -ne "1" ]; then
