@@ -20,7 +20,7 @@ case $CURRENT_OS_ID in
   debian|ubuntu|pop)
     if [ ! -f /etc/apt/sources.list.d/google-cloud-sdk.list ]; then
       cecho "cyan" "Installing Google Cloud SDK APT source..."
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         decho "magenta" "curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg"
         curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
         decho "magenta" "echo ""deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main"" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list"
@@ -38,7 +38,7 @@ case $CURRENT_OS_ID in
   fedora|redhat)
     if [ ! -f /etc/yum.repos.d/google-cloud-sdk.repo ]; then
       cecho "cyan" "Installing Google Cloud SDK YUM source..."
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         if [ "$CURRENT_ARCH" == "aarch64" ]; then
           GC_ARCH="aarch64"
         else

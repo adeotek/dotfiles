@@ -69,7 +69,7 @@ else
   if [ -d "$HOME/$FONTS_DIR/$TARGET_FONT" ]; then
     if [[ $DFS_ACTION == "refresh" ]]; then
       ## Remove existing fonts
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         rm -rf -- "${HOME:?}/${FONTS_DIR:?}/${TARGET_FONT:?}"
       else
         cecho "yellow" "DRY-RUN: rm -rf -- ${HOME}/${FONTS_DIR}/${TARGET_FONT}"
@@ -79,12 +79,12 @@ else
       cecho "yellow" "[$TARGET_FONT] fonts already installed!"
     fi
   else
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       mkdir -p "$HOME/$FONTS_DIR"
     fi
   fi
   if [ -z "$SKIP_FONT_INST" ]; then
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       ## Download fonts
       wget "https://github.com/ryanoasis/nerd-fonts/releases/download/v$TARGET_VERSION/$TARGET_FONT.zip" -O "$HOME/$TARGET_FONT.zip"
       ## Unpack fonts
@@ -99,7 +99,7 @@ else
 fi
 
 ## Configure fonts
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   fc-cache -fv
 else
   cecho "yellow" "DRY-RUN: fc-cache -fv"

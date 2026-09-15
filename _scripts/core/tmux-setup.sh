@@ -27,7 +27,7 @@ if [ ! -e "$CDIR/../../tmux/.config/tmux/tmux.conf.local" ]; then
       tmux_local_config="gbs.light"
     fi
   fi
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     if ! ln -sr "$CDIR/../../tmux/.config/tmux/$tmux_local_config.tmux.conf.local" "$CDIR/../../tmux/.config/tmux/tmux.conf.local"; then
       cecho "red" "Failed to create tmux.conf.local link."
     fi
@@ -37,4 +37,3 @@ if [ ! -e "$CDIR/../../tmux/.config/tmux/tmux.conf.local" ]; then
 fi
 
 stow_package "tmux" "" "$CURRENT_CONFIG_DIR/tmux"
-

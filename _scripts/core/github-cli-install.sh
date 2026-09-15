@@ -21,7 +21,7 @@ case $CURRENT_OS_ID in
     install_package "github-cli" "gh --version" "_" "github-cli"
     ;;
   debian|ubuntu|pop)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       sudo mkdir -p -m 755 /etc/apt/keyrings
       out=$(mktemp) && wget -nv -O "$out" https://cli.github.com/packages/githubcli-archive-keyring.gpg \
         && cat "$out" | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null
@@ -32,7 +32,7 @@ case $CURRENT_OS_ID in
     install_package "gh" "gh --version"
     ;;
   fedora|redhat)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       if command -v dnf5 >/dev/null 2>&1; then
         sudo dnf install -y dnf5-plugins
         sudo dnf config-manager addrepo --from-repofile="https://cli.github.com/packages/rpm/gh-cli.repo"
@@ -50,4 +50,3 @@ case $CURRENT_OS_ID in
     exit 1
     ;;
 esac
-

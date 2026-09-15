@@ -20,7 +20,7 @@ source "$CDIR/nodejs-install.sh"
 
 case $CURRENT_OS_ID in
   arch)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       if [[ -x "$(command -v vim)" ]]; then
         sudo pacman -R --noconfirm vim
       fi
@@ -28,14 +28,14 @@ case $CURRENT_OS_ID in
     install_package "neovim" "nvim -v" "_" "luarocks xclip"
     ;;
   debian|ubuntu|pop)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       sudo apt-get install -y luarocks xclip
     else
       cecho "yellow" "DRY-RUN: sudo apt-get install -y luarocks xclip"
     fi
     if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
       cecho "cyan" "Installing [neovim]..."
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         sudo apt-get install -y ninja-build gettext cmake unzip curl build-essential
         if [ ! -d "/opt/neovim-src" ]; then
           sudo git clone https://github.com/neovim/neovim /opt/neovim-src
@@ -66,7 +66,7 @@ case $CURRENT_OS_ID in
     ;;
   fedora|redhat)
     source "$CDIR/homebrew-install.sh"
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       sudo dnf install -y luarocks xclip # python-neovim
     else
       cecho "yellow" "DRY-RUN: sudo dnf install -y luarocks xclip"
@@ -79,11 +79,10 @@ case $CURRENT_OS_ID in
     ;;
 esac
 
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   sudo npm install -g neovim
   sudo npm install -g tree-sitter-cli
 else
   cecho "yellow" "DRY-RUN: sudo npm install -g neovim"
   cecho "yellow" "DRY-RUN: sudo npm install -g tree-sitter-cli"
 fi
-

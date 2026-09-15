@@ -136,7 +136,7 @@ if [[ "$PACKAGE_SELECTION_CONFIRM" != "y" && "$PACKAGE_SELECTION_CONFIRM" != "Y"
 fi
 
 # System update
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   source "$CDIR/system-update.sh"
 else
   cecho "yellow" "Dry run mode enabled. System update will be skipped."

@@ -67,7 +67,7 @@ function cecho() {
       ;;
     *) local args="";;
   esac
-  
+
   case $color in
     "black") color_code="30";;
     "red") color_code="31";;
@@ -79,7 +79,7 @@ function cecho() {
     "white") color_code="37";;
     *) color_code="";;
   esac
-  
+
   if [ -z "$color_code" ]; then
     echo "$args" "$@"
   else
@@ -127,8 +127,8 @@ function get_vv() {
 function execute_command() {
   local command="$1"
   local success_message="$2"
- 
-  if [ "$DRY_RUN" -ne "1" ]; then
+
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     decho "magenta" "$command"
     if bash -c "$command"; then
       cecho "green" "$success_message"
@@ -146,7 +146,7 @@ function rename_dir_if_exists() {
   local suffix="$2"
 
   if [ -z "$target" ]; then
-    return 
+    return
   fi
 
   if [ -z "$suffix" ]; then
@@ -166,7 +166,7 @@ function rename_file_if_exists() {
   local suffix="$2"
 
   if [ -z "$target" ]; then
-    return 
+    return
   fi
 
   if [ -z "$suffix" ]; then
@@ -258,7 +258,7 @@ function get_stow_command() {
   local package="$1"
   local stow_action="$2"
   local extra_args="$3"
- 
+
   case $stow_action in
     init)
       stow_arg="--stow"
@@ -313,7 +313,7 @@ function stow_package() {
       return
     fi
 
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       rename_dir_if_exists "$dir_rename"
       rename_file_if_exists "$file_rename"
     else
@@ -450,14 +450,14 @@ function copy_files_if_missing() {
   local override="${4:-false}"
   local label
   label="$(basename "$src_dir")"
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     mkdir -p "$dest_dir"
   fi
   for src_file in "$src_dir"/$glob; do
     [[ -f "$src_file" ]] || continue
     local dest_file
     dest_file="$dest_dir/$(basename "$src_file")"
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       if [[ ! -f "$dest_file" ]] || [[ "$override" == true ]]; then
         cp "$src_file" "$dest_file"
         cecho "green" "$label $(basename "$src_file") copied to $dest_dir/"

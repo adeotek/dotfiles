@@ -21,7 +21,7 @@ source "$CDIR/zellij-install.sh"
 # Setup
 # Stow is not used for Zellij as it rewrites the config file on first run, so we need to copy our config before that happens.
 # If the config file already exists, we assume the user has already set it up and we don't overwrite it.
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if [ ! -f "$HOME/.config/zellij/config.kdl" ]; then
     mkdir -p "$HOME/.config/zellij"
     if cp "$RDIR/zellij/.config/zellij/config.gbs.kdl" "$HOME/.config/zellij/config.kdl"; then

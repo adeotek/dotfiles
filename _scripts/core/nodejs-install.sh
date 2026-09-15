@@ -50,7 +50,7 @@ fi
 if [[ "$NJS_INSTALL_MODE" == "brew" ]]; then
   install_package "node" "node -v" "brew install node@$NODEJS_VERSION"
   if [[ ! "$PATH" == */home/linuxbrew/.linuxbrew/opt/node@$NODEJS_VERSION/bin* ]]; then
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       if ! grep -qF "/home/linuxbrew/.linuxbrew/opt/node@$NODEJS_VERSION/bin" "$HOME/.bashrc" 2>/dev/null; then
         (echo; echo "export PATH=\"\$PATH:/home/linuxbrew/.linuxbrew/opt/node@$NODEJS_VERSION/bin\"") >> "$HOME/.bashrc"
       fi
@@ -69,17 +69,17 @@ else
       if node -v >/dev/null 2>&1; then
         decho "yellow" "Package already installed. Updating it..."
       else
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
            sudo curl -fsSL "https://deb.nodesource.com/setup_${NODEJS_VERSION}.x" -o nodesource_setup.sh
            sudo bash nodesource_setup.sh
            sudo rm -f nodesource_setup.sh
          else
            cecho "yellow" "DRY-RUN: sudo curl -fsSL https://deb.nodesource.com/setup_${NODEJS_VERSION}.x -o nodesource_setup.sh"
            cecho "yellow" "DRY-RUN: sudo bash nodesource_setup.sh"
-           cecho "yellow" "DRY-RUN: sudo rm -f nodesource_setup.sh" 
+           cecho "yellow" "DRY-RUN: sudo rm -f nodesource_setup.sh"
          fi
       fi
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         sudo apt-get update && sudo apt-get install -y nodejs
         cecho "green" "[nodejs] installation done."
       else
@@ -90,7 +90,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
       if node -v >/dev/null 2>&1; then
         decho "yellow" "Package already installed. Updating it..."
       else
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
            curl -fsSL "https://deb.nodesource.com/setup_${NODEJS_VERSION}.x" -o nodesource_setup.sh
            sudo -E bash nodesource_setup.sh
            rm -f nodesource_setup.sh
@@ -101,7 +101,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
          fi
       fi
 
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         sudo apt-get update && sudo apt-get install -y nodejs
         cecho "green" "[nodejs] installation done."
       else
@@ -114,7 +114,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
         decho "yellow" "Package already installed. Updating it..."
       fi
 
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         decho "yellow" "Removing old nodejs${NODEJS_VERSION} package if exists..."
         sudo dnf remove -y "nodejs${NODEJS_VERSION}"
         curl -fsSL https://rpm.nodesource.com/setup_lts.x | sudo bash -
@@ -137,10 +137,8 @@ if [ "$DRY_RUN" -ne "1" ]; then
   esac
 fi
 
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   sudo npm install -g npm
 else
   cecho "yellow" "DRY-RUN: sudo npm install -g npm"
 fi
-
-

@@ -42,7 +42,7 @@ if command -v ansible >/dev/null 2>&1; then
   cecho "yellow" "[ansible] is already present. Updating it..."
 fi
 
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   uv tool install ansible
   cecho "green" "[ansible] installation done."
 else
@@ -54,7 +54,7 @@ if command -v ansible-lint >/dev/null 2>&1; then
   cecho "yellow" "[ansible-lint] is already present. Updating it..."
 fi
 
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   uv tool install ansible-lint
   cecho "green" "[ansible-lint] installation done."
 else
@@ -62,7 +62,7 @@ else
 fi
 
 # Verify
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if command -v ansible >/dev/null 2>&1; then
     cecho "green" "[ansible] $(ansible --version 2>/dev/null | head -1 || echo 'installed') successfully."
   else

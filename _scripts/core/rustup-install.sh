@@ -17,7 +17,7 @@ fi
 
 # Install
 cecho "cyan" "Installing [rustup]..."
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if [[ ! -x "$(command -v rustc)" ]]; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     source "$HOME/.cargo/env"
@@ -28,5 +28,5 @@ if [ "$DRY_RUN" -ne "1" ]; then
   fi
 else
   cecho "yellow" "DRY-RUN: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
-  cecho "yellow" "DRY-RUN: rustup update" 
+  cecho "yellow" "DRY-RUN: rustup update"
 fi

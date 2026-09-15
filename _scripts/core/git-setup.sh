@@ -20,7 +20,7 @@ source "$CDIR/git-install.sh"
 
 # Setup
 # Copy default user.config, if it doesn't exists
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   mkdir -p ~/.config/git.user
   if [ ! -f ~/.config/git.user/config ]; then
     cecho "cyan" "Copying git.user/config file..."
@@ -35,7 +35,7 @@ fi
 stow_package "git" "" "$CURRENT_CONFIG_DIR/git"
 
 # Add GitHub SSH keys
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   mkdir -p ~/.ssh
   if ! grep -q "github.com" ~/.ssh/known_hosts 2>/dev/null; then
     if ! ssh-keyscan -H github.com >> ~/.ssh/known_hosts 2>/dev/null; then
@@ -45,4 +45,3 @@ if [ "$DRY_RUN" -ne "1" ]; then
 else
   cecho "yellow" "DRY-RUN: ssh-keyscan -H github.com >> ~/.ssh/known_hosts"
 fi
-

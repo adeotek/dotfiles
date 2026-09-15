@@ -24,7 +24,7 @@ case $CURRENT_OS_ID in
     fi
     if [ ! -f /etc/apt/sources.list.d/hashicorp.list ]; then
       cecho "cyan" "Installing Hashicorp APT source..."
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         decho "magenta" "wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg"
         wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
         decho "magenta" "echo \"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $HASHICORP_CODENAME main\" | sudo tee /etc/apt/sources.list.d/hashicorp.list"
@@ -42,7 +42,7 @@ case $CURRENT_OS_ID in
   fedora)
     if [ ! -f /etc/yum.repos.d/hashicorp.repo ]; then
       cecho "cyan" "Installing Hashicorp YUM source..."
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         if command -v dnf5 >/dev/null 2>&1; then
           decho "magenta" "sudo dnf install -y dnf5-plugins"
           sudo dnf install -y dnf5-plugins
@@ -63,7 +63,7 @@ case $CURRENT_OS_ID in
   redhat)
     if [ ! -f /etc/yum.repos.d/hashicorp.repo ]; then
       cecho "cyan" "Installing Hashicorp YUM source..."
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         decho "magenta" "sudo yum install -y yum-utils"
         sudo yum install -y yum-utils
         decho "magenta" "sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo"
@@ -84,7 +84,7 @@ esac
 # Install TFLint
 if ! command -v tflint &> /dev/null; then
   cecho "cyan" "Installing TFLint..."
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     decho "magenta" "curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash"
     curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
   else

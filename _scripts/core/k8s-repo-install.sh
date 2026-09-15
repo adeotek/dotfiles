@@ -25,7 +25,7 @@ case $CURRENT_OS_ID in
     cecho "yellow" "SKIPPED: not required on Arch-based systems."
     ;;
   debian|ubuntu|pop)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
       sudo mkdir -p -m 755 /etc/apt/keyrings
       curl -fsSL "https://pkgs.k8s.io/core:/stable:/${K8S_MINOR_VERSION}/deb/Release.key" | \
@@ -44,7 +44,7 @@ case $CURRENT_OS_ID in
     fi
     ;;
   fedora|redhat)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes

@@ -17,7 +17,7 @@ fi
 
 
 # Install
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   case $CURRENT_OS_ID in
     arch)
       ## Base tools

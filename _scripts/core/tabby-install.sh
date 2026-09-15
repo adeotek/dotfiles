@@ -29,7 +29,7 @@ else
   case $CURRENT_OS_ID in
     arch)
       tabby_package_file="tabby-$TABBY_VERSION-linux-x64.pacman"
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         decho "magenta" "wget https://github.com/Eugeny/tabby/releases/download/v$TABBY_VERSION/$tabby_package_file -O ~/$tabby_package_file"
         wget "https://github.com/Eugeny/tabby/releases/download/v${TABBY_VERSION}/${tabby_package_file}" -O "$HOME/${tabby_package_file}"
         decho "magenta" "sudo pacman -U --noconfirm --needed ~/$tabby_package_file"
@@ -45,7 +45,7 @@ else
     ;;
     debian|ubuntu|pop)
       tabby_package_file="tabby-$TABBY_VERSION-linux-x64.deb"
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         decho "magenta" "wget https://github.com/Eugeny/tabby/releases/download/v$TABBY_VERSION/$tabby_package_file -O ~/$tabby_package_file"
         wget "https://github.com/Eugeny/tabby/releases/download/v${TABBY_VERSION}/${tabby_package_file}" -O "$HOME/${tabby_package_file}"
         decho "magenta" "sudo dpkg -i ~/$tabby_package_file"

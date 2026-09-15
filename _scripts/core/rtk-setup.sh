@@ -25,7 +25,7 @@ if ! command -v rtk >/dev/null 2>&1; then
 fi
 
 ## Disable rtk telemetry
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   rtk telemetry disable
 else
   cecho "yellow" "DRY-RUN: rtk telemetry disable"
@@ -33,7 +33,7 @@ fi
 
 if command -v opencode &> /dev/null; then
   cecho "yellow" "Setting up rtk for opencode..."
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     rtk init -g --opencode
   else
     cecho "yellow" "DRY-RUN: rtk init -g --opencode"
@@ -44,7 +44,7 @@ fi
 
 if command -v claude &> /dev/null; then
   cecho "yellow" "Setting up rtk for claude..."
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     rtk init -g --auto-patch
   else
     cecho "yellow" "DRY-RUN: rtk init -g --auto-patch"
@@ -55,7 +55,7 @@ fi
 
 if command -v hermes &> /dev/null; then
   cecho "yellow" "Setting up rtk for hermes..."
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     rtk init --agent hermes
   else
     cecho "yellow" "DRY-RUN: rtk init --agent hermes"

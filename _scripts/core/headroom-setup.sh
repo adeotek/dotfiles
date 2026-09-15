@@ -20,12 +20,12 @@ fi
 source "$CDIR/headroom-install.sh"
 
 # --- WSL systemd ---
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   enable_wsl_systemd
 fi
 
 # --- Config directories ---
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   mkdir -p "$HOME/.headroom"
   mkdir -p "$HOME/.config/headroom"
   mkdir -p "$HOME/.config/systemd/user"
@@ -44,7 +44,7 @@ if [ -f "$HOME/.config/headroom/proxy.env" ] || [ -f "$SERVICE_FILE" ]; then
 fi
 
 # --- Deploy providers.env ---
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if [ -f "$HOME/.config/headroom/proxy.env" ]; then
     if [ "$OVERRIDE_EXISTING" = true ]; then
       cp "$RDIR/headroom/providers.env" "$HOME/.config/headroom/proxy.env"
@@ -61,7 +61,7 @@ else
 fi
 
 # --- Deploy models.json ---
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if [ -f "$HOME/.headroom/models.json" ]; then
     if [ "$OVERRIDE_EXISTING" = true ]; then
       cp "$RDIR/headroom/models.json" "$HOME/.headroom/models.json"
@@ -78,7 +78,7 @@ else
 fi
 
 # --- Deploy systemd service file ---
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if [ -f "$SERVICE_FILE" ]; then
     if [ "$OVERRIDE_EXISTING" = true ]; then
       cp "$RDIR/headroom/headroom-proxy.service" "$SERVICE_FILE"
@@ -89,13 +89,13 @@ if [ "$DRY_RUN" -ne "1" ]; then
   else
     cp "$RDIR/headroom/headroom-proxy.service" "$SERVICE_FILE"
     cecho "green" "Headroom systemd service deployed to $SERVICE_FILE"
-  fi  
+  fi
 else
   cecho "yellow" "DRY-RUN: cp $RDIR/headroom/headroom-proxy.service $SERVICE_FILE"
 fi
 
 # --- Reload systemd user daemon ---
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if systemctl --user daemon-reload; then
     cecho "green" "systemd user daemon reloaded."
   else
@@ -106,7 +106,7 @@ else
 fi
 
 # --- Enable lingering (service survives logout) ---
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if ! loginctl show-user "$USER" 2>/dev/null | grep -q "Linger=yes"; then
     loginctl enable-linger "$USER"
     cecho "green" "User lingering enabled — headroom-proxy will survive logout."
@@ -118,7 +118,7 @@ else
 fi
 
 # --- Enable and start the service ---
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if systemctl --user is-enabled --quiet headroom-proxy.service; then
     cecho "yellow" "headroom-proxy.service is already enabled. It will be restarted."
     if systemctl --user restart headroom-proxy.service; then
@@ -138,7 +138,7 @@ else
 fi
 
 # --- Health check ---
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   cecho "cyan" "Waiting for headroom proxy to become healthy..."
   retries=0
   max_retries=30

@@ -47,13 +47,13 @@ source "$CDIR/claude-code-install.sh"
 cecho "green" "Installing Claude official marketplace..."
 if claude plugin marketplace list | grep -G "claude-plugins-official" >/dev/null; then
   cecho "green" "Claude official marketplace already added to [claude-code]. Updating it..."
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     claude plugin marketplace update claude-plugins-official
   else
     cecho "yellow" "DRY-RUN: claude plugin marketplace update claude-plugins-official"
   fi
 else
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     cecho "cyan" "Adding Claude official marketplace to [claude-code]..."
     claude plugin marketplace add anthropics/claude-plugins-official
   else
@@ -64,13 +64,13 @@ fi
 # Install ADEOTEK marketplace
 if claude plugin marketplace list | grep -G "adeotek-plugins" >/dev/null; then
   cecho "green" "ADEOTEK marketplace already added to [claude-code]. Updating it..."
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     claude plugin marketplace update adeotek-plugins
   else
     cecho "yellow" "DRY-RUN: claude plugin marketplace update adeotek-plugins"
   fi
 else
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     cecho "cyan" "Adding ADEOTEK marketplace to [claude-code]..."
     claude plugin marketplace add adeotek/claude-code
   else
@@ -82,13 +82,13 @@ fi
 for plugin in "${CLAUDECODE_PLUGINS[@]}"; do
   if claude plugin list | grep -G "$plugin" >/dev/null; then
     cecho "green" "[claude-code] Plugin $plugin already installed. Updating it..."
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       claude plugin update "$plugin"
     else
       cecho "yellow" "DRY-RUN: claude plugin update $plugin"
     fi
   else
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       cecho "cyan" "Installing [claude-code] plugin: $plugin..."
       claude plugin install "$plugin"
     else
@@ -104,7 +104,7 @@ source "$CDIR/lsp-servers-install.sh"
 source "$CDIR/playwright-install.sh"
 
 # Configure status line
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   mkdir -p ~/.claude
   if [ ! -f "$HOME/.claude/statusline-command.sh" ]; then
     if cp "$RDIR/claude-code/user-config/statusline-command.sh" ~/.claude/statusline-command.sh; then
@@ -122,7 +122,7 @@ else
 fi
 
 # Create global CLAUDE.md file if it doesn't exist
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if [ ! -f "$HOME/.claude/CLAUDE.md" ]; then
     cp "$RDIR/claude-code/user-config/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
     cecho "green" "Global CLAUDE.md file created at ~/.claude/CLAUDE.md"
@@ -134,7 +134,7 @@ else
 fi
 
 # Patch user settings
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   SETTINGS_FILE="$HOME/.claude/settings.json"
   if [ -f "$SETTINGS_FILE" ]; then
     if command -v jq >/dev/null 2>&1 && \

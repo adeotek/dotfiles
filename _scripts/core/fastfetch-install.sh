@@ -29,7 +29,7 @@ case $CURRENT_OS_ID in
       else
         FF_DEB_URL="$(curl -s https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest | jq -r '.assets[] | select(.name | contains("linux-amd64.deb")) | .browser_download_url')"
       fi
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         decho "magenta" "wget $FF_DEB_URL -O /tmp/fastfetch.deb"
         wget "$FF_DEB_URL" -O /tmp/fastfetch.deb
         decho "magenta" "sudo apt-get install /tmp/fastfetch.deb -y"
@@ -51,4 +51,3 @@ case $CURRENT_OS_ID in
     exit 1
     ;;
 esac
-

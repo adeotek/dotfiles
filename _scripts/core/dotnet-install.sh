@@ -45,7 +45,7 @@ else
     debian)
       if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
         cecho "cyan" "Installing [dotnet-sdk-$DOTNET_VERSION]..."
-        if [ "$DRY_RUN" -ne "1" ]; then
+        if [[ "$DRY_RUN" -ne "1" ]]; then
           DOTNET_INSTALL_SCRIPT="$(mktemp /tmp/dotnet-install.XXXXXX.sh)"
           if wget -q https://dotnet.microsoft.com/download/dotnet/scripts/v1/dotnet-install.sh -O "$DOTNET_INSTALL_SCRIPT" \
              && chmod +x "$DOTNET_INSTALL_SCRIPT"; then
@@ -66,7 +66,7 @@ else
     ubuntu|pop)
       if ! grep -q "^deb.*dotnet/backports" /etc/apt/sources.list.d/*.list 2>/dev/null; then
         cecho "cyan" "Enabling dotnet backports Ubuntu feed..."
-        if [ "$DRY_RUN" -ne "1" ]; then
+        if [[ "$DRY_RUN" -ne "1" ]]; then
           sudo add-apt-repository -y ppa:dotnet/backports
           sudo apt-get update
         else
@@ -86,7 +86,7 @@ else
   esac
 
   # Install Adeotek.DevOpsTools package
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     dotnet tool install -g Adeotek.DevOpsTools
   else
     cecho "yellow" "DRY-RUN: dotnet tool install -g Adeotek.DevOpsTools"

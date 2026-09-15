@@ -23,7 +23,7 @@ cleanup_done=0
 case $CURRENT_OS_ID in
   arch)
     if pacman -Qi ansible >/dev/null 2>&1; then
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         sudo pacman -Rns --noconfirm ansible ansible-lint 2>/dev/null || true
         cecho "green" "Removed ansible/ansible-lint via pacman."
       else
@@ -50,7 +50,7 @@ case $CURRENT_OS_ID in
     fi
 
     if [ "$apt_cleanup_needed" -eq "1" ]; then
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         sudo apt-get remove -y ansible ansible-lint 2>/dev/null || true
         sudo apt-get autoremove -y 2>/dev/null || true
 
@@ -88,7 +88,7 @@ case $CURRENT_OS_ID in
   ;;
   fedora|redhat)
     if rpm -q ansible >/dev/null 2>&1 || rpm -q ansible-lint >/dev/null 2>&1; then
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         sudo dnf remove -y ansible ansible-lint 2>/dev/null || true
         sudo dnf autoremove -y 2>/dev/null || true
         cecho "green" "Removed ansible/ansible-lint via dnf."

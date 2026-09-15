@@ -29,7 +29,7 @@ case $CURRENT_OS_ID in
         if [ "$CURRENT_OS_VER" == "13" ]; then
           cecho "yellow" "SKIPPED: not available yet on Debian 13 systems."
         else
-          if [ "$DRY_RUN" -ne "1" ]; then
+          if [[ "$DRY_RUN" -ne "1" ]]; then
             decho "magenta" "wget https://packages.microsoft.com/config/debian/${CURRENT_OS_VER}/packages-microsoft-prod.deb -O packages-microsoft-prod.deb"
             wget "https://packages.microsoft.com/config/debian/${CURRENT_OS_VER}/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb
             decho "magenta" "sudo dpkg -i packages-microsoft-prod.deb"

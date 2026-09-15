@@ -28,7 +28,7 @@ case $CURRENT_OS_ID in
         cecho "yellow" "SKIPPED: not available yet on Debian 13 systems."
       else
         PWSH_PACKAGE_URL="$(curl -s https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r '.assets[] | select(.name | contains(".deb_amd64.deb")) | .browser_download_url' | head -n 1)"
-        if [ "$DRY_RUN" -ne "1" ]; then
+        if [[ "$DRY_RUN" -ne "1" ]]; then
           decho "magenta" "wget $PWSH_PACKAGE_URL -O /tmp/powershell.deb"
           wget "$PWSH_PACKAGE_URL" -O /tmp/powershell.deb
           decho "magenta" "sudo apt-get install /tmp/powershell.deb -y"
@@ -50,7 +50,7 @@ case $CURRENT_OS_ID in
       PWSH_RPM_ARCH="x86_64"
     fi
     PWSH_PACKAGE_URL="$(curl -fsSL https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r --arg arch "$PWSH_RPM_ARCH" '.assets[] | select(.name | contains(".rh." + $arch + ".rpm")) | .browser_download_url' | head -n 1)"
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       decho "magenta" "wget $PWSH_PACKAGE_URL -O /tmp/powershell.rpm"
       wget "$PWSH_PACKAGE_URL" -O /tmp/powershell.rpm
       decho "magenta" "sudo dnf install /tmp/powershell.rpm -y"

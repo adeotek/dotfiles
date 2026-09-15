@@ -37,7 +37,7 @@ fi
 stow_package "bash" "" "$CURRENT_CONFIG_DIR/bash"
 
 # Enable custom config
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if ! grep -qF "source $CURRENT_CONFIG_DIR/bash/config.bash" "$HOME/.bashrc"; then
     (echo; echo "source $CURRENT_CONFIG_DIR/bash/config.bash") >> "$HOME/.bashrc"
   fi

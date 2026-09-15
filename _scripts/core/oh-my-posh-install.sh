@@ -23,11 +23,10 @@ if command -v oh-my-posh >/dev/null 2>&1; then
   decho "yellow" "Package already installed. Updating it..."
 fi
 
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   decho "magenta" "curl -fsSL https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin"
   curl -fsSL https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin
   cecho "green" "[oh-my-posh] installation done."
 else
   cecho "yellow" "DRY-RUN: curl -fsSL https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin"
 fi
-

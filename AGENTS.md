@@ -87,7 +87,7 @@ Default ZSH prompt: `starship`; bash: `oh-my-posh`.
 - Output helpers: `cecho "color" "msg"`, `decho "color" "msg"` (verbose-only), `aecho ARRAY "prefix" "color" "pfx_color"`
 - Key helpers: `install_package`, `stow_package`, `execute_command`, `rename_dir_if_exists`, `rename_file_if_exists`
 - Argument parsing: `declare -A ARGS=(["flag"]="")` then `process_args "$@"` — sets `VV`/`DRY_RUN`
-- Dry run: guard all side effects with `if [ "$DRY_RUN" -ne "1" ]; then … else cecho "yellow" "DRY-RUN: …"; fi`
+- Dry run: guard all side effects with `if [[ "$DRY_RUN" -ne "1" ]]; then … else cecho "yellow" "DRY-RUN: …"; fi`
 - Multi-distro: every install script must handle `arch`, `debian|ubuntu|pop`, and `fedora|redhat` via a `case $CURRENT_OS_ID` block
 - WSL2 special handling via `IF_WSL2` variable and `enable_wsl_systemd` function
 

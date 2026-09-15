@@ -129,7 +129,7 @@ if [[ "$1" == "ls" ]]; then
   exit 0
 fi
 
-## Startup debug 
+## Startup debug
 cecho "blue" "Starting dotfiles unatended setup ($DFS_ACTION)..."
 decho "magenta" "Current OS: $CURRENT_OS_ID"
 decho "magenta" "dotfiles root path: $RDIR"
@@ -170,7 +170,7 @@ if [[ "$VV" -eq 1 ]]; then
 fi
 
 # System update (performed before package installations)
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   source "$CDIR/system-update.sh"
 else
   cecho "yellow" "Dry run mode enabled. System update will be skipped."

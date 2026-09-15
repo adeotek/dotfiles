@@ -26,7 +26,7 @@ case $CURRENT_OS_ID in
       decho "yellow" "Package already installed. Updating it..."
     fi
 
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       decho "magenta" "/bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)\""
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
       cecho "green" "[ghostty] installation done."
@@ -35,7 +35,7 @@ case $CURRENT_OS_ID in
     fi
   ;;
   fedora)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       decho "magenta" "sudo dnf copr enable -y scottames/ghostty"
       sudo dnf copr enable -y scottames/ghostty
     else

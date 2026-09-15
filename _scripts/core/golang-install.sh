@@ -56,7 +56,7 @@ else
     else
       GOLANG_ARCH="amd64"
     fi
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       wget "https://go.dev/dl/go${GOLANG_VERSION}.linux-${GOLANG_ARCH}.tar.gz"
       sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf "go${GOLANG_VERSION}.linux-${GOLANG_ARCH}.tar.gz"
       rm -f "go${GOLANG_VERSION}.linux-${GOLANG_ARCH}.tar.gz"

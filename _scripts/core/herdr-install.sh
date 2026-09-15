@@ -17,7 +17,7 @@ fi
 
 # Install herdr
 cecho "cyan" "Installing [herdr]..."
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   curl -fsSL https://herdr.dev/install.sh | sh
   cecho "green" "[herdr] installation done."
 else

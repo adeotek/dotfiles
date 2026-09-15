@@ -24,7 +24,7 @@ else
     ## Activate brew
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   else
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
       ## Activate brew
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -47,7 +47,7 @@ else
         exit 1
       ;;
     esac
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       # Install gcc
       brew install gcc
     else

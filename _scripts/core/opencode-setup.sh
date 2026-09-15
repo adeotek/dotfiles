@@ -10,7 +10,7 @@ copy_skills_if_missing() {
   local src_dir="$1"
   local dest_dir="$2"
   local override="${3:-false}"
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     mkdir -p "$dest_dir"
   fi
   for src_subdir in "$src_dir"/*/; do
@@ -18,7 +18,7 @@ copy_skills_if_missing() {
     local skill_name
     skill_name=$(basename "$src_subdir")
     local dest_subdir="$dest_dir/$skill_name"
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       if [[ ! -f "$dest_subdir/SKILL.md" ]] || [[ "$override" == true ]]; then
         mkdir -p "$dest_subdir"
         cp -r "$src_subdir"* "$dest_subdir/"
@@ -47,7 +47,7 @@ fi
 source "$CDIR/opencode-install.sh"
 
 # Setup
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   mkdir -p "$HOME/.config/opencode"
 fi
 OC_OVERRIDE_CONFIG=false
@@ -63,7 +63,7 @@ fi
 # on explicit override MERGE template into the existing config so custom
 # plugins/provider options/credentials are never lost (plain cp clobbers them).
 if [[ ! -f "$HOME/.config/opencode/opencode.jsonc" ]] || [[ "$OC_OVERRIDE_CONFIG" == true ]]; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     if [[ -f "$HOME/.config/opencode/opencode.jsonc" ]]; then
       if command -v python3 >/dev/null 2>&1; then
         if python3 "$RDIR/opencode/merge-opencode-config.py" \
@@ -93,7 +93,7 @@ fi
 # on explicit override MERGE template into the existing config with --live-wins
 # so the user's live values (web UI host/auth, provider, …) are never reset.
 if [[ ! -f "$HOME/.config/opencode/opencode-mem.jsonc" ]] || [[ "$OC_OVERRIDE_CONFIG" == true ]]; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     if [[ -f "$HOME/.config/opencode/opencode-mem.jsonc" ]]; then
       if command -v python3 >/dev/null 2>&1; then
         if python3 "$RDIR/opencode/merge-opencode-config.py" --live-wins \
@@ -121,7 +121,7 @@ fi
 
 # Create global tui.json file if it doesn't exist
 if [[ ! -f "$HOME/.config/opencode/tui.json" ]] || [[ "$OC_OVERRIDE_CONFIG" == true ]]; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     if cp "$RDIR/opencode/tui.json" "$HOME/.config/opencode/tui.json"; then
       cecho "green" "Global tui.json file created at ~/.config/opencode/tui.json"
     else
@@ -136,7 +136,7 @@ fi
 
 # Create global AGENTS.md file if it doesn't exist
 if [[ ! -f "$HOME/.config/opencode/AGENTS.md" ]] || [[ "$OC_OVERRIDE_CONFIG" == true ]]; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     if cp "$RDIR/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"; then
       cecho "green" "Global AGENTS.md file created at ~/.config/opencode/AGENTS.md"
     else

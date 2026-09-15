@@ -26,7 +26,7 @@ case $CURRENT_OS_ID in
       decho "yellow" "Package already installed. Updating it..."
     fi
 
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       decho "magenta" "curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
       curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
       cecho "green" "[kitty] installation done."

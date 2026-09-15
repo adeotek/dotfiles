@@ -17,7 +17,7 @@ fi
 
 # Install mise
 cecho "cyan" "Installing [mise]..."
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   curl -fsSL https://mise.run | sh
   cecho "green" "[mise] installation done."
 else

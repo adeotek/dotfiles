@@ -24,7 +24,7 @@ cecho "blue" "Starting dotfiles update..."
 source "$CDIR/system-update.sh"
 
 if [[ -x "$(command -v flatpak)" ]]; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     flatpak update -y
   else
     cecho "yellow" "DRY-RUN: flatpak update -y"
@@ -32,7 +32,7 @@ if [[ -x "$(command -v flatpak)" ]]; then
 fi
 
 if [[ -x "$(command -v brew)" ]]; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     brew upgrade -y
   else
     cecho "yellow" "DRY-RUN: brew upgrade -y"
@@ -40,7 +40,7 @@ if [[ -x "$(command -v brew)" ]]; then
 fi
 
 if [[ -x "$(command -v npm)" ]]; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     sudo npm install -g npm
   else
     cecho "yellow" "DRY-RUN: sudo npm install -g npm"
@@ -48,7 +48,7 @@ if [[ -x "$(command -v npm)" ]]; then
 fi
 
 if [[ -x "$(command -v uv)" ]]; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     uv self update
     uv tool upgrade --all
   else
@@ -57,7 +57,7 @@ if [[ -x "$(command -v uv)" ]]; then
 fi
 
 if [[ -x "$(command -v oh-my-posh)" ]]; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     sudo oh-my-posh upgrade
   else
     cecho "yellow" "DRY-RUN: sudo oh-my-posh upgrade"
@@ -66,4 +66,3 @@ fi
 
 ## End
 cecho "blue" "DONE!"
-

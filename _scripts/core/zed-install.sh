@@ -23,7 +23,7 @@ case $CURRENT_OS_ID in
       decho "yellow" "Package already installed. Updating it..."
     fi
 
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       decho "magenta" "curl -f https://zed.dev/install.sh | sh"
       curl -f https://zed.dev/install.sh | sh
       cecho "green" "[zed] installation done."

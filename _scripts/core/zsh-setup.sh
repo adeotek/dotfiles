@@ -38,7 +38,7 @@ fi
 
 stow_package "zsh" "" "$CURRENT_CONFIG_DIR/zsh"
 
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   # Enable custom config
   if [ -f "$HOME/.zshrc" ]; then
     if ! grep -q "source $CURRENT_CONFIG_DIR/zsh/config.zsh" "$HOME/.zshrc"; then

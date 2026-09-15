@@ -23,7 +23,7 @@ source "$CDIR/nodejs-install.sh"
 cecho "cyan" "Installing [lsp-servers]..."
 
 # Format language servers (always installed): YAML, TOML, HTML, CSS, JSON
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   sudo npm install -g yaml-language-server @taplo/cli vscode-langservers-extracted
   cecho "green" "[lsp-servers] YAML, TOML, HTML, CSS and JSON language servers installed successfully."
 else
@@ -32,7 +32,7 @@ fi
 
 # Bash language server
 if command -v bash >/dev/null 2>&1; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     sudo npm install -g bash-language-server
     cecho "green" "[lsp-servers] Bash language server installed successfully."
   else
@@ -44,7 +44,7 @@ fi
 
 # JavaScript/TypeScript language server
 if command -v node >/dev/null 2>&1; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     sudo npm install -g @vtsls/language-server typescript
     cecho "green" "[lsp-servers] JavaScript/TypeScript language server installed successfully."
   else
@@ -56,7 +56,7 @@ fi
 
 # Python language server
 if command -v python3 >/dev/null 2>&1; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     sudo npm install -g pyright
     cecho "green" "[lsp-servers] Python language server installed successfully."
   else
@@ -68,7 +68,7 @@ fi
 
 # Go language server
 if command -v go >/dev/null 2>&1; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     go install golang.org/x/tools/gopls@latest
     cecho "green" "[lsp-servers] Go language server installed successfully."
   else
@@ -80,7 +80,7 @@ fi
 
 # .NET language server
 if command -v dotnet >/dev/null 2>&1; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     dotnet tool install --global csharp-ls
     cecho "green" "[lsp-servers] .NET language server installed successfully."
   else
@@ -92,7 +92,7 @@ fi
 
 # Rust language server
 if command -v rustup >/dev/null 2>&1; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     rustup component add rust-analyzer
     cecho "green" "[lsp-servers] Rust language server installed successfully."
   else
@@ -104,7 +104,7 @@ fi
 
 # PowerShell language server
 if command -v pwsh >/dev/null 2>&1; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     pwsh -Command "Install-Module -Name PowerShellEditorServices -Scope CurrentUser -Force"
     cecho "green" "[lsp-servers] PowerShell language server installed successfully."
   else
@@ -116,7 +116,7 @@ fi
 
 # Terraform language server
 if command -v terraform >/dev/null 2>&1; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     install_package "unzip" "command -v unzip"
     TERRAFORM_LS_VERSION=$(curl -s https://releases.hashicorp.com/terraform-ls/ | grep -oE 'terraform-ls/[0-9]+\.[0-9]+\.[0-9]+' | head -1 | cut -d/ -f2)
     case $CURRENT_ARCH in
@@ -141,7 +141,7 @@ fi
 
 # Docker language server
 if command -v docker >/dev/null 2>&1; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     sudo npm install -g dockerfile-language-server-nodejs
     cecho "green" "[lsp-servers] Dockerfile language server installed successfully."
   else
@@ -153,7 +153,7 @@ fi
 
 # Ansible language server
 if command -v ansible >/dev/null 2>&1; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     sudo npm install -g @ansible/ansible-language-server
     cecho "green" "[lsp-servers] Ansible language server installed successfully."
   else
@@ -170,7 +170,7 @@ if command -v lua >/dev/null 2>&1 || command -v luajit >/dev/null 2>&1 || comman
       install_package "lua-language-server" "command -v lua-language-server"
       ;;
     debian|ubuntu|pop)
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         sudo apt-get update
         sudo apt-get install -y lua-language-server
         cecho "green" "[lsp-servers] Lua language server installed successfully."
@@ -179,7 +179,7 @@ if command -v lua >/dev/null 2>&1 || command -v luajit >/dev/null 2>&1 || comman
       fi
       ;;
     fedora|redhat)
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         source "$CDIR/homebrew-install.sh"
         install_package "lua-language-server" "brew list lua-language-server" "brew install lua-language-server"
       else

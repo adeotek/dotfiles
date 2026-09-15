@@ -18,7 +18,7 @@ fi
 # Update
 case $CURRENT_OS_ID in
   arch)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       sudo pacman -Suy --noconfirm
       if command -v yay >/dev/null 2>&1; then
         yay -Suy --noconfirm
@@ -31,7 +31,7 @@ case $CURRENT_OS_ID in
     fi
     ;;
   debian|ubuntu|pop)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       sudo apt-get update
       sudo apt-get upgrade -y
       sudo apt-get autoremove -y
@@ -40,7 +40,7 @@ case $CURRENT_OS_ID in
     fi
     ;;
   fedora|redhat)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       # Check if EPEL repo is installed
       if [ "$CURRENT_OS_ID" != "fedora" ] && ! sudo dnf repolist 2>/dev/null | grep -q epel; then
         cecho "yellow" "EPEL repository is not installed. Installing it now..."
