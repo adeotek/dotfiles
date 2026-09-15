@@ -21,7 +21,7 @@ source "$CDIR/_options.sh"
 # Globals
 DEFAULT_MENU_OPTION="0"
 
-## Startup debug 
+## Startup debug
 cecho "blue" "Starting dotfiles setup ($DFS_ACTION)..."
 decho "magenta" "Current OS: $CURRENT_OS_ID"
 decho "magenta" "dotfiles root path: $RDIR"
@@ -32,7 +32,7 @@ decho "magenta" "core scripts path: $CDIR"
 cecho "white" "Setup options:"
 for key in "${MENU_OPTION_KEYS[@]}"
 do
-  if [ "$key" == "$DEFAULT_MENU_OPTION" ]; then
+  if [[ "$key" == "$DEFAULT_MENU_OPTION" ]]; then
     cecho "yellow" " *[$key] ${MENU_OPTIONS[$key]}"
   else
     cecho "white" "  [$key] ${MENU_OPTIONS[$key]}"
@@ -40,7 +40,7 @@ do
 done
 cecho "yellow" -n "Please select setup mode (0-4) [$DEFAULT_MENU_OPTION]: "
 read -r SETUP_MODE
-if [ -z "$SETUP_MODE" ]; then
+if [[ -z "$SETUP_MODE" ]]; then
   SETUP_MODE="$DEFAULT_MENU_OPTION"
 fi
 if [[ "$SETUP_MODE" == "c" || "$SETUP_MODE" == "C" ]]; then
@@ -74,7 +74,11 @@ case $SETUP_MODE in
     IFS=',' read -ra SELECTED_INDICES <<< "$TASKS_IDS"
     for id in "${SELECTED_INDICES[@]}"
     do
-      id=$(echo "$id" | xargs)  # Trim whitespace from $id
+      id="${id//[[:space:]]/}"  # Trim whitespace from $id
+      if ! [[ "$id" =~ ^[0-9]+$ ]] || (( id >= ${#ALL_TASKS[@]} )); then
+        cecho "red" "Invalid package id: [$id]"
+        exit 1
+      fi
       SELECTED_PACKAGES+=("${ALL_TASKS[$id]}")
     done
     ;;
@@ -115,18 +119,15 @@ case $SETUP_MODE in
       fi
     done
     ;;
-  5)
-    SELECTED_PACKAGES+=("${ALL_TASKS[@]}")
-    ;;
   *)
     cecho "red" "Invalid option selection: $SETUP_MODE"
-    exit 10
+    exit 1
     ;;
 esac
 
 if [[ -z "${SELECTED_PACKAGES[*]}" ]]; then
   cecho "magenta" "No package selected. Operation cancelled!"
-  exit 11
+  exit 10
 fi
 
 cecho "white" "The following packages will be installed/set up:"
@@ -139,7 +140,7 @@ if [[ "$PACKAGE_SELECTION_CONFIRM" != "y" && "$PACKAGE_SELECTION_CONFIRM" != "Y"
 fi
 
 # System update
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   source "$CDIR/system-update.sh"
 else
   cecho "yellow" "Dry run mode enabled. System update will be skipped."

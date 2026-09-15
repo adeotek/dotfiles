@@ -27,35 +27,43 @@ case $CURRENT_OS_ID in
       if [ "$CURRENT_OS_ID" == "debian" ] && [ "$CURRENT_OS_VER" == "13" ]; then
         cecho "yellow" "SKIPPED: not available yet on Debian 13 systems."
       else
-        PWSH_PACKAGE_URL="$(curl -s https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r '.assets[] | select(.name | contains(".deb_amd64.deb")) | .browser_download_url' | head -n 1)"
-        if [ "$DRY_RUN" -ne "1" ]; then
-          decho "magenta" "wget $PWSH_PACKAGE_URL -O /tmp/powershell.deb"
-          wget "$PWSH_PACKAGE_URL" -O /tmp/powershell.deb
-          decho "magenta" "sudo apt-get install /tmp/powershell.deb -y"
-          sudo apt-get install /tmp/powershell.deb -y
-          decho "magenta" "rm -f /tmp/powershell.deb"
-          rm -f /tmp/powershell.deb
+        PWSH_PACKAGE_URL="$(curl -fsSL https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r '.assets[] | select(.name | contains(".deb_amd64.deb")) | .browser_download_url' | head -n 1)"
+        if [[ -z "$PWSH_PACKAGE_URL" || "$PWSH_PACKAGE_URL" == "null" ]]; then
+          cecho "red" "Failed to resolve PowerShell .deb download URL."
+          return 1
+        fi
+        if [[ "$DRY_RUN" -ne "1" ]]; then
+          PWSH_DEB_FILE="$(mktemp --suffix=.deb)"
+          if wget -q "$PWSH_PACKAGE_URL" -O "$PWSH_DEB_FILE" && sudo apt-get install -y "$PWSH_DEB_FILE"; then
+            cecho "green" "[powershell] installation done."
+          else
+            cecho "red" "[powershell] installation failed."
+          fi
+          rm -f "$PWSH_DEB_FILE"
         else
-          cecho "yellow" "DRY-RUN: wget $PWSH_PACKAGE_URL -O /tmp/powershell.deb"
-          cecho "yellow" "DRY-RUN: sudo apt-get install /tmp/powershell.deb -y"
-          cecho "yellow" "DRY-RUN: rm -f /tmp/powershell.deb"
+          cecho "yellow" "DRY-RUN: wget $PWSH_PACKAGE_URL -O <tmp>.deb && sudo apt-get install -y <tmp>.deb"
         fi
       fi
     fi
     ;;
   fedora|redhat)
-    PWSH_PACKAGE_URL="$(curl -s https://api.github.com/repos/PowerShell/PowerShell/releases/latest | jq -r '.assets[] | select(.name | contains(".rh.x86_64.rpm")) | .browser_download_url' | head -n 1)"
-    if [ "$DRY_RUN" -ne "1" ]; then
-      decho "magenta" "wget $PWSH_PACKAGE_URL -O /tmp/powershell.rpm"
-      wget "$PWSH_PACKAGE_URL" -O /tmp/powershell.rpm
-      decho "magenta" "sudo dnf install /tmp/powershell.rpm -y"
-      sudo dnf install /tmp/powershell.rpm -y
-      decho "magenta" "rm -f /tmp/powershell.rpm"
-      rm -f /tmp/powershell.rpm
+    PWSH_RPM_ARCH="$CURRENT_ARCH"
+    PWSH_RELEASE_JSON="$(curl -fsSL https://api.github.com/repos/PowerShell/PowerShell/releases/latest)"
+    PWSH_PACKAGE_URL="$(jq -r --arg arch "$PWSH_RPM_ARCH" '([.assets[] | select(.name | contains(".rh." + $arch + ".rpm")) | .browser_download_url] + [.assets[] | select(.name | contains("." + $arch + ".rpm")) | .browser_download_url] | .[0]) // empty' <<< "$PWSH_RELEASE_JSON")"
+    if [[ -z "$PWSH_PACKAGE_URL" || "$PWSH_PACKAGE_URL" == "null" ]]; then
+      cecho "red" "Failed to resolve PowerShell .rpm download URL."
+      return 1
+    fi
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      PWSH_RPM_FILE="$(mktemp --suffix=.rpm)"
+      if wget -q "$PWSH_PACKAGE_URL" -O "$PWSH_RPM_FILE" && sudo dnf install -y "$PWSH_RPM_FILE"; then
+        cecho "green" "[powershell] installation done."
+      else
+        cecho "red" "[powershell] installation failed."
+      fi
+      rm -f "$PWSH_RPM_FILE"
     else
-      cecho "yellow" "DRY-RUN: wget $PWSH_PACKAGE_URL -O /tmp/powershell.rpm"
-      cecho "yellow" "DRY-RUN: sudo dnf install /tmp/powershell.rpm -y"
-      cecho "yellow" "DRY-RUN: rm -f /tmp/powershell.rpm"
+      cecho "yellow" "DRY-RUN: wget $PWSH_PACKAGE_URL -O <tmp>.rpm && sudo dnf install -y <tmp>.rpm"
     fi
     ;;
   *)

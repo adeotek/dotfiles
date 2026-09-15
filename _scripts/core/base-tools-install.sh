@@ -17,7 +17,7 @@ fi
 
 
 # Install
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   case $CURRENT_OS_ID in
     arch)
       ## Base tools
@@ -29,7 +29,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
       ;;
     debian|ubuntu|pop)
       ## Distro tools
-      if [ "$CURRENT_OS_ID" != "debian" ] || [ "$CURRENT_OS_VER" != "13" ]; then
+      if [[ "$CURRENT_OS_ID" != "debian" || "$CURRENT_OS_VER" != "13" ]]; then
         sudo apt-get install -y software-properties-common
       fi
       sudo apt-get install -y apt-transport-https gpg gnupg
@@ -37,12 +37,12 @@ if [ "$DRY_RUN" -ne "1" ]; then
       sudo apt-get install -y curl wget mc netcat-traditional nano whois micro shellcheck
       ## CLI tools
       sudo apt-get install -y jq fd-find ripgrep bat tree htop hstr zoxide bash-completion stow
-      mkdir -p ~/.local/bin
-      if [ ! -f ~/.local/bin/fd ]; then
-        ln -s "$(which fdfind)" ~/.local/bin/fd
+      mkdir -p "$HOME/.local/bin"
+      if [[ ! -e "$HOME/.local/bin/fd" && ! -L "$HOME/.local/bin/fd" ]]; then
+        ln -s "$(which fdfind)" "$HOME/.local/bin/fd"
       fi
-      if [ ! -f ~/.local/bin/bat ]; then
-        ln -s "$(which batcat)" ~/.local/bin/bat
+      if [[ ! -e "$HOME/.local/bin/bat" && ! -L "$HOME/.local/bin/bat" ]]; then
+        ln -s "$(which batcat)" "$HOME/.local/bin/bat"
       fi
 
       if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
@@ -62,7 +62,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
       sudo dnf install -y curl wget mc nc nano whois micro shellcheck
       ## CLI tools
       sudo dnf install -y file jq ripgrep bat tree htop hstr zoxide bash-completion stow fzf fd-find
-      if [ "$CURRENT_OS_ID" != "fedora" ]; then
+      if [[ "$CURRENT_OS_ID" != "fedora" ]]; then
         cecho "yellow" "Skipping eza for RHEL-based distros due to missing package"
       else
         sudo dnf copr enable alternateved/eza -y

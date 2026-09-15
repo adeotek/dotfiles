@@ -33,7 +33,7 @@ if command -v python3 >/dev/null 2>&1; then
   if [[ "$current_python_version" =~ ^3\.1[4-9] ]] || [[ "$current_python_version" =~ ^3\.[2-9][0-9] ]]; then
     cecho "yellow" "Detected Python $current_python_version which is incompatible with hnswlib."
     cecho "cyan" "Installing Python $PYTHON_VERSION via uv for the headroom tool..."
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       uv python install "$PYTHON_VERSION"
     else
       cecho "yellow" "DRY-RUN: uv python install $PYTHON_VERSION"
@@ -44,17 +44,22 @@ fi
 # Install headroom-ai[all] via uv tool install
 if command -v headroom >/dev/null 2>&1; then
   cecho "yellow" "[headroom] is already present. Updating it..."
-fi
-
-if [ "$DRY_RUN" -ne "1" ]; then
-  uv tool install --python "python${PYTHON_VERSION}" 'headroom-ai[all]'
-  cecho "green" "[headroom] installation done."
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    uv tool upgrade headroom-ai
+  else
+    cecho "yellow" "DRY-RUN: uv tool upgrade headroom-ai"
+  fi
 else
-  cecho "yellow" "DRY-RUN: uv tool install --python python${PYTHON_VERSION} 'headroom-ai[all]'"
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    uv tool install --python "python${PYTHON_VERSION}" 'headroom-ai[all]'
+    cecho "green" "[headroom] installation done."
+  else
+    cecho "yellow" "DRY-RUN: uv tool install --python python${PYTHON_VERSION} 'headroom-ai[all]'"
+  fi
 fi
 
 # Verify
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if command -v headroom >/dev/null 2>&1; then
     cecho "green" "[headroom] $(headroom --version 2>/dev/null || echo 'installed') successfully."
   else

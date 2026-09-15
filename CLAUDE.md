@@ -62,8 +62,8 @@ fi
 `_options.sh` composes arrays from smaller groups — understand the hierarchy before adding a package:
 
 ```
-MINIMAL_TASKS          → base essentials (base-tools, bash, git, tmux, yazi)
-CONSOLE_ONLY_TASKS     → dev tools added at Console tier (nodejs, golang, claude-code, glow, …)
+MINIMAL_TASKS          → base essentials (base-tools, git, yazi, zellij, zsh)
+CONSOLE_ONLY_TASKS     → dev tools added at Console tier (fastfetch, glow, nodejs, onefetch)
 CONSOLE_TASKS          → MINIMAL + CONSOLE_ONLY
 CONSOLE_EXTRA_TASKS    → opt-in extras (docker, nvim, kubectl, dotnet, opencode, …)
 DESKTOP_ONLY_TASKS     → GUI-only apps (ghostty, zed)
@@ -73,6 +73,7 @@ DESKTOP_EXTRA_TASKS    → CONSOLE_EXTRA + GUI extras (kitty, tabby, vscode, jet
 ALL_DESKTOP_TASKS      → DESKTOP + DESKTOP_EXTRA
 ALL_TASKS              → deduplicated union of everything (sorted)
 ```
+For exact per-tier membership, read `_scripts/core/_options.sh` or run `./unattended_setup.sh ls`.
 
 ### Adding a New Package
 1. Create `_scripts/core/<name>-install.sh` and/or `<name>-setup.sh`
@@ -86,16 +87,16 @@ Config directories (e.g., `bash/`, `git/`, `nvim/`) mirror the `$HOME` directory
 
 ### Claude Code Config (`claude-code/`)
 Not stowed — deployed imperatively by `claude-code-setup.sh`. Files under `claude-code/user-config/` are copied/merged into `~/.claude/`:
-- `statusline-command.sh` / `statusline-command.ps1` — ANSI status-line script that reads Claude Code's JSON payload via stdin and outputs two formatted lines (directory, git branch, model, context %, rate limits, cost). Copied to `~/.claude/statusline-command.sh` and registered via `settings.json` `statusLine.command`.
+- `statusline-command.sh` / `statusline-command-win.sh` — ANSI status-line script that reads Claude Code's JSON payload via stdin and outputs two formatted lines (directory, git branch, model, context %, rate limits, cost). Copied to `~/.claude/statusline-command.sh` and registered via `settings.json` `statusLine.command`.
 - `settings-part.json` — partial `~/.claude/settings.json` merged with `jq -s '.[0] * .[1]'`.
 - `CLAUDE.md` — seeded as `~/.claude/CLAUDE.md` only if the file does not yet exist.
 
 The setup script also installs plugins from two marketplaces (`claude-plugins-official`, `adeotek-plugins`) and sources `lsp-servers-install.sh`, which installs language servers for languages present on the machine (YAML/TOML/HTML/CSS/JSON format servers always; bash, JS/TS, Python, Go, C#, Rust, PowerShell, Terraform, Docker, Ansible, Lua servers when the respective toolchain is available).
 
 ### OpenCode Config (`opencode/`)
-Not stowed — deployed imperatively by `opencode-setup.sh`. Samples are copied to `~/.config/opencode/` only if the target does not yet exist:
-- `opencode.jsonc.sample` → `~/.config/opencode/opencode.jsonc` — global config with model, plugins, server, and multi-agent definitions (`build`, `plan`, `code-review`)
-- `AGENTS.md.sample` → `~/.config/opencode/AGENTS.md` — system prompt for the primary agent
+Not stowed — deployed imperatively by `opencode-setup.sh` into `~/.config/opencode/`. On re-deploy with the override prompt, `opencode.jsonc` is **merged** into the existing live config (see `opencode/merge-opencode-config.py`) — never a plain overwrite, so local plugins/credentials survive; `opencode-mem.jsonc` is merged with `--live-wins` (live values preserved, template fills missing keys). Other files are seeded only if missing:
+- `opencode.jsonc` → `~/.config/opencode/opencode.jsonc` — global config with model, plugins, server, and multi-agent definitions (`build`, `plan`, `code-review`)
+- `AGENTS.md` → `~/.config/opencode/AGENTS.md` — system prompt for the primary agent
 - `agents/`, `skills/`, `plugins/` — agent definitions, skill files, and JS plugins (e.g. `plugins/graphify.js`)
 
 ### Auxiliary Utility Scripts (`tools/`, `win-tools/`)
@@ -104,9 +105,8 @@ These directories contain standalone helper scripts not managed by the task/stow
 - `win-tools/.tools/` — PowerShell utilities for Windows/WSL environments (firewall rules, port tools, GitHub stats, etc.).
 
 ### ZSH Configurations
-`zsh/` contains two configs managed via `zsh-setup.sh`:
-- `config.zsh` — original config requiring external plugins (zsh-syntax-highlighting, zsh-autosuggestions)
-- `config-standalone.zsh` — self-contained config with no plugin manager; recommended for new setups
+`zsh/` config managed via `zsh-setup.sh`:
+- `config.zsh` — plugins (autosuggestions, syntax highlighting, history-substring-search, completions) managed by [antidote](https://antidote.sh) via `zsh_plugins.txt`
 
 Default prompt for ZSH is `starship` (`OPT_ZSH_DEFAULT_PROMPT`); bash defaults to `oh-my-posh`.
 

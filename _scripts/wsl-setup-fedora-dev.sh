@@ -73,12 +73,18 @@ INSTALL_TERRAFORM=false
 # Parse arguments
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --win-user)         WINDOWS_USERNAME="$2";     shift 2 ;;
-    --custom-ca-src)    CUSTOM_CA_SRC_PATH="$2";   shift 2 ;;
-    --git-name)         GIT_USER_NAME="$2";        shift 2 ;;
-    --git-email)        GIT_USER_EMAIL="$2";       shift 2 ;;
-    --nx-version)       NX_VERSION="$2";           shift 2 ;;
-    --angular-version)  ANGULAR_VERSION="$2";      shift 2 ;;
+    --win-user)         [[ $# -ge 2 ]] || { echo "ERROR: missing value for $1" >&2; exit 1; }
+                        WINDOWS_USERNAME="$2";     shift 2 ;;
+    --custom-ca-src)    [[ $# -ge 2 ]] || { echo "ERROR: missing value for $1" >&2; exit 1; }
+                        CUSTOM_CA_SRC_PATH="$2";   shift 2 ;;
+    --git-name)         [[ $# -ge 2 ]] || { echo "ERROR: missing value for $1" >&2; exit 1; }
+                        GIT_USER_NAME="$2";        shift 2 ;;
+    --git-email)        [[ $# -ge 2 ]] || { echo "ERROR: missing value for $1" >&2; exit 1; }
+                        GIT_USER_EMAIL="$2";       shift 2 ;;
+    --nx-version)       [[ $# -ge 2 ]] || { echo "ERROR: missing value for $1" >&2; exit 1; }
+                        NX_VERSION="$2";           shift 2 ;;
+    --angular-version)  [[ $# -ge 2 ]] || { echo "ERROR: missing value for $1" >&2; exit 1; }
+                        ANGULAR_VERSION="$2";      shift 2 ;;
     --ansible)          INSTALL_ANSIBLE=true;      shift ;;
     --claude)           INSTALL_CLAUDECODE=true;   shift ;;
     --docker)           INSTALL_DOCKER=true;       shift ;;
@@ -150,8 +156,9 @@ stage_status $_changed "WSL configuration (/etc/wsl.conf)"
 
 # appendWindowsPath only takes effect on distro restart, but we can strip
 # Windows-mounted paths from the current session immediately.
-if echo "$PATH" | grep -q '/mnt/[a-z]/'; then
-  export PATH=$(echo "$PATH" | tr ':' '\n' | grep -v '^/mnt/[a-z]/' | tr '\n' ':' | sed 's/:$//')
+if echo "$PATH" | grep -q '/mnt/[a-zA-Z]/'; then
+  _path_clean="$(echo "$PATH" | tr ':' '\n' | grep -v '^/mnt/[a-zA-Z]/' | tr '\n' ':' | sed 's/:$//')"
+  export PATH="$_path_clean"
   stage_status true "Windows paths removed from current session PATH"
 else
   stage_status false "Windows paths removed from current session PATH"
@@ -159,8 +166,11 @@ fi
 
 # --- Install base tools ---
 
-sudo dnf install -y nano curl wget mc jq git awk openssl ca-certificates
-stage_status true "Base tools installed"
+if sudo dnf install -y nano curl wget mc jq git awk openssl ca-certificates; then
+  stage_status true "Base tools installed"
+else
+  stage_status false "Base tools installed (FAILED)"
+fi
 
 # --- SSH Keys ---
 
@@ -198,10 +208,15 @@ if [ -n "${CUSTOM_CA_SRC_PATH}" ]; then
   else
     sudo mkdir -p "${CUSTOM_CA_DEST_PATH}"
     for crt_file in "${CUSTOM_CA_SRC_PATH}/"*.crt; do
-      sudo openssl x509 -in "$crt_file" -out "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
-      sudo chown root:root "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
-      sudo chmod 644 "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
-      _changed=true
+      # Guard against the unexpanded glob when no *.crt files match
+      [ -f "$crt_file" ] || continue
+      if sudo openssl x509 -in "$crt_file" -out "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"; then
+        sudo chown root:root "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
+        sudo chmod 644 "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
+        _changed=true
+      else
+        echo_warning "Failed to import CA certificate: $crt_file"
+      fi
     done
     if $_changed; then sudo update-ca-trust extract; fi
   fi
@@ -210,8 +225,11 @@ stage_status $_changed "Custom CA certificates"
 
 # --- Update DNF Packages ---
 
-sudo dnf upgrade -y --refresh
-stage_status true "DNF packages upgrade"
+if sudo dnf upgrade -y --refresh; then
+  stage_status true "DNF packages upgrade"
+else
+  stage_status false "DNF packages upgrade (FAILED)"
+fi
 
 # --- GitHub known_hosts ---
 
@@ -230,8 +248,11 @@ fi
 _changed=false
 # Clone dotfiles repository
 if [ ! -d "$HOME/.dotfiles" ]; then
-  git clone "${DOTFILES_CLONE_URL}" "$HOME/.dotfiles"
-  _changed=true
+  if git clone "${DOTFILES_CLONE_URL}" "$HOME/.dotfiles"; then
+    _changed=true
+  else
+    echo_error "Failed to clone ${DOTFILES_CLONE_URL} into $HOME/.dotfiles"
+  fi
 fi
 
 # Check if dotfiles setup script is present
@@ -257,48 +278,69 @@ stage_status $_changed ".dotfiles setup"
 
 # Install tools using dotfiles setup script
 PACKAGES_LIST=$(printf '%s,' "${DOTFILES_PACKAGES[@]}")
-bash "$HOME/.dotfiles/unattended_setup.sh" --packages "${PACKAGES_LIST%,}"
-stage_status true "Standard .dotfiles packages installed"
+if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "${PACKAGES_LIST%,}"; then
+  stage_status true "Standard .dotfiles packages installed"
+else
+  stage_status false "Standard .dotfiles packages installed (FAILED)"
+fi
 
 # Install Ansible if not already installed
 if [ "$INSTALL_ANSIBLE" = true ] && ! command -v ansible &> /dev/null; then
-  bash "$HOME/.dotfiles/unattended_setup.sh" --packages "ansible"
-  stage_status true "Ansible installation"
+  if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "ansible"; then
+    stage_status true "Ansible installation"
+  else
+    stage_status false "Ansible installation (FAILED)"
+  fi
 else
   stage_status false "Ansible installation"
 fi
 # Install Claude Code if not already installed
 if [ "$INSTALL_CLAUDECODE" = true ] && ! command -v claude &> /dev/null; then
-  bash "$HOME/.dotfiles/unattended_setup.sh" --packages "claude-code"
-  stage_status true "Claude Code installation"
+  if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "claude-code"; then
+    stage_status true "Claude Code installation"
+  else
+    stage_status false "Claude Code installation (FAILED)"
+  fi
 else
   stage_status false "Claude Code installation"
 fi
 # Install Docker if not already installed
 if [ "$INSTALL_DOCKER" = true ] && ! command -v docker &> /dev/null; then
-  bash "$HOME/.dotfiles/unattended_setup.sh" --packages "docker"
-  stage_status true "Docker installation"
+  if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "docker"; then
+    stage_status true "Docker installation"
+  else
+    stage_status false "Docker installation (FAILED)"
+  fi
 else
   stage_status false "Docker installation"
 fi
 # Install Golang if not already installed
 if [ "$INSTALL_GOLANG" = true ] && ! command -v go &> /dev/null; then
-  bash "$HOME/.dotfiles/unattended_setup.sh" --packages "golang"
-  stage_status true "Golang installation"
+  if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "golang"; then
+    stage_status true "Golang installation"
+  else
+    stage_status false "Golang installation (FAILED)"
+  fi
 else
   stage_status false "Golang installation"
 fi
 # Install Kubectl and Helm if not already installed
 if [ "$INSTALL_KUBECTL" = true ]; then
   if ! command -v kubectl &> /dev/null; then
-    bash "$HOME/.dotfiles/unattended_setup.sh" --packages "kubectl"
-    stage_status true "Kubectl installation"
+    if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "kubectl"; then
+      stage_status true "Kubectl installation"
+    else
+      stage_status false "Kubectl installation (FAILED)"
+    fi
   else
     stage_status false "Kubectl installation"
   fi
   if ! command -v helm &> /dev/null; then
-    bash "$HOME/.dotfiles/unattended_setup.sh" --packages "helm"
-    stage_status true "Helm installation"
+    if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "helm"; then
+      stage_status true "Helm installation"
+    else
+      stage_status false "Helm installation (FAILED)"
+    fi
   else
     stage_status false "Helm installation"
   fi
@@ -308,15 +350,21 @@ else
 fi
 # Install Rust if not already installed
 if [ "$INSTALL_RUST" = true ] && ! command -v rustc &> /dev/null; then
-  bash "$HOME/.dotfiles/unattended_setup.sh" --packages "rust"
-  stage_status true "Rust installation"
+  if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "rustup"; then
+    stage_status true "Rust installation"
+  else
+    stage_status false "Rust installation (FAILED)"
+  fi
 else
   stage_status false "Rust installation"
 fi
 # Install Terraform if not already installed
 if [ "$INSTALL_TERRAFORM" = true ] && ! command -v terraform &> /dev/null; then
-  bash "$HOME/.dotfiles/unattended_setup.sh" --packages "terraform"
-  stage_status true "Terraform installation"
+  if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "terraform"; then
+    stage_status true "Terraform installation"
+  else
+    stage_status false "Terraform installation (FAILED)"
+  fi
 else
   stage_status false "Terraform installation"
 fi
@@ -326,21 +374,26 @@ fi
 _changed=false
 # Install NX globally if version is specified
 if [ -n "${NX_VERSION}" ]; then
-  sudo npm install -g nx@"$NX_VERSION"
-  _changed=true
+  if sudo npm install -g nx@"$NX_VERSION"; then
+    _changed=true
+  else
+    echo_warning "Failed to install nx@${NX_VERSION} globally"
+  fi
 
-  # Add aliases to .zshrc
-  if ! grep -q "DEV Aliases" ~/.zshrc; then
-    mv ~/.zshrc ~/.zshrc.bak
-    tee -a ~/.zshrc &> /dev/null <<'EOF'
+  # Add aliases to .zshrc (build into a temp file, then swap atomically)
+  if ! grep -q "DEV Aliases" ~/.zshrc 2>/dev/null; then
+    _zshrc_tmp="$(mktemp)"
+    {
+      cat <<'EOF'
 # DEV aliases
 alias nxrl='nx run-many --target=lint --max-warnings=0'
 alias nxrt='nx run-many --target=test'
 alias nxrlt='nx run-many --target=lint --max-warnings=0 & nx run-many --target=test'
 
 EOF
-    cat ~/.zshrc.bak >> ~/.zshrc
-    rm ~/.zshrc.bak
+      [ -f ~/.zshrc ] && cat ~/.zshrc
+    } > "$_zshrc_tmp"
+    mv "$_zshrc_tmp" ~/.zshrc
   fi
 fi
 stage_status $_changed "NPM NX global package"
@@ -348,8 +401,11 @@ stage_status $_changed "NPM NX global package"
 # Install Angular CLI globally if version is specified
 _changed=false
 if [ -n "${ANGULAR_VERSION}" ]; then
-  sudo npm install -g @angular/cli@"$ANGULAR_VERSION"
-  _changed=true
+  if sudo npm install -g @angular/cli@"$ANGULAR_VERSION"; then
+    _changed=true
+  else
+    echo_warning "Failed to install @angular/cli@${ANGULAR_VERSION} globally"
+  fi
 fi
 stage_status $_changed "NPM Angular CLI global package"
 
@@ -357,15 +413,17 @@ stage_status $_changed "NPM Angular CLI global package"
 
 _changed=false
 # Add env variables and aliases to .zshrc, before `source /home/dev/.config/zsh/config.zsh`
-if ! grep -q "DEV environment variables" ~/.zshrc; then
-  mv ~/.zshrc ~/.zshrc.bak
-  tee -a ~/.zshrc &> /dev/null <<'EOF'
+if ! grep -q "DEV environment variables" ~/.zshrc 2>/dev/null; then
+  _zshrc_tmp="$(mktemp)"
+  {
+    cat <<'EOF'
 # DEV environment variables
 export NX_TUI="false"
 
 EOF
-  cat ~/.zshrc.bak >> ~/.zshrc
-  rm ~/.zshrc.bak
+    [ -f ~/.zshrc ] && cat ~/.zshrc
+  } > "$_zshrc_tmp"
+  mv "$_zshrc_tmp" ~/.zshrc
   _changed=true
 fi
 

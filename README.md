@@ -1,4 +1,4 @@
-# AdeoTEK Dotfiles
+# AdeoTEK Dotfiles v2.0
 
 A comprehensive, modular collection of Linux dotfiles and automated installation scripts for setting up development environments across multiple distributions.
 
@@ -23,7 +23,7 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 ## 📦 What's Included
 
 ### Development Tools
-- **Languages**: Node.js (v24), Go (1.25.4), Rust, .NET SDK (10.0), PowerShell
+- **Languages**: Node.js (v24), Go (1.26.5), Rust, .NET SDK (10.0), PowerShell
 - **Cloud/DevOps**: Docker, AWS CLI, GCP CLI, Terraform, Ansible, Helm, kubectl
 - **Editors**: Neovim (with custom config), Zed, VS Code, JetBrains Toolbox
 - **AI/Code Assistants**: Claude Code, OpenCode, Hermes Agent
@@ -36,9 +36,7 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 
 ### Shell Environments
 - **Bash**: Comprehensive configuration with Oh My Posh prompt (default) and Starship support
-- **ZSH**: Two configurations available (see zsh/README.md for details):
-  - `config.zsh` — standard config requiring external plugins (zsh-syntax-highlighting, zsh-autosuggestions)
-  - `config-standalone.zsh` — self-contained config with no plugin manager; recommended for new setups
+- **ZSH**: `config.zsh` — plugin management via [antidote](https://antidote.sh) (autosuggestions, syntax highlighting, history-substring-search, completions)
 - Default prompt: **Oh My Posh** for Bash, **Starship** for ZSH
 
 ### Desktop Applications
@@ -72,8 +70,8 @@ git clone https://github.com/adeotek/dotfiles.git ~/.dotfiles && ~/.dotfiles/set
 
 3. **Select installation mode:**
    - **Manual selection** - Choose specific packages by ID
-   - **Minimal** - Essential tools (base-tools, bash, git, tmux, yazi)
-   - **Console** - Minimal + development tools (nodejs, golang, fastfetch, onefetch, glow, claude-code)
+   - **Minimal** - Essential tools (base-tools, git, yazi, zellij, zsh)
+   - **Console** - Minimal + dev tools (fastfetch, glow, nodejs, onefetch)
    - **Desktop** - Console + desktop apps (ghostty, zed)
    - **Interactive** - Prompted for each package individually
    - **All** - Everything including extra packages
@@ -108,7 +106,7 @@ The following packages can be installed individually or in groups:
 
 ### Development Languages & Runtimes
 - **nodejs** - Node.js runtime (v24, configurable)
-- **golang** - Go programming language (v1.25.4)
+- **golang** - Go programming language (v1.26.5)
 - **dotnet** - .NET SDK (v10.0)
 - **rustup** - Rust toolchain installer
 - **uv** - Python package and project manager (Astral)
@@ -160,16 +158,16 @@ Headroom supports all major LLM providers through its configurable proxy:
 - **GitHub Copilot** — via `headroom wrap copilot`
 
 ### Advanced Shell
-- **zsh** - Z shell with Oh My Zsh or standalone configuration
+- **zsh** - Z shell with antidote-managed plugins and Starship prompt
 
 ### Package Groups
 
-Packages are organized into logical tiers for easy installation:
+Packages are organized into logical tiers (source of truth: `_scripts/core/_options.sh`):
 
-- **Minimal**: `base-tools,bash,git,tmux,yazi`
-- **Console**: Minimal + `fastfetch,claude-code,glow,golang,nodejs,onefetch,tools`
+- **Minimal**: `base-tools,git,yazi,zellij,zsh`
+- **Console**: Minimal + `fastfetch,glow,nodejs,onefetch`
 - **Desktop**: Console + `ghostty,zed`
-- **Console Extra**: `ansible,aws-cli,docker,dotnet,github-cli,gcp-cli,graphify,headroom,helm,hermes,kubectl,lsp-servers,nvim,opencode,playwright,powershell,rustup,uv,terraform,zellij`
+- **Console Extra**: opt-in extras (docker, nvim, tmux, starship, AI tools, …)
 - **Desktop Extra**: Console Extra + `kitty,tabby,vscode,jetbrains-toolbox`
 - **All Console**: Console + Console Extra
 - **All Desktop**: Desktop + Desktop Extra
@@ -196,16 +194,15 @@ dotfiles/
 ├── bash/                       # Bash configuration
 │   └── .config/bash/
 │       └── config.bash
-├── zsh/                        # ZSH configurations
-│   ├── README.md               # Detailed ZSH documentation
+├── zsh/                        # ZSH configuration
+│   ├── README.md               # ZSH documentation
 │   └── .config/zsh/
-│       ├── config.zsh          # Standard ZSH config
-│       └── config-standalone.zsh  # Self-contained ZSH config
+│       ├── config.zsh          # ZSH config (antidote plugins)
+│       └── zsh_plugins.txt     # Antidote plugin list
 ├── claude-code/                # Claude Code configuration
 ├── headroom/                   # Headroom LLM compression proxy (service + model config)
 ├── hermes/                     # Hermes Agent AI coding assistant (config template)
 ├── git/                        # Git configuration
-├── neofetch/                   # Neofetch system info config
 ├── nvim/                       # Neovim configuration
 ├── tmux/                       # Tmux configuration
 ├── tools/                      # Curated CLI tools config
@@ -239,8 +236,8 @@ When you install a package like `git` or `bash`, the setup script:
 2. Creates symlinks from `~/.dotfiles/<package>/` to `$HOME`
 3. Preserves your ability to customize with local override files
 
-Example: Installing bash configuration creates:
-- `~/.bashrc` → symlink to `~/.dotfiles/bash/.bashrc`
+Example: Installing bash configuration:
+- `bash-setup.sh` appends `source ~/.config/bash/config.bash` to `~/.bashrc` (no symlink is created)
 - `~/.bashrc.local` → your local customizations (not tracked by git)
 
 ## 📋 Supported Distributions
@@ -291,8 +288,8 @@ The following default versions are configured (see `_scripts/core/_options.sh`):
 
 - Node.js: v24 (all distributions)
 - .NET SDK: v10.0
-- Go: v1.25.4
-- Nerd Fonts: v3.4.0 (CascadiaCode)
+- Go: v1.26.5
+- Nerd Fonts: v3.5.0 (CascadiaCode)
 - Bash Prompt: Oh My Posh
 - ZSH Prompt: Starship
 
@@ -327,10 +324,9 @@ Edit `_scripts/core/_options.sh` to change default versions, installation modes,
    ```bash
    ./unattended_setup.sh --packages zsh
    ```
-   This uses Starship as the default prompt. To override:
-   ```bash
-   ./unattended_setup.sh --packages zsh --prompt oh-my-posh
-   ```
+   This uses Starship as the default prompt. The prompt can only be changed via the
+   interactive `./setup.sh` (the `--prompt` flag belongs to the zsh/bash setup scripts,
+   not to `unattended_setup.sh`).
 
 ### Switch to Bash
 
@@ -345,10 +341,9 @@ Edit `_scripts/core/_options.sh` to change default versions, installation modes,
    ```bash
    ./unattended_setup.sh --packages bash
    ```
-   This uses Oh My Posh as the default prompt. To override:
-   ```bash
-   ./unattended_setup.sh --packages bash --prompt starship
-   ```
+   This uses Oh My Posh as the default prompt. The prompt can only be changed via the
+   interactive `./setup.sh` (the `--prompt` flag belongs to the zsh/bash setup scripts,
+   not to `unattended_setup.sh`).
 
 ### Notes
 
@@ -442,13 +437,13 @@ Enable verbose output for debugging:
 ### Configuration Locations
 
 - **Bash**: `~/.config/bash/config.bash` (sourced from `~/.bashrc`)
-- **ZSH**: `~/.config/zsh/config.zsh` or `config-standalone.zsh`
+- **ZSH**: `~/.config/zsh/config.zsh`
 - **Git**: `~/.config/git/config` (user settings in `~/.config/git.user/config`)
 - **Neovim**: `~/.config/nvim/`
 - **Tmux**: `~/.config/tmux/tmux.conf`
 - **Kitty**: `~/.config/kitty/kitty.conf`
 - **Yazi**: `~/.config/yazi/`
-- **Oh My Posh**: `~/.config/oh-my-posh/themes/`
+- **Oh My Posh**: `~/.config/oh-my-posh/` (themes: `gbs.omp.yaml`, `gbs-text.omp.yaml`)
 - **Headroom**: `~/.config/headroom/proxy.env` (provider config), `~/.headroom/models.json` (model limits + pricing)
 - **Headroom Dashboard**: `http://localhost:8787/dashboard` (live compression stats)
 

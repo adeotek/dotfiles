@@ -29,35 +29,15 @@ return {
           'ansiblels',
           'taplo'
         },
-        automatic_installation = true,
       })
 
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-      -- LSP servers configuration
-      require('lspconfig').lua_ls.setup({
+      -- LSP servers configuration (modern API: vim.lsp.config / vim.lsp.enable)
+      vim.lsp.config('*', {
         capabilities = capabilities,
       })
-      require('lspconfig').powershell_es.setup({
-        capabilities = capabilities,
-      })
-      require('lspconfig').ts_ls.setup({
-        capabilities = capabilities,
-      })
-      require('lspconfig').html.setup({
-        capabilities = capabilities,
-      })
-      require('lspconfig').cssls.setup({
-        capabilities = capabilities,
-      })
-      require('lspconfig').csharp_ls.setup({
-        capabilities = capabilities,
-      })
-      require('lspconfig').bashls.setup({
-        capabilities = capabilities,
-      })
-      require('lspconfig').pyright.setup({
-        capabilities = capabilities,
+      vim.lsp.config('pyright', {
         settings = {
           python = {
             analysis = {
@@ -68,15 +48,23 @@ return {
           }
         }
       })
-      require('lspconfig').ansiblels.setup({
-        capabilities = capabilities,
+      vim.lsp.config('ansiblels', {
         filetypes = {
           "yaml.ansible",
           "ansible"
         },
       })
-      require('lspconfig').taplo.setup({
-        capabilities = capabilities,
+      vim.lsp.enable({
+        'lua_ls',
+        'powershell_es',
+        'ts_ls',
+        'html',
+        'cssls',
+        'csharp_ls',
+        'bashls',
+        'pyright',
+        'ansiblels',
+        'taplo'
       })
 
       -- Configure nvim-cmp
@@ -106,12 +94,14 @@ return {
       })
 
       -- LSP keymaps
-      local on_attach = function(client, bufnr)
-        local opts = { buffer = bufnr }
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-      end
+      vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(ev)
+          local opts = { buffer = ev.buf }
+          vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+          vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+        end,
+      })
     end,
   },
 }

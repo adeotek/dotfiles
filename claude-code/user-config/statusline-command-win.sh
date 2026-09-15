@@ -26,8 +26,13 @@ Red="${ESC}[31m"
 sep="${Dim}|${Reset}"; colon="${Dim}:${Reset}"; slash="${Dim}/${Reset}"
 at="${Dim}@${Reset}"; lp="${Dim}(${Reset}"; rp="${Dim})${Reset}"
 
-# Read stdin with timeout
-raw=$(timeout 1 cat 2>/dev/null)
+# Read stdin with timeout. Only use GNU coreutils `timeout`: a System32-first
+# PATH can otherwise resolve it to Windows' timeout.exe (silently empty input).
+if timeout --version >/dev/null 2>&1; then
+    raw=$(timeout 1 cat 2>/dev/null)
+else
+    raw=$(cat 2>/dev/null)
+fi
 [[ -z "$raw" || "$raw" == "null" ]] && raw="{}"
 
 jqr() { printf '%s' "$raw" | jq -r "$1 // empty" 2>/dev/null; }
@@ -61,7 +66,7 @@ if [[ "$dir_display" =~ ^([A-Za-z]):/ ]]; then
     drive="${BASH_REMATCH[1],,}"
     dir_display="/${drive}${dir_display:2}"
 fi
-[[ "$dir_display" == "$HOME"* ]] && dir_display="~${dir_display#$HOME}"
+[[ "$dir_display" == "$HOME"* ]] && dir_display="~${dir_display#"$HOME"}"
 
 # Git branch
 git_branch=""
@@ -99,7 +104,7 @@ if [[ -f "$cache_path" ]]; then
     else
         ttl=$cache_ttl
     fi
-    cache_mtime=$(stat -c %Y "$cache_path" 2>/dev/null)
+    cache_mtime=$(stat -c %Y "$cache_path" 2>/dev/null || stat -f %m "$cache_path" 2>/dev/null || echo 0)
     now_epoch=$(date +%s)
     if [[ $(( now_epoch - cache_mtime )) -le $ttl ]]; then
         needs_fetch=0

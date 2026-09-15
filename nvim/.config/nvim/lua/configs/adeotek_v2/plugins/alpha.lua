@@ -5,8 +5,6 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = function()
         local dashboard = require("alpha.themes.dashboard")
-        require("alpha.term")
-        local arttoggle = false
 
         local logo = {
             [[                                                    ]],
@@ -19,31 +17,7 @@ return {
             [[                                                    ]],
         }
 
-        local art = {
-            -- { name, width, height }
-            { "tohru", 62, 17 },
-        }
-
-        if arttoggle == true then
-            dashboard.opts.opts.noautocmd = true
-            dashboard.section.terminal.opts.redraw = true
-            local path = vim.fn.stdpath("config") .. "/assets/"
-            -- local random = math.random(1, #art)
-            local currentart = art[1]
-            dashboard.section.terminal.command = "cat " .. path .. currentart[1]
-
-            dashboard.section.terminal.width = currentart[2]
-            dashboard.section.terminal.height = currentart[3]
-
-            dashboard.opts.layout = {
-                dashboard.section.terminal,
-                { type = "padding", val = 2 },
-                dashboard.section.buttons,
-                dashboard.section.footer,
-            }
-        else
-            dashboard.section.header.val = logo
-        end
+        dashboard.section.header.val = logo
         dashboard.section.buttons.val = {
             dashboard.button("f", " " .. "Find files", ":Telescope find_files <CR>"),
         }

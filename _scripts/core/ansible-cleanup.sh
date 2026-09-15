@@ -22,12 +22,21 @@ cleanup_done=0
 
 case $CURRENT_OS_ID in
   arch)
-    if pacman -Qi ansible >/dev/null 2>&1; then
-      if [ "$DRY_RUN" -ne "1" ]; then
-        sudo pacman -Rns --noconfirm ansible ansible-lint 2>/dev/null || true
-        cecho "green" "Removed ansible/ansible-lint via pacman."
+    installed_pkgs=()
+    for p in ansible ansible-lint; do
+      if pacman -Qi "$p" >/dev/null 2>&1; then
+        installed_pkgs+=("$p")
+      fi
+    done
+    if [[ "${#installed_pkgs[@]}" -gt 0 ]]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
+        if sudo pacman -Rns --noconfirm "${installed_pkgs[@]}"; then
+          cecho "green" "Removed ${installed_pkgs[*]} via pacman."
+        else
+          cecho "red" "Failed to remove ${installed_pkgs[*]} via pacman."
+        fi
       else
-        cecho "yellow" "DRY-RUN: sudo pacman -Rns --noconfirm ansible ansible-lint"
+        cecho "yellow" "DRY-RUN: sudo pacman -Rns --noconfirm ${installed_pkgs[*]}"
       fi
       cleanup_done=1
     else
@@ -36,8 +45,14 @@ case $CURRENT_OS_ID in
   ;;
   debian|ubuntu|pop)
     apt_cleanup_needed=0
+    installed_pkgs=()
+    for p in ansible ansible-lint; do
+      if dpkg -s "$p" >/dev/null 2>&1; then
+        installed_pkgs+=("$p")
+      fi
+    done
 
-    if dpkg -s ansible >/dev/null 2>&1 || dpkg -s ansible-lint >/dev/null 2>&1; then
+    if [[ "${#installed_pkgs[@]}" -gt 0 ]]; then
       apt_cleanup_needed=1
     fi
 
@@ -49,9 +64,15 @@ case $CURRENT_OS_ID in
       apt_cleanup_needed=1
     fi
 
-    if [ "$apt_cleanup_needed" -eq "1" ]; then
-      if [ "$DRY_RUN" -ne "1" ]; then
-        sudo apt-get remove -y ansible ansible-lint 2>/dev/null || true
+    if [[ "$apt_cleanup_needed" -eq "1" ]]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
+        if [[ "${#installed_pkgs[@]}" -gt 0 ]]; then
+          if sudo apt-get remove -y "${installed_pkgs[@]}"; then
+            cecho "green" "Removed ${installed_pkgs[*]} via apt-get."
+          else
+            cecho "red" "Failed to remove ${installed_pkgs[*]} via apt-get."
+          fi
+        fi
         sudo apt-get autoremove -y 2>/dev/null || true
 
         if [[ -f /etc/apt/sources.list.d/ansible.list ]]; then
@@ -72,9 +93,11 @@ case $CURRENT_OS_ID in
         done
 
         sudo apt-get update 2>/dev/null || true
-        cecho "green" "Old ansible packages and repos removed."
+        decho "green" "Old ansible packages and repos cleanup finished."
       else
-        cecho "yellow" "DRY-RUN: sudo apt-get remove -y ansible ansible-lint"
+        if [[ "${#installed_pkgs[@]}" -gt 0 ]]; then
+          cecho "yellow" "DRY-RUN: sudo apt-get remove -y ${installed_pkgs[*]}"
+        fi
         cecho "yellow" "DRY-RUN: sudo apt-get autoremove -y"
         cecho "yellow" "DRY-RUN: rm /etc/apt/sources.list.d/ansible.list"
         cecho "yellow" "DRY-RUN: rm /usr/share/keyrings/ansible-archive-keyring.gpg"
@@ -87,13 +110,22 @@ case $CURRENT_OS_ID in
     fi
   ;;
   fedora|redhat)
-    if rpm -q ansible >/dev/null 2>&1 || rpm -q ansible-lint >/dev/null 2>&1; then
-      if [ "$DRY_RUN" -ne "1" ]; then
-        sudo dnf remove -y ansible ansible-lint 2>/dev/null || true
+    installed_pkgs=()
+    for p in ansible ansible-lint; do
+      if rpm -q "$p" >/dev/null 2>&1; then
+        installed_pkgs+=("$p")
+      fi
+    done
+    if [[ "${#installed_pkgs[@]}" -gt 0 ]]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
+        if sudo dnf remove -y "${installed_pkgs[@]}"; then
+          cecho "green" "Removed ${installed_pkgs[*]} via dnf."
+        else
+          cecho "red" "Failed to remove ${installed_pkgs[*]} via dnf."
+        fi
         sudo dnf autoremove -y 2>/dev/null || true
-        cecho "green" "Removed ansible/ansible-lint via dnf."
       else
-        cecho "yellow" "DRY-RUN: sudo dnf remove -y ansible ansible-lint"
+        cecho "yellow" "DRY-RUN: sudo dnf remove -y ${installed_pkgs[*]}"
         cecho "yellow" "DRY-RUN: sudo dnf autoremove -y"
       fi
       cleanup_done=1
@@ -107,7 +139,7 @@ case $CURRENT_OS_ID in
   ;;
 esac
 
-if [ "$cleanup_done" -eq "0" ]; then
+if [[ "$cleanup_done" -eq "0" ]]; then
   cecho "yellow" "Nothing to clean up."
 else
   cecho "green" "[ansible] cleanup complete."

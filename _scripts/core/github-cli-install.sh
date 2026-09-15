@@ -18,23 +18,33 @@ fi
 # Install
 case $CURRENT_OS_ID in
   arch)
-    install_package "github-cli" "gh --version" "_" "github-cli"
+    install_package "github-cli" "gh --version"
     ;;
   debian|ubuntu|pop)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       sudo mkdir -p -m 755 /etc/apt/keyrings
       out=$(mktemp) && wget -nv -O "$out" https://cli.github.com/packages/githubcli-archive-keyring.gpg \
         && cat "$out" | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null
+      rm -f "$out"
       sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
       echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
       sudo apt-get update
+    else
+      cecho "yellow" "DRY-RUN: add GitHub CLI APT repository"
     fi
     install_package "gh" "gh --version"
     ;;
   fedora|redhat)
-    if [ "$DRY_RUN" -ne "1" ]; then
-      sudo dnf install dnf5-plugins
-      sudo dnf config-manager addrepo --from-repofile=https://cli.github.com/packages/rpm/gh-cli.repo
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      if command -v dnf5 >/dev/null 2>&1; then
+        sudo dnf install -y dnf5-plugins
+        sudo dnf config-manager addrepo --from-repofile="https://cli.github.com/packages/rpm/gh-cli.repo"
+      else
+        sudo dnf install -y dnf-plugins-core
+        sudo dnf -y config-manager --add-repo "https://cli.github.com/packages/rpm/gh-cli.repo"
+      fi
+    else
+      cecho "yellow" "DRY-RUN: add GitHub CLI dnf repository (dnf5 or dnf4 config-manager)"
     fi
     install_package "gh" "gh --version" "_" "--repo gh-cli"
     ;;
@@ -43,4 +53,3 @@ case $CURRENT_OS_ID in
     exit 1
     ;;
 esac
-

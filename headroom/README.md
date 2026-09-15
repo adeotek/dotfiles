@@ -28,7 +28,7 @@ Headroom natively supports the following providers via the proxy:
 | **OpenAI API** | Native | Default — no extra config needed |
 | **Anthropic API** | Native | Default — no extra config needed |
 | **OpenRouter** | `--backend openrouter` | Set `OPENROUTER_API_KEY` in `~/.config/headroom/proxy.env` |
-| **OpenCode Zen** | OpenAI-compatible | Set `OPENAI_TARGET_API_URL=https://opencode.ai/zen/v1` in `proxy.env` |
+| **OpenCode Zen** | OpenAI-compatible | Set `OPENAI_TARGET_API_URL=https://opencode.ai/zen/v1/chat/completions` in `proxy.env` |
 | **Google Gemini / Vertex AI** | `--backend vertex_ai` | Set `GOOGLE_APPLICATION_CREDENTIALS` for Vertex AI |
 | **GitHub Copilot** | `headroom wrap copilot` | Use wrapper command (see below) |
 
@@ -80,9 +80,9 @@ systemctl --user restart headroom-proxy
 
 ```bash
 # ~/.config/headroom/proxy.env
-OPENAI_TARGET_API_URL=https://opencode.ai/zen/v1
-# For Claude models via Zen, also set:
-# ANTHROPIC_BASE_URL=https://opencode.ai/zen/v1
+OPENAI_TARGET_API_URL=https://opencode.ai/zen/v1/chat/completions
+# For Claude models via Zen, use instead:
+# ANTHROPIC_TARGET_API_URL=https://opencode.ai/zen/v1/messages
 ```
 
 Then restart the proxy.

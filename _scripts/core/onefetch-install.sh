@@ -20,11 +20,7 @@ case $CURRENT_OS_ID in
   arch)
     install_package "onefetch" "onefetch --version"
     ;;
-  debian|ubuntu|pop)
-    source "$CDIR/homebrew-install.sh"
-    install_package "onefetch" "onefetch --version" "brew install onefetch"
-    ;;
-  fedora|redhat)
+  debian|ubuntu|pop|fedora|redhat)
     source "$CDIR/homebrew-install.sh"
     install_package "onefetch" "onefetch --version" "brew install onefetch"
     ;;

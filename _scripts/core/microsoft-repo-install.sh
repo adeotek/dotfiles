@@ -24,62 +24,30 @@ case $CURRENT_OS_ID in
     if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
       cecho "yellow" "SKIPPED: not available on ARM-based systems."
     else
-      if [ ! -f /etc/apt/sources.list.d/microsoft-prod.list ]; then
+      if [[ ! -f /etc/apt/sources.list.d/microsoft-prod.list ]]; then
         cecho "cyan" "Installing Microsoft APT source..."
-        if [ "$CURRENT_OS_VER" != "13" ]; then
+        if [[ "$CURRENT_OS_VER" == "13" ]]; then
           cecho "yellow" "SKIPPED: not available yet on Debian 13 systems."
         else
-          if [ "$DRY_RUN" -ne "1" ]; then
-            decho "magenta" "wget https://packages.microsoft.com/config/debian/${CURRENT_OS_VER}/packages-microsoft-prod.deb -O packages-microsoft-prod.deb"
-            wget "https://packages.microsoft.com/config/debian/${CURRENT_OS_VER}/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb
-            decho "magenta" "sudo dpkg -i packages-microsoft-prod.deb"
-            sudo dpkg -i packages-microsoft-prod.deb
-            decho "magenta" "rm packages-microsoft-prod.deb"
-            rm packages-microsoft-prod.deb
-            decho "magenta" "sudo apt-get update"
-            sudo apt-get update
+          if [[ "$DRY_RUN" -ne "1" ]]; then
+            MS_REPO_DEB="$(mktemp --suffix=.deb)"
+            if wget -q "https://packages.microsoft.com/config/debian/${CURRENT_OS_VER}/packages-microsoft-prod.deb" -O "$MS_REPO_DEB" \
+              && sudo dpkg -i "$MS_REPO_DEB" \
+              && sudo apt-get update; then
+              decho "green" "Microsoft APT source installed."
+            else
+              cecho "red" "Failed to install Microsoft APT source."
+            fi
+            rm -f "$MS_REPO_DEB"
           else
-            cecho "yellow" "DRY-RUN: wget https://packages.microsoft.com/config/debian/${CURRENT_OS_VER}/packages-microsoft-prod.deb -O packages-microsoft-prod.deb"
-            cecho "yellow" "DRY-RUN: sudo dpkg -i packages-microsoft-prod.deb"
-            cecho "yellow" "DRY-RUN: rm packages-microsoft-prod.deb"
-            cecho "yellow" "DRY-RUN: sudo apt-get update"
+            cecho "yellow" "DRY-RUN: wget https://packages.microsoft.com/config/debian/${CURRENT_OS_VER}/packages-microsoft-prod.deb -O <tmp>.deb && sudo dpkg -i <tmp>.deb && sudo apt-get update"
           fi
         fi
       fi
     fi
     ;;
   ubuntu|pop)
-    if [[ "$CURRENT_OS_VER" != "24.10" ]]; then
-      if ! grep -q "^deb.*dotnet/backports" /etc/apt/sources.list.d/*.list 2>/dev/null; then
-        cecho "cyan" "Enabling dotnet backports Ubuntu feed..."
-        if [ "$DRY_RUN" -ne "1" ]; then
-          sudo add-apt-repository -y ppa:dotnet/backports
-          sudo apt-get update
-        else
-          cecho "yellow" "DRY-RUN: sudo add-apt-repository -y ppa:dotnet/backports"
-          cecho "yellow" "DRY-RUN: sudo apt-get update"
-        fi
-      fi
-    else
-      if [ ! -f /etc/apt/sources.list.d/microsoft-prod.list ]; then
-        cecho "cyan" "Installing Microsoft APT source..."
-if [ "$DRY_RUN" -ne "1" ]; then
-            decho "magenta" "wget https://packages.microsoft.com/config/ubuntu/${CURRENT_OS_VER}/packages-microsoft-prod.deb -O packages-microsoft-prod.deb"
-            wget "https://packages.microsoft.com/config/ubuntu/${CURRENT_OS_VER}/packages-microsoft-prod.deb" -O packages-microsoft-prod.deb
-            decho "magenta" "sudo dpkg -i packages-microsoft-prod.deb"
-            sudo dpkg -i packages-microsoft-prod.deb
-            decho "magenta" "rm packages-microsoft-prod.deb"
-            rm packages-microsoft-prod.deb
-            decho "magenta" "sudo apt-get update"
-            sudo apt-get update
-          else
-            cecho "yellow" "DRY-RUN: wget https://packages.microsoft.com/config/ubuntu/${CURRENT_OS_VER}/packages-microsoft-prod.deb -O packages-microsoft-prod.deb"
-            cecho "yellow" "DRY-RUN: sudo dpkg -i packages-microsoft-prod.deb"
-            cecho "yellow" "DRY-RUN: rm packages-microsoft-prod.deb"
-            cecho "yellow" "DRY-RUN: sudo apt-get update"
-          fi
-      fi
-    fi
+    cecho "yellow" "SKIPPED: not required on Ubuntu-based systems."
     ;;
   fedora|redhat)
     cecho "yellow" "SKIPPED: not required on RHEL-based systems."

@@ -28,51 +28,29 @@
 #   --dry-run             Perform a dry run without making actual changes
 #
 # AVAILABLE PACKAGES:
-#   Core/Minimal packages:
-#     base-tools          Essential command-line tools
-#     git                 Git version control system
-#     yazi                File manager
-#     bash                Bash shell configuration
-#     tmux                Terminal multiplexer
-#     nvim                Neovim text editor
+#   Run './unattended_setup.sh ls' or see _scripts/core/_options.sh for the
+#   authoritative, always-current task list and tier arrays.
 #
-#   Console-only packages:
-#     dotnet              .NET SDK (default: 8.0)
-#     neofetch            System information display
-#     onefetch            Git repository information display
-#
-#   Desktop-only packages:
-#     kitty               Terminal emulator
-#     zed                 Zed text editor
-#
-#   Extra packages (console/desktop):
-#     github-cli          GitHub command-line interface
-#     ansible             Automation tool
-#     docker              Container platform
-#     golang              Go programming language (default: 1.24.0)
-#     powershell          PowerShell
-#     python              Python programming language
-#     nodejs              Node.js runtime (default: 22)
-#     rustup              Rust toolchain installer
-#     tabby               Terminal application (desktop only)
-#     vscode              Visual Studio Code (desktop only)
-#     jetbrains-toolbox   JetBrains development tools (desktop only)
-#     gcp-cli             Google Cloud Platform CLI
-#     terraform           Infrastructure as Code tool
-#     zsh                 Z shell
-#
-# PACKAGE GROUPS (for reference):
-#   Minimal:    base-tools,git,yazi,bash,tmux,nvim
-#   Console:    Minimal + dotnet,neofetch,onefetch
-#   Desktop:    Console + kitty,zed
-#   All:        Desktop + all extra packages + zsh
+# PACKAGE GROUPS (from _options.sh arrays):
+#   Minimal:        base-tools, git, yazi, zellij, zsh
+#   Console-only:   fastfetch, glow, nodejs, onefetch
+#   Console:        Minimal + Console-only
+#   Console extras: ansible, aws-cli, bash, claude-code, docker, dotnet,
+#                   gcp-cli, github-cli, golang, graphify, headroom, helm,
+#                   herdr, hermes, homebrew, kubectl, lsp-servers, mise,
+#                   nerd-fonts, nvim, oh-my-posh, opencode, playwright,
+#                   powershell, rtk, rustup, starship, terraform, tmux,
+#                   tools, uv
+#   Desktop-only:   ghostty, zed
+#   Desktop extras: Console extras + kitty, tabby, vscode, jetbrains-toolbox
+#   Shell:          zsh (in Minimal)
 #
 # EXAMPLES:
 #   # List all available packages
 #   ./unattended_setup.sh ls
 #
 #   # Install minimal development environment
-#   ./unattended_setup.sh --packages base-tools,git,nvim,tmux
+#   ./unattended_setup.sh --packages base-tools,git,yazi,zellij,zsh
 #
 #   # Install development environment with Docker and Node.js
 #   ./unattended_setup.sh --packages git,nvim,docker,nodejs --verbose
@@ -110,8 +88,8 @@ if [[ "$1" == "ls" ]]; then
   exit 0
 fi
 
-## Startup debug 
-cecho "blue" "Starting dotfiles unatended setup ($DFS_ACTION)..."
+## Startup debug
+cecho "blue" "Starting dotfiles unattended setup ($DFS_ACTION)..."
 decho "magenta" "Current OS: $CURRENT_OS_ID"
 decho "magenta" "dotfiles root path: $RDIR"
 decho "magenta" "core scripts path: $CDIR"
@@ -121,15 +99,29 @@ if [[ -z "${ARGS["packages"]}" ]]; then
   cecho "red" "ERROR: --packages argument is required!"
   cecho "white" "Usage: $0 --packages <package1,package2,...> [OPTIONS]"
   cecho "white" "Use '$0 ls' to list all available packages"
-  exit 10
+  exit 1
 fi
 
-# Parse and validate package list
-IFS=',' read -ra SELECTED_PACKAGES <<< "${ARGS["packages"]}"
-if [[ -z "${SELECTED_PACKAGES[*]}" ]]; then
+# Parse package list once (split on commas and spaces; no per-loop trimming needed)
+IFS=', ' read -ra parsed_packages <<< "${ARGS["packages"]}"
+
+# Validate package names against known tasks
+SELECTED_PACKAGES=()
+for pkg in "${parsed_packages[@]}"
+do
+  [[ -z "$pkg" ]] && continue
+  if [[ -z "${TASK_TYPES[$pkg]:-}" ]]; then
+    cecho "red" "ERROR: Unknown package: [$pkg]!"
+    cecho "white" "Use '$0 ls' to list all available packages"
+    exit 1
+  fi
+  SELECTED_PACKAGES+=("$pkg")
+done
+
+if [[ "${#SELECTED_PACKAGES[@]}" -eq 0 ]]; then
   cecho "red" "ERROR: No valid packages found in package list!"
   cecho "white" "Use '$0 ls' to list all available packages"
-  exit 10
+  exit 1
 fi
 
 # Display selected packages in verbose mode
@@ -139,7 +131,7 @@ if [[ "$VV" -eq 1 ]]; then
 fi
 
 # System update (performed before package installations)
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   source "$CDIR/system-update.sh"
 else
   cecho "yellow" "Dry run mode enabled. System update will be skipped."
@@ -149,7 +141,6 @@ fi
 # Each package is processed individually using its corresponding install/setup script
 for pkg in "${SELECTED_PACKAGES[@]}"
 do
-  pkg=$(echo "$pkg" | xargs)  # Trim whitespace from package name
   pkg_task_type="${TASK_TYPES["$pkg"]}"  # Get task type (install/setup)
   decho "magenta" "Processing $pkg ($pkg_task_type) with default settings"
   # shellcheck source=/dev/null

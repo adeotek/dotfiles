@@ -9,6 +9,15 @@ INSTALL_DIR="$HOME/.hermes/hermes-agent"
 NOTIFY_SCRIPT="$HOME/.hermes/scripts/hermes-update-notify.sh"
 RUN_LOG="$(mktemp)"
 
+# Serialize runs: a hung update plus the daily timer must not race on the same git state.
+LOCK_FILE="${TMPDIR:-/tmp}/hermes-update-daily.lock"
+exec 9>"$LOCK_FILE"
+if ! flock -n 9; then
+    echo "HERMES_UPDATE_DAILY_RESULT=SKIPPED reason=locked" >>"$RUN_LOG"
+    rm -f "$RUN_LOG"
+    exit 0
+fi
+
 notify() { bash "$NOTIFY_SCRIPT" "$1" >>"$RUN_LOG" 2>&1 || true; }
 
 PRE="$(git -C "$INSTALL_DIR" rev-parse --short HEAD 2>/dev/null || echo unknown)"
