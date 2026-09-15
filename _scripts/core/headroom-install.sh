@@ -44,13 +44,18 @@ fi
 # Install headroom-ai[all] via uv tool install
 if command -v headroom >/dev/null 2>&1; then
   cecho "yellow" "[headroom] is already present. Updating it..."
-fi
-
-if [[ "$DRY_RUN" -ne "1" ]]; then
-  uv tool install --python "python${PYTHON_VERSION}" 'headroom-ai[all]'
-  cecho "green" "[headroom] installation done."
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    uv tool upgrade headroom-ai
+  else
+    cecho "yellow" "DRY-RUN: uv tool upgrade headroom-ai"
+  fi
 else
-  cecho "yellow" "DRY-RUN: uv tool install --python python${PYTHON_VERSION} 'headroom-ai[all]'"
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    uv tool install --python "python${PYTHON_VERSION}" 'headroom-ai[all]'
+    cecho "green" "[headroom] installation done."
+  else
+    cecho "yellow" "DRY-RUN: uv tool install --python python${PYTHON_VERSION} 'headroom-ai[all]'"
+  fi
 fi
 
 # Verify

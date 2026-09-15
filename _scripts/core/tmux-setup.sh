@@ -19,7 +19,16 @@ fi
 source "$CDIR/tmux-install.sh"
 
 # Setup
-if [ ! -e "$CDIR/../../tmux/.config/tmux/tmux.conf.local" ]; then
+tmux_conf_local="$CDIR/../../tmux/.config/tmux/tmux.conf.local"
+if [[ -L "$tmux_conf_local" && ! -e "$tmux_conf_local" ]]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    rm -f "$tmux_conf_local"
+    cecho "yellow" "Removed dangling tmux.conf.local symlink — recreating it."
+  else
+    cecho "yellow" "DRY-RUN: rm -f $tmux_conf_local (dangling symlink)"
+  fi
+fi
+if [[ ! -e "$tmux_conf_local" ]]; then
   tmux_local_config="gbs.full"
   if [[ "${ARGS["unattended"]}" != "1" ]]; then
     read -r -p "Please select tmux local config: light/full [l/F] " tmux_local_mode || tmux_local_mode=""

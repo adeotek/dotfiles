@@ -74,7 +74,7 @@ $results = Get-NetFirewallRule -Enabled True | ForEach-Object {
             Name          = $rule.Name
         }
     }
-} | Where-Object { $_ }
+}
 
 if (-not $results) {
     Write-Host "No enabled firewall rules found for port $Port." -ForegroundColor Yellow

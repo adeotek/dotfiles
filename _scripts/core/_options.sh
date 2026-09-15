@@ -14,21 +14,7 @@ OPT_GOLANG_DEFAULT_VERSION="1.26.5"
 OPT_NERDFONTS_DEFAULT_VERSION="3.5.0"
 OPT_NERDFONTS_DEFAULT_FONT="CascadiaCode"
 OPT_NODEJS_DEFAULT_INSTALL_MODE="source"
-case $CURRENT_OS_ID in
-  arch)
-    OPT_NODEJS_DEFAULT_VERSION="24"
-    ;;
-  debian|ubuntu|pop)
-    OPT_NODEJS_DEFAULT_VERSION="24"
-    ;;
-  fedora|redhat)
-    OPT_NODEJS_DEFAULT_VERSION="24"
-    ;;
-  *)
-    cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
-    exit 1
-    ;;
-esac
+OPT_NODEJS_DEFAULT_VERSION="24"
 
 declare MINIMAL_TASKS=(
   "base-tools"
@@ -118,14 +104,14 @@ declare ALL_TASKS=(
   "${DESKTOP_ONLY_TASKS[@]}"
   "${DESKTOP_EXTRA_TASKS[@]}"
 )
-readarray -t ALL_TASKS < <(printf '%s\n' "${ALL_TASKS[@]}" | sort)
+readarray -t ALL_TASKS < <(printf '%s\n' "${ALL_TASKS[@]}" | sort -u)
 
 MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "c")
 declare -A MENU_OPTIONS=(
   ["0"]="Manual selection"
   ["1"]="Minimal (${MINIMAL_TASKS[*]})"
-  ["2"]="Console (Minimal + ${CONSOLE_ONLY_TASKS[*]})"
-  ["3"]="Desktop (Console + ${DESKTOP_ONLY_TASKS[*]})"
+  ["2"]="Console (Minimal + ${CONSOLE_ONLY_TASKS[*]}; extras opt-in)"
+  ["3"]="Desktop (Console + ${DESKTOP_ONLY_TASKS[*]}; extras opt-in)"
   ["4"]="Interactive"
   ["c"]="Cancel/Exit"
 )
@@ -167,7 +153,7 @@ declare -A TASK_TYPES=(
   ["uv"]="install"
   ["rtk"]="setup"
   ["rustup"]="install"
-  ["starship"]="install"
+  ["starship"]="setup"
   ["tabby"]="setup"
   ["terraform"]="install"
   ["tmux"]="setup"

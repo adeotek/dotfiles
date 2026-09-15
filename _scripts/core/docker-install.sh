@@ -61,14 +61,21 @@ case $CURRENT_OS_ID in
     install_package "docker-ce" "sudo docker --version" "_" "docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
     ;;
   fedora|redhat)
-    if [ "$CURRENT_OS_ID" == "redhat" ]; then
+    if [[ "$CURRENT_OS_ID" == "redhat" ]]; then
       DOCKER_REPO_URL="https://download.docker.com/linux/rhel/docker-ce.repo"
     else
       DOCKER_REPO_URL="https://download.docker.com/linux/fedora/docker-ce.repo"
     fi
     if [[ "$DRY_RUN" -ne "1" ]]; then
-      sudo dnf -y install dnf-plugins-core libsecret
-      sudo dnf-3 config-manager --add-repo "$DOCKER_REPO_URL"
+      if command -v dnf5 >/dev/null 2>&1; then
+        sudo dnf install -y dnf5-plugins libsecret
+        sudo dnf config-manager addrepo --from-repofile="$DOCKER_REPO_URL"
+      else
+        sudo dnf install -y dnf-plugins-core libsecret
+        sudo dnf -y config-manager --add-repo "$DOCKER_REPO_URL"
+      fi
+    else
+      cecho "yellow" "DRY-RUN: add Docker CE dnf repository (dnf5 or dnf4 config-manager)"
     fi
     install_package "docker-ce" "sudo docker --version" "_" "docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
     ;;

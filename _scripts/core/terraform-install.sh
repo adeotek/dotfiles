@@ -17,6 +17,9 @@ fi
 
 # Install
 case $CURRENT_OS_ID in
+  arch)
+    install_package "terraform" "terraform --version"
+    ;;
   debian|ubuntu|pop)
     HASHICORP_CODENAME="$(. /etc/os-release && echo "${VERSION_CODENAME:-$UBUNTU_CODENAME}")"
     if [ -z "$HASHICORP_CODENAME" ]; then
@@ -25,14 +28,18 @@ case $CURRENT_OS_ID in
     if [ ! -f /etc/apt/sources.list.d/hashicorp.list ]; then
       cecho "cyan" "Installing Hashicorp APT source..."
       if [[ "$DRY_RUN" -ne "1" ]]; then
-        decho "magenta" "wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg"
-        wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-        decho "magenta" "echo \"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $HASHICORP_CODENAME main\" | sudo tee /etc/apt/sources.list.d/hashicorp.list"
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $HASHICORP_CODENAME main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-        decho "magenta" "sudo apt-get update"
-        sudo apt-get update
+        HASHICORP_KEY_TMP="$(mktemp)"
+        if wget -q -O "$HASHICORP_KEY_TMP" https://apt.releases.hashicorp.com/gpg \
+          && sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg "$HASHICORP_KEY_TMP"; then
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $HASHICORP_CODENAME main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+          sudo apt-get update
+        else
+          cecho "red" "Failed to install Hashicorp APT key."
+          return 1
+        fi
+        rm -f "$HASHICORP_KEY_TMP"
       else
-        cecho "yellow" "DRY-RUN: wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg"
+        cecho "yellow" "DRY-RUN: wget -O <tmp> https://apt.releases.hashicorp.com/gpg && sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg <tmp>"
         cecho "yellow" "DRY-RUN: echo \"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $HASHICORP_CODENAME main\" | sudo tee /etc/apt/sources.list.d/hashicorp.list"
         cecho "yellow" "DRY-RUN: sudo apt-get update"
       fi

@@ -40,7 +40,7 @@ if [[ -z "$GOLANG_VERSION" ]]; then
 else
   GOLANG_INSTALLED=""
   if [[ -x "$(command -v go)" ]]; then
-    if go version | grep "$GOLANG_VERSION" > /dev/null; then
+    if go version | grep -q "go${GOLANG_VERSION} "; then
       cecho "yellow" "[golang] is already present."
       GOLANG_INSTALLED="1"
     else
@@ -56,13 +56,22 @@ else
     else
       GOLANG_ARCH="amd64"
     fi
+    GOLANG_URL="https://go.dev/dl/go${GOLANG_VERSION}.linux-${GOLANG_ARCH}.tar.gz"
     if [[ "$DRY_RUN" -ne "1" ]]; then
-      wget "https://go.dev/dl/go${GOLANG_VERSION}.linux-${GOLANG_ARCH}.tar.gz"
-      sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf "go${GOLANG_VERSION}.linux-${GOLANG_ARCH}.tar.gz"
-      rm -f "go${GOLANG_VERSION}.linux-${GOLANG_ARCH}.tar.gz"
-      cecho "green" "[golang] installation done."
+      GOLANG_TARBALL="$(mktemp)"
+      if ! wget -q "$GOLANG_URL" -O "$GOLANG_TARBALL"; then
+        cecho "red" "Failed to download Go ${GOLANG_VERSION}. Existing [golang] install left untouched."
+        rm -f "$GOLANG_TARBALL"
+        return 1
+      fi
+      if sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf "$GOLANG_TARBALL"; then
+        cecho "green" "[golang] installation done."
+      else
+        cecho "red" "[golang] extraction into /usr/local/go failed."
+      fi
+      rm -f "$GOLANG_TARBALL"
     else
-      cecho "yellow" "DRY-RUN: rm -rf /usr/local/go && tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-${GOLANG_ARCH}.tar.gz"
+      cecho "yellow" "DRY-RUN: wget $GOLANG_URL -O <tmp> && sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf <tmp>"
     fi
   fi
 fi

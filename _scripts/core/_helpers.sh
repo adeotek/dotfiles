@@ -20,9 +20,9 @@ DFS_ACTION="init"
 # Global functions
 
 function process_args() {
-  if [[ "${#1}" -eq 0 || "${1:0:1}" == "-" || "$1" == "" ]]; then
-    DFS_ACTION="init"
-  else
+  # Only set the action from a leading non-flag argument; never clobber an
+  # already-set DFS_ACTION (e.g. "refresh") with "init" when $1 is a flag.
+  if [[ -n "$1" && "${1:0:1}" != "-" ]]; then
     DFS_ACTION="$1"
     shift
   fi
@@ -38,7 +38,7 @@ function process_args() {
       --*)
         if [[ ! -v ARGS[${1:2}] ]]; then
           echo "ERROR: Invalid argument/flag: $1!"
-          exit 2
+          exit 1
         fi
         if [[ -z "$2" || "${2:0:2}" == "--" ]]; then
           ARGS[${1:2}]=1
@@ -49,7 +49,7 @@ function process_args() {
       ;;
       *)
         echo "ERROR[0]: Unknown argument/flag: $1!"
-        exit 2
+        exit 1
       ;;
     esac
     shift
@@ -81,9 +81,11 @@ function cecho() {
   esac
 
   if [ -z "$color_code" ]; then
-    echo "$args" "$@"
+    # shellcheck disable=SC2086  # intentional: empty args must vanish, "-n" must pass as flag
+    echo ${args:+$args} "$@"
   else
-    echo -e "$args" "\e[${color_code}m${*}\e[0m"
+    # shellcheck disable=SC2086
+    echo -e ${args:+$args} "\e[${color_code}m${*}\e[0m"
   fi
 }
 
@@ -110,10 +112,6 @@ function aecho() {
     fi
     cecho "$color" "$val"
   done
-}
-
-function is_associative_array() {
-  [[ "$(declare -p "$1" 2>/dev/null)" =~ "declare -A" ]]
 }
 
 function get_vv() {
@@ -155,9 +153,9 @@ function rename_dir_if_exists() {
 
   if [ -d "$target" ]; then
     mv "$target" "$target$suffix"
-    decho "Directory found and renamed to [$target$suffix]"
+    decho "magenta" "Directory found and renamed to [$target$suffix]"
   else
-    decho "Directory [$target] not found!"
+    decho "magenta" "Directory [$target] not found!"
   fi
 }
 
@@ -175,15 +173,15 @@ function rename_file_if_exists() {
 
   if [ -f "$target" ]; then
     mv "$target" "$target$suffix"
-    decho "File found and renamed to [$target$suffix]"
+    decho "magenta" "File found and renamed to [$target$suffix]"
   else
-    decho "File [$target] not found!"
+    decho "magenta" "File [$target] not found!"
   fi
 }
 
 function increase_ulimit() {
   if [ $# -ne 1 ]; then
-    cecho "red" "increase_ulimit() error: No target limit provided (Usage: adjust_ulimit <target_limit>)"
+    cecho "red" "increase_ulimit() error: No target limit provided (Usage: increase_ulimit <target_limit>)"
     return
   fi
 
@@ -196,6 +194,12 @@ function increase_ulimit() {
   # Get current soft limit
   local current_limit
   current_limit=$(ulimit -Sn)
+
+  # "unlimited" (common default) is not numeric; it is already sufficient.
+  if ! [[ "$current_limit" =~ ^[0-9]+$ ]]; then
+    decho "yellow" "Current ulimit ($current_limit) is not numeric; assuming it is sufficient."
+    return
+  fi
 
   if [ "$current_limit" -lt "$target_limit" ]; then
     cecho "yellow" "Current ulimit ($current_limit) is below target ($target_limit). Increasing..."
@@ -279,7 +283,7 @@ function get_stow_command() {
     extra_args="$(get_vv)"
   fi
 
-  echo "stow --dir=$RDIR --target=$HOME $extra_args $stow_arg $package"
+  echo "stow --dir=\"$RDIR\" --target=\"$HOME\" $extra_args $stow_arg $package"
 }
 
 function stow_package() {
@@ -331,56 +335,9 @@ function stow_package() {
     fi
   fi
 
-  if [ -z "$stow_action" ]; then
-    cecho "red" "Missing stow action for package [$package]!"
-    return
-  fi
   cecho "cyan" "Running stow $stow_action for [$package]..."
   stow_command=$(get_stow_command "$package" "$stow_action")
   execute_command "$stow_command" "[$package] setup done."
-}
-
-function symlink_package_directory() {
-  local package="$1"
-  local directory="$2"
-  local stow_action="$3"
-  local dir_rename="$4"
-
-  if [ -z "$stow_action" ]; then
-    stow_action="$DFS_ACTION"
-  fi
-
-  case $stow_action in
-    init|refresh)
-      if [ ! -d "$CURRENT_CONFIG_DIR/$package" ]; then
-        mkdir -p "$CURRENT_CONFIG_DIR/$package"
-      fi
-
-      # Check if directory is already symlinked
-      if [ -L "$CURRENT_CONFIG_DIR/$package/$directory" ]; then
-        cecho "yellow" "Nothing to do. Directory [$directory] from package [$package] is already stowed (using symlink)."
-        return
-      fi
-
-      rename_dir_if_exists "$CURRENT_CONFIG_DIR/$package/$directory"
-      stow_command="ln -s \"$RDIR/$package/$directory\" \"$CURRENT_CONFIG_DIR/$package/$directory\""
-      execute_command "$stow_command" "Directory [$directory] from package [$package] stowed (using symlink)."
-    ;;
-    remove)
-      # Check if directory is already symlinked
-      if [ ! -L "$CURRENT_CONFIG_DIR/$package/$directory" ]; then
-        cecho "yellow" "Nothing to do. Directory [$directory] from package [$package] is not stowed (using symlink)."
-        return
-      fi
-
-      stow_command="rm \"$CURRENT_CONFIG_DIR/$package/$directory\""
-      execute_command "$stow_command" "Directory [$directory] from package [$package] was unstowed (using symlink)."
-    ;;
-    *)
-      cecho "red" "ERROR: Invalid action: $stow_action!"
-      exit 1
-    ;;
-  esac
 }
 
 # Symlink a single file from a package directory into $HOME (mirrors the stow layout).
@@ -482,6 +439,10 @@ EOF
 }
 
 # Main
+# NOTE: sourcing this file self-invokes process_args with the caller's "$@"
+# (when the caller received any arguments), which is how setup.sh/update.sh and
+# every sourced script honor --dry-run/--verbose without an explicit call.
+# Explicit `process_args "$@"` calls elsewhere are redundant but harmless.
 decho "white" "Loading _helpers.sh..."
 if [ $# -ne 0 ]; then
   process_args "$@"

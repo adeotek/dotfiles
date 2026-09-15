@@ -43,59 +43,63 @@ declare CLAUDECODE_PLUGINS=(
 # Install
 source "$CDIR/claude-code-install.sh"
 
-# Install Claude official marketplace
-cecho "green" "Installing Claude official marketplace..."
-if claude plugin marketplace list | grep -G "claude-plugins-official" >/dev/null; then
-  cecho "green" "Claude official marketplace already added to [claude-code]. Updating it..."
-  if [[ "$DRY_RUN" -ne "1" ]]; then
-    claude plugin marketplace update claude-plugins-official
-  else
-    cecho "yellow" "DRY-RUN: claude plugin marketplace update claude-plugins-official"
-  fi
+if ! command -v claude >/dev/null 2>&1; then
+  cecho "red" "[claude-code] 'claude' executable not found — skipping marketplace/plugin setup."
 else
-  if [[ "$DRY_RUN" -ne "1" ]]; then
-    cecho "cyan" "Adding Claude official marketplace to [claude-code]..."
-    claude plugin marketplace add anthropics/claude-plugins-official
-  else
-    cecho "yellow" "DRY-RUN: claude plugin marketplace add anthropics/claude-plugins-official"
-  fi
-fi
-
-# Install ADEOTEK marketplace
-if claude plugin marketplace list | grep -G "adeotek-plugins" >/dev/null; then
-  cecho "green" "ADEOTEK marketplace already added to [claude-code]. Updating it..."
-  if [[ "$DRY_RUN" -ne "1" ]]; then
-    claude plugin marketplace update adeotek-plugins
-  else
-    cecho "yellow" "DRY-RUN: claude plugin marketplace update adeotek-plugins"
-  fi
-else
-  if [[ "$DRY_RUN" -ne "1" ]]; then
-    cecho "cyan" "Adding ADEOTEK marketplace to [claude-code]..."
-    claude plugin marketplace add adeotek/claude-code
-  else
-    cecho "yellow" "DRY-RUN: claude plugin marketplace add adeotek/claude-code"
-  fi
-fi
-
-# Install plugins
-for plugin in "${CLAUDECODE_PLUGINS[@]}"; do
-  if claude plugin list | grep -G "$plugin" >/dev/null; then
-    cecho "green" "[claude-code] Plugin $plugin already installed. Updating it..."
+  # Install Claude official marketplace
+  cecho "green" "Installing Claude official marketplace..."
+  if claude plugin marketplace list | grep -G "claude-plugins-official" >/dev/null; then
+    cecho "green" "Claude official marketplace already added to [claude-code]. Updating it..."
     if [[ "$DRY_RUN" -ne "1" ]]; then
-      claude plugin update "$plugin"
+      claude plugin marketplace update claude-plugins-official
     else
-      cecho "yellow" "DRY-RUN: claude plugin update $plugin"
+      cecho "yellow" "DRY-RUN: claude plugin marketplace update claude-plugins-official"
     fi
   else
     if [[ "$DRY_RUN" -ne "1" ]]; then
-      cecho "cyan" "Installing [claude-code] plugin: $plugin..."
-      claude plugin install "$plugin"
+      cecho "cyan" "Adding Claude official marketplace to [claude-code]..."
+      claude plugin marketplace add anthropics/claude-plugins-official
     else
-      cecho "yellow" "DRY-RUN: claude plugin install $plugin"
+      cecho "yellow" "DRY-RUN: claude plugin marketplace add anthropics/claude-plugins-official"
     fi
   fi
-done
+
+  # Install ADEOTEK marketplace
+  if claude plugin marketplace list | grep -G "adeotek-plugins" >/dev/null; then
+    cecho "green" "ADEOTEK marketplace already added to [claude-code]. Updating it..."
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      claude plugin marketplace update adeotek-plugins
+    else
+      cecho "yellow" "DRY-RUN: claude plugin marketplace update adeotek-plugins"
+    fi
+  else
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      cecho "cyan" "Adding ADEOTEK marketplace to [claude-code]..."
+      claude plugin marketplace add adeotek/claude-code
+    else
+      cecho "yellow" "DRY-RUN: claude plugin marketplace add adeotek/claude-code"
+    fi
+  fi
+
+  # Install plugins
+  for plugin in "${CLAUDECODE_PLUGINS[@]}"; do
+    if claude plugin list | grep -G "$plugin" >/dev/null; then
+      cecho "green" "[claude-code] Plugin $plugin already installed. Updating it..."
+      if [[ "$DRY_RUN" -ne "1" ]]; then
+        claude plugin update "$plugin"
+      else
+        cecho "yellow" "DRY-RUN: claude plugin update $plugin"
+      fi
+    else
+      if [[ "$DRY_RUN" -ne "1" ]]; then
+        cecho "cyan" "Installing [claude-code] plugin: $plugin..."
+        claude plugin install "$plugin"
+      else
+        cecho "yellow" "DRY-RUN: claude plugin install $plugin"
+      fi
+    fi
+  done
+fi
 
 # Install LSP servers
 source "$CDIR/lsp-servers-install.sh"

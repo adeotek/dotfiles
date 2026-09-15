@@ -24,9 +24,32 @@ fi
 # Install
 source "$CDIR/hermes-install.sh"
 
+# --- WSL systemd ---
+if [[ "$DRY_RUN" -ne "1" ]]; then
+  enable_wsl_systemd
+fi
+
 # Ensure Hermes config directory exists
 if [[ "$DRY_RUN" -ne "1" ]]; then
   mkdir -p "$HOME/.hermes"
+fi
+
+# Create .env template if missing (before the Headroom block, so the
+# proxy vars below append to a complete template instead of replacing it)
+HERMES_ENV="$HOME/.hermes/.env"
+if [[ "$DRY_RUN" -ne "1" ]]; then
+  if [[ ! -f "$HERMES_ENV" ]]; then
+    if cp "$RDIR/hermes/.env.template" "$HERMES_ENV"; then
+      chmod 600 "$HERMES_ENV"
+      cecho "green" "Hermes .env template created at ~/.hermes/.env"
+    else
+      cecho "red" "Failed to deploy Hermes .env template."
+    fi
+  else
+    cecho "yellow" "Hermes .env already exists — skipping"
+  fi
+else
+  cecho "yellow" "DRY-RUN: cp $RDIR/hermes/.env.template $HERMES_ENV (if not exists)"
 fi
 
 if [[ "${ARGS["unattended"]}" -ne "1" ]]; then
@@ -37,9 +60,8 @@ if [[ "${ARGS["unattended"]}" -ne "1" ]]; then
     # Hermes reads OPENAI_BASE_URL for the "main" provider and ANTHROPIC_BASE_URL
     # for Anthropic. These are already set globally by bash/zsh configs.
     # We also add them to ~/.hermes/.env as a fallback for isolated environments.
-    HERMES_ENV="$HOME/.hermes/.env"
     if [[ "$DRY_RUN" -ne "1" ]]; then
-      if [ -f "$HERMES_ENV" ]; then
+      if [[ -f "$HERMES_ENV" ]]; then
         # Append proxy vars if not already present
         if ! grep -q "OPENAI_BASE_URL" "$HERMES_ENV" 2>/dev/null; then
           {
@@ -58,6 +80,7 @@ if [[ "${ARGS["unattended"]}" -ne "1" ]]; then
 OPENAI_BASE_URL=http://localhost:8787/v1
 ANTHROPIC_BASE_URL=http://localhost:8787
 EOF
+        chmod 600 "$HERMES_ENV"
         cecho "green" "Hermes .env created with Headroom proxy configuration at $HERMES_ENV"
       fi
     else
@@ -68,7 +91,7 @@ fi
 
 # Setup config.yaml
 if [[ "$DRY_RUN" -ne "1" ]]; then
-  if [ ! -f "$HOME/.hermes/config.yaml" ]; then
+  if [[ ! -f "$HOME/.hermes/config.yaml" ]]; then
     cp "$RDIR/hermes/config.yaml" "$HOME/.hermes/config.yaml"
     cecho "green" "Hermes config.yaml deployed to ~/.hermes/config.yaml"
     cecho "cyan" "Next: add your API keys to ~/.hermes/.env and run 'hermes setup'"
@@ -83,18 +106,6 @@ else
   cecho "yellow" "DRY-RUN: cp $RDIR/hermes/config.yaml $HOME/.hermes/config.yaml (if not exists)"
 fi
 
-# Create .env template if missing
-if [[ "$DRY_RUN" -ne "1" ]]; then
-  if [ ! -f "$HOME/.hermes/.env" ]; then
-    cp "$RDIR/hermes/.env.template" "$HOME/.hermes/.env"
-    cecho "green" "Hermes .env template created at ~/.hermes/.env"
-  else
-    cecho "yellow" "Hermes .env already exists — skipping"
-  fi
-else
-  cecho "yellow" "DRY-RUN: cp $RDIR/hermes/.env.template $HOME/.hermes/.env (if not exists)"
-fi
-
 # --- Deploy systemd user units ---
 copy_files_if_missing "$RDIR/hermes/.config/systemd/user" "$HOME/.config/systemd/user" "*.service"
 copy_files_if_missing "$RDIR/hermes/.config/systemd/user" "$HOME/.config/systemd/user" "*.timer"
@@ -105,7 +116,7 @@ if [[ "$DRY_RUN" -ne "1" ]]; then
   chmod +x "$HOME/.hermes/scripts"/*.sh 2>/dev/null || true
 fi
 copy_files_if_missing "$RDIR/hermes/.hermes" "$HOME/.hermes" "SOUL.md"
-if [ -d "$RDIR/hermes/.hermes/profiles" ]; then
+if [[ -d "$RDIR/hermes/.hermes/profiles" ]]; then
   for profile_dir in "$RDIR/hermes/.hermes/profiles"/*/; do
     [[ -d "$profile_dir" ]] || continue
     copy_files_if_missing "$profile_dir" "$HOME/.hermes/profiles/$(basename "$profile_dir")" "*"
@@ -114,7 +125,9 @@ fi
 
 # --- Reload systemd user daemon ---
 if [[ "$DRY_RUN" -ne "1" ]]; then
-  if systemctl --user daemon-reload; then
+  if [[ "$IF_WSL2" == "1" && ! -d /run/systemd/system ]]; then
+    cecho "yellow" "WARNING: systemd is not running in this WSL2 session yet. Edit /etc/wsl.conf ([boot] systemd=true), run 'wsl --shutdown' from Windows, reopen, and re-run this setup to activate the Hermes units."
+  elif systemctl --user daemon-reload; then
     cecho "green" "systemd user daemon reloaded."
   else
     cecho "red" "Failed to reload systemd user daemon (is a systemd user session available?)."
@@ -123,4 +136,8 @@ else
   cecho "yellow" "DRY-RUN: systemctl --user daemon-reload"
 fi
 
-cecho "green" "[hermes] setup complete. Headroom proxy is ready for Hermes Agent."
+if [[ "${HEADROOM_HERMES:-}" =~ ^[Yy]$ ]]; then
+  cecho "green" "[hermes] setup complete. Headroom proxy is ready for Hermes Agent."
+else
+  cecho "green" "[hermes] setup complete."
+fi

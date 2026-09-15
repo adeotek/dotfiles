@@ -19,9 +19,12 @@ fi
 source "$CDIR/rtk-install.sh"
 
 # Setup
-if ! command -v rtk >/dev/null 2>&1; then
+if [[ "$DRY_RUN" -ne "1" ]] && ! command -v rtk >/dev/null 2>&1; then
   cecho "red" "ERROR: [rtk] executable not found after install. Skipping rtk setup."
   exit 1
+fi
+if [[ "$DRY_RUN" -eq "1" ]] && ! command -v rtk >/dev/null 2>&1; then
+  cecho "yellow" "DRY-RUN: rtk not installed — remaining rtk steps are printed only."
 fi
 
 ## Disable rtk telemetry

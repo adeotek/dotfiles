@@ -80,6 +80,7 @@ done
 [[ "$PROJECTS_ONLY" -eq 1 && "$FILES_ONLY" -eq 1 ]] && { echo "Error: --projects-only and --list cannot be used together" >&2; exit 1; }
 [[ "$PROJECTS_ONLY" -eq 1 && "$RM_SESSIONS" -eq 1 ]] && { echo "Error: --projects-only and --rm cannot be used together" >&2; exit 1; }
 [[ -d "$PROJECTS_DIR" ]] || { echo "Error: Claude projects directory not found: $PROJECTS_DIR" >&2; exit 1; }
+command -v jq >/dev/null 2>&1 || { echo "Error: jq is required but not installed" >&2; exit 1; }
 
 declare -a rm_files=()
 declare -a rm_labels=()
@@ -157,6 +158,7 @@ for proj_dir in "$PROJECTS_DIR"/*/; do
 
       rel_path="projects/$proj_slug/$(basename "$session_file")"
       max_summary=$(( TERM_WIDTH - 15 ))
+      [[ $max_summary -lt 1 ]] && max_summary=1
       disp_summary="$summary"
       [[ ${#disp_summary} -gt $max_summary ]] && disp_summary="${disp_summary:0:$max_summary}…"
 
@@ -192,13 +194,21 @@ if [[ "$RM_SESSIONS" -eq 1 ]]; then
   removed=0
   for session_file in "${rm_files[@]}"; do
     uuid=$(basename "$session_file" .jsonl)
-    rm -f "$session_file"
-    rm -rf "$CLAUDE_DIR/file-history/$uuid"
-    rm -rf "$CLAUDE_DIR/session-env/$uuid"
-    rm -rf "$CLAUDE_DIR/tasks/$uuid"
-    rm -f "$CLAUDE_DIR/security_warnings_state_$uuid.json"
-    rm -f "$CLAUDE_DIR/debug/$uuid.txt"
-    (( removed++ ))
+    # Guard against path traversal via crafted session file names (e.g. "..jsonl")
+    if [[ ! "$uuid" =~ ^[A-Za-z0-9._-]+$ ]] || [[ "$uuid" == "." || "$uuid" == ".." ]]; then
+      echo "Warning: refusing to remove session with unsafe name: $session_file" >&2
+      continue
+    fi
+    if rm -f "$session_file" \
+       && rm -rf "$CLAUDE_DIR/file-history/$uuid" \
+       && rm -rf "$CLAUDE_DIR/session-env/$uuid" \
+       && rm -rf "$CLAUDE_DIR/tasks/$uuid" \
+       && rm -f "$CLAUDE_DIR/security_warnings_state_$uuid.json" \
+       && rm -f "$CLAUDE_DIR/debug/$uuid.txt"; then
+      (( removed++ ))
+    else
+      echo "Warning: failed to fully remove $session_file" >&2
+    fi
   done
   echo "Removed $removed session(s)."
 fi

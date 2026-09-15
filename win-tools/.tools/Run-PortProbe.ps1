@@ -35,7 +35,10 @@ param (
 
     [Parameter(Mandatory)]
     [ValidateRange(1, 65535)]
-    [int]$TargetPort
+    [int]$TargetPort,
+
+    [ValidateRange(100, 600000)]
+    [int]$TimeoutMs = 5000
 )
 
 if ($Help) {
@@ -49,7 +52,9 @@ function Invoke-PortProbe {
         [string]$Hostname,
 
         [Parameter(Mandatory)]
-        [int]$Port
+        [int]$Port,
+
+        [int]$TimeoutMs = 5000
     )
 
     $ipAddress = $null
@@ -71,14 +76,23 @@ function Invoke-PortProbe {
             [System.Net.Sockets.SocketType]::Stream,
             [System.Net.Sockets.ProtocolType]::Tcp
         )
-        $socket.Connect($ipAddress, $Port)
+        # Non-blocking connect with explicit timeout (blocking Connect() hangs ~21 s)
+        $connectTask = $socket.ConnectAsync($ipAddress, $Port)
+        if (-not $connectTask.Wait($TimeoutMs)) {
+            throw [System.TimeoutException]::new("Connection timed out after $TimeoutMs ms")
+        }
+        if ($connectTask.IsFaulted) {
+            throw $connectTask.Exception.GetBaseException()
+        }
         $ipInfo = if ($ipAddress) { " (IP: $ipAddress)" } else { "" }
         Write-Host "Successfully connected to $Hostname$ipInfo on port $Port" -ForegroundColor Green
+        exit 0
     }
     catch {
         $ipInfo = if ($ipAddress) { " (IP: $ipAddress)" } else { "" }
         Write-Host "Failed to connect to $Hostname$ipInfo on port $Port" -ForegroundColor Red
         Write-Host "-> $($_.Exception.Message)" -ForegroundColor Yellow
+        exit 1
     }
     finally {
         if ($null -ne $socket) {
@@ -87,4 +101,4 @@ function Invoke-PortProbe {
     }
 }
 
-Invoke-PortProbe -Hostname $TargetHost.Trim() -Port $TargetPort
+Invoke-PortProbe -Hostname $TargetHost.Trim() -Port $TargetPort -TimeoutMs $TimeoutMs

@@ -34,7 +34,7 @@ Usage: merge-opencode-config.py [--live-wins] <template> <live>
 """
 import json
 import os
-import re
+import shutil
 import sys
 import time
 
@@ -88,6 +88,9 @@ def merge(template, live, prefer_live=False):
                 result[k] = tv
         return result
     if isinstance(template, list) and isinstance(live, list):
+        if prefer_live:
+            # --live-wins: template only fills missing keys; never append entries
+            return live
         # ordered union, dedup by normalized JSON value
         seen = {_key(x) for x in live}
         result = list(live)
@@ -120,6 +123,9 @@ def main():
     merged = merge(template, live, prefer_live)
 
     # safety net: never drop a live-only top-level key
+    if not isinstance(live, dict):
+        print("ERROR: live config is not a JSON object; aborting", file=sys.stderr)
+        return 1
     dropped = [k for k in live if k not in merged]
     if dropped:
         print(f"ERROR: merge would drop live keys {dropped}; aborting", file=sys.stderr)
@@ -130,8 +136,7 @@ def main():
         return 0
 
     backup = f"{live_path}.bak.{int(time.time())}"
-    with open(backup, "w") as f:
-        f.write(open(live_path).read())
+    shutil.copyfile(live_path, backup)
 
     tmp = f"{live_path}.tmp.{os.getpid()}"
     with open(tmp, "w") as f:

@@ -25,7 +25,10 @@ else
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
   else
     if [[ "$DRY_RUN" -ne "1" ]]; then
-      curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
+      if ! (set -o pipefail; curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash); then
+        cecho "red" "Homebrew installation failed."
+        return 1
+      fi
       ## Activate brew
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     else

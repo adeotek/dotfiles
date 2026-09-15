@@ -26,42 +26,42 @@ else
     TABBY_VERSION="1.0.221"
   fi
 
+  if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
+    TABBY_ARCH="arm64"
+  else
+    TABBY_ARCH="x64"
+  fi
+
   case $CURRENT_OS_ID in
     arch)
-      tabby_package_file="tabby-$TABBY_VERSION-linux-x64.pacman"
-      if [[ "$DRY_RUN" -ne "1" ]]; then
-        decho "magenta" "wget https://github.com/Eugeny/tabby/releases/download/v$TABBY_VERSION/$tabby_package_file -O ~/$tabby_package_file"
-        wget "https://github.com/Eugeny/tabby/releases/download/v${TABBY_VERSION}/${tabby_package_file}" -O "$HOME/${tabby_package_file}"
-        decho "magenta" "sudo pacman -U --noconfirm --needed ~/$tabby_package_file"
-        sudo pacman -U --noconfirm --needed "$HOME/${tabby_package_file}"
-        decho "magenta" "rm ~/$tabby_package_file"
-        rm "$HOME/${tabby_package_file}"
-        cecho "green" "[tabby] installation done."
-      else
-        cecho "yellow" "DRY-RUN: wget https://github.com/Eugeny/tabby/releases/download/v${TABBY_VERSION}/${tabby_package_file} -O ~/${tabby_package_file}"
-        cecho "yellow" "DRY-RUN: sudo pacman -U --noconfirm --needed ~/${tabby_package_file}"
-        cecho "yellow" "DRY-RUN: rm ~/${tabby_package_file}"
-      fi
-    ;;
+      tabby_ext="pacman"
+      tabby_install_cmd=(sudo pacman -U --noconfirm --needed)
+      ;;
     debian|ubuntu|pop)
-      tabby_package_file="tabby-$TABBY_VERSION-linux-x64.deb"
-      if [[ "$DRY_RUN" -ne "1" ]]; then
-        decho "magenta" "wget https://github.com/Eugeny/tabby/releases/download/v$TABBY_VERSION/$tabby_package_file -O ~/$tabby_package_file"
-        wget "https://github.com/Eugeny/tabby/releases/download/v${TABBY_VERSION}/${tabby_package_file}" -O "$HOME/${tabby_package_file}"
-        decho "magenta" "sudo dpkg -i ~/$tabby_package_file"
-        sudo dpkg -i "$HOME/${tabby_package_file}"
-        decho "magenta" "rm ~/$tabby_package_file"
-        rm "$HOME/${tabby_package_file}"
-        cecho "green" "[tabby] installation done."
-      else
-        cecho "yellow" "DRY-RUN: wget https://github.com/Eugeny/tabby/releases/download/v${TABBY_VERSION}/${tabby_package_file} -O ~/${tabby_package_file}"
-        cecho "yellow" "DRY-RUN: sudo dpkg -i ~/${tabby_package_file}"
-        cecho "yellow" "DRY-RUN: rm ~/${tabby_package_file}"
-      fi
-    ;;
+      tabby_ext="deb"
+      tabby_install_cmd=(sudo dpkg -i)
+      ;;
+    fedora|redhat)
+      tabby_ext="rpm"
+      tabby_install_cmd=(sudo dnf install -y)
+      ;;
     *)
       cecho "red" "Unsupported OS: $CURRENT_OS_ID"
-      exit 1
-    ;;
+      return 1
+      ;;
   esac
+
+  tabby_package_file="tabby-$TABBY_VERSION-linux-$TABBY_ARCH.$tabby_ext"
+  tabby_url="https://github.com/Eugeny/tabby/releases/download/v${TABBY_VERSION}/${tabby_package_file}"
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    if wget -q "$tabby_url" -O "$HOME/${tabby_package_file}" \
+      && "${tabby_install_cmd[@]}" "$HOME/${tabby_package_file}"; then
+      cecho "green" "[tabby] installation done."
+    else
+      cecho "red" "[tabby] installation failed."
+    fi
+    rm -f "$HOME/${tabby_package_file}"
+  else
+    cecho "yellow" "DRY-RUN: wget $tabby_url -O ~/${tabby_package_file} && ${tabby_install_cmd[*]} ~/${tabby_package_file}"
+  fi
 fi

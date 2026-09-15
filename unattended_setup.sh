@@ -28,70 +28,29 @@
 #   --dry-run             Perform a dry run without making actual changes
 #
 # AVAILABLE PACKAGES:
-#   Core/Minimal packages:
-#     base-tools          Essential command-line tools
-#     bash                Bash shell configuration
-#     git                 Git version control system
-#     tmux                Terminal multiplexer
-#     yazi                File manager
+#   Run './unattended_setup.sh ls' or see _scripts/core/_options.sh for the
+#   authoritative, always-current task list and tier arrays.
 #
-#   Console-only packages:
-#     claude-code         Claude Code CLI and plugins
-#     fastfetch           System information display
-#     glow                Markdown renderer
-#     golang              Go programming language (default: 1.26.5)
-#     nodejs              Node.js runtime (default: 24)
-#     onefetch            Git repository information display
-#     tools               Auxiliary utility scripts
-#
-#   Console extra packages:
-#     ansible             Automation tool
-#     aws-cli             AWS command-line interface
-#     docker              Container platform
-#     dotnet              .NET SDK (default: 10.0)
-#     github-cli          GitHub command-line interface
-#     gcp-cli             Google Cloud Platform CLI
-#     graphify            Codebase knowledge graph tool
-#     headroom            Headroom LLM proxy
-#     helm                Kubernetes package manager
-#     herdr               herdr CLI
-#     hermes              Hermes Agent
-#     kubectl             Kubernetes CLI
-#     lsp-servers         Language server protocol servers
-#     mise                Polyglot tool version manager
-#     nvim                Neovim text editor
-#     opencode            OpenCode CLI
-#     playwright          Playwright browser automation
-#     powershell          PowerShell
-#     rtk                 rtk CLI
-#     rustup              Rust toolchain installer
-#     uv                  Python package/tool manager
-#     terraform           Infrastructure as Code tool
-#     zellij              Terminal workspace manager
-#
-#   Desktop-only packages:
-#     ghostty             Ghostty terminal emulator
-#     zed                 Zed text editor
-#     kitty               Terminal emulator
-#     tabby               Terminal application
-#     vscode              Visual Studio Code
-#     jetbrains-toolbox   JetBrains development tools
-#
-#   Shell:
-#     zsh                 Z shell
-#
-# PACKAGE GROUPS (for reference):
-#   Minimal:    base-tools,bash,git,tmux,yazi
-#   Console:    Minimal + claude-code,fastfetch,glow,golang,nodejs,onefetch,tools
-#   Desktop:    Console + ghostty,zed
-#   All:        Console + all extra packages + zsh
+# PACKAGE GROUPS (from _options.sh arrays):
+#   Minimal:        base-tools, git, yazi, zellij, zsh
+#   Console-only:   fastfetch, glow, nodejs, onefetch
+#   Console:        Minimal + Console-only
+#   Console extras: ansible, aws-cli, bash, claude-code, docker, dotnet,
+#                   gcp-cli, github-cli, golang, graphify, headroom, helm,
+#                   herdr, hermes, homebrew, kubectl, lsp-servers, mise,
+#                   nerd-fonts, nvim, oh-my-posh, opencode, playwright,
+#                   powershell, rtk, rustup, starship, terraform, tmux,
+#                   tools, uv
+#   Desktop-only:   ghostty, zed
+#   Desktop extras: Console extras + kitty, tabby, vscode, jetbrains-toolbox
+#   Shell:          zsh (in Minimal)
 #
 # EXAMPLES:
 #   # List all available packages
 #   ./unattended_setup.sh ls
 #
 #   # Install minimal development environment
-#   ./unattended_setup.sh --packages base-tools,bash,git,tmux,yazi
+#   ./unattended_setup.sh --packages base-tools,git,yazi,zellij,zsh
 #
 #   # Install development environment with Docker and Node.js
 #   ./unattended_setup.sh --packages git,nvim,docker,nodejs --verbose
@@ -130,7 +89,7 @@ if [[ "$1" == "ls" ]]; then
 fi
 
 ## Startup debug
-cecho "blue" "Starting dotfiles unatended setup ($DFS_ACTION)..."
+cecho "blue" "Starting dotfiles unattended setup ($DFS_ACTION)..."
 decho "magenta" "Current OS: $CURRENT_OS_ID"
 decho "magenta" "dotfiles root path: $RDIR"
 decho "magenta" "core scripts path: $CDIR"
@@ -140,28 +99,30 @@ if [[ -z "${ARGS["packages"]}" ]]; then
   cecho "red" "ERROR: --packages argument is required!"
   cecho "white" "Usage: $0 --packages <package1,package2,...> [OPTIONS]"
   cecho "white" "Use '$0 ls' to list all available packages"
-  exit 10
+  exit 1
 fi
 
-# Parse and validate package list
-IFS=',' read -ra SELECTED_PACKAGES <<< "${ARGS["packages"]}"
-if [[ -z "${SELECTED_PACKAGES[*]}" ]]; then
-  cecho "red" "ERROR: No valid packages found in package list!"
-  cecho "white" "Use '$0 ls' to list all available packages"
-  exit 10
-fi
+# Parse package list once (split on commas and spaces; no per-loop trimming needed)
+IFS=', ' read -ra parsed_packages <<< "${ARGS["packages"]}"
 
 # Validate package names against known tasks
-for pkg in "${SELECTED_PACKAGES[@]}"
+SELECTED_PACKAGES=()
+for pkg in "${parsed_packages[@]}"
 do
-  pkg="${pkg// /}"
   [[ -z "$pkg" ]] && continue
   if [[ -z "${TASK_TYPES[$pkg]:-}" ]]; then
     cecho "red" "ERROR: Unknown package: [$pkg]!"
     cecho "white" "Use '$0 ls' to list all available packages"
-    exit 10
+    exit 1
   fi
+  SELECTED_PACKAGES+=("$pkg")
 done
+
+if [[ "${#SELECTED_PACKAGES[@]}" -eq 0 ]]; then
+  cecho "red" "ERROR: No valid packages found in package list!"
+  cecho "white" "Use '$0 ls' to list all available packages"
+  exit 1
+fi
 
 # Display selected packages in verbose mode
 if [[ "$VV" -eq 1 ]]; then
@@ -180,8 +141,6 @@ fi
 # Each package is processed individually using its corresponding install/setup script
 for pkg in "${SELECTED_PACKAGES[@]}"
 do
-  pkg="${pkg// /}"  # Trim whitespace from package name
-  [[ -z "$pkg" ]] && continue
   pkg_task_type="${TASK_TYPES["$pkg"]}"  # Get task type (install/setup)
   decho "magenta" "Processing $pkg ($pkg_task_type) with default settings"
   # shellcheck source=/dev/null

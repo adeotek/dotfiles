@@ -19,6 +19,9 @@ fi
 # TODO: implement upgrade in the upgrade.sh script
 if [[ "$DRY_RUN" -ne "1" ]]; then
   case $CURRENT_OS_ID in
+    arch)
+      sudo pacman -S --noconfirm --needed unzip
+      ;;
     debian|ubuntu|pop)
       sudo apt-get install -y unzip
       ;;
@@ -49,8 +52,11 @@ fi
 
 if [[ "$DRY_RUN" -ne "1" ]]; then
   decho "magenta" "curl -fsSL $AWS_CLI_DOWNLOAD_URL -o ~/awscliv2.zip"
-  curl -fsSL "$AWS_CLI_DOWNLOAD_URL" -o ~/awscliv2.zip
-  if [ -d ~/aws ]; then
+  if ! curl -fsSL "$AWS_CLI_DOWNLOAD_URL" -o ~/awscliv2.zip; then
+    cecho "red" "Failed to download AWS CLI installer. Skipping install."
+    return 1
+  fi
+  if [[ -d ~/aws ]]; then
     decho "magenta" "rm -rf ~/aws"
     rm -rf ~/aws
   fi

@@ -28,19 +28,20 @@ case $CURRENT_OS_ID in
     if [[ "$DRY_RUN" -ne "1" ]]; then
       sudo apt-get install -y apt-transport-https ca-certificates curl gnupg
       sudo mkdir -p -m 755 /etc/apt/keyrings
-      curl -fsSL "https://pkgs.k8s.io/core:/stable:/${K8S_MINOR_VERSION}/deb/Release.key" | \
-        sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-      sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg # allow unprivileged APT programs to read this keyring
-      echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/${K8S_MINOR_VERSION}/deb/ /" | \
-        sudo tee /etc/apt/sources.list.d/kubernetes.list
-      sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list
+      K8S_KEY_TMP="$(mktemp)"
+      if curl -fsSL "https://pkgs.k8s.io/core:/stable:/${K8S_MINOR_VERSION}/deb/Release.key" -o "$K8S_KEY_TMP" \
+        && sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg "$K8S_KEY_TMP"; then
+        sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg # allow unprivileged APT programs to read this keyring
+        echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/${K8S_MINOR_VERSION}/deb/ /" | \
+          sudo tee /etc/apt/sources.list.d/kubernetes.list
+        sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list
+      else
+        cecho "red" "Failed to install Kubernetes APT key."
+        return 1
+      fi
+      rm -f "$K8S_KEY_TMP"
     else
-      cecho "yellow" "DRY-RUN: sudo apt-get install -y apt-transport-https ca-certificates curl gnupg"
-      cecho "yellow" "DRY-RUN: sudo mkdir -p -m 755 /etc/apt/keyrings"
-      cecho "yellow" "DRY-RUN: curl -fsSL https://pkgs.k8s.io/core:/stable:/${K8S_MINOR_VERSION}/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg"
-      cecho "yellow" "DRY-RUN: sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg"
-      cecho "yellow" "DRY-RUN: echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/${K8S_MINOR_VERSION}/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list"
-      cecho "yellow" "DRY-RUN: sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list"
+      cecho "yellow" "DRY-RUN: install Kubernetes APT repository (prerequisites + keyring + sources entry)"
     fi
     ;;
   fedora|redhat)
@@ -54,14 +55,7 @@ gpgcheck=1
 gpgkey=https://pkgs.k8s.io/core:/stable:/${K8S_MINOR_VERSION}/rpm/repodata/repomd.xml.key
 EOF
     else
-      cecho "yellow" "DRY-RUN: cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
-[kubernetes]
-name=Kubernetes
-baseurl=https://pkgs.k8s.io/core:/stable:/${K8S_MINOR_VERSION}/rpm/
-enabled=1
-gpgcheck=1
-gpgkey=https://pkgs.k8s.io/core:/stable:/${K8S_MINOR_VERSION}/rpm/repodata/repomd.xml.key
-EOF"
+      cecho "yellow" "DRY-RUN: write /etc/yum.repos.d/kubernetes.repo (pkgs.k8s.io stable repo)"
     fi
     ;;
   *)

@@ -24,22 +24,26 @@ case $CURRENT_OS_ID in
     if [ "$CURRENT_OS_ID" == "debian" ] && [ "$CURRENT_OS_VER" == "13" ]; then
       install_package "fastfetch" "fastfetch --version"
     else
-      if [ "$CURRENT_ARCH" == "aarch64" ]; then
-        FF_DEB_URL="$(curl -s https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest | jq -r '.assets[] | select(.name | contains("linux-aarch64.deb")) | .browser_download_url')"
+      if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
+        FF_ASSET="linux-aarch64.deb"
       else
-        FF_DEB_URL="$(curl -s https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest | jq -r '.assets[] | select(.name | contains("linux-amd64.deb")) | .browser_download_url')"
+        FF_ASSET="linux-amd64.deb"
+      fi
+      FF_DEB_URL="$(curl -fsSL https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest | jq -r --arg asset "$FF_ASSET" '.assets[] | select(.name | contains($asset)) | .browser_download_url' | head -n 1)"
+      if [[ -z "$FF_DEB_URL" || "$FF_DEB_URL" == "null" ]]; then
+        cecho "red" "Failed to resolve fastfetch .deb download URL."
+        return 1
       fi
       if [[ "$DRY_RUN" -ne "1" ]]; then
-        decho "magenta" "wget $FF_DEB_URL -O /tmp/fastfetch.deb"
-        wget "$FF_DEB_URL" -O /tmp/fastfetch.deb
-        decho "magenta" "sudo apt-get install /tmp/fastfetch.deb -y"
-        sudo apt-get install /tmp/fastfetch.deb -y
-        decho "magenta" "rm -f /tmp/fastfetch.deb"
-        rm -f /tmp/fastfetch.deb
+        FF_DEB_FILE="$(mktemp --suffix=.deb)"
+        if wget -q "$FF_DEB_URL" -O "$FF_DEB_FILE" && sudo apt-get install -y "$FF_DEB_FILE"; then
+          cecho "green" "[fastfetch] installation done."
+        else
+          cecho "red" "[fastfetch] installation failed."
+        fi
+        rm -f "$FF_DEB_FILE"
       else
-        cecho "yellow" "DRY-RUN: wget $FF_DEB_URL -O /tmp/fastfetch.deb"
-        cecho "yellow" "DRY-RUN: sudo apt-get install /tmp/fastfetch.deb -y"
-        cecho "yellow" "DRY-RUN: rm -f /tmp/fastfetch.deb"
+        cecho "yellow" "DRY-RUN: wget $FF_DEB_URL -O <tmp>.deb && sudo apt-get install -y <tmp>.deb"
       fi
     fi
     ;;

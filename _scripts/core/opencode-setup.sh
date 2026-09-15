@@ -149,7 +149,6 @@ else
   cecho "yellow" "Global AGENTS.md file already exists at ~/.config/opencode/AGENTS.md"
 fi
 
-# Create missing skills/plugins/agents
+# Create missing skills/agents
 copy_files_if_missing "$RDIR/opencode/agents"  "$HOME/.config/opencode/agents"  "*.md" "$OC_OVERRIDE_CONFIG"
-copy_files_if_missing "$RDIR/opencode/plugins" "$HOME/.config/opencode/plugins" "*.js" "$OC_OVERRIDE_CONFIG"
 copy_skills_if_missing  "$RDIR/opencode/skills" "$HOME/.config/opencode/skills" "$OC_OVERRIDE_CONFIG"

@@ -1,25 +1,26 @@
 # Bash configuration file
 
 export COLORTERM=truecolor
-export LC_ALL='C.UTF-8'
+export LC_ALL="${LC_ALL:-C.UTF-8}"
 export EDITOR="nano"
 
 # Global alias
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
 # get top process eating memory
 alias psmem='ps auxf | sort -nr -k 4 | head -5'
 # get top process eating cpu ##
 alias pscpu='ps auxf | sort -nr -k 3 | head -5'
 
+# PATH helpers: prepend/append only if the dir is not already present (dedup on re-source)
+path_prepend() { [[ ":$PATH:" == *":$1:"* ]] || PATH="$1${PATH:+:$PATH}"; }
+path_append()  { [[ ":$PATH:" == *":$1:"* ]] || PATH="${PATH:+$PATH:}$1"; }
 
-export PATH=$PATH:$HOME/.local/bin
+path_prepend "$HOME/.local/bin"
 
 # Add .tools to path if it exists
 if [ -d "$HOME/.tools" ]; then
-  export PATH=$PATH:$HOME/.tools
+  path_append "$HOME/.tools"
 fi
 
 # homebrew
@@ -28,10 +29,10 @@ if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
 
   # NodeJs
   if [ -d "/home/linuxbrew/.linuxbrew/opt/node@22/bin" ]; then
-    export PATH="/home/linuxbrew/.linuxbrew/opt/node@22/bin:$PATH"
+    path_prepend "/home/linuxbrew/.linuxbrew/opt/node@22/bin"
   fi
   if [ -d "/home/linuxbrew/.linuxbrew/opt/node@24/bin" ]; then
-    export PATH="/home/linuxbrew/.linuxbrew/opt/node@24/bin:$PATH"
+    path_prepend "/home/linuxbrew/.linuxbrew/opt/node@24/bin"
   fi
 fi
 
@@ -42,18 +43,18 @@ fi
 
 # GO lang
 if [ -d "/usr/local/go/bin" ]; then
-  export PATH="$PATH:/usr/local/go/bin"
+  path_append "/usr/local/go/bin"
 fi
 if [ -d "$HOME/go/bin" ]; then
   export GOPATH="$HOME/go"
-  export PATH="$PATH:$GOPATH/bin"
+  path_append "$GOPATH/bin"
 fi
 
 # dotnet & dotnet tools
 if [ -d "$HOME/.dotnet" ]; then
   # export DOTNET_ROOT=$HOME/.dotnet
-  export PATH=$PATH:$HOME/.dotnet
-  export PATH="$PATH:$HOME/.dotnet/tools"
+  path_append "$HOME/.dotnet"
+  path_append "$HOME/.dotnet/tools"
 fi
 
 # Neovim
@@ -149,15 +150,14 @@ if command -v terraform >/dev/null 2>&1; then
   alias tfp='terraform plan'
 fi
 
-# Oh My Posh bash config
-if command -v oh-my-posh >/dev/null 2>&1; then
+# Prompt (per-machine choice in ~/.config/bash/prompt-tool; defaults to oh-my-posh)
+_prompt_tool="$(cat ~/.config/bash/prompt-tool 2>/dev/null || echo oh-my-posh)"
+if [[ "$_prompt_tool" == "starship" ]] && command -v starship >/dev/null 2>&1; then
+  eval "$(starship init bash)"
+elif command -v oh-my-posh >/dev/null 2>&1; then
   eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/gbs.omp.yaml)"
 fi
-
-# Starship
-# if command -v starship >/dev/null 2>&1; then
-#   eval "$(starship init bash)"
-# fi
+unset _prompt_tool
 
 # zoxide
 if command -v zoxide >/dev/null 2>&1; then

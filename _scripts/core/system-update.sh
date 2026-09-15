@@ -44,8 +44,13 @@ case $CURRENT_OS_ID in
       # Check if EPEL repo is installed
       if [ "$CURRENT_OS_ID" != "fedora" ] && ! sudo dnf repolist 2>/dev/null | grep -q epel; then
         cecho "yellow" "EPEL repository is not installed. Installing it now..."
-        # Enable CRB repository
-        sudo dnf config-manager --set-enabled crb
+        # Enable CodeReady Builder repository (repo id differs by RHEL major version)
+        if [[ "$CURRENT_OS_VER" == 8* ]]; then
+          CRB_REPO_ID="codeready-builder"
+        else
+          CRB_REPO_ID="codeready_builder"
+        fi
+        sudo dnf config-manager --set-enabled "$CRB_REPO_ID" || decho "yellow" "Could not enable $CRB_REPO_ID; continuing."
         # Install EPEL repository
         if sudo dnf install -y epel-release; then
           cecho "green" "EPEL repository installed successfully."

@@ -31,8 +31,8 @@ shellcheck _scripts/core/*.sh setup.sh unattended_setup.sh update.sh
 
 ### Task Array Hierarchy
 ```
-MINIMAL_TASKS          → base essentials (base-tools, bash, git, tmux, yazi)
-CONSOLE_ONLY_TASKS     → dev tools added at Console tier (nodejs, golang, claude-code, glow, …)
+MINIMAL_TASKS          → base essentials (base-tools, git, yazi, zellij, zsh)
+CONSOLE_ONLY_TASKS     → dev tools added at Console tier (fastfetch, glow, nodejs, onefetch)
 CONSOLE_TASKS          → MINIMAL + CONSOLE_ONLY
 CONSOLE_EXTRA_TASKS    → opt-in extras (docker, nvim, kubectl, dotnet, opencode, …)
 DESKTOP_ONLY_TASKS     → GUI-only apps (ghostty, zed)
@@ -42,29 +42,29 @@ DESKTOP_EXTRA_TASKS    → CONSOLE_EXTRA + GUI extras (kitty, tabby, vscode, jet
 ALL_DESKTOP_TASKS      → DESKTOP + DESKTOP_EXTRA
 ALL_TASKS              → deduplicated union of everything (sorted)
 ```
+For exact per-tier membership, read `_scripts/core/_options.sh` or run `./unattended_setup.sh ls`.
 
 ### GNU Stow Configuration Directories
 Config directories (e.g., `bash/`, `git/`, `nvim/`) mirror `$HOME`. Editing here immediately affects the live symlinked system. `stow_package` helper wraps stow with backup logic.
 
 ### AI Tool Configs
-Not stowed — deployed imperatively by their respective setup scripts. Files copied (not symlinked), only if target does not yet exist.
+Not stowed — deployed imperatively by their respective setup scripts. Files are copied (not symlinked); on re-deploy, opencode configs are **merged** into the existing live config (never a plain overwrite), other files are seeded only if missing.
 
 **`claude-code/`** — deployed by `claude-code-setup.sh` into `~/.claude/`:
 - `settings-part.json` — partial settings merged with `jq -s '.[0] * .[1]'`
-- `statusline-command.sh/.ps1` — ANSI status-line script
+- `statusline-command.sh` / `statusline-command-win.sh` — ANSI status-line scripts
 - `CLAUDE.md` — seeded only if not yet present
 - Also installs plugins (`claude-plugins-official`, `adeotek-plugins`) and LSP servers
 
 **`opencode/`** — deployed by `opencode-setup.sh` into `~/.config/opencode/`:
-- `opencode.jsonc` → global config with model, plugins, server, multi-agent defs (`build`, `plan`, `code-review`); on re-run with the override prompt, the template is **merged** into the existing live config (see `opencode/merge-opencode-config.py`) — never a plain overwrite, so local plugins/credentials survive
+- `opencode.jsonc` → global config with model, plugins, server, primary-agent defs (`build`, `plan`); on re-run with the override prompt, the template is **merged** into the existing live config (see `opencode/merge-opencode-config.py`) — never a plain overwrite, so local plugins/credentials survive
 - `opencode-mem.jsonc` → config for the `opencode-mem` plugin (auto-capture provider, web UI, profile/retention). On override it is merged with `--live-wins`, so live values such as `webServerHost`/`webServerAuth*` are preserved and the template only fills in missing keys
 - `AGENTS.md` → system prompt for the primary agent
-- `agents/`, `skills/`, `plugins/` — agent definitions, skill files, JS plugins
+- `agents/`, `skills/` — agent definitions (incl. `code-review`), skill files. Project-level plugins live in `.opencode/plugins/` (auto-loaded by opencode)
 
 ### ZSH Configurations
-`zsh/` contains two configs via `zsh-setup.sh`:
-- `config.zsh` — requires external plugins (zsh-syntax-highlighting, zsh-autosuggestions)
-- `config-standalone.zsh` — self-contained; recommended for new setups
+`zsh/` config deployed via `zsh-setup.sh`:
+- `config.zsh` — plugins (autosuggestions, syntax highlighting, history-substring-search, completions) managed by [antidote](https://antidote.sh) via `zsh_plugins.txt`
 
 Default ZSH prompt: `starship`; bash: `oh-my-posh`.
 

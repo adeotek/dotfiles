@@ -34,6 +34,9 @@ case $CURRENT_OS_ID in
       cecho "yellow" "DRY-RUN: curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
     fi
   ;;
+  fedora|redhat)
+    install_package "kitty" "kitty --version"
+  ;;
   *)
     cecho "red" "Unsupported OS: $CURRENT_OS_ID"
     exit 1

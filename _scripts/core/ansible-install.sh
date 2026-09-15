@@ -40,25 +40,35 @@ fi
 # Install ansible via uv tool install
 if command -v ansible >/dev/null 2>&1; then
   cecho "yellow" "[ansible] is already present. Updating it..."
-fi
-
-if [[ "$DRY_RUN" -ne "1" ]]; then
-  uv tool install ansible
-  cecho "green" "[ansible] installation done."
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    uv tool upgrade ansible
+  else
+    cecho "yellow" "DRY-RUN: uv tool upgrade ansible"
+  fi
 else
-  cecho "yellow" "DRY-RUN: uv tool install ansible"
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    uv tool install ansible
+    cecho "green" "[ansible] installation done."
+  else
+    cecho "yellow" "DRY-RUN: uv tool install ansible"
+  fi
 fi
 
 # Install ansible-lint via uv tool install
 if command -v ansible-lint >/dev/null 2>&1; then
   cecho "yellow" "[ansible-lint] is already present. Updating it..."
-fi
-
-if [[ "$DRY_RUN" -ne "1" ]]; then
-  uv tool install ansible-lint
-  cecho "green" "[ansible-lint] installation done."
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    uv tool upgrade ansible-lint
+  else
+    cecho "yellow" "DRY-RUN: uv tool upgrade ansible-lint"
+  fi
 else
-  cecho "yellow" "DRY-RUN: uv tool install ansible-lint"
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    uv tool install ansible-lint
+    cecho "green" "[ansible-lint] installation done."
+  else
+    cecho "yellow" "DRY-RUN: uv tool install ansible-lint"
+  fi
 fi
 
 # Verify

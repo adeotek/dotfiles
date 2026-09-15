@@ -44,22 +44,30 @@ fi
 # Install graphifyy (PyPI name) with optional extras for MCP, Neo4j, PDF, and watch mode
 if command -v graphify >/dev/null 2>&1; then
   cecho "yellow" "[graphify] is already present. Updating it..."
-fi
-
-if [[ "$DRY_RUN" -ne "1" ]]; then
-  uv tool install --python "python${PYTHON_VERSION}" 'graphifyy[all]'
-  cecho "green" "[graphify] package installation done."
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    uv tool upgrade graphifyy
+  else
+    cecho "yellow" "DRY-RUN: uv tool upgrade graphifyy"
+  fi
 else
-  cecho "yellow" "DRY-RUN: uv tool install --python python${PYTHON_VERSION} 'graphifyy[all]'"
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    uv tool install --python "python${PYTHON_VERSION}" 'graphifyy[all]'
+    cecho "green" "[graphify] package installation done."
+  else
+    cecho "yellow" "DRY-RUN: uv tool install --python python${PYTHON_VERSION} 'graphifyy[all]'"
+  fi
 fi
 
 # Register the Claude Code skill (~/.claude/skills/graphify/SKILL.md)
 if command -v claude >/dev/null 2>&1; then
   if [[ "$DRY_RUN" -ne "1" ]]; then
-    claude install graphify
-    cecho "green" "[claude] graphify skill registered."
+    if graphify install --platform claude; then
+      cecho "green" "[claude] graphify skill registered."
+    else
+      cecho "red" "Failed to register graphify skill for Claude Code."
+    fi
   else
-    cecho "yellow" "DRY-RUN: claude install graphify"
+    cecho "yellow" "DRY-RUN: graphify install --platform claude"
   fi
 fi
 

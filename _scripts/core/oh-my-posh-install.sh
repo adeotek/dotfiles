@@ -25,7 +25,10 @@ fi
 
 if [[ "$DRY_RUN" -ne "1" ]]; then
   decho "magenta" "curl -fsSL https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin"
-  curl -fsSL https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin
+  if ! (set -o pipefail; curl -fsSL https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin); then
+    cecho "red" "[oh-my-posh] installation failed."
+    return 1
+  fi
   cecho "green" "[oh-my-posh] installation done."
 else
   cecho "yellow" "DRY-RUN: curl -fsSL https://ohmyposh.dev/install.sh | sudo bash -s -- -d /usr/local/bin"

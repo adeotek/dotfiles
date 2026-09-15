@@ -29,22 +29,34 @@ process_args "$@"
 source "$CDIR/zsh-install.sh"
 
 # Setup
-if [ "${ARGS["prompt"]}" == "oh-my-posh" ]; then
+if [[ "${ARGS["prompt"]}" == "oh-my-posh" ]]; then
   source "$CDIR/oh-my-posh-setup.sh"
 fi
-if [ "${ARGS["prompt"]}" == "starship" ]; then
+if [[ "${ARGS["prompt"]}" == "starship" ]]; then
   source "$CDIR/starship-setup.sh"
 fi
 
 stow_package "zsh" "" "$CURRENT_CONFIG_DIR/zsh"
 
+# Record the chosen prompt tool so config.zsh can honor it (per-machine file)
+if [[ -n "${ARGS["prompt"]}" ]]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    mkdir -p "$CURRENT_CONFIG_DIR/zsh"
+    echo "${ARGS["prompt"]}" > "$CURRENT_CONFIG_DIR/zsh/prompt-tool"
+  else
+    cecho "yellow" "DRY-RUN: echo ${ARGS["prompt"]} > $CURRENT_CONFIG_DIR/zsh/prompt-tool"
+  fi
+fi
+
 if [[ "$DRY_RUN" -ne "1" ]]; then
   # Enable custom config
-  if [ -f "$HOME/.zshrc" ]; then
-    if ! grep -q "source $CURRENT_CONFIG_DIR/zsh/config.zsh" "$HOME/.zshrc"; then
+  if [[ -f "$HOME/.zshrc" ]]; then
+    if ! grep -qF "source $CURRENT_CONFIG_DIR/zsh/config.zsh" "$HOME/.zshrc"; then
       (echo; echo "source $CURRENT_CONFIG_DIR/zsh/config.zsh") >> "$HOME/.zshrc"
     fi
   else
     echo "source $CURRENT_CONFIG_DIR/zsh/config.zsh" > "$HOME/.zshrc"
   fi
+else
+  cecho "yellow" "DRY-RUN: ensure 'source $CURRENT_CONFIG_DIR/zsh/config.zsh' in ~/.zshrc"
 fi

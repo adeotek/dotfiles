@@ -64,7 +64,7 @@ else
       fi
       ;;
     ubuntu|pop)
-      if ! grep -q "^deb.*dotnet/backports" /etc/apt/sources.list.d/*.list 2>/dev/null; then
+      if ! grep -q "dotnet/backports" /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources 2>/dev/null; then
         cecho "cyan" "Enabling dotnet backports Ubuntu feed..."
         if [[ "$DRY_RUN" -ne "1" ]]; then
           sudo add-apt-repository -y ppa:dotnet/backports
@@ -87,8 +87,8 @@ else
 
   # Install Adeotek.DevOpsTools package
   if [[ "$DRY_RUN" -ne "1" ]]; then
-    dotnet tool install -g Adeotek.DevOpsTools
+    dotnet tool install -g Adeotek.DevOpsTools || dotnet tool update -g Adeotek.DevOpsTools
   else
-    cecho "yellow" "DRY-RUN: dotnet tool install -g Adeotek.DevOpsTools"
+    cecho "yellow" "DRY-RUN: dotnet tool install -g Adeotek.DevOpsTools || dotnet tool update -g Adeotek.DevOpsTools"
   fi
 fi

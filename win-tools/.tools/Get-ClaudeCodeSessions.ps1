@@ -128,11 +128,19 @@ if ($termWidth -le 0) { $termWidth = 80 }
 # ── Helper: extract first JSON string field value from a line ─────────────────
 
 function Get-JsonField([string]$Line, [string]$Field) {
-    # Handles escaped characters inside the value (e.g. \\ in Windows paths)
-    if ($Line -match ('"' + [regex]::Escape($Field) + '":"((?:[^"\\]|\\.)*)')) {
-        return $Matches[1] -replace '\\\\"', '"' -replace '\\\\', '\'
-    }
+    # Full JSON decode per line: escapes (\n, \uXXXX, quotes) are handled correctly
+    try {
+        $obj = $Line | ConvertFrom-Json
+        if ($obj.PSObject.Properties.Name -contains $Field -and $obj.$Field -is [string]) {
+            return $obj.$Field
+        }
+    } catch { }
     return $null
+}
+
+function Test-ContainsText([string]$Haystack, [string]$Needle) {
+    # Plain case-insensitive substring check (no wildcard interpretation)
+    $Haystack.IndexOf($Needle, [StringComparison]::OrdinalIgnoreCase) -ge 0
 }
 
 # ── State ─────────────────────────────────────────────────────────────────────
@@ -172,12 +180,12 @@ foreach ($projDir in Get-ChildItem $projectsDir -Directory -ErrorAction Silently
 
         # ── Filters ───────────────────────────────────────────────────────────
 
-        if ($Project -and $projectPath -notlike "*$Project*") { continue }
+        if ($Project -and -not (Test-ContainsText $projectPath $Project)) { continue }
 
         if ($Filter) {
             $idMatch      = $sessionId -ieq $Filter
-            $nameMatch    = $name -and $name -ilike "*$Filter*"
-            $summaryMatch = $summary -ilike "*$Filter*"
+            $nameMatch    = $name -and (Test-ContainsText $name $Filter)
+            $summaryMatch = Test-ContainsText $summary $Filter
             if (-not ($idMatch -or $nameMatch -or $summaryMatch)) { continue }
         }
 
@@ -222,7 +230,7 @@ foreach ($projDir in Get-ChildItem $projectsDir -Directory -ErrorAction Silently
         }
 
         $relPath    = "projects/$projSlug/$($sessionFile.Name)"
-        $maxSummary = $termWidth - 15
+        $maxSummary = [Math]::Max(1, $termWidth - 15)
         $dispSummary = if ($summary.Length -gt $maxSummary) {
             $summary.Substring(0, $maxSummary) + '…'
         } else {
@@ -270,6 +278,11 @@ if ($Remove) {
     $removed = 0
     foreach ($sessionFilePath in $rmFiles) {
         $uuid = [System.IO.Path]::GetFileNameWithoutExtension($sessionFilePath)
+        # Guard against path traversal via crafted session file names (e.g. "..jsonl")
+        if ($uuid -notmatch '^[A-Za-z0-9._-]+$' -or $uuid -eq '.' -or $uuid -eq '..') {
+            Write-Warning "Refusing to remove session with unsafe name: $sessionFilePath"
+            continue
+        }
         Remove-Item $sessionFilePath -Force -ErrorAction SilentlyContinue
         Remove-Item (Join-Path $claudeDir 'file-history' $uuid) -Recurse -Force -ErrorAction SilentlyContinue
         Remove-Item (Join-Path $claudeDir 'session-env'  $uuid) -Recurse -Force -ErrorAction SilentlyContinue

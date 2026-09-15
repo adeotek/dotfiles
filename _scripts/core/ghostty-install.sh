@@ -43,6 +43,9 @@ case $CURRENT_OS_ID in
     fi
     install_package "ghostty" "ghostty --version"
   ;;
+  redhat)
+    cecho "yellow" "SKIPPED: Ghostty COPR is Fedora-only; build from source or use the Fedora COPR manually on RHEL."
+  ;;
   *)
     cecho "red" "Unsupported OS: $CURRENT_OS_ID"
     exit 1

@@ -22,7 +22,7 @@ source "$CDIR/git-install.sh"
 # Copy default user.config, if it doesn't exists
 if [[ "$DRY_RUN" -ne "1" ]]; then
   mkdir -p ~/.config/git.user
-  if [ ! -f ~/.config/git.user/config ]; then
+  if [[ ! -f ~/.config/git.user/config ]]; then
     cecho "cyan" "Copying git.user/config file..."
     if ! cp "$RDIR/_extra/git.user.config" ~/.config/git.user/config; then
       cecho "red" "Failed to copy git.user/config file."
