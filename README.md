@@ -5,11 +5,11 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Distributions](https://img.shields.io/badge/distros-Arch%20%7C%20Debian%20%7C%20Ubuntu%20%7C%20Fedora%20%7C%20RHEL-green.svg)](#supported-distributions)
 [![Shell](https://img.shields.io/badge/shell-Bash%20%7C%20ZSH-orange.svg)](#shell-environments)
-[![Packages](https://img.shields.io/badge/packages-30%2B-brightgreen.svg)](#available-packages)
+[![Packages](https://img.shields.io/badge/packages-46-brightgreen.svg)](#available-packages)
 
 ## ✨ Features
 
-- 🎯 **Modular Architecture** - 50+ individual installation scripts for granular control
+- 🎯 **Modular Architecture** - 70+ individual installation scripts (46 installable packages) for granular control
 - 🐧 **Multi-Distribution** - Supports Arch, Debian, Ubuntu, Pop!OS, Fedora, and RHEL
 - 🔧 **GNU Stow** - Symlink-based configuration management
 - ⚡ **Interactive & Unattended** - Both modes supported for flexibility
@@ -24,9 +24,10 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 
 ### Development Tools
 - **Languages**: Node.js (v24), Go (1.26.5), Rust, .NET SDK (10.0), PowerShell
+- **Runtime/Version Manager**: mise
 - **Cloud/DevOps**: Docker, AWS CLI, GCP CLI, Terraform, Ansible, Helm, kubectl
 - **Editors**: Neovim (with custom config), Zed, VS Code, JetBrains Toolbox
-- **AI/Code Assistants**: Claude Code, OpenCode, Hermes Agent
+- **AI/Code Assistants**: Claude Code, OpenCode, Hermes Agent, Herdr
 - **LLM Context Compression**: Headroom proxy (systemd service, 40-90% token savings)
 
 ### CLI Utilities
@@ -46,6 +47,7 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 ### Prompts & Themes
 - Oh My Posh (with custom themes)
 - Starship (with custom config)
+- Nerd Fonts (v3.5.0, CascadiaCode) - patched terminal fonts
 
 ## 🚀 Quick Start
 
@@ -68,13 +70,14 @@ git clone https://github.com/adeotek/dotfiles.git ~/.dotfiles && ~/.dotfiles/set
    ./setup.sh
    ```
 
-3. **Select installation mode:**
-   - **Manual selection** - Choose specific packages by ID
+3. **Select installation mode (0-3):**
+   - **Manual selection** - Choose specific packages by ID from the list
    - **Minimal** - Essential tools (base-tools, git, yazi, zellij, zsh)
-   - **Console** - Minimal + dev tools (fastfetch, glow, nodejs, onefetch)
+   - **Console** - Minimal + dev tools (fastfetch, glow, nodejs, onefetch, yazi)
    - **Desktop** - Console + desktop apps (ghostty, zed)
-   - **Interactive** - Prompted for each package individually
-   - **All** - Everything including extra packages
+   - Modes 2/3 prompt to optionally include the extra packages
+
+   Available flags: `--help` (usage + all flags), `--basic` (numeric package list instead of the interactive selection grid), `--dry-run`, `--verbose`.
 
 ### Unattended Installation
 
@@ -100,9 +103,9 @@ The following packages can be installed individually or in groups:
 ### Core/Minimal Packages
 - **base-tools** - Essential CLI utilities (fzf, ripgrep, bat, fd, eza, zoxide, etc.)
 - **git** - Git configuration with custom aliases and settings
-- **bash** - Bash shell configuration with Oh My Posh or Starship prompt
-- **tmux** - Terminal multiplexer configuration
+- **zellij** - Terminal multiplexer/workspace manager with custom layout
 - **yazi** - Modern file manager
+- **zsh** - Z shell with antidote-managed plugins and Starship prompt
 
 ### Development Languages & Runtimes
 - **nodejs** - Node.js runtime (v24, configurable)
@@ -110,6 +113,7 @@ The following packages can be installed individually or in groups:
 - **dotnet** - .NET SDK (v10.0)
 - **rustup** - Rust toolchain installer
 - **uv** - Python package and project manager (Astral)
+- **mise** - Polyglot runtime/version manager
 - **powershell** - PowerShell cross-platform shell
 
 ### Cloud & DevOps Tools
@@ -139,11 +143,15 @@ The following packages can be installed individually or in groups:
 
 ### Developer Tools
 - **github-cli** - GitHub command-line interface
+- **tmux** - Terminal multiplexer configuration
 - **tools** - Custom scripts and tools bundle
 - **claude-code** - Claude AI coding assistant
 - **opencode** - OpenCode configuration
 - **headroom** - LLM context compression proxy (systemd service, supports OpenAI, Anthropic, OpenRouter, OpenCode Zen, Google Gemini, GitHub Copilot)
 - **hermes** - Hermes Agent AI coding assistant (Nous Research)
+- **herdr** - Herdr agent configuration and shell completions
+- **graphify** - Knowledge-graph tool for codebases (PyPI: graphifyy, includes Claude Code skill)
+- **rtk** - CLI output compression/toolkit (installed via Homebrew)
 - **playwright** - Playwright CLI for browser automation (used by AI tools)
 - **lsp-servers** - Language servers for languages present on the machine (used by AI agents and editors)
 
@@ -157,15 +165,19 @@ Headroom supports all major LLM providers through its configurable proxy:
 - **Google Gemini / Vertex AI** — via `--backend vertex_ai`
 - **GitHub Copilot** — via `headroom wrap copilot`
 
-### Advanced Shell
-- **zsh** - Z shell with antidote-managed plugins and Starship prompt
+### Shells & Prompts (installable packages)
+- **bash** - Bash shell configuration with Oh My Posh or Starship prompt
+- **oh-my-posh** - Oh My Posh prompt with custom themes
+- **starship** - Starship prompt with custom config
+- **homebrew** - Homebrew package manager for Linux
+- **nerd-fonts** - Nerd Fonts installer (v3.5.0, CascadiaCode)
 
 ### Package Groups
 
 Packages are organized into logical tiers (source of truth: `_scripts/core/_options.sh`):
 
 - **Minimal**: `base-tools,git,yazi,zellij,zsh`
-- **Console**: Minimal + `fastfetch,glow,nodejs,onefetch`
+- **Console**: Minimal + `fastfetch,glow,nodejs,onefetch,yazi`
 - **Desktop**: Console + `ghostty,zed`
 - **Console Extra**: opt-in extras (docker, nvim, tmux, starship, AI tools, …)
 - **Desktop Extra**: Console Extra + `kitty,tabby,vscode,jetbrains-toolbox`
@@ -185,7 +197,7 @@ dotfiles/
 ├── unattended_setup.sh         # Automated setup script
 ├── update.sh                   # Update installed tools
 ├── _scripts/
-│   ├── core/                   # 50+ modular install scripts
+│   ├── core/                   # 70+ modular install/setup scripts
 │   │   ├── _helpers.sh         # Shared functions library
 │   │   ├── _options.sh         # Package definitions
 │   │   ├── *-install.sh        # Tool installation scripts
@@ -202,11 +214,14 @@ dotfiles/
 ├── claude-code/                # Claude Code configuration
 ├── headroom/                   # Headroom LLM compression proxy (service + model config)
 ├── hermes/                     # Hermes Agent AI coding assistant (config template)
+├── herdr/                      # Herdr agent configuration
 ├── git/                        # Git configuration
 ├── nvim/                       # Neovim configuration
 ├── tmux/                       # Tmux configuration
+├── zellij/                     # Zellij multiplexer config
 ├── tools/                      # Curated CLI tools config
 ├── win-tools/                  # Windows-side tools config
+├── paseo/                      # Paseo agent-orchestrator daemon config template (not stowed)
 ├── kitty/                      # Kitty terminal config
 ├── tabby/                      # Tabby terminal config
 ├── zed/                        # Zed editor config
@@ -215,6 +230,7 @@ dotfiles/
 ├── yazi/                       # Yazi file manager config
 ├── fastfetch/                  # Fastfetch system info config
 ├── opencode/                   # OpenCode configuration
+├── docs/                       # Project documentation
 └── _extra/                     # Additional configs & templates
 ```
 
@@ -253,7 +269,7 @@ Example: Installing bash configuration:
 | WSL2 | All supported distros | ✅ Special WSL2 support** |
 
 ** Special WSL2 support:
-— see `_scripts/wsl-setup-fedora-dev.sh` for a turnkey Fedora WSL setup (`--help` for options)
+- see `_scripts/wsl-setup-fedora-dev.sh` for a turnkey Fedora WSL setup (`--help` for options)
 - run the WSL2 setup script directly from the repository:
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/adeotek/dotfiles/main/_scripts/wsl-setup-fedora-dev.sh) --help
@@ -270,6 +286,7 @@ This will:
 - Update Flatpak packages
 - Update Homebrew packages
 - Update npm global packages
+- Update uv (self-update + tool upgrades)
 - Update oh-my-posh
 
 ## 🛠️ Customization
@@ -421,6 +438,10 @@ Enable verbose output for debugging:
 # Interactive installation with menu
 ./setup.sh
 
+# Show usage and all flags
+./setup.sh --help
+./unattended_setup.sh --help
+
 # Install specific packages
 ./unattended_setup.sh --packages git,bash,tmux,nvim
 
@@ -445,7 +466,7 @@ Enable verbose output for debugging:
 - **Yazi**: `~/.config/yazi/`
 - **Oh My Posh**: `~/.config/oh-my-posh/` (themes: `gbs.omp.yaml`, `gbs-text.omp.yaml`)
 - **Headroom**: `~/.config/headroom/proxy.env` (provider config), `~/.headroom/models.json` (model limits + pricing)
-- **Headroom Dashboard**: `http://localhost:8787/dashboard` (live compression stats)
+- **Headroom Stats**: `http://localhost:8787/stats` (live compression stats; `/health` for service health)
 
 ### Local Override Files
 
