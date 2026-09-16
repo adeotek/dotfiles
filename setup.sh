@@ -41,11 +41,25 @@ done
 cecho "yellow" -n "Please select setup mode (0-3, q) [$DEFAULT_MENU_OPTION]: "
 while true
 do
-  read -r SETUP_MODE
-  if [[ -z "$SETUP_MODE" ]]; then
-    SETUP_MODE="$DEFAULT_MENU_OPTION"
+  if [[ "$IS_TTY" -eq 1 ]]; then
+    key="$(read_key)"
+    echo
+    case "$key" in
+      enter) SETUP_MODE="$DEFAULT_MENU_OPTION" ;;
+      esc) SETUP_MODE="q" ;;
+      *) SETUP_MODE="$key" ;;
+    esac
+  else
+    SETUP_MODE=""
+    if ! IFS= read -r SETUP_MODE; then
+      cecho "magenta" "Operation cancelled!"
+      exit 10
+    fi
+    if [[ -z "$SETUP_MODE" ]]; then
+      SETUP_MODE="$DEFAULT_MENU_OPTION"
+    fi
+    SETUP_MODE="${SETUP_MODE//[[:space:]]/}"
   fi
-  SETUP_MODE="${SETUP_MODE//[[:space:]]/}"
   if [[ "$SETUP_MODE" == "q" || "$SETUP_MODE" == "Q" ]]; then
     cecho "magenta" "Operation cancelled!"
     exit 10
@@ -125,9 +139,8 @@ case $SETUP_MODE in
     do
       cecho "cyan" "$line"
     done
-    cecho "yellow" -n "Do you want to include the extra packages? [y/N]: "
-    read -r INCLUDE_EXTRA
-    if [[ "$INCLUDE_EXTRA" == "y" || "$INCLUDE_EXTRA" == "Y" ]]; then
+    read_yes_no "Do you want to include the extra packages? [y/N]: " "n"
+    if [[ "$REPLY_YN" == "y" ]]; then
       SELECTED_PACKAGES=("${ALL_CONSOLE_TASKS[@]}")
     fi
     ;;
@@ -139,9 +152,8 @@ case $SETUP_MODE in
     do
       cecho "cyan" "$line"
     done
-    cecho "yellow" -n "Do you want to include the extra packages? [y/N]: "
-    read -r INCLUDE_EXTRA
-    if [[ "$INCLUDE_EXTRA" == "y" || "$INCLUDE_EXTRA" == "Y" ]]; then
+    read_yes_no "Do you want to include the extra packages? [y/N]: " "n"
+    if [[ "$REPLY_YN" == "y" ]]; then
       SELECTED_PACKAGES=("${ALL_DESKTOP_TASKS[@]}")
     fi
     ;;
@@ -154,9 +166,8 @@ fi
 
 cecho "white" "The following packages will be installed/set up:"
 aecho -s SELECTED_PACKAGES "- " "yellow" "white"
-cecho "yellow" -n "Please confirm package selection [Y/n]: "
-read -r PACKAGE_SELECTION_CONFIRM
-if [[ "$PACKAGE_SELECTION_CONFIRM" != "y" && "$PACKAGE_SELECTION_CONFIRM" != "Y" && "$PACKAGE_SELECTION_CONFIRM" != "" ]]; then
+read_yes_no "Please confirm package selection [Y/n]: " "y"
+if [[ "$REPLY_YN" != "y" ]]; then
   cecho "magenta" "Operation cancelled!"
   exit 10
 fi
