@@ -124,6 +124,77 @@ function aecho() {
   done
 }
 
+# Interactive input helpers (single-keypress prompts)
+IS_TTY=0
+if [[ -t 0 && -t 1 ]]; then
+  IS_TTY=1
+fi
+
+function read_key() {
+  # Reads one keypress; prints a canonical key name or the literal character.
+  # Arrow keys are the 3-byte CSI sequences; a lone Esc is detected by a
+  # short follow-up read timeout. Ctrl+C keeps normal SIGINT behavior.
+  local key seq
+  if ! IFS= read -rsn1 key; then
+    echo "eof"
+    return
+  fi
+  case "$key" in
+    $'\x1b')
+      seq=""
+      # shellcheck disable=SC2034  # seq read for its bytes, may stay empty on lone Esc
+      IFS= read -rsn2 -t 0.01 seq
+      case "$seq" in
+        "[A") echo "up" ;;
+        "[B") echo "down" ;;
+        "[C") echo "right" ;;
+        "[D") echo "left" ;;
+        *) echo "esc" ;;
+      esac
+      ;;
+    ""|$'\r'|$'\n') echo "enter" ;;
+    " ") echo "space" ;;
+    $'\x7f'|$'\b') echo "backspace" ;;
+    *) echo "$key" ;;
+  esac
+}
+
+function read_yes_no() {
+  # Usage: read_yes_no "prompt" "default(y|n)"
+  # Single keypress on TTY, typed line otherwise. Sets REPLY_YN: y|n|esc.
+  # q/Esc map to esc; callers decide whether esc means "no" or "cancel".
+  local prompt="$1"
+  local default="${2:-n}"
+  local key line
+  while true
+  do
+    cecho "yellow" -n "$prompt"
+    if [[ "$IS_TTY" -eq 1 ]]; then
+      key="$(read_key)"
+      echo
+    else
+      key=""
+      if ! IFS= read -r line; then
+        REPLY_YN="esc"  # EOF: never interpret as yes
+        return
+      fi
+      case "$line" in
+        "") key="enter" ;;
+        [yY]) key="y" ;;
+        [nN]) key="n" ;;
+        [qQ]) key="esc" ;;
+        *) continue ;;
+      esac
+    fi
+    case "$key" in
+      y|Y) REPLY_YN="y"; return ;;
+      n|N) REPLY_YN="n"; return ;;
+      enter) REPLY_YN="$default"; return ;;
+      esc|q|Q|eof) REPLY_YN="esc"; return ;;
+    esac
+  done
+}
+
 function get_vv() {
   if [[ "$VV" -eq "1" ]]; then
     echo "--verbose"
