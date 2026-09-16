@@ -96,6 +96,11 @@ function decho() {
 }
 
 function aecho() {
+  local sorted=0
+  if [[ "$1" == "-s" ]]; then
+    sorted=1
+    shift
+  fi
   local -n input=$1
   local prefix="$2"
   local color="$3"
@@ -105,7 +110,12 @@ function aecho() {
     prefix_color="$color"
   fi
 
-  for val in "${input[@]}"
+  local items=("${input[@]}")
+  if [[ "$sorted" -eq 1 ]]; then
+    mapfile -t items < <(printf '%s\n' "${items[@]}" | sort)
+  fi
+
+  for val in "${items[@]}"
   do
     if [ ! -z "$prefix" ]; then
       cecho "$prefix_color" -n "$prefix"

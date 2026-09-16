@@ -120,7 +120,7 @@ Default prompt for ZSH is `starship` (`OPT_ZSH_DEFAULT_PROMPT`); bash defaults t
 - 2-space indentation; no tabs; Unix LF line endings
 - `set -e` is **not** used — scripts allow graceful failures; check return codes explicitly
 - Exit codes: `exit 1` (error), `exit 10` (user cancelled)
-- Output helpers (from `_helpers.sh`): `cecho "color" "msg"`, `decho "color" "msg"` (verbose-only), `aecho ARRAY "prefix" "color" "pfx_color"`
+- Output helpers (from `_helpers.sh`): `cecho "color" "msg"`, `decho "color" "msg"` (verbose-only), `aecho [-s] ARRAY "prefix" "color" "pfx_color"` (optional `-s` sorts items alphabetically)
 - Key helper functions: `install_package`, `stow_package`, `execute_command`, `rename_dir_if_exists`, `rename_file_if_exists`
 - Argument parsing: `declare -A ARGS=(["flag"]="")` then `process_args "$@"` — populates `ARGS` and sets `VV`/`DRY_RUN`
 

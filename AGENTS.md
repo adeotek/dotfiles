@@ -84,7 +84,7 @@ Default ZSH prompt: `starship`; bash: `oh-my-posh`.
 - Exit codes: `exit 1` (error), `exit 10` (user cancelled)
 - SCREAMING_SNAKE_CASE for globals/arrays; snake_case for functions; kebab-case for files
 - Use `local` for function-scoped variables; validate params at the top of functions
-- Output helpers: `cecho "color" "msg"`, `decho "color" "msg"` (verbose-only), `aecho ARRAY "prefix" "color" "pfx_color"`
+- Output helpers: `cecho "color" "msg"`, `decho "color" "msg"` (verbose-only), `aecho [-s] ARRAY "prefix" "color" "pfx_color"` (optional `-s` sorts items alphabetically)
 - Key helpers: `install_package`, `stow_package`, `execute_command`, `rename_dir_if_exists`, `rename_file_if_exists`
 - Argument parsing: `declare -A ARGS=(["flag"]="")` then `process_args "$@"` — sets `VV`/`DRY_RUN`
 - Dry run: guard all side effects with `if [[ "$DRY_RUN" -ne "1" ]]; then … else cecho "yellow" "DRY-RUN: …"; fi`

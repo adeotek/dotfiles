@@ -269,7 +269,7 @@
       "file_type": "code",
       "norm_label": "_key()",
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L77"
+      "source_location": "L76"
     },
     {
       "id": "opencode_merge_opencode_config_main",
@@ -281,7 +281,7 @@
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L107"
+      "source_location": "L106"
     },
     {
       "id": "opencode_merge_opencode_config_merge",
@@ -293,7 +293,7 @@
       "file_type": "code",
       "norm_label": "merge()",
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L81"
+      "source_location": "L80"
     },
     {
       "id": "opencode_merge_opencode_config_strip_jsonc",
@@ -305,7 +305,7 @@
       "file_type": "code",
       "norm_label": "strip_jsonc()",
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L43"
+      "source_location": "L42"
     },
     {
       "id": "opencode_plugins_graphify_graphifyplugin",
@@ -1010,210 +1010,6 @@
       "source_location": "L1"
     },
     {
-      "id": "headroom_readme_bypassing_the_proxy",
-      "label": "Bypassing the proxy",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "bypassing the proxy",
-      "source_file": "headroom/README.md",
-      "source_location": "L168"
-    },
-    {
-      "id": "headroom_readme_compatible_tools",
-      "label": "Compatible tools",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "compatible tools",
-      "source_file": "headroom/README.md",
-      "source_location": "L15"
-    },
-    {
-      "id": "headroom_readme_configuration",
-      "label": "Configuration",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "configuration",
-      "source_file": "headroom/README.md",
-      "source_location": "L177"
-    },
-    {
-      "id": "headroom_readme_documentation",
-      "label": "Documentation",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "documentation",
-      "source_file": "headroom/README.md",
-      "source_location": "L184"
-    },
-    {
-      "id": "headroom_readme_github_copilot",
-      "label": "GitHub Copilot",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "github copilot",
-      "source_file": "headroom/README.md",
-      "source_location": "L116"
-    },
-    {
-      "id": "headroom_readme_google_gemini_vertex_ai",
-      "label": "Google Gemini / Vertex AI",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "google gemini / vertex ai",
-      "source_file": "headroom/README.md",
-      "source_location": "L90"
-    },
-    {
-      "id": "headroom_readme_headroom",
-      "label": "Headroom",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "headroom",
-      "source_file": "headroom/README.md",
-      "source_location": "L1"
-    },
-    {
-      "id": "headroom_readme_how_it_works",
-      "label": "How it works",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "how it works",
-      "source_file": "headroom/README.md",
-      "source_location": "L130"
-    },
-    {
-      "id": "headroom_readme_important_one_backend_at_a_time",
-      "label": "Important: one backend at a time",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "important: one backend at a time",
-      "source_file": "headroom/README.md",
-      "source_location": "L35"
-    },
-    {
-      "id": "headroom_readme_installation",
-      "label": "Installation",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "installation",
-      "source_file": "headroom/README.md",
-      "source_location": "L5"
-    },
-    {
-      "id": "headroom_readme_multi_provider_setup",
-      "label": "Multi-provider setup",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "multi-provider setup",
-      "source_file": "headroom/README.md",
-      "source_location": "L47"
-    },
-    {
-      "id": "headroom_readme_opencode_zen",
-      "label": "OpenCode Zen",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "opencode zen",
-      "source_file": "headroom/README.md",
-      "source_location": "L79"
-    },
-    {
-      "id": "headroom_readme_openrouter",
-      "label": "OpenRouter",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "openrouter",
-      "source_file": "headroom/README.md",
-      "source_location": "L65"
-    },
-    {
-      "id": "headroom_readme_provider_specific_setup",
-      "label": "Provider-specific setup",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "provider-specific setup",
-      "source_file": "headroom/README.md",
-      "source_location": "L63"
-    },
-    {
-      "id": "headroom_readme_service_management",
-      "label": "Service management",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "service management",
-      "source_file": "headroom/README.md",
-      "source_location": "L137"
-    },
-    {
-      "id": "headroom_readme_stats_and_monitoring",
-      "label": "Stats and monitoring",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "stats and monitoring",
-      "source_file": "headroom/README.md",
-      "source_location": "L155"
-    },
-    {
-      "id": "headroom_readme_supported_llm_providers",
-      "label": "Supported LLM providers",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "Hermes Agent",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "supported llm providers",
-      "source_file": "headroom/README.md",
-      "source_location": "L22"
-    },
-    {
       "id": "hermes_readme",
       "label": "hermes/README.md",
       "_origin": "ast",
@@ -1839,6 +1635,36 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_golang_install",
+      "label": "golang-install.sh",
+      "_origin": "ast",
+      "community": 117,
+      "community_name": "golang-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "golang-install.sh",
+      "source_file": "_scripts/core/golang-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_golang_install_sh__entry",
+      "label": "golang-install.sh script",
+      "_origin": "ast",
+      "community": 117,
+      "community_name": "golang-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "golang-install.sh script",
+      "source_file": "_scripts/core/golang-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_ansible_cleanup",
       "label": "ansible-cleanup.sh",
       "_origin": "ast",
@@ -2284,7 +2110,7 @@
       "source_location": "L2"
     },
     {
-      "id": "opencode_merge_opencode_config_rationale_44",
+      "id": "opencode_merge_opencode_config_rationale_43",
       "label": "Remove // and /* */ comments outside strings (state machine).",
       "_origin": "ast",
       "community": 16,
@@ -2292,10 +2118,10 @@
       "file_type": "rationale",
       "norm_label": "remove // and /* */ comments outside strings (state machine).",
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L44"
+      "source_location": "L43"
     },
     {
-      "id": "opencode_merge_opencode_config_rationale_82",
+      "id": "opencode_merge_opencode_config_rationale_81",
       "label": "Deep merge: live-only content kept; conflict winner depends on mode.",
       "_origin": "ast",
       "community": 16,
@@ -2303,163 +2129,211 @@
       "file_type": "rationale",
       "norm_label": "deep merge: live-only content kept; conflict winner depends on mode.",
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L82"
+      "source_location": "L81"
     },
     {
-      "id": "docs_repo_review",
-      "label": "repo-review.md",
+      "id": "headroom_readme_bypassing_the_proxy",
+      "label": "Bypassing the proxy",
       "_origin": "ast",
       "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "community_name": "Headroom",
       "file_type": "document",
-      "node_kind": "page",
-      "norm_label": "repo-review.md",
-      "source_file": "docs/repo-review.md",
+      "node_kind": "heading",
+      "norm_label": "bypassing the proxy",
+      "source_file": "headroom/README.md",
+      "source_location": "L168"
+    },
+    {
+      "id": "headroom_readme_compatible_tools",
+      "label": "Compatible tools",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "Headroom",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "compatible tools",
+      "source_file": "headroom/README.md",
+      "source_location": "L15"
+    },
+    {
+      "id": "headroom_readme_configuration",
+      "label": "Configuration",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "Headroom",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "configuration",
+      "source_file": "headroom/README.md",
+      "source_location": "L177"
+    },
+    {
+      "id": "headroom_readme_documentation",
+      "label": "Documentation",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "Headroom",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "documentation",
+      "source_file": "headroom/README.md",
+      "source_location": "L184"
+    },
+    {
+      "id": "headroom_readme_github_copilot",
+      "label": "GitHub Copilot",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "Headroom",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "github copilot",
+      "source_file": "headroom/README.md",
+      "source_location": "L116"
+    },
+    {
+      "id": "headroom_readme_google_gemini_vertex_ai",
+      "label": "Google Gemini / Vertex AI",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "Headroom",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "google gemini / vertex ai",
+      "source_file": "headroom/README.md",
+      "source_location": "L90"
+    },
+    {
+      "id": "headroom_readme_headroom",
+      "label": "Headroom",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "Headroom",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "headroom",
+      "source_file": "headroom/README.md",
       "source_location": "L1"
     },
     {
-      "id": "docs_repo_review_a_entry_points_shared_helpers_options",
-      "label": "A. Entry points, shared helpers, options",
+      "id": "headroom_readme_how_it_works",
+      "label": "How it works",
       "_origin": "ast",
       "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "community_name": "Headroom",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "a. entry points, shared helpers, options",
-      "source_file": "docs/repo-review.md",
-      "source_location": "L33"
+      "norm_label": "how it works",
+      "source_file": "headroom/README.md",
+      "source_location": "L130"
     },
     {
-      "id": "docs_repo_review_b_install_scripts_scripts_core_install_sh",
-      "label": "B. Install scripts (`_scripts/core/*_install.sh`)",
+      "id": "headroom_readme_important_one_backend_at_a_time",
+      "label": "Important: one backend at a time",
       "_origin": "ast",
       "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "community_name": "Headroom",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "b. install scripts (`_scripts/core/*_install.sh`)",
-      "source_file": "docs/repo-review.md",
-      "source_location": "L69"
+      "norm_label": "important: one backend at a time",
+      "source_file": "headroom/README.md",
+      "source_location": "L35"
     },
     {
-      "id": "docs_repo_review_c_setup_deploy_scripts_setup_sh_specials",
-      "label": "C. Setup & deploy scripts (`*_setup.sh` + specials)",
+      "id": "headroom_readme_installation",
+      "label": "Installation",
       "_origin": "ast",
       "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "community_name": "Headroom",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "c. setup & deploy scripts (`*_setup.sh` + specials)",
-      "source_file": "docs/repo-review.md",
-      "source_location": "L104"
+      "norm_label": "installation",
+      "source_file": "headroom/README.md",
+      "source_location": "L5"
     },
     {
-      "id": "docs_repo_review_d_dotfile_configs",
-      "label": "D. Dotfile configs",
+      "id": "headroom_readme_multi_provider_setup",
+      "label": "Multi-provider setup",
       "_origin": "ast",
       "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "community_name": "Headroom",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "d. dotfile configs",
-      "source_file": "docs/repo-review.md",
-      "source_location": "L131"
+      "norm_label": "multi-provider setup",
+      "source_file": "headroom/README.md",
+      "source_location": "L47"
     },
     {
-      "id": "docs_repo_review_e_tools_powershell_opencode_tooling",
-      "label": "E. Tools / PowerShell / opencode tooling",
+      "id": "headroom_readme_opencode_zen",
+      "label": "OpenCode Zen",
       "_origin": "ast",
       "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "community_name": "Headroom",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "e. tools / powershell / opencode tooling",
-      "source_file": "docs/repo-review.md",
-      "source_location": "L160"
+      "norm_label": "opencode zen",
+      "source_file": "headroom/README.md",
+      "source_location": "L79"
     },
     {
-      "id": "docs_repo_review_f_over_engineering_scan_ponytail_audit",
-      "label": "F. Over-engineering scan (ponytail audit)",
+      "id": "headroom_readme_openrouter",
+      "label": "OpenRouter",
       "_origin": "ast",
       "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "community_name": "Headroom",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "f. over-engineering scan (ponytail audit)",
-      "source_file": "docs/repo-review.md",
-      "source_location": "L183"
+      "norm_label": "openrouter",
+      "source_file": "headroom/README.md",
+      "source_location": "L65"
     },
     {
-      "id": "docs_repo_review_full_repository_review_adeotek_dotfiles",
-      "label": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "id": "headroom_readme_provider_specific_setup",
+      "label": "Provider-specific setup",
       "_origin": "ast",
       "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "community_name": "Headroom",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "full repository review \u2014 adeotek dotfiles",
-      "source_file": "docs/repo-review.md",
-      "source_location": "L1"
+      "norm_label": "provider-specific setup",
+      "source_file": "headroom/README.md",
+      "source_location": "L63"
     },
     {
-      "id": "docs_repo_review_g_shellcheck_baseline_false_positives_vendored_no_action",
-      "label": "G. Shellcheck baseline \u2014 false positives / vendored (no action)",
+      "id": "headroom_readme_service_management",
+      "label": "Service management",
       "_origin": "ast",
       "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "community_name": "Headroom",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "g. shellcheck baseline \u2014 false positives / vendored (no action)",
-      "source_file": "docs/repo-review.md",
-      "source_location": "L206"
+      "norm_label": "service management",
+      "source_file": "headroom/README.md",
+      "source_location": "L137"
     },
     {
-      "id": "docs_repo_review_h_post_fix_pass_verification_follow_ups",
-      "label": "H. Post-fix pass verification + follow-ups",
+      "id": "headroom_readme_stats_and_monitoring",
+      "label": "Stats and monitoring",
       "_origin": "ast",
       "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "community_name": "Headroom",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "h. post-fix pass verification + follow-ups",
-      "source_file": "docs/repo-review.md",
-      "source_location": "L224"
+      "norm_label": "stats and monitoring",
+      "source_file": "headroom/README.md",
+      "source_location": "L155"
     },
     {
-      "id": "docs_repo_review_legend",
-      "label": "Legend",
+      "id": "headroom_readme_supported_llm_providers",
+      "label": "Supported LLM providers",
       "_origin": "ast",
       "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "community_name": "Headroom",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "legend",
-      "source_file": "docs/repo-review.md",
-      "source_location": "L9"
-    },
-    {
-      "id": "docs_repo_review_summary",
-      "label": "Summary",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "summary",
-      "source_file": "docs/repo-review.md",
-      "source_location": "L17"
-    },
-    {
-      "id": "docs_repo_review_verification_notes",
-      "label": "Verification notes",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "verification notes",
-      "source_file": "docs/repo-review.md",
-      "source_location": "L218"
+      "norm_label": "supported llm providers",
+      "source_file": "headroom/README.md",
+      "source_location": "L22"
     },
     {
       "id": "scripts_core_helm_install",
@@ -2537,11 +2411,41 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_base_tools_install",
+      "label": "base-tools-install.sh",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "base-tools-install.sh",
+      "source_file": "_scripts/core/base-tools-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_base_tools_install_sh__entry",
+      "label": "base-tools-install.sh script",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "base-tools-install.sh script",
+      "source_file": "_scripts/core/base-tools-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_bash_setup",
       "label": "bash-setup.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2552,48 +2456,48 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_ghostty_install",
-      "label": "ghostty-install.sh",
+      "id": "scripts_core_glow_install",
+      "label": "glow-install.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "ghostty-install.sh",
-      "source_file": "_scripts/core/ghostty-install.sh",
+      "norm_label": "glow-install.sh",
+      "source_file": "_scripts/core/glow-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_ghostty_setup",
-      "label": "ghostty-setup.sh",
+      "id": "scripts_core_glow_install_sh__entry",
+      "label": "glow-install.sh script",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "ghostty-setup.sh",
-      "source_file": "_scripts/core/ghostty-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_ghostty_setup_sh__entry",
-      "label": "ghostty-setup.sh script",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "ghostty-setup.sh script",
-      "source_file": "_scripts/core/ghostty-setup.sh",
+      "norm_label": "glow-install.sh script",
+      "source_file": "_scripts/core/glow-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_homebrew_install",
+      "label": "homebrew-install.sh",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "homebrew-install.sh",
+      "source_file": "_scripts/core/homebrew-install.sh",
       "source_location": "L1"
     },
     {
@@ -2601,7 +2505,7 @@
       "label": "kitty-install.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2616,7 +2520,7 @@
       "label": "kitty-setup.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2631,7 +2535,7 @@
       "label": "kitty-setup.sh script",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2646,7 +2550,7 @@
       "label": "nerd-fonts-install.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2657,11 +2561,56 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_nvim_install",
+      "label": "nvim-install.sh",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "nvim-install.sh",
+      "source_file": "_scripts/core/nvim-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_nvim_setup",
+      "label": "nvim-setup.sh",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "nvim-setup.sh",
+      "source_file": "_scripts/core/nvim-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_nvim_setup_sh__entry",
+      "label": "nvim-setup.sh script",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "nvim-setup.sh script",
+      "source_file": "_scripts/core/nvim-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_oh_my_posh_install",
       "label": "oh-my-posh-install.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2676,7 +2625,7 @@
       "label": "oh-my-posh-setup.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2691,7 +2640,7 @@
       "label": "oh-my-posh-setup.sh script",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2702,11 +2651,86 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_onefetch_install",
+      "label": "onefetch-install.sh",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "onefetch-install.sh",
+      "source_file": "_scripts/core/onefetch-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_rtk_install",
+      "label": "rtk-install.sh",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "rtk-install.sh",
+      "source_file": "_scripts/core/rtk-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_rtk_install_sh__entry",
+      "label": "rtk-install.sh script",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "rtk-install.sh script",
+      "source_file": "_scripts/core/rtk-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_rtk_setup",
+      "label": "rtk-setup.sh",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "rtk-setup.sh",
+      "source_file": "_scripts/core/rtk-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_rtk_setup_sh__entry",
+      "label": "rtk-setup.sh script",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "homebrew-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "rtk-setup.sh script",
+      "source_file": "_scripts/core/rtk-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_starship_install",
       "label": "starship-install.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2721,7 +2745,7 @@
       "label": "starship-install.sh script",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2736,7 +2760,7 @@
       "label": "starship-setup.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2751,7 +2775,7 @@
       "label": "starship-setup.sh script",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2766,7 +2790,7 @@
       "label": "tabby-install.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2781,7 +2805,7 @@
       "label": "tabby-setup.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2796,7 +2820,7 @@
       "label": "tabby-setup.sh script",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2807,56 +2831,11 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_zed_install",
-      "label": "zed-install.sh",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "starship-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "zed-install.sh",
-      "source_file": "_scripts/core/zed-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_zed_setup",
-      "label": "zed-setup.sh",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "starship-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "zed-setup.sh",
-      "source_file": "_scripts/core/zed-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_zed_setup_sh__entry",
-      "label": "zed-setup.sh script",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "starship-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "zed-setup.sh script",
-      "source_file": "_scripts/core/zed-setup.sh",
-      "source_location": "L1"
-    },
-    {
       "id": "scripts_core_zsh_install",
       "label": "zsh-install.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2871,7 +2850,7 @@
       "label": "zsh-install.sh script",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2886,7 +2865,7 @@
       "label": "zsh-setup.sh",
       "_origin": "ast",
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -3533,109 +3512,160 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_claude_code_setup",
-      "label": "claude-code-setup.sh",
+      "id": "docs_v2_review",
+      "label": "v2-review.md",
       "_origin": "ast",
       "community": 31,
-      "community_name": "claude-code-setup.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "claude-code-setup.sh",
-      "source_file": "_scripts/core/claude-code-setup.sh",
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "v2-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_claude_code_setup_claudecode_plugins",
-      "label": "CLAUDECODE_PLUGINS",
+      "id": "docs_v2_review_a_entry_points_shared_helpers_options",
+      "label": "A. Entry points, shared helpers, options",
       "_origin": "ast",
       "community": 31,
-      "community_name": "claude-code-setup.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "code"
-      },
-      "norm_label": "claudecode_plugins",
-      "source_file": "_scripts/core/claude-code-setup.sh",
-      "source_location": "L18"
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "a. entry points, shared helpers, options",
+      "source_file": "docs/v2-review.md",
+      "source_location": "L33"
     },
     {
-      "id": "scripts_core_claude_code_setup_sh__entry",
-      "label": "claude-code-setup.sh script",
+      "id": "docs_v2_review_b_install_scripts_scripts_core_install_sh",
+      "label": "B. Install scripts (`_scripts/core/*_install.sh`)",
       "_origin": "ast",
       "community": 31,
-      "community_name": "claude-code-setup.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "claude-code-setup.sh script",
-      "source_file": "_scripts/core/claude-code-setup.sh",
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "b. install scripts (`_scripts/core/*_install.sh`)",
+      "source_file": "docs/v2-review.md",
+      "source_location": "L69"
+    },
+    {
+      "id": "docs_v2_review_c_setup_deploy_scripts_setup_sh_specials",
+      "label": "C. Setup & deploy scripts (`*_setup.sh` + specials)",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "c. setup & deploy scripts (`*_setup.sh` + specials)",
+      "source_file": "docs/v2-review.md",
+      "source_location": "L104"
+    },
+    {
+      "id": "docs_v2_review_d_dotfile_configs",
+      "label": "D. Dotfile configs",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "d. dotfile configs",
+      "source_file": "docs/v2-review.md",
+      "source_location": "L131"
+    },
+    {
+      "id": "docs_v2_review_e_tools_powershell_opencode_tooling",
+      "label": "E. Tools / PowerShell / opencode tooling",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "e. tools / powershell / opencode tooling",
+      "source_file": "docs/v2-review.md",
+      "source_location": "L160"
+    },
+    {
+      "id": "docs_v2_review_f_over_engineering_scan_ponytail_audit",
+      "label": "F. Over-engineering scan (ponytail audit)",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "f. over-engineering scan (ponytail audit)",
+      "source_file": "docs/v2-review.md",
+      "source_location": "L183"
+    },
+    {
+      "id": "docs_v2_review_full_repository_review_adeotek_dotfiles",
+      "label": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "full repository review \u2014 adeotek dotfiles",
+      "source_file": "docs/v2-review.md",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_lsp_servers_install",
-      "label": "lsp-servers-install.sh",
+      "id": "docs_v2_review_g_shellcheck_baseline_false_positives_vendored_no_action",
+      "label": "G. Shellcheck baseline \u2014 false positives / vendored (no action)",
       "_origin": "ast",
       "community": 31,
-      "community_name": "claude-code-setup.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "lsp-servers-install.sh",
-      "source_file": "_scripts/core/lsp-servers-install.sh",
-      "source_location": "L1"
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "g. shellcheck baseline \u2014 false positives / vendored (no action)",
+      "source_file": "docs/v2-review.md",
+      "source_location": "L206"
     },
     {
-      "id": "scripts_core_nodejs_install",
-      "label": "nodejs-install.sh",
+      "id": "docs_v2_review_h_post_fix_pass_verification_follow_ups",
+      "label": "H. Post-fix pass verification + follow-ups",
       "_origin": "ast",
       "community": 31,
-      "community_name": "claude-code-setup.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "nodejs-install.sh",
-      "source_file": "_scripts/core/nodejs-install.sh",
-      "source_location": "L1"
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "h. post-fix pass verification + follow-ups",
+      "source_file": "docs/v2-review.md",
+      "source_location": "L224"
     },
     {
-      "id": "scripts_core_playwright_install",
-      "label": "playwright-install.sh",
+      "id": "docs_v2_review_legend",
+      "label": "Legend",
       "_origin": "ast",
       "community": 31,
-      "community_name": "claude-code-setup.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "playwright-install.sh",
-      "source_file": "_scripts/core/playwright-install.sh",
-      "source_location": "L1"
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "legend",
+      "source_file": "docs/v2-review.md",
+      "source_location": "L9"
     },
     {
-      "id": "scripts_core_playwright_install_sh__entry",
-      "label": "playwright-install.sh script",
+      "id": "docs_v2_review_summary",
+      "label": "Summary",
       "_origin": "ast",
       "community": 31,
-      "community_name": "claude-code-setup.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "playwright-install.sh script",
-      "source_file": "_scripts/core/playwright-install.sh",
-      "source_location": "L1"
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "summary",
+      "source_file": "docs/v2-review.md",
+      "source_location": "L17"
+    },
+    {
+      "id": "docs_v2_review_verification_notes",
+      "label": "Verification notes",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "Full Repository Review \u2014 AdeoTEK Dotfiles",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "verification notes",
+      "source_file": "docs/v2-review.md",
+      "source_location": "L218"
     },
     {
       "id": "opencode_opencode",
@@ -3647,6 +3677,17 @@
       "norm_label": "opencode.json",
       "source_file": ".opencode/opencode.json",
       "source_location": "L1"
+    },
+    {
+      "id": "opencode_opencode_plugin",
+      "label": "plugin",
+      "_origin": "ast",
+      "community": 32,
+      "community_name": "opencode.json",
+      "file_type": "code",
+      "norm_label": "plugin",
+      "source_file": ".opencode/opencode.json",
+      "source_location": "L3"
     },
     {
       "id": "opencode_opencode_schema",
@@ -3865,138 +3906,93 @@
       "source_location": "L430"
     },
     {
-      "id": "scripts_core_base_tools_install",
-      "label": "base-tools-install.sh",
+      "id": "scripts_core_ghostty_install",
+      "label": "ghostty-install.sh",
       "_origin": "ast",
       "community": 38,
-      "community_name": "homebrew-install.sh",
+      "community_name": "ghostty-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "base-tools-install.sh",
-      "source_file": "_scripts/core/base-tools-install.sh",
+      "norm_label": "ghostty-install.sh",
+      "source_file": "_scripts/core/ghostty-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_base_tools_install_sh__entry",
-      "label": "base-tools-install.sh script",
+      "id": "scripts_core_ghostty_setup",
+      "label": "ghostty-setup.sh",
       "_origin": "ast",
       "community": 38,
-      "community_name": "homebrew-install.sh",
+      "community_name": "ghostty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "ghostty-setup.sh",
+      "source_file": "_scripts/core/ghostty-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_ghostty_setup_sh__entry",
+      "label": "ghostty-setup.sh script",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "ghostty-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "base-tools-install.sh script",
-      "source_file": "_scripts/core/base-tools-install.sh",
+      "norm_label": "ghostty-setup.sh script",
+      "source_file": "_scripts/core/ghostty-setup.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_glow_install",
-      "label": "glow-install.sh",
+      "id": "scripts_core_zed_install",
+      "label": "zed-install.sh",
       "_origin": "ast",
       "community": 38,
-      "community_name": "homebrew-install.sh",
+      "community_name": "ghostty-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "glow-install.sh",
-      "source_file": "_scripts/core/glow-install.sh",
+      "norm_label": "zed-install.sh",
+      "source_file": "_scripts/core/zed-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_glow_install_sh__entry",
-      "label": "glow-install.sh script",
+      "id": "scripts_core_zed_setup",
+      "label": "zed-setup.sh",
       "_origin": "ast",
       "community": 38,
-      "community_name": "homebrew-install.sh",
+      "community_name": "ghostty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "zed-setup.sh",
+      "source_file": "_scripts/core/zed-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_zed_setup_sh__entry",
+      "label": "zed-setup.sh script",
+      "_origin": "ast",
+      "community": 38,
+      "community_name": "ghostty-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "glow-install.sh script",
-      "source_file": "_scripts/core/glow-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_homebrew_install",
-      "label": "homebrew-install.sh",
-      "_origin": "ast",
-      "community": 38,
-      "community_name": "homebrew-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "homebrew-install.sh",
-      "source_file": "_scripts/core/homebrew-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_nvim_install",
-      "label": "nvim-install.sh",
-      "_origin": "ast",
-      "community": 38,
-      "community_name": "homebrew-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "nvim-install.sh",
-      "source_file": "_scripts/core/nvim-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_nvim_setup",
-      "label": "nvim-setup.sh",
-      "_origin": "ast",
-      "community": 38,
-      "community_name": "homebrew-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "nvim-setup.sh",
-      "source_file": "_scripts/core/nvim-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_nvim_setup_sh__entry",
-      "label": "nvim-setup.sh script",
-      "_origin": "ast",
-      "community": 38,
-      "community_name": "homebrew-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "nvim-setup.sh script",
-      "source_file": "_scripts/core/nvim-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_onefetch_install",
-      "label": "onefetch-install.sh",
-      "_origin": "ast",
-      "community": 38,
-      "community_name": "homebrew-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "onefetch-install.sh",
-      "source_file": "_scripts/core/onefetch-install.sh",
+      "norm_label": "zed-setup.sh script",
+      "source_file": "_scripts/core/zed-setup.sh",
       "source_location": "L1"
     },
     {
@@ -4308,7 +4304,7 @@
       "label": "claude-code-install.sh",
       "_origin": "ast",
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4323,7 +4319,7 @@
       "label": "claude-code-install.sh script",
       "_origin": "ast",
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4334,11 +4330,56 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_claude_code_setup",
+      "label": "claude-code-setup.sh",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "claude-code-setup.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "claude-code-setup.sh",
+      "source_file": "_scripts/core/claude-code-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_claude_code_setup_claudecode_plugins",
+      "label": "CLAUDECODE_PLUGINS",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "claude-code-setup.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "code"
+      },
+      "norm_label": "claudecode_plugins",
+      "source_file": "_scripts/core/claude-code-setup.sh",
+      "source_location": "L18"
+    },
+    {
+      "id": "scripts_core_claude_code_setup_sh__entry",
+      "label": "claude-code-setup.sh script",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "claude-code-setup.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "claude-code-setup.sh script",
+      "source_file": "_scripts/core/claude-code-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_helpers_copy_files_if_missing",
       "label": "copy_files_if_missing()",
       "_origin": "ast",
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4353,7 +4394,7 @@
       "label": "hermes-install.sh",
       "_origin": "ast",
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4368,7 +4409,7 @@
       "label": "hermes-install.sh script",
       "_origin": "ast",
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4383,7 +4424,7 @@
       "label": "hermes-setup.sh",
       "_origin": "ast",
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4398,7 +4439,7 @@
       "label": "hermes-setup.sh script",
       "_origin": "ast",
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4409,11 +4450,41 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_lsp_servers_install",
+      "label": "lsp-servers-install.sh",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "claude-code-setup.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "lsp-servers-install.sh",
+      "source_file": "_scripts/core/lsp-servers-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_nodejs_install",
+      "label": "nodejs-install.sh",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "claude-code-setup.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "nodejs-install.sh",
+      "source_file": "_scripts/core/nodejs-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_opencode_install",
       "label": "opencode-install.sh",
       "_origin": "ast",
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4428,7 +4499,7 @@
       "label": "opencode-install.sh script",
       "_origin": "ast",
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4443,7 +4514,7 @@
       "label": "opencode-setup.sh",
       "_origin": "ast",
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4458,7 +4529,7 @@
       "label": "copy_skills_if_missing()",
       "_origin": "ast",
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4473,7 +4544,7 @@
       "label": "opencode-setup.sh script",
       "_origin": "ast",
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4481,6 +4552,36 @@
       },
       "norm_label": "opencode-setup.sh script",
       "source_file": "_scripts/core/opencode-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_playwright_install",
+      "label": "playwright-install.sh",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "claude-code-setup.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "playwright-install.sh",
+      "source_file": "_scripts/core/playwright-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_playwright_install_sh__entry",
+      "label": "playwright-install.sh script",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "claude-code-setup.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "playwright-install.sh script",
+      "source_file": "_scripts/core/playwright-install.sh",
       "source_location": "L1"
     },
     {
@@ -4756,63 +4857,48 @@
       "source_location": "L49"
     },
     {
-      "id": "scripts_core_rtk_install",
-      "label": "rtk-install.sh",
+      "id": "scripts_core_git_install",
+      "label": "git-install.sh",
       "_origin": "ast",
       "community": 58,
-      "community_name": "rtk-install.sh",
+      "community_name": "git-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "rtk-install.sh",
-      "source_file": "_scripts/core/rtk-install.sh",
+      "norm_label": "git-install.sh",
+      "source_file": "_scripts/core/git-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_rtk_install_sh__entry",
-      "label": "rtk-install.sh script",
+      "id": "scripts_core_git_install_sh__entry",
+      "label": "git-install.sh script",
       "_origin": "ast",
       "community": 58,
-      "community_name": "rtk-install.sh",
+      "community_name": "git-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "rtk-install.sh script",
-      "source_file": "_scripts/core/rtk-install.sh",
+      "norm_label": "git-install.sh script",
+      "source_file": "_scripts/core/git-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_rtk_setup",
-      "label": "rtk-setup.sh",
+      "id": "scripts_core_git_setup",
+      "label": "git-setup.sh",
       "_origin": "ast",
       "community": 58,
-      "community_name": "rtk-install.sh",
+      "community_name": "git-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "rtk-setup.sh",
-      "source_file": "_scripts/core/rtk-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_rtk_setup_sh__entry",
-      "label": "rtk-setup.sh script",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "rtk-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "rtk-setup.sh script",
-      "source_file": "_scripts/core/rtk-setup.sh",
+      "norm_label": "git-setup.sh",
+      "source_file": "_scripts/core/git-setup.sh",
       "source_location": "L1"
     },
     {
@@ -5339,81 +5425,6 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_git_install",
-      "label": "git-install.sh",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_helpers.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "git-install.sh",
-      "source_file": "_scripts/core/git-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_git_install_sh__entry",
-      "label": "git-install.sh script",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_helpers.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "git-install.sh script",
-      "source_file": "_scripts/core/git-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_git_setup",
-      "label": "git-setup.sh",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_helpers.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "git-setup.sh",
-      "source_file": "_scripts/core/git-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_golang_install",
-      "label": "golang-install.sh",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_helpers.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "golang-install.sh",
-      "source_file": "_scripts/core/golang-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_golang_install_sh__entry",
-      "label": "golang-install.sh script",
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "_helpers.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "golang-install.sh script",
-      "source_file": "_scripts/core/golang-install.sh",
-      "source_location": "L1"
-    },
-    {
       "id": "scripts_core_helpers",
       "label": "_helpers.sh",
       "_origin": "ast",
@@ -5690,7 +5701,7 @@
       },
       "norm_label": "all_console_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L91"
+      "source_location": "L83"
     },
     {
       "id": "scripts_core_options_all_desktop_tasks",
@@ -5705,7 +5716,7 @@
       },
       "norm_label": "all_desktop_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L104"
+      "source_location": "L96"
     },
     {
       "id": "scripts_core_options_all_tasks",
@@ -5720,7 +5731,7 @@
       },
       "norm_label": "all_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L109"
+      "source_location": "L101"
     },
     {
       "id": "scripts_core_options_console_extra_tasks",
@@ -5735,7 +5746,7 @@
       },
       "norm_label": "console_extra_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L47"
+      "source_location": "L39"
     },
     {
       "id": "scripts_core_options_console_only_tasks",
@@ -5750,7 +5761,7 @@
       },
       "norm_label": "console_only_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L35"
+      "source_location": "L27"
     },
     {
       "id": "scripts_core_options_console_tasks",
@@ -5765,7 +5776,7 @@
       },
       "norm_label": "console_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L42"
+      "source_location": "L34"
     },
     {
       "id": "scripts_core_options_desktop_extra_tasks",
@@ -5780,7 +5791,7 @@
       },
       "norm_label": "desktop_extra_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L96"
+      "source_location": "L88"
     },
     {
       "id": "scripts_core_options_desktop_only_tasks",
@@ -5795,7 +5806,7 @@
       },
       "norm_label": "desktop_only_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L81"
+      "source_location": "L73"
     },
     {
       "id": "scripts_core_options_desktop_tasks",
@@ -5810,7 +5821,7 @@
       },
       "norm_label": "desktop_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L86"
+      "source_location": "L78"
     },
     {
       "id": "scripts_core_options_menu_options",
@@ -5825,7 +5836,7 @@
       },
       "norm_label": "menu_options",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L118"
+      "source_location": "L110"
     },
     {
       "id": "scripts_core_options_minimal_tasks",
@@ -5840,7 +5851,7 @@
       },
       "norm_label": "minimal_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L27"
+      "source_location": "L19"
     },
     {
       "id": "scripts_core_options_sh__entry",
@@ -5870,7 +5881,7 @@
       },
       "norm_label": "task_args",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L176"
+      "source_location": "L168"
     },
     {
       "id": "scripts_core_options_task_types",
@@ -5885,7 +5896,7 @@
       },
       "norm_label": "task_types",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L127"
+      "source_location": "L119"
     },
     {
       "id": "nvim_config_nvim_lua_configs_adeotek_v2_plugins_editorconfig",
@@ -6410,28 +6421,13 @@
       "source_url": null
     },
     {
-      "id": "zed_config_zed_settings",
-      "label": "Zed Editor settings.json",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 2,
-      "community_name": "starship-install.sh",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "zed editor settings.json",
-      "source_file": "zed/.config/zed/settings.json",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "concept_install_then_setup_pattern",
       "label": "Install-Then-Setup Pattern",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "install-then-setup pattern",
@@ -6446,7 +6442,7 @@
       "author": null,
       "captured_at": null,
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "shell prompt customization tool",
@@ -6461,7 +6457,7 @@
       "author": null,
       "captured_at": null,
       "community": 2,
-      "community_name": "starship-install.sh",
+      "community_name": "homebrew-install.sh",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "terminal emulator",
@@ -6744,36 +6740,6 @@
       "source_url": null
     },
     {
-      "id": "win_tools_run_win_env_setup",
-      "label": "Run-LocalWinEnvSetup.ps1 (Windows Dev Setup)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 31,
-      "community_name": "claude-code-setup.sh",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "run-localwinenvsetup.ps1 (windows dev setup)",
-      "source_file": "win-tools/.tools/Run-LocalWinEnvSetup.ps1",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "concept_claude_plugins",
-      "label": "Claude Code Plugin Marketplace",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 31,
-      "community_name": "claude-code-setup.sh",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "claude code plugin marketplace",
-      "source_file": "_scripts/core/claude-code-setup.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "paseo_readme_claude_code",
       "label": "Claude Code CLI (orchestrated agent)",
       "_origin": "semantic",
@@ -6815,6 +6781,21 @@
       "file_type": "document",
       "norm_label": "paseo agent-orchestrator daemon",
       "source_file": "paseo/README.md",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "zed_config_zed_settings",
+      "label": "Zed Editor settings.json",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 38,
+      "community_name": "ghostty-install.sh",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "zed editor settings.json",
+      "source_file": "zed/.config/zed/settings.json",
       "source_location": null,
       "source_url": null
     },
@@ -6999,17 +6980,47 @@
       "source_url": null
     },
     {
+      "id": "win_tools_run_win_env_setup",
+      "label": "Run-LocalWinEnvSetup.ps1 (Windows Dev Setup)",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 5,
+      "community_name": "claude-code-setup.sh",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "run-localwinenvsetup.ps1 (windows dev setup)",
+      "source_file": "win-tools/.tools/Run-LocalWinEnvSetup.ps1",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "concept_ai_coding_tools",
       "label": "AI Coding Tools (claude-code + opencode)",
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
       "community": 5,
-      "community_name": "claude-code-install.sh",
+      "community_name": "claude-code-setup.sh",
       "contributor": null,
       "file_type": "concept",
       "norm_label": "ai coding tools (claude-code + opencode)",
       "source_file": "_scripts/core/claude-code-install.sh",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "concept_claude_plugins",
+      "label": "Claude Code Plugin Marketplace",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 5,
+      "community_name": "claude-code-setup.sh",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "claude code plugin marketplace",
+      "source_file": "_scripts/core/claude-code-setup.sh",
       "source_location": null,
       "source_url": null
     },
@@ -7631,7 +7642,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L117",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -7643,7 +7654,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L124",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -7655,7 +7666,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L87",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -7667,7 +7678,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L96",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -9711,134 +9722,134 @@
       "weight": 1.0
     },
     {
-      "source": "docs_repo_review",
-      "target": "docs_repo_review_full_repository_review_adeotek_dotfiles",
+      "source": "docs_v2_review",
+      "target": "docs_v2_review_full_repository_review_adeotek_dotfiles",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/repo-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L1",
       "weight": 1.0
     },
     {
-      "source": "docs_repo_review_full_repository_review_adeotek_dotfiles",
-      "target": "docs_repo_review_c_setup_deploy_scripts_setup_sh_specials",
+      "source": "docs_v2_review_full_repository_review_adeotek_dotfiles",
+      "target": "docs_v2_review_c_setup_deploy_scripts_setup_sh_specials",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/repo-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L104",
       "weight": 1.0
     },
     {
-      "source": "docs_repo_review_full_repository_review_adeotek_dotfiles",
-      "target": "docs_repo_review_d_dotfile_configs",
+      "source": "docs_v2_review_full_repository_review_adeotek_dotfiles",
+      "target": "docs_v2_review_d_dotfile_configs",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/repo-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L131",
       "weight": 1.0
     },
     {
-      "source": "docs_repo_review_full_repository_review_adeotek_dotfiles",
-      "target": "docs_repo_review_e_tools_powershell_opencode_tooling",
+      "source": "docs_v2_review_full_repository_review_adeotek_dotfiles",
+      "target": "docs_v2_review_e_tools_powershell_opencode_tooling",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/repo-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L160",
       "weight": 1.0
     },
     {
-      "source": "docs_repo_review_full_repository_review_adeotek_dotfiles",
-      "target": "docs_repo_review_summary",
+      "source": "docs_v2_review_full_repository_review_adeotek_dotfiles",
+      "target": "docs_v2_review_summary",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/repo-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L17",
       "weight": 1.0
     },
     {
-      "source": "docs_repo_review_full_repository_review_adeotek_dotfiles",
-      "target": "docs_repo_review_f_over_engineering_scan_ponytail_audit",
+      "source": "docs_v2_review_full_repository_review_adeotek_dotfiles",
+      "target": "docs_v2_review_f_over_engineering_scan_ponytail_audit",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/repo-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L183",
       "weight": 1.0
     },
     {
-      "source": "docs_repo_review_full_repository_review_adeotek_dotfiles",
-      "target": "docs_repo_review_g_shellcheck_baseline_false_positives_vendored_no_action",
+      "source": "docs_v2_review_full_repository_review_adeotek_dotfiles",
+      "target": "docs_v2_review_g_shellcheck_baseline_false_positives_vendored_no_action",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/repo-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L206",
       "weight": 1.0
     },
     {
-      "source": "docs_repo_review_full_repository_review_adeotek_dotfiles",
-      "target": "docs_repo_review_verification_notes",
+      "source": "docs_v2_review_full_repository_review_adeotek_dotfiles",
+      "target": "docs_v2_review_verification_notes",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/repo-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L218",
       "weight": 1.0
     },
     {
-      "source": "docs_repo_review_full_repository_review_adeotek_dotfiles",
-      "target": "docs_repo_review_h_post_fix_pass_verification_follow_ups",
+      "source": "docs_v2_review_full_repository_review_adeotek_dotfiles",
+      "target": "docs_v2_review_h_post_fix_pass_verification_follow_ups",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/repo-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L224",
       "weight": 1.0
     },
     {
-      "source": "docs_repo_review_full_repository_review_adeotek_dotfiles",
-      "target": "docs_repo_review_a_entry_points_shared_helpers_options",
+      "source": "docs_v2_review_full_repository_review_adeotek_dotfiles",
+      "target": "docs_v2_review_a_entry_points_shared_helpers_options",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/repo-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L33",
       "weight": 1.0
     },
     {
-      "source": "docs_repo_review_full_repository_review_adeotek_dotfiles",
-      "target": "docs_repo_review_b_install_scripts_scripts_core_install_sh",
+      "source": "docs_v2_review_full_repository_review_adeotek_dotfiles",
+      "target": "docs_v2_review_b_install_scripts_scripts_core_install_sh",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/repo-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L69",
       "weight": 1.0
     },
     {
-      "source": "docs_repo_review_full_repository_review_adeotek_dotfiles",
-      "target": "docs_repo_review_legend",
+      "source": "docs_v2_review_full_repository_review_adeotek_dotfiles",
+      "target": "docs_v2_review_legend",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "docs/repo-review.md",
+      "source_file": "docs/v2-review.md",
       "source_location": "L9",
       "weight": 1.0
     },
@@ -10631,7 +10642,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L107",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -10642,7 +10653,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L43",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -10653,7 +10664,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L77",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
@@ -10664,7 +10675,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L81",
+      "source_location": "L80",
       "weight": 1.0
     },
     {
@@ -10676,6 +10687,17 @@
       "confidence_score": 1.0,
       "source_file": ".opencode/opencode.json",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "opencode_opencode",
+      "target": "opencode_opencode_plugin",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".opencode/opencode.json",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -12154,24 +12176,13 @@
     },
     {
       "source": "scripts_core_options",
-      "target": "scripts_core_options_all_desktop_tasks",
-      "relation": "defines",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "_scripts/core/_options.sh",
-      "source_location": "L104",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_core_options",
       "target": "scripts_core_options_all_tasks",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L109",
+      "source_location": "L101",
       "weight": 1.0
     },
     {
@@ -12182,7 +12193,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L118",
+      "source_location": "L110",
       "weight": 1.0
     },
     {
@@ -12193,7 +12204,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L127",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -12204,7 +12215,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L176",
+      "source_location": "L168",
       "weight": 1.0
     },
     {
@@ -12215,7 +12226,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L27",
+      "source_location": "L19",
       "weight": 1.0
     },
     {
@@ -12226,7 +12237,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L35",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -12237,7 +12248,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L42",
+      "source_location": "L34",
       "weight": 1.0
     },
     {
@@ -12248,7 +12259,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L47",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -12259,7 +12270,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L81",
+      "source_location": "L73",
       "weight": 1.0
     },
     {
@@ -12270,7 +12281,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L86",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -12281,12 +12292,23 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L91",
+      "source_location": "L83",
       "weight": 1.0
     },
     {
       "source": "scripts_core_options",
       "target": "scripts_core_options_desktop_extra_tasks",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_scripts/core/_options.sh",
+      "source_location": "L88",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_options",
+      "target": "scripts_core_options_all_desktop_tasks",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12472,25 +12494,25 @@
       "weight": 1.0
     },
     {
-      "source": "opencode_merge_opencode_config_rationale_44",
+      "source": "opencode_merge_opencode_config_rationale_43",
       "target": "opencode_merge_opencode_config_strip_jsonc",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L44",
+      "source_location": "L43",
       "weight": 1.0
     },
     {
-      "source": "opencode_merge_opencode_config_rationale_82",
+      "source": "opencode_merge_opencode_config_rationale_81",
       "target": "opencode_merge_opencode_config_merge",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "opencode/merge-opencode-config.py",
-      "source_location": "L82",
+      "source_location": "L81",
       "weight": 1.0
     },
     {
@@ -15631,5 +15653,5 @@
       "source_file": "win-tools/.tools/Add-WinFirewallRule.ps1"
     }
   ],
-  "built_at_commit": "367574e17fec77dbdc0c4424b9f439f7c72df95f"
+  "built_at_commit": "ffc72b9a49f2cbe25e65695a26e070563159f58a"
 }

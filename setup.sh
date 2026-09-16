@@ -38,15 +38,24 @@ do
     cecho "white" "  [$key] ${MENU_OPTIONS[$key]}"
   fi
 done
-cecho "yellow" -n "Please select setup mode (0-4) [$DEFAULT_MENU_OPTION]: "
-read -r SETUP_MODE
-if [[ -z "$SETUP_MODE" ]]; then
-  SETUP_MODE="$DEFAULT_MENU_OPTION"
-fi
-if [[ "$SETUP_MODE" == "c" || "$SETUP_MODE" == "C" ]]; then
-  cecho "magenta" "Operation cancelled!"
-  exit 10
-fi
+cecho "yellow" -n "Please select setup mode (0-4, c) [$DEFAULT_MENU_OPTION]: "
+while true
+do
+  read -r SETUP_MODE
+  if [[ -z "$SETUP_MODE" ]]; then
+    SETUP_MODE="$DEFAULT_MENU_OPTION"
+  fi
+  SETUP_MODE="${SETUP_MODE//[[:space:]]/}"
+  if [[ "$SETUP_MODE" == "c" || "$SETUP_MODE" == "C" ]]; then
+    cecho "magenta" "Operation cancelled!"
+    exit 10
+  fi
+  case $SETUP_MODE in
+    0|1|2|3|4) break ;;
+    *) cecho "red" "Invalid option selection: $SETUP_MODE" ;;
+  esac
+  cecho "yellow" -n "Please select setup mode (0-4, c) [$DEFAULT_MENU_OPTION]: "
+done
 
 case $SETUP_MODE in
   0)
@@ -61,67 +70,80 @@ case $SETUP_MODE in
       fi
     done
     cecho "cyan" "[c] Cancel and exit"
-    cecho "yellow" -n "Please input the selected packages IDs separated by comma: "
-    read -r TASKS_IDS
-    if [[ "$TASKS_IDS" == "c" || "$TASKS_IDS" == "C" ]]; then
-      cecho "magenta" "Operation cancelled!"
-      exit 10
-    fi
-    if [[ -z "$TASKS_IDS" ]]; then
-      cecho "magenta" "No packages selected. Operation cancelled!"
-      exit 10
-    fi
-    IFS=',' read -ra SELECTED_INDICES <<< "$TASKS_IDS"
-    for id in "${SELECTED_INDICES[@]}"
+    while true
     do
-      id="${id//[[:space:]]/}"  # Trim whitespace from $id
-      if ! [[ "$id" =~ ^[0-9]+$ ]] || (( id >= ${#ALL_TASKS[@]} )); then
-        cecho "red" "Invalid package id: [$id]"
-        exit 1
+      cecho "yellow" -n "Please input the selected packages IDs separated by comma: "
+      read -r TASKS_IDS
+      if [[ "$TASKS_IDS" == "c" || "$TASKS_IDS" == "C" ]]; then
+        cecho "magenta" "Operation cancelled!"
+        exit 10
       fi
-      SELECTED_PACKAGES+=("${ALL_TASKS[$id]}")
+      if [[ -z "$TASKS_IDS" ]]; then
+        cecho "magenta" "No packages selected. Operation cancelled!"
+        exit 10
+      fi
+      IFS=',' read -ra SELECTED_INDICES <<< "$TASKS_IDS"
+      SELECTED_PACKAGES=()
+      declare -A SEEN_IDS=()
+      INVALID_ID=0
+      for id in "${SELECTED_INDICES[@]}"
+      do
+        id="${id//[[:space:]]/}"  # Trim whitespace from $id
+        if [[ -z "$id" ]]; then
+          continue  # Ignore empty entries (e.g. trailing comma)
+        fi
+        if ! [[ "$id" =~ ^[0-9]+$ ]] || (( id >= ${#ALL_TASKS[@]} )); then
+          cecho "red" "Invalid package id: [$id]"
+          INVALID_ID=1
+          break
+        fi
+        if [[ -n "${SEEN_IDS[$id]}" ]]; then
+          continue  # Skip duplicate ids
+        fi
+        SEEN_IDS[$id]=1
+        SELECTED_PACKAGES+=("${ALL_TASKS[$id]}")
+      done
+      if [[ "$INVALID_ID" -eq "1" ]]; then
+        cecho "yellow" "Please try again."
+        continue
+      fi
+      if [[ "${#SELECTED_PACKAGES[@]}" -eq 0 ]]; then
+        cecho "red" "No valid package ids provided."
+        continue
+      fi
+      break
     done
     ;;
   1)
     SELECTED_PACKAGES=("${MINIMAL_TASKS[@]}")
     ;;
   2)
-    cecho "yellow" "Do you want to include the extra packages? [y/N]"
-    cecho "cyan" -n "-> [${CONSOLE_EXTRA_TASKS[*]}] "
+    SELECTED_PACKAGES=("${CONSOLE_TASKS[@]}")
+    cecho "yellow" "Extra packages (${#CONSOLE_EXTRA_TASKS[@]}):"
+    mapfile -t EXTRA_LINES < <(printf '%s\n' "${CONSOLE_EXTRA_TASKS[@]}" | column -c 80)
+    for line in "${EXTRA_LINES[@]}"
+    do
+      cecho "cyan" "$line"
+    done
+    cecho "yellow" -n "Do you want to include the extra packages? [y/N]: "
     read -r INCLUDE_EXTRA
     if [[ "$INCLUDE_EXTRA" == "y" || "$INCLUDE_EXTRA" == "Y" ]]; then
       SELECTED_PACKAGES=("${ALL_CONSOLE_TASKS[@]}")
-    else
-      SELECTED_PACKAGES=("${CONSOLE_TASKS[@]}")
     fi
     ;;
   3)
-    cecho "yellow" "Do you want to include the extra packages? [y/N]"
-    cecho "yellow" -n "-> [${DESKTOP_EXTRA_TASKS[*]}] "
+    SELECTED_PACKAGES=("${DESKTOP_TASKS[@]}")
+    cecho "yellow" "Extra packages (${#DESKTOP_EXTRA_TASKS[@]}):"
+    mapfile -t EXTRA_LINES < <(printf '%s\n' "${DESKTOP_EXTRA_TASKS[@]}" | column -c 80)
+    for line in "${EXTRA_LINES[@]}"
+    do
+      cecho "cyan" "$line"
+    done
+    cecho "yellow" -n "Do you want to include the extra packages? [y/N]: "
     read -r INCLUDE_EXTRA
     if [[ "$INCLUDE_EXTRA" == "y" || "$INCLUDE_EXTRA" == "Y" ]]; then
-      SELECTED_PACKAGES+=("${ALL_DESKTOP_TASKS[@]}")
-    else
-      SELECTED_PACKAGES+=("${DESKTOP_TASKS[@]}")
+      SELECTED_PACKAGES=("${ALL_DESKTOP_TASKS[@]}")
     fi
-    ;;
-  4)
-    SELECTED_PACKAGES=()
-    for task in "${ALL_TASKS[@]}"
-    do
-      cecho "yellow" -n "Do you want to include the ["
-      cecho "cyan" -n "$task"
-      cecho "yellow" -n "] package? [y/N]: "
-      read -r INCLUDE_TASK
-      # read -p "Do you want to include the [$task] package? [y/N]: " INCLUDE_TASK
-      if [[ "$INCLUDE_TASK" == "y" || "$INCLUDE_TASK" == "Y" ]]; then
-        SELECTED_PACKAGES+=("$task")
-      fi
-    done
-    ;;
-  *)
-    cecho "red" "Invalid option selection: $SETUP_MODE"
-    exit 1
     ;;
 esac
 
@@ -131,7 +153,7 @@ if [[ -z "${SELECTED_PACKAGES[*]}" ]]; then
 fi
 
 cecho "white" "The following packages will be installed/set up:"
-aecho SELECTED_PACKAGES "- " "yellow" "white"
+aecho -s SELECTED_PACKAGES "- " "yellow" "white"
 cecho "yellow" -n "Please confirm package selection [Y/n]: "
 read -r PACKAGE_SELECTION_CONFIRM
 if [[ "$PACKAGE_SELECTION_CONFIRM" != "y" && "$PACKAGE_SELECTION_CONFIRM" != "Y" && "$PACKAGE_SELECTION_CONFIRM" != "" ]]; then

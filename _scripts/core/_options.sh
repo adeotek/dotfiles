@@ -19,7 +19,6 @@ OPT_NODEJS_DEFAULT_VERSION="24"
 declare MINIMAL_TASKS=(
   "base-tools"
   "git"
-  "yazi"
   "zellij"
   "zsh"
 )
@@ -29,6 +28,7 @@ declare CONSOLE_ONLY_TASKS=(
   "glow"
   "nodejs"
   "onefetch"
+  "yazi"
 )
 
 declare CONSOLE_TASKS=(
@@ -70,6 +70,11 @@ declare CONSOLE_EXTRA_TASKS=(
   "uv"
 )
 
+declare ALL_CONSOLE_TASKS=(
+  "${CONSOLE_TASKS[@]}"
+  "${CONSOLE_EXTRA_TASKS[@]}"
+)
+
 declare DESKTOP_ONLY_TASKS=(
   "ghostty"
   "zed"
@@ -80,15 +85,8 @@ declare DESKTOP_TASKS=(
   "${DESKTOP_ONLY_TASKS[@]}"
 )
 
-declare ALL_CONSOLE_TASKS=(
-  "${CONSOLE_TASKS[@]}"
-  "${CONSOLE_EXTRA_TASKS[@]}"
-)
-
 declare DESKTOP_EXTRA_TASKS=(
   "${CONSOLE_EXTRA_TASKS[@]}"
-  "kitty"
-  "tabby"
   "vscode"
   "jetbrains-toolbox"
 )
@@ -96,23 +94,27 @@ declare DESKTOP_EXTRA_TASKS=(
 declare ALL_DESKTOP_TASKS=(
   "${DESKTOP_TASKS[@]}"
   "${DESKTOP_EXTRA_TASKS[@]}"
+  "kitty"
+  "tabby"
 )
 
 declare ALL_TASKS=(
   "${MINIMAL_TASKS[@]}"
   "${CONSOLE_ONLY_TASKS[@]}"
+  "${CONSOLE_EXTRA_TASKS[@]}"
   "${DESKTOP_ONLY_TASKS[@]}"
   "${DESKTOP_EXTRA_TASKS[@]}"
+  "kitty"
+  "tabby"
 )
 readarray -t ALL_TASKS < <(printf '%s\n' "${ALL_TASKS[@]}" | sort -u)
 
-MENU_OPTION_KEYS=("0" "1" "2" "3" "4" "c")
+MENU_OPTION_KEYS=("0" "1" "2" "3" "c")
 declare -A MENU_OPTIONS=(
   ["0"]="Manual selection"
   ["1"]="Minimal (${MINIMAL_TASKS[*]})"
-  ["2"]="Console (Minimal + ${CONSOLE_ONLY_TASKS[*]}; extras opt-in)"
-  ["3"]="Desktop (Console + ${DESKTOP_ONLY_TASKS[*]}; extras opt-in)"
-  ["4"]="Interactive"
+  ["2"]="Console (${#CONSOLE_TASKS[@]} packages; extras opt-in)"
+  ["3"]="Desktop ($(( ${#CONSOLE_TASKS[@]} + ${#DESKTOP_ONLY_TASKS[@]} )) packages; extras opt-in)"
   ["c"]="Cancel/Exit"
 )
 
