@@ -59,6 +59,7 @@ You are an expert DevOps, Infrastructure, and Systems Automation Engineer specia
   - `cecho "color" "message"` for standard color output.
   - `decho "color" "message"` for verbose-only output.
   - `aecho [-s] ARRAY "prefix" "color" "pfx_color"` for arrays (`-s` sorts items alphabetically).
+  - Interactive helpers: `read_key` (single keypress → `up/down/left/right/space/enter/esc/eof` or literal char) and `read_yes_no "prompt" "default"` (sets `REPLY_YN`; keypress on TTY, typed fallback otherwise).
 
 ### 5. Side-Effect Guarding (Dry Runs)
 - **Always** respect the `DRY_RUN` flag. All side-effect actions (package installs, copying files, directory modification) must be conditionalized:
