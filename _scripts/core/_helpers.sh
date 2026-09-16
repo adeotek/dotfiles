@@ -132,25 +132,30 @@ fi
 
 function read_key() {
   # Reads one keypress; prints a canonical key name or the literal character.
-  # Arrow keys are the 3-byte CSI sequences; a lone Esc is detected by a
-  # short follow-up read timeout. Ctrl+C keeps normal SIGINT behavior.
-  local key seq
+  # Arrow keys arrive as 3-byte CSI ("ESC [ X") or SS3 ("ESC O X", DECCKM)
+  # sequences that can be split across TCP packets over SSH, so each
+  # follow-up byte gets its own fresh timeout window (100ms; a lone Esc
+  # costs that one delay, split bytes cost it only when actually split).
+  # Ctrl+C keeps normal SIGINT behavior.
+  # ponytail: 100ms per-byte window; tune up only if remote links still split arrows.
+  local key seq="" c1 c2
   if ! IFS= read -rsn1 key; then
     echo "eof"
     return
   fi
   case "$key" in
     $'\x1b')
-      seq=""
-      # shellcheck disable=SC2034  # seq read for its bytes, may stay empty on lone Esc
-      IFS= read -rsn2 -t 0.01 seq
-      case "$seq" in
-        "[A") echo "up" ;;
-        "[B") echo "down" ;;
-        "[C") echo "right" ;;
-        "[D") echo "left" ;;
-        *) echo "esc" ;;
-      esac
+      if IFS= read -rsn1 -t 0.1 c1 && [[ "$c1" == "[" || "$c1" == "O" ]]; then
+        if IFS= read -rsn1 -t 0.1 c2; then
+          case "$c1$c2" in
+            "[A"|"OA") echo "up"; return ;;
+            "[B"|"OB") echo "down"; return ;;
+            "[C"|"OC") echo "right"; return ;;
+            "[D"|"OD") echo "left"; return ;;
+          esac
+        fi
+      fi
+      echo "esc"
       ;;
     ""|$'\r'|$'\n') echo "enter" ;;
     " ") echo "space" ;;
