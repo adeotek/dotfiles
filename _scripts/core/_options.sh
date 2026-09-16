@@ -109,13 +109,13 @@ declare ALL_TASKS=(
 )
 readarray -t ALL_TASKS < <(printf '%s\n' "${ALL_TASKS[@]}" | sort -u)
 
-MENU_OPTION_KEYS=("0" "1" "2" "3" "c")
+MENU_OPTION_KEYS=("0" "1" "2" "3" "q")
 declare -A MENU_OPTIONS=(
   ["0"]="Manual selection"
   ["1"]="Minimal (${MINIMAL_TASKS[*]})"
   ["2"]="Console (${#CONSOLE_TASKS[@]} packages; extras opt-in)"
   ["3"]="Desktop ($(( ${#CONSOLE_TASKS[@]} + ${#DESKTOP_ONLY_TASKS[@]} )) packages; extras opt-in)"
-  ["c"]="Cancel/Exit"
+  ["q"]="Cancel/Exit"
 )
 
 declare -A TASK_TYPES=(

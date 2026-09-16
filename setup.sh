@@ -38,7 +38,7 @@ do
     cecho "white" "  [$key] ${MENU_OPTIONS[$key]}"
   fi
 done
-cecho "yellow" -n "Please select setup mode (0-4, c) [$DEFAULT_MENU_OPTION]: "
+cecho "yellow" -n "Please select setup mode (0-3, q) [$DEFAULT_MENU_OPTION]: "
 while true
 do
   read -r SETUP_MODE
@@ -46,15 +46,15 @@ do
     SETUP_MODE="$DEFAULT_MENU_OPTION"
   fi
   SETUP_MODE="${SETUP_MODE//[[:space:]]/}"
-  if [[ "$SETUP_MODE" == "c" || "$SETUP_MODE" == "C" ]]; then
+  if [[ "$SETUP_MODE" == "q" || "$SETUP_MODE" == "Q" ]]; then
     cecho "magenta" "Operation cancelled!"
     exit 10
   fi
   case $SETUP_MODE in
-    0|1|2|3|4) break ;;
+    0|1|2|3) break ;;
     *) cecho "red" "Invalid option selection: $SETUP_MODE" ;;
   esac
-  cecho "yellow" -n "Please select setup mode (0-4, c) [$DEFAULT_MENU_OPTION]: "
+  cecho "yellow" -n "Please select setup mode (0-3, q) [$DEFAULT_MENU_OPTION]: "
 done
 
 case $SETUP_MODE in
@@ -69,12 +69,12 @@ case $SETUP_MODE in
         cecho "cyan" "[$i] ${ALL_TASKS[$i]}"
       fi
     done
-    cecho "cyan" "[c] Cancel and exit"
+    cecho "cyan" "[q] Cancel and exit"
     while true
     do
       cecho "yellow" -n "Please input the selected packages IDs separated by comma: "
       read -r TASKS_IDS
-      if [[ "$TASKS_IDS" == "c" || "$TASKS_IDS" == "C" ]]; then
+      if [[ "$TASKS_IDS" == "q" || "$TASKS_IDS" == "Q" ]]; then
         cecho "magenta" "Operation cancelled!"
         exit 10
       fi
