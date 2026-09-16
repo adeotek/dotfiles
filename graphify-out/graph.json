@@ -560,7 +560,7 @@
       },
       "norm_label": "execute_command()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L125"
+      "source_location": "L206"
     },
     {
       "id": "scripts_core_helpers_increase_ulimit",
@@ -575,7 +575,7 @@
       },
       "norm_label": "increase_ulimit()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L182"
+      "source_location": "L263"
     },
     {
       "id": "scripts_core_helpers_install_package",
@@ -590,7 +590,7 @@
       },
       "norm_label": "install_package()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L212"
+      "source_location": "L293"
     },
     {
       "id": "scripts_core_helpers_process_args",
@@ -620,7 +620,7 @@
       },
       "norm_label": "rename_dir_if_exists()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L142"
+      "source_location": "L223"
     },
     {
       "id": "scripts_core_helpers_rename_file_if_exists",
@@ -635,7 +635,7 @@
       },
       "norm_label": "rename_file_if_exists()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L162"
+      "source_location": "L243"
     },
     {
       "id": "scripts_core_helpers_sh__entry",
@@ -665,7 +665,7 @@
       },
       "norm_label": "stow_package()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L289"
+      "source_location": "L370"
     },
     {
       "id": "scripts_core_helpers_symlink_package_file",
@@ -680,7 +680,7 @@
       },
       "norm_label": "symlink_package_file()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L346"
+      "source_location": "L427"
     },
     {
       "id": "scripts_core_homebrew_install_sh__entry",
@@ -1665,6 +1665,171 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_kitty_install",
+      "label": "kitty-install.sh",
+      "_origin": "ast",
+      "community": 118,
+      "community_name": "kitty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "kitty-install.sh",
+      "source_file": "_scripts/core/kitty-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_kitty_setup",
+      "label": "kitty-setup.sh",
+      "_origin": "ast",
+      "community": 118,
+      "community_name": "kitty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "kitty-setup.sh",
+      "source_file": "_scripts/core/kitty-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_kitty_setup_sh__entry",
+      "label": "kitty-setup.sh script",
+      "_origin": "ast",
+      "community": 118,
+      "community_name": "kitty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "kitty-setup.sh script",
+      "source_file": "_scripts/core/kitty-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_tabby_install",
+      "label": "tabby-install.sh",
+      "_origin": "ast",
+      "community": 118,
+      "community_name": "kitty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "tabby-install.sh",
+      "source_file": "_scripts/core/tabby-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_tabby_setup",
+      "label": "tabby-setup.sh",
+      "_origin": "ast",
+      "community": 118,
+      "community_name": "kitty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "tabby-setup.sh",
+      "source_file": "_scripts/core/tabby-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_tabby_setup_sh__entry",
+      "label": "tabby-setup.sh script",
+      "_origin": "ast",
+      "community": 118,
+      "community_name": "kitty-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "tabby-setup.sh script",
+      "source_file": "_scripts/core/tabby-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_helpers_copy_files_if_missing",
+      "label": "copy_files_if_missing()",
+      "_origin": "ast",
+      "community": 119,
+      "community_name": "copy_files_if_missing",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "copy_files_if_missing()",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L484"
+    },
+    {
+      "id": "scripts_core_hermes_install",
+      "label": "hermes-install.sh",
+      "_origin": "ast",
+      "community": 119,
+      "community_name": "copy_files_if_missing",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "hermes-install.sh",
+      "source_file": "_scripts/core/hermes-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_hermes_install_sh__entry",
+      "label": "hermes-install.sh script",
+      "_origin": "ast",
+      "community": 119,
+      "community_name": "copy_files_if_missing",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "hermes-install.sh script",
+      "source_file": "_scripts/core/hermes-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_hermes_setup",
+      "label": "hermes-setup.sh",
+      "_origin": "ast",
+      "community": 119,
+      "community_name": "copy_files_if_missing",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "hermes-setup.sh",
+      "source_file": "_scripts/core/hermes-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_hermes_setup_sh__entry",
+      "label": "hermes-setup.sh script",
+      "_origin": "ast",
+      "community": 119,
+      "community_name": "copy_files_if_missing",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "hermes-setup.sh script",
+      "source_file": "_scripts/core/hermes-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_ansible_cleanup",
       "label": "ansible-cleanup.sh",
       "_origin": "ast",
@@ -2501,51 +2666,6 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_kitty_install",
-      "label": "kitty-install.sh",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "homebrew-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "kitty-install.sh",
-      "source_file": "_scripts/core/kitty-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_kitty_setup",
-      "label": "kitty-setup.sh",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "homebrew-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "kitty-setup.sh",
-      "source_file": "_scripts/core/kitty-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_kitty_setup_sh__entry",
-      "label": "kitty-setup.sh script",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "homebrew-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "kitty-setup.sh script",
-      "source_file": "_scripts/core/kitty-setup.sh",
-      "source_location": "L1"
-    },
-    {
       "id": "scripts_core_nerd_fonts_install",
       "label": "nerd-fonts-install.sh",
       "_origin": "ast",
@@ -2783,51 +2903,6 @@
       },
       "norm_label": "starship-setup.sh script",
       "source_file": "_scripts/core/starship-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_tabby_install",
-      "label": "tabby-install.sh",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "homebrew-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "tabby-install.sh",
-      "source_file": "_scripts/core/tabby-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_tabby_setup",
-      "label": "tabby-setup.sh",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "homebrew-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "tabby-setup.sh",
-      "source_file": "_scripts/core/tabby-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_tabby_setup_sh__entry",
-      "label": "tabby-setup.sh script",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "homebrew-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "tabby-setup.sh script",
-      "source_file": "_scripts/core/tabby-setup.sh",
       "source_location": "L1"
     },
     {
@@ -3903,7 +3978,7 @@
       },
       "norm_label": "enable_wsl_systemd()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L430"
+      "source_location": "L511"
     },
     {
       "id": "scripts_core_ghostty_install",
@@ -4375,81 +4450,6 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_helpers_copy_files_if_missing",
-      "label": "copy_files_if_missing()",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "claude-code-setup.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_function"
-      },
-      "norm_label": "copy_files_if_missing()",
-      "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L403"
-    },
-    {
-      "id": "scripts_core_hermes_install",
-      "label": "hermes-install.sh",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "claude-code-setup.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "hermes-install.sh",
-      "source_file": "_scripts/core/hermes-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_hermes_install_sh__entry",
-      "label": "hermes-install.sh script",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "claude-code-setup.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "hermes-install.sh script",
-      "source_file": "_scripts/core/hermes-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_hermes_setup",
-      "label": "hermes-setup.sh",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "claude-code-setup.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "hermes-setup.sh",
-      "source_file": "_scripts/core/hermes-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_hermes_setup_sh__entry",
-      "label": "hermes-setup.sh script",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "claude-code-setup.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "hermes-setup.sh script",
-      "source_file": "_scripts/core/hermes-setup.sh",
-      "source_location": "L1"
-    },
-    {
       "id": "scripts_core_lsp_servers_install",
       "label": "lsp-servers-install.sh",
       "_origin": "ast",
@@ -4724,7 +4724,7 @@
       "label": "setup.sh",
       "_origin": "ast",
       "community": 52,
-      "community_name": "setup.sh",
+      "community_name": "select_packages_grid",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4735,11 +4735,41 @@
       "source_location": "L1"
     },
     {
+      "id": "setup_render_grid",
+      "label": "_render_grid()",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "select_packages_grid",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "_render_grid()",
+      "source_file": "setup.sh",
+      "source_location": "L51"
+    },
+    {
+      "id": "setup_select_packages_grid",
+      "label": "select_packages_grid()",
+      "_origin": "ast",
+      "community": 52,
+      "community_name": "select_packages_grid",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "select_packages_grid()",
+      "source_file": "setup.sh",
+      "source_location": "L24"
+    },
+    {
       "id": "setup_sh__entry",
       "label": "setup.sh script",
       "_origin": "ast",
       "community": 52,
-      "community_name": "setup.sh",
+      "community_name": "select_packages_grid",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5467,7 +5497,7 @@
       },
       "norm_label": "get_stow_command()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L261"
+      "source_location": "L342"
     },
     {
       "id": "scripts_core_helpers_get_vv",
@@ -5482,7 +5512,37 @@
       },
       "norm_label": "get_vv()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L117"
+      "source_location": "L198"
+    },
+    {
+      "id": "scripts_core_helpers_read_key",
+      "label": "read_key()",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "read_key()",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L133"
+    },
+    {
+      "id": "scripts_core_helpers_read_yes_no",
+      "label": "read_yes_no()",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "read_yes_no()",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L162"
     },
     {
       "id": "scripts_core_microsoft_repo_install",
@@ -5701,7 +5761,7 @@
       },
       "norm_label": "all_console_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L83"
+      "source_location": "L73"
     },
     {
       "id": "scripts_core_options_all_desktop_tasks",
@@ -5716,7 +5776,7 @@
       },
       "norm_label": "all_desktop_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L96"
+      "source_location": "L94"
     },
     {
       "id": "scripts_core_options_all_tasks",
@@ -5761,7 +5821,7 @@
       },
       "norm_label": "console_only_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L27"
+      "source_location": "L26"
     },
     {
       "id": "scripts_core_options_console_tasks",
@@ -5806,7 +5866,7 @@
       },
       "norm_label": "desktop_only_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L73"
+      "source_location": "L78"
     },
     {
       "id": "scripts_core_options_desktop_tasks",
@@ -5821,7 +5881,7 @@
       },
       "norm_label": "desktop_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L78"
+      "source_location": "L83"
     },
     {
       "id": "scripts_core_options_menu_options",
@@ -5836,7 +5896,7 @@
       },
       "norm_label": "menu_options",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L110"
+      "source_location": "L113"
     },
     {
       "id": "scripts_core_options_minimal_tasks",
@@ -5881,7 +5941,7 @@
       },
       "norm_label": "task_args",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L168"
+      "source_location": "L170"
     },
     {
       "id": "scripts_core_options_task_types",
@@ -5896,7 +5956,7 @@
       },
       "norm_label": "task_types",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L119"
+      "source_location": "L121"
     },
     {
       "id": "nvim_config_nvim_lua_configs_adeotek_v2_plugins_editorconfig",
@@ -6271,6 +6331,36 @@
       "source_url": null
     },
     {
+      "id": "concept_install_then_setup_pattern",
+      "label": "Install-Then-Setup Pattern",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 118,
+      "community_name": "kitty-install.sh",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "install-then-setup pattern",
+      "source_file": "_scripts/core/kitty-install.sh",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "concept_terminal_emulator",
+      "label": "Terminal Emulator",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 118,
+      "community_name": "kitty-install.sh",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "terminal emulator",
+      "source_file": "_scripts/core/kitty-install.sh",
+      "source_location": null,
+      "source_url": null
+    },
+    {
       "id": "concept_wsl2_support",
       "label": "WSL2 Environment Support",
       "_origin": "semantic",
@@ -6421,21 +6511,6 @@
       "source_url": null
     },
     {
-      "id": "concept_install_then_setup_pattern",
-      "label": "Install-Then-Setup Pattern",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 2,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "install-then-setup pattern",
-      "source_file": "_scripts/core/kitty-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "concept_shell_prompt_tool",
       "label": "Shell Prompt Customization Tool",
       "_origin": "semantic",
@@ -6447,21 +6522,6 @@
       "file_type": "concept",
       "norm_label": "shell prompt customization tool",
       "source_file": "_scripts/core/starship-install.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "concept_terminal_emulator",
-      "label": "Terminal Emulator",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 2,
-      "community_name": "homebrew-install.sh",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "terminal emulator",
-      "source_file": "_scripts/core/kitty-install.sh",
       "source_location": null,
       "source_url": null
     },
@@ -8158,7 +8218,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L111",
+      "source_location": "L121",
       "weight": 1.0
     },
     {
@@ -8170,7 +8230,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L420",
+      "source_location": "L501",
       "weight": 1.0
     },
     {
@@ -8194,7 +8254,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L130",
+      "source_location": "L211",
       "weight": 1.0
     },
     {
@@ -8206,7 +8266,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L132",
+      "source_location": "L213",
       "weight": 1.0
     },
     {
@@ -8218,7 +8278,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L277",
+      "source_location": "L358",
       "weight": 1.0
     },
     {
@@ -8230,7 +8290,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L283",
+      "source_location": "L364",
       "weight": 1.0
     },
     {
@@ -8242,7 +8302,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L184",
+      "source_location": "L265",
       "weight": 1.0
     },
     {
@@ -8254,7 +8314,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L200",
+      "source_location": "L281",
       "weight": 1.0
     },
     {
@@ -8266,7 +8326,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L218",
+      "source_location": "L299",
       "weight": 1.0
     },
     {
@@ -8278,7 +8338,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L237",
+      "source_location": "L318",
       "weight": 1.0
     },
     {
@@ -8290,7 +8350,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L258",
+      "source_location": "L339",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_helpers_read_yes_no",
+      "target": "scripts_core_helpers_cecho",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L171",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_helpers_read_yes_no",
+      "target": "scripts_core_helpers_read_key",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L173",
       "weight": 1.0
     },
     {
@@ -8302,7 +8386,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L156",
+      "source_location": "L237",
       "weight": 1.0
     },
     {
@@ -8314,7 +8398,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L176",
+      "source_location": "L257",
       "weight": 1.0
     },
     {
@@ -8326,7 +8410,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L446",
+      "source_location": "L527",
       "weight": 1.0
     },
     {
@@ -8338,7 +8422,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L448",
+      "source_location": "L529",
       "weight": 1.0
     },
     {
@@ -8350,7 +8434,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L295",
+      "source_location": "L376",
       "weight": 1.0
     },
     {
@@ -8362,7 +8446,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L297",
+      "source_location": "L378",
       "weight": 1.0
     },
     {
@@ -8374,7 +8458,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L308",
+      "source_location": "L389",
       "weight": 1.0
     },
     {
@@ -8386,7 +8470,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L309",
+      "source_location": "L390",
       "weight": 1.0
     },
     {
@@ -8398,7 +8482,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L321",
+      "source_location": "L402",
       "weight": 1.0
     },
     {
@@ -8410,7 +8494,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L322",
+      "source_location": "L403",
       "weight": 1.0
     },
     {
@@ -8422,7 +8506,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L340",
+      "source_location": "L421",
       "weight": 1.0
     },
     {
@@ -8434,7 +8518,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L370",
+      "source_location": "L451",
       "weight": 1.0
     },
     {
@@ -8446,7 +8530,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L378",
+      "source_location": "L459",
       "weight": 1.0
     },
     {
@@ -8458,7 +8542,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L382",
+      "source_location": "L463",
       "weight": 1.0
     },
     {
@@ -9587,6 +9671,30 @@
       "context": "call",
       "source_file": "_scripts/wsl-setup-fedora-dev.sh",
       "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "setup_sh__entry",
+      "target": "setup_select_packages_grid",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "setup.sh",
+      "source_location": "L214",
+      "weight": 1.0
+    },
+    {
+      "source": "setup_select_packages_grid",
+      "target": "setup_render_grid",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "setup.sh",
+      "source_location": "L51",
       "weight": 1.0
     },
     {
@@ -11989,40 +12097,18 @@
     },
     {
       "source": "scripts_core_helpers",
-      "target": "scripts_core_helpers_get_vv",
+      "target": "scripts_core_helpers_read_key",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L117",
+      "source_location": "L133",
       "weight": 1.0
     },
     {
       "source": "scripts_core_helpers",
-      "target": "scripts_core_helpers_execute_command",
-      "relation": "defines",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L125",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_core_helpers",
-      "target": "scripts_core_helpers_rename_dir_if_exists",
-      "relation": "defines",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L142",
-      "weight": 1.0
-    },
-    {
-      "source": "scripts_core_helpers",
-      "target": "scripts_core_helpers_rename_file_if_exists",
+      "target": "scripts_core_helpers_read_yes_no",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12033,24 +12119,24 @@
     },
     {
       "source": "scripts_core_helpers",
-      "target": "scripts_core_helpers_increase_ulimit",
+      "target": "scripts_core_helpers_get_vv",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L182",
+      "source_location": "L198",
       "weight": 1.0
     },
     {
       "source": "scripts_core_helpers",
-      "target": "scripts_core_helpers_install_package",
+      "target": "scripts_core_helpers_execute_command",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L212",
+      "source_location": "L206",
       "weight": 1.0
     },
     {
@@ -12066,13 +12152,57 @@
     },
     {
       "source": "scripts_core_helpers",
+      "target": "scripts_core_helpers_rename_dir_if_exists",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L223",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_helpers",
+      "target": "scripts_core_helpers_rename_file_if_exists",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L243",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_helpers",
+      "target": "scripts_core_helpers_increase_ulimit",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L263",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_helpers",
+      "target": "scripts_core_helpers_install_package",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L293",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_helpers",
       "target": "scripts_core_helpers_get_stow_command",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L261",
+      "source_location": "L342",
       "weight": 1.0
     },
     {
@@ -12083,7 +12213,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L289",
+      "source_location": "L370",
       "weight": 1.0
     },
     {
@@ -12094,7 +12224,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L346",
+      "source_location": "L427",
       "weight": 1.0
     },
     {
@@ -12105,7 +12235,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L403",
+      "source_location": "L484",
       "weight": 1.0
     },
     {
@@ -12116,7 +12246,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L430",
+      "source_location": "L511",
       "weight": 1.0
     },
     {
@@ -12193,7 +12323,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L110",
+      "source_location": "L113",
       "weight": 1.0
     },
     {
@@ -12204,7 +12334,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L119",
+      "source_location": "L121",
       "weight": 1.0
     },
     {
@@ -12215,7 +12345,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L168",
+      "source_location": "L170",
       "weight": 1.0
     },
     {
@@ -12237,7 +12367,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L27",
+      "source_location": "L26",
       "weight": 1.0
     },
     {
@@ -12264,7 +12394,7 @@
     },
     {
       "source": "scripts_core_options",
-      "target": "scripts_core_options_desktop_only_tasks",
+      "target": "scripts_core_options_all_console_tasks",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12275,7 +12405,7 @@
     },
     {
       "source": "scripts_core_options",
-      "target": "scripts_core_options_desktop_tasks",
+      "target": "scripts_core_options_desktop_only_tasks",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12286,7 +12416,7 @@
     },
     {
       "source": "scripts_core_options",
-      "target": "scripts_core_options_all_console_tasks",
+      "target": "scripts_core_options_desktop_tasks",
       "relation": "defines",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -12314,7 +12444,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L96",
+      "source_location": "L94",
       "weight": 1.0
     },
     {
@@ -12425,6 +12555,17 @@
       "confidence_score": 1.0,
       "source_file": "_scripts/wsl-setup-fedora-dev.sh",
       "source_location": "L445",
+      "weight": 1.0
+    },
+    {
+      "source": "setup",
+      "target": "setup_select_packages_grid",
+      "relation": "defines",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "setup.sh",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -15653,5 +15794,5 @@
       "source_file": "win-tools/.tools/Add-WinFirewallRule.ps1"
     }
   ],
-  "built_at_commit": "ffc72b9a49f2cbe25e65695a26e070563159f58a"
+  "built_at_commit": "35047423350a6df26194a8e9c456dc90b492de1c"
 }

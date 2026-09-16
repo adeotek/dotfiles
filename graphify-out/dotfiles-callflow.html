@@ -60,7 +60,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 <div class="container">
 
 <h1>.dotfiles — Complete Call Flow &amp; Architecture Documentation</h1>
-<p class="subtitle">Generated from graphify knowledge graph: 514 nodes, 696 edges, 118 communities. Commit: ffc72b9</p>
+<p class="subtitle">Generated from graphify knowledge graph: 518 nodes, 703 edges, 120 communities. Commit: 3504742</p>
 
 <div class="nav">
     <a href="#overview">Architecture Overview</a>
@@ -77,7 +77,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
     <a href="#windows-network-firewall-diagnostic-tools">Windows Network/Firewall Diagnostic Tools</a>
     <a href="#zed-stowed-config-setup-notes">Zed — stowed config + setup notes</a>
     <a href="#lua-config-lua">lua/config.lua</a>
-    <a href="#dry-run-safety-pattern">Dry-Run Safety Pattern</a>
+    <a href="#select-packages-grid">select_packages_grid</a>
     <a href="#other">Other</a>
 </div>
 
@@ -94,7 +94,7 @@ flowchart LR
     class BUILD_GRAPH_321CBB04 module;
     ANALYSIS_CLUSTERING_C79796DA("Analysis &amp; Clustering<br/><small>10 nodes</small>")
     class ANALYSIS_CLUSTERING_C79796DA module;
-    CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>334 nodes</small>")
+    CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>336 nodes</small>")
     class CLI_SKILLS_9964CBB8 module;
     INGEST_CACHE_UPDATE_FF457338("Ingestion &amp; Updates<br/><small>27 nodes</small>")
     class INGEST_CACHE_UPDATE_FF457338 module;
@@ -114,14 +114,14 @@ flowchart LR
     class ZED_STOWED_CONFIG_SETUP_NOTES_F9147170 module;
     LUA_CONFIG_LUA_36FEEBF7("lua/config.lua<br/><small>4 nodes</small>")
     class LUA_CONFIG_LUA_36FEEBF7 module;
-    DRY_RUN_SAFETY_PATTERN_97ACFA1E("Dry-Run Safety Pattern<br/><small>3 nodes</small>")
-    class DRY_RUN_SAFETY_PATTERN_97ACFA1E module;
-    OTHER_D0941E68("Other<br/><small>72 nodes</small>")
+    SELECT_PACKAGES_GRID_DF7D8D5F("select_packages_grid<br/><small>4 nodes</small>")
+    class SELECT_PACKAGES_GRID_DF7D8D5F module;
+    OTHER_D0941E68("Other<br/><small>73 nodes</small>")
     class OTHER_D0941E68 module;
     INGEST_CACHE_UPDATE_FF457338 -->|references x4| CLI_SKILLS_9964CBB8
     WSL_SETUP_FEDORA_DEV_SH_E3795175 -->|references| CLI_SKILLS_9964CBB8
     ANALYSIS_CLUSTERING_C79796DA -->|references| CLI_SKILLS_9964CBB8
-    CLI_SKILLS_9964CBB8 -->|implements| DRY_RUN_SAFETY_PATTERN_97ACFA1E
+    CLI_SKILLS_9964CBB8 -->|implements| OTHER_D0941E68
     CLI_SKILLS_9964CBB8 -->|implements| WSL_SETUP_FEDORA_DEV_SH_E3795175
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
@@ -139,7 +139,7 @@ flowchart LR
     <h4>Architecture Layers</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>Layer</th><th>Nodes</th><th>Communities</th></tr>
-      <tr><td>Extraction Pipeline</td><td>17</td><td><code>4, 112, 73, 88</code></td></tr><tr><td>Graph Build</td><td>3</td><td><code>35</code></td></tr><tr><td>Analysis &amp; Clustering</td><td>10</td><td><code>27</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>334</td><td><code>0, 2, 1, 5, 6, 18, 7, 9, 31, 11, 14, 16, 3, 12, 37, 38, 19, 20, 21, 25, 51, 26, 28, 32, 33, 34, 36, 58, 59, 60, 117, 47, 48, 49, 62, 103, 104, 78, 79</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>27</td><td><code>8, 30, 43, 53, 97</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>6</td><td><code>22</code></td></tr><tr><td>wsl-setup-fedora-dev.sh</td><td>9</td><td><code>13</code></td></tr><tr><td>cc-sessions.sh</td><td>8</td><td><code>15</code></td></tr><tr><td>AdeoTEK Neovim configuration README</td><td>6</td><td><code>17</code></td></tr><tr><td>Run-LocalWinEnvSetup.ps1</td><td>5</td><td><code>23</code></td></tr><tr><td>Windows Network/Firewall Diagnostic Tools</td><td>5</td><td><code>24</code></td></tr><tr><td>Zed — stowed config + setup notes</td><td>5</td><td><code>50</code></td></tr><tr><td>lua/config.lua</td><td>4</td><td><code>10</code></td></tr><tr><td>Dry-Run Safety Pattern</td><td>3</td><td><code>29</code></td></tr><tr><td>Other</td><td>72</td><td><code>39, 54, 40, 41, 42, 45, 46, 52, 55, 56, 61, 100, 101, 102, 105, 106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 44, 57, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 74, 75, 76, 77, 80, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91, 92, 93, 94, 95, 96, 98, 99</code></td></tr>
+      <tr><td>Extraction Pipeline</td><td>17</td><td><code>4, 112, 73, 88</code></td></tr><tr><td>Graph Build</td><td>3</td><td><code>35</code></td></tr><tr><td>Analysis &amp; Clustering</td><td>10</td><td><code>27</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>336</td><td><code>0, 1, 2, 6, 7, 18, 5, 9, 31, 11, 14, 118, 16, 3, 12, 37, 38, 19, 20, 21, 119, 25, 51, 26, 28, 32, 33, 34, 36, 58, 59, 60, 117, 47, 48, 49, 62, 103, 104, 78, 79</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>27</td><td><code>8, 30, 43, 53, 97</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>6</td><td><code>22</code></td></tr><tr><td>wsl-setup-fedora-dev.sh</td><td>9</td><td><code>13</code></td></tr><tr><td>cc-sessions.sh</td><td>8</td><td><code>15</code></td></tr><tr><td>AdeoTEK Neovim configuration README</td><td>6</td><td><code>17</code></td></tr><tr><td>Run-LocalWinEnvSetup.ps1</td><td>5</td><td><code>23</code></td></tr><tr><td>Windows Network/Firewall Diagnostic Tools</td><td>5</td><td><code>24</code></td></tr><tr><td>Zed — stowed config + setup notes</td><td>5</td><td><code>50</code></td></tr><tr><td>lua/config.lua</td><td>4</td><td><code>10</code></td></tr><tr><td>select_packages_grid</td><td>4</td><td><code>52</code></td></tr><tr><td>Other</td><td>73</td><td><code>29, 39, 54, 40, 41, 42, 45, 46, 55, 56, 61, 100, 101, 102, 105, 106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 44, 57, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 74, 75, 76, 77, 80, 81, 82, 83, 84, 85, 86, 87, 89, 90, 91, 92, 93, 94, 95, 96, 98, 99</code></td></tr>
     </table>
   </div>
   <div class="card">
@@ -151,10 +151,10 @@ flowchart LR
   <div class="card">
     <h4>Graph Report Highlights</h4>
     <ul>
-      <li>514 nodes · 696 edges · 118 communities (33 shown, 34 thin omitted)</li>
+      <li>518 nodes · 703 edges · 120 communities (35 shown, 34 thin omitted)</li>
       <li>Extraction: 75% EXTRACTED · 25% INFERRED · 0% AMBIGUOUS · INFERRED: 174 edges (avg confidence: 0.61)</li>
       <li>Token cost: 0 input · 0 output</li>
-      <li>1. `cecho()` - 63 edges</li>
+      <li>1. `cecho()` - 64 edges</li>
       <li>2. `install_package()` - 31 edges</li>
       <li>3. `decho()` - 24 edges</li>
     </ul>
@@ -624,12 +624,12 @@ flowchart LR
 
 <!-- ====== 5. CLI & Skill Installers ====== -->
 <h2 id="cli-skills">5. CLI &amp; Skill Installers</h2>
-<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, setupsh, opencode, mostly in hermes/README.md, _scripts/core/_helpers.sh, headroom/README.md. This section covers 334 nodes and 568 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, setupsh, opencode, mostly in _scripts/core/_helpers.sh, hermes/README.md, headroom/README.md. This section covers 336 nodes and 572 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: CLI &amp; Skill Installers (334 nodes, 568 edges)
+    %% Section: CLI &amp; Skill Installers (336 nodes, 572 edges)
     subgraph cli_skills_scripts_core_helpers_sh_347c91c6["_scripts/core/_helpers.sh"]
         scripts_core_helpers_cecho_42476bc7("cecho()<br/><small>_scripts/core/_helpers.sh</small>")
         scripts_core_helpers_decho_3a11e880("decho()<br/><small>_scripts/core/_helpers.sh</small>")
@@ -676,7 +676,7 @@ flowchart LR
     scripts_core_nodejs_install_sh_entry_8b7e045c -->|calls| scripts_core_helpers_install_package_13a3fee4
     scripts_core_nodejs_install_sh_entry_8b7e045c -->|calls| scripts_core_helpers_decho_3a11e880
     scripts_core_docker_install_sh_entry_59bebea1 -->|calls| scripts_core_helpers_install_package_13a3fee4
-    %% Omitted for readability: 316 nodes, 1 edges
+    %% Omitted for readability: 318 nodes, 1 edges
     class scripts_core_helpers_cecho_42476bc7 function;
     class scripts_core_helpers_decho_3a11e880 function;
     class scripts_core_helpers_process_args_2849d49d function;
@@ -800,7 +800,7 @@ flowchart LR
   <td>11</td>
   <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>aecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>ansible-cleanup.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small><br><code>ansible-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-install.sh</small><br>+59 more</td>
+  <td><code>aecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>ansible-cleanup.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small><br><code>ansible-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-install.sh</small><br>+60 more</td>
   <td>No direct outbound edge</td>
   <td>cecho() node in _scripts/core/_helpers.sh.</td>
 </tr>
@@ -963,8 +963,8 @@ flowchart LR
     <h4>Key Files</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
-      <tr><td><code>hermes/README.md</code></td><td>21 nodes</td></tr>
-<tr><td><code>_scripts/core/_helpers.sh</code></td><td>20 nodes</td></tr>
+      <tr><td><code>_scripts/core/_helpers.sh</code></td><td>22 nodes</td></tr>
+<tr><td><code>hermes/README.md</code></td><td>21 nodes</td></tr>
 <tr><td><code>headroom/README.md</code></td><td>19 nodes</td></tr>
 <tr><td><code>.opencode/agents/dotfiles.md</code></td><td>13 nodes</td></tr>
 <tr><td><code>docs/v2-review.md</code></td><td>13 nodes</td></tr>
@@ -975,7 +975,7 @@ flowchart LR
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: calls x171, contains x155, defines x35, references x34. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: calls x173, contains x155, defines x37, references x34. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -2191,24 +2191,161 @@ flowchart LR
 </div>
 <hr>
 
-<!-- ====== 15. Dry-Run Safety Pattern ====== -->
-<h2 id="dry-run-safety-pattern">15. Dry-Run Safety Pattern</h2>
-<p>Dry-Run Safety Pattern groups implementation around tools, rename, filesps1, dry, mostly in win-tools/.tools/Rename-Files.ps1, _scripts/core/_helpers.sh. This section covers 3 nodes and 2 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<!-- ====== 15. select_packages_grid ====== -->
+<h2 id="select-packages-grid">15. select_packages_grid</h2>
+<p>select_packages_grid groups implementation around setupsh, grid, render, select, mostly in setup.sh. This section covers 4 nodes and 4 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Dry-Run Safety Pattern (3 nodes, 2 edges)
-    subgraph dry_run_safety_pattern_win_tools_tools_Rename_Fi_0340b1cb["win-tools/.tools/Rename-Files.ps1"]
+    %% Section: select_packages_grid (4 nodes, 4 edges)
+    setup_sh_entry_6a444dbb("setup.sh script<br/><small>setup.sh</small>")
+    setup_select_packages_grid_0f0f5919("select_packages_grid()<br/><small>setup.sh</small>")
+    setup_render_grid_8598b488("_render_grid()<br/><small>setup.sh</small>")
+    setup_80437a44("setup.sh")
+    setup_sh_entry_6a444dbb -->|calls| setup_select_packages_grid_0f0f5919
+    class setup_sh_entry_6a444dbb function;
+    class setup_select_packages_grid_0f0f5919 function;
+    class setup_render_grid_8598b488 function;
+    class setup_80437a44 function;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>setup.sh</code><br><small style="color:var(--muted)">setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>setup.sh node in setup.sh.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>_render_grid()</code><br><small style="color:var(--muted)">setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>_render_grid() node in setup.sh.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>select_packages_grid()</code><br><small style="color:var(--muted)">setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>setup.sh script</code><br><small style="color:var(--muted)">setup.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>select_packages_grid() node in setup.sh.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>setup.sh script</code><br><small style="color:var(--muted)">setup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>select_packages_grid()</code><br><small style="color:var(--muted)">setup.sh</small></td>
+  <td>setup.sh script node in setup.sh.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>setup.sh</code></td><td>4 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: defines x2, contains x1, calls x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 16. Other ====== -->
+<h2 id="other">16. Other</h2>
+<p>Other groups implementation around nvim, plugins, adeotek, extra, mostly in win-tools/.tools/Rename-Files.ps1, unattended_setup.sh, win-tools/.tools/Get-ClaudeCodeSessions.ps1. This section covers 73 nodes and 14 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Other (73 nodes, 14 edges)
+    subgraph other_unattended_setup_sh_a1f334d8["unattended_setup.sh"]
+        unattended_setup_28e5cbc5("unattended_setup.sh")
+        unattended_setup_args_26e9b743("ARGS<br/><small>unattended_setup.sh</small>")
+        unattended_setup_sh_entry_d25383ca("unattended_setup.sh script<br/><small>unattended_setup.sh</small>")
+    end
+    subgraph other_win_tools_tools_Get_ClaudeCodeSessions_ps1_9941a12f["win-tools/.tools/Get-ClaudeCodeSessions.ps1"]
+        win_tools_tools_get_claudecodesessions_0d7e0d2c("Get-ClaudeCodeSessions.ps1")
+        win_tools_tools_get_claudecodesessions_get_jsonf_48888e85("Get-JsonField()<br/><small>win-tools/.tools/Get-ClaudeCodeSessions.ps1</small>")
+        win_tools_tools_get_claudecodesessions_test_cont_be44c337("Test-ContainsText()<br/><small>win-tools/.tools/Get-ClaudeCodeSessions.ps1</small>")
+    end
+    subgraph other_config_bash_ai_config_bash_0ae72e5f[".config/bash/ai-config.bash"]
+        bash_config_bash_ai_config_e9d723f6("ai-config.bash")
+        bash_config_bash_ai_config_bash_entry_3e07cf91("ai-config.bash script<br/><small>.config/bash/ai-config.bash</small>")
+    end
+    subgraph other_adeotek_v2_plugins_toggleterm_lua_09b3fbde["adeotek_v2/plugins/toggleterm.lua"]
+        nvim_config_nvim_lua_configs_adeotek_v2_plugins_d3a16feb("adeotek v2/plugins/toggleterm.lua")
+        nvim_config_nvim_lua_configs_adeotek_v2_plugins_69434b29("get_terminal_size()<br/><small>adeotek_v2/plugins/toggleterm.lua</small>")
+    end
+    subgraph other_win_tools_tools_Rename_Files_ps1_9bb80fbd["win-tools/.tools/Rename-Files.ps1"]
         win_tools_rename_files_42fc557e("Rename-Files.ps1 (Bulk Rename with Dry-...<br/><small>win-tools/.tools/Rename-Files.ps1</small>")
         concept_dry_run_win_tools_a4a026a9("Dry-Run Pattern in PowerShell Tools<br/><small>win-tools/.tools/Rename-Files.ps1</small>")
     end
-    concept_dry_run_pattern_30b2eae3("Dry-Run Safety Pattern<br/><small>_scripts/core/_helpers.sh</small>")
+    subgraph other_win_tools_tools_Run_PortListen_ps1_63994aee["win-tools/.tools/Run-PortListen.ps1"]
+        win_tools_tools_run_portlisten_3ec247a3("Run-PortListen.ps1")
+        win_tools_tools_run_portlisten_invoke_portlisten_e073e115("Invoke-Portlistener()<br/><small>win-tools/.tools/Run-PortListen.ps1</small>")
+    end
+    subgraph other_win_tools_tools_Run_PortProbe_ps1_1eebf917["win-tools/.tools/Run-PortProbe.ps1"]
+        win_tools_tools_run_portprobe_559a70fe("Run-PortProbe.ps1")
+        win_tools_tools_run_portprobe_invoke_portprobe_a316a76c("Invoke-PortProbe()<br/><small>win-tools/.tools/Run-PortProbe.ps1</small>")
+    end
+    agents_rules_graphify_8193478b("rules/graphify.md")
+    agents_workflows_graphify_08a1cc26("workflows/graphify.md")
+    unattended_setup_28e5cbc5 -->|defines| unattended_setup_args_26e9b743
     win_tools_rename_files_42fc557e -->|implements| concept_dry_run_win_tools_a4a026a9
-    win_tools_rename_files_42fc557e -->|semantically similar to| concept_dry_run_pattern_30b2eae3
+    unattended_setup_28e5cbc5 -->|contains| unattended_setup_sh_entry_d25383ca
+    bash_config_bash_ai_config_e9d723f6 -->|contains| bash_config_bash_ai_config_bash_entry_3e07cf91
+    nvim_config_nvim_lua_configs_adeotek_v2_plugins_d3a16feb -->|contains| nvim_config_nvim_lua_configs_adeotek_v2_plugins_69434b29
+    win_tools_tools_get_claudecodesessions_0d7e0d2c -->|contains| win_tools_tools_get_claudecodesessions_get_jsonf_48888e85
+    win_tools_tools_get_claudecodesessions_0d7e0d2c -->|contains| win_tools_tools_get_claudecodesessions_test_cont_be44c337
+    win_tools_tools_run_portlisten_3ec247a3 -->|contains| win_tools_tools_run_portlisten_invoke_portlisten_e073e115
+    win_tools_tools_run_portprobe_559a70fe -->|contains| win_tools_tools_run_portprobe_invoke_portprobe_a316a76c
+    %% Omitted for readability: 55 nodes, 0 edges
+    class unattended_setup_28e5cbc5 function;
+    class unattended_setup_args_26e9b743 klass;
+    class unattended_setup_sh_entry_d25383ca function;
+    class win_tools_tools_get_claudecodesessions_0d7e0d2c klass;
+    class win_tools_tools_get_claudecodesessions_get_jsonf_48888e85 function;
+    class win_tools_tools_get_claudecodesessions_test_cont_be44c337 function;
+    class bash_config_bash_ai_config_e9d723f6 function;
+    class bash_config_bash_ai_config_bash_entry_3e07cf91 function;
+    class nvim_config_nvim_lua_configs_adeotek_v2_plugins_d3a16feb function;
+    class nvim_config_nvim_lua_configs_adeotek_v2_plugins_69434b29 function;
     class win_tools_rename_files_42fc557e klass;
     class concept_dry_run_win_tools_a4a026a9 klass;
-    class concept_dry_run_pattern_30b2eae3 klass;
+    class win_tools_tools_run_portlisten_3ec247a3 klass;
+    class win_tools_tools_run_portlisten_invoke_portlisten_e073e115 function;
+    class win_tools_tools_run_portprobe_559a70fe klass;
+    class win_tools_tools_run_portprobe_invoke_portprobe_a316a76c function;
+    class agents_rules_graphify_8193478b concept;
+    class agents_workflows_graphify_08a1cc26 concept;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -2254,112 +2391,8 @@ flowchart LR
   <td>No direct outbound edge</td>
   <td>Dry-Run Pattern in PowerShell Tools node in win-tools/.tools/Rename-Files.ps1.</td>
 </tr>
-</table>
-
-<div class="grid">
-  <div class="card">
-    <h4>Key Files</h4>
-    <table style="width:100%;font-size:0.85rem;">
-      <tr><th>File</th><th>Coverage</th></tr>
-      <tr><td><code>win-tools/.tools/Rename-Files.ps1</code></td><td>2 nodes</td></tr>
-<tr><td><code>_scripts/core/_helpers.sh</code></td><td>1 nodes</td></tr>
-    </table>
-  </div>
-  <div class="card">
-    <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: implements x1, semantically similar to x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
-  </div>
-</div>
-<hr>
-
-<!-- ====== 16. Other ====== -->
-<h2 id="other">16. Other</h2>
-<p>Other groups implementation around nvim, plugins, adeotek, extra, mostly in unattended_setup.sh, win-tools/.tools/Get-ClaudeCodeSessions.ps1, adeotek_v2/plugins/toggleterm.lua. This section covers 72 nodes and 13 internal edges; the diagram shows only representative relationships to stay readable.</p>
-
-<div class="mermaid">
-%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
-flowchart LR
-    %% Section: Other (72 nodes, 13 edges)
-    subgraph other_unattended_setup_sh_a1f334d8["unattended_setup.sh"]
-        unattended_setup_28e5cbc5("unattended_setup.sh")
-        unattended_setup_args_26e9b743("ARGS<br/><small>unattended_setup.sh</small>")
-        unattended_setup_sh_entry_d25383ca("unattended_setup.sh script<br/><small>unattended_setup.sh</small>")
-    end
-    subgraph other_win_tools_tools_Get_ClaudeCodeSessions_ps1_9941a12f["win-tools/.tools/Get-ClaudeCodeSessions.ps1"]
-        win_tools_tools_get_claudecodesessions_0d7e0d2c("Get-ClaudeCodeSessions.ps1")
-        win_tools_tools_get_claudecodesessions_get_jsonf_48888e85("Get-JsonField()<br/><small>win-tools/.tools/Get-ClaudeCodeSessions.ps1</small>")
-        win_tools_tools_get_claudecodesessions_test_cont_be44c337("Test-ContainsText()<br/><small>win-tools/.tools/Get-ClaudeCodeSessions.ps1</small>")
-    end
-    subgraph other_config_bash_ai_config_bash_0ae72e5f[".config/bash/ai-config.bash"]
-        bash_config_bash_ai_config_e9d723f6("ai-config.bash")
-        bash_config_bash_ai_config_bash_entry_3e07cf91("ai-config.bash script<br/><small>.config/bash/ai-config.bash</small>")
-    end
-    subgraph other_adeotek_v2_plugins_toggleterm_lua_09b3fbde["adeotek_v2/plugins/toggleterm.lua"]
-        nvim_config_nvim_lua_configs_adeotek_v2_plugins_d3a16feb("adeotek v2/plugins/toggleterm.lua")
-        nvim_config_nvim_lua_configs_adeotek_v2_plugins_69434b29("get_terminal_size()<br/><small>adeotek_v2/plugins/toggleterm.lua</small>")
-    end
-    subgraph other_setup_sh_bc2a115c["setup.sh"]
-        setup_80437a44("setup.sh")
-        setup_sh_entry_6a444dbb("setup.sh script<br/><small>setup.sh</small>")
-    end
-    subgraph other_win_tools_tools_Run_PortListen_ps1_63994aee["win-tools/.tools/Run-PortListen.ps1"]
-        win_tools_tools_run_portlisten_3ec247a3("Run-PortListen.ps1")
-        win_tools_tools_run_portlisten_invoke_portlisten_e073e115("Invoke-Portlistener()<br/><small>win-tools/.tools/Run-PortListen.ps1</small>")
-    end
-    agents_rules_graphify_8193478b("rules/graphify.md")
-    agents_workflows_graphify_08a1cc26("workflows/graphify.md")
-    extra_nvim_adeotek_v1_keymaps_92cd6dac("adeotek_v1/keymaps.lua")
-    win_tools_tools_run_portprobe_559a70fe("Run-PortProbe.ps1")
-    unattended_setup_28e5cbc5 -->|defines| unattended_setup_args_26e9b743
-    unattended_setup_28e5cbc5 -->|contains| unattended_setup_sh_entry_d25383ca
-    bash_config_bash_ai_config_e9d723f6 -->|contains| bash_config_bash_ai_config_bash_entry_3e07cf91
-    nvim_config_nvim_lua_configs_adeotek_v2_plugins_d3a16feb -->|contains| nvim_config_nvim_lua_configs_adeotek_v2_plugins_69434b29
-    setup_80437a44 -->|contains| setup_sh_entry_6a444dbb
-    win_tools_tools_get_claudecodesessions_0d7e0d2c -->|contains| win_tools_tools_get_claudecodesessions_get_jsonf_48888e85
-    win_tools_tools_get_claudecodesessions_0d7e0d2c -->|contains| win_tools_tools_get_claudecodesessions_test_cont_be44c337
-    win_tools_tools_run_portlisten_3ec247a3 -->|contains| win_tools_tools_run_portlisten_invoke_portlisten_e073e115
-    %% Omitted for readability: 54 nodes, 0 edges
-    class unattended_setup_28e5cbc5 function;
-    class unattended_setup_args_26e9b743 klass;
-    class unattended_setup_sh_entry_d25383ca function;
-    class win_tools_tools_get_claudecodesessions_0d7e0d2c klass;
-    class win_tools_tools_get_claudecodesessions_get_jsonf_48888e85 function;
-    class win_tools_tools_get_claudecodesessions_test_cont_be44c337 function;
-    class bash_config_bash_ai_config_e9d723f6 function;
-    class bash_config_bash_ai_config_bash_entry_3e07cf91 function;
-    class nvim_config_nvim_lua_configs_adeotek_v2_plugins_d3a16feb function;
-    class nvim_config_nvim_lua_configs_adeotek_v2_plugins_69434b29 function;
-    class setup_80437a44 function;
-    class setup_sh_entry_6a444dbb function;
-    class win_tools_tools_run_portlisten_3ec247a3 klass;
-    class win_tools_tools_run_portlisten_invoke_portlisten_e073e115 function;
-    class agents_rules_graphify_8193478b concept;
-    class agents_workflows_graphify_08a1cc26 concept;
-    class extra_nvim_adeotek_v1_keymaps_92cd6dac function;
-    class win_tools_tools_run_portprobe_559a70fe klass;
-    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
-    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
-    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
-    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
-    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
-    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
-    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
-    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
-    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
-</div>
-
-<h3>Call Details</h3>
-<table class="call-table">
 <tr>
-  <th style="width:5%">#</th>
-  <th style="width:28%">Node</th>
-  <th style="width:10%">Type</th>
-  <th style="width:17%">Caller</th>
-  <th style="width:20%">Callees</th>
-  <th style="width:20%">Description</th>
-</tr>
-<tr>
-  <td>1</td>
+  <td>4</td>
   <td><code>unattended_setup.sh</code><br><small style="color:var(--muted)">unattended_setup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2367,7 +2400,7 @@ flowchart LR
   <td>unattended_setup.sh node in unattended_setup.sh.</td>
 </tr>
 <tr>
-  <td>2</td>
+  <td>5</td>
   <td><code>ARGS</code><br><small style="color:var(--muted)">unattended_setup.sh</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -2375,7 +2408,7 @@ flowchart LR
   <td>ARGS node in unattended_setup.sh.</td>
 </tr>
 <tr>
-  <td>3</td>
+  <td>6</td>
   <td><code>unattended_setup.sh script</code><br><small style="color:var(--muted)">unattended_setup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2383,7 +2416,7 @@ flowchart LR
   <td>unattended_setup.sh script node in unattended_setup.sh.</td>
 </tr>
 <tr>
-  <td>4</td>
+  <td>7</td>
   <td><code>Get-ClaudeCodeSessions.ps1</code><br><small style="color:var(--muted)">win-tools/.tools/Get-ClaudeCodeSessions.ps1</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -2391,7 +2424,7 @@ flowchart LR
   <td>Get-ClaudeCodeSessions.ps1 node in win-tools/.tools/Get-ClaudeCodeSessions.ps1.</td>
 </tr>
 <tr>
-  <td>5</td>
+  <td>8</td>
   <td><code>Get-JsonField()</code><br><small style="color:var(--muted)">win-tools/.tools/Get-ClaudeCodeSessions.ps1</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2399,7 +2432,7 @@ flowchart LR
   <td>Get-JsonField() node in win-tools/.tools/Get-ClaudeCodeSessions.ps1.</td>
 </tr>
 <tr>
-  <td>6</td>
+  <td>9</td>
   <td><code>Test-ContainsText()</code><br><small style="color:var(--muted)">win-tools/.tools/Get-ClaudeCodeSessions.ps1</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2407,7 +2440,7 @@ flowchart LR
   <td>Verifies imports, entry points, or version behavior.</td>
 </tr>
 <tr>
-  <td>7</td>
+  <td>10</td>
   <td><code>rules/graphify.md</code><br><small style="color:var(--muted)">.agents/rules/graphify.md</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -2415,7 +2448,7 @@ flowchart LR
   <td>Documentation node describing rules/graphify.md.</td>
 </tr>
 <tr>
-  <td>8</td>
+  <td>11</td>
   <td><code>graphify</code><br><small style="color:var(--muted)">.agents/rules/graphify.md</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -2423,7 +2456,7 @@ flowchart LR
   <td>Documentation node describing graphify.</td>
 </tr>
 <tr>
-  <td>9</td>
+  <td>12</td>
   <td><code>workflows/graphify.md</code><br><small style="color:var(--muted)">.agents/workflows/graphify.md</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -2431,7 +2464,7 @@ flowchart LR
   <td>Documentation node describing workflows/graphify.md.</td>
 </tr>
 <tr>
-  <td>10</td>
+  <td>13</td>
   <td><code>Workflow: graphify</code><br><small style="color:var(--muted)">.agents/workflows/graphify.md</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -2439,7 +2472,7 @@ flowchart LR
   <td>Documentation node describing Workflow: graphify.</td>
 </tr>
 <tr>
-  <td>11</td>
+  <td>14</td>
   <td><code>ai-config.bash</code><br><small style="color:var(--muted)">.config/bash/ai-config.bash</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2447,7 +2480,7 @@ flowchart LR
   <td>Reads, resolves, or persists project configuration.</td>
 </tr>
 <tr>
-  <td>12</td>
+  <td>15</td>
   <td><code>ai-config.bash script</code><br><small style="color:var(--muted)">.config/bash/ai-config.bash</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2455,7 +2488,7 @@ flowchart LR
   <td>Reads, resolves, or persists project configuration.</td>
 </tr>
 <tr>
-  <td>13</td>
+  <td>16</td>
   <td><code>get_terminal_size()</code><br><small style="color:var(--muted)">adeotek_v2/plugins/toggleterm.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2463,7 +2496,7 @@ flowchart LR
   <td>get_terminal_size() node in adeotek_v2/plugins/toggleterm.lua.</td>
 </tr>
 <tr>
-  <td>14</td>
+  <td>17</td>
   <td><code>adeotek_v2/plugins/toggleterm.lua</code><br><small style="color:var(--muted)">adeotek_v2/plugins/toggleterm.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2471,7 +2504,7 @@ flowchart LR
   <td>adeotek_v2/plugins/toggleterm.lua node in adeotek_v2/plugins/toggleterm.lua.</td>
 </tr>
 <tr>
-  <td>15</td>
+  <td>18</td>
   <td><code>gbs Oh My Posh theme</code><br><small style="color:var(--muted)">.config/oh-my-posh/gbs.omp.yaml</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -2479,7 +2512,7 @@ flowchart LR
   <td>Documentation node describing gbs Oh My Posh theme.</td>
 </tr>
 <tr>
-  <td>16</td>
+  <td>19</td>
   <td><code>gbs-text Oh My Posh theme</code><br><small style="color:var(--muted)">.config/oh-my-posh/gbs-text.omp.yaml</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -2487,23 +2520,7 @@ flowchart LR
   <td>Documentation node describing gbs-text Oh My Posh theme.</td>
 </tr>
 <tr>
-  <td>17</td>
-  <td><code>setup.sh</code><br><small style="color:var(--muted)">setup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>setup.sh node in setup.sh.</td>
-</tr>
-<tr>
-  <td>18</td>
-  <td><code>setup.sh script</code><br><small style="color:var(--muted)">setup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>setup.sh script node in setup.sh.</td>
-</tr>
-<tr>
-  <td>19</td>
+  <td>20</td>
   <td><code>Run-PortListen.ps1</code><br><small style="color:var(--muted)">win-tools/.tools/Run-PortListen.ps1</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -2511,7 +2528,7 @@ flowchart LR
   <td>Run-PortListen.ps1 node in win-tools/.tools/Run-PortListen.ps1.</td>
 </tr>
 <tr>
-  <td>20</td>
+  <td>21</td>
   <td><code>Invoke-Portlistener()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-PortListen.ps1</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2519,7 +2536,7 @@ flowchart LR
   <td>Invoke-Portlistener() node in win-tools/.tools/Run-PortListen.ps1.</td>
 </tr>
 <tr>
-  <td>21</td>
+  <td>22</td>
   <td><code>Run-PortProbe.ps1</code><br><small style="color:var(--muted)">win-tools/.tools/Run-PortProbe.ps1</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -2527,7 +2544,7 @@ flowchart LR
   <td>Run-PortProbe.ps1 node in win-tools/.tools/Run-PortProbe.ps1.</td>
 </tr>
 <tr>
-  <td>22</td>
+  <td>23</td>
   <td><code>Invoke-PortProbe()</code><br><small style="color:var(--muted)">win-tools/.tools/Run-PortProbe.ps1</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2535,7 +2552,7 @@ flowchart LR
   <td>Invoke-PortProbe() node in win-tools/.tools/Run-PortProbe.ps1.</td>
 </tr>
 <tr>
-  <td>23</td>
+  <td>24</td>
   <td><code>_G.set_terminal_keymaps()</code><br><small style="color:var(--muted)">nvim/adeotek_v1/keymaps.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2543,7 +2560,7 @@ flowchart LR
   <td>_G.set_terminal_keymaps() node in nvim/adeotek_v1/keymaps.lua.</td>
 </tr>
 <tr>
-  <td>24</td>
+  <td>25</td>
   <td><code>adeotek_v1/keymaps.lua</code><br><small style="color:var(--muted)">nvim/adeotek_v1/keymaps.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2551,7 +2568,7 @@ flowchart LR
   <td>adeotek_v1/keymaps.lua node in nvim/adeotek_v1/keymaps.lua.</td>
 </tr>
 <tr>
-  <td>25</td>
+  <td>26</td>
   <td><code>plugins.lua</code><br><small style="color:var(--muted)">nvim/jakoolit/plugins.lua</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -2559,7 +2576,7 @@ flowchart LR
   <td>plugins.lua node in nvim/jakoolit/plugins.lua.</td>
 </tr>
 <tr>
-  <td>26</td>
+  <td>27</td>
   <td><code>code-review.md</code><br><small style="color:var(--muted)">opencode/agents/code-review.md</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -2567,7 +2584,7 @@ flowchart LR
   <td>Documentation node describing code-review.md.</td>
 </tr>
 <tr>
-  <td>27</td>
+  <td>28</td>
   <td><code>dev.md</code><br><small style="color:var(--muted)">opencode/agents/dev.md</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -2575,7 +2592,7 @@ flowchart LR
   <td>Documentation node describing dev.md.</td>
 </tr>
 <tr>
-  <td>28</td>
+  <td>29</td>
   <td><code>Tabby terminal config</code><br><small style="color:var(--muted)">.config/tabby/config.yaml</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -2583,20 +2600,12 @@ flowchart LR
   <td>Documentation node describing Tabby terminal config.</td>
 </tr>
 <tr>
-  <td>29</td>
+  <td>30</td>
   <td><code>Get-FilesList.ps1</code><br><small style="color:var(--muted)">win-tools/.tools/Get-FilesList.ps1</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
   <td>Get-FilesList.ps1 node in win-tools/.tools/Get-FilesList.ps1.</td>
-</tr>
-<tr>
-  <td>30</td>
-  <td><code>Rename-Files.ps1</code><br><small style="color:var(--muted)">win-tools/.tools/Rename-Files.ps1</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Rename-Files.ps1 node in win-tools/.tools/Rename-Files.ps1.</td>
 </tr>
 </table>
 
@@ -2608,16 +2617,16 @@ flowchart LR
       <tr><td><code>adeotek_v2/plugins/toggleterm.lua</code></td><td>3 nodes</td></tr>
 <tr><td><code>unattended_setup.sh</code></td><td>3 nodes</td></tr>
 <tr><td><code>win-tools/.tools/Get-ClaudeCodeSessions.ps1</code></td><td>3 nodes</td></tr>
+<tr><td><code>win-tools/.tools/Rename-Files.ps1</code></td><td>3 nodes</td></tr>
 <tr><td><code>.agents/rules/graphify.md</code></td><td>2 nodes</td></tr>
 <tr><td><code>.agents/workflows/graphify.md</code></td><td>2 nodes</td></tr>
 <tr><td><code>nvim/adeotek_v1/keymaps.lua</code></td><td>2 nodes</td></tr>
 <tr><td><code>.config/bash/ai-config.bash</code></td><td>2 nodes</td></tr>
-<tr><td><code>adeotek_v2/plugins/git.lua</code></td><td>2 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x11, defines x1, semantically similar to x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x10, semantically similar to x2, defines x1, implements x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -2726,17 +2735,17 @@ flowchart LR
   <div class="card">
     <h4>Graph</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>Nodes</td><td>514</td></tr>
-      <tr><td>Edges</td><td>696</td></tr>
+      <tr><td>Nodes</td><td>518</td></tr>
+      <tr><td>Edges</td><td>703</td></tr>
       <tr><td>Hyperedges</td><td>17</td></tr>
-      <tr><td>Communities</td><td>118</td></tr>
+      <tr><td>Communities</td><td>120</td></tr>
       <tr><td>Documented Sections</td><td>15</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Edge Confidence</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>EXTRACTED</td><td>522</td></tr>
+      <tr><td>EXTRACTED</td><td>529</td></tr>
       <tr><td>INFERRED</td><td>174</td></tr>
       <tr><td>AMBIGUOUS</td><td>0</td></tr>
     </table>
@@ -2745,7 +2754,7 @@ flowchart LR
 
 <div style="text-align:center; padding:40px 0; color: var(--muted); font-size:0.9rem;">
   <p>.dotfiles — Architecture Documentation</p>
-  <p>Generated: 2026-09-16 11:43 UTC · graphify callflow-html</p>
+  <p>Generated: 2026-09-16 18:07 UTC · graphify callflow-html</p>
 </div>
 
 </div><!-- .container -->

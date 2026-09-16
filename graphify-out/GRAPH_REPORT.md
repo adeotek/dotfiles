@@ -1,17 +1,17 @@
 # Graph Report - .dotfiles  (2026-09-16)
 
 ## Corpus Check
-- 179 files · ~60,790 words
+- 179 files · ~61,578 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 43 file(s) not represented in the graph (top: (none) 7, .toml 7, .service 6)
 
 ## Summary
-- 514 nodes · 696 edges · 118 communities (33 shown, 34 thin omitted)
+- 518 nodes · 703 edges · 120 communities (35 shown, 34 thin omitted)
 - Extraction: 75% EXTRACTED · 25% INFERRED · 0% AMBIGUOUS · INFERRED: 174 edges (avg confidence: 0.61)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `ffc72b9a`
+- Built from commit: `35047423`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -67,7 +67,7 @@
 - github-cli-install.sh
 - Zed — stowed config + setup notes
 - herdr-setup.sh
-- setup.sh
+- select_packages_grid
 - update.sh
 - Homebrew Fallback Package Manager
 - git-install.sh
@@ -83,9 +83,11 @@
 - Tabby terminal config
 - adeotek_v2/plugins/treesitter.lua (Syntax)
 - golang-install.sh
+- kitty-install.sh
+- copy_files_if_missing
 
 ## God Nodes (most connected - your core abstractions)
-1. `cecho()` - 63 edges
+1. `cecho()` - 64 edges
 2. `install_package()` - 31 edges
 3. `decho()` - 24 edges
 4. `stow_package()` - 22 edges
@@ -130,7 +132,7 @@
 - **Claude Code Statusline Variants** — claude_code_user_config_statusline_command, claude_code_user_config_statusline_command_win, claude_code_user_config_statusline_slim [INFERRED 0.95]
 - **Windows Network & Firewall Tools** — win_tools_tools_add_winfirewallrule, win_tools_tools_get_winfirewallrulebyport, win_tools_run_port_listen, win_tools_run_port_probe [INFERRED 0.95]
 
-## Communities (118 total, 34 thin omitted)
+## Communities (120 total, 34 thin omitted)
 
 ### Community 0 - "cecho"
 Cohesion: 0.11
@@ -141,8 +143,8 @@ Cohesion: 0.08
 Nodes (27): Headroom Proxy (systemd user service, localhost:8787), Foca Profile config.yaml (deployed ~/.hermes/profiles/foca), Foca — Senior Engineer/Architect Persona (profile SOUL.md), Mo — Hermes Maintainer Persona (SOUL.md), hermes/config.yaml — Hermes Master Config Template, Hermes Fallback Provider Chain, OpenCode Go Provider (deepseek-v4-flash primary), API Server (port 8642) (+19 more)
 
 ### Community 2 - "homebrew-install.sh"
-Cohesion: 0.08
-Nodes (14): Install-Then-Setup Pattern, Shell Prompt Customization Tool, Terminal Emulator, base-tools-install.sh script, glow-install.sh script, kitty-setup.sh script, nvim-setup.sh script, oh-my-posh-setup.sh script (+6 more)
+Cohesion: 0.10
+Nodes (10): Shell Prompt Customization Tool, base-tools-install.sh script, glow-install.sh script, nvim-setup.sh script, oh-my-posh-setup.sh script, rtk-install.sh script, rtk-setup.sh script, starship-install.sh script (+2 more)
 
 ### Community 3 - "yazi-install.sh"
 Cohesion: 0.25
@@ -153,16 +155,16 @@ Cohesion: 0.16
 Nodes (8): Centralized Keymap Architecture (v2 pattern), LSP Ecosystem (lspconfig + mason + cmp + LuaSnip), Theme Integration Pattern (catppuccin integrations), adeotek_v2/plugins/alpha.lua (Dashboard), adeotek_v2/plugins/lsp.lua (LSP + Mason + nvim-cmp), adeotek_v2/plugins/nvim-tree.lua (File Explorer), adeotek_v2/plugins/telescope.lua (Fuzzy Finder), adeotek_v2/plugins/theme.lua (Catppuccin)
 
 ### Community 5 - "claude-code-setup.sh"
-Cohesion: 0.10
-Nodes (13): AI Coding Tools (claude-code + opencode), Claude Code Plugin Marketplace, claude-code-install.sh script, CLAUDECODE_PLUGINS, claude-code-setup.sh script, copy_files_if_missing(), hermes-install.sh script, hermes-setup.sh script (+5 more)
+Cohesion: 0.14
+Nodes (10): AI Coding Tools (claude-code + opencode), Claude Code Plugin Marketplace, claude-code-install.sh script, CLAUDECODE_PLUGINS, claude-code-setup.sh script, opencode-install.sh script, copy_skills_if_missing(), opencode-setup.sh script (+2 more)
 
 ### Community 6 - "statusline-command.sh"
 Cohesion: 0.17
 Nodes (17): settings-part.json (Claude Code Settings), fmt_ctx_size(), fmt_pct(), fmt_reset_time(), get_mtime(), pct_color(), statusline-command.sh script, cents_to_dollars() (+9 more)
 
 ### Community 7 - "_helpers.sh"
-Cohesion: 0.16
-Nodes (6): Multi-Distro Support (Arch/Debian/Fedora), OS-Dispatch Pattern (case $CURRENT_OS_ID), stow_package() Helper Function, aecho(), get_stow_command(), get_vv()
+Cohesion: 0.14
+Nodes (8): Multi-Distro Support (Arch/Debian/Fedora), OS-Dispatch Pattern (case $CURRENT_OS_ID), stow_package() Helper Function, aecho(), get_stow_command(), get_vv(), read_key(), read_yes_no()
 
 ### Community 8 - "_options.sh"
 Cohesion: 0.11
@@ -264,25 +266,33 @@ Nodes (4): House rules, Per-machine setup (not stowable — do once per machine)
 Cohesion: 0.50
 Nodes (3): herdr-install.sh script, setup_herdr_completions(), herdr-setup.sh script
 
+### Community 118 - "kitty-install.sh"
+Cohesion: 0.32
+Nodes (4): Install-Then-Setup Pattern, Terminal Emulator, kitty-setup.sh script, tabby-setup.sh script
+
+### Community 119 - "copy_files_if_missing"
+Cohesion: 0.40
+Nodes (3): copy_files_if_missing(), hermes-install.sh script, hermes-setup.sh script
+
 ## Knowledge Gaps
-- **136 isolated node(s):** `$schema`, `plugin`, `_options.sh script`, `MINIMAL_TASKS`, `CONSOLE_ONLY_TASKS` (+131 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 221 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **135 isolated node(s):** `$schema`, `plugin`, `_options.sh script`, `MINIMAL_TASKS`, `CONSOLE_ONLY_TASKS` (+130 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 220 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **34 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cecho()` connect `cecho` to `homebrew-install.sh`, `yazi-install.sh`, `docker-install.sh script`, `claude-code-setup.sh`, `_helpers.sh`, `uv-install.sh`, `herdr-setup.sh`, `k8s-repo-install.sh`, `golang-install.sh`, `mise-install.sh`?**
+- **Why does `cecho()` connect `cecho` to `homebrew-install.sh`, `yazi-install.sh`, `docker-install.sh script`, `claude-code-setup.sh`, `_helpers.sh`, `uv-install.sh`, `herdr-setup.sh`, `k8s-repo-install.sh`, `golang-install.sh`, `copy_files_if_missing`, `mise-install.sh`?**
   _High betweenness centrality (0.040) - this node is a cross-community bridge._
 - **Why does `install_package()` connect `cecho` to `homebrew-install.sh`, `docker-install.sh script`, `_helpers.sh`, `k8s-repo-install.sh`, `git-install.sh`, `tmux-install.sh`?**
   _High betweenness centrality (0.014) - this node is a cross-community bridge._
-- **Why does `stow_package()` connect `cecho` to `homebrew-install.sh`, `yazi-install.sh`, `ghostty-install.sh`, `_helpers.sh`, `fastfetch-install.sh`?**
+- **Why does `stow_package()` connect `cecho` to `homebrew-install.sh`, `yazi-install.sh`, `ghostty-install.sh`, `_helpers.sh`, `kitty-install.sh`, `fastfetch-install.sh`?**
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
 - **What connects `$schema`, `plugin`, `_options.sh script` to the rest of the system?**
-  _136 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _135 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `cecho` be split into smaller, more focused modules?**
   _Cohesion score 0.11265969802555169 - nodes in this community are weakly interconnected._
 - **Should `Hermes Agent` be split into smaller, more focused modules?**
   _Cohesion score 0.07881773399014778 - nodes in this community are weakly interconnected._
 - **Should `homebrew-install.sh` be split into smaller, more focused modules?**
-  _Cohesion score 0.0784313725490196 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10153846153846154 - nodes in this community are weakly interconnected._
