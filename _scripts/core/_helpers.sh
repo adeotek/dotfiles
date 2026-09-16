@@ -15,6 +15,8 @@ CURRENT_CONFIG_DIR="$HOME/.config"
 # Global variables and CLI arguments
 VV="0"
 DRY_RUN="0"
+HELP_REQUESTED="0"
+BASIC_MODE="0"
 DFS_ACTION="init"
 
 # Global functions
@@ -34,6 +36,12 @@ function process_args() {
       ;;
       --dry-run)
         DRY_RUN="1"
+      ;;
+      -h|--help)
+        HELP_REQUESTED="1"
+      ;;
+      -b|--basic)
+        BASIC_MODE="1"
       ;;
       --*)
         if [[ ! -v ARGS[${1:2}] ]]; then

@@ -21,6 +21,21 @@ source "$CDIR/_options.sh"
 # Globals
 DEFAULT_MENU_OPTION="0"
 
+function show_usage() {
+  cecho "white" "Usage: $0 [OPTIONS]"
+  cecho "white" "AdeoTEK dotfiles setup"
+  cecho "white" "Options:"
+  cecho "cyan" "  -b, --basic     Use the basic numeric package list instead of the interactive selection grid"
+  cecho "cyan" "  --dry-run       Perform a dry run without making actual changes"
+  cecho "cyan" "  -h, --help      Show this help and exit"
+  cecho "cyan" "  -v, --verbose   Enable verbose output for debugging"
+}
+
+if [[ "$HELP_REQUESTED" -eq 1 ]]; then
+  show_usage
+  exit 0
+fi
+
 function select_packages_grid() {
   # Interactive multi-column checklist. Usage: select_packages_grid ALL_TASKS
   # Sets global SELECTED_PACKAGES on Enter; q/Esc/EOF cancel (exit 10).
@@ -210,16 +225,18 @@ case $SETUP_MODE in
   0)
     SELECTED_PACKAGES=()
     cecho "yellow" "The available packages are:"
-    if [[ "$IS_TTY" -eq 1 ]]; then
+    if [[ "$IS_TTY" -eq 1 && "$BASIC_MODE" -ne 1 ]]; then
       select_packages_grid ALL_TASKS
     else
+      TASK_LINES=""
       for i in "${!ALL_TASKS[@]}"
       do
-        if [[ $i -lt 10 ]]; then
-          cecho "cyan" " [$i] ${ALL_TASKS[$i]}"
-        else
-          cecho "cyan" "[$i] ${ALL_TASKS[$i]}"
-        fi
+        TASK_LINES+="$(printf '[%d] %-14s  ' "$i" "${ALL_TASKS[$i]}")"$'\n'
+      done
+      mapfile -t TASK_LINES < <(printf '%s' "$TASK_LINES" | column -c "${COLUMNS:-80}")
+      for line in "${TASK_LINES[@]}"
+      do
+        cecho "cyan" "$line"
       done
       cecho "cyan" "[q] Cancel and exit"
       while true

@@ -19,13 +19,12 @@
 #   ls                    List all available packages and exit
 #   (default: init)       Perform the installation/setup process
 #
-# REQUIRED OPTIONS:
+# GLOBAL OPTIONS:
 #   --packages <list>     Comma-separated list of packages to install/setup
 #                         Example: --packages git,nvim,tmux,docker
-#
-# GLOBAL OPTIONS:
 #   -v, --verbose         Enable verbose output for debugging
 #   --dry-run             Perform a dry run without making actual changes
+#   -h, --help            Show help and exit
 #
 # AVAILABLE PACKAGES:
 #   Run './unattended_setup.sh ls' or see _scripts/core/_options.sh for the
@@ -85,6 +84,21 @@ process_args "$@"
 if [[ "$1" == "ls" ]]; then
   cecho "white" "Available packages:"
   aecho ALL_TASKS "- " "yellow" "white"
+  exit 0
+fi
+
+# Help
+if [[ "$HELP_REQUESTED" -eq 1 ]]; then
+  cecho "white" "Usage: $0 [OPTIONS] [ACTION] (--packages <list> is required unless ACTION is 'ls' or -h is given)"
+  cecho "white" "AdeoTEK dotfiles unattended setup"
+  cecho "white" "Actions:"
+  cecho "cyan" "  ls                List all available packages and exit"
+  cecho "cyan" "  (default: init)   Perform the installation/setup process"
+  cecho "white" "Options:"
+  cecho "cyan" "  --packages <list> Comma-separated list of packages to install/setup"
+  cecho "cyan" "  --dry-run         Perform a dry run without making actual changes"
+  cecho "cyan" "  -h, --help        Show this help and exit"
+  cecho "cyan" "  -v, --verbose     Enable verbose output for debugging"
   exit 0
 fi
 
