@@ -27,6 +27,10 @@ function select_packages_grid() {
   # ponytail: no paging/scroll — add when the task list exceeds one screen.
   local -n items=$1
   local total=${#items[@]}
+  if [[ "$total" -eq 0 ]]; then
+    SELECTED_PACKAGES=()
+    return
+  fi
   local max_len=0 name
   for name in "${items[@]}"
   do
@@ -177,7 +181,7 @@ do
     echo
     case "$key" in
       enter) SETUP_MODE="$DEFAULT_MENU_OPTION" ;;
-      esc) SETUP_MODE="q" ;;
+      esc|eof) SETUP_MODE="q" ;;
       *) SETUP_MODE="$key" ;;
     esac
   else
