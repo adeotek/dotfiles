@@ -90,7 +90,7 @@ fi
 # Help
 if [[ "$HELP_REQUESTED" -eq 1 ]]; then
   cecho "white" "Usage: $0 [OPTIONS] [ACTION] (--packages <list> is required unless ACTION is 'ls' or -h is given)"
-  cecho "white" "AdeoTEK dotfiles unattended setup"
+  cecho "white" "AdeoTEK dotfiles v2 unattended setup"
   cecho "white" "Actions:"
   cecho "cyan" "  ls                List all available packages and exit"
   cecho "cyan" "  (default: init)   Perform the installation/setup process"
@@ -103,7 +103,7 @@ if [[ "$HELP_REQUESTED" -eq 1 ]]; then
 fi
 
 ## Startup debug
-cecho "blue" "Starting dotfiles unattended setup ($DFS_ACTION)..."
+cecho "blue" "Starting dotfiles v2 unattended setup ($DFS_ACTION)..."
 decho "magenta" "Current OS: $CURRENT_OS_ID"
 decho "magenta" "dotfiles root path: $RDIR"
 decho "magenta" "core scripts path: $CDIR"
