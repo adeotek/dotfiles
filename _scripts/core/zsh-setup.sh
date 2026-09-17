@@ -64,7 +64,7 @@ fi
 # Change default shell to zsh
 if [[ "$(basename "$SHELL")" != "zsh" ]]; then
   if [[ "$DRY_RUN" -ne "1" ]]; then
-    echo "Changing default shell to zsh..."
+    echo "Changing default shell to zsh [chsh -s \"$(which zsh)\"]..."
     chsh -s "$(which zsh)"
   else
     cecho "yellow" "DRY-RUN: chsh -s \"$(which zsh)\""
