@@ -114,5 +114,6 @@ else
 fi
 
 if [[ "$NJS_INSTALL_MODE" != "brew" ]]; then
-  execute_command "sudo npm install -g npm" "npm updated."
+  # root's PATH may not see node (brew/tarball installs) — pass the user PATH through
+  execute_command 'sudo env PATH="$PATH" npm install -g npm' "npm updated."
 fi
