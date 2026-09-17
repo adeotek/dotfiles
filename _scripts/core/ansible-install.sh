@@ -38,11 +38,17 @@ if [[ "$ANS_CLEANUP" == true ]]; then
 fi
 
 # Install ansible via uv tool install
+# The PyPI `ansible` metapackage only declares the `ansible-community` entry point;
+# the `ansible` executable comes from the ansible-core dependency, so it must be
+# exposed explicitly via --with-executables-from (uv does not expose dependency
+# executables by default).
 if command -v ansible >/dev/null 2>&1; then
   cecho "yellow" "[ansible] is already present. Updating it..."
   execute_command "uv tool upgrade ansible" "[ansible] update done."
 else
-  execute_command "uv tool install ansible" "[ansible] installation done."
+  # Fallback to --force covers tools installed by older script versions
+  # (installed in uv but not exposed on PATH)
+  execute_command "uv tool install ansible --with-executables-from ansible-core || uv tool install --force ansible --with-executables-from ansible-core" "[ansible] installation done."
 fi
 
 # Install ansible-lint via uv tool install
