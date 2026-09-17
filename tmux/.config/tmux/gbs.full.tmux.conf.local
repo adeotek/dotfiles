@@ -488,6 +488,7 @@ set -g @plugin 'tmux-plugins/tmux-continuum'
 set -g @continuum-restore 'off'
 set -g @plugin 'fcsonline/tmux-thumbs'    # <prefix>Space — highlight & copy text patterns
 set -g @plugin 'omerxx/tmux-sessionx'     # <prefix>o    — fuzzy session/window switcher
+# thumbs/sessionx are declared but not vendored: press <prefix>I once on a fresh machine to install them
 
 
 # -- custom variables ----------------------------------------------------------

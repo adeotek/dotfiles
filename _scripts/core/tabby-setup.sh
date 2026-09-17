@@ -19,4 +19,4 @@ fi
 source "$CDIR/tabby-install.sh"
 
 # Setup
-decho "yellow" "No config available to stow for Tabby!"
+stow_package "tabby" "" "$CURRENT_CONFIG_DIR/tabby"

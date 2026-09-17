@@ -27,9 +27,8 @@ fi
 # Clean up old package manager installations
 ANS_CLEANUP=false
 if [[ "${ARGS["unattended"]}" != "1" ]]; then
-  cecho "yellow" -n "Do you want to run the clean-up for old installations? (y/N): "
-  read -r ANS_CLEANUP_RESPONSE
-  if [[ "$ANS_CLEANUP_RESPONSE" =~ ^[Yy]$ ]]; then
+  read_yes_no "Do you want to run the clean-up for old installations? (y/N): " "n"
+  if [[ "$REPLY_YN" == "y" ]]; then
     ANS_CLEANUP=true
   fi
 fi
@@ -38,31 +37,29 @@ if [[ "$ANS_CLEANUP" == true ]]; then
 fi
 
 # Install ansible via uv tool install
+# The PyPI `ansible` metapackage only declares the `ansible-community` entry point;
+# the `ansible` executable comes from the ansible-core dependency, so it must be
+# exposed explicitly via --with-executables-from (uv does not expose dependency
+# executables by default).
 if command -v ansible >/dev/null 2>&1; then
   cecho "yellow" "[ansible] is already present. Updating it..."
-fi
-
-if [ "$DRY_RUN" -ne "1" ]; then
-  uv tool install ansible
-  cecho "green" "[ansible] installation done."
+  execute_command "uv tool upgrade ansible" "[ansible] update done."
 else
-  cecho "yellow" "DRY-RUN: uv tool install ansible"
+  # Fallback to --force covers tools installed by older script versions
+  # (installed in uv but not exposed on PATH)
+  execute_command "uv tool install ansible --with-executables-from ansible-core || uv tool install --force ansible --with-executables-from ansible-core" "[ansible] installation done."
 fi
 
 # Install ansible-lint via uv tool install
 if command -v ansible-lint >/dev/null 2>&1; then
   cecho "yellow" "[ansible-lint] is already present. Updating it..."
-fi
-
-if [ "$DRY_RUN" -ne "1" ]; then
-  uv tool install ansible-lint
-  cecho "green" "[ansible-lint] installation done."
+  execute_command "uv tool upgrade ansible-lint" "[ansible-lint] update done."
 else
-  cecho "yellow" "DRY-RUN: uv tool install ansible-lint"
+  execute_command "uv tool install ansible-lint" "[ansible-lint] installation done."
 fi
 
 # Verify
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if command -v ansible >/dev/null 2>&1; then
     cecho "green" "[ansible] $(ansible --version 2>/dev/null | head -1 || echo 'installed') successfully."
   else

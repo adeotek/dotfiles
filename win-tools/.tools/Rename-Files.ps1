@@ -112,12 +112,13 @@ $matchedCount = 0
 $renamedCount = 0
 $errorCount = 0
 
-$files = Get-ChildItem -Path $resolvedPath -File -Recurse
+$files = Get-ChildItem -Path $resolvedPath -File -Recurse -ErrorAction SilentlyContinue
 
 foreach ($file in $files) {
     if ($Exclude.Count -gt 0) {
-        $pathSegments = $file.FullName.Split([System.IO.Path]::DirectorySeparatorChar)
-        if ($pathSegments | Where-Object { $Exclude -contains $_ }) {
+        # Compare only directory segments (Exclude lists directory names, not file names)
+        $dirSegments = $file.DirectoryName.Split([System.IO.Path]::DirectorySeparatorChar)
+        if ($dirSegments | Where-Object { $Exclude -contains $_ }) {
             continue
         }
     }

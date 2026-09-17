@@ -19,8 +19,13 @@ fi
 # Install
 source "$CDIR/headroom-install.sh"
 
+# --- WSL systemd ---
+if [[ "$DRY_RUN" -ne "1" ]]; then
+  enable_wsl_systemd
+fi
+
 # --- Config directories ---
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   mkdir -p "$HOME/.headroom"
   mkdir -p "$HOME/.config/headroom"
   mkdir -p "$HOME/.config/systemd/user"
@@ -28,25 +33,28 @@ fi
 
 OVERRIDE_EXISTING=false
 SERVICE_FILE="$HOME/.config/systemd/user/headroom-proxy.service"
-if [ -f "$HOME/.config/headroom/proxy.env" ] || [ -f "$SERVICE_FILE" ]; then
-  cecho "yellow" -n "Headroom config already exists. Do you want to overwrite it? (y/N):"
-  read -r overwrite_config
-  if [[ "$overwrite_config" =~ ^[Yy]$ ]]; then
-    OVERRIDE_EXISTING=true
+if [[ -f "$HOME/.config/headroom/proxy.env" ]] || [[ -f "$SERVICE_FILE" ]]; then
+  if [[ "$DRY_RUN" -ne "1" ]] && [[ "${ARGS["unattended"]}" != "1" ]]; then
+    read_yes_no "Headroom config already exists. Do you want to overwrite it? (y/N): " "n"
+    if [[ "$REPLY_YN" == "y" ]]; then
+      OVERRIDE_EXISTING=true
+    fi
   fi
 fi
 
 # --- Deploy providers.env ---
-if [ "$DRY_RUN" -ne "1" ]; then
-  if [ -f "$HOME/.config/headroom/proxy.env" ]; then
-    if [ "$OVERRIDE_EXISTING" = true ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
+  if [[ -f "$HOME/.config/headroom/proxy.env" ]]; then
+    if [[ "$OVERRIDE_EXISTING" == true ]]; then
       cp "$RDIR/headroom/providers.env" "$HOME/.config/headroom/proxy.env"
+      chmod 600 "$HOME/.config/headroom/proxy.env"
       cecho "green" "Headroom provider config overwritten to ~/.config/headroom/proxy.env"
     else
       cecho "yellow" "Headroom provider config already exists at ~/.config/headroom/proxy.env"
     fi
   else
     cp "$RDIR/headroom/providers.env" "$HOME/.config/headroom/proxy.env"
+    chmod 600 "$HOME/.config/headroom/proxy.env"
     cecho "green" "Headroom provider config deployed to ~/.config/headroom/proxy.env"
   fi
 else
@@ -54,9 +62,9 @@ else
 fi
 
 # --- Deploy models.json ---
-if [ "$DRY_RUN" -ne "1" ]; then
-  if [ -f "$HOME/.headroom/models.json" ]; then
-    if [ "$OVERRIDE_EXISTING" = true ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
+  if [[ -f "$HOME/.headroom/models.json" ]]; then
+    if [[ "$OVERRIDE_EXISTING" == true ]]; then
       cp "$RDIR/headroom/models.json" "$HOME/.headroom/models.json"
       cecho "green" "Headroom models.json overwritten to ~/.headroom/models.json"
     else
@@ -71,9 +79,9 @@ else
 fi
 
 # --- Deploy systemd service file ---
-if [ "$DRY_RUN" -ne "1" ]; then
-  if [ -f "$SERVICE_FILE" ]; then
-    if [ "$OVERRIDE_EXISTING" = true ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
+  if [[ -f "$SERVICE_FILE" ]]; then
+    if [[ "$OVERRIDE_EXISTING" == true ]]; then
       cp "$RDIR/headroom/headroom-proxy.service" "$SERVICE_FILE"
       cecho "green" "Headroom systemd service overwritten to $SERVICE_FILE"
     else
@@ -82,51 +90,63 @@ if [ "$DRY_RUN" -ne "1" ]; then
   else
     cp "$RDIR/headroom/headroom-proxy.service" "$SERVICE_FILE"
     cecho "green" "Headroom systemd service deployed to $SERVICE_FILE"
-  fi  
+  fi
 else
   cecho "yellow" "DRY-RUN: cp $RDIR/headroom/headroom-proxy.service $SERVICE_FILE"
 fi
 
 # --- Reload systemd user daemon ---
-if [ "$DRY_RUN" -ne "1" ]; then
-  systemctl --user daemon-reload
-  cecho "green" "systemd user daemon reloaded."
+if [[ "$DRY_RUN" -ne "1" ]]; then
+  if systemctl --user daemon-reload; then
+    cecho "green" "systemd user daemon reloaded."
+  else
+    cecho "red" "Failed to reload systemd user daemon (is a systemd user session available?)."
+  fi
 else
   cecho "yellow" "DRY-RUN: systemctl --user daemon-reload"
 fi
 
 # --- Enable lingering (service survives logout) ---
-if [ "$DRY_RUN" -ne "1" ]; then
-  if ! loginctl show-user "$USER" 2>/dev/null | grep -q "Linger=yes"; then
-    loginctl enable-linger "$USER"
+if [[ "$DRY_RUN" -ne "1" ]]; then
+  if ! command -v loginctl >/dev/null 2>&1; then
+    cecho "yellow" "loginctl not found — skipping lingering; headroom-proxy may stop at logout."
+  elif loginctl show-user "$USER" 2>/dev/null | grep -q "Linger=yes"; then
+    cecho "yellow" "User lingering already enabled."
+  elif loginctl enable-linger "$USER"; then
     cecho "green" "User lingering enabled — headroom-proxy will survive logout."
   else
-    cecho "yellow" "User lingering already enabled."
+    cecho "red" "Failed to enable user lingering for $USER."
   fi
 else
   cecho "yellow" "DRY-RUN: loginctl enable-linger $USER"
 fi
 
 # --- Enable and start the service ---
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if systemctl --user is-enabled --quiet headroom-proxy.service; then
     cecho "yellow" "headroom-proxy.service is already enabled. It will be restarted."
-    systemctl --user restart headroom-proxy.service
-    cecho "green" "headroom-proxy.service restarted."
+    if systemctl --user restart headroom-proxy.service; then
+      cecho "green" "headroom-proxy.service restarted."
+    else
+      cecho "red" "Failed to restart headroom-proxy.service."
+    fi
   else
-    systemctl --user enable --now headroom-proxy.service
-    cecho "green" "headroom-proxy.service enabled and started."
+    if systemctl --user enable --now headroom-proxy.service; then
+      cecho "green" "headroom-proxy.service enabled and started."
+    else
+      cecho "red" "Failed to enable/start headroom-proxy.service."
+    fi
   fi
 else
   cecho "yellow" "DRY-RUN: systemctl --user enable --now headroom-proxy.service"
 fi
 
 # --- Health check ---
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   cecho "cyan" "Waiting for headroom proxy to become healthy..."
   retries=0
   max_retries=30
-  while [ "$retries" -lt "$max_retries" ]; do
+  while [[ "$retries" -lt "$max_retries" ]]; do
     if curl -sf http://localhost:8787/health >/dev/null 2>&1; then
       cecho "green" "headroom proxy is healthy on http://localhost:8787"
       break
@@ -134,7 +154,7 @@ if [ "$DRY_RUN" -ne "1" ]; then
     retries=$((retries + 1))
     sleep 1
   done
-  if [ "$retries" -eq "$max_retries" ]; then
+  if [[ "$retries" -eq "$max_retries" ]]; then
     cecho "red" "headroom proxy did not become healthy within ${max_retries}s. Check: systemctl --user status headroom-proxy"
   fi
 else

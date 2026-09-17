@@ -98,7 +98,13 @@
 
 ## Custom
 
-* `CTRL-N` - Toggle file tree (neo-tree)
-* `CTRL-P` - Toggle telescope find files
+* `<leader>e` - Toggle file explorer (nvim-tree)
+* `CTRL-P` / `<leader>ff` - Telescope find files
 * `<leader>gf` - Telescope git files
-* `<leader>fg'` - Toggle telescope live grep
+* `<leader>fg` - Telescope live grep
+* `<leader>fge` - Telescope live grep with args
+* `<leader>fb` - Telescope buffers
+* `<leader>fm` - Format buffer
+* `gd`/`K`/`gr`/`<leader>rn`/`<leader>ca` - LSP definition/hover/references/rename/code action
+* `<C-c>`/`<C-v>`/`<C-x>` - Copy/paste/cut via system clipboard
+* `<C-\>` - Toggle terminal

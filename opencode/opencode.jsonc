@@ -1,6 +1,6 @@
-{  
+{
   "$schema": "https://opencode.ai/config.json",
-  "model": "opencode-go/deepseek-v4-flash",
+  "model": "opencode-go/deepseek-v4.1-flash",
   "small_model": "opencode-go/mimo-v2.5",
   "lsp": {},
   "default_agent": "build",
@@ -8,7 +8,7 @@
     "build": {
       "description": "Primary build/orchestrator agent. Full tool access. Delegates analysis to @plan and review to @code-review.",
       "mode": "primary",
-      "model": "opencode-go/deepseek-v4-flash"
+      "model": "opencode-go/deepseek-v4.1-flash"
     },
     "plan": {
       "mode": "primary",
@@ -72,7 +72,7 @@
   },
   "server": {
     "port": 9991,
-    "hostname": "0.0.0.0",
+    // "hostname": "0.0.0.0",
     "cors": [
       "http://localhost:9991",
       "http://127.0.0.1:9991"

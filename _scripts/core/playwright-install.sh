@@ -24,7 +24,7 @@ cecho "cyan" "Installing [playwright]..."
 case $CURRENT_OS_ID in
   arch)
     cecho "yellow" "[playwright] Arch Linux is not officially supported by Playwright. Installing without OS dependencies..."
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       sudo npm install -g @playwright/cli@latest
       npx --yes playwright install chromium
     else
@@ -33,7 +33,7 @@ case $CURRENT_OS_ID in
     fi
     ;;
   debian|ubuntu|pop)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       sudo npm install -g @playwright/cli@latest
       npx --yes playwright install --with-deps chromium
     else
@@ -42,7 +42,7 @@ case $CURRENT_OS_ID in
     fi
     ;;
   fedora|redhat)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       # System deps Chromium requires on Fedora
       sudo dnf install -y nss atk at-spi2-atk gtk3 alsa-lib libdrm \
         libxkbcommon libXcomposite libXdamage libXrandr mesa-libgbm \
@@ -64,7 +64,7 @@ case $CURRENT_OS_ID in
 esac
 
 # Verify
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if command -v playwright-cli >/dev/null 2>&1; then
     cecho "green" "[playwright] CLI and dependencies installed successfully."
   else

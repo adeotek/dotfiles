@@ -12,7 +12,7 @@
       1. <ScriptDir>\<COMPUTERNAME>-config.{yml,yaml,json,jsonc}
       2. <ScriptDir>\win-env-config.{yml,yaml,json,jsonc}
 
-    Task types supported: winget, npm, powershell-module, tf-install
+    Task types supported: winget, npm, powershell-module
 
     YAML support requires the 'powershell-yaml' module.
 
@@ -126,41 +126,6 @@ function ReadConfigFile {
     return $config
 }
 
-function Add-Env-Path {
-    param (
-        [Parameter(Mandatory, Position = 0)][string] $LiteralPath,
-        [ValidateSet('User', 'CurrentUser', 'Machine', 'LocalMachine')][string] $Scope
-    )
-
-    Set-StrictMode -Version 1; $ErrorActionPreference = 'Stop'
-
-    $isMachineLevel = $Scope -in 'Machine', 'LocalMachine'
-    if ($isMachineLevel -and -not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        throw "You must run AS ADMIN to update the machine-level Path environment variable."
-    }
-
-    $regPath = 'registry::' + ('HKEY_CURRENT_USER\Environment', 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment')[$isMachineLevel]
-
-    # Use .GetValue() to retrieve the unexpanded registry value (avoids resolving %vars%)
-    $currDirs = (Get-Item -LiteralPath $regPath).GetValue('Path', '', 'DoNotExpandEnvironmentNames') -split ';' -ne ''
-
-    if ($LiteralPath -in $currDirs) {
-        Write-Color "INFO: ", "Already present in the persistent $(('user', 'machine')[$isMachineLevel])-level Path: $LiteralPath" -Color $Script:commandColor, $Script:baseColor
-        return
-    }
-
-    $newValue = ($currDirs + $LiteralPath) -join ';'
-    Set-ItemProperty -Type ExpandString -LiteralPath $regPath Path $newValue
-
-    # Broadcast WM_SETTINGCHANGE so the Windows shell picks up the updated PATH
-    $dummyName = [guid]::NewGuid().ToString()
-    [Environment]::SetEnvironmentVariable($dummyName, 'foo', 'User')
-    [Environment]::SetEnvironmentVariable($dummyName, [NullString]::value, 'User')
-
-    $env:Path = ($env:Path -replace ';$') + ';' + $LiteralPath
-    Write-Color "`"$LiteralPath`" successfully appended to the persistent $(('user', 'machine')[$isMachineLevel])-level Path and also the current-process value." -Color $Script:accentColor
-}
-
 function CreateAlias {
     Param ([string]$source, [string]$destination)
 
@@ -186,6 +151,7 @@ function ExecuteWinGetTask {
             try {
                 Write-Color "$($Script:itemPrefix)$($Script:startingPrefix) Starting ", "winget $action ", $app.Id, " -s winget" -Color $Script:inputColor, $Script:baseColor, $Script:commandColor, $Script:baseColor
                 winget $action $app.Id -s winget
+                if ($LASTEXITCODE -ne 0) { throw "winget $action $($app.Id) failed with exit code $LASTEXITCODE" }
                 # Coerce single alias object or array of aliases into a uniform array
                 if ($null -ne $app.CreateAlias) {
                     @($app.CreateAlias) | ForEach-Object {
@@ -212,29 +178,28 @@ function ExecutePowershellModuleTask {
         $action = $task.Action -eq "upgrade" ? "Update-Module" : "Install-Module"
         Write-Color "$($Script:startingPrefix) Starting Task $($task.Name)", ": [", $task.Type, ":", $action, "]" -Color $Script:inputColor, $Script:baseColor, $Script:commandColor, $Script:baseColor, $Script:commandColor, $Script:baseColor
         [System.Linq.Enumerable]::Where($managedApps, [Func[object,bool]]{ param($x) $x.Source -eq "powershell-module" -and ($null -eq $x.IsActive -or $true -eq $x.IsActive) }) | ForEach-Object {
+            $app = $_
             try {
-                $flags = ""
-                if ($action -eq "Install-Module" -and -not [string]::IsNullOrEmpty($_.Scope)) {
-                    $flags = "$flags -Scope $($_.Scope)"
+                # Native parameter binding: config values are passed as arguments, never interpolated into code
+                $splat   = @{}
+                $rawArgs = @()
+                if ($action -eq "Install-Module") {
+                    if (-not [string]::IsNullOrEmpty($app.Scope)) { $splat["Scope"] = $app.Scope }
+                    if (-not [string]::IsNullOrEmpty($app.Repository)) { $splat["Repository"] = $app.Repository }
+                    if (-not [string]::IsNullOrEmpty($app.InstallFlags)) {
+                        $rawArgs += $app.InstallFlags -split '\s+' | Where-Object { $_ }
+                    }
+                    if ($app.Force -eq $true) { $splat["Force"] = $true }
                 }
-                if ($action -eq "Install-Module" -and -not [string]::IsNullOrEmpty($_.Repository)) {
-                    $flags = "$flags -Repository $($_.Repository)"
+                if (-not [string]::IsNullOrEmpty($app.Flags)) {
+                    $rawArgs += $app.Flags -split '\s+' | Where-Object { $_ }
                 }
-                if ($action -eq "Install-Module" -and -not [string]::IsNullOrEmpty($_.InstallFlags)) {
-                    $flags = "$flags $($_.InstallFlags)"
-                }
-                if (-not [string]::IsNullOrEmpty($_.Flags)) {
-                    $flags = "$flags $($_.Flags)"
-                }
-                if ($action -eq "Install-Module" -and $_.Force -eq $true) {
-                    $flags = "$flags -Force"
-                }
-                Write-Color "$($Script:itemPrefix)$($Script:startingPrefix) Starting ", "PowerShellGet\$action -Name ", $_.Id, $flags -Color $Script:inputColor, $Script:baseColor, $Script:commandColor, $Script:baseColor
-                Invoke-Expression "PowerShellGet\$action -Name $($_.Id) $flags"
+                Write-Color "$($Script:itemPrefix)$($Script:startingPrefix) Starting ", "PowerShellGet\$action -Name ", $app.Id -Color $Script:inputColor, $Script:baseColor, $Script:commandColor, $Script:baseColor
+                & "PowerShellGet\$action" -Name $app.Id @splat @rawArgs
                 Write-Color "$($Script:itemPrefix)$($Script:donePrefix) Done " -Color $Script:accentColor
             }
             catch {
-                Write-Color "ERROR: ", "Executing PowerShellGet\$action -Name ", $_.Id, " $flags >> ", $_.Exception.Message -Color Red, $Script:baseColor, $Script:commandColor, $Script:baseColor, Red
+                Write-Color "ERROR: ", "Executing PowerShellGet\$action -Name ", $app.Id, " >> ", $_.Exception.Message -Color Red, $Script:baseColor, $Script:commandColor, $Script:baseColor, Red
             }
         }
         Write-Color "$($Script:donePrefix) Task $($task.Name) Executed", ": [", $task.Type, ":", $task.Action, "]" -Color $Script:accentColor, $Script:baseColor, $Script:commandColor, $Script:baseColor, $Script:commandColor, $Script:baseColor
@@ -251,13 +216,15 @@ function ExecuteNpmTask {
         $action = "npm install --global"
         Write-Color "$($Script:startingPrefix) Starting Task $($task.Name)", ": [", $task.Type, ":", $action, "]" -Color $Script:inputColor, $Script:baseColor, $Script:commandColor, $Script:baseColor, $Script:commandColor, $Script:baseColor
         [System.Linq.Enumerable]::Where($managedApps, [Func[object,bool]]{ param($x) $x.Source -eq "npm" -and ($null -eq $x.IsActive -or $true -eq $x.IsActive) }) | ForEach-Object {
+            $app = $_
             try {
-                Write-Color "$($Script:itemPrefix)$($Script:startingPrefix) Starting ", "$action ", $_.Id -Color $Script:inputColor, $Script:baseColor, $Script:commandColor
-                Invoke-Expression "$action $($_.Id)"
+                Write-Color "$($Script:itemPrefix)$($Script:startingPrefix) Starting ", "$action ", $app.Id -Color $Script:inputColor, $Script:baseColor, $Script:commandColor
+                npm install --global -- $app.Id
+                if ($LASTEXITCODE -ne 0) { throw "npm install --global $($app.Id) failed with exit code $LASTEXITCODE" }
                 Write-Color "$($Script:itemPrefix)$($Script:donePrefix) Done " -Color $Script:accentColor
             }
             catch {
-                Write-Color "ERROR: ", "Executing $action ", $_.Id, " >> ", $_.Exception.Message -Color Red, $Script:baseColor, $Script:commandColor, $Script:baseColor, Red
+                Write-Color "ERROR: ", "Executing $action ", $app.Id, " >> ", $_.Exception.Message -Color Red, $Script:baseColor, $Script:commandColor, $Script:baseColor, Red
             }
         }
         Write-Color "$($Script:donePrefix) Task $($task.Name) Executed", ": [", $task.Type, ":", $task.Action, "]" -Color $Script:accentColor, $Script:baseColor, $Script:commandColor, $Script:baseColor, $Script:commandColor, $Script:baseColor

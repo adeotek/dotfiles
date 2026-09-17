@@ -25,7 +25,7 @@ ctx_used=$(echo "$input"    | jq -r '.context_window.used_percentage // empty')
 # --- Shorten home directory ---
 home_prefix="$HOME"
 if [[ "$cwd" == "$home_prefix"* ]]; then
-  cwd="~${cwd#$home_prefix}"
+  cwd="~${cwd#"$home_prefix"}"
 fi
 
 # --- Git branch (from cwd, skip optional locks) ---

@@ -124,6 +124,9 @@ function Get-RepositoryMembers {
         # Get all repositories
         $repos = gh repo list $OrgName --limit 1000 --json name | ConvertFrom-Json
         Write-Host "Found $($repos.Count) repositories" -ForegroundColor Green
+        if ($repos.Count -ge 1000) {
+            Write-Warning "Repository count hit the --limit 1000 cap; results may be truncated for '$OrgName'."
+        }
 
         $results = @()
         $counter = 0
