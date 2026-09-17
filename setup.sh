@@ -206,7 +206,7 @@ if [[ "$IS_TTY" -eq 1 && "$BASIC_MODE" -ne 1 ]]; then
     done
   }
   _render_menu
-  cecho "cyan" "arrows: move | enter: select"
+  cecho "cyan" "arrows: move | enter: select | 0-3: quick-select | q: cancel"
   while true
   do
     key="$(read_key)"
@@ -225,6 +225,11 @@ if [[ "$IS_TTY" -eq 1 && "$BASIC_MODE" -ne 1 ]]; then
           menu_cursor=$(( menu_cursor + 1 ))
         fi
         ;;
+      0|1|2|3)
+        ## Quick-select by item number (same as basic mode)
+        menu_cursor="$key"
+        break
+        ;;
       q|Q|esc|eof)
         menu_cursor="q"
         break
@@ -235,7 +240,7 @@ if [[ "$IS_TTY" -eq 1 && "$BASIC_MODE" -ne 1 ]]; then
     esac
     printf '\e[%dA' "$(( menu_rows + 1 ))"
     _render_menu
-    cecho "cyan" "arrows: move | enter: select"
+    cecho "cyan" "arrows: move | enter: select | 0-3: quick-select | q: cancel"
   done
   SETUP_MODE="$menu_cursor"
   if [[ "$SETUP_MODE" == "q" ]]; then
