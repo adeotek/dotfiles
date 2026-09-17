@@ -121,7 +121,13 @@ if [[ $needs_fetch -eq 1 && -n "$fetch_token" ]]; then
         -H "anthropic-beta: oauth-2025-04-20" \
         "https://api.anthropic.com/api/oauth/usage" 2>/dev/null)
     if [[ -n "$response" ]]; then
-        echo "$response" > "$cache_path"
+        # Atomic write: concurrent statusline renders must not tear the cache file
+        cache_tmp="${cache_path}.$$"
+        if echo "$response" > "$cache_tmp"; then
+            mv "$cache_tmp" "$cache_path"
+        else
+            rm -f "$cache_tmp"
+        fi
         extra_enabled=$(echo "$response" | jq -r '.extra_usage.is_enabled // false'   2>/dev/null)
         extra_used=$(echo "$response"    | jq -r '.extra_usage.used_credits // 0'      2>/dev/null)
         extra_limit=$(echo "$response"   | jq -r '.extra_usage.monthly_limit // empty' 2>/dev/null)

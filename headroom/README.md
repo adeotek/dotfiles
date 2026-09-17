@@ -53,7 +53,7 @@ To use multiple providers simultaneously, run additional proxy instances on diff
 headroom proxy --port 8788 --backend openrouter
 
 # Terminal 2: OpenCode Zen
-headroom proxy --port 8789 --openai-api-url https://opencode.ai/zen/v1
+headroom proxy --port 8789 --openai-api-url https://opencode.ai/zen/v1/chat/completions
 
 # Then point different tools at different ports:
 OPENAI_BASE_URL=http://localhost:8788/v1 opencode

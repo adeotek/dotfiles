@@ -109,10 +109,10 @@ source "$CDIR/playwright-install.sh"
 
 # Configure status line
 if [[ "$DRY_RUN" -ne "1" ]]; then
-  mkdir -p ~/.claude
-  if [ ! -f "$HOME/.claude/statusline-command.sh" ]; then
-    if cp "$RDIR/claude-code/user-config/statusline-command.sh" ~/.claude/statusline-command.sh; then
-      chmod +x ~/.claude/statusline-command.sh
+  mkdir -p "$HOME/.claude"
+  if [[ ! -f "$HOME/.claude/statusline-command.sh" ]]; then
+    if cp "$RDIR/claude-code/user-config/statusline-command.sh" "$HOME/.claude/statusline-command.sh"; then
+      chmod +x "$HOME/.claude/statusline-command.sh"
       cecho "green" "Status line configured successfully."
     else
       cecho "red" "Failed to copy statusline-command.sh."

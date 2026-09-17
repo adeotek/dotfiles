@@ -28,54 +28,57 @@ if [[ "$NJS_INSTALL_MODE" == "brew" ]]; then
   NPM_CMD="npm"
 fi
 
+# All installs below are best-effort: one failing server must not stop the rest
+# (execute_command reports failures and returns 1; || true keeps the script going)
+
 # Format language servers (always installed): YAML, TOML, HTML, CSS, JSON
-execute_command "$NPM_CMD install -g yaml-language-server @taplo/cli vscode-langservers-extracted" "[lsp-servers] YAML, TOML, HTML, CSS and JSON language servers installed successfully."
+execute_command "$NPM_CMD install -g yaml-language-server @taplo/cli vscode-langservers-extracted" "[lsp-servers] YAML, TOML, HTML, CSS and JSON language servers installed successfully." || true
 
 # Bash language server
 if command -v bash >/dev/null 2>&1; then
-  execute_command "$NPM_CMD install -g bash-language-server" "[lsp-servers] Bash language server installed successfully."
+  execute_command "$NPM_CMD install -g bash-language-server" "[lsp-servers] Bash language server installed successfully." || true
 else
   cecho "yellow" "Skipping Bash language server since [bash] is not available."
 fi
 
 # JavaScript/TypeScript language server
 if command -v node >/dev/null 2>&1; then
-  execute_command "$NPM_CMD install -g @vtsls/language-server typescript" "[lsp-servers] JavaScript/TypeScript language server installed successfully."
+  execute_command "$NPM_CMD install -g @vtsls/language-server typescript" "[lsp-servers] JavaScript/TypeScript language server installed successfully." || true
 else
   cecho "yellow" "Skipping JavaScript/TypeScript language server since [node] is not available."
 fi
 
 # Python language server
 if command -v python3 >/dev/null 2>&1; then
-  execute_command "$NPM_CMD install -g pyright" "[lsp-servers] Python language server installed successfully."
+  execute_command "$NPM_CMD install -g pyright" "[lsp-servers] Python language server installed successfully." || true
 else
   cecho "yellow" "Skipping Python language server since [python3] is not available."
 fi
 
 # Go language server
 if command -v go >/dev/null 2>&1; then
-  execute_command "go install golang.org/x/tools/gopls@latest" "[lsp-servers] Go language server installed successfully."
+  execute_command "go install golang.org/x/tools/gopls@latest" "[lsp-servers] Go language server installed successfully." || true
 else
   cecho "yellow" "Skipping Go language server since [go] is not available."
 fi
 
 # .NET language server
 if command -v dotnet >/dev/null 2>&1; then
-  execute_command "dotnet tool install --global csharp-ls || dotnet tool update --global csharp-ls" "[lsp-servers] .NET language server installed successfully."
+  execute_command "dotnet tool install --global csharp-ls || dotnet tool update --global csharp-ls" "[lsp-servers] .NET language server installed successfully." || true
 else
   cecho "yellow" "Skipping .NET language server since [dotnet] is not available."
 fi
 
 # Rust language server
 if command -v rustup >/dev/null 2>&1; then
-  execute_command "rustup component add rust-analyzer" "[lsp-servers] Rust language server installed successfully."
+  execute_command "rustup component add rust-analyzer" "[lsp-servers] Rust language server installed successfully." || true
 else
   cecho "yellow" "Skipping Rust language server since [rustup] is not available."
 fi
 
 # PowerShell language server
 if command -v pwsh >/dev/null 2>&1; then
-  execute_command 'pwsh -Command "Install-Module -Name PowerShellEditorServices -Scope CurrentUser -Force"' "[lsp-servers] PowerShell language server installed successfully."
+  execute_command 'pwsh -Command "Install-Module -Name PowerShellEditorServices -Scope CurrentUser -Force"' "[lsp-servers] PowerShell language server installed successfully." || true
 else
   cecho "yellow" "Skipping PowerShell language server since [pwsh] is not available."
 fi
@@ -117,14 +120,14 @@ fi
 
 # Docker language server
 if command -v docker >/dev/null 2>&1; then
-  execute_command "$NPM_CMD install -g dockerfile-language-server-nodejs" "[lsp-servers] Dockerfile language server installed successfully."
+  execute_command "$NPM_CMD install -g dockerfile-language-server-nodejs" "[lsp-servers] Dockerfile language server installed successfully." || true
 else
   cecho "yellow" "Skipping Dockerfile language server since [docker] is not available."
 fi
 
 # Ansible language server
 if command -v ansible >/dev/null 2>&1; then
-  execute_command "$NPM_CMD install -g @ansible/ansible-language-server" "[lsp-servers] Ansible language server installed successfully."
+  execute_command "$NPM_CMD install -g @ansible/ansible-language-server" "[lsp-servers] Ansible language server installed successfully." || true
 else
   cecho "yellow" "Skipping Ansible language server since [ansible] is not available."
 fi
@@ -136,7 +139,7 @@ if command -v lua >/dev/null 2>&1 || command -v luajit >/dev/null 2>&1 || comman
       install_package "lua-language-server" "command -v lua-language-server"
       ;;
     debian|ubuntu|pop)
-      execute_command "sudo apt-get update && sudo apt-get install -y lua-language-server" "[lsp-servers] Lua language server installed successfully."
+      execute_command "sudo apt-get update && sudo apt-get install -y lua-language-server" "[lsp-servers] Lua language server installed successfully." || true
       ;;
     fedora|redhat)
       source "$CDIR/homebrew-install.sh"

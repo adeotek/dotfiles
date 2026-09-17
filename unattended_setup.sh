@@ -65,7 +65,7 @@
 ###
 
 # Init
-declare -A ARGS=(["packages"]="" ["unattended"]="1")
+declare -A ARGS=(["packages"]="")
 if [[ -d "${0%/*}" ]]; then
   RDIR="$(cd "${0%/*}" && pwd)"
 else

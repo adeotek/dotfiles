@@ -34,7 +34,7 @@ case $CURRENT_OS_ID in
             if wget -q "https://packages.microsoft.com/config/debian/${CURRENT_OS_VER}/packages-microsoft-prod.deb" -O "$MS_REPO_DEB" \
               && sudo dpkg -i "$MS_REPO_DEB" \
               && sudo apt-get update; then
-              decho "green" "Microsoft APT source installed."
+              cecho "green" "Microsoft APT source installed."
             else
               cecho "red" "Failed to install Microsoft APT source."
             fi

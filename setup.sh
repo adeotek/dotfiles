@@ -63,30 +63,6 @@ function select_packages_grid() {
   local REV=$'\e[7m' RESET=$'\e[0m'
   local hint="arrows: move | space: toggle | a: all/none | enter: confirm | q: cancel"
 
-  function _render_grid() {
-    for (( row = 0; row < rows; row++ ))
-    do
-      line=""
-      for (( col = 0; col < cols; col++ ))
-      do
-        idx=$(( row * cols + col ))
-        if [[ "$idx" -ge "$total" ]]; then
-          break
-        fi
-        mark=" "
-        if [[ "${checked[$idx]:-}" == "1" ]]; then
-          mark="x"
-        fi
-        if [[ "$idx" -eq "$cursor" ]]; then
-          line+="${REV}$(printf '[%s] %-*s' "$mark" "$max_len" "${items[$idx]}")${RESET}   "
-        else
-          line+="$(printf '[%s] %-*s' "$mark" "$max_len" "${items[$idx]}")   "
-        fi
-      done
-      printf '\r\033[2K%s\n' "$line"
-    done
-  }
-
   _render_grid
   cecho "cyan" "$hint"
   while true
@@ -171,6 +147,32 @@ function select_packages_grid() {
   done
 }
 
+# Top-level renderers for the interactive menus. They rely on dynamic scoping:
+# they are only ever called while their menu's locals (cursor/rows/etc.) are in frame.
+function _render_grid() {
+  for (( row = 0; row < rows; row++ ))
+  do
+    line=""
+    for (( col = 0; col < cols; col++ ))
+    do
+      idx=$(( row * cols + col ))
+      if [[ "$idx" -ge "$total" ]]; then
+        break
+      fi
+      mark=" "
+      if [[ "${checked[$idx]:-}" == "1" ]]; then
+        mark="x"
+      fi
+      if [[ "$idx" -eq "$cursor" ]]; then
+        line+="${REV}$(printf '[%s] %-*s' "$mark" "$max_len" "${items[$idx]}")${RESET}   "
+      else
+        line+="$(printf '[%s] %-*s' "$mark" "$max_len" "${items[$idx]}")   "
+      fi
+    done
+    printf '\r\033[2K%s\n' "$line"
+  done
+}
+
 ## Startup debug
 cecho "blue" "Starting dotfiles setup ($DFS_ACTION)..."
 decho "magenta" "Current OS: $CURRENT_OS_ID"
@@ -180,20 +182,11 @@ decho "magenta" "core scripts path: $CDIR"
 # Menu
 ## Display main menu
 cecho "white" "Setup options:"
-for key in "${MENU_OPTION_KEYS[@]}"
-do
-  if [[ "$key" == "$DEFAULT_MENU_OPTION" ]]; then
-    cecho "yellow" " *[$key] ${MENU_OPTIONS[$key]}"
-  else
-    cecho "white" "  [$key] ${MENU_OPTIONS[$key]}"
-  fi
-done
 
 if [[ "$IS_TTY" -eq 1 && "$BASIC_MODE" -ne 1 ]]; then
-  ## Arrow-key menu
+  ## Arrow-key menu (single visual style: reverse-video cursor, painted by _render_menu)
   menu_cursor="$DEFAULT_MENU_OPTION"
   menu_rows=${#MENU_OPTION_KEYS[@]}
-  printf '\e[%dA' "$menu_rows"
   function _render_menu() {
     for (( i = 0; i < menu_rows; i++ ))
     do
@@ -249,7 +242,16 @@ if [[ "$IS_TTY" -eq 1 && "$BASIC_MODE" -ne 1 ]]; then
   fi
 else
   ## Numeric prompt (basic mode / non-TTY)
+  for key in "${MENU_OPTION_KEYS[@]}"
+  do
+    if [[ "$key" == "$DEFAULT_MENU_OPTION" ]]; then
+      cecho "yellow" " *[$key] ${MENU_OPTIONS[$key]}"
+    else
+      cecho "white" "  [$key] ${MENU_OPTIONS[$key]}"
+    fi
+  done
   cecho "yellow" -n "Please select setup mode (0-3, q) [$DEFAULT_MENU_OPTION]: "
+  # Single keypress per iteration is intentional: options are one char (0-3, q), like read_yes_no.
   while true
   do
     if [[ "$IS_TTY" -eq 1 ]]; then
@@ -290,17 +292,13 @@ case $SETUP_MODE in
     if [[ "$IS_TTY" -eq 1 && "$BASIC_MODE" -ne 1 ]]; then
       select_packages_grid ALL_TASKS
     else
-      TASK_LINES=""
-      for i in "${!ALL_TASKS[@]}"
-      do
-        TASK_LINES+="$(printf '[%d] %-14s  ' "$i" "${ALL_TASKS[$i]}")"$'\n'
-      done
-      mapfile -t TASK_LINES < <(printf '%s' "$TASK_LINES" | column -c "${COLUMNS:-80}")
+      mapfile -t TASK_LINES < <(for i in "${!ALL_TASKS[@]}"; do printf '[%d] %-14s  \n' "$i" "${ALL_TASKS[$i]}"; done | column -c "${COLUMNS:-80}")
       for line in "${TASK_LINES[@]}"
       do
         cecho "cyan" "$line"
       done
       cecho "cyan" "[q] Cancel and exit"
+      declare -A SEEN_IDS=()  # declared once — reused across input retries
       while true
       do
         cecho "yellow" -n "Please input the selected packages IDs separated by comma: "
@@ -315,7 +313,6 @@ case $SETUP_MODE in
         fi
         IFS=',' read -ra SELECTED_INDICES <<< "$TASKS_IDS"
         SELECTED_PACKAGES=()
-        declare -A SEEN_IDS=()
         INVALID_ID=0
         for id in "${SELECTED_INDICES[@]}"
         do
@@ -352,7 +349,7 @@ case $SETUP_MODE in
   2)
     SELECTED_PACKAGES=("${CONSOLE_TASKS[@]}")
     cecho "yellow" "Extra packages (${#CONSOLE_EXTRA_TASKS[@]}):"
-    mapfile -t EXTRA_LINES < <(printf '%s\n' "${CONSOLE_EXTRA_TASKS[@]}" | column -c 80)
+    mapfile -t EXTRA_LINES < <(printf '%s\n' "${CONSOLE_EXTRA_TASKS[@]}" | column -c "${COLUMNS:-80}")
     for line in "${EXTRA_LINES[@]}"
     do
       cecho "cyan" "$line"
@@ -365,7 +362,7 @@ case $SETUP_MODE in
   3)
     SELECTED_PACKAGES=("${DESKTOP_TASKS[@]}")
     cecho "yellow" "Extra packages (${#DESKTOP_EXTRA_TASKS[@]}):"
-    mapfile -t EXTRA_LINES < <(printf '%s\n' "${DESKTOP_EXTRA_TASKS[@]}" | column -c 80)
+    mapfile -t EXTRA_LINES < <(printf '%s\n' "${DESKTOP_EXTRA_TASKS[@]}" | column -c "${COLUMNS:-80}")
     for line in "${EXTRA_LINES[@]}"
     do
       cecho "cyan" "$line"

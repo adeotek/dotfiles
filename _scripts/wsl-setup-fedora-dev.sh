@@ -98,7 +98,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 stage_status() {
-  if [ "$1" = true ]; then
+  if [[ "$1" = true ]]; then
     echo -e "\e[36m[DONE]    $2\e[0m"
   else
     echo -e "\e[35m[SKIPPED] $2\e[0m"
@@ -152,7 +152,7 @@ EOF
   fi
   _changed=true
 fi
-stage_status $_changed "WSL configuration (/etc/wsl.conf)"
+stage_status "$_changed" "WSL configuration (/etc/wsl.conf)"
 
 # appendWindowsPath only takes effect on distro restart, but we can strip
 # Windows-mounted paths from the current session immediately.
@@ -175,41 +175,41 @@ fi
 # --- SSH Keys ---
 
 _changed=false
-if [ -n "${WINDOWS_USERNAME}" ]; then
-  if [ ! -d "${SSH_KEY_SRC_PATH}" ]; then
+if [[ -n "${WINDOWS_USERNAME}" ]]; then
+  if [[ ! -d "${SSH_KEY_SRC_PATH}" ]]; then
     echo_warning "Windows username provided (${WINDOWS_USERNAME}), but SSH key source path does not exist: ${SSH_KEY_SRC_PATH}."
   else
     mkdir -p ~/.ssh
-    if [ ! -f ~/.ssh/id_rsa ] && [ -f "${SSH_KEY_SRC_PATH}/id_rsa" ]; then
+    if [[ ! -f ~/.ssh/id_rsa ]] && [[ -f "${SSH_KEY_SRC_PATH}/id_rsa" ]]; then
       cp "${SSH_KEY_SRC_PATH}/id_rsa" ~/.ssh/id_rsa
       chmod 600 ~/.ssh/id_rsa
       _changed=true
     fi
-    if [ ! -f ~/.ssh/id_rsa.pub ] && [ -f "${SSH_KEY_SRC_PATH}/id_rsa.pub" ]; then
+    if [[ ! -f ~/.ssh/id_rsa.pub ]] && [[ -f "${SSH_KEY_SRC_PATH}/id_rsa.pub" ]]; then
       cp "${SSH_KEY_SRC_PATH}/id_rsa.pub" ~/.ssh/id_rsa.pub
       chmod 644 ~/.ssh/id_rsa.pub
       _changed=true
     fi
-    if [ ! -f ~/.ssh/known_hosts ] && [ -f "${SSH_KEY_SRC_PATH}/wsl_known_hosts" ]; then
+    if [[ ! -f ~/.ssh/known_hosts ]] && [[ -f "${SSH_KEY_SRC_PATH}/wsl_known_hosts" ]]; then
       cp "${SSH_KEY_SRC_PATH}/wsl_known_hosts" ~/.ssh/known_hosts
       chmod 600 ~/.ssh/known_hosts
       _changed=true
     fi
   fi
 fi
-stage_status $_changed "SSH keys"
+stage_status "$_changed" "SSH keys"
 
 # --- Custom CA certificates ---
 
 _changed=false
-if [ -n "${CUSTOM_CA_SRC_PATH}" ]; then
-  if [ ! -d "${CUSTOM_CA_SRC_PATH}" ]; then
+if [[ -n "${CUSTOM_CA_SRC_PATH}" ]]; then
+  if [[ ! -d "${CUSTOM_CA_SRC_PATH}" ]]; then
     echo_warning "Custom CA source path does not exist: ${CUSTOM_CA_SRC_PATH}."
   else
     sudo mkdir -p "${CUSTOM_CA_DEST_PATH}"
     for crt_file in "${CUSTOM_CA_SRC_PATH}/"*.crt; do
       # Guard against the unexpanded glob when no *.crt files match
-      [ -f "$crt_file" ] || continue
+      [[ -f "$crt_file" ]] || continue
       if sudo openssl x509 -in "$crt_file" -out "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"; then
         sudo chown root:root "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
         sudo chmod 644 "${CUSTOM_CA_DEST_PATH}/$(basename "$crt_file")"
@@ -218,10 +218,10 @@ if [ -n "${CUSTOM_CA_SRC_PATH}" ]; then
         echo_warning "Failed to import CA certificate: $crt_file"
       fi
     done
-    if $_changed; then sudo update-ca-trust extract; fi
+    if [[ "$_changed" == "true" ]]; then sudo update-ca-trust extract; fi
   fi
 fi
-stage_status $_changed "Custom CA certificates"
+stage_status "$_changed" "Custom CA certificates"
 
 # --- Update DNF Packages ---
 
@@ -236,9 +236,12 @@ fi
 # Add GitHub to known_hosts to avoid interactive host-key prompt during git clone
 mkdir -p ~/.ssh
 if ! grep -q "github.com" ~/.ssh/known_hosts 2>/dev/null; then
-  ssh-keyscan github.com >> ~/.ssh/known_hosts
-  chmod 600 ~/.ssh/known_hosts
-  stage_status true "GitHub -> known_hosts"
+  if ssh-keyscan -T 10 github.com 2>/dev/null >> ~/.ssh/known_hosts; then
+    chmod 600 ~/.ssh/known_hosts
+    stage_status true "GitHub -> known_hosts"
+  else
+    stage_status false "GitHub -> known_hosts (FAILED)"
+  fi
 else
   stage_status false "GitHub -> known_hosts"
 fi
@@ -247,7 +250,7 @@ fi
 
 _changed=false
 # Clone dotfiles repository
-if [ ! -d "$HOME/.dotfiles" ]; then
+if [[ ! -d "$HOME/.dotfiles" ]]; then
   if git clone "${DOTFILES_CLONE_URL}" "$HOME/.dotfiles"; then
     _changed=true
   else
@@ -256,12 +259,12 @@ if [ ! -d "$HOME/.dotfiles" ]; then
 fi
 
 # Check if dotfiles setup script is present
-if [ ! -f "$HOME/.dotfiles/setup.sh" ]; then
+if [[ ! -f "$HOME/.dotfiles/setup.sh" ]]; then
   echo_error "Dotfiles setup script not found. Please check the repository structure."
 fi
 
 # Set Git local overrides
-if [ ! -f ~/.config/git.user/config ] && [ -n "${GIT_USER_NAME}" ] && [ -n "${GIT_USER_EMAIL}" ]; then
+if [[ ! -f ~/.config/git.user/config ]] && [[ -n "${GIT_USER_NAME}" ]] && [[ -n "${GIT_USER_EMAIL}" ]]; then
   mkdir -p ~/.config/git.user
   tee ~/.config/git.user/config &> /dev/null <<EOF
 [core]
@@ -272,7 +275,7 @@ if [ ! -f ~/.config/git.user/config ] && [ -n "${GIT_USER_NAME}" ] && [ -n "${GI
 EOF
   _changed=true
 fi
-stage_status $_changed ".dotfiles setup"
+stage_status "$_changed" ".dotfiles setup"
 
 # --- .dotfile packages installation ---
 
@@ -285,7 +288,7 @@ else
 fi
 
 # Install Ansible if not already installed
-if [ "$INSTALL_ANSIBLE" = true ] && ! command -v ansible &> /dev/null; then
+if [[ "$INSTALL_ANSIBLE" == "true" ]] && ! command -v ansible &> /dev/null; then
   if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "ansible"; then
     stage_status true "Ansible installation"
   else
@@ -295,7 +298,7 @@ else
   stage_status false "Ansible installation"
 fi
 # Install Claude Code if not already installed
-if [ "$INSTALL_CLAUDECODE" = true ] && ! command -v claude &> /dev/null; then
+if [[ "$INSTALL_CLAUDECODE" == "true" ]] && ! command -v claude &> /dev/null; then
   if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "claude-code"; then
     stage_status true "Claude Code installation"
   else
@@ -305,7 +308,7 @@ else
   stage_status false "Claude Code installation"
 fi
 # Install Docker if not already installed
-if [ "$INSTALL_DOCKER" = true ] && ! command -v docker &> /dev/null; then
+if [[ "$INSTALL_DOCKER" == "true" ]] && ! command -v docker &> /dev/null; then
   if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "docker"; then
     stage_status true "Docker installation"
   else
@@ -315,7 +318,7 @@ else
   stage_status false "Docker installation"
 fi
 # Install Golang if not already installed
-if [ "$INSTALL_GOLANG" = true ] && ! command -v go &> /dev/null; then
+if [[ "$INSTALL_GOLANG" == "true" ]] && ! command -v go &> /dev/null; then
   if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "golang"; then
     stage_status true "Golang installation"
   else
@@ -325,7 +328,7 @@ else
   stage_status false "Golang installation"
 fi
 # Install Kubectl and Helm if not already installed
-if [ "$INSTALL_KUBECTL" = true ]; then
+if [[ "$INSTALL_KUBECTL" = true ]]; then
   if ! command -v kubectl &> /dev/null; then
     if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "kubectl"; then
       stage_status true "Kubectl installation"
@@ -348,8 +351,9 @@ else
   stage_status false "Kubectl installation"
   stage_status false "Helm installation"
 fi
-# Install Rust if not already installed
-if [ "$INSTALL_RUST" = true ] && ! command -v rustc &> /dev/null; then
+# Install Rust if not already installed (checks PATH and ~/.cargo/bin, which is
+# not on PATH in this session — rustup lands there and .profile only picks it up on next login)
+if [[ "$INSTALL_RUST" == "true" ]] && ! command -v rustc &> /dev/null && [[ ! -x "$HOME/.cargo/bin/rustup" ]]; then
   if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "rustup"; then
     stage_status true "Rust installation"
   else
@@ -359,7 +363,7 @@ else
   stage_status false "Rust installation"
 fi
 # Install Terraform if not already installed
-if [ "$INSTALL_TERRAFORM" = true ] && ! command -v terraform &> /dev/null; then
+if [[ "$INSTALL_TERRAFORM" == "true" ]] && ! command -v terraform &> /dev/null; then
   if bash "$HOME/.dotfiles/unattended_setup.sh" --packages "terraform"; then
     stage_status true "Terraform installation"
   else
@@ -373,15 +377,18 @@ fi
 
 _changed=false
 # Install NX globally if version is specified
-if [ -n "${NX_VERSION}" ]; then
+if [[ -n "${NX_VERSION}" ]]; then
   if sudo npm install -g nx@"$NX_VERSION"; then
     _changed=true
   else
     echo_warning "Failed to install nx@${NX_VERSION} globally"
   fi
 
-  # Add aliases to .zshrc (build into a temp file, then swap atomically)
+  # Add aliases to .zshrc (build into a temp file, then swap atomically;
+  # resolve stow-managed symlinks first so the mv does not replace them)
   if ! grep -q "DEV Aliases" ~/.zshrc 2>/dev/null; then
+    _zshrc_target="$HOME/.zshrc"
+    if [[ -L "$_zshrc_target" ]]; then _zshrc_target="$(readlink -f "$_zshrc_target")"; fi
     _zshrc_tmp="$(mktemp)"
     {
       cat <<'EOF'
@@ -391,29 +398,32 @@ alias nxrt='nx run-many --target=test'
 alias nxrlt='nx run-many --target=lint --max-warnings=0 & nx run-many --target=test'
 
 EOF
-      [ -f ~/.zshrc ] && cat ~/.zshrc
+      [[ -f "$_zshrc_target" ]] && cat "$_zshrc_target"
     } > "$_zshrc_tmp"
-    mv "$_zshrc_tmp" ~/.zshrc
+    mv "$_zshrc_tmp" "$_zshrc_target"
   fi
 fi
-stage_status $_changed "NPM NX global package"
+stage_status "$_changed" "NPM NX global package"
 
 # Install Angular CLI globally if version is specified
 _changed=false
-if [ -n "${ANGULAR_VERSION}" ]; then
+if [[ -n "${ANGULAR_VERSION}" ]]; then
   if sudo npm install -g @angular/cli@"$ANGULAR_VERSION"; then
     _changed=true
   else
     echo_warning "Failed to install @angular/cli@${ANGULAR_VERSION} globally"
   fi
 fi
-stage_status $_changed "NPM Angular CLI global package"
+stage_status "$_changed" "NPM Angular CLI global package"
 
 # --- ZSH Configuration ---
 
 _changed=false
-# Add env variables and aliases to .zshrc, before `source /home/dev/.config/zsh/config.zsh`
+# Add NX_TUI env variable to .zshrc (prepended before `source ~/.config/zsh/config.zsh`;
+# aliases are handled in the NX block above). Resolve stow-managed symlinks first.
 if ! grep -q "DEV environment variables" ~/.zshrc 2>/dev/null; then
+  _zshrc_target="$HOME/.zshrc"
+  if [[ -L "$_zshrc_target" ]]; then _zshrc_target="$(readlink -f "$_zshrc_target")"; fi
   _zshrc_tmp="$(mktemp)"
   {
     cat <<'EOF'
@@ -421,18 +431,21 @@ if ! grep -q "DEV environment variables" ~/.zshrc 2>/dev/null; then
 export NX_TUI="false"
 
 EOF
-    [ -f ~/.zshrc ] && cat ~/.zshrc
+    [[ -f "$_zshrc_target" ]] && cat "$_zshrc_target"
   } > "$_zshrc_tmp"
-  mv "$_zshrc_tmp" ~/.zshrc
+  mv "$_zshrc_tmp" "$_zshrc_target"
   _changed=true
 fi
 
 # Change default shell to zsh
-if [ "$SHELL" != "/usr/bin/zsh" ]; then
-  sudo chsh -s "/usr/bin/zsh" "$USER"
-  _changed=true
+if [[ "$SHELL" != "/usr/bin/zsh" ]]; then
+  if sudo chsh -s "/usr/bin/zsh" "$USER"; then
+    _changed=true
+  else
+    echo_warning "Failed to change default shell to zsh — run manually: sudo chsh -s /usr/bin/zsh $USER"
+  fi
 fi
-stage_status $_changed "ZSH configuration"
+stage_status "$_changed" "ZSH configuration"
 
 # --- VS Code (Windows) ---
 
@@ -443,7 +456,7 @@ _vscode_link_name="code"
 # Scan typical Windows VS Code install locations: user-local first, then system-wide.
 # Insiders edition checked after stable for each tier.
 declare -a _vscode_candidates=()
-if [ -n "${WINDOWS_USERNAME}" ]; then
+if [[ -n "${WINDOWS_USERNAME}" ]]; then
   _vscode_candidates+=(
     "/mnt/c/Users/${WINDOWS_USERNAME}/AppData/Local/Programs/Microsoft VS Code/bin/code"
     "/mnt/c/Users/${WINDOWS_USERNAME}/AppData/Local/Programs/Microsoft VS Code Insiders/bin/code-insiders"
@@ -455,17 +468,17 @@ _vscode_candidates+=(
 )
 
 for _candidate in "${_vscode_candidates[@]}"; do
-  if [ -f "$_candidate" ]; then
+  if [[ -f "$_candidate" ]]; then
     _vscode_bin="$_candidate"
     [[ "$_candidate" == *"Insiders"* ]] && _vscode_link_name="code-insiders"
     break
   fi
 done
 
-if [ -n "$_vscode_bin" ]; then
+if [[ -n "$_vscode_bin" ]]; then
   _vscode_wrapper="/usr/local/bin/${_vscode_link_name}"
   # (Re)create the wrapper if it's missing or points at a different VS Code path
-  if [ ! -f "$_vscode_wrapper" ] || ! grep -qF "${_vscode_bin}" "$_vscode_wrapper" 2>/dev/null; then
+  if [[ ! -f "$_vscode_wrapper" ]] || ! grep -qF "${_vscode_bin}" "$_vscode_wrapper" 2>/dev/null; then
     sudo tee "$_vscode_wrapper" > /dev/null <<EOF
 #!/bin/sh
 exec "${_vscode_bin}" "\$@"
@@ -473,7 +486,7 @@ EOF
     sudo chmod +x "$_vscode_wrapper"
     _changed=true
   fi
-  stage_status $_changed "VS Code (Windows) -> /usr/local/bin/${_vscode_link_name}"
+  stage_status "$_changed" "VS Code (Windows) -> /usr/local/bin/${_vscode_link_name}"
 else
   stage_status false "VS Code (Windows)"
 fi
@@ -481,9 +494,12 @@ fi
 # --- Projects ---
 
 # Create projects directory
-if [ ! -d ~/projects ]; then
-  mkdir -p ~/projects
-  stage_status true "Projects directory"
+if [[ ! -d ~/projects ]]; then
+  if mkdir -p ~/projects; then
+    stage_status true "Projects directory"
+  else
+    stage_status false "Projects directory (FAILED)"
+  fi
 else
   stage_status false "Projects directory"
 fi

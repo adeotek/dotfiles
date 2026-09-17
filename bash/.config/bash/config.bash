@@ -77,7 +77,7 @@ alias dud="du -h --max-depth=1 | sort -hr"
 alias service='sudo systemctl'
 alias d='docker'
 alias dc='docker compose'
-case "$(awk -F '=' '/^ID=/ { print $2 }' /etc/os-release)" in
+case "$(awk -F '=' '/^ID=/ { gsub(/"/, "", $2); print $2 }' /etc/os-release)" in
   arch)
     alias pacman="sudo pacman"
     ;;

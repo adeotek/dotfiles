@@ -114,7 +114,7 @@ function aecho() {
   local color="$3"
   local prefix_color="$4"
 
-  if [ -z "$prefix_color" ]; then
+  if [[ -z "$prefix_color" ]]; then
     prefix_color="$color"
   fi
 
@@ -125,7 +125,7 @@ function aecho() {
 
   for val in "${items[@]}"
   do
-    if [ ! -z "$prefix" ]; then
+    if [[ -n "$prefix" ]]; then
       cecho "$prefix_color" -n "$prefix"
     fi
     cecho "$color" "$val"
@@ -146,7 +146,7 @@ function read_key() {
   # costs that one delay, split bytes cost it only when actually split).
   # Ctrl+C keeps normal SIGINT behavior.
   # ponytail: 100ms per-byte window; tune up only if remote links still split arrows.
-  local key seq="" c1 c2
+  local key c1 c2
   if ! IFS= read -rsn1 key; then
     echo "eof"
     return
@@ -538,6 +538,6 @@ EOF
 # every sourced script honor --dry-run/--verbose without an explicit call.
 # Explicit `process_args "$@"` calls elsewhere are redundant but harmless.
 decho "white" "Loading _helpers.sh..."
-if [ $# -ne 0 ]; then
+if [[ $# -ne 0 ]]; then
   process_args "$@"
 fi
