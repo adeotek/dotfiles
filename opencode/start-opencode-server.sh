@@ -39,6 +39,13 @@ command -v opencode >/dev/null 2>&1 || {
   exit 1
 }
 
+if command -v ss >/dev/null 2>&1; then
+  if ss -ltn 2>/dev/null | awk '{print $4}' | grep -qE "[:.]${OPENCODE_PORT}\$"; then
+    echo "ERROR: port ${OPENCODE_PORT} is already in use." >&2
+    exit 1
+  fi
+fi
+
 # --- Connection info -----------------------------------------------------------
 
 echo "Starting opencode serve…"
@@ -50,7 +57,7 @@ echo "Reachable at (use one of these from the remote Desktop app):"
 # Print each non-empty LAN IPv4 address from `hostname -I`.
 while IFS= read -r ip; do
   [[ -n "${ip}" ]] && echo "  http://${ip}:${OPENCODE_PORT}"
-done < <(printf '%s\n' $(hostname -I))
+done < <(hostname -I | tr ' ' '\n')
 echo "  http://localhost:${OPENCODE_PORT}"
 echo ""
 echo "On the remote machine run:"

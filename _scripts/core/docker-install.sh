@@ -16,7 +16,7 @@ if [[ -z "$RDIR" ]]; then
 fi
 
 # Install
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   enable_wsl_systemd
 fi
 
@@ -25,8 +25,8 @@ case $CURRENT_OS_ID in
     install_package "docker" "sudo docker --version" "_" "docker-compose"
     ;;
   debian)
-    if [ "$DRY_RUN" -ne "1" ]; then
-      for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove -y "$pkg"; done
       # Add Docker's official GPG key:
       sudo apt-get update
       sudo apt-get install -y ca-certificates curl
@@ -43,8 +43,8 @@ case $CURRENT_OS_ID in
     install_package "docker-ce" "sudo docker --version" "_" "docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
     ;;
   ubuntu|pop)
-    if [ "$DRY_RUN" -ne "1" ]; then
-      for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove -y "$pkg"; done
       # Add Docker's official GPG key:
       sudo apt-get update
       sudo apt-get install -y ca-certificates curl
@@ -61,14 +61,21 @@ case $CURRENT_OS_ID in
     install_package "docker-ce" "sudo docker --version" "_" "docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
     ;;
   fedora|redhat)
-    if [ "$CURRENT_OS_ID" == "redhat" ]; then
+    if [[ "$CURRENT_OS_ID" == "redhat" ]]; then
       DOCKER_REPO_URL="https://download.docker.com/linux/rhel/docker-ce.repo"
     else
       DOCKER_REPO_URL="https://download.docker.com/linux/fedora/docker-ce.repo"
     fi
-    if [ "$DRY_RUN" -ne "1" ]; then
-      sudo dnf -y install dnf-plugins-core libsecret
-      sudo dnf-3 config-manager --add-repo "$DOCKER_REPO_URL"
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      if command -v dnf5 >/dev/null 2>&1; then
+        sudo dnf install -y dnf5-plugins libsecret
+        sudo dnf config-manager addrepo --from-repofile="$DOCKER_REPO_URL"
+      else
+        sudo dnf install -y dnf-plugins-core libsecret
+        sudo dnf -y config-manager --add-repo "$DOCKER_REPO_URL"
+      fi
+    else
+      cecho "yellow" "DRY-RUN: add Docker CE dnf repository (dnf5 or dnf4 config-manager)"
     fi
     install_package "docker-ce" "sudo docker --version" "_" "docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
     ;;
@@ -78,7 +85,7 @@ case $CURRENT_OS_ID in
     ;;
 esac
 
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   cecho "cyan" "Enabling Docker service..."
   sudo systemctl enable --now docker
   cecho "cyan" "Adding user to Docker group..."

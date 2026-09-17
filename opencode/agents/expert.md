@@ -1,7 +1,8 @@
 ---
 description: Primary build/orchestrator agent. Full tool access. Delegates analysis to @plan and review to @code-review.
 mode: all
-model: opencode-go/minimax-m3
+# alt: minimax-m3
+model: opencode-go/glm-5.3-flash
 reasoningEffort: max
 permission:
   task:

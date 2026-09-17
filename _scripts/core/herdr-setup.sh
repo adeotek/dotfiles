@@ -37,8 +37,13 @@ function setup_herdr_completions() {
     zsh)
       if [[ "$DRY_RUN" -ne "1" ]]; then
         mkdir -p "$HOME/.zfunc"
-        herdr completion zsh > "$HOME/.zfunc/_herdr"
-        cecho "green" "[herdr] zsh completions generated at ~/.zfunc/_herdr"
+        if herdr completion zsh > "$HOME/.zfunc/_herdr.tmp"; then
+          mv "$HOME/.zfunc/_herdr.tmp" "$HOME/.zfunc/_herdr"
+          cecho "green" "[herdr] zsh completions generated at ~/.zfunc/_herdr"
+        else
+          rm -f "$HOME/.zfunc/_herdr.tmp"
+          cecho "red" "[herdr] failed to generate zsh completions."
+        fi
 
         if [[ -f "$HOME/.zshrc.local" ]]; then
           if ! grep -q "# herdr completions" "$HOME/.zshrc.local"; then
@@ -64,8 +69,13 @@ function setup_herdr_completions() {
     bash)
       if [[ "$DRY_RUN" -ne "1" ]]; then
         mkdir -p "$HOME/.local/share/bash-completion/completions"
-        herdr completion bash > "$HOME/.local/share/bash-completion/completions/herdr"
-        cecho "green" "[herdr] bash completions generated at ~/.local/share/bash-completion/completions/herdr"
+        if herdr completion bash > "$HOME/.local/share/bash-completion/completions/herdr.tmp"; then
+          mv "$HOME/.local/share/bash-completion/completions/herdr.tmp" "$HOME/.local/share/bash-completion/completions/herdr"
+          cecho "green" "[herdr] bash completions generated at ~/.local/share/bash-completion/completions/herdr"
+        else
+          rm -f "$HOME/.local/share/bash-completion/completions/herdr.tmp"
+          cecho "red" "[herdr] failed to generate bash completions."
+        fi
 
         if [[ -f "$HOME/.bashrc.local" ]]; then
           if ! grep -q "# herdr completion" "$HOME/.bashrc.local"; then

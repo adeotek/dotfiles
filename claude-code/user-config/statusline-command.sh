@@ -37,17 +37,17 @@ eval "$(printf '%s' "$INPUT" | jq -r '
   "MODEL_ID="          + (.model.id                                // "" | @sh) + "\n" +
   "MODEL_NAME="        + (.model.display_name                      // "" | @sh) + "\n" +
   "VERSION="           + (.version                                  // "" | @sh) + "\n" +
-  "CTX_TOTAL_IN="      + (.context_window.total_input_tokens  // 0 | tostring) + "\n" +
-  "CTX_TOTAL_OUT="     + (.context_window.total_output_tokens // 0 | tostring) + "\n" +
-  "CTX_SIZE="          + (.context_window.context_window_size // 0 | tostring) + "\n" +
-  "CTX_USED_PCT="      + (.context_window.used_percentage     // 0 | tostring) + "\n" +
-  "LINES_ADDED_JSON="  + (.cost.total_lines_added             // 0 | tostring) + "\n" +
-  "LINES_REMOVED_JSON="+ (.cost.total_lines_removed           // 0 | tostring) + "\n" +
-  "SESSION_COST_JSON=" + (.cost.total_cost_usd               | if . == null then "\"\"" else tostring end) + "\n" +
-  "RATE_5H_PCT="       + (.rate_limits.five_hour.used_percentage | if . == null then "\"\"" else tostring end) + "\n" +
-  "RATE_5H_RESET="     + (.rate_limits.five_hour.resets_at       | if . == null then "\"\"" else tostring end) + "\n" +
-  "RATE_WK_PCT="       + (.rate_limits.seven_day.used_percentage | if . == null then "\"\"" else tostring end) + "\n" +
-  "RATE_WK_RESET="     + (.rate_limits.seven_day.resets_at       | if . == null then "\"\"" else tostring end)
+  "CTX_TOTAL_IN="      + (.context_window.total_input_tokens  // 0 | tostring | @sh) + "\n" +
+  "CTX_TOTAL_OUT="     + (.context_window.total_output_tokens // 0 | tostring | @sh) + "\n" +
+  "CTX_SIZE="          + (.context_window.context_window_size // 0 | tostring | @sh) + "\n" +
+  "CTX_USED_PCT="      + (.context_window.used_percentage     // 0 | tostring | @sh) + "\n" +
+  "LINES_ADDED_JSON="  + (.cost.total_lines_added             // 0 | tostring | @sh) + "\n" +
+  "LINES_REMOVED_JSON="+ (.cost.total_lines_removed           // 0 | tostring | @sh) + "\n" +
+  "SESSION_COST_JSON=" + (.cost.total_cost_usd               | if . == null then "" else tostring end | @sh) + "\n" +
+  "RATE_5H_PCT="       + (.rate_limits.five_hour.used_percentage | if . == null then "" else tostring end | @sh) + "\n" +
+  "RATE_5H_RESET="     + (.rate_limits.five_hour.resets_at       | if . == null then "" else tostring end | @sh) + "\n" +
+  "RATE_WK_PCT="       + (.rate_limits.seven_day.used_percentage | if . == null then "" else tostring end | @sh) + "\n" +
+  "RATE_WK_RESET="     + (.rate_limits.seven_day.resets_at       | if . == null then "" else tostring end | @sh)
 ' 2>/dev/null)"
 if [[ -z "$VERSION" || "$VERSION" == "unknown" ]]; then
     VERSION=$(claude --version 2>/dev/null | head -1 | awk '{print $1}')
@@ -91,7 +91,14 @@ if [[ "$needs_fetch" == "true" && -n "$FETCH_TOKEN" ]]; then
         -H "Content-Type: application/json" \
         -H "anthropic-beta: oauth-2025-04-20" \
         "https://api.anthropic.com/api/oauth/usage" 2>/dev/null)
-    [[ -n "$usage_json" ]] && printf '%s' "$usage_json" | jq '.' > "$USAGE_CACHE" 2>/dev/null
+    if [[ -n "$usage_json" ]]; then
+        usage_tmp="${USAGE_CACHE}.$$"
+        if printf '%s' "$usage_json" | jq '.' > "$usage_tmp" 2>/dev/null; then
+            mv "$usage_tmp" "$USAGE_CACHE"
+        else
+            rm -f "$usage_tmp"
+        fi
+    fi
 fi
 
 EXTRA_ENABLED=false
@@ -136,7 +143,7 @@ HOSTNAME_SHORT="${HOSTNAME:-$(hostname -s)}"
 
 # Git branch (fast: no subprocess if not in a git repo)
 GIT_BRANCH=""
-if git_root=$(git -C "$CWD" rev-parse --show-toplevel 2>/dev/null); then
+if git -C "$CWD" rev-parse --show-toplevel >/dev/null 2>&1; then
     GIT_BRANCH=$(GIT_OPTIONAL_LOCKS=0 git -C "$CWD" symbolic-ref --short HEAD 2>/dev/null \
                  || GIT_OPTIONAL_LOCKS=0 git -C "$CWD" rev-parse --short HEAD 2>/dev/null)
 fi
@@ -243,7 +250,7 @@ SESSION_COST="$SESSION_COST_JSON"
 
 # Tilde-shorten CWD for display only (raw path already used for git above)
 CWD_DISPLAY="$CWD"
-[[ "$CWD_DISPLAY" == "$HOME"* ]] && CWD_DISPLAY="~${CWD_DISPLAY#$HOME}"
+[[ "$CWD_DISPLAY" == "$HOME"* ]] && CWD_DISPLAY="~${CWD_DISPLAY#"$HOME"}"
 
 # ── Build output ──────────────────────────────────────────────────────────────
 SEP="${DIM}|${RESET}"

@@ -18,19 +18,19 @@
     Optional switch. When specified, displays only filenames without paths.
 
 .EXAMPLE
-    ./list_files.ps1 C:\Documents
+    ./Get-FilesList.ps1 C:\Documents
     Lists all files with full paths in C:\Documents
 
 .EXAMPLE
-    ./list_files.ps1 C:\Documents -NamesOnly
+    ./Get-FilesList.ps1 C:\Documents -NamesOnly
     Lists all filenames without paths in C:\Documents
 
 .EXAMPLE
-    ./list_files.ps1 C:\Documents txt
+    ./Get-FilesList.ps1 C:\Documents txt
     Lists all .txt files with full paths in C:\Documents
 
 .EXAMPLE
-    ./list_files.ps1 C:\Documents txt -NamesOnly
+    ./Get-FilesList.ps1 C:\Documents txt -NamesOnly
     Lists all .txt filenames without paths in C:\Documents
 #>
 

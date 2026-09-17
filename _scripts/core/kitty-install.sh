@@ -26,13 +26,16 @@ case $CURRENT_OS_ID in
       decho "yellow" "Package already installed. Updating it..."
     fi
 
-    if [ "$DRY_RUN" -ne "1" ]; then
-      decho "magenta" "curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
-      curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      decho "magenta" "curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
+      curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
       cecho "green" "[kitty] installation done."
     else
-      cecho "yellow" "DRY-RUN: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
+      cecho "yellow" "DRY-RUN: curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin"
     fi
+  ;;
+  fedora|redhat)
+    install_package "kitty" "kitty --version"
   ;;
   *)
     cecho "red" "Unsupported OS: $CURRENT_OS_ID"

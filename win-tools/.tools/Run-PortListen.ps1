@@ -81,6 +81,7 @@ function Invoke-Portlistener {
         $listener.start()
         Write-Host ("Now listening on TCP port {0}, press Escape to stop listening" -f $TCPPort) -ForegroundColor Green
         while ($true) {
+            Start-Sleep -Milliseconds 50
             if ($host.ui.RawUi.KeyAvailable) {
                 $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
                 if ($key.VirtualKeyCode -eq 27) {
@@ -93,23 +94,19 @@ function Invoke-Portlistener {
     }
 
     if ($UDPPort) {
+        # Bind directly; a taken port throws here (no self-send probe — it only ever
+        # detected its own bind failure and leaked a socket on success).
         try {
-            $UdpObject = New-Object System.Net.Sockets.UdpClient($UDPPort)
-            $UdpObject.Connect('localhost', $UDPPort)
-            $bytes = [System.Text.Encoding]::ASCII.GetBytes((Get-Date -UFormat '%Y-%m-%d %T'))
-            [void]$UdpObject.Send($bytes, $bytes.Length)
-            $UdpObject.Close()
-            Write-Host ("UDP port {0} is available, continuing..." -f $UDPPort) -ForegroundColor Green
+            $endpoint  = New-Object System.Net.IPEndPoint([IPAddress]::Any, $UDPPort)
+            $udpclient = New-Object System.Net.Sockets.UdpClient $UDPPort
         }
         catch {
-            Write-Warning ("UDP Port {0} is already listening, aborting..." -f $UDPPort)
+            Write-Warning ("UDP Port {0} is already in use, aborting... ({1})" -f $UDPPort, $_.Exception.Message)
             return
         }
-
-        $endpoint  = New-Object System.Net.IPEndPoint([IPAddress]::Any, $UDPPort)
-        $udpclient = New-Object System.Net.Sockets.UdpClient $UDPPort
         Write-Host ("Now listening on UDP port {0}, press Escape to stop listening" -f $UDPPort) -ForegroundColor Green
         while ($true) {
+            Start-Sleep -Milliseconds 50
             if ($host.ui.RawUi.KeyAvailable) {
                 $key = $host.ui.RawUI.ReadKey("NoEcho,IncludeKeyUp,IncludeKeyDown")
                 if ($key.VirtualKeyCode -eq 27) {

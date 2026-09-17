@@ -567,7 +567,7 @@ security:
   tirith_enabled: true
   tirith_path: tirith
   tirith_timeout: 5
-  tirith_fail_open: true
+  tirith_fail_open: false  # fail closed: block traffic when the security scanner errors
   website_blocklist:
     enabled: false
     domains: []
@@ -744,12 +744,11 @@ known_plugin_toolsets:
     - spotify
   telegram:
     - spotify
-SEARXNG_URL: http://localhost:8080
 mcp_servers:
   inframp:
     url: https://infra-mp.hl.adeotek.cloud/mcp
     headers:
-      Authorization: Bearer Bearer ${INFRA_MP_TOKEN}
+      Authorization: Bearer ${INFRA_MP_TOKEN}
     timeout: 120
     connect_timeout: 30
 platforms:

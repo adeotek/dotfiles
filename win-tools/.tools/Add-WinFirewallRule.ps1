@@ -58,11 +58,13 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     exit 1
 }
 
-New-NetFirewallRule `
-    -DisplayName $Name `
-    -Direction Inbound `
-    -Protocol TCP `
-    -LocalPort $Port `
-    -Action Allow `
-    -RemoteAddress $RemoteAddress `
-    -Description $Description
+if ($PSCmdlet.ShouldProcess("local TCP port $Port", "Add inbound firewall rule '$Name'")) {
+    New-NetFirewallRule `
+        -DisplayName $Name `
+        -Direction Inbound `
+        -Protocol TCP `
+        -LocalPort $Port `
+        -Action Allow `
+        -RemoteAddress $RemoteAddress `
+        -Description $Description
+}

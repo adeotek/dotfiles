@@ -23,8 +23,12 @@ if command -v claude >/dev/null 2>&1; then
   cecho "yellow" "[claude-code] is already present. Upgrading to the latest version..."
 fi
 
-if [ "$DRY_RUN" -ne "1" ]; then
-  curl -fsSL https://claude.ai/install.sh | bash
+if [[ "$DRY_RUN" -ne "1" ]]; then
+  if ! (set -o pipefail; curl -fsSL https://claude.ai/install.sh | bash); then
+    cecho "red" "[claude-code] installation failed."
+    return 1
+  fi
+  cecho "green" "[claude-code] installation done."
 else
   cecho "yellow" "DRY-RUN: curl -fsSL https://claude.ai/install.sh | bash"
 fi

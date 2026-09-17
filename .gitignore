@@ -1,5 +1,6 @@
 # Generic
 *.log
+__pycache__/
 
 # IDE files
 .idea/
@@ -8,7 +9,6 @@
 # tmux
 tmux/.config/tmux/plugins/*
 tmux/.config/tmux/tmux.conf.local
-nvim/.config/nvim/lazy-lock.json
 
 # homebrew symlinks
 fd

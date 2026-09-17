@@ -1,7 +1,7 @@
 # ZSH configuration file
 
 # --- Environment ---
-export LC_ALL='C.UTF-8'
+export LC_ALL="${LC_ALL:-C.UTF-8}"
 export EDITOR="nano"
 export VISUAL="${EDITOR}"
 
@@ -153,8 +153,6 @@ else
   alias ll='ls -lAhF'
 fi
 alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
 
 alias dud='du -h --max-depth=1 | sort -hr'
 alias df='df -h'
@@ -231,8 +229,11 @@ if command -v zoxide >/dev/null 2>&1; then
   unset _zoxide_cache
 fi
 
-# --- Starship prompt ---
-if command -v starship >/dev/null 2>&1; then
+# --- Prompt (per-machine choice in ~/.config/zsh/prompt-tool; defaults to starship) ---
+_prompt_tool="$(cat ~/.config/zsh/prompt-tool 2>/dev/null || echo starship)"
+if [[ "$_prompt_tool" == "oh-my-posh" ]] && command -v oh-my-posh >/dev/null 2>&1; then
+  eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/gbs.omp.yaml)"
+elif command -v starship >/dev/null 2>&1; then
   export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
   _starship_cache="${XDG_CACHE_HOME}/zsh/starship_init.zsh"
   if [[ ! -f "$_starship_cache" || "${commands[starship]}" -nt "$_starship_cache" ]]; then
@@ -241,6 +242,7 @@ if command -v starship >/dev/null 2>&1; then
   source "$_starship_cache"
   unset _starship_cache
 fi
+unset _prompt_tool
 
 # --- AI tools configuration ---
 [[ -f "${XDG_CONFIG_HOME}/zsh/ai-config.zsh" ]] && source "${XDG_CONFIG_HOME}/zsh/ai-config.zsh"

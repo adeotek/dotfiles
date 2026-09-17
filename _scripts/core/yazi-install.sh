@@ -18,10 +18,10 @@ fi
 # Install
 case $CURRENT_OS_ID in
   arch)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       sudo pacman -S --noconfirm --needed ffmpegthumbnailer p7zip poppler imagemagick
     else
-      cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed ffmpegthumbnailer p7zip poppler imagemagick" 
+      cecho "yellow" "DRY-RUN: sudo pacman -S --noconfirm --needed ffmpegthumbnailer p7zip poppler imagemagick"
     fi
     install_package "yazi" "yazi -V"
     ;;
@@ -29,7 +29,7 @@ case $CURRENT_OS_ID in
     if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
       source "$CDIR/rustup-install.sh"
       cecho "cyan" "Installing [yazi]..."
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         sudo apt-get install -y make gcc
         cargo install --locked yazi-fm yazi-cli
         cecho "green" "[yazi] installation done."
@@ -40,7 +40,7 @@ case $CURRENT_OS_ID in
     else
       source "$CDIR/homebrew-install.sh"
       if ! yazi -V >/dev/null 2>&1; then
-        if [ "$DRY_RUN" -ne "1" ]; then
+        if [[ "$DRY_RUN" -ne "1" ]]; then
           increase_ulimit 65535
           brew install ffmpegthumbnailer sevenzip poppler imagemagick
         else
@@ -52,7 +52,7 @@ case $CURRENT_OS_ID in
     ;;
   fedora|redhat)
     source "$CDIR/homebrew-install.sh"
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       brew install ffmpegthumbnailer sevenzip poppler imagemagick
     else
       cecho "yellow" "DRY-RUN: brew install ffmpegthumbnailer sevenzip poppler imagemagick"
@@ -64,4 +64,3 @@ case $CURRENT_OS_ID in
     exit 1
     ;;
 esac
-

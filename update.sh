@@ -24,26 +24,24 @@ cecho "blue" "Starting dotfiles update..."
 source "$CDIR/system-update.sh"
 
 if [[ -x "$(command -v flatpak)" ]]; then
-  flatpak update -y
+  execute_command "flatpak update -y" "flatpak updated."
 fi
 
 if [[ -x "$(command -v brew)" ]]; then
-  brew upgrade -y
+  execute_command "brew upgrade -y" "Homebrew packages upgraded."
 fi
 
 if [[ -x "$(command -v npm)" ]]; then
-  sudo npm install -g npm
+  execute_command "sudo npm install -g npm" "npm updated."
 fi
 
 if [[ -x "$(command -v uv)" ]]; then
-  uv self update
-  uv tool upgrade --all
+  execute_command "uv self update && uv tool upgrade --all" "uv updated."
 fi
 
 if [[ -x "$(command -v oh-my-posh)" ]]; then
-  sudo oh-my-posh upgrade
+  execute_command "sudo oh-my-posh upgrade" "oh-my-posh updated."
 fi
 
 ## End
 cecho "blue" "DONE!"
-

@@ -24,7 +24,7 @@ case $CURRENT_OS_ID in
     if [[ "$CURRENT_ARCH" == "aarch64" ]]; then
       source "$CDIR/rustup-install.sh"
       cecho "cyan" "Installing [zellij]..."
-      if [ "$DRY_RUN" -ne "1" ]; then
+      if [[ "$DRY_RUN" -ne "1" ]]; then
         cargo install --locked zellij
         cecho "green" "[zellij] installation done."
       else

@@ -33,7 +33,7 @@ if command -v python3 >/dev/null 2>&1; then
   if [[ "$current_python_major" -lt 3 ]] || [[ "$current_python_major" -eq 3 && "$current_python_minor" -lt 10 ]]; then
     cecho "yellow" "Detected Python ${current_python_major}.${current_python_minor}; graphify requires Python 3.10+."
     cecho "cyan" "Installing Python $PYTHON_VERSION via uv for graphify..."
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       uv python install "$PYTHON_VERSION"
     else
       cecho "yellow" "DRY-RUN: uv python install $PYTHON_VERSION"
@@ -44,37 +44,45 @@ fi
 # Install graphifyy (PyPI name) with optional extras for MCP, Neo4j, PDF, and watch mode
 if command -v graphify >/dev/null 2>&1; then
   cecho "yellow" "[graphify] is already present. Updating it..."
-fi
-
-if [ "$DRY_RUN" -ne "1" ]; then
-  uv tool install --python "python${PYTHON_VERSION}" 'graphifyy[all]'
-  cecho "green" "[graphify] package installation done."
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    uv tool upgrade graphifyy
+  else
+    cecho "yellow" "DRY-RUN: uv tool upgrade graphifyy"
+  fi
 else
-  cecho "yellow" "DRY-RUN: uv tool install --python python${PYTHON_VERSION} 'graphifyy[all]'"
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    uv tool install --python "python${PYTHON_VERSION}" 'graphifyy[all]'
+    cecho "green" "[graphify] package installation done."
+  else
+    cecho "yellow" "DRY-RUN: uv tool install --python python${PYTHON_VERSION} 'graphifyy[all]'"
+  fi
 fi
 
 # Register the Claude Code skill (~/.claude/skills/graphify/SKILL.md)
 if command -v claude >/dev/null 2>&1; then
-  if [ "$DRY_RUN" -ne "1" ]; then
-    claude install graphify
-    cecho "green" "[claude] graphify skill registered."
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    if graphify install --platform claude; then
+      cecho "green" "[claude] graphify skill registered."
+    else
+      cecho "red" "Failed to register graphify skill for Claude Code."
+    fi
   else
-    cecho "yellow" "DRY-RUN: claude install graphify"
+    cecho "yellow" "DRY-RUN: graphify install --platform claude"
   fi
 fi
 
 # Register the OpenCode skill and command
 if command -v opencode >/dev/null 2>&1; then
-  if [ "$DRY_RUN" -ne "1" ]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     graphify install --platform opencode
     cecho "green" "[opencode] graphify skill registered."
   else
     cecho "yellow" "DRY-RUN: graphify install --platform opencode"
   fi
   if [[ ! -f "$HOME/.config/opencode/commands/graphify.md" ]]; then
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       mkdir -p "$HOME/.config/opencode/commands"
-      tee <<EOF > "$HOME/.config/opencode/commands/graphify.md"
+      tee <<'EOF' > "$HOME/.config/opencode/commands/graphify.md"
 ---
 description: Build, query, and manage a knowledge graph of any codebase, repo, or document set
 ---
@@ -91,7 +99,7 @@ EOF
 fi
 
 # Verify
-if [ "$DRY_RUN" -ne "1" ]; then
+if [[ "$DRY_RUN" -ne "1" ]]; then
   if command -v graphify >/dev/null 2>&1; then
     cecho "green" "[graphify] $(graphify --version 2>/dev/null || echo 'installed') successfully."
   else

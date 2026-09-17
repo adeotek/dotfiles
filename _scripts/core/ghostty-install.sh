@@ -26,7 +26,7 @@ case $CURRENT_OS_ID in
       decho "yellow" "Package already installed. Updating it..."
     fi
 
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       decho "magenta" "/bin/bash -c \"\$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)\""
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
       cecho "green" "[ghostty] installation done."
@@ -35,13 +35,16 @@ case $CURRENT_OS_ID in
     fi
   ;;
   fedora)
-    if [ "$DRY_RUN" -ne "1" ]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
       decho "magenta" "sudo dnf copr enable -y scottames/ghostty"
       sudo dnf copr enable -y scottames/ghostty
     else
       cecho "yellow" "DRY-RUN: sudo dnf copr enable -y scottames/ghostty"
     fi
     install_package "ghostty" "ghostty --version"
+  ;;
+  redhat)
+    cecho "yellow" "SKIPPED: Ghostty COPR is Fedora-only; build from source or use the Fedora COPR manually on RHEL."
   ;;
   *)
     cecho "red" "Unsupported OS: $CURRENT_OS_ID"

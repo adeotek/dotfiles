@@ -30,9 +30,8 @@ confirm_or_exit() {
   if [[ "$YES" == true ]]; then
     return 0
   fi
-  cecho "yellow" -n "$prompt (y/N):"
-  read -r answer
-  if [[ ! "$answer" =~ ^[Yy]$ ]]; then
+  read_yes_no "$prompt (y/N): " "n"
+  if [[ "$REPLY_YN" != "y" ]]; then
     cecho "yellow" "Aborted."
     exit 10
   fi

@@ -17,18 +17,21 @@ fi
 
 # Install
 case $CURRENT_OS_ID in
-  arch|debian|ubuntu|pop|fedora)
+  arch|debian|ubuntu|pop|fedora|redhat)
     cecho "cyan" "Installing [zed]..."
     if command -v zed >/dev/null 2>&1; then
       decho "yellow" "Package already installed. Updating it..."
     fi
 
-    if [ "$DRY_RUN" -ne "1" ]; then
-      decho "magenta" "curl -f https://zed.dev/install.sh | sh"
-      curl -f https://zed.dev/install.sh | sh
-      cecho "green" "[kitty] installation done."
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      decho "magenta" "curl -fsSL https://zed.dev/install.sh | sh"
+      if ! (set -o pipefail; curl -fsSL https://zed.dev/install.sh | sh); then
+        cecho "red" "[zed] installation failed."
+        return 1
+      fi
+      cecho "green" "[zed] installation done."
     else
-      cecho "yellow" "DRY-RUN: curl -f https://zed.dev/install.sh | sh"
+      cecho "yellow" "DRY-RUN: curl -fsSL https://zed.dev/install.sh | sh"
     fi
   ;;
   *)
