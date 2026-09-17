@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "opencode-go/deepseek-v4-flash",
+  "model": "opencode-go/deepseek-v4.1-flash",
   "small_model": "opencode-go/mimo-v2.5",
   "lsp": {},
   "default_agent": "build",
@@ -8,7 +8,7 @@
     "build": {
       "description": "Primary build/orchestrator agent. Full tool access. Delegates analysis to @plan and review to @code-review.",
       "mode": "primary",
-      "model": "opencode-go/deepseek-v4-flash"
+      "model": "opencode-go/deepseek-v4.1-flash"
     },
     "plan": {
       "mode": "primary",

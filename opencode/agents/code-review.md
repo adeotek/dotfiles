@@ -8,22 +8,9 @@ temperature: 0.1
 permission:
   edit: deny
   bash:
-    "find *": allow
-    "git diff *": allow
-    "git log *": allow
-    "git show *": allow
-    "git status": allow
-    "git stash list": allow
-    "git branch *": allow
-    "git remote *": allow
-    "graphify *": allow
-    "ls *": allow
-    "rg *": allow
-    "sort *": allow
-    "which *": allow
+    "rm *": ask
     "rtk rm *": ask
-    "rtk *": allow
-    "*": ask
+    "*": allow
   task: deny
 color: accent
 ---
