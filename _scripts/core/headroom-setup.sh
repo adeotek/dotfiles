@@ -35,9 +35,8 @@ OVERRIDE_EXISTING=false
 SERVICE_FILE="$HOME/.config/systemd/user/headroom-proxy.service"
 if [[ -f "$HOME/.config/headroom/proxy.env" ]] || [[ -f "$SERVICE_FILE" ]]; then
   if [[ "$DRY_RUN" -ne "1" ]] && [[ "${ARGS["unattended"]}" != "1" ]]; then
-    cecho "yellow" -n "Headroom config already exists. Do you want to overwrite it? (y/N):"
-    read -r overwrite_config
-    if [[ "$overwrite_config" =~ ^[Yy]$ ]]; then
+    read_yes_no "Headroom config already exists. Do you want to overwrite it? (y/N): " "n"
+    if [[ "$REPLY_YN" == "y" ]]; then
       OVERRIDE_EXISTING=true
     fi
   fi

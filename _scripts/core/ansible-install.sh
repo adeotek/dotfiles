@@ -27,9 +27,8 @@ fi
 # Clean up old package manager installations
 ANS_CLEANUP=false
 if [[ "${ARGS["unattended"]}" != "1" ]]; then
-  cecho "yellow" -n "Do you want to run the clean-up for old installations? (y/N): "
-  read -r ANS_CLEANUP_RESPONSE
-  if [[ "$ANS_CLEANUP_RESPONSE" =~ ^[Yy]$ ]]; then
+  read_yes_no "Do you want to run the clean-up for old installations? (y/N): " "n"
+  if [[ "$REPLY_YN" == "y" ]]; then
     ANS_CLEANUP=true
   fi
 fi

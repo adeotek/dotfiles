@@ -53,9 +53,9 @@ else
 fi
 
 if [[ "${ARGS["unattended"]}" -ne "1" ]]; then
-  cecho "yellow" -n "Do you want to configure the Headroom proxy for Hermes? (y/N): "
-  read -r HEADROOM_HERMES
-  if [[ "$HEADROOM_HERMES" =~ ^[Yy]$ ]]; then
+  read_yes_no "Do you want to configure the Headroom proxy for Hermes? (y/N): " "n"
+  HEADROOM_HERMES="$REPLY_YN"
+  if [[ "$HEADROOM_HERMES" == "y" ]]; then
     # Configure Headroom proxy for Hermes
     # Hermes reads OPENAI_BASE_URL for the "main" provider and ANTHROPIC_BASE_URL
     # for Anthropic. These are already set globally by bash/zsh configs.

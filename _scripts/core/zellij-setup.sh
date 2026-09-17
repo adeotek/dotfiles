@@ -30,9 +30,8 @@ if [[ "$DRY_RUN" -ne "1" ]]; then
       cecho "red" "Failed to create Zellij config."
     fi
   elif [[ "${ARGS["unattended"]}" -ne "1" ]]; then
-    cecho "yellow" "Zellij config already exists. Do you want to overwrite it? (y/N)"
-    read -r overwrite_config
-    if [[ "$overwrite_config" =~ ^[Yy]$ ]]; then
+    read_yes_no "Zellij config already exists. Do you want to overwrite it? (y/N): " "n"
+    if [[ "$REPLY_YN" == "y" ]]; then
       if cp "$RDIR/zellij/.config/zellij/config.gbs.kdl" "$HOME/.config/zellij/config.kdl"; then
         cecho "green" "Zellij config overwritten."
       else

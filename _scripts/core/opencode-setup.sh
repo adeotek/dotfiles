@@ -52,9 +52,8 @@ if [[ "$DRY_RUN" -ne "1" ]]; then
 fi
 OC_OVERRIDE_CONFIG=false
 if [[ -f "$HOME/.config/opencode/opencode.jsonc" ]] && [[ "${ARGS["unattended"]}" != "1" ]]; then
-  cecho "yellow" -n "OpenCode already configured. Do you want to overwrite the existing configuration? (y/N): "
-  read -r OC_OVERRIDE_RESPONSE
-  if [[ "$OC_OVERRIDE_RESPONSE" =~ ^[Yy]$ ]]; then
+  read_yes_no "OpenCode already configured. Do you want to overwrite the existing configuration? (y/N): " "n"
+  if [[ "$REPLY_YN" == "y" ]]; then
     OC_OVERRIDE_CONFIG=true
   fi
 fi
