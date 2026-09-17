@@ -25,7 +25,7 @@ function show_usage() {
   cecho "white" "Usage: $0 [OPTIONS]"
   cecho "white" "AdeoTEK dotfiles setup"
   cecho "white" "Options:"
-  cecho "cyan" "  -b, --basic     Use the basic numeric package list instead of the interactive selection grid"
+  cecho "cyan" "  -b, --basic     Use the basic numeric prompts instead of the arrow-key interactive menus"
   cecho "cyan" "  --dry-run       Perform a dry run without making actual changes"
   cecho "cyan" "  -h, --help      Show this help and exit"
   cecho "cyan" "  -v, --verbose   Enable verbose output for debugging"
@@ -188,38 +188,95 @@ do
     cecho "white" "  [$key] ${MENU_OPTIONS[$key]}"
   fi
 done
-cecho "yellow" -n "Please select setup mode (0-3, q) [$DEFAULT_MENU_OPTION]: "
-while true
-do
-  if [[ "$IS_TTY" -eq 1 ]]; then
+
+if [[ "$IS_TTY" -eq 1 && "$BASIC_MODE" -ne 1 ]]; then
+  ## Arrow-key menu
+  menu_cursor="$DEFAULT_MENU_OPTION"
+  menu_rows=${#MENU_OPTION_KEYS[@]}
+  printf '\e[%dA' "$menu_rows"
+  function _render_menu() {
+    for (( i = 0; i < menu_rows; i++ ))
+    do
+      key="${MENU_OPTION_KEYS[$i]}"
+      if [[ "$key" == "$menu_cursor" ]]; then
+        printf '\r\033[2K\e[7m %s %-2s %s\e[0m\n' "*" "$key" "${MENU_OPTIONS[$key]}"
+      else
+        printf '\r\033[2K  %-2s %s\n' "$key" "${MENU_OPTIONS[$key]}"
+      fi
+    done
+  }
+  _render_menu
+  cecho "cyan" "arrows: move | enter: select"
+  while true
+  do
     key="$(read_key)"
-    echo
     case "$key" in
-      enter) SETUP_MODE="$DEFAULT_MENU_OPTION" ;;
-      esc|eof) SETUP_MODE="q" ;;
-      *) SETUP_MODE="$key" ;;
+      up)
+        if [[ "$menu_cursor" == "q" ]]; then
+          menu_cursor="3"
+        elif [[ "$menu_cursor" != "0" ]]; then
+          menu_cursor=$(( menu_cursor - 1 ))
+        fi
+        ;;
+      down)
+        if [[ "$menu_cursor" == "3" ]]; then
+          menu_cursor="q"
+        elif [[ "$menu_cursor" != "q" ]]; then
+          menu_cursor=$(( menu_cursor + 1 ))
+        fi
+        ;;
+      q|Q|esc|eof)
+        menu_cursor="q"
+        break
+        ;;
+      enter)
+        break
+        ;;
     esac
-  else
-    SETUP_MODE=""
-    if ! IFS= read -r SETUP_MODE; then
-      cecho "magenta" "Operation cancelled!"
-      exit 10
-    fi
-    if [[ -z "$SETUP_MODE" ]]; then
-      SETUP_MODE="$DEFAULT_MENU_OPTION"
-    fi
-    SETUP_MODE="${SETUP_MODE//[[:space:]]/}"
-  fi
-  if [[ "$SETUP_MODE" == "q" || "$SETUP_MODE" == "Q" ]]; then
+    printf '\e[%dA' "$(( menu_rows + 1 ))"
+    _render_menu
+    cecho "cyan" "arrows: move | enter: select"
+  done
+  SETUP_MODE="$menu_cursor"
+  if [[ "$SETUP_MODE" == "q" ]]; then
     cecho "magenta" "Operation cancelled!"
     exit 10
   fi
-  case $SETUP_MODE in
-    0|1|2|3) break ;;
-    *) cecho "red" "Invalid option selection: $SETUP_MODE" ;;
-  esac
+else
+  ## Numeric prompt (basic mode / non-TTY)
   cecho "yellow" -n "Please select setup mode (0-3, q) [$DEFAULT_MENU_OPTION]: "
-done
+  while true
+  do
+    if [[ "$IS_TTY" -eq 1 ]]; then
+      key="$(read_key)"
+      echo
+      case "$key" in
+        enter) SETUP_MODE="$DEFAULT_MENU_OPTION" ;;
+        esc|eof) SETUP_MODE="q" ;;
+        *) SETUP_MODE="$key" ;;
+      esac
+    else
+      SETUP_MODE=""
+      if ! IFS= read -r SETUP_MODE; then
+        cecho "magenta" "Operation cancelled!"
+        exit 10
+      fi
+      if [[ -z "$SETUP_MODE" ]]; then
+        SETUP_MODE="$DEFAULT_MENU_OPTION"
+      fi
+      SETUP_MODE="${SETUP_MODE//[[:space:]]/}"
+    fi
+    if [[ "$SETUP_MODE" == "q" || "$SETUP_MODE" == "Q" ]]; then
+      cecho "magenta" "Operation cancelled!"
+      exit 10
+    fi
+    case $SETUP_MODE in
+      0|1|2|3) break ;;
+      *) cecho "red" "Invalid option selection: $SETUP_MODE" ;;
+    esac
+    cecho "yellow" -n "Please select setup mode (0-3, q) [$DEFAULT_MENU_OPTION]: "
+  done
+fi
 
 case $SETUP_MODE in
   0)
