@@ -5,7 +5,9 @@ return {
     lazy = false,
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
-      require('lualine').setup { options = { theme = 'catppuccin' } }
+      -- 'catppuccin' builtin theme dropped by lualine upstream; 'auto' derives
+      -- from the active colorscheme (catppuccin) instead
+      require('lualine').setup { options = { theme = 'auto' } }
     end,
   },
 }
