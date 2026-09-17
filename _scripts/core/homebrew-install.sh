@@ -20,7 +20,7 @@ fi
 
 # Install
 if [[ -x "$(command -v brew)" ]]; then
-  decho "yellow" "Homebrew is already installed!"
+  cecho "yellow" "Homebrew is already installed!"
 else
   if /home/linuxbrew/.linuxbrew/bin/brew -v >/dev/null 2>&1; then
     cecho "yellow" "Homebrew is installed, but not activated. Activating it for current execution..."

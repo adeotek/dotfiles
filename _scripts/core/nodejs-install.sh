@@ -27,6 +27,12 @@ if [[ -z "$RDIR" ]]; then
 fi
 process_args "$@"
 
+# Guard: skip installation when node is already available
+if command -v node >/dev/null 2>&1; then
+  cecho "yellow" "[nodejs] is already present. Skipping installation."
+  return 0
+fi
+
 # Install
 if [[ -z "${ARGS["version"]}" ]]; then
   cecho "yellow" -n "Please input the NodeJs version you want to install? [$OPT_NODEJS_DEFAULT_VERSION]: "

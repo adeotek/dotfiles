@@ -15,6 +15,12 @@ if [[ -z "$RDIR" ]]; then
   source "$CDIR/_helpers.sh"
 fi
 
+# Guard: skip installation when PowerShell is already available
+if command -v pwsh >/dev/null 2>&1; then
+  cecho "yellow" "[powershell] is already present. Skipping installation."
+  return 0
+fi
+
 # Install
 case $CURRENT_OS_ID in
   arch)
