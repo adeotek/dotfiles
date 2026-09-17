@@ -15,16 +15,17 @@ if [[ -z "$RDIR" ]]; then
   source "$CDIR/_helpers.sh"
 fi
 
+# uv installs into ~/.local/bin, which may not be on PATH in the current session
+# (fresh LXCs and root profiles often lack it; the installer only edits rc files)
+if [[ -x "$HOME/.local/bin/uv" ]] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
 # Install
 cecho "cyan" "Installing [uv]..."
 
 if command -v uv >/dev/null 2>&1; then
   cecho "yellow" "[uv] is already present."
 else
-  if [[ "$DRY_RUN" -ne "1" ]]; then
-    curl -LsSf https://astral.sh/uv/install.sh | sh
-    cecho "green" "[uv] installation done."
-  else
-    cecho "yellow" "DRY-RUN: curl -LsSf https://astral.sh/uv/install.sh | sh"
-  fi
+  execute_command "set -o pipefail && curl -LsSf https://astral.sh/uv/install.sh | sh" "[uv] installation done."
 fi

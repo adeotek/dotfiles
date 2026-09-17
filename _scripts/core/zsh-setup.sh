@@ -61,12 +61,12 @@ else
   cecho "yellow" "DRY-RUN: ensure 'source $CURRENT_CONFIG_DIR/zsh/config.zsh' in ~/.zshrc"
 fi
 
-if [[ "$DRY_RUN" -ne "1" ]]; then
-  # Change default shell to zsh
-  if [[ "$(basename "$SHELL")" != "zsh" ]]; then
+# Change default shell to zsh
+if [[ "$(basename "$SHELL")" != "zsh" ]]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
     echo "Changing default shell to zsh..."
+    chsh -s "$(which zsh)"
+  else
+    cecho "yellow" "DRY-RUN: chsh -s \"$(which zsh)\""
   fi
-  chsh -s "$(which zsh)"
-else
-  cecho "yellow" "DRY-RUN: chsh -s \"$(which zsh)\""
 fi
