@@ -27,6 +27,24 @@ if [[ "$DRY_RUN" -eq "1" ]] && ! command -v rtk >/dev/null 2>&1; then
   cecho "yellow" "DRY-RUN: rtk not installed — remaining rtk steps are printed only."
 fi
 
+# Systemd-supervised processes (e.g. the Hermes gateway) run with a fixed PATH
+# that omits Homebrew's bin dir, so rtk hooks never register for them. Expose
+# rtk through ~/.local/bin (always on the user PATH).
+if [[ "$DRY_RUN" -ne "1" ]]; then
+  if command -v rtk >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
+    RTK_BIN="$(brew --prefix rtk 2>/dev/null)/bin/rtk"
+    if [[ -n "$RTK_BIN" && -x "$RTK_BIN" ]]; then
+      mkdir -p "$HOME/.local/bin"
+      ln -sf "$RTK_BIN" "$HOME/.local/bin/rtk"
+      cecho "green" "[rtk] symlinked to ~/.local/bin/rtk (systemd PATH visibility)."
+    else
+      cecho "yellow" "[rtk] could not resolve brew rtk binary — skipping symlink."
+    fi
+  fi
+else
+  cecho "yellow" "DRY-RUN: ln -sf \$(brew --prefix rtk)/bin/rtk $HOME/.local/bin/rtk"
+fi
+
 ## Disable rtk telemetry
 if [[ "$DRY_RUN" -ne "1" ]]; then
   rtk telemetry disable

@@ -22,17 +22,23 @@ source "$CDIR/nodejs-install.sh"
 
 cecho "cyan" "Installing [lsp-servers]..."
 
-# With Homebrew node, npm is not in root's PATH — use the user's npm instead
-NPM_CMD="sudo npm"
-if [[ "$NJS_INSTALL_MODE" == "brew" ]]; then
-  NPM_CMD="npm"
+# With Homebrew node, npm is not in root's PATH — use the user's npm instead.
+# Otherwise root npm needs node on PATH (sudo env) plus an explicit prefix so
+# installs land in /usr/local/lib/node_modules.
+NPM_CMD="npm"
+if [[ "$NJS_INSTALL_MODE" != "brew" ]]; then
+  NPM_CMD="sudo env PATH=$PATH npm --prefix /usr/local"
 fi
 
 # All installs below are best-effort: one failing server must not stop the rest
 # (execute_command reports failures and returns 1; || true keeps the script going)
 
 # Format language servers (always installed): YAML, TOML, HTML, CSS, JSON
-execute_command "$NPM_CMD install -g yaml-language-server @taplo/cli vscode-langservers-extracted" "[lsp-servers] YAML, TOML, HTML, CSS and JSON language servers installed successfully." || true
+# @taplo/cli ships a native binary via postinstall — allow it on npm >= 11.5,
+# with a plain retry for older npm that rejects the flag.
+if ! execute_command "$NPM_CMD install -g --allow-scripts=@taplo/cli yaml-language-server @taplo/cli vscode-langservers-extracted" "[lsp-servers] YAML, TOML, HTML, CSS and JSON language servers installed successfully."; then
+  execute_command "$NPM_CMD install -g yaml-language-server @taplo/cli vscode-langservers-extracted" "[lsp-servers] YAML, TOML, HTML, CSS and JSON language servers installed successfully (fallback)." || true
+fi
 
 # Bash language server
 if command -v bash >/dev/null 2>&1; then
@@ -50,7 +56,11 @@ fi
 
 # Python language server
 if command -v python3 >/dev/null 2>&1; then
-  execute_command "$NPM_CMD install -g pyright" "[lsp-servers] Python language server installed successfully." || true
+  # pyright fetches its binary via postinstall — allow it (npm >= 11.5 gating),
+  # plain retry for older npm.
+  if ! execute_command "$NPM_CMD install -g --allow-scripts=pyright pyright" "[lsp-servers] Python language server installed successfully."; then
+    execute_command "$NPM_CMD install -g pyright" "[lsp-servers] Python language server installed successfully (fallback)." || true
+  fi
 else
   cecho "yellow" "Skipping Python language server since [python3] is not available."
 fi

@@ -25,19 +25,19 @@ case $CURRENT_OS_ID in
   arch)
     cecho "yellow" "[playwright] Arch Linux is not officially supported by Playwright. Installing without OS dependencies..."
     if [[ "$DRY_RUN" -ne "1" ]]; then
-      sudo npm install -g @playwright/cli@latest
+      sudo env PATH="$PATH" npm install -g @playwright/cli@latest
       npx --yes playwright install chromium
     else
-      cecho "yellow" "DRY-RUN: sudo npm install -g @playwright/cli@latest"
+      cecho "yellow" "DRY-RUN: sudo env PATH=\"$PATH\" npm install -g @playwright/cli@latest"
       cecho "yellow" "DRY-RUN: npx --yes playwright install chromium"
     fi
     ;;
   debian|ubuntu|pop)
     if [[ "$DRY_RUN" -ne "1" ]]; then
-      sudo npm install -g @playwright/cli@latest
+      sudo env PATH="$PATH" npm install -g @playwright/cli@latest
       npx --yes playwright install --with-deps chromium
     else
-      cecho "yellow" "DRY-RUN: sudo npm install -g @playwright/cli@latest"
+      cecho "yellow" "DRY-RUN: sudo env PATH=\"$PATH\" npm install -g @playwright/cli@latest"
       cecho "yellow" "DRY-RUN: npx --yes playwright install --with-deps chromium"
     fi
     ;;
@@ -47,13 +47,13 @@ case $CURRENT_OS_ID in
       sudo dnf install -y nss atk at-spi2-atk gtk3 alsa-lib libdrm \
         libxkbcommon libXcomposite libXdamage libXrandr mesa-libgbm \
         libXScrnSaver cups-libs
-      sudo npm install -g @playwright/cli@latest
+      sudo env PATH="$PATH" npm install -g @playwright/cli@latest
       npx --yes playwright install chromium
     else
       cecho "yellow" "DRY-RUN: sudo dnf install -y nss atk at-spi2-atk gtk3 alsa-lib libdrm \\"
       cecho "yellow" "   libxkbcommon libXcomposite libXdamage libXrandr mesa-libgbm \\"
       cecho "yellow" "   libXScrnSaver cups-libs"
-      cecho "yellow" "DRY-RUN: sudo npm install -g @playwright/cli@latest"
+      cecho "yellow" "DRY-RUN: sudo env PATH=\"$PATH\" npm install -g @playwright/cli@latest"
       cecho "yellow" "DRY-RUN: npx --yes playwright install chromium"
     fi
     ;;
