@@ -18,7 +18,7 @@ CDIR="$RDIR/_scripts/core";
 source "$CDIR/_helpers.sh"
 
 ## Startup
-cecho "blue" "Starting dotfiles update..."
+cecho "blue" "Starting dotfiles v2 update..."
 
 # Main
 source "$CDIR/system-update.sh"

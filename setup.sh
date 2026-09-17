@@ -23,7 +23,7 @@ DEFAULT_MENU_OPTION="0"
 
 function show_usage() {
   cecho "white" "Usage: $0 [OPTIONS]"
-  cecho "white" "AdeoTEK dotfiles setup"
+  cecho "white" "AdeoTEK dotfiles v2 setup"
   cecho "white" "Options:"
   cecho "cyan" "  -b, --basic     Use the basic numeric prompts instead of the arrow-key interactive menus"
   cecho "cyan" "  --dry-run       Perform a dry run without making actual changes"
@@ -174,7 +174,7 @@ function _render_grid() {
 }
 
 ## Startup debug
-cecho "blue" "Starting dotfiles setup ($DFS_ACTION)..."
+cecho "blue" "Starting dotfiles v2 setup ($DFS_ACTION)..."
 decho "magenta" "Current OS: $CURRENT_OS_ID"
 decho "magenta" "dotfiles root path: $RDIR"
 decho "magenta" "core scripts path: $CDIR"

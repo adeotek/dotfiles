@@ -1,4 +1,4 @@
-# AdeoTEK Dotfiles v2.0
+# AdeoTEK Dotfiles v2
 
 A comprehensive, modular collection of Linux dotfiles and automated installation scripts for setting up development environments across multiple distributions.
 
