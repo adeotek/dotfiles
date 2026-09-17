@@ -4,6 +4,9 @@
 # HomeBrew install script
 ###
 
+# Homebrew 6.0+ enables "ask mode" by default; skip the install/upgrade confirmation
+export HOMEBREW_NO_ASK=1
+
 # Init
 if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
