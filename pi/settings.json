@@ -1,6 +1,10 @@
 {
   "defaultProvider": "opencode-go",
-  "defaultModel": "deepseek-v4.1-flash",
+  "defaultModel": "glm-5.3-flash",
+  "packages": [
+    "git:github.com/obra/superpowers",
+    "git:github.com/DietrichGebert/ponytail"
+  ],
   "defaultTools": [
     "read",
     "bash",
