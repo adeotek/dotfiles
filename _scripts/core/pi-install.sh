@@ -50,7 +50,15 @@ else
     cecho "yellow" "[pi] warning: Node.js $(node --version 2>/dev/null) is older than the required 22.19; the installer will verify."
   fi
   if [[ "$DRY_RUN" -ne "1" ]]; then
-    if ! (set -o pipefail; curl -fsSL https://pi.dev/install.sh | sh); then
+    # Detach from the tty: the upstream installer's only non-interactive mode is
+    # "no terminal detected", which auto-continues and skips its prompts
+    # (install/reinstall menu, Node install offer, PATH update offer).
+    PI_SETSID=""
+    if command -v setsid >/dev/null 2>&1; then
+      PI_SETSID="setsid"
+    fi
+    # shellcheck disable=SC2086  # PI_SETSID is empty (plain sh) or setsid
+    if ! (set -o pipefail; curl -fsSL https://pi.dev/install.sh | $PI_SETSID sh); then
       cecho "red" "[pi] installation failed."
       return 1
     fi
