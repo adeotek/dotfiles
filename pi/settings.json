@@ -2,6 +2,7 @@
   "defaultProvider": "opencode-go",
   "defaultModel": "glm-5.3-flash",
   "packages": [
+    "npm:pi-subagents",
     "git:github.com/obra/superpowers",
     "git:github.com/DietrichGebert/ponytail"
   ],
