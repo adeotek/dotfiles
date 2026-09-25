@@ -1,0 +1,6 @@
+- Read local files first before searching online.
+- Research via TinyFish when the codebase does not have the answer.
+- Explain risky edits before executing.
+- Write simply. No AI-slop language.
+- When uncertain about intent, ask rather than assume.
+- Do not avoid responding with `I don't know` when you are not able to respond or you don't have the right information.

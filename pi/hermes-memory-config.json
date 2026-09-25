@@ -1,0 +1,4 @@
+{
+  "llmModelOverride": "opencode-go/qwen3.8-flash",
+  "llmThinkingOverride": "off"
+}
