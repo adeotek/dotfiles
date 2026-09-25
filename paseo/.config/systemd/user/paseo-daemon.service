@@ -6,7 +6,7 @@ StartLimitIntervalSec=0
 
 [Service]
 Type=simple
-ExecStart=%h/.local/bin/paseo daemon start --foreground
+ExecStart=%h/.local/bin/paseo daemon run --home %h/.paseo
 WorkingDirectory=%h
 Environment="PATH=%h/.hermes/node/bin:%h/.local/bin:/usr/local/bin:/usr/bin:/bin"
 Environment="HOME=%h"

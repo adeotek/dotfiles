@@ -98,6 +98,37 @@ EOF
   fi
 fi
 
+# Register the PI skill and prompt
+if command -v pi >/dev/null 2>&1; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    if graphify install --platform pi; then
+      cecho "green" "[pi] graphify skill registered."
+    else
+      cecho "red" "Failed to register graphify skill for Pi."
+    fi
+  else
+    cecho "yellow" "DRY-RUN: graphify install --platform pi"
+  fi
+  if [[ ! -f "$HOME/.pi/agent/prompts/graphify.md" ]]; then
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      mkdir -p "$HOME/.pi/agent/prompts"
+      tee <<'EOF' > "$HOME/.pi/agent/prompts/graphify.md"
+---
+description: Build, query, and manage a knowledge graph of any codebase, repo, or document set
+argument-hint: "[path or question]"
+---
+
+You MUST load the graphify skill before doing anything else. Then follow the skill's instructions exactly to process the user's request.
+
+Arguments: $ARGUMENTS
+EOF
+      cecho "green" "[pi] graphify prompt registered."
+    else
+      cecho "yellow" "DRY-RUN: Create $HOME/.pi/agent/prompts/graphify.md with graphify prompt definition"
+    fi
+  fi
+fi
+
 # Verify
 if [[ "$DRY_RUN" -ne "1" ]]; then
   if command -v graphify >/dev/null 2>&1; then

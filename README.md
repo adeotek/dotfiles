@@ -27,7 +27,7 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 - **Runtime/Version Manager**: mise
 - **Cloud/DevOps**: Docker, AWS CLI, GCP CLI, Terraform, Ansible, Helm, kubectl
 - **Editors**: Neovim (with custom config), Zed, VS Code, JetBrains Toolbox
-- **AI/Code Assistants**: Claude Code, OpenCode, Hermes Agent, Herdr
+- **AI/Code Assistants**: Claude Code, OpenCode, Pi, Hermes Agent, Herdr
 - **LLM Context Compression**: Headroom proxy (systemd service, 40-90% token savings)
 
 ### CLI Utilities
@@ -147,6 +147,7 @@ The following packages can be installed individually or in groups:
 - **tools** - Custom scripts and tools bundle
 - **claude-code** - Claude AI coding assistant
 - **opencode** - OpenCode configuration
+- **pi** - PI coding agent (minimal, extensible terminal coding harness)
 - **headroom** - LLM context compression proxy (systemd service, supports OpenAI, Anthropic, OpenRouter, OpenCode Zen, Google Gemini, GitHub Copilot)
 - **hermes** - Hermes Agent AI coding assistant (Nous Research)
 - **herdr** - Herdr agent configuration and shell completions
@@ -230,6 +231,7 @@ dotfiles/
 ├── yazi/                       # Yazi file manager config
 ├── fastfetch/                  # Fastfetch system info config
 ├── opencode/                   # OpenCode configuration
+├── pi/                         # Pi coding agent configuration
 ├── docs/                       # Project documentation
 └── _extra/                     # Additional configs & templates
 ```
