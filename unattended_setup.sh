@@ -37,7 +37,7 @@
 #   Console extras: ansible, aws-cli, bash, claude-code, docker, dotnet,
 #                   gcp-cli, github-cli, golang, graphify, headroom, helm,
 #                   herdr, hermes, homebrew, kubectl, lsp-servers, mise,
-#                   nerd-fonts, nvim, oh-my-posh, opencode, playwright,
+#                   nerd-fonts, nvim, oh-my-posh, opencode, pi, playwright,
 #                   powershell, rtk, rustup, starship, terraform, tmux,
 #                   tools, uv
 #   Desktop-only:   ghostty, zed

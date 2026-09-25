@@ -1,0 +1,7 @@
+{
+  "providers": {
+    "opencode-go": {
+      "apiKey": "${OPENCODE_API_KEY}"
+    }
+  }
+}
