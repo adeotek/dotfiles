@@ -63,7 +63,7 @@ Not stowed — deployed imperatively by their respective setup scripts. Files ar
 - `agents/`, `skills/` — agent definitions (incl. `code-review`), skill files. Project-level plugins live in `.opencode/plugins/` (auto-loaded by opencode)
 
 **`pi/`** — deployed by `pi-setup.sh` into `~/.pi/agent/`:
-- `settings.json` → startup defaults (provider `opencode-go`, model `deepseek-v4.1-flash`, all built-in tools enabled, telemetry off); on re-run with the override prompt, the template is **merged** into the existing live config (see `pi/merge-pi-config.py`) — local tweaks and installed packages survive
+- `settings.json` → startup defaults (provider `opencode-go`, model `glm-5.3-flash`, all built-in tools enabled, telemetry off); on re-run with the override prompt, the template is **merged** into the existing live config (see `pi/merge-pi-config.py`) — local tweaks and installed packages survive
 - `models.json` → `opencode-go` provider credential only (`${OPENCODE_API_KEY}` from the environment, or `pi /login opencode-go`); on override it is merged with `--live-wins`, so a live `apiKey` is never replaced by the placeholder
 - `AGENTS.md` → global instructions for all pi sessions
 - `skills/` — skills (e.g. `dotnet-unit-testing`); seeded per-skill only if missing

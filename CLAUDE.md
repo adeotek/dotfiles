@@ -101,7 +101,7 @@ Not stowed — deployed imperatively by `opencode-setup.sh` into `~/.config/open
 
 ### Pi Config (`pi/`)
 Not stowed — deployed imperatively by `pi-setup.sh` into `~/.pi/agent/`. On re-deploy with the override prompt, `settings.json` is **merged** into the existing live config (see `pi/merge-pi-config.py`) — template defaults win, live-only keys and installed packages survive; `models.json` is merged with `--live-wins`, so a live `apiKey` is never replaced by the `${OPENCODE_API_KEY}` placeholder. Other files are seeded only if missing:
-- `settings.json` → `~/.pi/agent/settings.json` — startup defaults (provider `opencode-go`, model `deepseek-v4.1-flash`, all built-in tools enabled, telemetry off)
+- `settings.json` → `~/.pi/agent/settings.json` — startup defaults (provider `opencode-go`, model `glm-5.3-flash`, all built-in tools enabled, telemetry off)
 - `models.json` → `~/.pi/agent/models.json` — `opencode-go` provider credential (`${OPENCODE_API_KEY}` from the environment, or `pi /login opencode-go`)
 - `AGENTS.md` → `~/.pi/agent/AGENTS.md` — global instructions for all pi sessions
 - `skills/` — skills (Agent Skills standard, e.g. `dotnet-unit-testing`); seeded per-skill only if missing
