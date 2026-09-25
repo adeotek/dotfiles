@@ -1,0 +1,18 @@
+{
+  "defaultProvider": "opencode-go",
+  "defaultModel": "glm-5.3-flash",
+  "packages": [
+    "git:github.com/obra/superpowers",
+    "git:github.com/DietrichGebert/ponytail"
+  ],
+  "defaultTools": [
+    "read",
+    "bash",
+    "edit",
+    "write",
+    "grep",
+    "find",
+    "ls"
+  ],
+  "enableInstallTelemetry": false
+}
