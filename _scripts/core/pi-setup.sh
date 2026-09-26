@@ -39,7 +39,7 @@ if [[ -z "$RDIR" ]]; then
   else
     RDIR=$(dirname "$PWD")
   fi
-  CDIR="$RDIR/_scripts/core";
+  CDIR="$RDIR/_scripts/core"
   source "$CDIR/_helpers.sh"
 fi
 
@@ -133,6 +133,24 @@ if [[ ! -f "$PI_AGENT_DIR/AGENTS.md" ]] || [[ "$PI_OVERRIDE_CONFIG" == true ]]; 
   fi
 else
   cecho "yellow" "Global AGENTS.md file already exists at $PI_AGENT_DIR/AGENTS.md"
+fi
+
+# Create global pi-lens config if it doesn't exist;
+# on explicit override the template replaces the live config.
+PI_LENS_CONFIG_DIR="$HOME/.pi-lens"
+if [[ ! -f "$PI_LENS_CONFIG_DIR/config.json" ]] || [[ "$PI_OVERRIDE_CONFIG" == true ]]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    mkdir -p "$PI_LENS_CONFIG_DIR"
+    if cp "$RDIR/pi/pi-lens-config.json" "$PI_LENS_CONFIG_DIR/config.json"; then
+      cecho "green" "Global pi-lens config file created at $PI_LENS_CONFIG_DIR/config.json"
+    else
+      cecho "red" "Failed to create global pi-lens config file."
+    fi
+  else
+    cecho "yellow" "DRY-RUN: cp $RDIR/pi/pi-lens-config.json -> $PI_LENS_CONFIG_DIR/config.json (if not exists)"
+  fi
+else
+  cecho "yellow" "Global pi-lens config file already exists at $PI_LENS_CONFIG_DIR/config.json"
 fi
 
 # Create missing skills
