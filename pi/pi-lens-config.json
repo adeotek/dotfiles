@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/apmantza/pi-lens/master/config.schema.json",
+  "ignore": [
+    "**/.venv/**",
+    "**/__pycache__/**",
+    "**/node_modules/**",
+    "**/vendor/**",
+    "**/.terraform/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/*.min.js",
+    "**/*.snap",
+    "graphify-out/**",
+    "**/*.generated.*"
+  ],
+  "tools": {
+    "lazy": true
+  },
+  "format": {
+    "enabled": true,
+    "mode": "deferred"
+  },
+  "autofix": {
+    "enabled": true
+  },
+  "contextInjection": {
+    "enabled": true
+  },
+  "widget": {
+    "visible": true
+  },
+  "startup": {
+    "mode": "full"
+  }
+}

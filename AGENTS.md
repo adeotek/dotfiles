@@ -67,6 +67,7 @@ Not stowed — deployed imperatively by their respective setup scripts. Files ar
 - `models.json` → `opencode-go` provider credential only (`${OPENCODE_API_KEY}` from the environment, or `pi /login opencode-go`); on override it is merged with `--live-wins`, so a live `apiKey` is never replaced by the placeholder
 - `AGENTS.md` → global instructions for all pi sessions
 - `skills/` — skills (e.g. `dotnet-unit-testing`); seeded per-skill only if missing
+- `agents/` — custom subagent definitions for the `pi-subagents` extension (ported from the OpenCode agents: `code-review`, `dev`, `devops`, `expert`, `tutor`, `dotnet-backend-expert`, `dotnet-unit-test-expert`); seeded per-agent only if missing
 
 ### ZSH Configurations
 `zsh/` config deployed via `zsh-setup.sh`:
