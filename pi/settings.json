@@ -3,8 +3,16 @@
   "defaultModel": "glm-5.3-flash",
   "packages": [
     "npm:pi-subagents",
+    "npm:pi-mcp-adapter",
+    "npm:pi-web-access",
+    "npm:pi-lens",
+    "npm:pi-hermes-memory",
     "git:github.com/obra/superpowers",
-    "git:github.com/DietrichGebert/ponytail"
+    "git:github.com/DietrichGebert/ponytail",
+    "npm:@narumitw/pi-plan-mode",
+    "npm:@gotgenes/pi-permission-system",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@juicesharp/rpiv-ask-user-question"
   ],
   "defaultTools": [
     "read",
@@ -15,5 +23,6 @@
     "find",
     "ls"
   ],
-  "enableInstallTelemetry": false
+  "enableInstallTelemetry": false,
+  "theme": "dark"
 }
