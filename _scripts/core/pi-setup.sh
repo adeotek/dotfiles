@@ -32,6 +32,33 @@ copy_skills_if_missing() {
   done
 }
 
+# Copy agent definitions from source to dest if the file doesn't already exist
+# Usage: copy_agents_if_missing <src_dir> <dest_dir> [override]
+copy_agents_if_missing() {
+  local src_dir="$1"
+  local dest_dir="$2"
+  local override="${3:-false}"
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    mkdir -p "$dest_dir"
+  fi
+  for src_file in "$src_dir"/*.md; do
+    [[ -f "$src_file" ]] || continue
+    local agent_name
+    agent_name=$(basename "$src_file" .md)
+    local dest_file="$dest_dir/$agent_name.md"
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      if [[ ! -f "$dest_file" ]] || [[ "$override" == true ]]; then
+        cp "$src_file" "$dest_file"
+        cecho "green" "Agent $agent_name copied to $dest_dir/"
+      else
+        cecho "yellow" "Agent $agent_name already exists at $dest_dir/"
+      fi
+    else
+      cecho "yellow" "DRY-RUN: cp $src_file $dest_file (if not exists)"
+    fi
+  done
+}
+
 # Init
 if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
@@ -39,7 +66,7 @@ if [[ -z "$RDIR" ]]; then
   else
     RDIR=$(dirname "$PWD")
   fi
-  CDIR="$RDIR/_scripts/core";
+  CDIR="$RDIR/_scripts/core"
   source "$CDIR/_helpers.sh"
 fi
 
@@ -135,8 +162,62 @@ else
   cecho "yellow" "Global AGENTS.md file already exists at $PI_AGENT_DIR/AGENTS.md"
 fi
 
+# Create global APPEND_SYSTEM.md file — appended instructions for Pi's system prompt
+if [[ ! -f "$PI_AGENT_DIR/APPEND_SYSTEM.md" ]] || [[ "$PI_OVERRIDE_CONFIG" == true ]]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    if cp "$RDIR/pi/APPEND_SYSTEM.md" "$PI_AGENT_DIR/APPEND_SYSTEM.md"; then
+      cecho "green" "Global APPEND_SYSTEM.md file created at $PI_AGENT_DIR/APPEND_SYSTEM.md"
+    else
+      cecho "red" "Failed to create global APPEND_SYSTEM.md file."
+    fi
+  else
+    cecho "yellow" "DRY-RUN: cp $RDIR/pi/APPEND_SYSTEM.md $PI_AGENT_DIR/APPEND_SYSTEM.md"
+  fi
+else
+  cecho "yellow" "Global APPEND_SYSTEM.md file already exists at $PI_AGENT_DIR/APPEND_SYSTEM.md"
+fi
+
+# Create global pi-lens config if it doesn't exist;
+# on explicit override the template replaces the live config.
+PI_LENS_CONFIG_DIR="$HOME/.pi-lens"
+if [[ ! -f "$PI_LENS_CONFIG_DIR/config.json" ]] || [[ "$PI_OVERRIDE_CONFIG" == true ]]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    mkdir -p "$PI_LENS_CONFIG_DIR"
+    if cp "$RDIR/pi/pi-lens-config.json" "$PI_LENS_CONFIG_DIR/config.json"; then
+      cecho "green" "Global pi-lens config file created at $PI_LENS_CONFIG_DIR/config.json"
+    else
+      cecho "red" "Failed to create global pi-lens config file."
+    fi
+  else
+    cecho "yellow" "DRY-RUN: cp $RDIR/pi/pi-lens-config.json -> $PI_LENS_CONFIG_DIR/config.json (if not exists)"
+  fi
+else
+  cecho "yellow" "Global pi-lens config file already exists at $PI_LENS_CONFIG_DIR/config.json"
+fi
+
+# Create global pi-permission-system config if it doesn't exist;
+# on explicit override the template replaces the live config.
+PI_PERM_CONFIG_DIR="$PI_AGENT_DIR/extensions/pi-permission-system"
+if [[ ! -f "$PI_PERM_CONFIG_DIR/config.json" ]] || [[ "$PI_OVERRIDE_CONFIG" == true ]]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    mkdir -p "$PI_PERM_CONFIG_DIR"
+    if cp "$RDIR/pi/pi-permission-system.config.json" "$PI_PERM_CONFIG_DIR/config.json"; then
+      cecho "green" "Global pi-permission-system config file created at $PI_PERM_CONFIG_DIR/config.json"
+    else
+      cecho "red" "Failed to create global pi-permission-system config file."
+    fi
+  else
+    cecho "yellow" "DRY-RUN: cp $RDIR/pi/pi-permission-system.config.json -> $PI_PERM_CONFIG_DIR/config.json (if not exists)"
+  fi
+else
+  cecho "yellow" "Global pi-permission-system config file already exists at $PI_PERM_CONFIG_DIR/config.json"
+fi
+
 # Create missing skills
 copy_skills_if_missing "$RDIR/pi/skills" "$PI_AGENT_DIR/skills" "$PI_OVERRIDE_CONFIG"
+
+# Create missing subagent definitions (pi-subagents extension)
+copy_agents_if_missing "$RDIR/pi/agents" "$PI_AGENT_DIR/agents" "$PI_OVERRIDE_CONFIG"
 
 # Credential note
 cecho "white" "Note: the opencode-go provider needs OPENCODE_API_KEY exported or a 'pi /login opencode-go' login."

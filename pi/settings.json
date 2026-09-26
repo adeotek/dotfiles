@@ -2,6 +2,14 @@
   "defaultProvider": "opencode-go",
   "defaultModel": "glm-5.3-flash",
   "packages": [
+    "npm:pi-subagents",
+    "npm:pi-mcp-adapter",
+    "npm:pi-web-access",
+    "npm:pi-hermes-memory",
+    "npm:pi-lens",
+    "npm:@gotgenes/pi-permission-system",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:@juicesharp/rpiv-ask-user-question",
     "git:github.com/obra/superpowers",
     "git:github.com/DietrichGebert/ponytail"
   ],
@@ -14,5 +22,57 @@
     "find",
     "ls"
   ],
-  "enableInstallTelemetry": false
+  "enableInstallTelemetry": false,
+  "lastChangelogVersion": "0.87.1",
+  "theme": "dark",
+  "subagents": {
+    "agentOverrides": {
+      "scout": {
+        "model": "opencode-go/glm-5.3-flash",
+        "thinking": "low"
+      },
+      "researcher": {
+        "model": "opencode-go/glm-5.3-flash",
+        "thinking": "medium"
+      },
+      "evidence-auditor": {
+        "model": "opencode-go/glm-5.3-flash",
+        "thinking": "high"
+      },
+      "worker": {
+        "model": "opencode-go/glm-5.3-flash",
+        "thinking": "high"
+      },
+      "reviewer": {
+        "model": "opencode-go/kimi-k2.7-code",
+        "thinking": "high"
+      },
+      "oracle": {
+        "model": "opencode-go/glm-5.3-flash",
+        "thinking": "high"
+      },
+      "delegate": {
+        "model": "opencode-go/glm-5.3-flash",
+        "thinking": "low"
+      },
+      "claude-code": {
+        "disabled": true
+      },
+      "claude-code-writer": {
+        "disabled": true
+      },
+      "codex-exec": {
+        "disabled": true
+      },
+      "codex-exec-writer": {
+        "disabled": true
+      },
+      "cursor-agent": {
+        "disabled": true
+      },
+      "cursor-agent-writer": {
+        "disabled": true
+      }
+    }
+  }
 }
