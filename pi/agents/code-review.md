@@ -2,9 +2,8 @@
 name: code-review
 description: Read-only code review subagent. Inspects diffs for correctness, security, and best practices.
 advertise: true
-model: opencode-go/minimax-m3
-# port: opencode used reasoningEffort max + temperature 0.1; Pi maps this to the thinking level.
-thinking: max
+model: opencode-go/kimi-k2.7-code
+thinking: high
 tools: read, bash, grep, find, ls
 systemPromptMode: append
 inheritProjectContext: true

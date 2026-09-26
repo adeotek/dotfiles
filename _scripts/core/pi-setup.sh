@@ -162,6 +162,21 @@ else
   cecho "yellow" "Global AGENTS.md file already exists at $PI_AGENT_DIR/AGENTS.md"
 fi
 
+# Create global APPEND_SYSTEM.md file — appended instructions for Pi's system prompt
+if [[ ! -f "$PI_AGENT_DIR/APPEND_SYSTEM.md" ]] || [[ "$PI_OVERRIDE_CONFIG" == true ]]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    if cp "$RDIR/pi/APPEND_SYSTEM.md" "$PI_AGENT_DIR/APPEND_SYSTEM.md"; then
+      cecho "green" "Global APPEND_SYSTEM.md file created at $PI_AGENT_DIR/APPEND_SYSTEM.md"
+    else
+      cecho "red" "Failed to create global APPEND_SYSTEM.md file."
+    fi
+  else
+    cecho "yellow" "DRY-RUN: cp $RDIR/pi/APPEND_SYSTEM.md $PI_AGENT_DIR/APPEND_SYSTEM.md"
+  fi
+else
+  cecho "yellow" "Global APPEND_SYSTEM.md file already exists at $PI_AGENT_DIR/APPEND_SYSTEM.md"
+fi
+
 # Create global pi-lens config if it doesn't exist;
 # on explicit override the template replaces the live config.
 PI_LENS_CONFIG_DIR="$HOME/.pi-lens"

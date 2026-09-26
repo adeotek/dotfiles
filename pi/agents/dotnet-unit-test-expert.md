@@ -7,7 +7,8 @@ model: opencode-go/qwen3.8-flash
 systemPromptMode: append
 inheritProjectContext: true
 inheritGlobalContext: true
-inheritSkills: true
+inheritSkills: false
+skills: dotnet-unit-testing
 ---
 
 # .NET Unit Test Expert Agent

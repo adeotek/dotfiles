@@ -1,5 +1,5 @@
 - Read local files first before searching online.
-- Research via TinyFish when the codebase does not have the answer.
+- Research via web search (web_search / source_check) when the codebase does not have the answer.
 - Explain risky edits before executing.
 - Write simply. No AI-slop language.
 - When uncertain about intent, ask rather than assume.
