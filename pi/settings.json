@@ -23,6 +23,7 @@
     "ls"
   ],
   "enableInstallTelemetry": false,
+  "lastChangelogVersion": "0.87.1",
   "theme": "dark",
   "subagents": {
     "agentOverrides": {

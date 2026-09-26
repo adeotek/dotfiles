@@ -195,6 +195,24 @@ else
   cecho "yellow" "Global pi-lens config file already exists at $PI_LENS_CONFIG_DIR/config.json"
 fi
 
+# Create global pi-permission-system config if it doesn't exist;
+# on explicit override the template replaces the live config.
+PI_PERM_CONFIG_DIR="$PI_AGENT_DIR/extensions/pi-permission-system"
+if [[ ! -f "$PI_PERM_CONFIG_DIR/config.json" ]] || [[ "$PI_OVERRIDE_CONFIG" == true ]]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    mkdir -p "$PI_PERM_CONFIG_DIR"
+    if cp "$RDIR/pi/pi-permission-system.config.json" "$PI_PERM_CONFIG_DIR/config.json"; then
+      cecho "green" "Global pi-permission-system config file created at $PI_PERM_CONFIG_DIR/config.json"
+    else
+      cecho "red" "Failed to create global pi-permission-system config file."
+    fi
+  else
+    cecho "yellow" "DRY-RUN: cp $RDIR/pi/pi-permission-system.config.json -> $PI_PERM_CONFIG_DIR/config.json (if not exists)"
+  fi
+else
+  cecho "yellow" "Global pi-permission-system config file already exists at $PI_PERM_CONFIG_DIR/config.json"
+fi
+
 # Create missing skills
 copy_skills_if_missing "$RDIR/pi/skills" "$PI_AGENT_DIR/skills" "$PI_OVERRIDE_CONFIG"
 

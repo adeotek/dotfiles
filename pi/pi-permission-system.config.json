@@ -12,7 +12,9 @@
     "bash": {
       "*": "allow",
       "rm *": "ask",
-      "sudo *": "ask"
+      "sudo *": "ask",
+      "git commit *": "ask",
+      "git push *": "ask"
     },
     "external_directory": "ask"
   }
