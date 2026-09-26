@@ -32,6 +32,33 @@ copy_skills_if_missing() {
   done
 }
 
+# Copy agent definitions from source to dest if the file doesn't already exist
+# Usage: copy_agents_if_missing <src_dir> <dest_dir> [override]
+copy_agents_if_missing() {
+  local src_dir="$1"
+  local dest_dir="$2"
+  local override="${3:-false}"
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    mkdir -p "$dest_dir"
+  fi
+  for src_file in "$src_dir"/*.md; do
+    [[ -f "$src_file" ]] || continue
+    local agent_name
+    agent_name=$(basename "$src_file" .md)
+    local dest_file="$dest_dir/$agent_name.md"
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      if [[ ! -f "$dest_file" ]] || [[ "$override" == true ]]; then
+        cp "$src_file" "$dest_file"
+        cecho "green" "Agent $agent_name copied to $dest_dir/"
+      else
+        cecho "yellow" "Agent $agent_name already exists at $dest_dir/"
+      fi
+    else
+      cecho "yellow" "DRY-RUN: cp $src_file $dest_file (if not exists)"
+    fi
+  done
+}
+
 # Init
 if [[ -z "$RDIR" ]]; then
   if [[ -d "${0%/*}" ]]; then
@@ -155,6 +182,9 @@ fi
 
 # Create missing skills
 copy_skills_if_missing "$RDIR/pi/skills" "$PI_AGENT_DIR/skills" "$PI_OVERRIDE_CONFIG"
+
+# Create missing subagent definitions (pi-subagents extension)
+copy_agents_if_missing "$RDIR/pi/agents" "$PI_AGENT_DIR/agents" "$PI_OVERRIDE_CONFIG"
 
 # Credential note
 cecho "white" "Note: the opencode-go provider needs OPENCODE_API_KEY exported or a 'pi /login opencode-go' login."
