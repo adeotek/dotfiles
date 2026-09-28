@@ -1,6 +1,8 @@
 {
   "llmModelOverride": "opencode-go/qwen3.8-flash",
+  "llmFallbackModels": ["opencode-go/kimi-k2.7-code"],
   "llmThinkingOverride": "off",
+  "reviewRecentMessages": 40,
   "lazyInitialization": false,
   "memoryMode": "policy-only",
   "memoryPolicyStyle": "full",
@@ -9,7 +11,6 @@
   "projectCharLimit": 5000,
   "nudgeInterval": 10,
   "nudgeToolCalls": 15,
-  "reviewRecentMessages": 0,
   "reviewEnabled": true,
   "reviewTransport": "direct",
   "flushOnCompact": true,

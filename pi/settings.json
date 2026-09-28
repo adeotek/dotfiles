@@ -10,6 +10,7 @@
     "npm:@gotgenes/pi-permission-system",
     "npm:@juicesharp/rpiv-todo",
     "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@narumitw/pi-plan-mode",
     "git:github.com/obra/superpowers",
     "git:github.com/DietrichGebert/ponytail"
   ],
