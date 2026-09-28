@@ -33,11 +33,12 @@ copy_skills_if_missing() {
 }
 
 # Copy agent definitions from source to dest if the file doesn't already exist
-# Usage: copy_agents_if_missing <src_dir> <dest_dir> [override]
+# Usage: copy_agents_if_missing <src_dir> <dest_dir> [override] [label]
 copy_agents_if_missing() {
   local src_dir="$1"
   local dest_dir="$2"
   local override="${3:-false}"
+  local label="${4:-Agent}"
   if [[ "$DRY_RUN" -ne "1" ]]; then
     mkdir -p "$dest_dir"
   fi
@@ -49,9 +50,9 @@ copy_agents_if_missing() {
     if [[ "$DRY_RUN" -ne "1" ]]; then
       if [[ ! -f "$dest_file" ]] || [[ "$override" == true ]]; then
         cp "$src_file" "$dest_file"
-        cecho "green" "Agent $agent_name copied to $dest_dir/"
+        cecho "green" "$label $agent_name copied to $dest_dir/"
       else
-        cecho "yellow" "Agent $agent_name already exists at $dest_dir/"
+        cecho "yellow" "$label $agent_name already exists at $dest_dir/"
       fi
     else
       cecho "yellow" "DRY-RUN: cp $src_file $dest_file (if not exists)"
@@ -213,11 +214,30 @@ else
   cecho "yellow" "Global pi-permission-system config file already exists at $PI_PERM_CONFIG_DIR/config.json"
 fi
 
+# Create global pi-hermes-memory config if it doesn't exist;
+# on explicit override the template replaces the live config.
+if [[ ! -f "$PI_AGENT_DIR/hermes-memory-config.json" ]] || [[ "$PI_OVERRIDE_CONFIG" == true ]]; then
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    if cp "$RDIR/pi/hermes-memory-config.json" "$PI_AGENT_DIR/hermes-memory-config.json"; then
+      cecho "green" "Global pi-hermes-memory config file created at $PI_AGENT_DIR/hermes-memory-config.json"
+    else
+      cecho "red" "Failed to create global pi-hermes-memory config file."
+    fi
+  else
+    cecho "yellow" "DRY-RUN: cp $RDIR/pi/hermes-memory-config.json -> $PI_AGENT_DIR/hermes-memory-config.json (if not exists)"
+  fi
+else
+  cecho "yellow" "Global pi-hermes-memory config file already exists at $PI_AGENT_DIR/hermes-memory-config.json"
+fi
+
 # Create missing skills
 copy_skills_if_missing "$RDIR/pi/skills" "$PI_AGENT_DIR/skills" "$PI_OVERRIDE_CONFIG"
 
 # Create missing subagent definitions (pi-subagents extension)
 copy_agents_if_missing "$RDIR/pi/agents" "$PI_AGENT_DIR/agents" "$PI_OVERRIDE_CONFIG"
+
+# Create missing prompt templates (flat .md files, same handling as agents)
+copy_agents_if_missing "$RDIR/pi/prompts" "$PI_AGENT_DIR/prompts" "$PI_OVERRIDE_CONFIG" "Prompt"
 
 # Credential note
 cecho "white" "Note: the opencode-go provider needs OPENCODE_API_KEY exported or a 'pi /login opencode-go' login."

@@ -16,6 +16,9 @@
       "git commit *": "ask",
       "git push *": "ask"
     },
-    "external_directory": "ask"
+    "external_directory": {
+      "*": "ask",
+      "/tmp/*": "allow"
+    }
   }
 }
