@@ -33,6 +33,7 @@ fi
 
 if [[ -x "$(command -v npm)" ]]; then
   execute_command "sudo npm install -g npm" "npm updated."
+  execute_command "sudo npm update -g" "npm global packages updated."
 fi
 
 if [[ -x "$(command -v uv)" ]]; then
