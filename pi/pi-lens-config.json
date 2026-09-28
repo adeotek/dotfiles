@@ -24,12 +24,15 @@
     "enabled": true
   },
   "contextInjection": {
-    "enabled": true
+    "enabled": false
   },
   "widget": {
-    "visible": true
+    "visible": false
   },
   "startup": {
-    "mode": "full"
+    "mode": "minimal",
+    "scans": {
+      "enabled": false
+    }
   }
 }
