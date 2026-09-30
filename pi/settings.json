@@ -3,7 +3,6 @@
   "defaultModel": "glm-5.3-flash",
   "packages": [
     "npm:pi-subagents",
-    "npm:pi-mcp-adapter",
     "npm:pi-web-access",
     "npm:pi-hermes-memory",
     "npm:pi-lens",
@@ -21,10 +20,12 @@
     "write",
     "grep",
     "find",
-    "ls"
+    "ls",
+    "+codemode",
+    "+tool_search"
   ],
   "enableInstallTelemetry": false,
-  "lastChangelogVersion": "0.87.1",
+  "lastChangelogVersion": "0.99.1",
   "theme": "dark",
   "subagents": {
     "agentOverrides": {
