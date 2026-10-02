@@ -1,6 +1,6 @@
 {
   "defaultProvider": "opencode-go",
-  "defaultModel": "glm-5.3-flash",
+  "defaultModel": "deepseek-v4.1-flash",
   "packages": [
     "npm:pi-subagents",
     "npm:pi-web-access",
@@ -25,7 +25,7 @@
     "+tool_search"
   ],
   "enableInstallTelemetry": false,
-  "lastChangelogVersion": "0.99.1",
+  "lastChangelogVersion": "1.0.0",
   "theme": "dark",
   "subagents": {
     "agentOverrides": {
