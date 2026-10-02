@@ -1,0 +1,44 @@
+// RTK OpenCode plugin — rewrites shell commands to use rtk for token savings.
+// Requires: rtk >= 0.23.0 in PATH.
+//
+// This is a thin delegating plugin: all rewrite logic lives in `rtk rewrite`,
+// which is the single source of truth (src/discover/registry.rs).
+// To add or change rewrite rules, edit the Rust registry — not this file.
+//
+// OpenCode V2 plugin API: default export { id, setup(ctx) }, registered via
+// ctx.tool.hook("execute.before"). The command is rewritten in place on
+// event.input, matching the sibling graphify plugin.
+import { execFile, spawnSync } from "child_process";
+
+// `rtk rewrite` writes the rewritten command to stdout and exits non-zero for
+// some successful rewrites, so ignore the exit status and read stdout only.
+function rewrite(command: string): Promise<string> {
+  return new Promise((resolve) => {
+    execFile("rtk", ["rewrite", command], { encoding: "utf8" }, (_error, stdout) => {
+      resolve(typeof stdout === "string" ? stdout : "");
+    });
+  });
+}
+
+export default {
+  id: "rtk",
+  async setup(ctx: any) {
+    if (spawnSync("rtk", ["--version"]).status !== 0) {
+      console.warn("[rtk] rtk binary not found in PATH — plugin disabled");
+      return;
+    }
+
+    await ctx.tool.hook("execute.before", async (event: any) => {
+      const tool = String(event?.tool ?? "").toLowerCase();
+      if (tool !== "bash" && tool !== "shell") return;
+
+      const args = event?.input;
+      if (!args || typeof args !== "object") return;
+      const command = args.command;
+      if (typeof command !== "string" || !command) return;
+
+      const rewritten = (await rewrite(command)).trim();
+      if (rewritten && rewritten !== command) args.command = rewritten;
+    });
+  },
+};

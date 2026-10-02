@@ -3,11 +3,14 @@ description: Expert .NET 9/10 backend developer for Web APIs, Entity Framework C
 mode: all
 # alt: minimax-m3 / glm-5.3-flash / deepseek-v4-flash
 model: opencode-go/glm-5.3-flash
-temperature: 0.4
+request:
+  body:
+    temperature: 0.4
 steps: 100
-permission:
-  task:
-    "*": allow
+permissions:
+  - action: subagent
+    resource: "*"
+    effect: allow
 ---
 
 # .NET Backend Expert Agent
