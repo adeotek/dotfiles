@@ -15,26 +15,33 @@ if [[ -z "$RDIR" ]]; then
   source "$CDIR/_helpers.sh"
 fi
 
+# Marketplaces, as "<marketplace-name>=<source>" (source is passed to 'marketplace add')
+declare CLAUDECODE_MARKETPLACES=(
+  "claude-plugins-official=anthropics/claude-plugins-official"
+  "adeotek-plugins=adeotek/claude-code"
+  "ponytail=DietrichGebert/ponytail"
+)
+
 declare CLAUDECODE_PLUGINS=(
-  "frontend-design@claude-plugins-official"
-  "code-review@claude-plugins-official"
-  "feature-dev@claude-plugins-official"
-  "typescript-lsp@claude-plugins-official"
-  "code-simplifier@claude-plugins-official"
-  "security-guidance@claude-plugins-official"
-  "pr-review-toolkit@claude-plugins-official"
-  "superpowers@claude-plugins-official"
-  "gopls-lsp@claude-plugins-official"
-  "csharp-lsp@claude-plugins-official"
-  "claude-md-management@claude-plugins-official"
   "claude-code-setup@claude-plugins-official"
-  "context7@claude-plugins-official"
-  "pyright-lsp@claude-plugins-official"
-  "skill-creator@claude-plugins-official"
-  "playground@claude-plugins-official"
-  "microsoft-docs@claude-plugins-official"
-  "lua-lsp@claude-plugins-official"
+  "claude-md-management@claude-plugins-official"
+  "code-review@claude-plugins-official"
+  "code-simplifier@claude-plugins-official"
   "context-checkpoint@adeotek-plugins"
+  "csharp-lsp@claude-plugins-official"
+  "feature-dev@claude-plugins-official"
+  "frontend-design@claude-plugins-official"
+  "gopls-lsp@claude-plugins-official"
+  "lua-lsp@claude-plugins-official"
+  "microsoft-docs@claude-plugins-official"
+  "playground@claude-plugins-official"
+  "ponytail@ponytail"
+  "pr-review-toolkit@claude-plugins-official"
+  "pyright-lsp@claude-plugins-official"
+  "security-guidance@claude-plugins-official"
+  "skill-creator@claude-plugins-official"
+  "superpowers@claude-plugins-official"
+  "typescript-lsp@claude-plugins-official"
 )
 
 # Install
@@ -43,40 +50,26 @@ source "$CDIR/claude-code-install.sh"
 if ! command -v claude >/dev/null 2>&1; then
   cecho "red" "[claude-code] 'claude' executable not found — skipping marketplace/plugin setup."
 else
-  # Install Claude official marketplace
-  cecho "green" "Installing Claude official marketplace..."
-  if claude plugin marketplace list | grep -G "claude-plugins-official" >/dev/null; then
-    cecho "green" "Claude official marketplace already added to [claude-code]. Updating it..."
-    if [[ "$DRY_RUN" -ne "1" ]]; then
-      claude plugin marketplace update claude-plugins-official
+  # Install marketplaces
+  for entry in "${CLAUDECODE_MARKETPLACES[@]}"; do
+    mp_name="${entry%%=*}"
+    mp_source="${entry#*=}"
+    if claude plugin marketplace list | grep -G "$mp_name" >/dev/null; then
+      cecho "green" "[claude-code] Marketplace $mp_name already added. Updating it..."
+      if [[ "$DRY_RUN" -ne "1" ]]; then
+        claude plugin marketplace update "$mp_name"
+      else
+        cecho "yellow" "DRY-RUN: claude plugin marketplace update $mp_name"
+      fi
     else
-      cecho "yellow" "DRY-RUN: claude plugin marketplace update claude-plugins-official"
+      if [[ "$DRY_RUN" -ne "1" ]]; then
+        cecho "cyan" "Adding [claude-code] marketplace: $mp_name ($mp_source)..."
+        claude plugin marketplace add "$mp_source"
+      else
+        cecho "yellow" "DRY-RUN: claude plugin marketplace add $mp_source"
+      fi
     fi
-  else
-    if [[ "$DRY_RUN" -ne "1" ]]; then
-      cecho "cyan" "Adding Claude official marketplace to [claude-code]..."
-      claude plugin marketplace add anthropics/claude-plugins-official
-    else
-      cecho "yellow" "DRY-RUN: claude plugin marketplace add anthropics/claude-plugins-official"
-    fi
-  fi
-
-  # Install ADEOTEK marketplace
-  if claude plugin marketplace list | grep -G "adeotek-plugins" >/dev/null; then
-    cecho "green" "ADEOTEK marketplace already added to [claude-code]. Updating it..."
-    if [[ "$DRY_RUN" -ne "1" ]]; then
-      claude plugin marketplace update adeotek-plugins
-    else
-      cecho "yellow" "DRY-RUN: claude plugin marketplace update adeotek-plugins"
-    fi
-  else
-    if [[ "$DRY_RUN" -ne "1" ]]; then
-      cecho "cyan" "Adding ADEOTEK marketplace to [claude-code]..."
-      claude plugin marketplace add adeotek/claude-code
-    else
-      cecho "yellow" "DRY-RUN: claude plugin marketplace add adeotek/claude-code"
-    fi
-  fi
+  done
 
   # Install plugins
   for plugin in "${CLAUDECODE_PLUGINS[@]}"; do
