@@ -1,29 +1,64 @@
 ---
 description: Dotfiles agent. Full tool access. Manages deployment automation scripts, tools, and configuration.
 mode: all
-permission:
-  edit: allow
-  read: allow
-  lsp: allow
-  glob: allow
-  grep: allow
-  bash:
-    "find *": allow
-    "git diff *": allow
-    "git log *": allow
-    "git show *": allow
-    "git status": allow
-    "git stash list": allow
-    "git branch *": allow
-    "git remote *": allow
-    "graphify *": allow
-    "ls *": allow
-    "rg *": allow
-    "sort *": allow
-    "which *": allow
-    "*": ask
-  task:
-    "*": ask
+permissions:
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: read
+    resource: "*"
+    effect: allow
+  - action: glob
+    resource: "*"
+    effect: allow
+  - action: grep
+    resource: "*"
+    effect: allow
+  - action: shell
+    resource: "find *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "git show *"
+    effect: allow
+  - action: shell
+    resource: "git status"
+    effect: allow
+  - action: shell
+    resource: "git stash list"
+    effect: allow
+  - action: shell
+    resource: "git branch *"
+    effect: allow
+  - action: shell
+    resource: "git remote *"
+    effect: allow
+  - action: shell
+    resource: "graphify *"
+    effect: allow
+  - action: shell
+    resource: "ls *"
+    effect: allow
+  - action: shell
+    resource: "rg *"
+    effect: allow
+  - action: shell
+    resource: "sort *"
+    effect: allow
+  - action: shell
+    resource: "which *"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: ask
+  - action: subagent
+    resource: "*"
+    effect: ask
 ---
 
 # Dotfiles Expert Agent

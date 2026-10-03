@@ -3,9 +3,10 @@ description: Primary devops and infrastructure agent. Full tool access. Manages 
 mode: primary
 # alt: opencode-go/glm-5.3
 model: opencode/nemotron-3-ultra-free
-permission:
-  task:
-    "*": allow
+permissions:
+  - action: subagent
+    resource: "*"
+    effect: allow
 ---
 
 # DevOps and Infrastructure Expert Agent

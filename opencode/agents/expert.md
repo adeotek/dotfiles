@@ -3,10 +3,13 @@ description: Primary build/orchestrator agent. Full tool access. Delegates analy
 mode: all
 # alt: minimax-m3
 model: opencode-go/glm-5.3-flash
-reasoningEffort: max
-permission:
-  task:
-    "*": allow
+request:
+  body:
+    reasoningEffort: max
+permissions:
+  - action: subagent
+    resource: "*"
+    effect: allow
 ---
 
 ## Core Principles

@@ -3,9 +3,10 @@ description: Primary development agent. Full tool access.
 mode: primary
 # alt: opencode-go/qwen3.7-plus/kimi-k3/deepseek-v4-pro
 model: ollama/qwen3.8:27b
-permission:
-  task:
-    "*": allow
+permissions:
+  - action: subagent
+    resource: "*"
+    effect: allow
 ---
 
 ## Core Principles

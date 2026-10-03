@@ -1,10 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "model": "opencode-go/deepseek-v4.1-flash",
-  "small_model": "opencode-go/mimo-v2.5",
-  "lsp": {},
   "default_agent": "build",
-  "agent": {
+  "agents": {
     "build": {
       "description": "Primary build/orchestrator agent. Full tool access. Delegates analysis to @plan and review to @code-review.",
       "mode": "primary",
@@ -14,68 +12,103 @@
       "mode": "primary",
       // alt: minimax-m3 (balanced strong) / gpt-5.6-luna (frontier, $15 cap)
       "model": "opencode-go/glm-5.3-flash",
-      "temperature": 0.1
+      "request": { "body": { "temperature": 0.1 } }
     },
     "general": {
       "mode": "subagent",
       "model": "opencode-go/qwen3.8-flash",
-      "temperature": 0.3
+      "request": { "body": { "temperature": 0.3 } }
     },
     "explore": {
       "mode": "subagent",
       "model": "opencode-go/glm-5.3-flash",
-      "reasoningEffort": "max",
-      "temperature": 0.1
+      "request": { "body": { "reasoningEffort": "max", "temperature": 0.1 } }
     },
     "scout": {
       "mode": "subagent",
       "model": "opencode-go/glm-5.3-flash",
-      "temperature": 0.2
+      "request": { "body": { "temperature": 0.2 } }
     },
     "compaction": {
       "model": "opencode-go/qwen3.8-flash",
-      "thinking": { "type": "disabled" }
+      "request": { "body": { "thinking": { "type": "disabled" } } }
     },
     "summary": {
       "model": "opencode-go/qwen3.8-flash",
-      "thinking": { "type": "disabled" }
+      "request": { "body": { "thinking": { "type": "disabled" } } }
     },
     "title": {
       "model": "opencode-go/qwen3.8-flash",
-      "thinking": { "type": "disabled" }
+      "request": { "body": { "thinking": { "type": "disabled" } } }
     }
   },
-  "plugin": [
+  "plugins": [
     "@dietrichgebert/ponytail",
     "superpowers@git+https://github.com/obra/superpowers.git",
     "opencode-mem"
   ],
-  "provider": {
+  "providers": {
     "ollama": {
-      "npm": "@ai-sdk/openai-compatible",
+      "package": "aisdk:@ai-sdk/openai-compatible",
       "name": "Ollama (LAN)",
-      "options": {
+      "settings": {
         "baseURL": "https://ollama.hl.adeotek.cloud/v1"
       },
       // context = native ctx window from Ollama /api/show; output = ctx/4 (cap 64k)
       "models": {
-        "nemotron-3.5-lightning:30b": { "name": "Nemotron 3.5 Lightning 30B (OLL)", "tool_call": true, "limit": { "context": 1048576, "output": 65536 } },
-        "qwen3.8:27b": { "name": "Qwen3.8 27B (OLL)", "tool_call": true, "attachment": true, "limit": { "context": 262144, "output": 65536 } },
-        "qwen3-coder:30b": { "name": "Qwen3 Coder 30B (OLL)", "tool_call": true, "limit": { "context": 262144, "output": 65536 } },
-        "deepseek-r1:32b": { "name": "DeepSeek R1 32B (OLL)", "tool_call": true, "limit": { "context": 131072, "output": 32768 } },
-        "gemma4:latest": { "name": "Gemma4 8B (OLL)", "tool_call": true, "attachment": true, "limit": { "context": 131072, "output": 32768 } }
+        "nemotron-3.5-lightning:30b": {
+          "name": "Nemotron 3.5 Lightning 30B (OLL)",
+          "capabilities": { "tools": true },
+          "limit": { "context": 1048576, "output": 65536 }
+        },
+        "qwen3.8:27b": {
+          "name": "Qwen3.8 27B (OLL)",
+          "capabilities": { "tools": true },
+          "limit": { "context": 262144, "output": 65536 }
+        },
+        "qwen3-coder:30b": {
+          "name": "Qwen3 Coder 30B (OLL)",
+          "capabilities": { "tools": true },
+          "limit": { "context": 262144, "output": 65536 }
+        },
+        "deepseek-r1:32b": {
+          "name": "DeepSeek R1 32B (OLL)",
+          "capabilities": { "tools": true },
+          "limit": { "context": 131072, "output": 32768 }
+        },
+        "gemma4:latest": {
+          "name": "Gemma4 8B (OLL)",
+          "capabilities": { "tools": true },
+          "limit": { "context": 131072, "output": 32768 }
+        }
+      }
+    },
+    "llamacpp": {
+      "package": "aisdk:@ai-sdk/openai-compatible",
+      "name": "llama.cpp (LAN)",
+      "settings": {
+        "baseURL": "http://ollama1.lan:8080/v1"
+      },
+      "models": {
+        "qwen3-coder-30b": {
+          "name": "Qwen3 Coder 30B (LLCPP)",
+          "capabilities": { "tools": true },
+          "limit": { "context": 32768, "output": 16384 }
+        },
+        "qwen36-35b-mtp": {
+          "name": "Qwen3.6 35B MTP (LLCPP)",
+          "capabilities": { "tools": true },
+          "limit": { "context": 32768, "output": 16384 }
+        },
+        "nemotron-lightning-30b": {
+          "name": "Nemotron 3.5 Lightning 30B (LLCPP)",
+          "capabilities": { "tools": true },
+          "limit": { "context": 32768, "output": 16384 }
+        }
       }
     }
   // // Route LLM traffic through Headroom proxy for context compression
   //   "opencode": { "options": { "baseURL": "http://localhost:8787/v1" } },
   //   "opencode-go": { "options": { "baseURL": "http://localhost:8787/v1" } }
-  },
-  "server": {
-    "port": 9991,
-    // "hostname": "0.0.0.0",
-    "cors": [
-      "http://localhost:9991",
-      "http://127.0.0.1:9991"
-    ]
   }
 }

@@ -118,19 +118,19 @@ else
   cecho "yellow" "Global opencode-mem.jsonc file already exists at ~/.config/opencode/opencode-mem.jsonc"
 fi
 
-# Create global tui.json file if it doesn't exist
-if [[ ! -f "$HOME/.config/opencode/tui.json" ]] || [[ "$OC_OVERRIDE_CONFIG" == true ]]; then
+# Create global cli.json (V2 terminal client config) if it doesn't exist
+if [[ ! -f "$HOME/.config/opencode/cli.json" ]] || [[ "$OC_OVERRIDE_CONFIG" == true ]]; then
   if [[ "$DRY_RUN" -ne "1" ]]; then
-    if cp "$RDIR/opencode/tui.json" "$HOME/.config/opencode/tui.json"; then
-      cecho "green" "Global tui.json file created at ~/.config/opencode/tui.json"
+    if cp "$RDIR/opencode/cli.json" "$HOME/.config/opencode/cli.json"; then
+      cecho "green" "Global cli.json file created at ~/.config/opencode/cli.json"
     else
-      cecho "red" "Failed to create global tui.json file."
+      cecho "red" "Failed to create global cli.json file."
     fi
   else
-    cecho "yellow" "DRY-RUN: cp $RDIR/opencode/tui.json $HOME/.config/opencode/tui.json"
+    cecho "yellow" "DRY-RUN: cp $RDIR/opencode/cli.json $HOME/.config/opencode/cli.json"
   fi
 else
-  cecho "yellow" "Global tui.json file already exists at ~/.config/opencode/tui.json"
+  cecho "yellow" "Global cli.json file already exists at ~/.config/opencode/cli.json"
 fi
 
 # Create global AGENTS.md file if it doesn't exist
@@ -148,6 +148,7 @@ else
   cecho "yellow" "Global AGENTS.md file already exists at ~/.config/opencode/AGENTS.md"
 fi
 
-# Create missing skills/agents
+# Create missing skills/agents/plugins
 copy_files_if_missing "$RDIR/opencode/agents"  "$HOME/.config/opencode/agents"  "*.md" "$OC_OVERRIDE_CONFIG"
 copy_skills_if_missing  "$RDIR/opencode/skills" "$HOME/.config/opencode/skills" "$OC_OVERRIDE_CONFIG"
+copy_files_if_missing "$RDIR/opencode/plugins" "$HOME/.config/opencode/plugins" "*.ts" "$OC_OVERRIDE_CONFIG"
