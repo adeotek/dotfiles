@@ -20,6 +20,21 @@ paseo daemon set-password
 systemctl --user restart paseo-daemon
 ```
 
+## Update
+
+```bash
+# CLI
+npm install -g --allow-scripts=esbuild,node-pty @getpaseo/cli
+
+# Daemon
+systemctl --user restart paseo-daemon
+```
+
+Health check:
+```bash
+curl -s http://127.0.0.1:6767/api/health
+```
+
 ## Notes
 
 - Listens 0.0.0.0:6767; firewalld public zone needs 6767/tcp.
