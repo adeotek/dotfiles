@@ -11,11 +11,15 @@ npm install -g --allow-scripts=esbuild,node-pty @getpaseo/cli
 
 # 2. systemd user unit
 mkdir -p ~/.config/systemd/user
-cp .config/systemd/user/paseo-daemon.service ~/.config/systemd/user/
+cp paseo/.config/systemd/user/paseo-daemon.service ~/.config/systemd/user/
 systemctl --user daemon-reload
 systemctl --user enable --now paseo-daemon
 
-# 3. daemon password (writes bcrypt hash to ~/.paseo/config.json, then restart)
+# 3. daemon config (set to listen on all interfaces)
+paseo daemon config set daemon.listen 0.0.0.0:6767
+systemctl --user restart paseo-daemon
+
+# 4. daemon password (writes bcrypt hash to ~/.paseo/config.json, then restart)
 paseo daemon set-password
 systemctl --user restart paseo-daemon
 ```
