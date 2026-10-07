@@ -6,6 +6,9 @@ __pycache__/
 .idea/
 .vscode/
 
+# ZSH
+**/.config/zsh/prompt-tool
+
 # tmux
 tmux/.config/tmux/plugins/*
 tmux/.config/tmux/tmux.conf.local
