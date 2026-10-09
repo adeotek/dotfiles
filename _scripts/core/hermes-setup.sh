@@ -129,11 +129,14 @@ if [[ "$DRY_RUN" -ne "1" ]]; then
     cecho "yellow" "WARNING: systemd is not running in this WSL2 session yet. Edit /etc/wsl.conf ([boot] systemd=true), run 'wsl --shutdown' from Windows, reopen, and re-run this setup to activate the Hermes units."
   elif systemctl --user daemon-reload; then
     cecho "green" "systemd user daemon reloaded."
+    # --- Enable lingering (units survive logout; daily timer runs without login) ---
+    enable_lingering "Hermes units"
   else
     cecho "red" "Failed to reload systemd user daemon (is a systemd user session available?)."
   fi
 else
   cecho "yellow" "DRY-RUN: systemctl --user daemon-reload"
+  enable_lingering "Hermes units"
 fi
 
 if [[ "${HEADROOM_HERMES:-}" =~ ^[Yy]$ ]]; then

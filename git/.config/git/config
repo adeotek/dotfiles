@@ -122,6 +122,8 @@
 	#############
 	ls = ls-files
 	lsf = !git ls-files | grep -i
+	lsu = ls-files --others -x '*/*'
+	lsua = ls-files --others .
 	#############
 	m = merge
 	ma = merge --abort

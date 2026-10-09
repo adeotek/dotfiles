@@ -107,19 +107,7 @@ else
 fi
 
 # --- Enable lingering (service survives logout) ---
-if [[ "$DRY_RUN" -ne "1" ]]; then
-  if ! command -v loginctl >/dev/null 2>&1; then
-    cecho "yellow" "loginctl not found — skipping lingering; headroom-proxy may stop at logout."
-  elif loginctl show-user "$USER" 2>/dev/null | grep -q "Linger=yes"; then
-    cecho "yellow" "User lingering already enabled."
-  elif loginctl enable-linger "$USER"; then
-    cecho "green" "User lingering enabled — headroom-proxy will survive logout."
-  else
-    cecho "red" "Failed to enable user lingering for $USER."
-  fi
-else
-  cecho "yellow" "DRY-RUN: loginctl enable-linger $USER"
-fi
+enable_lingering "headroom-proxy"
 
 # --- Enable and start the service ---
 if [[ "$DRY_RUN" -ne "1" ]]; then

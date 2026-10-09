@@ -532,6 +532,27 @@ EOF
   fi
 }
 
+# Enable systemd user lingering for the current user so user services keep
+# running after logout and start at boot. No-op when already enabled.
+# Usage: enable_lingering <service-label>
+function enable_lingering() {
+  local label="$1"
+
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    if ! command -v loginctl >/dev/null 2>&1; then
+      cecho "yellow" "loginctl not found — skipping lingering; $label may stop at logout."
+    elif loginctl show-user "$USER" 2>/dev/null | grep -q "Linger=yes"; then
+      cecho "yellow" "User lingering already enabled."
+    elif loginctl enable-linger "$USER"; then
+      cecho "green" "User lingering enabled — $label will survive logout."
+    else
+      cecho "red" "Failed to enable user lingering for $USER."
+    fi
+  else
+    cecho "yellow" "DRY-RUN: loginctl enable-linger $USER"
+  fi
+}
+
 # Main
 # NOTE: sourcing this file self-invokes process_args with the caller's "$@"
 # (when the caller received any arguments), which is how setup.sh/update.sh and
