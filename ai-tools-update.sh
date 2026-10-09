@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-# Update AI tools (claude, opencode, pi, graphify, rtk) and their plugins/extensions
+# Update AI tools (claude, opencode, pi, paseo, graphify, rtk) and their plugins/extensions
 # Usage: ./ai-tools-update.sh [--dry-run]
 ###
 
@@ -45,6 +45,26 @@ fi
 if has pi; then
   section "pi"
   run pi pi update --all
+fi
+
+if has paseo; then
+  section "paseo"
+  if has npm; then
+    NPM_CMD=(sudo env "PATH=$PATH" npm)
+    # dry-run: show the planned update without running the sudo check
+    if [[ "$DRY_RUN" -eq "1" ]] || "${NPM_CMD[@]}" list -g --depth=0 2>/dev/null | grep -q '@getpaseo/cli'; then
+      run paseo "${NPM_CMD[@]}" install -g --allow-scripts=esbuild,node-pty @getpaseo/cli
+      if has systemctl && [[ -f "$HOME/.config/systemd/user/paseo-daemon.service" ]]; then
+        run paseo systemctl --user restart paseo-daemon
+      else
+        echo "  paseo-daemon systemd user unit not found — skipping restart"
+      fi
+    else
+      echo "  paseo not installed system-wide — skipping update"
+    fi
+  else
+    echo "  npm not found — skipping paseo update"
+  fi
 fi
 
 if has graphify; then

@@ -5,6 +5,14 @@ Config lives at `~/.paseo/config.json` (NOT stowed — contains daemon auth hash
 
 ## Install
 
+Automated (system-wide npm install, unit deployment, enable + start):
+
+```bash
+./unattended_setup.sh --packages paseo   # runs _scripts/core/paseo-install.sh
+```
+
+Manual:
+
 ```bash
 # 1. CLI (allow esbuild/node-pty install scripts)
 npm install -g --allow-scripts=esbuild,node-pty @getpaseo/cli
@@ -25,6 +33,14 @@ systemctl --user restart paseo-daemon
 ```
 
 ## Update
+
+Automated:
+
+```bash
+./ai-tools-update.sh   # updates the CLI and restarts paseo-daemon
+```
+
+Manual (use `sudo` for a system-wide install, plain `npm` for the `$HOME/.local` prefix):
 
 ```bash
 # CLI
