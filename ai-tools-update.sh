@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###
-# Update AI tools (claude, opencode, pi, paseo, graphify, rtk) and their plugins/extensions
+# Update AI tools (claude, opencode, pi, moca, paseo, graphify, rtk) and their plugins/extensions
 # Usage: ./ai-tools-update.sh [--dry-run]
 ###
 
@@ -45,6 +45,11 @@ fi
 if has pi; then
   section "pi"
   run pi pi update --all
+fi
+
+if has moca; then
+  section "moca"
+  run moca moca update
 fi
 
 if has paseo; then

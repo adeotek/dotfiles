@@ -1,23 +1,23 @@
 # Graph Report - .dotfiles  (2026-10-10)
 
 ## Corpus Check
-- 168 files · ~68,964 words
+- 169 files · ~69,320 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 42 file(s) not represented in the graph (top: (none) 7, .toml 7, .service 6)
 
 ## Summary
-- 585 nodes · 1070 edges · 73 communities (37 shown, 36 thin omitted)
-- Extraction: 83% EXTRACTED · 17% INFERRED · 0% AMBIGUOUS · INFERRED: 182 edges (avg confidence: 0.61)
+- 587 nodes · 1073 edges · 75 communities (36 shown, 39 thin omitted)
+- Extraction: 83% EXTRACTED · 17% INFERRED · 0% AMBIGUOUS · INFERRED: 183 edges (avg confidence: 0.61)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `103dd3c1`
+- Built from commit: `f9ec8622`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- uv-install.sh
-- install_package
+- ghostty-install.sh
+- _helpers.sh
 - Dotfiles README
 - starship-install.sh
 - statusline-command.sh
@@ -42,7 +42,7 @@
 - expert.md
 - tutor.md
 - cache-clean.sh
-- _helpers.sh
+- cecho
 - hermes-update-daily.sh
 - devops.md
 - .NET Backend Expert Agent (opencode)
@@ -58,19 +58,21 @@
 - dev.md
 - Tabby terminal config
 - zsh_plugins.txt — External ZSH Plugin Manifest
-- decho
+- install_package
 - cli.json
 - kitty-install.sh
-- cecho
+- microsoft-repo-install.sh
 - fastfetch-install.sh
-- nodejs-install.sh
+- git-install.sh
 - ai-tools-update.sh
 - herdr-setup.sh
 - init-agents.md
+- jetbrains-toolbox-install.sh
 - tmux-install.sh
+- github-cli-install.sh
 
 ## God Nodes (most connected - your core abstractions)
-1. `cecho()` - 71 edges
+1. `cecho()` - 72 edges
 2. `install_package()` - 31 edges
 3. `decho()` - 22 edges
 4. `stow_package()` - 22 edges
@@ -115,15 +117,15 @@
 - **Claude Code Statusline Variants** — claude_code_user_config_statusline_command, claude_code_user_config_statusline_command_win, claude_code_user_config_statusline_slim [INFERRED 0.95]
 - **Windows Network & Firewall Tools** — win_tools_tools_add_winfirewallrule, win_tools_tools_get_winfirewallrulebyport, win_tools_run_port_listen, win_tools_run_port_probe [INFERRED 0.95]
 
-## Communities (73 total, 36 thin omitted)
+## Communities (75 total, 39 thin omitted)
 
-### Community 0 - "uv-install.sh"
-Cohesion: 0.20
-Nodes (5): ansible-cleanup.sh script, ansible-install.sh script, graphify-install.sh script, headroom-install.sh script, uv-install.sh script
+### Community 0 - "ghostty-install.sh"
+Cohesion: 0.22
+Nodes (5): ghostty-install.sh script, ghostty-setup.sh script, zed-install.sh script, zed-setup.sh script, Zed Editor settings.json
 
-### Community 1 - "install_package"
-Cohesion: 0.11
-Nodes (13): base-tools-install.sh script, glow-install.sh script, install_package(), HOMEBREW_NO_ASK, homebrew-install.sh script, lsp-servers-install.sh script, onefetch-install.sh script, rtk-install.sh script (+5 more)
+### Community 1 - "_helpers.sh"
+Cohesion: 0.08
+Nodes (20): Dry-Run Safety Pattern, Dry-Run Pattern in PowerShell Tools, Multi-Distro Support (Arch/Debian/Fedora), OS-Dispatch Pattern (case $CURRENT_OS_ID), stow_package() Helper Function, base-tools-install.sh script, glow-install.sh script, get_stow_command() (+12 more)
 
 ### Community 2 - "Dotfiles README"
 Cohesion: 0.07
@@ -158,8 +160,8 @@ Cohesion: 0.14
 Nodes (13): git commit *, git push *, rm *, sudo *, /tmp/*, *.env, *.env.example, next-env.d.ts (+5 more)
 
 ### Community 10 - "claude-code-setup.sh"
-Cohesion: 0.20
-Nodes (8): AI Coding Tools (claude-code + opencode), Claude Code Plugin Marketplace, claude-code-install.sh script, CLAUDECODE_MARKETPLACES, CLAUDECODE_PLUGINS, claude-code-setup.sh script, opencode-install.sh script, Run-LocalWinEnvSetup.ps1 (Windows Dev Setup)
+Cohesion: 0.17
+Nodes (9): AI Coding Tools (claude-code + opencode), Claude Code Plugin Marketplace, claude-code-install.sh script, CLAUDECODE_MARKETPLACES, CLAUDECODE_PLUGINS, claude-code-setup.sh script, opencode-install.sh script, playwright-install.sh script (+1 more)
 
 ### Community 11 - "AdeoTEK Scripting Best Practices (Strictly Enforced)"
 Cohesion: 0.18
@@ -217,9 +219,9 @@ Nodes (4): Core Principles, Response Style, When to Make Changes, Guided Learnin
 Cohesion: 0.22
 Nodes (38): cecho(), dir_size_kb(), have(), human_lines_to_kb(), in_use(), measure(), path_in_use(), prune_old_entries() (+30 more)
 
-### Community 28 - "_helpers.sh"
-Cohesion: 0.11
-Nodes (21): Dry-Run Safety Pattern, Dry-Run Pattern in PowerShell Tools, Multi-Distro Support (Arch/Debian/Fedora), OS-Dispatch Pattern (case $CURRENT_OS_ID), stow_package() Helper Function, docker-install.sh script, headroom-setup.sh script, copy_files_if_missing() (+13 more)
+### Community 28 - "cecho"
+Cohesion: 0.09
+Nodes (24): ansible-cleanup.sh script, ansible-install.sh script, docker-install.sh script, golang-install.sh script, graphify-install.sh script, headroom-install.sh script, headroom-setup.sh script, aecho() (+16 more)
 
 ### Community 33 - ".NET Backend Expert Agent (opencode)"
 Cohesion: 1.00
@@ -233,9 +235,9 @@ Nodes (6): CORS, FORWARD, OPT_CORS, serve_args, start-opencode-server.sh script,
 Cohesion: 0.24
 Nodes (29): Format-KB(), Get-SizeKB(), Invoke-StepResult(), Invoke-ToolClean(), Measure-Paths(), Remove-CachePath(), Remove-OldEntries(), Remove-VsCodeServerStale() (+21 more)
 
-### Community 62 - "decho"
-Cohesion: 0.10
-Nodes (17): aws-cli-install.sh script, ghostty-install.sh script, ghostty-setup.sh script, helm-install.sh script, decho(), execute_command(), rename_dir_if_exists(), rename_file_if_exists() (+9 more)
+### Community 62 - "install_package"
+Cohesion: 0.15
+Nodes (17): aws-cli-install.sh script, gcp-cli-install.sh script, helm-install.sh script, decho(), execute_command(), install_package(), rename_dir_if_exists(), rename_file_if_exists() (+9 more)
 
 ### Community 63 - "cli.json"
 Cohesion: 0.17
@@ -245,13 +247,9 @@ Nodes (11): animations, diffs, wrap, $schema, session, scrollbar, sidebar, think
 Cohesion: 0.24
 Nodes (6): Install-Then-Setup Pattern, Terminal Emulator, kitty-install.sh script, kitty-setup.sh script, tabby-install.sh script, tabby-setup.sh script
 
-### Community 65 - "cecho"
-Cohesion: 0.09
-Nodes (16): dotnet-install.sh script, gcp-cli-install.sh script, git-install.sh script, git-setup.sh script, github-cli-install.sh script, golang-install.sh script, aecho(), cecho() (+8 more)
-
-### Community 67 - "nodejs-install.sh"
+### Community 65 - "microsoft-repo-install.sh"
 Cohesion: 0.25
-Nodes (4): nodejs-install.sh script, nvim-install.sh script, nvim-setup.sh script, playwright-install.sh script
+Nodes (4): dotnet-install.sh script, microsoft-repo-install.sh script, powershell-install.sh script, vscode-install.sh script
 
 ### Community 68 - "ai-tools-update.sh"
 Cohesion: 0.70
@@ -268,22 +266,22 @@ Nodes (3): Pitfalls, Procedure, Verification (do before reporting done)
 ## Knowledge Gaps
 - **54 isolated node(s):** `MINIMAL_TASKS`, `CONSOLE_ONLY_TASKS`, `CONSOLE_TASKS`, `CONSOLE_EXTRA_TASKS`, `ALL_CONSOLE_TASKS` (+49 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 171 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **36 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **39 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cecho()` connect `cecho` to `uv-install.sh`, `install_package`, `fastfetch-install.sh`, `starship-install.sh`, `kitty-install.sh`, `herdr-setup.sh`, `nodejs-install.sh`, `tmux-install.sh`, `claude-code-setup.sh`, `k8s-repo-install.sh`, `pi-install.sh`, `_helpers.sh`, `decho`?**
+- **Why does `cecho()` connect `cecho` to `ghostty-install.sh`, `microsoft-repo-install.sh`, `_helpers.sh`, `starship-install.sh`, `fastfetch-install.sh`, `git-install.sh`, `herdr-setup.sh`, `jetbrains-toolbox-install.sh`, `kitty-install.sh`, `tmux-install.sh`, `claude-code-setup.sh`, `github-cli-install.sh`, `k8s-repo-install.sh`, `pi-install.sh`, `install_package`?**
   _High betweenness centrality (0.038) - this node is a cross-community bridge._
 - **What connects `MINIMAL_TASKS`, `CONSOLE_ONLY_TASKS`, `CONSOLE_TASKS` to the rest of the system?**
   _54 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `install_package` be split into smaller, more focused modules?**
-  _Cohesion score 0.10666666666666667 - nodes in this community are weakly interconnected._
-- **Why does `install_package()` connect `install_package` to `kitty-install.sh`, `cecho`, `fastfetch-install.sh`, `starship-install.sh`, `nodejs-install.sh`, `tmux-install.sh`, `k8s-repo-install.sh`, `_helpers.sh`, `decho`?**
+- **Should `_helpers.sh` be split into smaller, more focused modules?**
+  _Cohesion score 0.08108108108108109 - nodes in this community are weakly interconnected._
+- **Why does `install_package()` connect `install_package` to `ghostty-install.sh`, `microsoft-repo-install.sh`, `fastfetch-install.sh`, `git-install.sh`, `_helpers.sh`, `kitty-install.sh`, `starship-install.sh`, `tmux-install.sh`, `github-cli-install.sh`, `k8s-repo-install.sh`, `cecho`?**
   _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Should `Dotfiles README` be split into smaller, more focused modules?**
   _Cohesion score 0.0748663101604278 - nodes in this community are weakly interconnected._
-- **Why does `stow_package()` connect `decho` to `kitty-install.sh`, `cecho`, `fastfetch-install.sh`, `starship-install.sh`, `install_package`, `nodejs-install.sh`, `tmux-install.sh`, `_helpers.sh`?**
+- **Why does `stow_package()` connect `install_package` to `ghostty-install.sh`, `_helpers.sh`, `fastfetch-install.sh`, `git-install.sh`, `starship-install.sh`, `kitty-install.sh`, `tmux-install.sh`, `cecho`?**
   _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **Should `_options.sh` be split into smaller, more focused modules?**
   _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._

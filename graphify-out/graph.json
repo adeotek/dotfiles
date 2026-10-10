@@ -254,7 +254,7 @@
       }
     ],
     "schema_version": 1,
-    "graphify_version": "0.9.82"
+    "graphify_version": "0.9.84"
   },
   "nodes": [
     {
@@ -390,153 +390,123 @@
       "source_location": "L41"
     },
     {
-      "id": "scripts_core_ansible_cleanup",
-      "label": "ansible-cleanup.sh",
+      "id": "scripts_core_ghostty_install",
+      "label": "ghostty-install.sh",
       "_origin": "ast",
       "community": 0,
-      "community_name": "uv-install.sh",
+      "community_name": "ghostty-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "ansible-cleanup.sh",
-      "source_file": "_scripts/core/ansible-cleanup.sh",
+      "norm_label": "ghostty-install.sh",
+      "source_file": "_scripts/core/ghostty-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_ansible_cleanup_sh__entry",
-      "label": "ansible-cleanup.sh script",
+      "id": "scripts_core_ghostty_install_sh__entry",
+      "label": "ghostty-install.sh script",
       "_origin": "ast",
       "community": 0,
-      "community_name": "uv-install.sh",
+      "community_name": "ghostty-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "ansible-cleanup.sh script",
-      "source_file": "_scripts/core/ansible-cleanup.sh",
+      "norm_label": "ghostty-install.sh script",
+      "source_file": "_scripts/core/ghostty-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_ansible_install",
-      "label": "ansible-install.sh",
+      "id": "scripts_core_ghostty_setup",
+      "label": "ghostty-setup.sh",
       "_origin": "ast",
       "community": 0,
-      "community_name": "uv-install.sh",
+      "community_name": "ghostty-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "ansible-install.sh",
-      "source_file": "_scripts/core/ansible-install.sh",
+      "norm_label": "ghostty-setup.sh",
+      "source_file": "_scripts/core/ghostty-setup.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_ansible_install_sh__entry",
-      "label": "ansible-install.sh script",
+      "id": "scripts_core_ghostty_setup_sh__entry",
+      "label": "ghostty-setup.sh script",
       "_origin": "ast",
       "community": 0,
-      "community_name": "uv-install.sh",
+      "community_name": "ghostty-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "ansible-install.sh script",
-      "source_file": "_scripts/core/ansible-install.sh",
+      "norm_label": "ghostty-setup.sh script",
+      "source_file": "_scripts/core/ghostty-setup.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_graphify_install",
-      "label": "graphify-install.sh",
+      "id": "scripts_core_zed_install",
+      "label": "zed-install.sh",
       "_origin": "ast",
       "community": 0,
-      "community_name": "uv-install.sh",
+      "community_name": "ghostty-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "graphify-install.sh",
-      "source_file": "_scripts/core/graphify-install.sh",
+      "norm_label": "zed-install.sh",
+      "source_file": "_scripts/core/zed-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_graphify_install_sh__entry",
-      "label": "graphify-install.sh script",
+      "id": "scripts_core_zed_install_sh__entry",
+      "label": "zed-install.sh script",
       "_origin": "ast",
       "community": 0,
-      "community_name": "uv-install.sh",
+      "community_name": "ghostty-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "graphify-install.sh script",
-      "source_file": "_scripts/core/graphify-install.sh",
+      "norm_label": "zed-install.sh script",
+      "source_file": "_scripts/core/zed-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_headroom_install",
-      "label": "headroom-install.sh",
+      "id": "scripts_core_zed_setup",
+      "label": "zed-setup.sh",
       "_origin": "ast",
       "community": 0,
-      "community_name": "uv-install.sh",
+      "community_name": "ghostty-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "headroom-install.sh",
-      "source_file": "_scripts/core/headroom-install.sh",
+      "norm_label": "zed-setup.sh",
+      "source_file": "_scripts/core/zed-setup.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_headroom_install_sh__entry",
-      "label": "headroom-install.sh script",
+      "id": "scripts_core_zed_setup_sh__entry",
+      "label": "zed-setup.sh script",
       "_origin": "ast",
       "community": 0,
-      "community_name": "uv-install.sh",
+      "community_name": "ghostty-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "headroom-install.sh script",
-      "source_file": "_scripts/core/headroom-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_uv_install",
-      "label": "uv-install.sh",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "uv-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "uv-install.sh",
-      "source_file": "_scripts/core/uv-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_uv_install_sh__entry",
-      "label": "uv-install.sh script",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "uv-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "uv-install.sh script",
-      "source_file": "_scripts/core/uv-install.sh",
+      "norm_label": "zed-setup.sh script",
+      "source_file": "_scripts/core/zed-setup.sh",
       "source_location": "L1"
     },
     {
@@ -544,7 +514,7 @@
       "label": "base-tools-install.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -559,7 +529,7 @@
       "label": "base-tools-install.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -574,7 +544,7 @@
       "label": "glow-install.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -589,7 +559,7 @@
       "label": "glow-install.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -600,26 +570,56 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_helpers_install_package",
-      "label": "install_package()",
+      "id": "scripts_core_helpers",
+      "label": "_helpers.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "_helpers.sh",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_helpers_get_stow_command",
+      "label": "get_stow_command()",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
-      "norm_label": "install_package()",
+      "norm_label": "get_stow_command()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L306"
+      "source_location": "L355"
+    },
+    {
+      "id": "scripts_core_helpers_get_vv",
+      "label": "get_vv()",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "get_vv()",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L211"
     },
     {
       "id": "scripts_core_homebrew_install",
       "label": "homebrew-install.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -634,7 +634,7 @@
       "label": "HOMEBREW_NO_ASK",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -649,7 +649,7 @@
       "label": "homebrew-install.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -664,7 +664,7 @@
       "label": "lsp-servers-install.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -675,18 +675,48 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_lsp_servers_install_sh__entry",
-      "label": "lsp-servers-install.sh script",
+      "id": "scripts_core_nodejs_install",
+      "label": "nodejs-install.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
-        "kind": "bash_entrypoint"
+        "kind": "file"
       },
-      "norm_label": "lsp-servers-install.sh script",
-      "source_file": "_scripts/core/lsp-servers-install.sh",
+      "norm_label": "nodejs-install.sh",
+      "source_file": "_scripts/core/nodejs-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_nvim_install",
+      "label": "nvim-install.sh",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "nvim-install.sh",
+      "source_file": "_scripts/core/nvim-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_nvim_setup",
+      "label": "nvim-setup.sh",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "nvim-setup.sh",
+      "source_file": "_scripts/core/nvim-setup.sh",
       "source_location": "L1"
     },
     {
@@ -694,7 +724,7 @@
       "label": "onefetch-install.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -709,7 +739,7 @@
       "label": "onefetch-install.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -720,11 +750,26 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_paseo_install",
+      "label": "paseo-install.sh",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "paseo-install.sh",
+      "source_file": "_scripts/core/paseo-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_rtk_install",
       "label": "rtk-install.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -739,7 +784,7 @@
       "label": "rtk-install.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -750,11 +795,41 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_rtk_setup",
+      "label": "rtk-setup.sh",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "rtk-setup.sh",
+      "source_file": "_scripts/core/rtk-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_rtk_setup_sh__entry",
+      "label": "rtk-setup.sh script",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "rtk-setup.sh script",
+      "source_file": "_scripts/core/rtk-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_rustup_install",
       "label": "rustup-install.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -769,7 +844,7 @@
       "label": "rustup-install.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -780,41 +855,11 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_terraform_install",
-      "label": "terraform-install.sh",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "install_package",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "terraform-install.sh",
-      "source_file": "_scripts/core/terraform-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_terraform_install_sh__entry",
-      "label": "terraform-install.sh script",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "install_package",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "terraform-install.sh script",
-      "source_file": "_scripts/core/terraform-install.sh",
-      "source_location": "L1"
-    },
-    {
       "id": "scripts_core_yazi_install",
       "label": "yazi-install.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -829,7 +874,7 @@
       "label": "yazi-setup.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -844,7 +889,7 @@
       "label": "yazi-setup.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -859,7 +904,7 @@
       "label": "zellij-install.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -874,7 +919,7 @@
       "label": "zellij-install.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -885,11 +930,41 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_zellij_setup",
+      "label": "zellij-setup.sh",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "zellij-setup.sh",
+      "source_file": "_scripts/core/zellij-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_zellij_setup_sh__entry",
+      "label": "zellij-setup.sh script",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "zellij-setup.sh script",
+      "source_file": "_scripts/core/zellij-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_zsh_install",
       "label": "zsh-install.sh",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -904,7 +979,7 @@
       "label": "zsh-install.sh script",
       "_origin": "ast",
       "community": 1,
-      "community_name": "install_package",
+      "community_name": "_helpers.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -1032,6 +1107,36 @@
       },
       "norm_label": "opencode-install.sh script",
       "source_file": "_scripts/core/opencode-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_playwright_install",
+      "label": "playwright-install.sh",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "claude-code-setup.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "playwright-install.sh",
+      "source_file": "_scripts/core/playwright-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_playwright_install_sh__entry",
+      "label": "playwright-install.sh script",
+      "_origin": "ast",
+      "community": 10,
+      "community_name": "claude-code-setup.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "playwright-install.sh script",
+      "source_file": "_scripts/core/playwright-install.sh",
       "source_location": "L1"
     },
     {
@@ -2822,11 +2927,71 @@
       "source_location": "L129"
     },
     {
+      "id": "scripts_core_ansible_cleanup",
+      "label": "ansible-cleanup.sh",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "ansible-cleanup.sh",
+      "source_file": "_scripts/core/ansible-cleanup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_ansible_cleanup_sh__entry",
+      "label": "ansible-cleanup.sh script",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "ansible-cleanup.sh script",
+      "source_file": "_scripts/core/ansible-cleanup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_ansible_install",
+      "label": "ansible-install.sh",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "ansible-install.sh",
+      "source_file": "_scripts/core/ansible-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_ansible_install_sh__entry",
+      "label": "ansible-install.sh script",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "ansible-install.sh script",
+      "source_file": "_scripts/core/ansible-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_docker_install",
       "label": "docker-install.sh",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2841,7 +3006,7 @@
       "label": "docker-install.sh script",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2852,11 +3017,101 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_golang_install",
+      "label": "golang-install.sh",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "golang-install.sh",
+      "source_file": "_scripts/core/golang-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_golang_install_sh__entry",
+      "label": "golang-install.sh script",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "golang-install.sh script",
+      "source_file": "_scripts/core/golang-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_graphify_install",
+      "label": "graphify-install.sh",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "graphify-install.sh",
+      "source_file": "_scripts/core/graphify-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_graphify_install_sh__entry",
+      "label": "graphify-install.sh script",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "graphify-install.sh script",
+      "source_file": "_scripts/core/graphify-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_headroom_install",
+      "label": "headroom-install.sh",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "headroom-install.sh",
+      "source_file": "_scripts/core/headroom-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_headroom_install_sh__entry",
+      "label": "headroom-install.sh script",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "headroom-install.sh script",
+      "source_file": "_scripts/core/headroom-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_headroom_setup",
       "label": "headroom-setup.sh",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2871,7 +3126,7 @@
       "label": "headroom-setup.sh script",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2882,26 +3137,41 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_helpers",
-      "label": "_helpers.sh",
+      "id": "scripts_core_helpers_aecho",
+      "label": "aecho()",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
-        "kind": "file"
+        "kind": "bash_function"
       },
-      "norm_label": "_helpers.sh",
+      "norm_label": "aecho()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L1"
+      "source_location": "L106"
+    },
+    {
+      "id": "scripts_core_helpers_cecho",
+      "label": "cecho()",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "cecho()",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L67"
     },
     {
       "id": "scripts_core_helpers_copy_files_if_missing",
       "label": "copy_files_if_missing()",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2916,7 +3186,7 @@
       "label": "enable_lingering()",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2931,7 +3201,7 @@
       "label": "enable_wsl_systemd()",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2942,41 +3212,26 @@
       "source_location": "L524"
     },
     {
-      "id": "scripts_core_helpers_get_stow_command",
-      "label": "get_stow_command()",
+      "id": "scripts_core_helpers_increase_ulimit",
+      "label": "increase_ulimit()",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_function"
       },
-      "norm_label": "get_stow_command()",
+      "norm_label": "increase_ulimit()",
       "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L355"
-    },
-    {
-      "id": "scripts_core_helpers_get_vv",
-      "label": "get_vv()",
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "_helpers.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_function"
-      },
-      "norm_label": "get_vv()",
-      "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L211"
+      "source_location": "L276"
     },
     {
       "id": "scripts_core_helpers_read_key",
       "label": "read_key()",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -2991,7 +3246,7 @@
       "label": "read_yes_no()",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -3006,7 +3261,7 @@
       "label": "hermes-install.sh",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -3021,7 +3276,7 @@
       "label": "hermes-install.sh script",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -3036,7 +3291,7 @@
       "label": "hermes-setup.sh",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -3051,7 +3306,7 @@
       "label": "hermes-setup.sh script",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -3062,11 +3317,71 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_mise_install",
+      "label": "mise-install.sh",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "mise-install.sh",
+      "source_file": "_scripts/core/mise-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_mise_install_sh__entry",
+      "label": "mise-install.sh script",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "mise-install.sh script",
+      "source_file": "_scripts/core/mise-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_moca_install",
+      "label": "moca-install.sh",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "moca-install.sh",
+      "source_file": "_scripts/core/moca-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_moca_install_sh__entry",
+      "label": "moca-install.sh script",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "moca-install.sh script",
+      "source_file": "_scripts/core/moca-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_opencode_setup",
       "label": "opencode-setup.sh",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -3081,7 +3396,7 @@
       "label": "copy_skills_if_missing()",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -3096,7 +3411,7 @@
       "label": "opencode-setup.sh script",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -3107,26 +3422,11 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_paseo_install",
-      "label": "paseo-install.sh",
-      "_origin": "ast",
-      "community": 28,
-      "community_name": "_helpers.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "paseo-install.sh",
-      "source_file": "_scripts/core/paseo-install.sh",
-      "source_location": "L1"
-    },
-    {
       "id": "scripts_core_paseo_install_sh__entry",
       "label": "paseo-install.sh script",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -3137,33 +3437,48 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_zellij_setup",
-      "label": "zellij-setup.sh",
+      "id": "scripts_core_uv_install",
+      "label": "uv-install.sh",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "zellij-setup.sh",
-      "source_file": "_scripts/core/zellij-setup.sh",
+      "norm_label": "uv-install.sh",
+      "source_file": "_scripts/core/uv-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_zellij_setup_sh__entry",
-      "label": "zellij-setup.sh script",
+      "id": "scripts_core_uv_install_sh__entry",
+      "label": "uv-install.sh script",
       "_origin": "ast",
       "community": 28,
-      "community_name": "_helpers.sh",
+      "community_name": "cecho",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "zellij-setup.sh script",
-      "source_file": "_scripts/core/zellij-setup.sh",
+      "norm_label": "uv-install.sh script",
+      "source_file": "_scripts/core/uv-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_yazi_install_sh__entry",
+      "label": "yazi-install.sh script",
+      "_origin": "ast",
+      "community": 28,
+      "community_name": "cecho",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "yazi-install.sh script",
+      "source_file": "_scripts/core/yazi-install.sh",
       "source_location": "L1"
     },
     {
@@ -4524,7 +4839,7 @@
       },
       "norm_label": "all_console_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L75"
+      "source_location": "L76"
     },
     {
       "id": "scripts_core_options_all_desktop_tasks",
@@ -4539,7 +4854,7 @@
       },
       "norm_label": "all_desktop_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L96"
+      "source_location": "L97"
     },
     {
       "id": "scripts_core_options_all_tasks",
@@ -4554,7 +4869,7 @@
       },
       "norm_label": "all_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L103"
+      "source_location": "L104"
     },
     {
       "id": "scripts_core_options_console_extra_tasks",
@@ -4614,7 +4929,7 @@
       },
       "norm_label": "desktop_extra_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L90"
+      "source_location": "L91"
     },
     {
       "id": "scripts_core_options_desktop_only_tasks",
@@ -4629,7 +4944,7 @@
       },
       "norm_label": "desktop_only_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L80"
+      "source_location": "L81"
     },
     {
       "id": "scripts_core_options_desktop_tasks",
@@ -4644,7 +4959,7 @@
       },
       "norm_label": "desktop_tasks",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L85"
+      "source_location": "L86"
     },
     {
       "id": "scripts_core_options_menu_options",
@@ -4659,7 +4974,7 @@
       },
       "norm_label": "menu_options",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L115"
+      "source_location": "L116"
     },
     {
       "id": "scripts_core_options_minimal_tasks",
@@ -4704,7 +5019,7 @@
       },
       "norm_label": "task_args",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L174"
+      "source_location": "L176"
     },
     {
       "id": "scripts_core_options_task_types",
@@ -4719,7 +5034,7 @@
       },
       "norm_label": "task_types",
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L123"
+      "source_location": "L124"
     },
     {
       "id": "nvim_config_nvim_lua_plugins_copilot",
@@ -4942,7 +5257,7 @@
       "label": "aws-cli-install.sh",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4957,7 +5272,7 @@
       "label": "aws-cli-install.sh script",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -4968,63 +5283,33 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_ghostty_install",
-      "label": "ghostty-install.sh",
+      "id": "scripts_core_gcp_cli_install",
+      "label": "gcp-cli-install.sh",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "ghostty-install.sh",
-      "source_file": "_scripts/core/ghostty-install.sh",
+      "norm_label": "gcp-cli-install.sh",
+      "source_file": "_scripts/core/gcp-cli-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_ghostty_install_sh__entry",
-      "label": "ghostty-install.sh script",
+      "id": "scripts_core_gcp_cli_install_sh__entry",
+      "label": "gcp-cli-install.sh script",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "ghostty-install.sh script",
-      "source_file": "_scripts/core/ghostty-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_ghostty_setup",
-      "label": "ghostty-setup.sh",
-      "_origin": "ast",
-      "community": 62,
-      "community_name": "decho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "ghostty-setup.sh",
-      "source_file": "_scripts/core/ghostty-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_ghostty_setup_sh__entry",
-      "label": "ghostty-setup.sh script",
-      "_origin": "ast",
-      "community": 62,
-      "community_name": "decho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "ghostty-setup.sh script",
-      "source_file": "_scripts/core/ghostty-setup.sh",
+      "norm_label": "gcp-cli-install.sh script",
+      "source_file": "_scripts/core/gcp-cli-install.sh",
       "source_location": "L1"
     },
     {
@@ -5032,7 +5317,7 @@
       "label": "helm-install.sh script",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5047,7 +5332,7 @@
       "label": "decho()",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5062,7 +5347,7 @@
       "label": "execute_command()",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5073,11 +5358,26 @@
       "source_location": "L219"
     },
     {
+      "id": "scripts_core_helpers_install_package",
+      "label": "install_package()",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "install_package",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "norm_label": "install_package()",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": "L306"
+    },
+    {
       "id": "scripts_core_helpers_rename_dir_if_exists",
       "label": "rename_dir_if_exists()",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5092,7 +5392,7 @@
       "label": "rename_file_if_exists()",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5107,7 +5407,7 @@
       "label": "stow_package()",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5122,7 +5422,7 @@
       "label": "symlink_package_file()",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5133,63 +5433,63 @@
       "source_location": "L440"
     },
     {
-      "id": "scripts_core_jetbrains_toolbox_install",
-      "label": "jetbrains-toolbox-install.sh",
+      "id": "scripts_core_lsp_servers_install_sh__entry",
+      "label": "lsp-servers-install.sh script",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "jetbrains-toolbox-install.sh",
-      "source_file": "_scripts/core/jetbrains-toolbox-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_jetbrains_toolbox_install_sh__entry",
-      "label": "jetbrains-toolbox-install.sh script",
-      "_origin": "ast",
-      "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "jetbrains-toolbox-install.sh script",
-      "source_file": "_scripts/core/jetbrains-toolbox-install.sh",
+      "norm_label": "lsp-servers-install.sh script",
+      "source_file": "_scripts/core/lsp-servers-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_jetbrains_toolbox_setup",
-      "label": "jetbrains-toolbox-setup.sh",
+      "id": "scripts_core_nodejs_install_sh__entry",
+      "label": "nodejs-install.sh script",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "jetbrains-toolbox-setup.sh",
-      "source_file": "_scripts/core/jetbrains-toolbox-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_jetbrains_toolbox_setup_sh__entry",
-      "label": "jetbrains-toolbox-setup.sh script",
-      "_origin": "ast",
-      "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "jetbrains-toolbox-setup.sh script",
-      "source_file": "_scripts/core/jetbrains-toolbox-setup.sh",
+      "norm_label": "nodejs-install.sh script",
+      "source_file": "_scripts/core/nodejs-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_nvim_install_sh__entry",
+      "label": "nvim-install.sh script",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "install_package",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "nvim-install.sh script",
+      "source_file": "_scripts/core/nvim-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_nvim_setup_sh__entry",
+      "label": "nvim-setup.sh script",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "install_package",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "nvim-setup.sh script",
+      "source_file": "_scripts/core/nvim-setup.sh",
       "source_location": "L1"
     },
     {
@@ -5197,7 +5497,7 @@
       "label": "system-update.sh",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5212,7 +5512,7 @@
       "label": "system-update.sh script",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5223,11 +5523,41 @@
       "source_location": "L1"
     },
     {
+      "id": "scripts_core_terraform_install",
+      "label": "terraform-install.sh",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "install_package",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "terraform-install.sh",
+      "source_file": "_scripts/core/terraform-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_terraform_install_sh__entry",
+      "label": "terraform-install.sh script",
+      "_origin": "ast",
+      "community": 62,
+      "community_name": "install_package",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "terraform-install.sh script",
+      "source_file": "_scripts/core/terraform-install.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_tools_setup",
       "label": "tools-setup.sh",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5242,7 +5572,7 @@
       "label": "tools-setup.sh script",
       "_origin": "ast",
       "community": 62,
-      "community_name": "decho",
+      "community_name": "install_package",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5250,66 +5580,6 @@
       },
       "norm_label": "tools-setup.sh script",
       "source_file": "_scripts/core/tools-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_zed_install",
-      "label": "zed-install.sh",
-      "_origin": "ast",
-      "community": 62,
-      "community_name": "decho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "zed-install.sh",
-      "source_file": "_scripts/core/zed-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_zed_install_sh__entry",
-      "label": "zed-install.sh script",
-      "_origin": "ast",
-      "community": 62,
-      "community_name": "decho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "zed-install.sh script",
-      "source_file": "_scripts/core/zed-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_zed_setup",
-      "label": "zed-setup.sh",
-      "_origin": "ast",
-      "community": 62,
-      "community_name": "decho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "zed-setup.sh",
-      "source_file": "_scripts/core/zed-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_zed_setup_sh__entry",
-      "label": "zed-setup.sh script",
-      "_origin": "ast",
-      "community": 62,
-      "community_name": "decho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "zed-setup.sh script",
-      "source_file": "_scripts/core/zed-setup.sh",
       "source_location": "L1"
     },
     {
@@ -5569,7 +5839,7 @@
       "label": "dotnet-install.sh",
       "_origin": "ast",
       "community": 65,
-      "community_name": "cecho",
+      "community_name": "microsoft-repo-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5584,7 +5854,7 @@
       "label": "dotnet-install.sh script",
       "_origin": "ast",
       "community": 65,
-      "community_name": "cecho",
+      "community_name": "microsoft-repo-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5595,206 +5865,11 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_gcp_cli_install",
-      "label": "gcp-cli-install.sh",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "gcp-cli-install.sh",
-      "source_file": "_scripts/core/gcp-cli-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_gcp_cli_install_sh__entry",
-      "label": "gcp-cli-install.sh script",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "gcp-cli-install.sh script",
-      "source_file": "_scripts/core/gcp-cli-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_git_install",
-      "label": "git-install.sh",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "git-install.sh",
-      "source_file": "_scripts/core/git-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_git_install_sh__entry",
-      "label": "git-install.sh script",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "git-install.sh script",
-      "source_file": "_scripts/core/git-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_git_setup",
-      "label": "git-setup.sh",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "git-setup.sh",
-      "source_file": "_scripts/core/git-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_git_setup_sh__entry",
-      "label": "git-setup.sh script",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "git-setup.sh script",
-      "source_file": "_scripts/core/git-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_github_cli_install",
-      "label": "github-cli-install.sh",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "github-cli-install.sh",
-      "source_file": "_scripts/core/github-cli-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_github_cli_install_sh__entry",
-      "label": "github-cli-install.sh script",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "github-cli-install.sh script",
-      "source_file": "_scripts/core/github-cli-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_golang_install",
-      "label": "golang-install.sh",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "golang-install.sh",
-      "source_file": "_scripts/core/golang-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_golang_install_sh__entry",
-      "label": "golang-install.sh script",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "golang-install.sh script",
-      "source_file": "_scripts/core/golang-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_helpers_aecho",
-      "label": "aecho()",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_function"
-      },
-      "norm_label": "aecho()",
-      "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L106"
-    },
-    {
-      "id": "scripts_core_helpers_cecho",
-      "label": "cecho()",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_function"
-      },
-      "norm_label": "cecho()",
-      "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L67"
-    },
-    {
-      "id": "scripts_core_helpers_increase_ulimit",
-      "label": "increase_ulimit()",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_function"
-      },
-      "norm_label": "increase_ulimit()",
-      "source_file": "_scripts/core/_helpers.sh",
-      "source_location": "L276"
-    },
-    {
       "id": "scripts_core_microsoft_repo_install",
       "label": "microsoft-repo-install.sh",
       "_origin": "ast",
       "community": 65,
-      "community_name": "cecho",
+      "community_name": "microsoft-repo-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5809,7 +5884,7 @@
       "label": "microsoft-repo-install.sh script",
       "_origin": "ast",
       "community": 65,
-      "community_name": "cecho",
+      "community_name": "microsoft-repo-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5820,41 +5895,11 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_mise_install",
-      "label": "mise-install.sh",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "mise-install.sh",
-      "source_file": "_scripts/core/mise-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_mise_install_sh__entry",
-      "label": "mise-install.sh script",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "mise-install.sh script",
-      "source_file": "_scripts/core/mise-install.sh",
-      "source_location": "L1"
-    },
-    {
       "id": "scripts_core_powershell_install",
       "label": "powershell-install.sh",
       "_origin": "ast",
       "community": 65,
-      "community_name": "cecho",
+      "community_name": "microsoft-repo-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5869,7 +5914,7 @@
       "label": "powershell-install.sh script",
       "_origin": "ast",
       "community": 65,
-      "community_name": "cecho",
+      "community_name": "microsoft-repo-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5880,41 +5925,11 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_rtk_setup",
-      "label": "rtk-setup.sh",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "rtk-setup.sh",
-      "source_file": "_scripts/core/rtk-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_rtk_setup_sh__entry",
-      "label": "rtk-setup.sh script",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "rtk-setup.sh script",
-      "source_file": "_scripts/core/rtk-setup.sh",
-      "source_location": "L1"
-    },
-    {
       "id": "scripts_core_vscode_install",
       "label": "vscode-install.sh",
       "_origin": "ast",
       "community": 65,
-      "community_name": "cecho",
+      "community_name": "microsoft-repo-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5929,7 +5944,7 @@
       "label": "vscode-install.sh script",
       "_origin": "ast",
       "community": 65,
-      "community_name": "cecho",
+      "community_name": "microsoft-repo-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
@@ -5937,21 +5952,6 @@
       },
       "norm_label": "vscode-install.sh script",
       "source_file": "_scripts/core/vscode-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_yazi_install_sh__entry",
-      "label": "yazi-install.sh script",
-      "_origin": "ast",
-      "community": 65,
-      "community_name": "cecho",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "yazi-install.sh script",
-      "source_file": "_scripts/core/yazi-install.sh",
       "source_location": "L1"
     },
     {
@@ -6015,123 +6015,63 @@
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_nodejs_install",
-      "label": "nodejs-install.sh",
+      "id": "scripts_core_git_install",
+      "label": "git-install.sh",
       "_origin": "ast",
       "community": 67,
-      "community_name": "nodejs-install.sh",
+      "community_name": "git-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "nodejs-install.sh",
-      "source_file": "_scripts/core/nodejs-install.sh",
+      "norm_label": "git-install.sh",
+      "source_file": "_scripts/core/git-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_nodejs_install_sh__entry",
-      "label": "nodejs-install.sh script",
+      "id": "scripts_core_git_install_sh__entry",
+      "label": "git-install.sh script",
       "_origin": "ast",
       "community": 67,
-      "community_name": "nodejs-install.sh",
+      "community_name": "git-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "nodejs-install.sh script",
-      "source_file": "_scripts/core/nodejs-install.sh",
+      "norm_label": "git-install.sh script",
+      "source_file": "_scripts/core/git-install.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_nvim_install",
-      "label": "nvim-install.sh",
+      "id": "scripts_core_git_setup",
+      "label": "git-setup.sh",
       "_origin": "ast",
       "community": 67,
-      "community_name": "nodejs-install.sh",
+      "community_name": "git-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "file"
       },
-      "norm_label": "nvim-install.sh",
-      "source_file": "_scripts/core/nvim-install.sh",
+      "norm_label": "git-setup.sh",
+      "source_file": "_scripts/core/git-setup.sh",
       "source_location": "L1"
     },
     {
-      "id": "scripts_core_nvim_install_sh__entry",
-      "label": "nvim-install.sh script",
+      "id": "scripts_core_git_setup_sh__entry",
+      "label": "git-setup.sh script",
       "_origin": "ast",
       "community": 67,
-      "community_name": "nodejs-install.sh",
+      "community_name": "git-install.sh",
       "file_type": "code",
       "metadata": {
         "language": "bash",
         "kind": "bash_entrypoint"
       },
-      "norm_label": "nvim-install.sh script",
-      "source_file": "_scripts/core/nvim-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_nvim_setup",
-      "label": "nvim-setup.sh",
-      "_origin": "ast",
-      "community": 67,
-      "community_name": "nodejs-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "nvim-setup.sh",
-      "source_file": "_scripts/core/nvim-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_nvim_setup_sh__entry",
-      "label": "nvim-setup.sh script",
-      "_origin": "ast",
-      "community": 67,
-      "community_name": "nodejs-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "nvim-setup.sh script",
-      "source_file": "_scripts/core/nvim-setup.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_playwright_install",
-      "label": "playwright-install.sh",
-      "_origin": "ast",
-      "community": 67,
-      "community_name": "nodejs-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "file"
-      },
-      "norm_label": "playwright-install.sh",
-      "source_file": "_scripts/core/playwright-install.sh",
-      "source_location": "L1"
-    },
-    {
-      "id": "scripts_core_playwright_install_sh__entry",
-      "label": "playwright-install.sh script",
-      "_origin": "ast",
-      "community": 67,
-      "community_name": "nodejs-install.sh",
-      "file_type": "code",
-      "metadata": {
-        "language": "bash",
-        "kind": "bash_entrypoint"
-      },
-      "norm_label": "playwright-install.sh script",
-      "source_file": "_scripts/core/playwright-install.sh",
+      "norm_label": "git-setup.sh script",
+      "source_file": "_scripts/core/git-setup.sh",
       "source_location": "L1"
     },
     {
@@ -6535,6 +6475,66 @@
       "source_location": "L43"
     },
     {
+      "id": "scripts_core_jetbrains_toolbox_install",
+      "label": "jetbrains-toolbox-install.sh",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "jetbrains-toolbox-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "jetbrains-toolbox-install.sh",
+      "source_file": "_scripts/core/jetbrains-toolbox-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_jetbrains_toolbox_install_sh__entry",
+      "label": "jetbrains-toolbox-install.sh script",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "jetbrains-toolbox-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "jetbrains-toolbox-install.sh script",
+      "source_file": "_scripts/core/jetbrains-toolbox-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_jetbrains_toolbox_setup",
+      "label": "jetbrains-toolbox-setup.sh",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "jetbrains-toolbox-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "jetbrains-toolbox-setup.sh",
+      "source_file": "_scripts/core/jetbrains-toolbox-setup.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_jetbrains_toolbox_setup_sh__entry",
+      "label": "jetbrains-toolbox-setup.sh script",
+      "_origin": "ast",
+      "community": 71,
+      "community_name": "jetbrains-toolbox-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "jetbrains-toolbox-setup.sh script",
+      "source_file": "_scripts/core/jetbrains-toolbox-setup.sh",
+      "source_location": "L1"
+    },
+    {
       "id": "scripts_core_tmux_install",
       "label": "tmux-install.sh",
       "_origin": "ast",
@@ -6637,6 +6637,36 @@
       "norm_label": "section()",
       "source_file": "win-tools/.tools/Run-AIToolsUpdate.ps1",
       "source_location": "L38"
+    },
+    {
+      "id": "scripts_core_github_cli_install",
+      "label": "github-cli-install.sh",
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "github-cli-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "norm_label": "github-cli-install.sh",
+      "source_file": "_scripts/core/github-cli-install.sh",
+      "source_location": "L1"
+    },
+    {
+      "id": "scripts_core_github_cli_install_sh__entry",
+      "label": "github-cli-install.sh script",
+      "_origin": "ast",
+      "community": 74,
+      "community_name": "github-cli-install.sh",
+      "file_type": "code",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "norm_label": "github-cli-install.sh script",
+      "source_file": "_scripts/core/github-cli-install.sh",
+      "source_location": "L1"
     },
     {
       "id": "opencode_agents",
@@ -6899,6 +6929,111 @@
       "norm_label": "$schema",
       "source_file": "pi/pi-permission-system.config.json",
       "source_location": "L2"
+    },
+    {
+      "id": "zed_config_zed_settings",
+      "label": "Zed Editor settings.json",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "ghostty-install.sh",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "zed editor settings.json",
+      "source_file": "zed/.config/zed/settings.json",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "win_tools_rename_files",
+      "label": "Rename-Files.ps1 (Bulk Rename with Dry-Run)",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "rename-files.ps1 (bulk rename with dry-run)",
+      "source_file": "win-tools/.tools/Rename-Files.ps1",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "concept_dry_run_pattern",
+      "label": "Dry-Run Safety Pattern",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "dry-run safety pattern",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "concept_dry_run_win_tools",
+      "label": "Dry-Run Pattern in PowerShell Tools",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "dry-run pattern in powershell tools",
+      "source_file": "win-tools/.tools/Rename-Files.ps1",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "concept_multi_distro_support",
+      "label": "Multi-Distro Support (Arch/Debian/Fedora)",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "multi-distro support (arch/debian/fedora)",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "concept_os_dispatch_pattern",
+      "label": "OS-Dispatch Pattern (case $CURRENT_OS_ID)",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "os-dispatch pattern (case $current_os_id)",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": null,
+      "source_url": null
+    },
+    {
+      "id": "concept_stow_package_fn",
+      "label": "stow_package() Helper Function",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 1,
+      "community_name": "_helpers.sh",
+      "contributor": null,
+      "file_type": "concept",
+      "norm_label": "stow_package() helper function",
+      "source_file": "_scripts/core/_helpers.sh",
+      "source_location": null,
+      "source_url": null
     },
     {
       "id": "win_tools_run_win_env_setup",
@@ -7721,96 +7856,6 @@
       "source_url": null
     },
     {
-      "id": "win_tools_rename_files",
-      "label": "Rename-Files.ps1 (Bulk Rename with Dry-Run)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 28,
-      "community_name": "_helpers.sh",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "rename-files.ps1 (bulk rename with dry-run)",
-      "source_file": "win-tools/.tools/Rename-Files.ps1",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "concept_dry_run_pattern",
-      "label": "Dry-Run Safety Pattern",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 28,
-      "community_name": "_helpers.sh",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "dry-run safety pattern",
-      "source_file": "_scripts/core/_helpers.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "concept_dry_run_win_tools",
-      "label": "Dry-Run Pattern in PowerShell Tools",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 28,
-      "community_name": "_helpers.sh",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "dry-run pattern in powershell tools",
-      "source_file": "win-tools/.tools/Rename-Files.ps1",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "concept_multi_distro_support",
-      "label": "Multi-Distro Support (Arch/Debian/Fedora)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 28,
-      "community_name": "_helpers.sh",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "multi-distro support (arch/debian/fedora)",
-      "source_file": "_scripts/core/_helpers.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "concept_os_dispatch_pattern",
-      "label": "OS-Dispatch Pattern (case $CURRENT_OS_ID)",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 28,
-      "community_name": "_helpers.sh",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "os-dispatch pattern (case $current_os_id)",
-      "source_file": "_scripts/core/_helpers.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
-      "id": "concept_stow_package_fn",
-      "label": "stow_package() Helper Function",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 28,
-      "community_name": "_helpers.sh",
-      "contributor": null,
-      "file_type": "concept",
-      "norm_label": "stow_package() helper function",
-      "source_file": "_scripts/core/_helpers.sh",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "concept_shell_prompt_tool",
       "label": "Shell Prompt Customization Tool",
       "_origin": "semantic",
@@ -8051,21 +8096,6 @@
       "source_url": null
     },
     {
-      "id": "zed_config_zed_settings",
-      "label": "Zed Editor settings.json",
-      "_origin": "semantic",
-      "author": null,
-      "captured_at": null,
-      "community": 62,
-      "community_name": "decho",
-      "contributor": null,
-      "file_type": "code",
-      "norm_label": "zed editor settings.json",
-      "source_file": "zed/.config/zed/settings.json",
-      "source_location": null,
-      "source_url": null
-    },
-    {
       "id": "concept_install_then_setup_pattern",
       "label": "Install-Then-Setup Pattern",
       "_origin": "semantic",
@@ -8101,8 +8131,8 @@
       "_origin": "semantic",
       "author": null,
       "captured_at": null,
-      "community": 65,
-      "community_name": "cecho",
+      "community": 74,
+      "community_name": "github-cli-install.sh",
       "contributor": null,
       "file_type": "code",
       "norm_label": "get-githubstats.ps1 (github org stats)",
@@ -10004,6 +10034,18 @@
       "context": "call",
       "source_file": "_scripts/core/mise-install.sh",
       "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_moca_install_sh__entry",
+      "target": "scripts_core_helpers_cecho",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "_scripts/core/moca-install.sh",
+      "source_location": "L32",
       "weight": 1.0
     },
     {
@@ -15283,6 +15325,17 @@
       "weight": 1.0
     },
     {
+      "source": "scripts_core_moca_install",
+      "target": "scripts_core_moca_install_sh__entry",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "_scripts/core/moca-install.sh",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
       "source": "scripts_core_nerd_fonts_install",
       "target": "scripts_core_nerd_fonts_install_sh__entry",
       "relation": "contains",
@@ -16830,7 +16883,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L103",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -16841,7 +16894,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L115",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -16852,7 +16905,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L123",
+      "source_location": "L124",
       "weight": 1.0
     },
     {
@@ -16863,7 +16916,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L174",
+      "source_location": "L176",
       "weight": 1.0
     },
     {
@@ -16918,7 +16971,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L75",
+      "source_location": "L76",
       "weight": 1.0
     },
     {
@@ -16929,7 +16982,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L80",
+      "source_location": "L81",
       "weight": 1.0
     },
     {
@@ -16940,7 +16993,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L85",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -16951,7 +17004,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L90",
+      "source_location": "L91",
       "weight": 1.0
     },
     {
@@ -16962,7 +17015,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "_scripts/core/_options.sh",
-      "source_location": "L96",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
@@ -18444,6 +18497,18 @@
       "context": "import",
       "source_file": "_scripts/core/mise-install.sh",
       "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "scripts_core_moca_install",
+      "target": "scripts_core_helpers",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.55,
+      "context": "import",
+      "source_file": "_scripts/core/moca-install.sh",
+      "source_location": "L22",
       "weight": 1.0
     },
     {
@@ -20909,5 +20974,5 @@
       "source_file": "win-tools/.tools/Add-WinFirewallRule.ps1"
     }
   ],
-  "built_at_commit": "103dd3c1086420457e681c13699c563344d49b4c"
+  "built_at_commit": "f9ec86220a93b8b2bc7387e676b9223eed04fb31"
 }
