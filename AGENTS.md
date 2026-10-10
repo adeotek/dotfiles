@@ -69,6 +69,10 @@ Not stowed — deployed imperatively by their respective setup scripts. Files ar
 - `skills/` — skills (e.g. `dotnet-unit-testing`); seeded per-skill only if missing
 - `agents/` — custom subagent definitions for the `pi-subagents` extension (ported from the OpenCode agents: `code-review`, `dev`, `devops`, `expert`, `tutor`, `dotnet-backend-expert`, `dotnet-unit-test-expert`); seeded per-agent only if missing
 
+**`moca/`** — deployed by `moca-setup.sh` into `$XDG_CONFIG_HOME/moca/` (or `~/.config/moca/`):
+- `config.jsonc` → default config (model/modelHard, built-in provider entries plus a commented Ollama example, shell allowlist, context/log/tui/web/snapshot knobs, commented MCP block); on re-run with the override prompt the template is **merged with `--live-wins`** (see `moca/merge-moca-config.py`) so the `model` saved by `/model`, a custom allowlist and extra providers survive; moca rejects unknown keys, so only documented ones may be added
+- `prompts/*.md` → saved slash-command templates (`code-review`, `debug`, `document-code`); seeded only if missing, next to the `/create-command` template moca writes on its own first run
+
 ### ZSH Configurations
 `zsh/` config deployed via `zsh-setup.sh`:
 - `config.zsh` — plugins (autosuggestions, syntax highlighting, history-substring-search, completions) managed by [antidote](https://antidote.sh) via `zsh_plugins.txt`

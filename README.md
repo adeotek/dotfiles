@@ -151,7 +151,7 @@ The following packages can be installed individually or in groups:
 - **headroom** - LLM context compression proxy (systemd service, supports OpenAI, Anthropic, OpenRouter, OpenCode Zen, Google Gemini, GitHub Copilot)
 - **hermes** - Hermes Agent AI coding assistant (Nous Research)
 - **herdr** - Herdr agent configuration and shell completions
-- **moca** - MO Coding Agent (minimal, token-efficient, provider-agnostic Go coding agent)
+- **moca** - MO Coding Agent (minimal, token-efficient, provider-agnostic Go coding agent; default config + code-review/debug/document-code slash commands)
 - **graphify** - Knowledge-graph tool for codebases (PyPI: graphifyy, includes Claude Code skill)
 - **rtk** - CLI output compression/toolkit (installed via Homebrew)
 - **playwright** - Playwright CLI for browser automation (used by AI tools)
@@ -233,6 +233,7 @@ dotfiles/
 ├── fastfetch/                  # Fastfetch system info config
 ├── opencode/                   # OpenCode configuration
 ├── pi/                         # Pi coding agent configuration
+├── moca/                       # moca (MO Coding Agent) configuration + prompt templates
 ├── docs/                       # Project documentation
 └── _extra/                     # Additional configs & templates
 ```
