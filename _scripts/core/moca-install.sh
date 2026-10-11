@@ -18,7 +18,7 @@ if [[ -z "$RDIR" ]]; then
   else
     RDIR=$(dirname "$PWD")
   fi
-  CDIR="$RDIR/_scripts/core";
+  CDIR="$RDIR/_scripts/core"
   source "$CDIR/_helpers.sh"
 fi
 
@@ -34,15 +34,15 @@ cecho "cyan" "Installing [moca]..."
 # Release packages cover every supported distro (static Go binary: linux/amd64
 # and linux/arm64), so no per-distro branch is needed — reject anything else.
 case $CURRENT_OS_ID in
-  arch|debian|ubuntu|pop|fedora|redhat) ;;
-  *)
-    cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
-    exit 1
-    ;;
+arch | debian | ubuntu | pop | fedora | redhat) ;;
+*)
+  cecho "red" "ERROR: Unsupported OS: $CURRENT_OS_ID!"
+  exit 1
+  ;;
 esac
 
-if ! command -v curl >/dev/null 2>&1 && ! command -v wget >/dev/null 2>&1; then
-  cecho "red" "[moca] installation requires curl or wget."
+if ! command -v curl >/dev/null 2>&1; then
+  cecho "red" "[moca] installation requires curl."
   return 1
 fi
 
@@ -51,7 +51,10 @@ if [[ -n "$MOCA_BIN" ]]; then
 fi
 
 if [[ "$DRY_RUN" -ne "1" ]]; then
-  if ! (set -o pipefail; curl -fsSL https://raw.githubusercontent.com/adeotek/moca/main/install.sh | bash); then
+  if ! (
+    set -o pipefail
+    curl -fsSL https://raw.githubusercontent.com/adeotek/moca/main/install.sh | bash
+  ); then
     cecho "red" "[moca] installation failed."
     return 1
   fi
