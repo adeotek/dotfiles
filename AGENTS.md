@@ -71,6 +71,7 @@ Not stowed — deployed imperatively by their respective setup scripts. Files ar
 
 **`moca/`** — deployed by `moca-setup.sh` into `$XDG_CONFIG_HOME/moca/` (or `~/.config/moca/`):
 - `config.jsonc` → default config (model/modelHard, built-in provider entries plus a commented Ollama example, shell allowlist, context/log/tui/web/snapshot knobs, commented MCP block); on re-run with the override prompt the template is **merged with `--live-wins`** (see `moca/merge-moca-config.py`) so the `model` saved by `/model`, a custom allowlist and extra providers survive; moca rejects unknown keys, so only documented ones may be added
+- `AGENTS.md` → global instructions loaded into every session; seeded only if missing (local edits are kept)
 - `prompts/*.md` → saved slash-command templates (`code-review`, `debug`, `document-code`); seeded only if missing, next to the `/create-command` template moca writes on its own first run
 
 ### ZSH Configurations

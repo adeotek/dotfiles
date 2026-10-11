@@ -5,6 +5,7 @@
 #
 # Deploys the moca configuration to <config dir>/moca/:
 # - config.jsonc with the default model/provider/limits setup
+# - AGENTS.md with global instructions for every session (seeded only if missing)
 # - prompts/ with saved slash-command templates (code review, debugging,
 #   documenting code)
 # Follows the same pattern as opencode-setup.sh / pi-setup.sh: files are
@@ -74,6 +75,10 @@ if [[ ! -f "$MOCA_CONFIG_DIR/config.jsonc" ]] || [[ "$MOCA_OVERRIDE_CONFIG" == t
 else
   cecho "yellow" "Global config.jsonc file already exists at $MOCA_CONFIG_DIR/config.jsonc"
 fi
+
+# Create the global AGENTS.md file if it doesn't exist — global instructions
+# loaded into every session. The user's own file is never overwritten.
+copy_files_if_missing "$RDIR/moca" "$MOCA_CONFIG_DIR" "AGENTS.md"
 
 # Create missing slash-command prompt templates (a template that already
 # exists is the user's from then on, like the moca-seeded /create-command)

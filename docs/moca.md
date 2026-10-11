@@ -10,6 +10,7 @@ provider-agnostic Go coding agent. Deployed to `$XDG_CONFIG_HOME/moca/`
 | File | Destination | Behaviour on re-run |
 |---|---|---|
 | `moca/config.jsonc` | `moca/config.jsonc` | first run copied; on override **merged with `--live-wins`** |
+| `moca/AGENTS.md` | `moca/AGENTS.md` | seeded only if missing |
 | `moca/prompts/*.md` | `moca/prompts/` | seeded only if missing |
 
 The merge (`moca/merge-moca-config.py`) keeps the live file authoritative: the
@@ -17,6 +18,10 @@ The merge (`moca/merge-moca-config.py`) keeps the live file authoritative: the
 are never reset to the template, and the template only fills in missing keys.
 moca itself rejects unknown keys (`DisallowUnknownFields`), so the template may
 only contain documented ones.
+
+`moca/AGENTS.md` is the global instruction file moca loads into every session
+(from the config dir; a trusted project's `AGENTS.md`/`CLAUDE.md` loads in
+addition). It is never overwritten, so local edits survive re-runs.
 
 ## Install
 
