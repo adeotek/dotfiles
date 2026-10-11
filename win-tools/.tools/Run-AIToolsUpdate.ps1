@@ -68,6 +68,11 @@ if (Has pi) {
     Run pi 'update', '--all'
 }
 
+if (Has moca) {
+    Section 'moca'
+    Run moca 'update'
+}
+
 if (Has graphify) {
     Section 'graphify'
     if (Has uv) { Run uv 'tool', 'upgrade', 'graphifyy' }
