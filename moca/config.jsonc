@@ -25,10 +25,10 @@
   // Built-ins (anthropic, openai, opencode-go) are always known: an entry
   // only overrides fields; apiKey defaults to the matching env var.
   // A name is enabled by a model reference such as "ollama/qwen3:8b".
-  "providers": {
-    "opencode-go": { "auth": "api_key", "apiKey": "env:OPENCODE_API_KEY" },
-    "anthropic": { "auth": "api_key", "apiKey": "env:ANTHROPIC_API_KEY" },
-    "openai": { "auth": "api_key", "apiKey": "env:OPENAI_API_KEY" }
+  // "providers": {
+    // "opencode-go": { "auth": "api_key", "apiKey": "env:OPENCODE_API_KEY" },
+    // "anthropic": { "auth": "api_key", "apiKey": "env:ANTHROPIC_API_KEY" },
+    // "openai": { "auth": "api_key", "apiKey": "env:OPENAI_API_KEY" }
 
     // --- Ollama (local or LAN) — example --------------------------------
     // A local server needs no API key and no model list: moca discovers the
@@ -56,7 +56,7 @@
     // }
     // A key (`/login ollama`) is only needed for a server behind an
     // authenticating proxy.
-  },
+  // },
 
   // ---- Shell permissions ------------------------------------------------
   // Command names auto-approved for the shell tool. A command not listed here
