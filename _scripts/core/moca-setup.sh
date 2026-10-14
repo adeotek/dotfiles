@@ -84,5 +84,4 @@ copy_files_if_missing "$RDIR/moca" "$MOCA_CONFIG_DIR" "AGENTS.md"
 # exists is the user's from then on, like the moca-seeded /create-command)
 copy_files_if_missing "$RDIR/moca/prompts" "$MOCA_CONFIG_DIR/prompts" "*.md" "$MOCA_OVERRIDE_CONFIG"
 
-# Credential note
-cecho "white" "Note: run 'moca login <provider>' (or /login in the TUI) to store an API key; stored keys live in $MOCA_CONFIG_DIR/auth.json."
+# TODO: copy missing skills

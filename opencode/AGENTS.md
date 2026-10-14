@@ -43,7 +43,27 @@ Do not load them proactively. Only read them via the Read tool when the task exp
 - When uncertain about intent, ask rather than assume.
 - Do not avoid responding with `I don't know` when you are not able to respond or you don't have the right information.
 
-## 6. Code Intelligence and Navigation
+## 6. Commit & PR Title Convention
+Every commit message and PR title must follow this format:
+`[{type}:{scope}] short description of the changes`
+- **{type}** — the kind of change, one of:
+  - `feat` — new feature or capability
+  - `fix` — bug fix
+  - `chore` — maintenance, tooling, dependencies, refactors
+- **{scope}** — the area the change affects, one of:
+  - `global` — affects multiple areas (e.g. backend + frontend, UI + docs)
+  - `docs` — documentation changes (README, specs, etc.)
+  - `ui` / `tui` — user interface / terminal UI changes
+  - `backend` / `core` — internal or backend changes
+  - a slug of the specific area changed (e.g. `auth`, `billing`, `ci`, `k8s`)
+Examples:
+- `[feat:auth] add passkey sign-in`
+- `[fix:ui] stop sidebar flicker on route change`
+- `[chore:ci] pin runner image to node 22`
+- `[feat:global] add i18n support across app and docs`
+This applies to commit messages and PR titles only; PR descriptions are free-form.
+
+## 7. Code Intelligence and Navigation
 Prefer LSP over Grep/Glob/Read for code navigation:
 - `goToDefinition` / `goToImplementation` to jump to source
 - `findReferences` to see all usages across the codebase
@@ -55,7 +75,7 @@ Before renaming or changing a function signature, use `findReferences` to find a
 Use Grep/Glob only for text/pattern searches (comments, strings, config values) where LSP doesn't help.
 After writing or editing code, check LSP diagnostics before moving on.
 
-## 7. Browser Automation
+## 8. Browser Automation
 Use `playwright-cli` for browser automation tasks. Run `playwright-cli --help`
 to see available commands. Prefer headless mode (default) unless a visible
 browser is explicitly needed.

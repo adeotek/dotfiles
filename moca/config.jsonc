@@ -78,7 +78,7 @@
   // reserveTokens    window kept free for the answer
   // keepRecentTokens recent history preserved verbatim by /compact
   "context": {
-    "maxSteps": 40,
+    "maxSteps": 60,
     "reserveTokens": 16384,
     "keepRecentTokens": 20000
   },
