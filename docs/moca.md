@@ -12,6 +12,7 @@ provider-agnostic Go coding agent. Deployed to `$XDG_CONFIG_HOME/moca/`
 | `moca/config.jsonc` | `moca/config.jsonc` | first run copied; on override **merged with `--live-wins`** |
 | `moca/AGENTS.md` | `moca/AGENTS.md` | seeded only if missing |
 | `moca/prompts/*.md` | `moca/prompts/` | seeded only if missing |
+| `moca/skills/*/` | `moca/skills/` | seeded per-skill only if missing |
 
 The merge (`moca/merge-moca-config.py`) keeps the live file authoritative: the
 `model` written back by `/model`, a custom shell allowlist and extra providers
@@ -22,6 +23,10 @@ only contain documented ones.
 `moca/AGENTS.md` is the global instruction file moca loads into every session
 (from the config dir; a trusted project's `AGENTS.md`/`CLAUDE.md` loads in
 addition). It is never overwritten, so local edits survive re-runs.
+
+`moca/skills/*/` holds agent skills (e.g. `dotnet-unit-testing`); each is
+seeded only if its `SKILL.md` is missing, so an existing skill stays the user's
+from then on — only an explicit override replaces it.
 
 ## Install
 
@@ -77,10 +82,15 @@ and warns at startup.
 - **`/document-code`** — document code from the code as it actually is: recon
   the existing docs pattern, write the contract and boundaries, verify every
   path/flag/sample quoted.
+- **`/review-and-fix`** — review the branch's changes against `main` and carry
+  the findings through to fixes: severity-ordered issues with a file:line,
+  minimal root-cause fixes, then re-verification; extra focus or paths can be
+  passed as arguments.
 
 Each takes an argument (`/code-review main..HEAD`, `/debug "<error>"`,
-`/document-code src/api`). A template that already exists is left alone, like
-the `/create-command` template moca seeds itself.
+`/document-code src/api`, `/review-and-fix "extra focus"`). A template that
+already exists is left alone, like the `/create-command` template moca seeds
+itself.
 
 ## Paseo (ACP)
 

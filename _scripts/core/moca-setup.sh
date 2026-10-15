@@ -32,7 +32,7 @@ copy_skills_if_missing() {
     if [[ "$DRY_RUN" -ne "1" ]]; then
       if [[ ! -f "$dest_subdir/SKILL.md" ]] || [[ "$override" == true ]]; then
         mkdir -p "$dest_subdir"
-        cp -r "$src_subdir"* "$dest_subdir/"
+        cp -r "$src_subdir/." "$dest_subdir/"
         cecho "green" "Skill $skill_name copied to $dest_dir/"
       else
         cecho "yellow" "Skill $skill_name already exists at $dest_dir/"

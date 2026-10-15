@@ -106,7 +106,15 @@ register_acp_agents() {
   fi
 
   # Start from the current providers map (empty object when unset or null).
-  original_json="$(paseo daemon config get agents.providers 2>/dev/null | jq -c '.value // {}')" || original_json=""
+  # `config set` replaces the whole map: outside a dry run a failed READ must
+  # not fall back to "{}" — that would drop every existing provider entry.
+  original_json=""
+  if original_json="$(paseo daemon config get agents.providers 2>/dev/null)"; then
+    original_json="$(jq -c '.value // {}' <<< "$original_json")" || original_json=""
+  elif [[ "$DRY_RUN" -ne "1" ]]; then
+    cecho "red" "[paseo] could not read the current agents.providers — skipping ACP provider registration."
+    return 1
+  fi
   providers_json="$original_json"
   if [[ -z "$providers_json" ]]; then
     providers_json='{}'

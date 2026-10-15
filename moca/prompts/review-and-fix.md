@@ -12,4 +12,4 @@ Review the work currently on this branch against `main`, then fix what you find.
 6. Verify: run `make vet && make test`, review `git diff` for stray changes, and re-read your own new diff for problems.
 7. Report what you changed and how you verified it; call out anything you deliberately left alone and why.
 
-$$ARGUMENTS
+$ARGUMENTS
