@@ -82,6 +82,13 @@ Each takes an argument (`/code-review main..HEAD`, `/debug "<error>"`,
 `/document-code src/api`). A template that already exists is left alone, like
 the `/create-command` template moca seeds itself.
 
+## Paseo (ACP)
+
+`moca acp` speaks the Agent Client Protocol on stdio, so the Paseo daemon runs
+it as an agent alongside Hermes (provider `moca` in `~/.paseo/config.json` —
+see `docs/paseo.md`). Paseo sessions use this config and its stored
+credentials; moca's approval prompts surface in the Paseo app.
+
 ## Update
 
 ```bash
