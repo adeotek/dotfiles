@@ -1,83 +1,82 @@
-# Graph Report - .dotfiles  (2026-10-10)
+# Graph Report - .dotfiles  (2026-10-15)
 
 ## Corpus Check
-- 169 files · ~69,320 words
+- 177 files · ~74,101 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 42 file(s) not represented in the graph (top: (none) 7, .toml 7, .service 6)
+- Unclassified: 42 file(s) not represented in the graph (top: (none) 8, .toml 7, .service 6)
 
 ## Summary
-- 587 nodes · 1073 edges · 75 communities (36 shown, 39 thin omitted)
-- Extraction: 83% EXTRACTED · 17% INFERRED · 0% AMBIGUOUS · INFERRED: 183 edges (avg confidence: 0.61)
+- 630 nodes · 1126 edges · 75 communities (40 shown, 35 thin omitted)
+- Extraction: 84% EXTRACTED · 16% INFERRED · 0% AMBIGUOUS · INFERRED: 184 edges (avg confidence: 0.64)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f9ec8622`
+- Built from commit: `9e5c2455`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- ghostty-install.sh
-- _helpers.sh
-- Dotfiles README
+- zed-install.sh
+- hermes/config.yaml — Hermes Master Config Template
 - starship-install.sh
+- starship-install.sh
+- .NET Unit Test Expert Agent
+- claude-code-setup.sh
 - statusline-command.sh
+- _helpers.sh
 - _options.sh
-- merge-opencode-config.py
-- pi-lens-config.json
-- AGENTS.md — Operational Rules for AI Agents
-- bash
+- AGENTS.md — Agent Coding Guidelines for AdeoTEK Dotfiles
 - claude-code-setup.sh
 - AdeoTEK Scripting Best Practices (Strictly Enforced)
-- config.bash
+- Hermes Agent
 - wsl-setup-fedora-dev.sh
 - cc-sessions.sh
+- Dry-Run Safety Pattern
+- nodejs-install.sh
 - k8s-repo-install.sh
-- pi-install.sh
-- dotnet-unit-testing Skill (opencode)
-- Run-LocalWinEnvSetup.ps1
+- expert build/orchestrator agent
 - headroom-uninstall.sh
-- setup.sh
 - Get-GitHubStats.ps1
+- Run-LocalWinEnvSetup.ps1
 - Windows Network/Firewall Diagnostic Tools
-- expert.md
-- tutor.md
-- cache-clean.sh
+- dotnet-unit-test-expert agent
+- opencode/agents/tutor.md
+- config.bash
 - cecho
-- hermes-update-daily.sh
-- devops.md
-- .NET Backend Expert Agent (opencode)
+- Dry-Run Safety Pattern
 - opencode.json
-- start-opencode-server.sh
-- Run-CacheClean.ps1
+- graphify.js
+- AGENTS.md — Operational Rules for AI Agents
+- tui.json
+- homebrew-install.sh
+- read_yes_no
 - unattended_setup.sh
-- ai-config.bash
+- workflows/graphify.md
 - hermes-update-notify.sh
-- gbs Oh My Posh theme
-- update.sh
+- AGENTS.md — Operational Rules for AI Agents
+- opencode/agents/devops.md
 - Homebrew Fallback Package Manager
-- dev.md
-- Tabby terminal config
-- zsh_plugins.txt — External ZSH Plugin Manifest
-- install_package
-- cli.json
-- kitty-install.sh
+- Zed — stowed config + setup notes
 - microsoft-repo-install.sh
-- fastfetch-install.sh
-- git-install.sh
-- ai-tools-update.sh
-- herdr-setup.sh
-- init-agents.md
-- jetbrains-toolbox-install.sh
-- tmux-install.sh
-- github-cli-install.sh
+- kitty-install.sh
+- Paseo daemon (dotfiles template)
+- moca (MO Coding Agent) — dotfiles setup
+- .NET Unit Test Expert Skill
+- _helpers.sh
+- catppuccin
+- pi/agents/code-review.md
+- prompts/code-review.md
+- stow_package
+- debug.md
+- document-code.md
 
 ## God Nodes (most connected - your core abstractions)
-1. `cecho()` - 72 edges
+1. `cecho()` - 73 edges
 2. `install_package()` - 31 edges
-3. `decho()` - 22 edges
-4. `stow_package()` - 22 edges
-5. `cache-clean.sh script` - 20 edges
-6. `section()` - 20 edges
+3. `stow_package()` - 22 edges
+4. `decho()` - 22 edges
+5. `section()` - 20 edges
+6. `cache-clean.sh script` - 20 edges
 7. `Remove-CachePath()` - 20 edges
 8. `vlog()` - 16 edges
 9. `Write-Section()` - 16 edges
@@ -92,8 +91,8 @@
   docs/zed.md → .zed/settings.json
 - `Global Claude Code Instructions (LSP-first navigation, playwright-cli)` --semantically_similar_to--> `AGENTS.md (project agent guidelines)`  [INFERRED] [semantically similar]
   claude-code/user-config/CLAUDE.md → AGENTS.md
-- `Rename-Files.ps1 (Bulk Rename with Dry-Run)` --semantically_similar_to--> `Dry-Run Safety Pattern`  [INFERRED] [semantically similar]
-  win-tools/.tools/Rename-Files.ps1 → _scripts/core/_helpers.sh
+- `.NET Backend Expert Agent (opencode)` --semantically_similar_to--> `.NET Backend Expert Subagent (pi)`  [INFERRED] [semantically similar]
+  opencode/agents/dotnet-backend-expert.md → pi/agents/dotnet-backend-expert.md
 
 ## Import Cycles
 - None detected.
@@ -105,7 +104,6 @@
 - **_helpers.sh as Universal Hub** — scripts_core_helpers, scripts_core_options, scripts_core_zed_setup, scripts_core_ghostty_setup, scripts_core_tmux_setup, scripts_core_claude_code_setup [EXTRACTED 1.00]
 - **Terminal Emulator Tools** — scripts_core_kitty_install, scripts_core_tabby_install, scripts_core_zed_install [INFERRED 0.65]
 - **Tools Using Homebrew as Fallback** — scripts_core_starship_install, scripts_core_nvim_install, scripts_core_onefetch_install, scripts_core_yazi_install, scripts_core_homebrew_install [INFERRED 0.75]
-- **AI agent tooling and proxy stack** — docs_headroom_headroom, docs_hermes_hermes_agent, docs_paseo_paseo_daemon, _opencode_opencode, docs_zed_acp_agent_integration [INFERRED 0.85]
 - **AI Coding Tools** — scripts_core_claude_code_install, scripts_core_claude_code_setup, scripts_core_opencode_install, scripts_core_opencode_setup [INFERRED 0.85]
 - **dotnet-unit-testing Skill Chain (xUnit/NSubstitute tooling)** — opencode_skills_dotnet_unit_testing_skill, pi_skills_dotnet_unit_testing_skill, opencode_agents_dotnet_unit_test_expert, pi_agents_dotnet_unit_test_expert, opencode_skills_dotnet_unit_testing_skill_arrange_act_assert, opencode_skills_dotnet_unit_testing_skill_nsubstitute_mocking [INFERRED 0.85]
 - **Pi Agent Set Ported from OpenCode Definitions** — pi_agents_code_review, pi_agents_devops, pi_agents_dotnet_backend_expert, pi_agents_dotnet_unit_test_expert, pi_agents_expert, pi_agents_tutor, opencode_agents_code_review, opencode_agents_devops, opencode_agents_dotnet_backend_expert, opencode_agents_dotnet_unit_test_expert, opencode_agents_expert, opencode_agents_tutor [INFERRED 0.85]
@@ -117,45 +115,41 @@
 - **Claude Code Statusline Variants** — claude_code_user_config_statusline_command, claude_code_user_config_statusline_command_win, claude_code_user_config_statusline_slim [INFERRED 0.95]
 - **Windows Network & Firewall Tools** — win_tools_tools_add_winfirewallrule, win_tools_tools_get_winfirewallrulebyport, win_tools_run_port_listen, win_tools_run_port_probe [INFERRED 0.95]
 
-## Communities (75 total, 39 thin omitted)
+## Communities (75 total, 35 thin omitted)
 
-### Community 0 - "ghostty-install.sh"
-Cohesion: 0.22
-Nodes (5): ghostty-install.sh script, ghostty-setup.sh script, zed-install.sh script, zed-setup.sh script, Zed Editor settings.json
+### Community 1 - "hermes/config.yaml — Hermes Master Config Template"
+Cohesion: 0.11
+Nodes (8): base-tools-install.sh script, glow-install.sh script, HOMEBREW_NO_ASK, rtk-install.sh script, rtk-setup.sh script, rustup-install.sh script, yazi-setup.sh script, zsh-install.sh script
 
-### Community 1 - "_helpers.sh"
+### Community 2 - "starship-install.sh"
 Cohesion: 0.08
-Nodes (20): Dry-Run Safety Pattern, Dry-Run Pattern in PowerShell Tools, Multi-Distro Support (Arch/Debian/Fedora), OS-Dispatch Pattern (case $CURRENT_OS_ID), stow_package() Helper Function, base-tools-install.sh script, glow-install.sh script, get_stow_command() (+12 more)
-
-### Community 2 - "Dotfiles README"
-Cohesion: 0.07
-Nodes (26): Dotfiles Agent (OpenCode subagent definition), Graphify knowledge-graph tool, OpenCode global config (opencode.json), Graphify OpenCode plugin (.opencode/plugins/graphify.js), Zed settings.json (stowed), AGENTS.md (project agent guidelines), Global Claude Code Instructions (LSP-first navigation, playwright-cli), Headroom documentation (+18 more)
+Nodes (24): Dotfiles Agent (OpenCode subagent definition), Graphify knowledge-graph tool, Zed settings.json (stowed), AGENTS.md (project agent guidelines), Global Claude Code Instructions (LSP-first navigation, playwright-cli), Headroom documentation, Headroom (LLM context compression proxy), Hermes Agent documentation (+16 more)
 
 ### Community 3 - "starship-install.sh"
-Cohesion: 0.17
-Nodes (10): Shell Prompt Customization Tool, bash-setup.sh script, process_args(), _helpers.sh script, nerd-fonts-install.sh script, oh-my-posh-install.sh script, oh-my-posh-setup.sh script, starship-install.sh script (+2 more)
+Cohesion: 0.18
+Nodes (6): Shell Prompt Customization Tool, ghostty-setup.sh script, oh-my-posh-setup.sh script, starship-install.sh script, starship-setup.sh script, zsh-setup.sh script
 
-### Community 4 - "statusline-command.sh"
+### Community 4 - ".NET Unit Test Expert Agent"
 Cohesion: 0.17
 Nodes (17): settings-part.json (Claude Code Settings), fmt_ctx_size(), fmt_pct(), fmt_reset_time(), get_mtime(), pct_color(), statusline-command.sh script, cents_to_dollars() (+9 more)
 
-### Community 5 - "_options.sh"
+### Community 5 - "claude-code-setup.sh"
 Cohesion: 0.11
 Nodes (18): Task Tier Hierarchy (Minimal/Console/Desktop), setup.sh (Interactive Setup), unattended_setup.sh (Unattended Setup), update.sh (System Update), ALL_CONSOLE_TASKS, ALL_DESKTOP_TASKS, ALL_TASKS, CONSOLE_EXTRA_TASKS (+10 more)
 
-### Community 6 - "merge-opencode-config.py"
-Cohesion: 0.19
-Nodes (8): _key(), main(), merge(), strip_jsonc(), _key(), main(), merge(), strip_jsonc()
+### Community 6 - "statusline-command.sh"
+Cohesion: 0.15
+Nodes (12): _key(), main(), merge(), strip_jsonc(), _key(), main(), merge(), strip_jsonc() (+4 more)
 
-### Community 7 - "pi-lens-config.json"
+### Community 7 - "_helpers.sh"
 Cohesion: 0.11
 Nodes (17): autofix, enabled, contextInjection, enabled, format, enabled, mode, ignore (+9 more)
 
-### Community 8 - "AGENTS.md — Operational Rules for AI Agents"
+### Community 8 - "_options.sh"
 Cohesion: 0.18
 Nodes (9): 1. Git Commit Policy — ALWAYS FOLLOW, 2. Verification Before Done, 3. Analysis/Plan Phase, 4. Lazy-Loading Sub-Rules, 5. General Conduct, 6. Code Intelligence and Navigation, 7. Browser Automation, AGENTS.md — Operational Rules for AI Agents (+1 more)
 
-### Community 9 - "bash"
+### Community 9 - "AGENTS.md — Agent Coding Guidelines for AdeoTEK Dotfiles"
 Cohesion: 0.14
 Nodes (13): git commit *, git push *, rm *, sudo *, /tmp/*, *.env, *.env.example, next-env.d.ts (+5 more)
 
@@ -167,7 +161,7 @@ Nodes (9): AI Coding Tools (claude-code + opencode), Claude Code Plugin Marketpl
 Cohesion: 0.18
 Nodes (10): 1. Robust Conditional Logic, 2. Error Handling & Indentation, 3. Function & Variable Scoping, 4. Output & Logging Helpers, 5. Side-Effect Guarding (Dry Runs), 6. Script Setup Pattern, AdeoTEK Scripting Best Practices (Strictly Enforced), Core Responsibilities (+2 more)
 
-### Community 12 - "config.bash"
+### Community 12 - "Hermes Agent"
 Cohesion: 0.24
 Nodes (7): config.bash script, COLORTERM, EDITOR, LC_ALL, path_append(), path_prepend(), Shell PATH Setup (Homebrew/Rust/Go/dotnet)
 
@@ -179,19 +173,19 @@ Nodes (8): WSL2 Environment Support, DOTFILES_PACKAGES, echo_error(), echo_warni
 Cohesion: 0.29
 Nodes (7): Claude Code Session Browser (cross-platform), ordered_projects, rm_files, rm_labels, seen_projects, cc-sessions.sh script, Get-ClaudeCodeSessions.ps1 (Win Session Browser)
 
-### Community 17 - "k8s-repo-install.sh"
-Cohesion: 0.40
-Nodes (3): Kubernetes Toolchain (kubectl + helm + k8s-repo), k8s-repo-install.sh script, kubectl-install.sh script
+### Community 17 - "Dry-Run Safety Pattern"
+Cohesion: 0.67
+Nodes (3): Dry-Run Safety Pattern, Dry-Run Pattern in PowerShell Tools, Rename-Files.ps1 (Bulk Rename with Dry-Run)
 
-### Community 18 - "pi-install.sh"
-Cohesion: 0.43
-Nodes (5): pi_node_ok(), pi-install.sh script, copy_agents_if_missing(), copy_skills_if_missing(), pi-setup.sh script
+### Community 18 - "nodejs-install.sh"
+Cohesion: 0.25
+Nodes (3): nvim-setup.sh script, pi_node_ok(), pi-install.sh script
 
-### Community 19 - "dotnet-unit-testing Skill (opencode)"
+### Community 19 - "k8s-repo-install.sh"
 Cohesion: 0.67
 Nodes (6): .NET Unit Test Expert Agent (opencode), dotnet-unit-testing Skill (opencode), Arrange-Act-Assert (AAA) Test Pattern, NSubstitute Interface Mocking (Substitute.For, Arg matchers), .NET Unit Test Expert Subagent (pi), dotnet-unit-testing Skill (pi)
 
-### Community 20 - "Run-LocalWinEnvSetup.ps1"
+### Community 20 - "expert build/orchestrator agent"
 Cohesion: 0.60
 Nodes (4): CreateAlias(), ExitWithMessage(), ReadConfigFile(), Write-Color()
 
@@ -199,7 +193,7 @@ Nodes (4): CreateAlias(), ExitWithMessage(), ReadConfigFile(), Write-Color()
 Cohesion: 0.60
 Nodes (5): confirm_or_exit(), remove_path(), headroom-uninstall.sh script, systemd_user_available(), usage()
 
-### Community 22 - "setup.sh"
+### Community 22 - "Get-GitHubStats.ps1"
 Cohesion: 0.60
 Nodes (5): _render_grid(), _render_menu(), select_packages_grid(), setup.sh script, show_usage()
 
@@ -207,81 +201,101 @@ Nodes (5): _render_grid(), _render_menu(), select_packages_grid(), setup.sh scri
 Cohesion: 0.60
 Nodes (3): Windows Network/Firewall Diagnostic Tools, Run-PortListen.ps1 (TCP/UDP Listener), Run-PortProbe.ps1 (TCP Connectivity Test)
 
-### Community 25 - "expert.md"
+### Community 25 - "dotnet-unit-test-expert agent"
 Cohesion: 0.50
 Nodes (3): Core Principles, Code Review Subagent (pi), Build/Orchestrator Subagent (pi)
 
-### Community 26 - "tutor.md"
+### Community 26 - "opencode/agents/tutor.md"
 Cohesion: 0.40
 Nodes (4): Core Principles, Response Style, When to Make Changes, Guided Learning Tutor Subagent (pi)
 
-### Community 27 - "cache-clean.sh"
+### Community 27 - "config.bash"
 Cohesion: 0.22
 Nodes (38): cecho(), dir_size_kb(), have(), human_lines_to_kb(), in_use(), measure(), path_in_use(), prune_old_entries() (+30 more)
 
 ### Community 28 - "cecho"
-Cohesion: 0.09
-Nodes (24): ansible-cleanup.sh script, ansible-install.sh script, docker-install.sh script, golang-install.sh script, graphify-install.sh script, headroom-install.sh script, headroom-setup.sh script, aecho() (+16 more)
+Cohesion: 0.06
+Nodes (61): Kubernetes Toolchain (kubectl + helm + k8s-repo), ansible-cleanup.sh script, ansible-install.sh script, aws-cli-install.sh script, bash-setup.sh script, docker-install.sh script, dotnet-install.sh script, fastfetch-install.sh script (+53 more)
 
-### Community 33 - ".NET Backend Expert Agent (opencode)"
+### Community 33 - "graphify.js"
 Cohesion: 1.00
 Nodes (3): .NET Backend Expert Agent (opencode), Minimal API Pattern over MVC Controllers, .NET Backend Expert Subagent (pi)
 
-### Community 35 - "start-opencode-server.sh"
+### Community 34 - "AGENTS.md — Operational Rules for AI Agents"
+Cohesion: 0.20
+Nodes (9): 1. Git Commit Policy — ALWAYS FOLLOW, 2. Verification Before Done, 3. Analysis/Plan Phase, 4. Lazy-Loading Sub-Rules, 5. General Conduct, 6. Commit & PR Title Convention, 7. Code Intelligence and Navigation, 8. Browser Automation (+1 more)
+
+### Community 35 - "tui.json"
 Cohesion: 0.33
 Nodes (6): CORS, FORWARD, OPT_CORS, serve_args, start-opencode-server.sh script, usage()
 
-### Community 36 - "Run-CacheClean.ps1"
+### Community 36 - "homebrew-install.sh"
 Cohesion: 0.24
 Nodes (29): Format-KB(), Get-SizeKB(), Invoke-StepResult(), Invoke-ToolClean(), Measure-Paths(), Remove-CachePath(), Remove-OldEntries(), Remove-VsCodeServerStale() (+21 more)
 
-### Community 62 - "install_package"
-Cohesion: 0.15
-Nodes (17): aws-cli-install.sh script, gcp-cli-install.sh script, helm-install.sh script, decho(), execute_command(), install_package(), rename_dir_if_exists(), rename_file_if_exists() (+9 more)
+### Community 62 - "kitty-install.sh"
+Cohesion: 0.32
+Nodes (4): Install-Then-Setup Pattern, Terminal Emulator, kitty-setup.sh script, tabby-setup.sh script
 
-### Community 63 - "cli.json"
+### Community 63 - "Paseo daemon (dotfiles template)"
 Cohesion: 0.17
 Nodes (11): animations, diffs, wrap, $schema, session, scrollbar, sidebar, thinking (+3 more)
 
-### Community 64 - "kitty-install.sh"
-Cohesion: 0.24
-Nodes (6): Install-Then-Setup Pattern, Terminal Emulator, kitty-install.sh script, kitty-setup.sh script, tabby-install.sh script, tabby-setup.sh script
+### Community 64 - "moca (MO Coding Agent) — dotfiles setup"
+Cohesion: 0.20
+Nodes (9): Default configuration, Install, moca (MO Coding Agent) — dotfiles setup, Ollama (local or LAN), Paseo (ACP), Providers and credentials, Slash commands (prompt templates), Update (+1 more)
 
-### Community 65 - "microsoft-repo-install.sh"
-Cohesion: 0.25
-Nodes (4): dotnet-install.sh script, microsoft-repo-install.sh script, powershell-install.sh script, vscode-install.sh script
+### Community 65 - ".NET Unit Test Expert Skill"
+Cohesion: 0.40
+Nodes (4): 📝 Code Template, 🛠 Core Methodology, .NET Unit Test Expert Skill, 📂 Project Integration
 
-### Community 68 - "ai-tools-update.sh"
+### Community 66 - "_helpers.sh"
+Cohesion: 0.08
+Nodes (14): Multi-Distro Support (Arch/Debian/Fedora), OS-Dispatch Pattern (case $CURRENT_OS_ID), stow_package() Helper Function, golang-install.sh script, aecho(), get_stow_command(), get_vv(), read_key() (+6 more)
+
+### Community 68 - "catppuccin"
 Cohesion: 0.70
 Nodes (4): has(), run(), section(), ai-tools-update.sh script
 
-### Community 69 - "herdr-setup.sh"
-Cohesion: 0.50
-Nodes (3): herdr-install.sh script, setup_herdr_completions(), herdr-setup.sh script
-
-### Community 70 - "init-agents.md"
+### Community 70 - "pi/agents/code-review.md"
 Cohesion: 0.50
 Nodes (3): Pitfalls, Procedure, Verification (do before reporting done)
 
+### Community 71 - "prompts/code-review.md"
+Cohesion: 0.50
+Nodes (3): Gather the change, Report, What to look for, in this order
+
+### Community 72 - "stow_package"
+Cohesion: 0.14
+Nodes (7): fastfetch-setup.sh script, git-setup.sh script, rename_dir_if_exists(), stow_package(), tmux-install.sh script, tmux-setup.sh script, tools-setup.sh script
+
+### Community 74 - "debug.md"
+Cohesion: 0.50
+Nodes (3): Fix and verify, Locate the cause, Reproduce first
+
+### Community 75 - "document-code.md"
+Cohesion: 0.50
+Nodes (3): Recon, Verify before reporting done, Write
+
 ## Knowledge Gaps
-- **54 isolated node(s):** `MINIMAL_TASKS`, `CONSOLE_ONLY_TASKS`, `CONSOLE_TASKS`, `CONSOLE_EXTRA_TASKS`, `ALL_CONSOLE_TASKS` (+49 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 171 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **39 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **55 isolated node(s):** `HOMEBREW_NO_ASK`, `CLAUDECODE_MARKETPLACES`, `CLAUDECODE_PLUGINS`, `COLORTERM`, `EDITOR` (+50 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 205 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **35 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cecho()` connect `cecho` to `ghostty-install.sh`, `microsoft-repo-install.sh`, `_helpers.sh`, `starship-install.sh`, `fastfetch-install.sh`, `git-install.sh`, `herdr-setup.sh`, `jetbrains-toolbox-install.sh`, `kitty-install.sh`, `tmux-install.sh`, `claude-code-setup.sh`, `github-cli-install.sh`, `k8s-repo-install.sh`, `pi-install.sh`, `install_package`?**
-  _High betweenness centrality (0.038) - this node is a cross-community bridge._
-- **What connects `MINIMAL_TASKS`, `CONSOLE_ONLY_TASKS`, `CONSOLE_TASKS` to the rest of the system?**
-  _54 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `_helpers.sh` be split into smaller, more focused modules?**
-  _Cohesion score 0.08108108108108109 - nodes in this community are weakly interconnected._
-- **Why does `install_package()` connect `install_package` to `ghostty-install.sh`, `microsoft-repo-install.sh`, `fastfetch-install.sh`, `git-install.sh`, `_helpers.sh`, `kitty-install.sh`, `starship-install.sh`, `tmux-install.sh`, `github-cli-install.sh`, `k8s-repo-install.sh`, `cecho`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
-- **Should `Dotfiles README` be split into smaller, more focused modules?**
-  _Cohesion score 0.0748663101604278 - nodes in this community are weakly interconnected._
-- **Why does `stow_package()` connect `install_package` to `ghostty-install.sh`, `_helpers.sh`, `fastfetch-install.sh`, `git-install.sh`, `starship-install.sh`, `kitty-install.sh`, `tmux-install.sh`, `cecho`?**
+- **Why does `cecho()` connect `cecho` to `hermes/config.yaml — Hermes Master Config Template`, `_helpers.sh`, `starship-install.sh`, `stow_package`, `claude-code-setup.sh`, `nodejs-install.sh`?**
+  _High betweenness centrality (0.034) - this node is a cross-community bridge._
+- **What connects `HOMEBREW_NO_ASK`, `CLAUDECODE_MARKETPLACES`, `CLAUDECODE_PLUGINS` to the rest of the system?**
+  _55 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `hermes/config.yaml — Hermes Master Config Template` be split into smaller, more focused modules?**
+  _Cohesion score 0.11052631578947368 - nodes in this community are weakly interconnected._
+- **Why does `install_package()` connect `cecho` to `stow_package`, `hermes/config.yaml — Hermes Master Config Template`, `_helpers.sh`, `starship-install.sh`?**
   _High betweenness centrality (0.010) - this node is a cross-community bridge._
-- **Should `_options.sh` be split into smaller, more focused modules?**
+- **Should `starship-install.sh` be split into smaller, more focused modules?**
+  _Cohesion score 0.07862903225806452 - nodes in this community are weakly interconnected._
+- **Why does `stow_package()` connect `stow_package` to `zed-install.sh`, `hermes/config.yaml — Hermes Master Config Template`, `_helpers.sh`, `starship-install.sh`, `nodejs-install.sh`, `cecho`, `kitty-install.sh`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+- **Should `claude-code-setup.sh` be split into smaller, more focused modules?**
   _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._
