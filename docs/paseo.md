@@ -59,7 +59,10 @@ curl -s http://127.0.0.1:6767/api/health
 
 - Listens 0.0.0.0:6767; firewalld public zone needs 6767/tcp.
 - Relay disabled by default (LAN direct only).
-- ACP agents: add under `agents.providers` in `~/.paseo/config.json`:
+- ACP agents: `paseo-install.sh` registers the `moca` and `hermes` providers
+  automatically when their CLI is present on the host (merging them into the
+  existing `agents.providers` map and reloading the daemon). To do it by hand,
+  add under `agents.providers` in `~/.paseo/config.json`:
   `{ "extends": "acp", "label": "Hermes", "command": ["hermes", "acp"] }` and
   `{ "extends": "acp", "label": "moca", "command": ["moca", "acp"] }`.
   Set with `paseo daemon config set agents.providers '<full JSON>'` — the

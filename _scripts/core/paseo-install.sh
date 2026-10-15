@@ -74,6 +74,84 @@ else
   cecho "yellow" "DRY-RUN: systemctl --user restart paseo-daemon.service (or enable --now if not enabled)"
 fi
 
+# --- Register installed ACP agents (moca, hermes) with the daemon ---
+# `paseo daemon config set agents.providers ...` replaces the whole dynamic
+# providers map, so the current value is read and the ACP entries are merged
+# into it. Only agents whose CLI is actually installed on this host are added.
+register_acp_agents() {
+  local acp_defs=()
+  local acp_def acp_id acp_label acp_cmd
+  local original_json providers_json names
+
+  if command -v moca >/dev/null 2>&1; then
+    acp_defs+=("moca|moca|moca acp")
+  fi
+  if command -v hermes >/dev/null 2>&1; then
+    acp_defs+=("hermes|Hermes|hermes acp")
+  fi
+
+  if [[ ${#acp_defs[@]} -eq 0 ]]; then
+    cecho "yellow" "[paseo] No ACP agents (moca, hermes) found on this host — skipping provider registration."
+    return 0
+  fi
+
+  if ! command -v jq >/dev/null 2>&1; then
+    cecho "red" "[paseo] jq is required to register ACP agents — skipping provider registration."
+    return 0
+  fi
+
+  if [[ "$DRY_RUN" -ne "1" ]] && ! command -v paseo >/dev/null 2>&1; then
+    cecho "red" "[paseo] 'paseo' command not found — skipping ACP provider registration."
+    return 0
+  fi
+
+  # Start from the current providers map (empty object when unset or null).
+  original_json="$(paseo daemon config get agents.providers 2>/dev/null | jq -c '.value // {}')" || original_json=""
+  providers_json="$original_json"
+  if [[ -z "$providers_json" ]]; then
+    providers_json='{}'
+  fi
+
+  names=()
+  for acp_def in "${acp_defs[@]}"; do
+    IFS='|' read -r acp_id acp_label acp_cmd <<< "$acp_def"
+    providers_json="$(jq -c \
+      --arg id "$acp_id" --arg label "$acp_label" --arg cmd "$acp_cmd" \
+      '.[$id] = {"extends": "acp", "label": $label, "command": ($cmd | split(" "))}' \
+      <<< "$providers_json")" || providers_json=""
+    names+=("$acp_id")
+  done
+
+  if [[ -z "$providers_json" ]]; then
+    cecho "red" "[paseo] Failed to build the ACP providers JSON — skipping provider registration."
+    return 1
+  fi
+
+  if [[ "$providers_json" == "$original_json" ]]; then
+    cecho "green" "[paseo] ACP agents already registered: ${names[*]}"
+    return 0
+  fi
+
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    if paseo daemon config set agents.providers "$providers_json" >/dev/null; then
+      cecho "green" "[paseo] ACP agents registered: ${names[*]}."
+      if paseo reload >/dev/null 2>&1; then
+        cecho "green" "[paseo] daemon config reloaded."
+      else
+        cecho "yellow" "[paseo] registered ACP agents but failed to reload the daemon — restart paseo-daemon to apply."
+      fi
+    else
+      cecho "red" "[paseo] failed to register ACP agents."
+      return 1
+    fi
+  else
+    cecho "yellow" "DRY-RUN: paseo daemon config set agents.providers '$providers_json'"
+    cecho "yellow" "DRY-RUN: paseo reload"
+  fi
+}
+
+register_acp_agents
+
 # Verify
 if [[ "$DRY_RUN" -ne "1" ]]; then
   if command -v paseo >/dev/null 2>&1; then

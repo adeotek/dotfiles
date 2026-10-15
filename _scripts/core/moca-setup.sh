@@ -8,11 +8,40 @@
 # - AGENTS.md with global instructions for every session (seeded only if missing)
 # - prompts/ with saved slash-command templates (code review, debugging,
 #   documenting code)
+# - skills/ with agent skills (seeded only if missing)
 # Follows the same pattern as opencode-setup.sh / pi-setup.sh: files are
 # copied, not stowed, and an existing config is never clobbered — on an
 # explicit override it is MERGED so the model saved by /model, a personal
 # shell allowlist and extra providers survive.
 ###
+
+# Copy skill subdirectories from source to dest if SKILL.md doesn't already exist
+# Usage: copy_skills_if_missing <src_dir> <dest_dir> [override]
+copy_skills_if_missing() {
+  local src_dir="$1"
+  local dest_dir="$2"
+  local override="${3:-false}"
+  if [[ "$DRY_RUN" -ne "1" ]]; then
+    mkdir -p "$dest_dir"
+  fi
+  for src_subdir in "$src_dir"/*/; do
+    [[ -d "$src_subdir" ]] || continue
+    local skill_name
+    skill_name=$(basename "$src_subdir")
+    local dest_subdir="$dest_dir/$skill_name"
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      if [[ ! -f "$dest_subdir/SKILL.md" ]] || [[ "$override" == true ]]; then
+        mkdir -p "$dest_subdir"
+        cp -r "$src_subdir"* "$dest_subdir/"
+        cecho "green" "Skill $skill_name copied to $dest_dir/"
+      else
+        cecho "yellow" "Skill $skill_name already exists at $dest_dir/"
+      fi
+    else
+      cecho "yellow" "DRY-RUN: cp -r $src_subdir $dest_subdir/ (if not exists)"
+    fi
+  done
+}
 
 # Init
 if [[ -z "$RDIR" ]]; then
@@ -84,4 +113,6 @@ copy_files_if_missing "$RDIR/moca" "$MOCA_CONFIG_DIR" "AGENTS.md"
 # exists is the user's from then on, like the moca-seeded /create-command)
 copy_files_if_missing "$RDIR/moca/prompts" "$MOCA_CONFIG_DIR/prompts" "*.md" "$MOCA_OVERRIDE_CONFIG"
 
-# TODO: copy missing skills
+# Create missing skills (a skill that already exists is the user's from then on;
+# on explicit override the template replaces it)
+copy_skills_if_missing "$RDIR/moca/skills" "$MOCA_CONFIG_DIR/skills" "$MOCA_OVERRIDE_CONFIG"
