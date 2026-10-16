@@ -60,7 +60,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 <div class="container">
 
 <h1>.dotfiles — Complete Call Flow &amp; Architecture Documentation</h1>
-<p class="subtitle">Generated from graphify knowledge graph: 632 nodes, 1122 edges, 78 communities. Commit: 2d4ec6c</p>
+<p class="subtitle">Generated from graphify knowledge graph: 632 nodes, 1132 edges, 82 communities. Commit: b09378a</p>
 
 <div class="nav">
     <a href="#overview">Architecture Overview</a>
@@ -138,7 +138,7 @@ flowchart LR
     <h4>Architecture Layers</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>Layer</th><th>Nodes</th><th>Communities</th></tr>
-      <tr><td>Extraction Pipeline</td><td>1</td><td><code>54</code></td></tr><tr><td>Graph Build</td><td>73</td><td><code>6, 7, 9, 63</code></td></tr><tr><td>Analysis &amp; Clustering</td><td>10</td><td><code>12</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>333</td><td><code>28, 2, 3, 10, 66, 4, 18, 1, 8, 11, 17, 64, 0, 13, 16, 35, 62, 19, 21, 25, 26, 65, 67, 69, 72, 32, 33, 57, 47, 50</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>71</td><td><code>27, 5, 68, 29, 41, 44</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>36</td><td><code>36, 23</code></td></tr><tr><td>Agentsmd Moca Commit</td><td>10</td><td><code>34</code></td></tr><tr><td>Wsl Setup Fedora</td><td>9</td><td><code>77</code></td></tr><tr><td>AGENTS.md — Operational Rules for AI Agents</td><td>8</td><td><code>14</code></td></tr><tr><td>cc-sessions.sh</td><td>8</td><td><code>15</code></td></tr><tr><td>expert build/orchestrator agent</td><td>6</td><td><code>20</code></td></tr><tr><td>Get-GitHubStats.ps1</td><td>6</td><td><code>22</code></td></tr><tr><td>Windows Network/Firewall Diagnostic Tools</td><td>5</td><td><code>24</code></td></tr><tr><td>pi/agents/code-review.md</td><td>4</td><td><code>70</code></td></tr><tr><td>Other</td><td>52</td><td><code>71, 73, 74, 75, 30, 31, 37, 38, 39, 40, 42, 43, 45, 46, 48, 49, 51, 52, 53, 55, 56, 58, 59, 60, 61, 76</code></td></tr>
+      <tr><td>Extraction Pipeline</td><td>1</td><td><code>54</code></td></tr><tr><td>Graph Build</td><td>73</td><td><code>6, 7, 9, 63</code></td></tr><tr><td>Analysis &amp; Clustering</td><td>10</td><td><code>12</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>333</td><td><code>2, 28, 66, 3, 4, 18, 1, 8, 10, 17, 11, 64, 13, 67, 16, 35, 69, 19, 21, 62, 0, 25, 26, 65, 72, 78, 79, 80, 32, 33, 81, 57, 47, 50</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>71</td><td><code>27, 5, 68, 29, 41, 44</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>36</td><td><code>36, 23</code></td></tr><tr><td>Agentsmd Moca Commit</td><td>10</td><td><code>34</code></td></tr><tr><td>Wsl Setup Fedora</td><td>9</td><td><code>77</code></td></tr><tr><td>AGENTS.md — Operational Rules for AI Agents</td><td>8</td><td><code>14</code></td></tr><tr><td>cc-sessions.sh</td><td>8</td><td><code>15</code></td></tr><tr><td>expert build/orchestrator agent</td><td>6</td><td><code>20</code></td></tr><tr><td>Get-GitHubStats.ps1</td><td>6</td><td><code>22</code></td></tr><tr><td>Windows Network/Firewall Diagnostic Tools</td><td>5</td><td><code>24</code></td></tr><tr><td>pi/agents/code-review.md</td><td>4</td><td><code>70</code></td></tr><tr><td>Other</td><td>52</td><td><code>71, 73, 74, 75, 30, 31, 37, 38, 39, 40, 42, 43, 45, 46, 48, 49, 51, 52, 53, 55, 56, 58, 59, 60, 61, 76</code></td></tr>
     </table>
   </div>
   <div class="card">
@@ -150,10 +150,10 @@ flowchart LR
   <div class="card">
     <h4>Graph Report Highlights</h4>
     <ul>
-      <li>632 nodes · 1122 edges · 78 communities (43 shown, 35 thin omitted)</li>
-      <li>Extraction: 84% EXTRACTED · 16% INFERRED · 0% AMBIGUOUS · INFERRED: 184 edges (avg confidence: 0.64)</li>
+      <li>632 nodes · 1132 edges · 82 communities (43 shown, 39 thin omitted)</li>
+      <li>Extraction: 84% EXTRACTED · 16% INFERRED · 0% AMBIGUOUS · INFERRED: 184 edges (avg confidence: 0.6)</li>
       <li>Token cost: 0 input · 0 output</li>
-      <li>1. `cecho()` - 71 edges</li>
+      <li>1. `cecho()` - 75 edges</li>
       <li>2. `install_package()` - 31 edges</li>
       <li>3. `decho()` - 22 edges</li>
     </ul>
@@ -726,36 +726,32 @@ flowchart LR
 
 <!-- ====== 5. CLI & Skill Installers ====== -->
 <h2 id="cli-skills">5. CLI &amp; Skill Installers</h2>
-<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, setupsh, script, mostly in _scripts/core/_helpers.sh, .opencode/agents/dotfiles.md, opencode/AGENTS.md. This section covers 333 nodes and 596 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, setupsh, script, mostly in _scripts/core/_helpers.sh, .opencode/agents/dotfiles.md, opencode/AGENTS.md. This section covers 333 nodes and 606 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: CLI &amp; Skill Installers (333 nodes, 596 edges)
+    %% Section: CLI &amp; Skill Installers (333 nodes, 606 edges)
     subgraph cli_skills_scripts_core_helpers_sh_347c91c6["_scripts/core/_helpers.sh"]
-        scripts_core_helpers_install_package_13a3fee4("install_package()<br/><small>_scripts/core/_helpers.sh</small>")
         scripts_core_helpers_cecho_42476bc7("cecho()<br/><small>_scripts/core/_helpers.sh</small>")
         scripts_core_helpers_decho_3a11e880("decho()<br/><small>_scripts/core/_helpers.sh</small>")
         scripts_core_helpers_stow_package_6093c77a("stow_package()<br/><small>_scripts/core/_helpers.sh</small>")
+        scripts_core_helpers_install_package_13a3fee4("install_package()<br/><small>_scripts/core/_helpers.sh</small>")
     end
     scripts_core_base_tools_install_sh_entry_6245d66b("base-tools-install.sh script<br/><small>_scripts/core/base-tools-install.sh</small>")
-    scripts_core_ghostty_install_sh_entry_7f9f5727("ghostty-install.sh script<br/><small>_scripts/core/ghostty-install.sh</small>")
-    scripts_core_ghostty_setup_sh_entry_699e3100("ghostty-setup.sh script<br/><small>_scripts/core/ghostty-setup.sh</small>")
     scripts_core_glow_install_sh_entry_155c75cf("glow-install.sh script<br/><small>_scripts/core/glow-install.sh</small>")
-    scripts_core_headroom_setup_sh_entry_04dc2f64("headroom-setup.sh script<br/><small>_scripts/core/headroom-setup.sh</small>")
     scripts_core_hermes_setup_sh_entry_aabb4b07("hermes-setup.sh script<br/><small>_scripts/core/hermes-setup.sh</small>")
     scripts_core_homebrew_install_sh_entry_30312733("homebrew-install.sh script<br/><small>_scripts/core/homebrew-install.sh</small>")
     scripts_core_nodejs_install_sh_entry_8b7e045c("nodejs-install.sh script<br/><small>_scripts/core/nodejs-install.sh</small>")
-    scripts_core_nvim_setup_sh_entry_c488b1ca("nvim-setup.sh script<br/><small>_scripts/core/nvim-setup.sh</small>")
+    scripts_core_onefetch_install_sh_entry_03e9bf36("onefetch-install.sh script<br/><small>_scripts/core/onefetch-install.sh</small>")
+    scripts_core_paseo_install_sh_entry_3e706387("paseo-install.sh script<br/><small>_scripts/core/paseo-install.sh</small>")
+    scripts_core_rtk_install_sh_entry_9094d908("rtk-install.sh script<br/><small>_scripts/core/rtk-install.sh</small>")
+    scripts_core_rtk_setup_sh_entry_48de7d3a("rtk-setup.sh script<br/><small>_scripts/core/rtk-setup.sh</small>")
     scripts_core_zed_install_sh_entry_6bcbf1ca("zed-install.sh script<br/><small>_scripts/core/zed-install.sh</small>")
     scripts_core_zed_setup_sh_entry_d69b7138("zed-setup.sh script<br/><small>_scripts/core/zed-setup.sh</small>")
     claude_code_user_config_statusline_command_win_s_92683a1c("statusline-command-win.sh script<br/><small>claude-code/user-config/statusline-command-win.sh</small>")
     claude_code_user_config_statusline_command_sh_en_1f04a487("statusline-command.sh script<br/><small>claude-code/user-config/statusline-command.sh</small>")
     nvim_config_nvim_lua_plugins_lsp_220be175("lsp.lua")
-    scripts_core_ghostty_install_sh_entry_7f9f5727 -->|calls| scripts_core_helpers_install_package_13a3fee4
-    scripts_core_ghostty_install_sh_entry_7f9f5727 -->|calls| scripts_core_helpers_cecho_42476bc7
-    scripts_core_ghostty_install_sh_entry_7f9f5727 -->|calls| scripts_core_helpers_decho_3a11e880
-    scripts_core_ghostty_setup_sh_entry_699e3100 -->|calls| scripts_core_helpers_stow_package_6093c77a
     scripts_core_zed_install_sh_entry_6bcbf1ca -->|calls| scripts_core_helpers_cecho_42476bc7
     scripts_core_zed_install_sh_entry_6bcbf1ca -->|calls| scripts_core_helpers_decho_3a11e880
     scripts_core_zed_setup_sh_entry_d69b7138 -->|calls| scripts_core_helpers_stow_package_6093c77a
@@ -763,32 +759,35 @@ flowchart LR
     scripts_core_glow_install_sh_entry_155c75cf -->|calls| scripts_core_helpers_install_package_13a3fee4
     scripts_core_homebrew_install_sh_entry_30312733 -->|calls| scripts_core_helpers_cecho_42476bc7
     scripts_core_homebrew_install_sh_entry_30312733 -->|calls| scripts_core_helpers_install_package_13a3fee4
-    scripts_core_nvim_setup_sh_entry_c488b1ca -->|calls| scripts_core_helpers_stow_package_6093c77a
+    scripts_core_onefetch_install_sh_entry_03e9bf36 -->|calls| scripts_core_helpers_install_package_13a3fee4
+    scripts_core_onefetch_install_sh_entry_03e9bf36 -->|calls| scripts_core_helpers_cecho_42476bc7
+    scripts_core_rtk_install_sh_entry_9094d908 -->|calls| scripts_core_helpers_install_package_13a3fee4
+    scripts_core_rtk_setup_sh_entry_48de7d3a -->|calls| scripts_core_helpers_cecho_42476bc7
     scripts_core_helpers_decho_3a11e880 -->|calls| scripts_core_helpers_cecho_42476bc7
     scripts_core_helpers_install_package_13a3fee4 -->|calls| scripts_core_helpers_cecho_42476bc7
     scripts_core_helpers_install_package_13a3fee4 -->|calls| scripts_core_helpers_decho_3a11e880
     scripts_core_nodejs_install_sh_entry_8b7e045c -->|calls| scripts_core_helpers_cecho_42476bc7
     scripts_core_nodejs_install_sh_entry_8b7e045c -->|calls| scripts_core_helpers_install_package_13a3fee4
     scripts_core_nodejs_install_sh_entry_8b7e045c -->|calls| scripts_core_helpers_decho_3a11e880
-    scripts_core_headroom_setup_sh_entry_04dc2f64 -->|calls| scripts_core_helpers_cecho_42476bc7
     scripts_core_hermes_setup_sh_entry_aabb4b07 -->|calls| scripts_core_helpers_cecho_42476bc7
+    scripts_core_paseo_install_sh_entry_3e706387 -->|calls| scripts_core_helpers_cecho_42476bc7
     scripts_core_helpers_stow_package_6093c77a -->|calls| scripts_core_helpers_cecho_42476bc7
     scripts_core_helpers_stow_package_6093c77a -->|calls| scripts_core_helpers_install_package_13a3fee4
     scripts_core_helpers_stow_package_6093c77a -->|calls| scripts_core_helpers_decho_3a11e880
     %% Omitted for readability: 315 nodes, 0 edges
-    class scripts_core_helpers_install_package_13a3fee4 function;
     class scripts_core_helpers_cecho_42476bc7 function;
     class scripts_core_helpers_decho_3a11e880 function;
     class scripts_core_helpers_stow_package_6093c77a function;
+    class scripts_core_helpers_install_package_13a3fee4 function;
     class scripts_core_base_tools_install_sh_entry_6245d66b function;
-    class scripts_core_ghostty_install_sh_entry_7f9f5727 function;
-    class scripts_core_ghostty_setup_sh_entry_699e3100 function;
     class scripts_core_glow_install_sh_entry_155c75cf function;
-    class scripts_core_headroom_setup_sh_entry_04dc2f64 function;
     class scripts_core_hermes_setup_sh_entry_aabb4b07 function;
     class scripts_core_homebrew_install_sh_entry_30312733 function;
     class scripts_core_nodejs_install_sh_entry_8b7e045c function;
-    class scripts_core_nvim_setup_sh_entry_c488b1ca function;
+    class scripts_core_onefetch_install_sh_entry_03e9bf36 function;
+    class scripts_core_paseo_install_sh_entry_3e706387 function;
+    class scripts_core_rtk_install_sh_entry_9094d908 function;
+    class scripts_core_rtk_setup_sh_entry_48de7d3a function;
     class scripts_core_zed_install_sh_entry_6bcbf1ca function;
     class scripts_core_zed_setup_sh_entry_d69b7138 function;
     class claude_code_user_config_statusline_command_win_s_92683a1c entry;
@@ -817,243 +816,243 @@ flowchart LR
 </tr>
 <tr>
   <td>1</td>
-  <td><code>ansible-cleanup.sh</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>ansible-install.sh</code><br><small style="color:var(--muted)">_scripts/core/ansible-install.sh</small></td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>ansible-cleanup.sh node in _scripts/core/ansible-cleanup.sh.</td>
+  <td><code>Zed settings.json (stowed)</code><br><small style="color:var(--muted)">.zed/settings.json</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Zed settings.json (stowed) node in .zed/settings.json.</td>
 </tr>
 <tr>
   <td>2</td>
-  <td><code>ansible-cleanup.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Foca profile Hermes config (config.yaml)</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>ansible-cleanup.sh script node in _scripts/core/ansible-cleanup.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
 </tr>
 <tr>
   <td>3</td>
-  <td><code>ansible-install.sh</code><br><small style="color:var(--muted)">_scripts/core/ansible-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Hermes main config template (config.yaml)</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>ansible-cleanup.sh</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small><br><code>uv-install.sh</code><br><small style="color:var(--muted)">_scripts/core/uv-install.sh</small></td>
-  <td>ansible-install.sh node in _scripts/core/ansible-install.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
 </tr>
 <tr>
   <td>4</td>
-  <td><code>ansible-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Graphify knowledge-graph tool</code><br><small style="color:var(--muted)">.opencode/agents/dotfiles.md</small></td>
+  <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>execute_command()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>read_yes_no()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>ansible-install.sh script node in _scripts/core/ansible-install.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Builds dependency relationships and graph data.</td>
 </tr>
 <tr>
   <td>5</td>
-  <td><code>docker-install.sh</code><br><small style="color:var(--muted)">_scripts/core/docker-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Headroom (LLM context compression proxy)</code><br><small style="color:var(--muted)">docs/headroom.md</small></td>
+  <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>docker-install.sh node in _scripts/core/docker-install.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Headroom (LLM context compression proxy) node in docs/headroom.md.</td>
 </tr>
 <tr>
   <td>6</td>
-  <td><code>docker-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/docker-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Hermes daily update timer/service (hermes-update.timer)</code><br><small style="color:var(--muted)">docs/hermes.md</small></td>
+  <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>enable_wsl_systemd()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>install_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>docker-install.sh script node in _scripts/core/docker-install.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Hermes daily update timer/service (hermes-update.timer) node in docs/hermes.md.</td>
 </tr>
 <tr>
   <td>7</td>
-  <td><code>github-cli-install.sh</code><br><small style="color:var(--muted)">_scripts/core/github-cli-install.sh</small></td>
-  <td><span class="tag tag-cmd">Entry</span></td>
+  <td><code>Hermes Gateway API Server (port 8642)</code><br><small style="color:var(--muted)">docs/hermes.md</small></td>
+  <td><span class="tag tag-endpoint">API</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>Turns a local path or remote repository into analysis context.</td>
+  <td>No direct outbound edge</td>
+  <td>Hermes Gateway API Server (port 8642) node in docs/hermes.md.</td>
 </tr>
 <tr>
   <td>8</td>
-  <td><code>github-cli-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/github-cli-install.sh</small></td>
+  <td><code>Hermes Agent (Nous Research AI agent CLI + gateway)</code><br><small style="color:var(--muted)">docs/hermes.md</small></td>
   <td><span class="tag tag-cmd">Entry</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>install_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>Turns a local path or remote repository into analysis context.</td>
+  <td>No direct outbound edge</td>
+  <td>Hermes Agent (Nous Research AI agent CLI + gateway) node in docs/hermes.md.</td>
 </tr>
 <tr>
   <td>9</td>
-  <td><code>golang-install.sh</code><br><small style="color:var(--muted)">_scripts/core/golang-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Hermes Dashboard (port 9119, Web UI + Remote Desktop backend)</code><br><small style="color:var(--muted)">docs/hermes.md</small></td>
+  <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>golang-install.sh node in _scripts/core/golang-install.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Hermes Dashboard (port 9119, Web UI + Remote Desktop backend) node in docs/hermes.md.</td>
 </tr>
 <tr>
   <td>10</td>
-  <td><code>golang-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/golang-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Paseo agent-orchestrator daemon (port 6767)</code><br><small style="color:var(--muted)">docs/paseo.md</small></td>
+  <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>golang-install.sh script node in _scripts/core/golang-install.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Paseo agent-orchestrator daemon (port 6767) node in docs/paseo.md.</td>
 </tr>
 <tr>
   <td>11</td>
-  <td><code>graphify-install.sh</code><br><small style="color:var(--muted)">_scripts/core/graphify-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Antidote ZSH plugin manager</code><br><small style="color:var(--muted)">docs/zsh.md</small></td>
+  <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>uv-install.sh</code><br><small style="color:var(--muted)">_scripts/core/uv-install.sh</small></td>
-  <td>Builds dependency relationships and graph data.</td>
+  <td>No direct outbound edge</td>
+  <td>Antidote ZSH plugin manager node in docs/zsh.md.</td>
 </tr>
 <tr>
   <td>12</td>
-  <td><code>graphify-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/graphify-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Dotfiles Agent (OpenCode subagent definition)</code><br><small style="color:var(--muted)">.opencode/agents/dotfiles.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>Builds dependency relationships and graph data.</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing Dotfiles Agent (OpenCode subagent definition).</td>
 </tr>
 <tr>
   <td>13</td>
-  <td><code>headroom-install.sh</code><br><small style="color:var(--muted)">_scripts/core/headroom-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>headroom-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/headroom-setup.sh</small></td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>uv-install.sh</code><br><small style="color:var(--muted)">_scripts/core/uv-install.sh</small></td>
-  <td>headroom-install.sh node in _scripts/core/headroom-install.sh.</td>
+  <td><code>AGENTS.md (project agent guidelines)</code><br><small style="color:var(--muted)">AGENTS.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing AGENTS.md (project agent guidelines).</td>
 </tr>
 <tr>
   <td>14</td>
-  <td><code>headroom-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/headroom-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Global Claude Code Instructions (LSP-first navigation, playwright-cli)</code><br><small style="color:var(--muted)">claude-code/user-config/CLAUDE.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>headroom-install.sh script node in _scripts/core/headroom-install.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing Global Claude Code Instructions (LSP-first navigation, playwright-cli).</td>
 </tr>
 <tr>
   <td>15</td>
-  <td><code>headroom-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/headroom-setup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Headroom documentation</code><br><small style="color:var(--muted)">docs/headroom.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>headroom-install.sh</code><br><small style="color:var(--muted)">_scripts/core/headroom-install.sh</small></td>
-  <td>headroom-setup.sh node in _scripts/core/headroom-setup.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing Headroom documentation.</td>
 </tr>
 <tr>
   <td>16</td>
-  <td><code>headroom-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/headroom-setup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Hermes Agent documentation</code><br><small style="color:var(--muted)">docs/hermes.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>enable_lingering()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>enable_wsl_systemd()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br>+1 more</td>
-  <td>headroom-setup.sh script node in _scripts/core/headroom-setup.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing Hermes Agent documentation.</td>
 </tr>
 <tr>
   <td>17</td>
-  <td><code>aecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Paseo daemon documentation</code><br><small style="color:var(--muted)">docs/paseo.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>aecho() node in _scripts/core/_helpers.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing Paseo daemon documentation.</td>
 </tr>
 <tr>
   <td>18</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>aecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>ansible-cleanup.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small><br><code>ansible-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-install.sh</small><br>+67 more</td>
+  <td><code>Zed config documentation</code><br><small style="color:var(--muted)">docs/zed.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>cecho() node in _scripts/core/_helpers.sh.</td>
+  <td>Documentation node describing Zed config documentation.</td>
 </tr>
 <tr>
   <td>19</td>
-  <td><code>copy_files_if_missing()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>hermes-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/hermes-setup.sh</small><br><code>opencode-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/opencode-setup.sh</small></td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>copy_files_if_missing() node in _scripts/core/_helpers.sh.</td>
+  <td><code>ZSH configuration documentation</code><br><small style="color:var(--muted)">docs/zsh.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing ZSH configuration documentation.</td>
 </tr>
 <tr>
   <td>20</td>
-  <td><code>enable_lingering()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>headroom-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/headroom-setup.sh</small><br><code>hermes-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/hermes-setup.sh</small></td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>enable_lingering() node in _scripts/core/_helpers.sh.</td>
+  <td><code>Foca persona SOUL.md (foca profile)</code><br><small style="color:var(--muted)">profiles/foca/SOUL.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing Foca persona SOUL.md (foca profile).</td>
 </tr>
 <tr>
   <td>21</td>
-  <td><code>enable_wsl_systemd()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>docker-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/docker-install.sh</small><br><code>headroom-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/headroom-setup.sh</small><br><code>hermes-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/hermes-setup.sh</small></td>
+  <td><code>Mo persona SOUL.md (Hermes default profile)</code><br><small style="color:var(--muted)">hermes/.hermes/SOUL.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>enable_wsl_systemd() node in _scripts/core/_helpers.sh.</td>
+  <td>Documentation node describing Mo persona SOUL.md (Hermes default profile).</td>
 </tr>
 <tr>
   <td>22</td>
-  <td><code>read_key()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>read_yes_no()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><code>Neovim Cheatsheet</code><br><small style="color:var(--muted)">.config/nvim/Cheatsheet.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>read_key() node in _scripts/core/_helpers.sh.</td>
+  <td>Documentation node describing Neovim Cheatsheet.</td>
 </tr>
 <tr>
   <td>23</td>
-  <td><code>read_yes_no()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>ansible-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-install.sh</small><br><code>headroom-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/headroom-setup.sh</small><br><code>hermes-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/hermes-setup.sh</small><br>+3 more</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>read_key()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>read_yes_no() node in _scripts/core/_helpers.sh.</td>
+  <td><code>Neovim config README</code><br><small style="color:var(--muted)">.config/nvim/README.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing Neovim config README.</td>
 </tr>
 <tr>
   <td>24</td>
-  <td><code>hermes-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/hermes-setup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Dotfiles README</code><br><small style="color:var(--muted)">README.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>copy_files_if_missing()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>enable_lingering()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br>+2 more</td>
-  <td>hermes-setup.sh script node in _scripts/core/hermes-setup.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing Dotfiles README.</td>
 </tr>
 <tr>
   <td>25</td>
-  <td><code>mise-install.sh</code><br><small style="color:var(--muted)">_scripts/core/mise-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>AdeoTEK Bash scripting conventions</code><br><small style="color:var(--muted)">.opencode/agents/dotfiles.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>mise-install.sh node in _scripts/core/mise-install.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Design note for AdeoTEK Bash scripting conventions.</td>
 </tr>
 <tr>
   <td>26</td>
-  <td><code>mise-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/mise-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>Zed ACP agent integration (OpenCode / Claude in Agent Panel)</code><br><small style="color:var(--muted)">docs/zed.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>mise-install.sh script node in _scripts/core/mise-install.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Design note for Zed ACP agent integration (OpenCode / Claude in Agent Panel).</td>
 </tr>
 <tr>
   <td>27</td>
-  <td><code>pi-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/pi-setup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>VSCode base keymap choice in Zed</code><br><small style="color:var(--muted)">docs/zed.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>pi-install.sh</code><br><small style="color:var(--muted)">_scripts/core/pi-install.sh</small></td>
-  <td>pi-setup.sh node in _scripts/core/pi-setup.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Design note for VSCode base keymap choice in Zed.</td>
 </tr>
 <tr>
   <td>28</td>
-  <td><code>copy_agents_if_missing()</code><br><small style="color:var(--muted)">_scripts/core/pi-setup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>pi-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/pi-setup.sh</small></td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>copy_agents_if_missing() node in _scripts/core/pi-setup.sh.</td>
+  <td><code>Foca - senior software engineer &amp; architect persona</code><br><small style="color:var(--muted)">profiles/foca/SOUL.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Design note for Foca - senior software engineer &amp; architect persona.</td>
 </tr>
 <tr>
   <td>29</td>
-  <td><code>copy_skills_if_missing()</code><br><small style="color:var(--muted)">_scripts/core/pi-setup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>pi-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/pi-setup.sh</small></td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>copy_skills_if_missing() node in _scripts/core/pi-setup.sh.</td>
+  <td><code>Mo - peer-level assistant &amp; Hermes maintainer persona</code><br><small style="color:var(--muted)">hermes/.hermes/SOUL.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Design note for Mo - peer-level assistant &amp; Hermes maintainer persona.</td>
 </tr>
 <tr>
   <td>30</td>
-  <td><code>pi-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/pi-setup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>lazy.nvim restructured Kickstart layout</code><br><small style="color:var(--muted)">.config/nvim/README.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>copy_agents_if_missing()</code><br><small style="color:var(--muted)">_scripts/core/pi-setup.sh</small><br><code>copy_skills_if_missing()</code><br><small style="color:var(--muted)">_scripts/core/pi-setup.sh</small><br>+1 more</td>
-  <td>pi-setup.sh script node in _scripts/core/pi-setup.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>Design note for lazy.nvim restructured Kickstart layout.</td>
 </tr>
 </table>
 
@@ -1074,7 +1073,7 @@ flowchart LR
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: calls x190, contains x118, references x56, defines x49. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: calls x200, contains x118, references x56, defines x49. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -3230,16 +3229,16 @@ flowchart LR
     <h4>Graph</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><td>Nodes</td><td>632</td></tr>
-      <tr><td>Edges</td><td>1122</td></tr>
+      <tr><td>Edges</td><td>1132</td></tr>
       <tr><td>Hyperedges</td><td>16</td></tr>
-      <tr><td>Communities</td><td>78</td></tr>
+      <tr><td>Communities</td><td>82</td></tr>
       <tr><td>Documented Sections</td><td>15</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Edge Confidence</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>EXTRACTED</td><td>938</td></tr>
+      <tr><td>EXTRACTED</td><td>948</td></tr>
       <tr><td>INFERRED</td><td>184</td></tr>
       <tr><td>AMBIGUOUS</td><td>0</td></tr>
     </table>
@@ -3248,7 +3247,7 @@ flowchart LR
 
 <div style="text-align:center; padding:40px 0; color: var(--muted); font-size:0.9rem;">
   <p>.dotfiles — Architecture Documentation</p>
-  <p>Generated: 2026-10-15 21:39 UTC · graphify callflow-html</p>
+  <p>Generated: 2026-10-16 10:42 UTC · graphify callflow-html</p>
 </div>
 
 </div><!-- .container -->
