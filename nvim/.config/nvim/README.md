@@ -93,7 +93,7 @@ Leader = `<Space>`. Full custom-binding list:
 | `<C-h/j/k/l>` | move focus left/lower/upper/right window |
 | `<leader>bn` / `<leader>bp` | next/previous buffer |
 | `<leader>bd` / `<C-q>` | close buffer |
-| `<C-PageUp>` / `<C-PageDown>` | next/previous buffer tab |
+| `<C-S-PageUp>` / `<C-S-PageDown>` | next/previous buffer |
 | `<C-\>` | toggle terminal (toggleterm) |
 | `jk` or `<esc>` (in terminal) | exit terminal mode |
 
