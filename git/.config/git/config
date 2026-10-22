@@ -129,7 +129,7 @@
 	ma = merge --abort
 	mc = merge --continue
 	ms = merge --skip
-    mom = merge origin/main
+  mom = merge origin/main
 	#############
 	o = checkout
 	om = checkout main
@@ -204,27 +204,28 @@
 	#############
 
 [color "branch"]
-    current = yellow bold
-    local = white bold
-    remote = cyan bold
+  current = yellow bold
+  local = white bold
+  remote = cyan bold
 
 [color "diff"]
-    meta = 11
-    frag = magenta bold
-    commit = yellow bold
-    old = red bold
-    new = green bold
-    whitespace = red reverse
+  meta = 11
+  frag = magenta bold
+  commit = yellow bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
 
 [color "diff-highlight"]
-    oldNormal = red bold
-    oldHighlight = red bold 52
-    newNormal = green bold
-    newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 
 [color "status"]
-    added = green bold
-    changed = yellow bold
-    untracked = red bold
+  added = green bold
+  changed = yellow bold
+  untracked = red bold
+
 [pull]
 	rebase = false

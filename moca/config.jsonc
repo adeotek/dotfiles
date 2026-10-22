@@ -27,8 +27,8 @@
     // Rule lists, in precedence order (deny > ask > allow). A rule is a command
     // with optional * wildcards, e.g. "git push", "rm build/*", "docker run *".
     // Absent = none. An allow entry only ever ADDS to the built-in allowlist.
-    "allow": ["rtk *", "make *", "git log *"],
-    "ask":   ["rtk rm *", "rm *", "git commit *", "git push *"],
+    "allow": ["rtk *", "make *", "git *"],
+    "ask":   ["rtk rm *", "rm *", "git commit *", "git push *", "git clone *"],
     "deny":  ["rm -rf *", "git push --force*"],
     // Auto mode's one-shot classifier for commands the risk tables cannot judge.
     "auto": { "classifier": true, "model": "opencode-go/deepseek-v4.1-flash" }
