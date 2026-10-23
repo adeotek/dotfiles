@@ -1,4 +1,6 @@
 {
+  "diff_view_style": "split",
+  "restore_on_startup": "launchpad",
   "project_panel": {
     "auto_fold_dirs": false,
     "dock": "left"
@@ -15,6 +17,7 @@
     "model_parameters": []
   },
   "git_panel": {
+    "tree_view": true,
     "dock": "left"
   },
   "icon_theme": "Zed (Default)",
