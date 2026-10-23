@@ -1,116 +1,129 @@
-// moca — MO Coding Agent configuration
-// Deployed by moca-setup.sh to ~/.config/moca/config.jsonc.
+// moca user config — every option, with its default or an example.
 //
-// On first run moca opens in setup mode: `/login` stores a credential and
-// `/model` picks a model (saved back into this file as "model"). A one-shot
-// run (`moca -p "..."`) needs "model" set up front.
+// Location: ~/.config/moca/config.jsonc (%APPDATA%\moca\config.jsonc on Windows).
+// Format: JSONC (comments and trailing commas are fine). Keys are camelCase and
+// decoding is STRICT: an unknown key is an error, not ignored. `moca config check`
+// validates this file and the project one; `moca config sample` prints this text.
 //
-// Secrets never appear as literals: "apiKey" is an "env:VAR" reference or is
-// omitted entirely, in which case the key stored by `/login` (or
-// `moca login <provider>`) in ~/.config/moca/auth.json is used. A stored key
-// wins over the env reference.
-//
-// Note: every top-level key below is optional — the values here make the
-// defaults explicit and are safe to edit or delete. An unknown key is a
-// config error (moca refuses to start), so keep to the documented set.
+// Copying this file as-is changes nothing: every active value is the built-in
+// default. Options that would REPLACE a default list or are environment-specific
+// are commented out — absent means "use the built-in".
 {
-  // ---- Model ------------------------------------------------------------
-  // "model"      everyday turns (cheap, fast)
-  // "modelHard"  /hard escalation: planning, gnarly debugging
-  // Both must be provider-qualified: provider/model.
-  "model": "opencode-go/glm-5.3-flash",
+  // The model everyday turns use, as <provider>/<model>. There is no default:
+  // a config without a model opens the TUI in setup mode (and `-p` exits 2).
+  "model": "opencode-go/deepseek-v4.1-flash",
+  // `/hard` (and plan execution) escalate to this one.
   "modelHard": "opencode-go/glm-5.3",
 
-  // ---- Providers --------------------------------------------------------
-  // Built-ins (anthropic, openai, opencode-go) are always known: an entry
-  // only overrides fields; apiKey defaults to the matching env var.
-  // A name is enabled by a model reference such as "ollama/qwen3:8b".
-  // "providers": {
-    // "opencode-go": { "auth": "api_key", "apiKey": "env:OPENCODE_API_KEY" },
-    // "anthropic": { "auth": "api_key", "apiKey": "env:ANTHROPIC_API_KEY" },
-    // "openai": { "auth": "api_key", "apiKey": "env:OPENAI_API_KEY" }
+  // ---------------------------------------------------------------------------
+  // Permissions (SPECS §4, §11). `--mode` overrides the mode for one run.
+  // ---------------------------------------------------------------------------
+  "permissions": {
+    // ask    = every non-allowlisted command asks
+    // auto   = safe actions run, risky ones ask (the default)
+    // yolo   = no permission checks at all
+    // plan   = the plan scope: write an implementation plan, nothing else
+    "defaultMode": "auto",
+    // Rule lists, in precedence order (deny > ask > allow). A rule is a command
+    // with optional * wildcards, e.g. "git push", "rm build/*", "docker run *".
+    // Absent = none. An allow entry only ever ADDS to the built-in allowlist.
+    "allow": ["rtk *", "make *", "git *"],
+    "ask":   ["rtk rm *", "rm *", "git commit *", "git push *", "git clone *"],
+    "deny":  ["rm -rf *", "git push --force*"],
+    // Auto mode's one-shot classifier for commands the risk tables cannot judge.
+    "auto": { "classifier": true, "model": "opencode-go/deepseek-v4.1-flash" }
+  },
 
-    // --- Ollama (local or LAN) — example --------------------------------
-    // A local server needs no API key and no model list: moca discovers the
-    // pulled models (and their tool support) from /api/tags + /api/show, and
-    // `/model` re-reads them, so a model you `ollama pull` meanwhile shows up.
-    //
-    // Naming an "ollama/..." model enables this provider; a providers entry
-    // on its own does too.
-    //
-    // The server's context window cannot be set per request on Ollama's
-    // OpenAI-compatible endpoint, so start it with at least 16K
-    // (OLLAMA_CONTEXT_LENGTH=32768 ollama serve) and, when its Modelfile has
-    // no num_ctx, declare the same number under models.<id>.contextWindow —
-    // moca otherwise assumes 16384 and warns at startup.
-    //
-    // "ollama": {}
-    // "ollama": { "baseUrl": "http://nas.lan:11434" }   // another machine
-    //     (address is providers.ollama.baseUrl, else $OLLAMA_HOST, else
-    //      localhost:11434; "nas", "nas:11434" and "http://nas:11434" all work
-    //      — start the remote server with `OLLAMA_HOST=0.0.0.0 ollama serve`)
-    // "ollama": {
-    //   "models": {
-    //     "qwen3:8b": { "contextWindow": 32768 }
-    //   }
+  // ---------------------------------------------------------------------------
+  // Shell (SPECS §10). `allow` is the first-word allowlist for the `shell` tool.
+  // ---------------------------------------------------------------------------
+  // Absent = the built-in list (go, git, make, npm, docker, …). Setting it
+  // REPLACES that list, so copy the default first if you extend it.
+  // "shell": { "allow": ["go", "git", "make", "npm", "docker"] },
+
+  // ---------------------------------------------------------------------------
+  // MCP servers (SPECS §10.5). Lazy: nothing starts until a tool call needs it.
+  // ---------------------------------------------------------------------------
+  "mcp": {
+    // Seconds of inactivity before a server is stopped again.
+    "idleTimeout": 600
+    // "servers": {
+    //   "context7": { "url": "https://mcp.context7.com/mcp", "description": "library docs" },
+    //   "local":    { "command": "my-mcp-server", "args": ["--stdio"],
+    //                 "env": { "TOKEN": "env:MCP_TOKEN" },              // values may be "env:VAR"
+    //                 "headers": { "Authorization": "env:MCP_TOKEN" },  // HTTP transport only
+    //                 "approve": ["read_file"] }                        // tools approved up front
     // }
-    // A key (`/login ollama`) is only needed for a server behind an
-    // authenticating proxy.
+  },
+
+  // ---------------------------------------------------------------------------
+  // Web tool (SPECS §10): `fetch` needs no configuration.
+  // ---------------------------------------------------------------------------
+  "web": {
+    "search": {
+      "provider": "tavily" // "tavily" (keyless, rate-limited) | "exa" (needs a key)
+      // "apiKey": "env:TAVILY_API_KEY"
+    }
+  },
+
+  // ---------------------------------------------------------------------------
+  // Context and compaction (SPECS §14).
+  // ---------------------------------------------------------------------------
+  "context": {
+    "reserveTokens": 16384, // headroom kept for the reply
+    "keepRecentTokens": 20000, // recent turns a compaction never rewrites
+    "maxSteps": 60, // tool-call steps before the run is wrapped up
+    "progressNudgeAt": 12 // tool batches with no file change before one "start acting" nudge; 0 disables
+  },
+
+  // ---------------------------------------------------------------------------
+  // Self-managed project skills (SPECS §12). OFF unless this is true — the only
+  // opt-in; a trusted project file can opt a repository out with false.
+  // ---------------------------------------------------------------------------
+  "skills": {
+    "selfManaged": false
+    // The end-of-run recording nudge is on by default; false turns it off.
+    // "recordNudge": true
+  },
+
+  // Providers. The three built-ins below are already known: an entry is only
+  // needed to change a URL, add a model, or point the key at another variable.
+  // `apiKey` MUST be "env:VAR" — a literal secret in this file is a config error.
+  // "providers": {
+    // "anthropic": { "auth": "api_key", "apiKey": "env:ANTHROPIC_API_KEY" }, // API key only — subscription OAuth is not permitted
+    // "opencode-go": { "auth": "api_key", "apiKey": "env:OPENCODE_API_KEY" }, // OpenCode Zen / Go key
+    // "openai": { "auth": "api_key", "apiKey": "env:OPENAI_API_KEY" } // or "oauth" + `moca login openai` (ChatGPT subscription)
+    // A custom or local provider (vLLM, LM Studio, Ollama, a gateway):
+    // "vllm": {
+    //   "baseUrl": "http://localhost:8000/v1",
+    //   "baseUrls": { "openai-completions": "http://localhost:8000/v1" },  // per-protocol override
+    //   "protocol": "openai-completions",            // required for a custom provider
+    //   "auth": "api_key", "apiKey": "env:VLLM_API_KEY",
+    //   "models": { "qwen3-coder": { "contextWindow": 131072, "maxOutputTokens": 32768,
+    //                                "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 } } }
+    // },
+    // "ollama": { "baseUrl": "http://localhost:11434" }   // local provider; models are discovered
   // },
 
-  // ---- Shell permissions ------------------------------------------------
-  // Command names auto-approved for the shell tool. A command not listed here
-  // prompts before it runs (approval is per exact command), so keep the list
-  // to non-destructive tools. "yolo": true (or --yolo / /yolo) lifts every
-  // check for a run — use it only in a sandbox or a throwaway checkout.
-  "shell": {
-    "allow": [
-      "go", "git", "gh", "grep", "rg", "find", "ls", "cat", "head", "tail",
-      "wc", "sort", "uniq", "diff", "which", "jq", "mkdir", "sed", "awk",
-      "curl", "make", "mise", "python", "pytest", "node", "npm",
-      "docker", "kubectl", "terraform", "ansible", "rtk", "graphify",
-      "shellcheck"
-    ]
+  // Pre-edit snapshots under the data dir; how long they are kept.
+  "snapshot": { "retentionDays": 60 }, // 0 = keep forever
+
+  // ---------------------------------------------------------------------------
+  // TUI (SPECS §3.5).
+  // ---------------------------------------------------------------------------
+  "tui": {
+    // How a finished long run or a waiting approval signals an unfocused terminal.
+    "notify": "osc9" // "osc9" (desktop notification) | "bell" | "off"
+    // Colors: each role takes a #rrggbb hex or an ANSI color number (0-255).
+    // Every role has a built-in default in internal/tui/theme.go, and the
+    // interactive builder (docs/tui-theme-builder.html) emits a ready block.
+    // "theme": {
+    //   "both": { "accent": "#d97706" },
+    //   "dark": { "userBg": "#141618", "respBg": "#0a1619" },
+    //   "light": { "userBg": "#f6f8fa" }
+    // }
   },
 
-  // ---- Context / loop limits --------------------------------------------
-  // maxSteps         tool-call steps per run before it stops (exit 3)
-  // reserveTokens    window kept free for the answer
-  // keepRecentTokens recent history preserved verbatim by /compact
-  "context": {
-    "maxSteps": 60,
-    "reserveTokens": 16384,
-    "keepRecentTokens": 20000
-  },
-
-  // ---- Diagnostic log ---------------------------------------------------
-  // One metadata-only log per run in ~/.local/state/moca/logs/ (never your
-  // prompts, code or keys). "info" | "debug" | "off"; MOCA_LOG overrides it
-  // for a single run (MOCA_LOG=debug moca ...).
-  "log": { "level": "info" },
-
-  // ---- TUI --------------------------------------------------------------
-  // How a finished long run or a waiting approval signals while the terminal
-  // is unfocused: "osc9" (desktop notification) | "bell" | "off".
-  "tui": { "notify": "osc9" },
-
-  // ---- Web tool ---------------------------------------------------------
-  // `fetch` needs no config. `search` is keyless with tavily (default) and
-  // needs an apiKey env reference for "exa".
-  "web": { "search": { "provider": "tavily" } },
-
-  // ---- Snapshots / sessions ---------------------------------------------
-  // How long per-run file snapshots (for /undo) are kept; 0 = forever.
-  "snapshot": { "retentionDays": 30 }
-
-  // ---- MCP servers ------------------------------------------------------
-  // Lazy by design: one ~200-token proxy tool, server tool lists never enter
-  // the prompt. `moca mcp import` imports Claude Code / OpenCode / Pi configs.
-  // "mcp": {
-  //   "idleTimeout": 600,
-  //   "servers": {
-  //     "example": { "command": "npx", "args": ["-y", "some-mcp-server"] },
-  //     "remote": { "url": "https://example.com/mcp" }
-  //   }
-  // }
+  // Diagnostic log: ~/.local/state/moca/logs (MOCA_LOG overrides for one run).
+  "log": { "level": "debug" } // "info" | "debug" | "off"
 }
