@@ -72,7 +72,7 @@
   "context": {
     "reserveTokens": 16384, // headroom kept for the reply
     "keepRecentTokens": 20000, // recent turns a compaction never rewrites
-    "maxSteps": 60, // tool-call steps before the run is wrapped up
+    "maxSteps": 120, // tool-call steps before the run is wrapped up
     "progressNudgeAt": 12 // tool batches with no file change before one "start acting" nudge; 0 disables
   },
 
