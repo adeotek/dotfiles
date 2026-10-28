@@ -7,7 +7,7 @@ stricter one wins. "The task asks for a commit" is not permission to commit.
 ## Approval required
 
 Ask, wait for an explicit yes, and treat it as covering one action — not a plan,
-not a task.
+not a task, not a change that is small or obviously complete.
 
 - **Commit / push.** Show `git status` and the diff, propose the exact message,
   get a yes per commit. Skills and prompt templates may stage; none may commit.
@@ -32,19 +32,23 @@ redact them when quoting output.
   `web` before asserting a signature, config key or behaviour — never recall it.
   If that still leaves a gap, say "I don't know" instead of filling it.
 - **Plan non-trivial work** — cross-file, ~10+ lines, a refactor, a new feature.
-  State what changes, where, why and the risk, then wait for a yes. `/plan` (or
-  `--mode plan`) confines writes to `docs/plans/*.md`; write the plan as `- [ ]`
-  steps, one verifiable change each, and `moca execute <plan.md>` walks them in
-  order, ticking the boxes. Typos, one-liners and doc fixes skip this.
+  In bullets: what changes, where, why, the risk. Then wait for a yes. `/plan`
+  (or `--mode plan`) confines writes to `docs/plans/*.md`; write the plan as
+  `- [ ]` steps, one verifiable change each, and `moca execute <plan.md>` walks
+  them in order, ticking the boxes. Typos, one-liners and doc fixes skip this.
 - **Two readings, different work?** Ask which one; don't pick and hope.
 
 ## Verification
 
 The prompt's "Project checks" line names the command moca detected — run it. Add
 only what detection cannot infer: `shellcheck` on shell scripts, an undeclared
-linter the repo uses, a generated artifact that must be regenerated. Fix every
-violation before calling the task done; if nothing was detected, say what you
-ran. Report a failure as the command, the relevant output and the fix.
+linter or type checker, a generated artifact that must be regenerated. Fix every
+violation before calling the task done. Nothing detected: run the build and the
+tests yourself, then say which. Report a failure as the command, the full error
+output and the fix.
+
+End the final answer with the open items as a numbered list — approvals to
+give, steps left, decisions needed — or state that nothing is open.
 
 ## Tools
 
@@ -55,16 +59,17 @@ before renaming or changing a signature.
   through `shell` (`sed -i`, `python -c`, `tee`, heredocs) may not — it bypasses
   read tracking and the pre-edit snapshot.
 - `mcp`: `search` → `describe` → `call`, with the arguments the schema declares.
-- Browser work: `playwright-cli`, headless unless a visible browser is needed,
-  and only for pages `web` cannot render (JS-driven or logged in).
+- Browser work: `playwright-cli` (`--help` lists its commands), headless unless
+  a visible browser is needed, and only for pages `web` cannot render (JS-driven
+  or logged in).
 
 ## Project context and skills
 
 - Another `AGENTS.md` loads only from the workdir root, and only in a trusted
   project (`CLAUDE.md` stands in for it); nested ones are never read — read a
   subdirectory's own `AGENTS.md` or `README.md` yourself before working there.
-- Read `docs/architecture.md`, `docs/design.md`, `docs/testing.md` or a style
-  guide only when the task touches that area.
+- Read `docs/architecture.md`, `docs/design.md`, `docs/language-style.md`,
+  `docs/testing.md` or a style guide only when the task touches that area.
 - A skill appears as name, description and path: read its body before using it;
   it outranks your priors, and this file outranks it.
 - `graphify-out/` present: ask the graph before grepping a large tree (`graphify
