@@ -1,81 +1,98 @@
-# AGENTS.md — Operational Rules for AI Agents
+# AGENTS.md — working rules
 
-## 1. Git Commit Policy — ALWAYS FOLLOW
-**Never run `git commit`, `git push`, or any command that creates a commit without my explicit, per-commit approval.**
-This applies in ALL situations, including:
-- When a skill, plugin, or superpower workflow suggests or implies committing as part of its normal process
-- When changes are small, "safe," or clearly complete
-- When I've approved a plan that *mentions* committing — plan approval is not commit approval
-- When working autonomously or in a long agentic loop
-Before committing, always:
-1. Show me the changes (`git diff` / `git status`) or a summary of what would be committed
-2. Propose the exact commit message
-3. Wait for my explicit "yes/approved/commit it" — a general "looks good" about the code is not sufficient authorization to commit
-If a skill's instructions conflict with this policy, this policy wins. Skills may stage changes or describe what a commit would contain, but must stop short of actually committing.
+These rules hold in every project. They override opencode's base prompt, any
+skill and any custom agent prompt; where two instructions disagree, the stricter
+one wins. "The task asks for a commit" is not permission to commit.
 
-## 2. Verification Before Done
-Before declaring any task complete, you MUST run verification steps appropriate to the project. This typically includes:
-- **Compile/build**: Ensure the project compiles without errors
-- **Lint**: Run the project's linter and fix all violations
-- **Type check**: Run the type checker (TypeScript, MyPy, etc.) if applicable
-- **Test**: Run relevant unit/integration tests
-- If any step fails, fix the issue before marking the task done.
+## Approval required
 
-## 3. Analysis/Plan Phase
-For any non-trivial change (cross-file, >10 lines changed, refactoring, new feature):
-1. **Research**: Use LSP, grep, read, and findReferences to understand the relevant code
-2. **Plan**: Present a clear plan describing what will change, why, and the expected impact
-3. **Wait for approval**: Do not write code until the user explicitly approves
-Simple changes (typo fix, single-line refactor, docs update) may skip this phase.
+Ask, then wait for an explicit yes — one action per yes, not a plan or a task.
 
-## 4. Lazy-Loading Sub-Rules
-If the project has these docs:
-- `docs/architecture.md` — System architecture documentation (load before cross-module work)
-- `docs/design.md` — UI design rules (load before adding/modifying UI components)
-- `docs/language-style.md` — Language-specific style guides (load before writing in that language)
-- `docs/testing.md` — Testing conventions (load before writing/modifying tests)
-Do not load them proactively. Only read them via the Read tool when the task explicitly requires them.
+- **Commit / push.** Show `git status` and the diff, propose the exact message,
+  get a yes per commit. Skills and plugins may stage; none may commit or push.
+- **Destructive or irreversible.** `rm -rf`, `git push --force`,
+  `git reset --hard`, `git clean`, `kubectl delete`, `docker … prune`, DB
+  `DROP`/`ALTER`/mass `DELETE`, disk, partition or NAS work.
+- **Installing anything.** `dnf`/`apt`/`brew`/`winget`, OS packages, project
+  dependencies.
+- **Publishing.** Releases, tags, PRs into `main`, deploys.
 
-## 5. General Conduct
-- **Verify, then answer**: When your response depends on API signatures, library behavior, project conventions, config values, or file contents, verify the relevant information by reading actual files, running commands, or checking live documentation. Never rely on memory alone when the ground truth is one tool call away.
-- Be concise, direct, and use bullet points for plans.
-- For errors: include the command, the full error output, and the proposed fix.
-- When uncertain about intent, ask rather than assume.
-- Do not avoid responding with `I don't know` when you are not able to respond or you don't have the right information.
+Auto-approve (`--auto`, a `permission` allow rule) is a backstop, not the
+policy: a command that runs unattended still needs a yes when it is listed
+above. `opencode run --auto` and any headless session have nobody to ask — stop
+and report what needs approval.
 
-## 6. Commit & PR Title Convention
-Every commit message and PR title must follow this format:
-`[{type}:{scope}] short description of the changes`
-- **{type}** — the kind of change, one of:
-  - `feat` — new feature or capability
-  - `fix` — bug fix
-  - `chore` — maintenance, tooling, dependencies, refactors
-- **{scope}** — the area the change affects, one of:
-  - `global` — affects multiple areas (e.g. backend + frontend, UI + docs)
-  - `docs` — documentation changes (README, specs, etc.)
-  - `ui` / `tui` — user interface / terminal UI changes
-  - `backend` / `core` — internal or backend changes
-  - a slug of the specific area changed (e.g. `auth`, `billing`, `ci`, `k8s`)
-Examples:
-- `[feat:auth] add passkey sign-in`
-- `[fix:ui] stop sidebar flicker on route change`
-- `[chore:ci] pin runner image to node 22`
-- `[feat:global] add i18n support across app and docs`
-This applies to commit messages and PR titles only; PR descriptions are free-form.
+Never print, echo or commit secrets (`.env`, `auth.json`, `*.key`, tokens);
+redact them when quoting output.
 
-## 7. Code Intelligence and Navigation
-Prefer LSP over Grep/Glob/Read for code navigation:
-- `goToDefinition` / `goToImplementation` to jump to source
-- `findReferences` to see all usages across the codebase
-- `workspaceSymbol` to find where something is defined
-- `documentSymbol` to list all symbols in a file
-- `hover` for type info without reading the file
-- `incomingCalls` / `outgoingCalls` for call hierarchy
-Before renaming or changing a function signature, use `findReferences` to find all call sites first.
-Use Grep/Glob only for text/pattern searches (comments, strings, config values) where LSP doesn't help.
-After writing or editing code, check LSP diagnostics before moving on.
+## Before changing code
 
-## 8. Browser Automation
-Use `playwright-cli` for browser automation tasks. Run `playwright-cli --help`
-to see available commands. Prefer headless mode (default) unless a visible
-browser is explicitly needed.
+- **Verify, then answer.** Read the file, run the command or `webfetch` the docs
+  before asserting a signature, config key or behaviour — never recall it. If a
+  gap remains, say "I don't know".
+- **Plan non-trivial work** — cross-file, ~10+ lines, a refactor, a new feature.
+  In bullets: what changes, where, why, the risk. Then wait for a yes. `plan`
+  (Tab) is read-only and writes only `.opencode/plans/*.md`; the approved plan
+  is what `build` executes. Typos, one-liners and doc fixes skip this.
+- **Two readings, different work?** Use the `question` tool instead of guessing.
+
+## Verification
+
+- Run the checks the project declares: build, lint, typecheck and test commands
+  from the README, package scripts or Makefile. Never assume a framework.
+- Add what the repo uses but does not script: `shellcheck` on shell scripts, a
+  generated artifact that must be regenerated.
+- Diagnostics arrive automatically after edits (pyright, gopls, eslint, csharp
+  and friends are auto-detected); the experimental `lsp` nav tool is off unless
+  `OPENCODE_EXPERIMENTAL_LSP_TOOL` is set — navigate with `grep` and `glob`.
+- Fix every violation before calling the task done. Report a failure as the
+  command, the full error output and the fix.
+
+End the final answer with the open items as a numbered list — approvals to
+give, steps left, decisions needed — or state that nothing is open.
+
+## Agents and tools
+
+Two primary agents: `build` (default, all tools) and `plan` (read-only).
+
+- Delegate to keep context lean: `@explore` for read-only codebase search,
+  `@general` for one parallel unit of multi-step work, `@code-review` before a
+  PR, `@dev`/`@devops` for their domains. Don't delegate what one `grep`
+  answers.
+- Keep `todowrite` current on multi-step work; it is the progress record.
+- `skill` loads a `SKILL.md` by name — read it before relying on it.
+- Browser automation: `playwright-cli` (`--help` lists its commands), headless
+  unless a visible browser is needed, and only for JS-driven or logged-in pages
+  `webfetch` cannot read.
+
+## Project context and skills
+
+- Rules load by walking **up** from the working directory: `AGENTS.md`, else
+  `CLAUDE.md`, first match wins; the global one is
+  `~/.config/opencode/AGENTS.md`. Nested files are never read — open a
+  subdirectory's `AGENTS.md` or `README.md` yourself before working there.
+- Extra instruction files come from the config's `instructions` array.
+- Read `docs/architecture.md`, `docs/design.md`, `docs/language-style.md`,
+  `docs/testing.md` only when the task touches that area.
+- A skill is advertised by name and description; its body outranks your priors,
+  and this file outranks it.
+- `graphify-out/` present: ask the graph before grepping a large tree (`graphify
+  query`, `path`, `explain`), and run `graphify update .` after changing code.
+
+## Scope
+
+Touch only what the task needs: no drive-by refactors, renames or reformatting,
+no new markdown unless asked, prefer editing an existing file to adding one.
+When the change outgrows its stated surface, stop and say so.
+
+## Commit and PR titles
+
+`[{type}:{scope}] short description`
+
+- **type** — `feat`, `fix` (a bug) or `chore` (tooling, deps, refactor, config).
+- **scope** — `global` (several areas), `docs`, `ui`, `tui`, `backend`, `core`,
+  or the area's slug (`auth`, `ci`, `k8s`).
+- E.g. `[feat:auth] add passkey sign-in`, `[fix:tui] stop flicker on resize`.
+
+No AI attribution trailers; one version bump per PR; PR descriptions
+are free-form.
