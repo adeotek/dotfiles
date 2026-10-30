@@ -60,7 +60,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 <div class="container">
 
 <h1>.dotfiles — Complete Call Flow &amp; Architecture Documentation</h1>
-<p class="subtitle">Generated from graphify knowledge graph: 1882 nodes, 2387 edges, 177 communities. Commit: 25a434b</p>
+<p class="subtitle">Generated from graphify knowledge graph: 1927 nodes, 2505 edges, 177 communities. Commit: 20357c3</p>
 
 <div class="nav">
     <a href="#overview">Architecture Overview</a>
@@ -94,11 +94,11 @@ flowchart LR
     class BUILD_GRAPH_321CBB04 module;
     ANALYSIS_CLUSTERING_C79796DA("Analysis &amp; Clustering<br/><small>10 nodes</small>")
     class ANALYSIS_CLUSTERING_C79796DA module;
-    CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>327 nodes</small>")
+    CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>364 nodes</small>")
     class CLI_SKILLS_9964CBB8 module;
-    INGEST_CACHE_UPDATE_FF457338("Ingestion &amp; Updates<br/><small>207 nodes</small>")
+    INGEST_CACHE_UPDATE_FF457338("Ingestion &amp; Updates<br/><small>234 nodes</small>")
     class INGEST_CACHE_UPDATE_FF457338 module;
-    SERVE_API_35EC8E86("Serving API<br/><small>145 nodes</small>")
+    SERVE_API_35EC8E86("Serving API<br/><small>140 nodes</small>")
     class SERVE_API_35EC8E86 module;
     SECURITY_GLOBAL_5B9C6A04("Security &amp; Global Graph<br/><small>26 nodes</small>")
     class SECURITY_GLOBAL_5B9C6A04 module;
@@ -116,20 +116,20 @@ flowchart LR
     class TABBY_CONFIGYAML_CONFIG_9AE7695F module;
     POSH_GBS_TEXTOMPYAML_FC34FA92("Posh Gbs Textompyaml<br/><small>31 nodes</small>")
     class POSH_GBS_TEXTOMPYAML_FC34FA92 module;
-    OTHER_D0941E68("Other<br/><small>728 nodes</small>")
+    OTHER_D0941E68("Other<br/><small>714 nodes</small>")
     class OTHER_D0941E68 module;
-    SERVE_API_35EC8E86 -->|contains x10| OTHER_D0941E68
-    OTHER_D0941E68 -->|contains x6| INGEST_CACHE_UPDATE_FF457338
-    OTHER_D0941E68 -->|contains x5| SERVE_API_35EC8E86
-    INGEST_CACHE_UPDATE_FF457338 -->|references x4| CLI_SKILLS_9964CBB8
-    OTHER_D0941E68 -->|contains x4| EXTRACT_PIPELINE_5F350230
-    SERVE_API_35EC8E86 -->|contains x2| INGEST_CACHE_UPDATE_FF457338
-    CLI_SKILLS_9964CBB8 -->|implements x2| OTHER_D0941E68
-    OTHER_D0941E68 -->|references x2| CLI_SKILLS_9964CBB8
-    OTHER_D0941E68 -->|contains x2| SECURITY_GLOBAL_5B9C6A04
+    INGEST_CACHE_UPDATE_FF457338 -->|contains x27| OTHER_D0941E68
+    OTHER_D0941E68 -->|contains x7| INGEST_CACHE_UPDATE_FF457338
+    INGEST_CACHE_UPDATE_FF457338 -->|references x5| CLI_SKILLS_9964CBB8
+    OTHER_D0941E68 -->|contains x3| SERVE_API_35EC8E86
+    INGEST_CACHE_UPDATE_FF457338 -->|contains x2| EXTRACT_PIPELINE_5F350230
+    OTHER_D0941E68 -->|contains x2| EXTRACT_PIPELINE_5F350230
     ANALYSIS_CLUSTERING_C79796DA -->|references| CLI_SKILLS_9964CBB8
+    CLI_SKILLS_9964CBB8 -->|implements| OTHER_D0941E68
+    OTHER_D0941E68 -->|references| CLI_SKILLS_9964CBB8
     TABBY_CONFIGYAML_CONFIG_9AE7695F -->|contains| SERVE_API_35EC8E86
-    INGEST_CACHE_UPDATE_FF457338 -->|contains| OTHER_D0941E68
+    POSH_GBS_TEXTOMPYAML_FC34FA92 -->|contains| INGEST_CACHE_UPDATE_FF457338
+    INGEST_CACHE_UPDATE_FF457338 -->|contains| HERMES_CONFIGYAML_TIMEOUT_AFCACF43
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -146,7 +146,7 @@ flowchart LR
     <h4>Architecture Layers</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>Layer</th><th>Nodes</th><th>Communities</th></tr>
-      <tr><td>Extraction Pipeline</td><td>87</td><td><code>80, 82, 54</code></td></tr><tr><td>Graph Build</td><td>73</td><td><code>6, 7, 9, 63</code></td></tr><tr><td>Analysis &amp; Clustering</td><td>10</td><td><code>12</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>327</td><td><code>66, 3, 18, 2, 28, 4, 10, 1, 8, 11, 112, 64, 13, 16, 35, 62, 19, 21, 0, 25, 26, 65, 69, 79, 32, 33, 81, 57, 47, 50</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>207</td><td><code>78, 27, 86, 5, 101, 99, 123, 126, 138, 150, 68, 171, 29, 176, 41, 44</code></td></tr><tr><td>Serving API</td><td>145</td><td><code>17, 96, 97, 122, 152, 165</code></td></tr><tr><td>Security &amp; Global Graph</td><td>26</td><td><code>100, 102</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>36</td><td><code>36, 23</code></td></tr><tr><td>Hermes Configyaml Resume</td><td>48</td><td><code>67</code></td></tr><tr><td>Hermes Profiles Foca</td><td>48</td><td><code>72</code></td></tr><tr><td>Hermes Configyaml Timeout</td><td>41</td><td><code>83</code></td></tr><tr><td>Hermes Foca Profiles</td><td>41</td><td><code>84</code></td></tr><tr><td>Tabby Configyaml Config</td><td>34</td><td><code>85</code></td></tr><tr><td>Posh Gbs Textompyaml</td><td>31</td><td><code>87</code></td></tr><tr><td>Other</td><td>728</td><td><code>88, 89, 90, 91, 92, 93, 94, 95, 98, 103, 104, 105, 106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 117, 118, 34, 73, 77, 119, 120, 121, 14, 15, 124, 125, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 151, 20, 22, 153, 154, 155, 156, 157, 158, 159, 160, 24, 161, 162, 163, 164, 166, 167, 168, 169, 170, 172, 173, 70, 71, 74, 75, 174, 30, 31, 37, 38, 175, 39, 40, 42, 43, 45, 46, 48, 49, 51, 52, 53, 55, 56, 58, 59, 60, 61, 76</code></td></tr>
+      <tr><td>Extraction Pipeline</td><td>87</td><td><code>80, 82, 54</code></td></tr><tr><td>Graph Build</td><td>73</td><td><code>6, 7, 9, 63</code></td></tr><tr><td>Analysis &amp; Clustering</td><td>10</td><td><code>12</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>364</td><td><code>0, 28, 66, 18, 2, 1, 4, 3, 8, 10, 11, 64, 79, 13, 35, 62, 19, 21, 25, 26, 65, 69, 32, 33, 81, 57, 50</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>234</td><td><code>78, 27, 86, 88, 5, 101, 99, 123, 126, 138, 150, 68, 165, 29, 176, 41, 44, 61</code></td></tr><tr><td>Serving API</td><td>140</td><td><code>17, 96, 97, 122, 152</code></td></tr><tr><td>Security &amp; Global Graph</td><td>26</td><td><code>100, 102</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>36</td><td><code>36, 23</code></td></tr><tr><td>Hermes Configyaml Resume</td><td>48</td><td><code>67</code></td></tr><tr><td>Hermes Profiles Foca</td><td>48</td><td><code>72</code></td></tr><tr><td>Hermes Configyaml Timeout</td><td>41</td><td><code>83</code></td></tr><tr><td>Hermes Foca Profiles</td><td>41</td><td><code>84</code></td></tr><tr><td>Tabby Configyaml Config</td><td>34</td><td><code>85</code></td></tr><tr><td>Posh Gbs Textompyaml</td><td>31</td><td><code>87</code></td></tr><tr><td>Other</td><td>714</td><td><code>90, 91, 89, 92, 93, 94, 95, 98, 103, 104, 105, 106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 117, 118, 34, 73, 77, 119, 120, 121, 14, 15, 124, 127, 139, 151, 16, 125, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 20, 22, 153, 154, 155, 156, 157, 158, 159, 160, 24, 112, 161, 162, 163, 164, 166, 167, 168, 169, 170, 171, 172, 173, 70, 71, 74, 75, 174, 30, 31, 37, 38, 175, 39, 40, 42, 43, 45, 46, 47, 48, 49, 51, 52, 53, 55, 56, 58, 59, 60, 76</code></td></tr>
     </table>
   </div>
   <div class="card">
@@ -158,8 +158,8 @@ flowchart LR
   <div class="card">
     <h4>Graph Report Highlights</h4>
     <ul>
-      <li>1882 nodes · 2387 edges · 177 communities (140 shown, 37 thin omitted)</li>
-      <li>Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 184 edges (avg confidence: 0.6)</li>
+      <li>1927 nodes · 2505 edges · 177 communities (141 shown, 36 thin omitted)</li>
+      <li>Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 184 edges (avg confidence: 0.6)</li>
       <li>Token cost: 0 input · 0 output</li>
       <li>1. `hotkeys` - 100 edges</li>
       <li>2. `cecho()` - 75 edges</li>
@@ -1021,73 +1021,75 @@ flowchart LR
 
 <!-- ====== 5. CLI & Skill Installers ====== -->
 <h2 id="cli-skills">5. CLI &amp; Skill Installers</h2>
-<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, setupsh, script, mostly in _scripts/core/_helpers.sh, .opencode/agents/dotfiles.md, opencode/AGENTS.md. This section covers 327 nodes and 596 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, tools, setupsh, mostly in tools/.tools/git-authors-cleanup.sh, _scripts/core/_helpers.sh, .opencode/agents/dotfiles.md. This section covers 364 nodes and 708 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: CLI &amp; Skill Installers (327 nodes, 596 edges)
-    subgraph cli_skills_scripts_core_helpers_sh_347c91c6["_scripts/core/_helpers.sh"]
-        scripts_core_helpers_cecho_42476bc7("cecho()<br/><small>_scripts/core/_helpers.sh</small>")
-        scripts_core_helpers_decho_3a11e880("decho()<br/><small>_scripts/core/_helpers.sh</small>")
-        scripts_core_helpers_stow_package_6093c77a("stow_package()<br/><small>_scripts/core/_helpers.sh</small>")
-        scripts_core_helpers_install_package_13a3fee4("install_package()<br/><small>_scripts/core/_helpers.sh</small>")
+    %% Section: CLI &amp; Skill Installers (364 nodes, 708 edges)
+    subgraph cli_skills_tools_tools_git_authors_cleanup_sh_c88416ad["tools/.tools/git-authors-cleanup.sh"]
+        tools_tools_git_authors_cleanup_sh_entry_8aa8acbb("git-authors-cleanup.sh script<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1("ensure_dependencies()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_run_rewrite_7f4a7e68("run_rewrite()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_backup_repo_30b3c7ec("backup_repo()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_cecho_33dfb37b("cecho()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_die_f8b27d34("die()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_build_rewrite_in_5da1390c("build_rewrite_inputs()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_split_identity_e969c4cd("split_identity()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_vlog_dc173bb0("vlog()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_detect_identity_fac1c1b3("detect_identity()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_detect_repo_8d9029c0("detect_repo()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_enforce_or_warn_34f9aa21("enforce_or_warn()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_find_filter_repo_25c80dfa("find_filter_repo()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_pkg_install_comm_02549b07("pkg_install_command()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
+        tools_tools_git_authors_cleanup_fallback_install_0c581f7a("fallback_install()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
     end
-    scripts_core_base_tools_install_sh_entry_6245d66b("base-tools-install.sh script<br/><small>_scripts/core/base-tools-install.sh</small>")
-    scripts_core_glow_install_sh_entry_155c75cf("glow-install.sh script<br/><small>_scripts/core/glow-install.sh</small>")
-    scripts_core_hermes_setup_sh_entry_aabb4b07("hermes-setup.sh script<br/><small>_scripts/core/hermes-setup.sh</small>")
-    scripts_core_homebrew_install_sh_entry_30312733("homebrew-install.sh script<br/><small>_scripts/core/homebrew-install.sh</small>")
-    scripts_core_nodejs_install_sh_entry_8b7e045c("nodejs-install.sh script<br/><small>_scripts/core/nodejs-install.sh</small>")
-    scripts_core_onefetch_install_sh_entry_03e9bf36("onefetch-install.sh script<br/><small>_scripts/core/onefetch-install.sh</small>")
     scripts_core_paseo_install_sh_entry_3e706387("paseo-install.sh script<br/><small>_scripts/core/paseo-install.sh</small>")
-    scripts_core_rtk_install_sh_entry_9094d908("rtk-install.sh script<br/><small>_scripts/core/rtk-install.sh</small>")
-    scripts_core_rtk_setup_sh_entry_48de7d3a("rtk-setup.sh script<br/><small>_scripts/core/rtk-setup.sh</small>")
-    scripts_core_zed_install_sh_entry_6bcbf1ca("zed-install.sh script<br/><small>_scripts/core/zed-install.sh</small>")
-    scripts_core_zed_setup_sh_entry_d69b7138("zed-setup.sh script<br/><small>_scripts/core/zed-setup.sh</small>")
     claude_code_user_config_statusline_command_win_s_92683a1c("statusline-command-win.sh script<br/><small>claude-code/user-config/statusline-command-win.sh</small>")
     claude_code_user_config_statusline_command_sh_en_1f04a487("statusline-command.sh script<br/><small>claude-code/user-config/statusline-command.sh</small>")
-    nvim_config_nvim_lua_plugins_lsp_220be175("lsp.lua")
-    scripts_core_zed_install_sh_entry_6bcbf1ca -->|calls| scripts_core_helpers_cecho_42476bc7
-    scripts_core_zed_install_sh_entry_6bcbf1ca -->|calls| scripts_core_helpers_decho_3a11e880
-    scripts_core_zed_setup_sh_entry_d69b7138 -->|calls| scripts_core_helpers_stow_package_6093c77a
-    scripts_core_base_tools_install_sh_entry_6245d66b -->|calls| scripts_core_helpers_cecho_42476bc7
-    scripts_core_glow_install_sh_entry_155c75cf -->|calls| scripts_core_helpers_install_package_13a3fee4
-    scripts_core_homebrew_install_sh_entry_30312733 -->|calls| scripts_core_helpers_cecho_42476bc7
-    scripts_core_homebrew_install_sh_entry_30312733 -->|calls| scripts_core_helpers_install_package_13a3fee4
-    scripts_core_onefetch_install_sh_entry_03e9bf36 -->|calls| scripts_core_helpers_install_package_13a3fee4
-    scripts_core_onefetch_install_sh_entry_03e9bf36 -->|calls| scripts_core_helpers_cecho_42476bc7
-    scripts_core_rtk_install_sh_entry_9094d908 -->|calls| scripts_core_helpers_install_package_13a3fee4
-    scripts_core_rtk_setup_sh_entry_48de7d3a -->|calls| scripts_core_helpers_cecho_42476bc7
-    scripts_core_helpers_decho_3a11e880 -->|calls| scripts_core_helpers_cecho_42476bc7
-    scripts_core_helpers_install_package_13a3fee4 -->|calls| scripts_core_helpers_cecho_42476bc7
-    scripts_core_helpers_install_package_13a3fee4 -->|calls| scripts_core_helpers_decho_3a11e880
-    scripts_core_helpers_stow_package_6093c77a -->|calls| scripts_core_helpers_cecho_42476bc7
-    scripts_core_helpers_stow_package_6093c77a -->|calls| scripts_core_helpers_install_package_13a3fee4
-    scripts_core_helpers_stow_package_6093c77a -->|calls| scripts_core_helpers_decho_3a11e880
-    scripts_core_nodejs_install_sh_entry_8b7e045c -->|calls| scripts_core_helpers_cecho_42476bc7
-    scripts_core_nodejs_install_sh_entry_8b7e045c -->|calls| scripts_core_helpers_install_package_13a3fee4
-    scripts_core_nodejs_install_sh_entry_8b7e045c -->|calls| scripts_core_helpers_decho_3a11e880
-    scripts_core_hermes_setup_sh_entry_aabb4b07 -->|calls| scripts_core_helpers_cecho_42476bc7
-    scripts_core_paseo_install_sh_entry_3e706387 -->|calls| scripts_core_helpers_cecho_42476bc7
-    %% Omitted for readability: 309 nodes, 0 edges
-    class scripts_core_helpers_cecho_42476bc7 function;
-    class scripts_core_helpers_decho_3a11e880 function;
-    class scripts_core_helpers_stow_package_6093c77a function;
-    class scripts_core_helpers_install_package_13a3fee4 function;
-    class scripts_core_base_tools_install_sh_entry_6245d66b function;
-    class scripts_core_glow_install_sh_entry_155c75cf function;
-    class scripts_core_hermes_setup_sh_entry_aabb4b07 function;
-    class scripts_core_homebrew_install_sh_entry_30312733 function;
-    class scripts_core_nodejs_install_sh_entry_8b7e045c function;
-    class scripts_core_onefetch_install_sh_entry_03e9bf36 function;
+    tools_tools_git_authors_cleanup_backup_repo_30b3c7ec -->|calls| tools_tools_git_authors_cleanup_cecho_33dfb37b
+    tools_tools_git_authors_cleanup_backup_repo_30b3c7ec -->|calls| tools_tools_git_authors_cleanup_die_f8b27d34
+    tools_tools_git_authors_cleanup_build_rewrite_in_5da1390c -->|calls| tools_tools_git_authors_cleanup_die_f8b27d34
+    tools_tools_git_authors_cleanup_build_rewrite_in_5da1390c -->|calls| tools_tools_git_authors_cleanup_split_identity_e969c4cd
+    tools_tools_git_authors_cleanup_build_rewrite_in_5da1390c -->|calls| tools_tools_git_authors_cleanup_vlog_dc173bb0
+    tools_tools_git_authors_cleanup_build_rewrite_in_5da1390c -->|calls| tools_tools_git_authors_cleanup_cecho_33dfb37b
+    tools_tools_git_authors_cleanup_detect_identity_fac1c1b3 -->|calls| tools_tools_git_authors_cleanup_die_f8b27d34
+    tools_tools_git_authors_cleanup_detect_repo_8d9029c0 -->|calls| tools_tools_git_authors_cleanup_die_f8b27d34
+    tools_tools_git_authors_cleanup_die_f8b27d34 -->|calls| tools_tools_git_authors_cleanup_cecho_33dfb37b
+    tools_tools_git_authors_cleanup_enforce_or_warn_34f9aa21 -->|calls| tools_tools_git_authors_cleanup_cecho_33dfb37b
+    tools_tools_git_authors_cleanup_enforce_or_warn_34f9aa21 -->|calls| tools_tools_git_authors_cleanup_die_f8b27d34
+    tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1 -->|calls| tools_tools_git_authors_cleanup_find_filter_repo_25c80dfa
+    tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1 -->|calls| tools_tools_git_authors_cleanup_vlog_dc173bb0
+    tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1 -->|calls| tools_tools_git_authors_cleanup_pkg_install_comm_02549b07
+    tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1 -->|calls| tools_tools_git_authors_cleanup_cecho_33dfb37b
+    tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1 -->|calls| tools_tools_git_authors_cleanup_fallback_install_0c581f7a
+    tools_tools_git_authors_cleanup_run_rewrite_7f4a7e68 -->|calls| tools_tools_git_authors_cleanup_cecho_33dfb37b
+    tools_tools_git_authors_cleanup_run_rewrite_7f4a7e68 -->|calls| tools_tools_git_authors_cleanup_backup_repo_30b3c7ec
+    tools_tools_git_authors_cleanup_run_rewrite_7f4a7e68 -->|calls| tools_tools_git_authors_cleanup_vlog_dc173bb0
+    tools_tools_git_authors_cleanup_run_rewrite_7f4a7e68 -->|calls| tools_tools_git_authors_cleanup_die_f8b27d34
+    tools_tools_git_authors_cleanup_sh_entry_8aa8acbb -->|calls| tools_tools_git_authors_cleanup_cecho_33dfb37b
+    tools_tools_git_authors_cleanup_sh_entry_8aa8acbb -->|calls| tools_tools_git_authors_cleanup_detect_repo_8d9029c0
+    tools_tools_git_authors_cleanup_sh_entry_8aa8acbb -->|calls| tools_tools_git_authors_cleanup_detect_identity_fac1c1b3
+    tools_tools_git_authors_cleanup_sh_entry_8aa8acbb -->|calls| tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1
+    %% Omitted for readability: 346 nodes, 4 edges
+    class tools_tools_git_authors_cleanup_sh_entry_8aa8acbb function;
+    class tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1 function;
+    class tools_tools_git_authors_cleanup_run_rewrite_7f4a7e68 function;
+    class tools_tools_git_authors_cleanup_backup_repo_30b3c7ec function;
+    class tools_tools_git_authors_cleanup_cecho_33dfb37b function;
+    class tools_tools_git_authors_cleanup_die_f8b27d34 function;
+    class tools_tools_git_authors_cleanup_build_rewrite_in_5da1390c function;
+    class tools_tools_git_authors_cleanup_split_identity_e969c4cd function;
+    class tools_tools_git_authors_cleanup_vlog_dc173bb0 function;
+    class tools_tools_git_authors_cleanup_detect_identity_fac1c1b3 function;
+    class tools_tools_git_authors_cleanup_detect_repo_8d9029c0 function;
+    class tools_tools_git_authors_cleanup_enforce_or_warn_34f9aa21 function;
+    class tools_tools_git_authors_cleanup_find_filter_repo_25c80dfa function;
+    class tools_tools_git_authors_cleanup_pkg_install_comm_02549b07 entry;
+    class tools_tools_git_authors_cleanup_fallback_install_0c581f7a function;
     class scripts_core_paseo_install_sh_entry_3e706387 function;
-    class scripts_core_rtk_install_sh_entry_9094d908 function;
-    class scripts_core_rtk_setup_sh_entry_48de7d3a function;
-    class scripts_core_zed_install_sh_entry_6bcbf1ca function;
-    class scripts_core_zed_setup_sh_entry_d69b7138 function;
     class claude_code_user_config_statusline_command_win_s_92683a1c entry;
     class claude_code_user_config_statusline_command_sh_en_1f04a487 entry;
-    class nvim_config_nvim_lua_plugins_lsp_220be175 function;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -1111,243 +1113,243 @@ flowchart LR
 </tr>
 <tr>
   <td>1</td>
-  <td><code>ansible-cleanup.sh</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small></td>
+  <td><code>git-authors-cleanup.sh</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>ansible-install.sh</code><br><small style="color:var(--muted)">_scripts/core/ansible-install.sh</small></td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>ansible-cleanup.sh node in _scripts/core/ansible-cleanup.sh.</td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Turns a local path or remote repository into analysis context.</td>
 </tr>
 <tr>
   <td>2</td>
-  <td><code>ansible-cleanup.sh script</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>AGENT_AUTHORS</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>ansible-cleanup.sh script node in _scripts/core/ansible-cleanup.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>AGENT_AUTHORS node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>3</td>
-  <td><code>ansible-install.sh</code><br><small style="color:var(--muted)">_scripts/core/ansible-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>AGENT_COAUTHORS</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>ansible-cleanup.sh</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small><br><code>uv-install.sh</code><br><small style="color:var(--muted)">_scripts/core/uv-install.sh</small></td>
-  <td>ansible-install.sh node in _scripts/core/ansible-install.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>AGENT_COAUTHORS node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>4</td>
-  <td><code>aws-cli-install.sh</code><br><small style="color:var(--muted)">_scripts/core/aws-cli-install.sh</small></td>
-  <td><span class="tag tag-cmd">Entry</span></td>
+  <td><code>AGENT_COMMITTERS</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>aws-cli-install.sh node in _scripts/core/aws-cli-install.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>AGENT_COMMITTERS node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>5</td>
-  <td><code>aws-cli-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/aws-cli-install.sh</small></td>
-  <td><span class="tag tag-cmd">Entry</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>aws-cli-install.sh script node in _scripts/core/aws-cli-install.sh.</td>
+  <td><code>backup_repo()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>run_rewrite()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>die()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>backup_repo() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>6</td>
-  <td><code>docker-install.sh</code><br><small style="color:var(--muted)">_scripts/core/docker-install.sh</small></td>
+  <td><code>build_rewrite_inputs()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>docker-install.sh node in _scripts/core/docker-install.sh.</td>
+  <td><code>git-authors-cleanup.sh script</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>die()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>split_identity()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br>+1 more</td>
+  <td>build_rewrite_inputs() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>7</td>
-  <td><code>gcp-cli-install.sh</code><br><small style="color:var(--muted)">_scripts/core/gcp-cli-install.sh</small></td>
-  <td><span class="tag tag-cmd">Entry</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>gcp-cli-install.sh node in _scripts/core/gcp-cli-install.sh.</td>
+  <td><code>capture_remotes()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>git-authors-cleanup.sh script</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>capture_remotes() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>8</td>
-  <td><code>golang-install.sh</code><br><small style="color:var(--muted)">_scripts/core/golang-install.sh</small></td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>golang-install.sh node in _scripts/core/golang-install.sh.</td>
+  <td><code>backup_repo()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>build_rewrite_inputs()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>die()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br>+13 more</td>
+  <td>No direct outbound edge</td>
+  <td>cecho() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>9</td>
-  <td><code>golang-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/golang-install.sh</small></td>
+  <td><code>current_branch_ref()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>golang-install.sh script node in _scripts/core/golang-install.sh.</td>
+  <td><code>print_push_commands()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>run_push()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>current_branch_ref() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>10</td>
-  <td><code>graphify-install.sh</code><br><small style="color:var(--muted)">_scripts/core/graphify-install.sh</small></td>
+  <td><code>detect_identity()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>uv-install.sh</code><br><small style="color:var(--muted)">_scripts/core/uv-install.sh</small></td>
-  <td>Builds dependency relationships and graph data.</td>
+  <td><code>git-authors-cleanup.sh script</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>die()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>detect_identity() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>11</td>
-  <td><code>graphify-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/graphify-install.sh</small></td>
+  <td><code>detect_repo()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>Builds dependency relationships and graph data.</td>
+  <td><code>git-authors-cleanup.sh script</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>die()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>detect_repo() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>12</td>
-  <td><code>headroom-install.sh</code><br><small style="color:var(--muted)">_scripts/core/headroom-install.sh</small></td>
+  <td><code>die()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>headroom-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/headroom-setup.sh</small></td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>uv-install.sh</code><br><small style="color:var(--muted)">_scripts/core/uv-install.sh</small></td>
-  <td>headroom-install.sh node in _scripts/core/headroom-install.sh.</td>
+  <td><code>backup_repo()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>build_rewrite_inputs()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>detect_identity()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br>+5 more</td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>die() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>13</td>
-  <td><code>headroom-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/headroom-install.sh</small></td>
+  <td><code>enforce_or_warn()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>headroom-install.sh script node in _scripts/core/headroom-install.sh.</td>
+  <td><code>preflight()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>die()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>enforce_or_warn() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>14</td>
-  <td><code>headroom-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/headroom-setup.sh</small></td>
+  <td><code>ensure_dependencies()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>headroom-install.sh</code><br><small style="color:var(--muted)">_scripts/core/headroom-install.sh</small></td>
-  <td>headroom-setup.sh node in _scripts/core/headroom-setup.sh.</td>
+  <td><code>git-authors-cleanup.sh script</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>fallback_install()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>find_filter_repo()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br>+3 more</td>
+  <td>ensure_dependencies() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>15</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><code>fallback_install()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>ansible-cleanup.sh</code><br><small style="color:var(--muted)">_scripts/core/ansible-cleanup.sh</small><br><code>ansible-install.sh</code><br><small style="color:var(--muted)">_scripts/core/ansible-install.sh</small><br><code>aws-cli-install.sh</code><br><small style="color:var(--muted)">_scripts/core/aws-cli-install.sh</small><br>+72 more</td>
-  <td>No direct outbound edge</td>
-  <td>_helpers.sh node in _scripts/core/_helpers.sh.</td>
+  <td><code>ensure_dependencies()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>have()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>fallback_install() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>16</td>
-  <td><code>aecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
+  <td><code>FILTER_REPO_CMD</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>aecho() node in _scripts/core/_helpers.sh.</td>
+  <td>No direct outbound edge</td>
+  <td>FILTER_REPO_CMD node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>17</td>
-  <td><code>get_stow_command()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td><span class="tag tag-cmd">Entry</span></td>
-  <td><code>stow_package()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>get_vv()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>get_stow_command() node in _scripts/core/_helpers.sh.</td>
+  <td><code>find_filter_repo()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>ensure_dependencies()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>find_filter_repo() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>18</td>
-  <td><code>get_vv()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><code>has_tags()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>get_stow_command()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><code>print_push_commands()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>run_push()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td>No direct outbound edge</td>
-  <td>get_vv() node in _scripts/core/_helpers.sh.</td>
+  <td>has_tags() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>19</td>
-  <td><code>read_key()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><code>have()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>read_yes_no()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
+  <td><code>fallback_install()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>require_git()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td>No direct outbound edge</td>
-  <td>read_key() node in _scripts/core/_helpers.sh.</td>
+  <td>have() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>20</td>
-  <td><code>hermes-install.sh</code><br><small style="color:var(--muted)">_scripts/core/hermes-install.sh</small></td>
+  <td><code>is_agent()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>hermes-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/hermes-setup.sh</small></td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>hermes-install.sh node in _scripts/core/hermes-install.sh.</td>
+  <td><code>scan_coauthors()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>scan_identity_field()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>is_agent() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>21</td>
-  <td><code>hermes-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/hermes-install.sh</small></td>
+  <td><code>is_self()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>hermes-install.sh script node in _scripts/core/hermes-install.sh.</td>
+  <td><code>scan_coauthors()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>scan_identity_field()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>is_self() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>22</td>
-  <td><code>hermes-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/hermes-setup.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>hermes-install.sh</code><br><small style="color:var(--muted)">_scripts/core/hermes-install.sh</small></td>
-  <td>hermes-setup.sh node in _scripts/core/hermes-setup.sh.</td>
+  <td><code>pkg_install_command()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><span class="tag tag-cmd">Entry</span></td>
+  <td><code>ensure_dependencies()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>pkg_install_command() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>23</td>
-  <td><code>jetbrains-toolbox-install.sh</code><br><small style="color:var(--muted)">_scripts/core/jetbrains-toolbox-install.sh</small></td>
+  <td><code>preflight()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td><code>jetbrains-toolbox-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/jetbrains-toolbox-setup.sh</small></td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>jetbrains-toolbox-install.sh node in _scripts/core/jetbrains-toolbox-install.sh.</td>
+  <td><code>git-authors-cleanup.sh script</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>enforce_or_warn()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>preflight() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>24</td>
-  <td><code>jetbrains-toolbox-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/jetbrains-toolbox-install.sh</small></td>
+  <td><code>print_agents()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>execute_command()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>jetbrains-toolbox-install.sh script node in _scripts/core/jetbrains-toolbox-install.sh.</td>
+  <td><code>git-authors-cleanup.sh script</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>print_agents() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>25</td>
-  <td><code>jetbrains-toolbox-setup.sh</code><br><small style="color:var(--muted)">_scripts/core/jetbrains-toolbox-setup.sh</small></td>
+  <td><code>print_backup_plan()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>jetbrains-toolbox-install.sh</code><br><small style="color:var(--muted)">_scripts/core/jetbrains-toolbox-install.sh</small></td>
-  <td>jetbrains-toolbox-setup.sh node in _scripts/core/jetbrains-toolbox-setup.sh.</td>
+  <td><code>git-authors-cleanup.sh script</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>print_backup_plan() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>26</td>
-  <td><code>jetbrains-toolbox-setup.sh script</code><br><small style="color:var(--muted)">_scripts/core/jetbrains-toolbox-setup.sh</small></td>
+  <td><code>print_next_steps()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>jetbrains-toolbox-setup.sh script node in _scripts/core/jetbrains-toolbox-setup.sh.</td>
+  <td><code>git-authors-cleanup.sh script</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>print_push_commands()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>print_summary_notes()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>section()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>print_next_steps() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>27</td>
-  <td><code>mise-install.sh</code><br><small style="color:var(--muted)">_scripts/core/mise-install.sh</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>mise-install.sh node in _scripts/core/mise-install.sh.</td>
+  <td><code>print_push_commands()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><span class="tag tag-cmd">Entry</span></td>
+  <td><code>print_next_steps()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>current_branch_ref()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>has_tags()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>print_push_commands() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>28</td>
-  <td><code>mise-install.sh script</code><br><small style="color:var(--muted)">_scripts/core/mise-install.sh</small></td>
+  <td><code>print_summary_notes()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>mise-install.sh script node in _scripts/core/mise-install.sh.</td>
+  <td><code>git-authors-cleanup.sh script</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>print_next_steps()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>print_summary_notes() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>29</td>
-  <td><code>system-update.sh</code><br><small style="color:var(--muted)">_scripts/core/system-update.sh</small></td>
+  <td><code>read_key()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>_helpers.sh</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>system-update.sh node in _scripts/core/system-update.sh.</td>
+  <td><code>read_yes_no()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>No direct outbound edge</td>
+  <td>read_key() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 <tr>
   <td>30</td>
-  <td><code>system-update.sh script</code><br><small style="color:var(--muted)">_scripts/core/system-update.sh</small></td>
+  <td><code>read_yes_no()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>cecho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small><br><code>decho()</code><br><small style="color:var(--muted)">_scripts/core/_helpers.sh</small></td>
-  <td>system-update.sh script node in _scripts/core/system-update.sh.</td>
+  <td><code>git-authors-cleanup.sh script</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td><code>cecho()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small><br><code>read_key()</code><br><small style="color:var(--muted)">tools/.tools/git-authors-cleanup.sh</small></td>
+  <td>read_yes_no() node in tools/.tools/git-authors-cleanup.sh.</td>
 </tr>
 </table>
 
@@ -1356,31 +1358,31 @@ flowchart LR
     <h4>Key Files</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
-      <tr><td><code>_scripts/core/_helpers.sh</code></td><td>24 nodes</td></tr>
+      <tr><td><code>tools/.tools/git-authors-cleanup.sh</code></td><td>45 nodes</td></tr>
+<tr><td><code>_scripts/core/_helpers.sh</code></td><td>24 nodes</td></tr>
 <tr><td><code>.opencode/agents/dotfiles.md</code></td><td>14 nodes</td></tr>
 <tr><td><code>opencode/AGENTS.md</code></td><td>12 nodes</td></tr>
 <tr><td><code>docs/moca.md</code></td><td>10 nodes</td></tr>
 <tr><td><code>claude-code/user-config/statusline-command-win.sh</code></td><td>8 nodes</td></tr>
 <tr><td><code>claude-code/user-config/statusline-command.sh</code></td><td>8 nodes</td></tr>
 <tr><td><code>opencode/start-opencode-server.sh</code></td><td>7 nodes</td></tr>
-<tr><td><code>_scripts/headroom-uninstall.sh</code></td><td>6 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: calls x200, contains x118, defines x49, references x49. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: calls x274, contains x119, defines x92, references x49. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
 
 <!-- ====== 6. Ingestion & Updates ====== -->
 <h2 id="ingest-cache-update">6. Ingestion &amp; Updates</h2>
-<p>Ingestion &amp; Updates groups implementation around posh, hermes, tools, config, mostly in .config/oh-my-posh/gbs-text.omp.yaml, tools/.tools/cache-clean.sh, .config/oh-my-posh/gbs.omp.yaml. This section covers 207 nodes and 331 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Ingestion &amp; Updates groups implementation around posh, hermes, tools, config, mostly in hermes/config.yaml, .config/oh-my-posh/gbs-text.omp.yaml, tools/.tools/cache-clean.sh. This section covers 234 nodes and 360 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Ingestion &amp; Updates (207 nodes, 331 edges)
+    %% Section: Ingestion &amp; Updates (234 nodes, 360 edges)
     tools_tools_cache_clean_sh_entry_739f6806("cache-clean.sh script<br/><small>tools/.tools/cache-clean.sh</small>")
     tools_tools_cache_clean_step_node_ca182165("step_node()<br/><small>tools/.tools/cache-clean.sh</small>")
     tools_tools_cache_clean_step_docker_d57e7c6b("step_docker()<br/><small>tools/.tools/cache-clean.sh</small>")
@@ -1423,7 +1425,7 @@ flowchart LR
     tools_tools_cache_clean_step_brew_4c841c9a -->|calls| tools_tools_cache_clean_have_b4e101b0
     tools_tools_cache_clean_step_brew_4c841c9a -->|calls| tools_tools_cache_clean_vlog_49fa4dd0
     tools_tools_cache_clean_step_brew_4c841c9a -->|calls| tools_tools_cache_clean_measure_3673c0d6
-    %% Omitted for readability: 189 nodes, 9 edges
+    %% Omitted for readability: 216 nodes, 9 edges
     class tools_tools_cache_clean_sh_entry_739f6806 function;
     class tools_tools_cache_clean_step_node_ca182165 function;
     class tools_tools_cache_clean_step_docker_d57e7c6b function;
@@ -1710,11 +1712,11 @@ flowchart LR
     <h4>Key Files</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
-      <tr><td><code>.config/oh-my-posh/gbs-text.omp.yaml</code></td><td>45 nodes</td></tr>
+      <tr><td><code>hermes/config.yaml</code></td><td>47 nodes</td></tr>
+<tr><td><code>.config/oh-my-posh/gbs-text.omp.yaml</code></td><td>45 nodes</td></tr>
 <tr><td><code>tools/.tools/cache-clean.sh</code></td><td>40 nodes</td></tr>
 <tr><td><code>.config/oh-my-posh/gbs.omp.yaml</code></td><td>33 nodes</td></tr>
-<tr><td><code>profiles/foca/config.yaml</code></td><td>30 nodes</td></tr>
-<tr><td><code>hermes/config.yaml</code></td><td>26 nodes</td></tr>
+<tr><td><code>profiles/foca/config.yaml</code></td><td>31 nodes</td></tr>
 <tr><td><code>_scripts/core/_options.sh</code></td><td>16 nodes</td></tr>
 <tr><td><code>ai-tools-update.sh</code></td><td>5 nodes</td></tr>
 <tr><td><code>.hermes/scripts/hermes-update-daily.sh</code></td><td>3 nodes</td></tr>
@@ -1722,30 +1724,27 @@ flowchart LR
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: calls x139, contains x132, defines x55, references x3. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x153, calls x139, defines x55, references x9. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
 
 <!-- ====== 7. Serving API ====== -->
 <h2 id="serve-api">7. Serving API</h2>
-<p>Serving API groups implementation around tabby, configyaml, config, hermes, mostly in .config/tabby/config.yaml, hermes/config.yaml, profiles/foca/config.yaml. This section covers 145 nodes and 139 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Serving API groups implementation around tabby, configyaml, config, hermes, mostly in .config/tabby/config.yaml, hermes/config.yaml, profiles/foca/config.yaml. This section covers 140 nodes and 135 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Serving API (145 nodes, 139 edges)
+    %% Section: Serving API (140 nodes, 135 edges)
     subgraph serve_api_hermes_config_yaml_e663c8ba["hermes/config.yaml"]
         hermes_config_delegation_c388d66b("delegation<br/><small>hermes/config.yaml</small>")
         hermes_config_auxiliary_approval_d480dd6b("approval<br/><small>hermes/config.yaml</small>")
-        hermes_config_openrouter_94254717("openrouter<br/><small>hermes/config.yaml</small>")
-        hermes_config_auxiliary_6dc7d2fe("auxiliary<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_provider_572e45cf("provider<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_model_6bebf9fa("model<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_base_url_e69bad08("base_url<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_api_key_2b92a98c("api_key<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_timeout_54253041("timeout<br/><small>hermes/config.yaml</small>")
-        hermes_config_openrouter_response_cache_5984f99a("response_cache<br/><small>hermes/config.yaml</small>")
     end
     subgraph serve_api_profiles_foca_config_yaml_ceebfa33["profiles/foca/config.yaml"]
         hermes_hermes_profiles_foca_config_delegation_c2a8a4df("delegation<br/><small>profiles/foca/config.yaml</small>")
@@ -1756,8 +1755,12 @@ flowchart LR
         hermes_hermes_profiles_foca_config_tool_search_s_da08985d("search_default_limit<br/><small>profiles/foca/config.yaml</small>")
         hermes_hermes_profiles_foca_config_tool_search_m_4859c0be("max_search_limit<br/><small>profiles/foca/config.yaml</small>")
     end
-    tabby_config_tabby_config_hotkeys_25af44b9("hotkeys<br/><small>.config/tabby/config.yaml</small>")
-    hermes_config_auxiliary_6dc7d2fe -->|contains| hermes_config_auxiliary_approval_d480dd6b
+    subgraph serve_api_config_tabby_config_yaml_82309306[".config/tabby/config.yaml"]
+        tabby_config_tabby_config_hotkeys_25af44b9("hotkeys<br/><small>.config/tabby/config.yaml</small>")
+        tabby_config_tabby_config_hotkeys_tab_2_00fbbea3("tab-2<br/><small>.config/tabby/config.yaml</small>")
+        tabby_config_tabby_config_hotkeys_tab_3_07223bb2("tab-3<br/><small>.config/tabby/config.yaml</small>")
+        tabby_config_tabby_config_hotkeys_tab_4_315f9450("tab-4<br/><small>.config/tabby/config.yaml</small>")
+    end
     hermes_config_auxiliary_approval_d480dd6b -->|contains| hermes_config_approval_provider_572e45cf
     hermes_config_auxiliary_approval_d480dd6b -->|contains| hermes_config_approval_model_6bebf9fa
     hermes_config_auxiliary_approval_d480dd6b -->|contains| hermes_config_approval_base_url_e69bad08
@@ -1768,18 +1771,17 @@ flowchart LR
     hermes_hermes_profiles_foca_config_tools_tool_se_3a772e45 -->|contains| hermes_hermes_profiles_foca_config_tool_search_t_2d9b39db
     hermes_hermes_profiles_foca_config_tools_tool_se_3a772e45 -->|contains| hermes_hermes_profiles_foca_config_tool_search_s_da08985d
     hermes_hermes_profiles_foca_config_tools_tool_se_3a772e45 -->|contains| hermes_hermes_profiles_foca_config_tool_search_m_4859c0be
-    hermes_config_openrouter_94254717 -->|contains| hermes_config_openrouter_response_cache_5984f99a
-    %% Omitted for readability: 127 nodes, 0 edges
+    tabby_config_tabby_config_hotkeys_25af44b9 -->|contains| tabby_config_tabby_config_hotkeys_tab_2_00fbbea3
+    tabby_config_tabby_config_hotkeys_25af44b9 -->|contains| tabby_config_tabby_config_hotkeys_tab_3_07223bb2
+    tabby_config_tabby_config_hotkeys_25af44b9 -->|contains| tabby_config_tabby_config_hotkeys_tab_4_315f9450
+    %% Omitted for readability: 122 nodes, 0 edges
     class hermes_config_delegation_c388d66b function;
     class hermes_config_auxiliary_approval_d480dd6b function;
-    class hermes_config_openrouter_94254717 api;
-    class hermes_config_auxiliary_6dc7d2fe function;
     class hermes_config_approval_provider_572e45cf function;
     class hermes_config_approval_model_6bebf9fa function;
     class hermes_config_approval_base_url_e69bad08 function;
     class hermes_config_approval_api_key_2b92a98c api;
     class hermes_config_approval_timeout_54253041 function;
-    class hermes_config_openrouter_response_cache_5984f99a function;
     class hermes_hermes_profiles_foca_config_delegation_c2a8a4df function;
     class hermes_hermes_profiles_foca_config_tools_tool_se_3a772e45 function;
     class hermes_hermes_profiles_foca_config_tools_42167891 function;
@@ -1788,6 +1790,9 @@ flowchart LR
     class hermes_hermes_profiles_foca_config_tool_search_s_da08985d function;
     class hermes_hermes_profiles_foca_config_tool_search_m_4859c0be function;
     class tabby_config_tabby_config_hotkeys_25af44b9 function;
+    class tabby_config_tabby_config_hotkeys_tab_2_00fbbea3 function;
+    class tabby_config_tabby_config_hotkeys_tab_3_07223bb2 function;
+    class tabby_config_tabby_config_hotkeys_tab_4_315f9450 function;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -2057,13 +2062,13 @@ flowchart LR
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
       <tr><td><code>.config/tabby/config.yaml</code></td><td>100 nodes</td></tr>
-<tr><td><code>hermes/config.yaml</code></td><td>25 nodes</td></tr>
 <tr><td><code>profiles/foca/config.yaml</code></td><td>20 nodes</td></tr>
+<tr><td><code>hermes/config.yaml</code></td><td>20 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x139. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x135. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -4774,12 +4779,12 @@ flowchart LR
 
 <!-- ====== 16. Other ====== -->
 <h2 id="other">16. Other</h2>
-<p>Other groups implementation around hermes, configyaml, foca, profiles, mostly in profiles/foca/config.yaml, hermes/config.yaml, .config/oh-my-posh/gbs.omp.yaml. This section covers 728 nodes and 702 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Other groups implementation around hermes, configyaml, foca, profiles, mostly in profiles/foca/config.yaml, hermes/config.yaml, .config/oh-my-posh/gbs.omp.yaml. This section covers 714 nodes and 669 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Other (728 nodes, 702 edges)
+    %% Section: Other (714 nodes, 669 edges)
     subgraph other_setup_sh_bc2a115c["setup.sh"]
         setup_sh_entry_6a444dbb("setup.sh script<br/><small>setup.sh</small>")
         setup_select_packages_grid_0f0f5919("select_packages_grid()<br/><small>setup.sh</small>")
@@ -4803,7 +4808,7 @@ flowchart LR
     nvim_config_nvim_init_3e625a8d("init.lua")
     scripts_wsl_setup_fedora_dev_sh_entry_7dbb36da("wsl-setup-fedora-dev.sh script<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
     nvim_config_nvim_lua_plugins_alpha_b15f93cb("alpha.lua")
-    nvim_config_nvim_lua_plugins_kickstart_12a8cae1("kickstart.lua")
+    nvim_config_nvim_lua_plugins_lsp_220be175("lsp.lua")
     win_tools_tools_run_localwinenvsetup_createalias_2e28bbae -->|calls| win_tools_tools_run_localwinenvsetup_write_color_01ae34c5
     win_tools_tools_run_localwinenvsetup_exitwithmes_69ad2c63 -->|calls| win_tools_tools_run_localwinenvsetup_write_color_01ae34c5
     win_tools_tools_run_localwinenvsetup_readconfigf_dd3cf659 -->|calls| win_tools_tools_run_localwinenvsetup_exitwithmes_69ad2c63
@@ -4816,7 +4821,7 @@ flowchart LR
     win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83 -->|calls| win_tools_tools_run_aitoolsupdate_test_rtkrunnin_8462ffee
     win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83 -->|calls| win_tools_tools_run_aitoolsupdate_get_rtkversion_772e9b09
     win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83 -->|calls| win_tools_tools_run_aitoolsupdate_get_latestrtkr_83887abf
-    %% Omitted for readability: 710 nodes, 0 edges
+    %% Omitted for readability: 696 nodes, 0 edges
     class setup_sh_entry_6a444dbb function;
     class setup_select_packages_grid_0f0f5919 function;
     class setup_render_grid_8598b488 function;
@@ -4834,7 +4839,7 @@ flowchart LR
     class nvim_config_nvim_init_3e625a8d function;
     class scripts_wsl_setup_fedora_dev_sh_entry_7dbb36da function;
     class nvim_config_nvim_lua_plugins_alpha_b15f93cb function;
-    class nvim_config_nvim_lua_plugins_kickstart_12a8cae1 function;
+    class nvim_config_nvim_lua_plugins_lsp_220be175 function;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -4858,243 +4863,243 @@ flowchart LR
 </tr>
 <tr>
   <td>1</td>
-  <td><code>hermes/config.yaml</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>terminal</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>Reads, resolves, or persists project configuration.</td>
+  <td>terminal node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>2</td>
-  <td><code>command_allowlist</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
-  <td><span class="tag tag-cmd">Entry</span></td>
+  <td><code>auto_source_bashrc</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>command_allowlist node in hermes/config.yaml.</td>
+  <td>auto_source_bashrc node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>3</td>
-  <td><code>context</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>backend</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>context node in hermes/config.yaml.</td>
+  <td>backend node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>4</td>
-  <td><code>engine</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>container_cpu</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>engine node in hermes/config.yaml.</td>
+  <td>container_cpu node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>5</td>
-  <td><code>cron</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>container_disk</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>cron node in hermes/config.yaml.</td>
+  <td>container_disk node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>6</td>
-  <td><code>wrap_response</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>container_memory</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>wrap_response node in hermes/config.yaml.</td>
+  <td>container_memory node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>7</td>
-  <td><code>file_read_max_chars</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>container_persistent</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>file_read_max_chars node in hermes/config.yaml.</td>
+  <td>container_persistent node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>8</td>
-  <td><code>goals</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>cwd</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>goals node in hermes/config.yaml.</td>
+  <td>cwd node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>9</td>
-  <td><code>max_turns</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>daytona_image</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>max_turns node in hermes/config.yaml.</td>
+  <td>daytona_image node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>10</td>
-  <td><code>hooks_auto_accept</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>docker_extra_args</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>hooks_auto_accept node in hermes/config.yaml.</td>
+  <td>docker_extra_args node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>11</td>
-  <td><code>prefill_messages_file</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>docker_forward_env</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>prefill_messages_file node in hermes/config.yaml.</td>
+  <td>docker_forward_env node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>12</td>
-  <td><code>privacy</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>docker_image</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>privacy node in hermes/config.yaml.</td>
+  <td>docker_image node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>13</td>
-  <td><code>redact_pii</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>docker_mount_cwd_to_workspace</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>redact_pii node in hermes/config.yaml.</td>
+  <td>docker_mount_cwd_to_workspace node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>14</td>
-  <td><code>prompt_caching</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>docker_run_as_host_user</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>Builds structured prompts for model calls.</td>
+  <td>docker_run_as_host_user node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>15</td>
-  <td><code>cache_ttl</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>docker_volumes</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>Caches analysis results or computes cache keys.</td>
+  <td>docker_volumes node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>16</td>
-  <td><code>timezone</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>env_passthrough</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>timezone node in hermes/config.yaml.</td>
+  <td>env_passthrough node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>17</td>
-  <td><code>tool_output</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>home_mode</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>tool_output node in hermes/config.yaml.</td>
+  <td>home_mode node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>18</td>
-  <td><code>max_bytes</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>lifetime_seconds</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>max_bytes node in hermes/config.yaml.</td>
+  <td>lifetime_seconds node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>19</td>
-  <td><code>max_line_length</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>modal_image</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>max_line_length node in hermes/config.yaml.</td>
+  <td>modal_image node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>20</td>
-  <td><code>max_lines</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>modal_mode</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>max_lines node in hermes/config.yaml.</td>
+  <td>modal_mode node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>21</td>
-  <td><code>toolsets</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>persistent_shell</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>toolsets node in hermes/config.yaml.</td>
+  <td>persistent_shell node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>22</td>
-  <td><code>Foca profile Hermes config (config.yaml)</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
-  <td><span class="tag tag-class">Class</span></td>
+  <td><code>shell_init_files</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>Reads, resolves, or persists project configuration.</td>
+  <td>shell_init_files node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>23</td>
-  <td><code>Foca persona SOUL.md (foca profile)</code><br><small style="color:var(--muted)">profiles/foca/SOUL.md</small></td>
-  <td><span class="tag tag-func">Concept</span></td>
+  <td><code>singularity_image</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>Documentation node describing Foca persona SOUL.md (foca profile).</td>
+  <td>singularity_image node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>24</td>
-  <td><code>Mo persona SOUL.md (Hermes default profile)</code><br><small style="color:var(--muted)">hermes/.hermes/SOUL.md</small></td>
-  <td><span class="tag tag-func">Concept</span></td>
+  <td><code>timeout</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>Documentation node describing Mo persona SOUL.md (Hermes default profile).</td>
+  <td>timeout node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>25</td>
-  <td><code>Foca - senior software engineer &amp; architect persona</code><br><small style="color:var(--muted)">profiles/foca/SOUL.md</small></td>
-  <td><span class="tag tag-func">Concept</span></td>
+  <td><code>vercel_runtime</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>Design note for Foca - senior software engineer &amp; architect persona.</td>
+  <td>vercel_runtime node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>26</td>
-  <td><code>Mo - peer-level assistant &amp; Hermes maintainer persona</code><br><small style="color:var(--muted)">hermes/.hermes/SOUL.md</small></td>
-  <td><span class="tag tag-func">Concept</span></td>
+  <td><code>terminal</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>Design note for Mo - peer-level assistant &amp; Hermes maintainer persona.</td>
+  <td>terminal node in profiles/foca/config.yaml.</td>
 </tr>
 <tr>
   <td>27</td>
-  <td><code>foca/config.yaml</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>auto_source_bashrc</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>Reads, resolves, or persists project configuration.</td>
+  <td>auto_source_bashrc node in profiles/foca/config.yaml.</td>
 </tr>
 <tr>
   <td>28</td>
-  <td><code>command_allowlist</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
-  <td><span class="tag tag-cmd">Entry</span></td>
+  <td><code>backend</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>command_allowlist node in profiles/foca/config.yaml.</td>
+  <td>backend node in profiles/foca/config.yaml.</td>
 </tr>
 <tr>
   <td>29</td>
-  <td><code>context</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>container_cpu</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>context node in profiles/foca/config.yaml.</td>
+  <td>container_cpu node in profiles/foca/config.yaml.</td>
 </tr>
 <tr>
   <td>30</td>
-  <td><code>engine</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>container_disk</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>engine node in profiles/foca/config.yaml.</td>
+  <td>container_disk node in profiles/foca/config.yaml.</td>
 </tr>
 </table>
 
@@ -5103,8 +5108,8 @@ flowchart LR
     <h4>Key Files</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
-      <tr><td><code>profiles/foca/config.yaml</code></td><td>292 nodes</td></tr>
-<tr><td><code>hermes/config.yaml</code></td><td>286 nodes</td></tr>
+      <tr><td><code>profiles/foca/config.yaml</code></td><td>291 nodes</td></tr>
+<tr><td><code>hermes/config.yaml</code></td><td>270 nodes</td></tr>
 <tr><td><code>.config/oh-my-posh/gbs.omp.yaml</code></td><td>35 nodes</td></tr>
 <tr><td><code>moca/AGENTS.md</code></td><td>9 nodes</td></tr>
 <tr><td><code>win-tools/.tools/Run-AIToolsUpdate.ps1</code></td><td>9 nodes</td></tr>
@@ -5115,7 +5120,7 @@ flowchart LR
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x641, calls x16, defines x15, imports x10. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x610, imports x16, calls x16, defines x15. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -5228,8 +5233,8 @@ flowchart LR
   <div class="card">
     <h4>Graph</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>Nodes</td><td>1882</td></tr>
-      <tr><td>Edges</td><td>2387</td></tr>
+      <tr><td>Nodes</td><td>1927</td></tr>
+      <tr><td>Edges</td><td>2505</td></tr>
       <tr><td>Hyperedges</td><td>16</td></tr>
       <tr><td>Communities</td><td>177</td></tr>
       <tr><td>Documented Sections</td><td>15</td></tr>
@@ -5238,7 +5243,7 @@ flowchart LR
   <div class="card">
     <h4>Edge Confidence</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>EXTRACTED</td><td>2203</td></tr>
+      <tr><td>EXTRACTED</td><td>2321</td></tr>
       <tr><td>INFERRED</td><td>184</td></tr>
       <tr><td>AMBIGUOUS</td><td>0</td></tr>
     </table>
@@ -5247,7 +5252,7 @@ flowchart LR
 
 <div style="text-align:center; padding:40px 0; color: var(--muted); font-size:0.9rem;">
   <p>.dotfiles — Architecture Documentation</p>
-  <p>Generated: 2026-10-28 09:19 UTC · graphify callflow-html</p>
+  <p>Generated: 2026-10-30 22:20 UTC · graphify callflow-html</p>
 </div>
 
 </div><!-- .container -->
