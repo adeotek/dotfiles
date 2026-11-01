@@ -1,17 +1,17 @@
-# Graph Report - .dotfiles  (2026-10-31)
+# Graph Report - .dotfiles  (2026-11-02)
 
 ## Corpus Check
-- 184 files · ~79,834 words
+- 184 files · ~80,190 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 44 file(s) not represented in the graph (top: (none) 8, .toml 8, .service 6)
 
 ## Summary
-- 1927 nodes · 2505 edges · 177 communities (141 shown, 36 thin omitted)
+- 1930 nodes · 2513 edges · 178 communities (140 shown, 38 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 184 edges (avg confidence: 0.6)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `20357c3d`
+- Built from commit: `2ba54ceb`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -32,7 +32,7 @@
 - install_package
 - cc-sessions.sh
 - uv-install.sh
-- execute_command
+- decho
 - dotnet-unit-testing Skill (opencode)
 - Run-LocalWinEnvSetup.ps1
 - headroom-uninstall.sh
@@ -74,9 +74,9 @@
 - document-code.md
 - wsl-setup-fedora-dev.sh
 - properties
-- kitty-install.sh
+- slack
 - tts
-- github-cli-install.sh
+- nodejs-install.sh
 - tts
 - agent
 - agent
@@ -161,20 +161,21 @@
 - matrix
 - mattermost
 - openrouter
-- slack
+- openrouter
 - tool_search
 - code_execution
 - matrix
 - mattermost
-- human_delay
+- tmux-install.sh
 - slack
 - tool_output
-- plugins
+- fastfetch-install.sh
 - mapped_shell_names
+- git-install.sh
 
 ## God Nodes (most connected - your core abstractions)
 1. `hotkeys` - 100 edges
-2. `cecho()` - 75 edges
+2. `cecho()` - 76 edges
 3. `properties` - 44 edges
 4. `display` - 40 edges
 5. `display` - 40 edges
@@ -217,7 +218,7 @@
 - **Claude Code Statusline Variants** — claude_code_user_config_statusline_command, claude_code_user_config_statusline_command_win, claude_code_user_config_statusline_slim [INFERRED 0.95]
 - **Windows Network & Firewall Tools** — win_tools_tools_add_winfirewallrule, win_tools_tools_get_winfirewallrulebyport, win_tools_run_port_listen, win_tools_run_port_probe [INFERRED 0.95]
 
-## Communities (177 total, 36 thin omitted)
+## Communities (178 total, 38 thin omitted)
 
 ### Community 0 - "git-authors-cleanup.sh"
 Cohesion: 0.12
@@ -225,7 +226,7 @@ Nodes (44): AGENT_AUTHORS, AGENT_COAUTHORS, AGENT_COMMITTERS, backup_repo(), bui
 
 ### Community 1 - "yazi-install.sh"
 Cohesion: 0.09
-Nodes (12): base-tools-install.sh script, glow-install.sh script, HOMEBREW_NO_ASK, homebrew-install.sh script, onefetch-install.sh script, rtk-install.sh script, rtk-setup.sh script, rustup-install.sh script (+4 more)
+Nodes (16): base-tools-install.sh script, gcp-cli-install.sh script, github-cli-install.sh script, glow-install.sh script, install_package(), HOMEBREW_NO_ASK, homebrew-install.sh script, lsp-servers-install.sh script (+8 more)
 
 ### Community 2 - "Dotfiles README"
 Cohesion: 0.09
@@ -261,7 +262,7 @@ Nodes (13): git commit *, git push *, rm *, sudo *, /tmp/*, *.env, *.env.example
 
 ### Community 10 - "claude-code-setup.sh"
 Cohesion: 0.17
-Nodes (7): Claude Code Plugin Marketplace, CLAUDECODE_MARKETPLACES, CLAUDECODE_PLUGINS, claude-code-setup.sh script, nvim-setup.sh script, playwright-install.sh script, Run-LocalWinEnvSetup.ps1 (Windows Dev Setup)
+Nodes (9): AI Coding Tools (claude-code + opencode), Claude Code Plugin Marketplace, claude-code-install.sh script, CLAUDECODE_MARKETPLACES, CLAUDECODE_PLUGINS, claude-code-setup.sh script, opencode-install.sh script, playwright-install.sh script (+1 more)
 
 ### Community 11 - "AdeoTEK Scripting Best Practices (Strictly Enforced)"
 Cohesion: 0.18
@@ -283,9 +284,9 @@ Nodes (7): Claude Code Session Browser (cross-platform), ordered_projects, rm_fi
 Cohesion: 0.02
 Nodes (100): hotkeys, clear, close-pane, close-tab, combine-tabs, command-selector, copy, copy-current-path (+92 more)
 
-### Community 18 - "execute_command"
-Cohesion: 0.11
-Nodes (23): fastfetch-install.sh script, fastfetch-setup.sh script, gcp-cli-install.sh script, ghostty-install.sh script, git-install.sh script, git-setup.sh script, decho(), execute_command() (+15 more)
+### Community 18 - "decho"
+Cohesion: 0.08
+Nodes (22): Install-Then-Setup Pattern, Terminal Emulator, aws-cli-install.sh script, ghostty-install.sh script, ghostty-setup.sh script, decho(), execute_command(), rename_dir_if_exists() (+14 more)
 
 ### Community 19 - "dotnet-unit-testing Skill (opencode)"
 Cohesion: 0.67
@@ -320,8 +321,8 @@ Cohesion: 0.22
 Nodes (38): cecho(), dir_size_kb(), have(), human_lines_to_kb(), in_use(), measure(), path_in_use(), prune_old_entries() (+30 more)
 
 ### Community 28 - "cecho"
-Cohesion: 0.08
-Nodes (31): AI Coding Tools (claude-code + opencode), aws-cli-install.sh script, claude-code-install.sh script, docker-install.sh script, golang-install.sh script, headroom-setup.sh script, aecho(), cecho() (+23 more)
+Cohesion: 0.13
+Nodes (23): docker-install.sh script, headroom-setup.sh script, aecho(), cecho(), copy_files_if_missing(), enable_lingering(), enable_wsl_systemd(), increase_ulimit() (+15 more)
 
 ### Community 33 - ".NET Backend Expert Agent (opencode)"
 Cohesion: 1.00
@@ -356,8 +357,8 @@ Cohesion: 0.40
 Nodes (4): 📝 Code Template, 🛠 Core Methodology, .NET Unit Test Expert Skill, 📂 Project Integration
 
 ### Community 66 - "_helpers.sh"
-Cohesion: 0.08
-Nodes (18): Dry-Run Safety Pattern, Dry-Run Pattern in PowerShell Tools, Multi-Distro Support (Arch/Debian/Fedora), OS-Dispatch Pattern (case $CURRENT_OS_ID), stow_package() Helper Function, ansible-cleanup.sh script, ansible-install.sh script, ghostty-setup.sh script (+10 more)
+Cohesion: 0.07
+Nodes (19): Dry-Run Safety Pattern, Dry-Run Pattern in PowerShell Tools, Multi-Distro Support (Arch/Debian/Fedora), OS-Dispatch Pattern (case $CURRENT_OS_ID), stow_package() Helper Function, ansible-cleanup.sh script, ansible-install.sh script, golang-install.sh script (+11 more)
 
 ### Community 67 - "pi-install.sh"
 Cohesion: 0.04
@@ -403,13 +404,17 @@ Nodes (8): WSL2 Environment Support, DOTFILES_PACKAGES, echo_error(), echo_warni
 Cohesion: 0.04
 Nodes (45): pwsh, alpine, always_enabled, arch, branch_ahead_icon, branch_behind_icon, branch_gone_icon, branch_icon (+37 more)
 
-### Community 79 - "kitty-install.sh"
-Cohesion: 0.28
-Nodes (5): Install-Then-Setup Pattern, Terminal Emulator, kitty-setup.sh script, tabby-install.sh script, tabby-setup.sh script
+### Community 79 - "slack"
+Cohesion: 0.50
+Nodes (4): slack, allowed_channels, free_response_channels, require_mention
 
 ### Community 80 - "tts"
 Cohesion: 0.05
 Nodes (43): voice, diarize, language_code, model_id, tag_audio_events, voice_id, audio_tags, model (+35 more)
+
+### Community 81 - "nodejs-install.sh"
+Cohesion: 0.43
+Nodes (6): get_nodejs_version(), nodejs_version_matches(), nodejs_versions_match(), nodejs-install.sh script, pi_node_ok(), pi-install.sh script
 
 ### Community 82 - "tts"
 Cohesion: 0.05
@@ -437,11 +442,11 @@ Nodes (30): blocks, alignment, newline, segments, type, final_space, palette, bg
 
 ### Community 88 - "hermes/config.yaml"
 Cohesion: 0.09
-Nodes (23): Foca profile Hermes config (config.yaml), Foca persona SOUL.md (foca profile), Mo persona SOUL.md (Hermes default profile), command_allowlist, context, engine, cron, wrap_response (+15 more)
+Nodes (22): Foca profile Hermes config (config.yaml), Foca persona SOUL.md (foca profile), Mo persona SOUL.md (Hermes default profile), command_allowlist, context, engine, cron, wrap_response (+14 more)
 
 ### Community 89 - "foca/config.yaml"
-Cohesion: 0.09
-Nodes (21): command_allowlist, context, engine, cron, wrap_response, file_read_max_chars, goals, max_turns (+13 more)
+Cohesion: 0.08
+Nodes (25): command_allowlist, context, engine, cron, wrap_response, file_read_max_chars, goals, max_turns (+17 more)
 
 ### Community 90 - "terminal"
 Cohesion: 0.08
@@ -747,9 +752,9 @@ Nodes (4): mattermost, allowed_channels, free_response_channels, require_mention
 Cohesion: 0.50
 Nodes (4): openrouter, min_coding_score, response_cache, response_cache_ttl
 
-### Community 166 - "slack"
+### Community 166 - "openrouter"
 Cohesion: 0.50
-Nodes (4): slack, allowed_channels, free_response_channels, require_mention
+Nodes (4): openrouter, min_coding_score, response_cache, response_cache_ttl
 
 ### Community 167 - "tool_search"
 Cohesion: 0.50
@@ -767,10 +772,6 @@ Nodes (4): matrix, allowed_rooms, free_response_rooms, require_mention
 Cohesion: 0.50
 Nodes (4): mattermost, allowed_channels, free_response_channels, require_mention
 
-### Community 171 - "human_delay"
-Cohesion: 0.50
-Nodes (4): human_delay, max_ms, min_ms, mode
-
 ### Community 172 - "slack"
 Cohesion: 0.50
 Nodes (4): slack, allowed_channels, free_response_channels, require_mention
@@ -779,29 +780,25 @@ Nodes (4): slack, allowed_channels, free_response_channels, require_mention
 Cohesion: 0.50
 Nodes (4): tool_output, max_bytes, max_line_length, max_lines
 
-### Community 174 - "plugins"
-Cohesion: 0.67
-Nodes (3): plugins, disabled, enabled
-
 ## Knowledge Gaps
 - **61 isolated node(s):** `MINIMAL_TASKS`, `CONSOLE_ONLY_TASKS`, `CONSOLE_TASKS`, `CONSOLE_EXTRA_TASKS`, `ALL_CONSOLE_TASKS` (+56 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1258 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **36 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **38 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `auxiliary` connect `auxiliary` to `compression`, `curator`, `kanban_decomposer`, `mcp`, `monitor`, `profile_describer`, `skills_hub`, `title_generation`, `triage_specifier`, `tts_audio_tags`, `foca/config.yaml`, `approval`, `vision`?**
-  _High betweenness centrality (0.025) - this node is a cross-community bridge._
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
 - **What connects `MINIMAL_TASKS`, `CONSOLE_ONLY_TASKS`, `CONSOLE_TASKS` to the rest of the system?**
   _61 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `git-authors-cleanup.sh` be split into smaller, more focused modules?**
   _Cohesion score 0.1191919191919192 - nodes in this community are weakly interconnected._
 - **Why does `auxiliary` connect `auxiliary` to `compression`, `curator`, `kanban_decomposer`, `mcp`, `monitor`, `profile_describer`, `skills_hub`, `title_generation`, `triage_specifier`, `tts_audio_tags`, `hermes/config.yaml`, `approval`, `vision`?**
-  _High betweenness centrality (0.015) - this node is a cross-community bridge._
-- **Should `yazi-install.sh` be split into smaller, more focused modules?**
-  _Cohesion score 0.09057971014492754 - nodes in this community are weakly interconnected._
-- **Why does `agent` connect `agent` to `hermes/config.yaml`?**
   _High betweenness centrality (0.014) - this node is a cross-community bridge._
+- **Should `yazi-install.sh` be split into smaller, more focused modules?**
+  _Cohesion score 0.08866995073891626 - nodes in this community are weakly interconnected._
+- **Why does `agent` connect `agent` to `hermes/config.yaml`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **Should `Dotfiles README` be split into smaller, more focused modules?**
   _Cohesion score 0.08923076923076922 - nodes in this community are weakly interconnected._

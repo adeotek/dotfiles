@@ -156,9 +156,13 @@ fi
 for pkg in "${SELECTED_PACKAGES[@]}"
 do
   pkg_task_type="${TASK_TYPES["$pkg"]}"  # Get task type (install/setup)
+  # Forward the task's default args, e.g. --prompt for bash/zsh (default prompt
+  # tool) and --upgrade for nodejs (explicit request: check the version)
+  pkg_args="${TASK_ARGS[$pkg]:-}"
   decho "magenta" "Processing $pkg ($pkg_task_type) with default settings"
+  # shellcheck disable=SC2086  # intentional word-split to pass multiple flags
   # shellcheck source=/dev/null
-  source "$CDIR/$pkg-$pkg_task_type.sh"
+  source "$CDIR/$pkg-$pkg_task_type.sh" $pkg_args
 done
 
 ## End

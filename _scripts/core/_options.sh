@@ -10,11 +10,11 @@ decho "white" "Loading _options.sh..."
 OPT_BASH_DEFAULT_PROMPT="oh-my-posh"
 OPT_ZSH_DEFAULT_PROMPT="starship"
 OPT_DOTNET_DEFAULT_VERSION="10.0"
-OPT_GOLANG_DEFAULT_VERSION="1.27.1"
+OPT_GOLANG_DEFAULT_VERSION="1.27.3"
 OPT_NERDFONTS_DEFAULT_VERSION="3.5.1"
 OPT_NERDFONTS_DEFAULT_FONT="CascadiaCode"
 OPT_NODEJS_DEFAULT_INSTALL_MODE="source"
-OPT_NODEJS_DEFAULT_VERSION="24"
+OPT_NODEJS_DEFAULT_VERSION="26"
 
 declare MINIMAL_TASKS=(
   "base-tools"
@@ -175,5 +175,8 @@ declare -A TASK_TYPES=(
 
 declare -A TASK_ARGS=(
   ["bash"]="--prompt $OPT_BASH_DEFAULT_PROMPT"
+  # An explicit nodejs request asks for the version and upgrades on mismatch
+  # (scripts that source nodejs-install.sh as a dependency do not pass this)
+  ["nodejs"]="--upgrade 1"
   ["zsh"]="--prompt $OPT_ZSH_DEFAULT_PROMPT"
 )
