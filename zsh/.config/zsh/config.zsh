@@ -124,8 +124,11 @@ fi
 bindkey -e  # Emacs-style editing
 
 # history-substring-search — bind AFTER the plugin is loaded
-bindkey "${terminfo[kcuu1]}" history-substring-search-up    # Up arrow (terminfo)
-bindkey "${terminfo[kcud1]}" history-substring-search-down  # Down arrow (terminfo)
+# `$terminfo` is empty when TERM is unset/unknown (automation, cron, ssh -c), and
+# `bindkey ""` fails with "cannot bind to an empty key sequence". The hardcoded
+# fallbacks below bind the same keys, so only bind terminfo when it exists.
+(( ${+terminfo[kcuu1]} )) && bindkey "${terminfo[kcuu1]}" history-substring-search-up    # Up arrow (terminfo)
+(( ${+terminfo[kcud1]} )) && bindkey "${terminfo[kcud1]}" history-substring-search-down  # Down arrow (terminfo)
 bindkey '^[[A' history-substring-search-up                  # Up arrow (fallback)
 bindkey '^[[B' history-substring-search-down                # Down arrow (fallback)
 bindkey '^P' history-substring-search-up                    # Ctrl+P
@@ -210,7 +213,14 @@ fi
 
 # --- FZF ---
 if command -v fzf >/dev/null 2>&1; then
-  source <(fzf --zsh)
+  # `fzf --zsh` defines ZLE widgets (`zle -N fzf-history-widget`, `zle -N
+  # fzf-completion`). ZLE needs a real terminal: in an interactive-flagged shell
+  # without a TTY (`zsh -i -c`, which is how background jobs and editor tasks
+  # run) it prints "can't change option: zle" twice. Gate only the key bindings
+  # on a TTY — the options and alias below are harmless everywhere.
+  if [[ -t 0 ]]; then
+    source <(fzf --zsh)
+  fi
 
   export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --inline-info'
 
