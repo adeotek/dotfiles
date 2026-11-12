@@ -178,9 +178,5 @@ declare -A TASK_ARGS=(
   # An explicit nodejs request asks for the version and upgrades on mismatch
   # (scripts that source nodejs-install.sh as a dependency do not pass this)
   ["nodejs"]="--upgrade 1"
-  # An explicit dotnet request asks for the version and upgrades when it is
-  # higher than the installed one (scripts that source dotnet-install.sh as a
-  # dependency do not pass this)
-  ["dotnet"]="--upgrade 1"
   ["zsh"]="--prompt $OPT_ZSH_DEFAULT_PROMPT"
 )
