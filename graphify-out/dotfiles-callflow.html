@@ -60,7 +60,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 <div class="container">
 
 <h1>.dotfiles — Complete Call Flow &amp; Architecture Documentation</h1>
-<p class="subtitle">Generated from graphify knowledge graph: 1932 nodes, 2515 edges, 177 communities. Commit: 18ebbda</p>
+<p class="subtitle">Generated from graphify knowledge graph: 2094 nodes, 2644 edges, 208 communities. Commit: 2547364</p>
 
 <div class="nav">
     <a href="#overview">Architecture Overview</a>
@@ -94,11 +94,11 @@ flowchart LR
     class BUILD_GRAPH_321CBB04 module;
     ANALYSIS_CLUSTERING_C79796DA("Analysis &amp; Clustering<br/><small>10 nodes</small>")
     class ANALYSIS_CLUSTERING_C79796DA module;
-    CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>369 nodes</small>")
+    CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>449 nodes</small>")
     class CLI_SKILLS_9964CBB8 module;
-    INGEST_CACHE_UPDATE_FF457338("Ingestion &amp; Updates<br/><small>208 nodes</small>")
+    INGEST_CACHE_UPDATE_FF457338("Ingestion &amp; Updates<br/><small>207 nodes</small>")
     class INGEST_CACHE_UPDATE_FF457338 module;
-    SERVE_API_35EC8E86("Serving API<br/><small>144 nodes</small>")
+    SERVE_API_35EC8E86("Serving API<br/><small>145 nodes</small>")
     class SERVE_API_35EC8E86 module;
     SECURITY_GLOBAL_5B9C6A04("Security &amp; Global Graph<br/><small>26 nodes</small>")
     class SECURITY_GLOBAL_5B9C6A04 module;
@@ -116,20 +116,20 @@ flowchart LR
     class TABBY_CONFIGYAML_CONFIG_9AE7695F module;
     POSH_GBS_TEXTOMPYAML_FC34FA92("Posh Gbs Textompyaml<br/><small>31 nodes</small>")
     class POSH_GBS_TEXTOMPYAML_FC34FA92 module;
-    OTHER_D0941E68("Other<br/><small>736 nodes</small>")
+    OTHER_D0941E68("Other<br/><small>818 nodes</small>")
     class OTHER_D0941E68 module;
-    OTHER_D0941E68 -->|contains x8| INGEST_CACHE_UPDATE_FF457338
+    SERVE_API_35EC8E86 -->|contains x10| OTHER_D0941E68
+    OTHER_D0941E68 -->|contains x6| INGEST_CACHE_UPDATE_FF457338
     OTHER_D0941E68 -->|contains x5| SERVE_API_35EC8E86
     INGEST_CACHE_UPDATE_FF457338 -->|references x4| CLI_SKILLS_9964CBB8
     OTHER_D0941E68 -->|contains x4| EXTRACT_PIPELINE_5F350230
+    SERVE_API_35EC8E86 -->|contains x2| INGEST_CACHE_UPDATE_FF457338
     CLI_SKILLS_9964CBB8 -->|implements x2| OTHER_D0941E68
     OTHER_D0941E68 -->|references x2| CLI_SKILLS_9964CBB8
     OTHER_D0941E68 -->|contains x2| SECURITY_GLOBAL_5B9C6A04
     ANALYSIS_CLUSTERING_C79796DA -->|references| CLI_SKILLS_9964CBB8
     TABBY_CONFIGYAML_CONFIG_9AE7695F -->|contains| SERVE_API_35EC8E86
     INGEST_CACHE_UPDATE_FF457338 -->|contains| OTHER_D0941E68
-    POSH_GBS_TEXTOMPYAML_FC34FA92 -->|contains| INGEST_CACHE_UPDATE_FF457338
-    OTHER_D0941E68 -->|contains| HERMES_CONFIGYAML_TIMEOUT_AFCACF43
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -146,7 +146,7 @@ flowchart LR
     <h4>Architecture Layers</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>Layer</th><th>Nodes</th><th>Communities</th></tr>
-      <tr><td>Extraction Pipeline</td><td>87</td><td><code>80, 82, 54</code></td></tr><tr><td>Graph Build</td><td>73</td><td><code>6, 7, 9, 63</code></td></tr><tr><td>Analysis &amp; Clustering</td><td>10</td><td><code>12</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>369</td><td><code>0, 66, 18, 1, 28, 2, 10, 4, 3, 8, 11, 64, 35, 62, 81, 13, 19, 21, 25, 26, 65, 69, 171, 177, 32, 33, 57, 50</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>208</td><td><code>78, 27, 86, 5, 101, 99, 123, 126, 138, 150, 68, 165, 29, 176, 41, 44, 61</code></td></tr><tr><td>Serving API</td><td>144</td><td><code>17, 96, 97, 122, 152, 166</code></td></tr><tr><td>Security &amp; Global Graph</td><td>26</td><td><code>100, 102</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>36</td><td><code>36, 23</code></td></tr><tr><td>Hermes Configyaml Resume</td><td>48</td><td><code>67</code></td></tr><tr><td>Hermes Profiles Foca</td><td>48</td><td><code>72</code></td></tr><tr><td>Hermes Configyaml Timeout</td><td>41</td><td><code>83</code></td></tr><tr><td>Hermes Foca Profiles</td><td>41</td><td><code>84</code></td></tr><tr><td>Tabby Configyaml Config</td><td>34</td><td><code>85</code></td></tr><tr><td>Posh Gbs Textompyaml</td><td>31</td><td><code>87</code></td></tr><tr><td>Other</td><td>736</td><td><code>89, 88, 90, 91, 92, 93, 94, 95, 98, 103, 104, 105, 106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 117, 118, 34, 73, 77, 119, 120, 121, 14, 15, 124, 127, 139, 151, 16, 125, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 20, 22, 153, 154, 155, 156, 157, 158, 159, 160, 24, 112, 161, 162, 163, 164, 167, 168, 169, 170, 172, 173, 70, 71, 74, 75, 79, 30, 31, 37, 38, 175, 39, 40, 42, 43, 45, 46, 47, 48, 49, 51, 52, 53, 55, 56, 58, 59, 60, 76</code></td></tr>
+      <tr><td>Extraction Pipeline</td><td>87</td><td><code>80, 82, 54</code></td></tr><tr><td>Graph Build</td><td>73</td><td><code>6, 7, 9, 63</code></td></tr><tr><td>Analysis &amp; Clustering</td><td>10</td><td><code>12</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>449</td><td><code>0, 66, 28, 2, 1, 18, 4, 3, 8, 10, 11, 13, 171, 64, 81, 179, 180, 181, 182, 185, 186, 188, 16, 35, 62, 19, 191, 21, 194, 25, 26, 65, 69, 177, 197, 199, 200, 32, 33, 204, 205, 57, 47, 50</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>207</td><td><code>78, 27, 86, 5, 101, 99, 123, 126, 138, 150, 68, 165, 29, 176, 41, 44</code></td></tr><tr><td>Serving API</td><td>145</td><td><code>17, 96, 97, 122, 152, 166</code></td></tr><tr><td>Security &amp; Global Graph</td><td>26</td><td><code>100, 102</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>36</td><td><code>36, 23</code></td></tr><tr><td>Hermes Configyaml Resume</td><td>48</td><td><code>67</code></td></tr><tr><td>Hermes Profiles Foca</td><td>48</td><td><code>72</code></td></tr><tr><td>Hermes Configyaml Timeout</td><td>41</td><td><code>83</code></td></tr><tr><td>Hermes Foca Profiles</td><td>41</td><td><code>84</code></td></tr><tr><td>Tabby Configyaml Config</td><td>34</td><td><code>85</code></td></tr><tr><td>Posh Gbs Textompyaml</td><td>31</td><td><code>87</code></td></tr><tr><td>Other</td><td>818</td><td><code>89, 90, 91, 88, 92, 93, 94, 95, 98, 103, 104, 105, 106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 117, 118, 174, 178, 183, 184, 34, 73, 77, 119, 120, 121, 14, 15, 187, 189, 124, 125, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 151, 190, 192, 20, 22, 153, 154, 155, 156, 157, 158, 159, 160, 193, 195, 24, 112, 161, 162, 163, 164, 167, 168, 169, 170, 172, 173, 196, 198, 70, 71, 74, 75, 79, 201, 30, 31, 37, 38, 175, 202, 203, 206, 207, 39, 40, 42, 43, 45, 46, 48, 49, 51, 52, 53, 55, 56, 58, 59, 60, 61, 76</code></td></tr>
     </table>
   </div>
   <div class="card">
@@ -158,11 +158,11 @@ flowchart LR
   <div class="card">
     <h4>Graph Report Highlights</h4>
     <ul>
-      <li>1932 nodes · 2515 edges · 177 communities (141 shown, 36 thin omitted)</li>
+      <li>2094 nodes · 2644 edges · 208 communities (164 shown, 44 thin omitted)</li>
       <li>Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 184 edges (avg confidence: 0.64)</li>
       <li>Token cost: 0 input · 0 output</li>
       <li>1. `hotkeys` - 100 edges</li>
-      <li>2. `cecho()` - 75 edges</li>
+      <li>2. `cecho()` - 73 edges</li>
       <li>3. `properties` - 44 edges</li>
     </ul>
   </div>
@@ -1021,12 +1021,12 @@ flowchart LR
 
 <!-- ====== 5. CLI & Skill Installers ====== -->
 <h2 id="cli-skills">5. CLI &amp; Skill Installers</h2>
-<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, tools, setupsh, mostly in tools/.tools/git-authors-cleanup.sh, _scripts/core/_helpers.sh, .opencode/agents/dotfiles.md. This section covers 369 nodes and 718 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, opencode, tools, mostly in tools/.tools/git-authors-cleanup.sh, _scripts/core/_helpers.sh, .opencode/agents/dotfiles.md. This section covers 449 nodes and 779 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: CLI &amp; Skill Installers (369 nodes, 718 edges)
+    %% Section: CLI &amp; Skill Installers (449 nodes, 779 edges)
     subgraph cli_skills_tools_tools_git_authors_cleanup_sh_c88416ad["tools/.tools/git-authors-cleanup.sh"]
         tools_tools_git_authors_cleanup_sh_entry_8aa8acbb("git-authors-cleanup.sh script<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
         tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1("ensure_dependencies()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
@@ -1044,9 +1044,9 @@ flowchart LR
         tools_tools_git_authors_cleanup_pkg_install_comm_02549b07("pkg_install_command()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
         tools_tools_git_authors_cleanup_fallback_install_0c581f7a("fallback_install()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
     end
-    scripts_core_nodejs_install_sh_entry_8b7e045c("nodejs-install.sh script<br/><small>_scripts/core/nodejs-install.sh</small>")
     scripts_core_paseo_install_sh_entry_3e706387("paseo-install.sh script<br/><small>_scripts/core/paseo-install.sh</small>")
     claude_code_user_config_statusline_command_win_s_92683a1c("statusline-command-win.sh script<br/><small>claude-code/user-config/statusline-command-win.sh</small>")
+    claude_code_user_config_statusline_command_sh_en_1f04a487("statusline-command.sh script<br/><small>claude-code/user-config/statusline-command.sh</small>")
     tools_tools_git_authors_cleanup_backup_repo_30b3c7ec -->|calls| tools_tools_git_authors_cleanup_cecho_33dfb37b
     tools_tools_git_authors_cleanup_backup_repo_30b3c7ec -->|calls| tools_tools_git_authors_cleanup_die_f8b27d34
     tools_tools_git_authors_cleanup_build_rewrite_in_5da1390c -->|calls| tools_tools_git_authors_cleanup_die_f8b27d34
@@ -1071,7 +1071,7 @@ flowchart LR
     tools_tools_git_authors_cleanup_sh_entry_8aa8acbb -->|calls| tools_tools_git_authors_cleanup_detect_repo_8d9029c0
     tools_tools_git_authors_cleanup_sh_entry_8aa8acbb -->|calls| tools_tools_git_authors_cleanup_detect_identity_fac1c1b3
     tools_tools_git_authors_cleanup_sh_entry_8aa8acbb -->|calls| tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1
-    %% Omitted for readability: 351 nodes, 4 edges
+    %% Omitted for readability: 431 nodes, 4 edges
     class tools_tools_git_authors_cleanup_sh_entry_8aa8acbb function;
     class tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1 function;
     class tools_tools_git_authors_cleanup_run_rewrite_7f4a7e68 function;
@@ -1087,9 +1087,9 @@ flowchart LR
     class tools_tools_git_authors_cleanup_find_filter_repo_25c80dfa function;
     class tools_tools_git_authors_cleanup_pkg_install_comm_02549b07 entry;
     class tools_tools_git_authors_cleanup_fallback_install_0c581f7a function;
-    class scripts_core_nodejs_install_sh_entry_8b7e045c function;
     class scripts_core_paseo_install_sh_entry_3e706387 function;
     class claude_code_user_config_statusline_command_win_s_92683a1c entry;
+    class claude_code_user_config_statusline_command_sh_en_1f04a487 entry;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -1363,26 +1363,26 @@ flowchart LR
 <tr><td><code>.opencode/agents/dotfiles.md</code></td><td>14 nodes</td></tr>
 <tr><td><code>opencode/AGENTS.md</code></td><td>12 nodes</td></tr>
 <tr><td><code>docs/moca.md</code></td><td>10 nodes</td></tr>
-<tr><td><code>claude-code/user-config/statusline-command-win.sh</code></td><td>8 nodes</td></tr>
-<tr><td><code>claude-code/user-config/statusline-command.sh</code></td><td>8 nodes</td></tr>
-<tr><td><code>opencode/start-opencode-server.sh</code></td><td>7 nodes</td></tr>
+<tr><td><code>skills/csharp-15/SKILL.md</code></td><td>9 nodes</td></tr>
+<tr><td><code>skills/csharp-15/SKILL.md</code></td><td>9 nodes</td></tr>
+<tr><td><code>csharp-15/references/memory-safety-preview.md</code></td><td>9 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: calls x279, contains x119, defines x97, references x49. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: calls x273, contains x180, defines x97, references x49. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
 
 <!-- ====== 6. Ingestion & Updates ====== -->
 <h2 id="ingest-cache-update">6. Ingestion &amp; Updates</h2>
-<p>Ingestion &amp; Updates groups implementation around posh, hermes, tools, config, mostly in .config/oh-my-posh/gbs-text.omp.yaml, tools/.tools/cache-clean.sh, .config/oh-my-posh/gbs.omp.yaml. This section covers 208 nodes and 331 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Ingestion &amp; Updates groups implementation around posh, hermes, tools, config, mostly in .config/oh-my-posh/gbs-text.omp.yaml, tools/.tools/cache-clean.sh, .config/oh-my-posh/gbs.omp.yaml. This section covers 207 nodes and 331 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Ingestion &amp; Updates (208 nodes, 331 edges)
+    %% Section: Ingestion &amp; Updates (207 nodes, 331 edges)
     tools_tools_cache_clean_sh_entry_739f6806("cache-clean.sh script<br/><small>tools/.tools/cache-clean.sh</small>")
     tools_tools_cache_clean_step_node_ca182165("step_node()<br/><small>tools/.tools/cache-clean.sh</small>")
     tools_tools_cache_clean_step_docker_d57e7c6b("step_docker()<br/><small>tools/.tools/cache-clean.sh</small>")
@@ -1425,7 +1425,7 @@ flowchart LR
     tools_tools_cache_clean_step_brew_4c841c9a -->|calls| tools_tools_cache_clean_have_b4e101b0
     tools_tools_cache_clean_step_brew_4c841c9a -->|calls| tools_tools_cache_clean_vlog_49fa4dd0
     tools_tools_cache_clean_step_brew_4c841c9a -->|calls| tools_tools_cache_clean_measure_3673c0d6
-    %% Omitted for readability: 190 nodes, 9 edges
+    %% Omitted for readability: 189 nodes, 9 edges
     class tools_tools_cache_clean_sh_entry_739f6806 function;
     class tools_tools_cache_clean_step_node_ca182165 function;
     class tools_tools_cache_clean_step_docker_d57e7c6b function;
@@ -1731,23 +1731,23 @@ flowchart LR
 
 <!-- ====== 7. Serving API ====== -->
 <h2 id="serve-api">7. Serving API</h2>
-<p>Serving API groups implementation around tabby, configyaml, config, hermes, mostly in .config/tabby/config.yaml, hermes/config.yaml, profiles/foca/config.yaml. This section covers 144 nodes and 138 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Serving API groups implementation around tabby, configyaml, config, hermes, mostly in .config/tabby/config.yaml, hermes/config.yaml, profiles/foca/config.yaml. This section covers 145 nodes and 139 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Serving API (144 nodes, 138 edges)
+    %% Section: Serving API (145 nodes, 139 edges)
     subgraph serve_api_hermes_config_yaml_e663c8ba["hermes/config.yaml"]
         hermes_config_delegation_c388d66b("delegation<br/><small>hermes/config.yaml</small>")
         hermes_config_auxiliary_approval_d480dd6b("approval<br/><small>hermes/config.yaml</small>")
         hermes_config_openrouter_94254717("openrouter<br/><small>hermes/config.yaml</small>")
+        hermes_config_auxiliary_6dc7d2fe("auxiliary<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_provider_572e45cf("provider<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_model_6bebf9fa("model<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_base_url_e69bad08("base_url<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_api_key_2b92a98c("api_key<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_timeout_54253041("timeout<br/><small>hermes/config.yaml</small>")
         hermes_config_openrouter_response_cache_5984f99a("response_cache<br/><small>hermes/config.yaml</small>")
-        hermes_config_openrouter_response_cache_ttl_501ea780("response_cache_ttl<br/><small>hermes/config.yaml</small>")
     end
     subgraph serve_api_profiles_foca_config_yaml_ceebfa33["profiles/foca/config.yaml"]
         hermes_hermes_profiles_foca_config_delegation_c2a8a4df("delegation<br/><small>profiles/foca/config.yaml</small>")
@@ -1759,6 +1759,7 @@ flowchart LR
         hermes_hermes_profiles_foca_config_tool_search_m_4859c0be("max_search_limit<br/><small>profiles/foca/config.yaml</small>")
     end
     tabby_config_tabby_config_hotkeys_25af44b9("hotkeys<br/><small>.config/tabby/config.yaml</small>")
+    hermes_config_auxiliary_6dc7d2fe -->|contains| hermes_config_auxiliary_approval_d480dd6b
     hermes_config_auxiliary_approval_d480dd6b -->|contains| hermes_config_approval_provider_572e45cf
     hermes_config_auxiliary_approval_d480dd6b -->|contains| hermes_config_approval_model_6bebf9fa
     hermes_config_auxiliary_approval_d480dd6b -->|contains| hermes_config_approval_base_url_e69bad08
@@ -1770,18 +1771,17 @@ flowchart LR
     hermes_hermes_profiles_foca_config_tools_tool_se_3a772e45 -->|contains| hermes_hermes_profiles_foca_config_tool_search_s_da08985d
     hermes_hermes_profiles_foca_config_tools_tool_se_3a772e45 -->|contains| hermes_hermes_profiles_foca_config_tool_search_m_4859c0be
     hermes_config_openrouter_94254717 -->|contains| hermes_config_openrouter_response_cache_5984f99a
-    hermes_config_openrouter_94254717 -->|contains| hermes_config_openrouter_response_cache_ttl_501ea780
-    %% Omitted for readability: 126 nodes, 0 edges
+    %% Omitted for readability: 127 nodes, 0 edges
     class hermes_config_delegation_c388d66b function;
     class hermes_config_auxiliary_approval_d480dd6b function;
     class hermes_config_openrouter_94254717 api;
+    class hermes_config_auxiliary_6dc7d2fe function;
     class hermes_config_approval_provider_572e45cf function;
     class hermes_config_approval_model_6bebf9fa function;
     class hermes_config_approval_base_url_e69bad08 function;
     class hermes_config_approval_api_key_2b92a98c api;
     class hermes_config_approval_timeout_54253041 function;
     class hermes_config_openrouter_response_cache_5984f99a function;
-    class hermes_config_openrouter_response_cache_ttl_501ea780 function;
     class hermes_hermes_profiles_foca_config_delegation_c2a8a4df function;
     class hermes_hermes_profiles_foca_config_tools_tool_se_3a772e45 function;
     class hermes_hermes_profiles_foca_config_tools_42167891 function;
@@ -2059,13 +2059,13 @@ flowchart LR
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
       <tr><td><code>.config/tabby/config.yaml</code></td><td>100 nodes</td></tr>
-<tr><td><code>hermes/config.yaml</code></td><td>24 nodes</td></tr>
+<tr><td><code>hermes/config.yaml</code></td><td>25 nodes</td></tr>
 <tr><td><code>profiles/foca/config.yaml</code></td><td>20 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x138. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x139. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -4776,12 +4776,12 @@ flowchart LR
 
 <!-- ====== 16. Other ====== -->
 <h2 id="other">16. Other</h2>
-<p>Other groups implementation around hermes, configyaml, foca, profiles, mostly in profiles/foca/config.yaml, hermes/config.yaml, .config/oh-my-posh/gbs.omp.yaml. This section covers 736 nodes and 719 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Other groups implementation around hermes, configyaml, foca, profiles, mostly in profiles/foca/config.yaml, hermes/config.yaml, .config/oh-my-posh/gbs.omp.yaml. This section covers 818 nodes and 776 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Other (736 nodes, 719 edges)
+    %% Section: Other (818 nodes, 776 edges)
     subgraph other_setup_sh_bc2a115c["setup.sh"]
         setup_sh_entry_6a444dbb("setup.sh script<br/><small>setup.sh</small>")
         setup_select_packages_grid_0f0f5919("select_packages_grid()<br/><small>setup.sh</small>")
@@ -4805,7 +4805,7 @@ flowchart LR
     nvim_config_nvim_init_3e625a8d("init.lua")
     scripts_wsl_setup_fedora_dev_sh_entry_7dbb36da("wsl-setup-fedora-dev.sh script<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
     nvim_config_nvim_lua_plugins_alpha_b15f93cb("alpha.lua")
-    nvim_config_nvim_lua_plugins_lsp_220be175("lsp.lua")
+    nvim_config_nvim_lua_plugins_kickstart_12a8cae1("kickstart.lua")
     win_tools_tools_run_localwinenvsetup_createalias_2e28bbae -->|calls| win_tools_tools_run_localwinenvsetup_write_color_01ae34c5
     win_tools_tools_run_localwinenvsetup_exitwithmes_69ad2c63 -->|calls| win_tools_tools_run_localwinenvsetup_write_color_01ae34c5
     win_tools_tools_run_localwinenvsetup_readconfigf_dd3cf659 -->|calls| win_tools_tools_run_localwinenvsetup_exitwithmes_69ad2c63
@@ -4818,7 +4818,7 @@ flowchart LR
     win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83 -->|calls| win_tools_tools_run_aitoolsupdate_test_rtkrunnin_8462ffee
     win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83 -->|calls| win_tools_tools_run_aitoolsupdate_get_rtkversion_772e9b09
     win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83 -->|calls| win_tools_tools_run_aitoolsupdate_get_latestrtkr_83887abf
-    %% Omitted for readability: 718 nodes, 0 edges
+    %% Omitted for readability: 800 nodes, 0 edges
     class setup_sh_entry_6a444dbb function;
     class setup_select_packages_grid_0f0f5919 function;
     class setup_render_grid_8598b488 function;
@@ -4836,7 +4836,7 @@ flowchart LR
     class nvim_config_nvim_init_3e625a8d function;
     class scripts_wsl_setup_fedora_dev_sh_entry_7dbb36da function;
     class nvim_config_nvim_lua_plugins_alpha_b15f93cb function;
-    class nvim_config_nvim_lua_plugins_lsp_220be175 function;
+    class nvim_config_nvim_lua_plugins_kickstart_12a8cae1 function;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -5068,35 +5068,35 @@ flowchart LR
 </tr>
 <tr>
   <td>27</td>
-  <td><code>hermes/config.yaml</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>terminal</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>Reads, resolves, or persists project configuration.</td>
+  <td>terminal node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>28</td>
-  <td><code>command_allowlist</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
-  <td><span class="tag tag-cmd">Entry</span></td>
+  <td><code>auto_source_bashrc</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>command_allowlist node in hermes/config.yaml.</td>
+  <td>auto_source_bashrc node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>29</td>
-  <td><code>context</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>backend</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>context node in hermes/config.yaml.</td>
+  <td>backend node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>30</td>
-  <td><code>engine</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><code>container_cpu</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>engine node in hermes/config.yaml.</td>
+  <td>container_cpu node in hermes/config.yaml.</td>
 </tr>
 </table>
 
@@ -5106,18 +5106,18 @@ flowchart LR
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
       <tr><td><code>profiles/foca/config.yaml</code></td><td>292 nodes</td></tr>
-<tr><td><code>hermes/config.yaml</code></td><td>287 nodes</td></tr>
+<tr><td><code>hermes/config.yaml</code></td><td>286 nodes</td></tr>
 <tr><td><code>.config/oh-my-posh/gbs.omp.yaml</code></td><td>35 nodes</td></tr>
 <tr><td><code>moca/AGENTS.md</code></td><td>9 nodes</td></tr>
-<tr><td><code>win-tools/.tools/Run-AIToolsUpdate.ps1</code></td><td>9 nodes</td></tr>
-<tr><td><code>_scripts/wsl-setup-fedora-dev.sh</code></td><td>8 nodes</td></tr>
-<tr><td><code>tools/.tools/cc-sessions.sh</code></td><td>7 nodes</td></tr>
-<tr><td><code>setup.sh</code></td><td>6 nodes</td></tr>
+<tr><td><code>csharp-15/references/memory-safety-preview.md</code></td><td>9 nodes</td></tr>
+<tr><td><code>csharp-15/references/unions.md</code></td><td>9 nodes</td></tr>
+<tr><td><code>csharp-15/references/memory-safety-preview.md</code></td><td>9 nodes</td></tr>
+<tr><td><code>csharp-15/references/unions.md</code></td><td>9 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x652, imports x16, calls x16, defines x15. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x715, calls x16, defines x15, imports x10. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -5230,17 +5230,17 @@ flowchart LR
   <div class="card">
     <h4>Graph</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>Nodes</td><td>1932</td></tr>
-      <tr><td>Edges</td><td>2515</td></tr>
+      <tr><td>Nodes</td><td>2094</td></tr>
+      <tr><td>Edges</td><td>2644</td></tr>
       <tr><td>Hyperedges</td><td>16</td></tr>
-      <tr><td>Communities</td><td>177</td></tr>
+      <tr><td>Communities</td><td>208</td></tr>
       <tr><td>Documented Sections</td><td>15</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Edge Confidence</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>EXTRACTED</td><td>2331</td></tr>
+      <tr><td>EXTRACTED</td><td>2460</td></tr>
       <tr><td>INFERRED</td><td>184</td></tr>
       <tr><td>AMBIGUOUS</td><td>0</td></tr>
     </table>
@@ -5249,7 +5249,7 @@ flowchart LR
 
 <div style="text-align:center; padding:40px 0; color: var(--muted); font-size:0.9rem;">
   <p>.dotfiles — Architecture Documentation</p>
-  <p>Generated: 2026-11-12 21:56 UTC · graphify callflow-html</p>
+  <p>Generated: 2026-11-12 22:58 UTC · graphify callflow-html</p>
 </div>
 
 </div><!-- .container -->
