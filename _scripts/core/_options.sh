@@ -9,7 +9,7 @@ decho "white" "Loading _options.sh..."
 
 OPT_BASH_DEFAULT_PROMPT="oh-my-posh"
 OPT_ZSH_DEFAULT_PROMPT="starship"
-OPT_DOTNET_DEFAULT_VERSION="10.0"
+OPT_DOTNET_DEFAULT_VERSION="11.0"
 OPT_GOLANG_DEFAULT_VERSION="1.27.3"
 OPT_NERDFONTS_DEFAULT_VERSION="3.5.1"
 OPT_NERDFONTS_DEFAULT_FONT="CascadiaCode"
@@ -178,5 +178,9 @@ declare -A TASK_ARGS=(
   # An explicit nodejs request asks for the version and upgrades on mismatch
   # (scripts that source nodejs-install.sh as a dependency do not pass this)
   ["nodejs"]="--upgrade 1"
+  # An explicit dotnet request asks for the version and upgrades when it is
+  # higher than the installed one (scripts that source dotnet-install.sh as a
+  # dependency do not pass this)
+  ["dotnet"]="--upgrade 1"
   ["zsh"]="--prompt $OPT_ZSH_DEFAULT_PROMPT"
 )

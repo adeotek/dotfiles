@@ -23,7 +23,7 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 ## 📦 What's Included
 
 ### Development Tools
-- **Languages**: Node.js (v24), Go (1.26.5), Rust, .NET SDK (10.0), PowerShell
+- **Languages**: Node.js (v24), Go (1.26.5), Rust, .NET SDK (11.0), PowerShell
 - **Runtime/Version Manager**: mise
 - **Cloud/DevOps**: Docker, AWS CLI, GCP CLI, Terraform, Ansible, Helm, kubectl
 - **Editors**: Neovim (with custom config), Zed, VS Code, JetBrains Toolbox
@@ -110,7 +110,7 @@ The following packages can be installed individually or in groups:
 ### Development Languages & Runtimes
 - **nodejs** - Node.js runtime (v24, configurable)
 - **golang** - Go programming language (v1.26.5)
-- **dotnet** - .NET SDK (v10.0)
+- **dotnet** - .NET SDK (v11.0)
 - **rustup** - Rust toolchain installer
 - **uv** - Python package and project manager (Astral)
 - **mise** - Polyglot runtime/version manager
@@ -308,7 +308,7 @@ Create local configuration files that won't be tracked by git:
 The following default versions are configured (see `_scripts/core/_options.sh`):
 
 - Node.js: v24 (all distributions)
-- .NET SDK: v10.0
+- .NET SDK: v11.0
 - Go: v1.26.5
 - Nerd Fonts: v3.5.0 (CascadiaCode)
 - Bash Prompt: Oh My Posh
