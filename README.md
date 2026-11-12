@@ -23,7 +23,7 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 ## 📦 What's Included
 
 ### Development Tools
-- **Languages**: Node.js (v24), Go (1.26.5), Rust, .NET SDK (11.0), PowerShell
+- **Languages**: Node.js (v26), Go (1.27.3), Rust, .NET SDK (11.0), PowerShell
 - **Runtime/Version Manager**: mise
 - **Cloud/DevOps**: Docker, AWS CLI, GCP CLI, Terraform, Ansible, Helm, kubectl
 - **Editors**: Neovim (with custom config), Zed, VS Code, JetBrains Toolbox
@@ -47,7 +47,7 @@ A comprehensive, modular collection of Linux dotfiles and automated installation
 ### Prompts & Themes
 - Oh My Posh (with custom themes)
 - Starship (with custom config)
-- Nerd Fonts (v3.5.0, CascadiaCode) - patched terminal fonts
+- Nerd Fonts (v3.5.1, CascadiaCode) - patched terminal fonts
 
 ## 🚀 Quick Start
 
@@ -108,8 +108,8 @@ The following packages can be installed individually or in groups:
 - **zsh** - Z shell with antidote-managed plugins and Starship prompt
 
 ### Development Languages & Runtimes
-- **nodejs** - Node.js runtime (v24, configurable)
-- **golang** - Go programming language (v1.26.5)
+- **nodejs** - Node.js runtime (v26, configurable)
+- **golang** - Go programming language (v1.27.3)
 - **dotnet** - .NET SDK (v11.0)
 - **rustup** - Rust toolchain installer
 - **uv** - Python package and project manager (Astral)
@@ -151,7 +151,7 @@ The following packages can be installed individually or in groups:
 - **headroom** - LLM context compression proxy (systemd service, supports OpenAI, Anthropic, OpenRouter, OpenCode Zen, Google Gemini, GitHub Copilot)
 - **hermes** - Hermes Agent AI coding assistant (Nous Research)
 - **herdr** - Herdr agent configuration and shell completions
-- **moca** - MO Coding Agent (minimal, token-efficient, provider-agnostic Go coding agent; default config + code-review/debug/document-code/review-and-fix slash commands + dotnet-unit-testing skill)
+- **moca** - MO Coding Agent (minimal, token-efficient, provider-agnostic Go coding agent; default config + code-review/debug/document-code/review-and-fix slash commands + csharp-15 and dotnet-unit-testing skills)
 - **graphify** - Knowledge-graph tool for codebases (PyPI: graphifyy, includes Claude Code skill)
 - **rtk** - CLI output compression/toolkit (installed via Homebrew)
 - **playwright** - Playwright CLI for browser automation (used by AI tools)
@@ -172,7 +172,7 @@ Headroom supports all major LLM providers through its configurable proxy:
 - **oh-my-posh** - Oh My Posh prompt with custom themes
 - **starship** - Starship prompt with custom config
 - **homebrew** - Homebrew package manager for Linux
-- **nerd-fonts** - Nerd Fonts installer (v3.5.0, CascadiaCode)
+- **nerd-fonts** - Nerd Fonts installer (v3.5.1, CascadiaCode)
 
 ### Package Groups
 
@@ -307,10 +307,10 @@ Create local configuration files that won't be tracked by git:
 
 The following default versions are configured (see `_scripts/core/_options.sh`):
 
-- Node.js: v24 (all distributions)
+- Node.js: v26 (all distributions)
 - .NET SDK: v11.0
-- Go: v1.26.5
-- Nerd Fonts: v3.5.0 (CascadiaCode)
+- Go: v1.27.3
+- Nerd Fonts: v3.5.1 (CascadiaCode)
 - Bash Prompt: Oh My Posh
 - ZSH Prompt: Starship
 
