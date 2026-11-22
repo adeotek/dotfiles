@@ -62,12 +62,16 @@ Not stowed — deployed imperatively by their respective setup scripts. Files ar
 - `AGENTS.md` → system prompt for the primary agent
 - `agents/`, `skills/` — agent definitions (incl. `code-review`), skill files. Project-level plugins live in `.opencode/plugins/` (auto-loaded by opencode)
 
-**`pi/`** — deployed by `pi-setup.sh` into `~/.pi/agent/`:
-- `settings.json` → startup defaults (provider `opencode-go`, model `glm-5.3-flash`, all built-in tools enabled, telemetry off); on re-run with the override prompt, the template is **merged** into the existing live config (see `pi/merge-pi-config.py`) — local tweaks and installed packages survive
+**`pi/`** — deployed by `pi-setup.sh` into `~/.pi/agent/` (plus `~/.pi-lens/`):
+- `settings.json` → startup defaults (provider `opencode-go`, model `deepseek-v4.1-flash`, `defaultTools` = the seven built-ins `read`/`bash`/`edit`/`write`/`grep`/`find`/`ls` plus `+codemode` and `+tool_search`, telemetry off); on re-run with the override prompt, the template is **merged** into the existing live config (see `pi/merge-pi-config.py`) — local tweaks and installed packages survive. Runtime state such as `lastChangelogVersion` is deliberately not in the template
 - `models.json` → `opencode-go` provider credential only (`${OPENCODE_API_KEY}` from the environment, or `pi /login opencode-go`); on override it is merged with `--live-wins`, so a live `apiKey` is never replaced by the placeholder
-- `AGENTS.md` → global instructions for all pi sessions
-- `skills/` — skills (e.g. `dotnet-unit-testing`); seeded per-skill only if missing
-- `agents/` — custom subagent definitions for the `pi-subagents` extension (ported from the OpenCode agents: `code-review`, `dev`, `devops`, `expert`, `tutor`, `dotnet-backend-expert`, `dotnet-unit-test-expert`); seeded per-agent only if missing
+- `AGENTS.md`, `APPEND_SYSTEM.md` → global instructions for all pi sessions; seeded only if missing, and backed up (`.bak.<epoch>`) when replaced on an override
+- `pi-lens-config.json` → `~/.pi-lens/config.json`; merged on override like the other JSON configs
+- `pi-permission-system.config.json` → `~/.pi/agent/extensions/pi-permission-system/config.json`; merged on override
+- `hermes-memory-config.json` → memory/consolidation knobs for `pi-hermes-memory`; merged on override
+- `skills/` → skills (e.g. `dotnet-unit-testing`, `code-review`, `devops`, `tutor`, `dotnet-backend-expert`); seeded per-skill only if missing. The former pi subagent definitions live here as skills
+- `prompts/` → slash-command templates (e.g. `init-agents` → `/init-agents`); seeded only if missing
+- `pi update --self` runs on every setup pass; set `PI_SKIP_SELF_UPDATE=1` to skip it
 
 **`moca/`** — deployed by `moca-setup.sh` into `$XDG_CONFIG_HOME/moca/` (or `~/.config/moca/`):
 - `config.jsonc` → default config (model/modelHard, built-in provider entries plus a commented Ollama example, shell allowlist, context/log/tui/web/snapshot knobs, commented MCP block); on re-run with the override prompt the template is **merged with `--live-wins`** (see `moca/merge-moca-config.py`) so the `model` saved by `/model`, a custom allowlist and extra providers survive; moca rejects unknown keys, so only documented ones may be added

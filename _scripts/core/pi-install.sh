@@ -12,7 +12,7 @@ if [[ -z "$RDIR" ]]; then
   else
     RDIR=$(dirname "$PWD")
   fi
-  CDIR="$RDIR/_scripts/core";
+  CDIR="$RDIR/_scripts/core"
   source "$CDIR/_helpers.sh"
 fi
 
@@ -32,15 +32,19 @@ pi_node_ok() {
 cecho "cyan" "Installing [pi]..."
 
 if command -v pi >/dev/null 2>&1; then
-  cecho "yellow" "[pi] is already present. Updating it..."
-  if [[ "$DRY_RUN" -ne "1" ]]; then
-    if ! pi update --self; then
-      cecho "red" "[pi] update failed."
-      return 1
-    fi
-    cecho "green" "[pi] update done."
+  if [[ "${PI_SKIP_SELF_UPDATE:-0}" == "1" ]]; then
+    cecho "yellow" "PI_SKIP_SELF_UPDATE=1 — skipping pi update --self."
   else
-    cecho "yellow" "DRY-RUN: pi update --self"
+    cecho "yellow" "[pi] is already present. Updating it..."
+    if [[ "$DRY_RUN" -ne "1" ]]; then
+      if ! pi update --self; then
+        cecho "red" "[pi] update failed."
+        return 1
+      fi
+      cecho "green" "[pi] update done."
+    else
+      cecho "yellow" "DRY-RUN: pi update --self"
+    fi
   fi
 else
   if ! command -v node >/dev/null 2>&1; then
@@ -58,7 +62,10 @@ else
       PI_SETSID="setsid"
     fi
     # shellcheck disable=SC2086  # PI_SETSID is empty (plain sh) or setsid
-    if ! (set -o pipefail; curl -fsSL https://pi.dev/install.sh | $PI_SETSID sh); then
+    if ! (
+      set -o pipefail
+      curl -fsSL https://pi.dev/install.sh | $PI_SETSID sh
+    ); then
       cecho "red" "[pi] installation failed."
       return 1
     fi

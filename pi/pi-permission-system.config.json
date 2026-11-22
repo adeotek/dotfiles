@@ -6,6 +6,10 @@
       "*": "allow",
       "*.env": "deny",
       "*.env.*": "deny",
+      "*auth.json": "deny",
+      "*.key": "deny",
+      "*.pem": "deny",
+      "*.ssh/*": "deny",
       "next-env.d.ts": "allow",
       "*.env.example": "allow"
     },

@@ -1,4 +1,9 @@
 {
+  "cli_default_open_behavior": "existing_window",
+  "auto_indent": "preserve_indent",
+  "middle_click_paste": false,
+  "auto_indent_on_paste": true,
+  "show_whitespaces": "trailing",
   "diff_view_style": "split",
   "restore_on_startup": "launchpad",
   "project_panel": {
@@ -20,25 +25,53 @@
     "tree_view": true,
     "dock": "left"
   },
+  "title_bar": {
+    "show_branch_status_icon": true
+  },
+  "status_bar": {
+    "line_endings_button": true,
+    "active_encoding_button": "enabled"
+  },
+  "git": {
+    "blame": {
+      "show_avatar": true
+    }
+  },
+  "terminal": {
+    "font_family": "CaskaydiaCove Nerd Font Mono",
+    "font_size": 17.0
+  },
+  "buffer_line_height": "standard",
+  "buffer_font_family": "CaskaydiaCove Nerd Font Mono",
   "icon_theme": "Zed (Default)",
   "base_keymap": "VSCode",
   "ui_font_size": 16,
-  "buffer_font_size": 16,
+  "buffer_font_size": 16.5,
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "One Dark"
+    "dark": "Ayu Dark"
   },
   "tab_size": 2,
+  "minimap": {
+    "show": "auto"
+  },
   "telemetry": {
     "diagnostics": false,
     "metrics": false
   },
   "agent_servers": {
-    "OpenCode": {
+    "moca": {
       "type": "custom",
-      "command": "opencode",
-      "args": ["acp"]
+      "command": "moca",
+      "args": ["acp"],
+      "default_config_options": {
+        "effort": "max",
+        "mode": "auto"
+      }
+    },
+    "pi-acp": {
+      "type": "registry"
     }
   }
 }

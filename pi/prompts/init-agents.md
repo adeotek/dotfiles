@@ -2,7 +2,9 @@
 description: Create or update AGENTS.md at the project root from the current state of the codebase — works like Claude Code's /init.
 argument-hint: "[monorepo subproject, optional]"
 ---
-Create or update AGENTS.md (or an equivalent agent-instructions file such as CLAUDE.md when explicitly named) at the project root, based on the current state of the codebase${1:+ for subproject/area: $1}.
+Create or update AGENTS.md (or an equivalent agent-instructions file such as CLAUDE.md when explicitly named) at the project root, based on the current state of the codebase.
+
+When this command is given an argument, scope the run to that subproject/area: ${1:-whole repository}.
 
 Scope rules:
 - This is only for AGENTS.md — the machine-facing instruction file. Do NOT use for general documentation tasks (README, docs/, architecture guides).

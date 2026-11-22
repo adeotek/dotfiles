@@ -60,7 +60,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 <div class="container">
 
 <h1>.dotfiles — Complete Call Flow &amp; Architecture Documentation</h1>
-<p class="subtitle">Generated from graphify knowledge graph: 2094 nodes, 2644 edges, 208 communities. Commit: 2547364</p>
+<p class="subtitle">Generated from graphify knowledge graph: 2138 nodes, 2678 edges, 213 communities. Commit: 1b8bde6</p>
 
 <div class="nav">
     <a href="#overview">Architecture Overview</a>
@@ -90,15 +90,15 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 flowchart LR
     EXTRACT_PIPELINE_5F350230("Extraction Pipeline<br/><small>87 nodes</small>")
     class EXTRACT_PIPELINE_5F350230 module;
-    BUILD_GRAPH_321CBB04("Graph Build<br/><small>73 nodes</small>")
+    BUILD_GRAPH_321CBB04("Graph Build<br/><small>89 nodes</small>")
     class BUILD_GRAPH_321CBB04 module;
     ANALYSIS_CLUSTERING_C79796DA("Analysis &amp; Clustering<br/><small>10 nodes</small>")
     class ANALYSIS_CLUSTERING_C79796DA module;
-    CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>449 nodes</small>")
+    CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>468 nodes</small>")
     class CLI_SKILLS_9964CBB8 module;
-    INGEST_CACHE_UPDATE_FF457338("Ingestion &amp; Updates<br/><small>207 nodes</small>")
+    INGEST_CACHE_UPDATE_FF457338("Ingestion &amp; Updates<br/><small>208 nodes</small>")
     class INGEST_CACHE_UPDATE_FF457338 module;
-    SERVE_API_35EC8E86("Serving API<br/><small>145 nodes</small>")
+    SERVE_API_35EC8E86("Serving API<br/><small>144 nodes</small>")
     class SERVE_API_35EC8E86 module;
     SECURITY_GLOBAL_5B9C6A04("Security &amp; Global Graph<br/><small>26 nodes</small>")
     class SECURITY_GLOBAL_5B9C6A04 module;
@@ -116,20 +116,20 @@ flowchart LR
     class TABBY_CONFIGYAML_CONFIG_9AE7695F module;
     POSH_GBS_TEXTOMPYAML_FC34FA92("Posh Gbs Textompyaml<br/><small>31 nodes</small>")
     class POSH_GBS_TEXTOMPYAML_FC34FA92 module;
-    OTHER_D0941E68("Other<br/><small>818 nodes</small>")
+    OTHER_D0941E68("Other<br/><small>827 nodes</small>")
     class OTHER_D0941E68 module;
-    SERVE_API_35EC8E86 -->|contains x10| OTHER_D0941E68
-    OTHER_D0941E68 -->|contains x6| INGEST_CACHE_UPDATE_FF457338
+    OTHER_D0941E68 -->|contains x8| INGEST_CACHE_UPDATE_FF457338
     OTHER_D0941E68 -->|contains x5| SERVE_API_35EC8E86
     INGEST_CACHE_UPDATE_FF457338 -->|references x4| CLI_SKILLS_9964CBB8
     OTHER_D0941E68 -->|contains x4| EXTRACT_PIPELINE_5F350230
-    SERVE_API_35EC8E86 -->|contains x2| INGEST_CACHE_UPDATE_FF457338
-    CLI_SKILLS_9964CBB8 -->|implements x2| OTHER_D0941E68
     OTHER_D0941E68 -->|references x2| CLI_SKILLS_9964CBB8
+    CLI_SKILLS_9964CBB8 -->|implements x2| OTHER_D0941E68
     OTHER_D0941E68 -->|contains x2| SECURITY_GLOBAL_5B9C6A04
     ANALYSIS_CLUSTERING_C79796DA -->|references| CLI_SKILLS_9964CBB8
     TABBY_CONFIGYAML_CONFIG_9AE7695F -->|contains| SERVE_API_35EC8E86
     INGEST_CACHE_UPDATE_FF457338 -->|contains| OTHER_D0941E68
+    POSH_GBS_TEXTOMPYAML_FC34FA92 -->|contains| INGEST_CACHE_UPDATE_FF457338
+    OTHER_D0941E68 -->|contains| HERMES_CONFIGYAML_TIMEOUT_AFCACF43
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -146,7 +146,7 @@ flowchart LR
     <h4>Architecture Layers</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>Layer</th><th>Nodes</th><th>Communities</th></tr>
-      <tr><td>Extraction Pipeline</td><td>87</td><td><code>80, 82, 54</code></td></tr><tr><td>Graph Build</td><td>73</td><td><code>6, 7, 9, 63</code></td></tr><tr><td>Analysis &amp; Clustering</td><td>10</td><td><code>12</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>449</td><td><code>0, 66, 28, 2, 1, 18, 4, 3, 8, 10, 11, 13, 171, 64, 81, 179, 180, 181, 182, 185, 186, 188, 16, 35, 62, 19, 191, 21, 194, 25, 26, 65, 69, 177, 197, 199, 200, 32, 33, 204, 205, 57, 47, 50</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>207</td><td><code>78, 27, 86, 5, 101, 99, 123, 126, 138, 150, 68, 165, 29, 176, 41, 44</code></td></tr><tr><td>Serving API</td><td>145</td><td><code>17, 96, 97, 122, 152, 166</code></td></tr><tr><td>Security &amp; Global Graph</td><td>26</td><td><code>100, 102</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>36</td><td><code>36, 23</code></td></tr><tr><td>Hermes Configyaml Resume</td><td>48</td><td><code>67</code></td></tr><tr><td>Hermes Profiles Foca</td><td>48</td><td><code>72</code></td></tr><tr><td>Hermes Configyaml Timeout</td><td>41</td><td><code>83</code></td></tr><tr><td>Hermes Foca Profiles</td><td>41</td><td><code>84</code></td></tr><tr><td>Tabby Configyaml Config</td><td>34</td><td><code>85</code></td></tr><tr><td>Posh Gbs Textompyaml</td><td>31</td><td><code>87</code></td></tr><tr><td>Other</td><td>818</td><td><code>89, 90, 91, 88, 92, 93, 94, 95, 98, 103, 104, 105, 106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 117, 118, 174, 178, 183, 184, 34, 73, 77, 119, 120, 121, 14, 15, 187, 189, 124, 125, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 151, 190, 192, 20, 22, 153, 154, 155, 156, 157, 158, 159, 160, 193, 195, 24, 112, 161, 162, 163, 164, 167, 168, 169, 170, 172, 173, 196, 198, 70, 71, 74, 75, 79, 201, 30, 31, 37, 38, 175, 202, 203, 206, 207, 39, 40, 42, 43, 45, 46, 48, 49, 51, 52, 53, 55, 56, 58, 59, 60, 61, 76</code></td></tr>
+      <tr><td>Extraction Pipeline</td><td>87</td><td><code>80, 82, 54</code></td></tr><tr><td>Graph Build</td><td>89</td><td><code>6, 7, 9, 63, 201</code></td></tr><tr><td>Analysis &amp; Clustering</td><td>10</td><td><code>12</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>468</td><td><code>0, 1, 18, 66, 2, 28, 10, 4, 3, 77, 8, 11, 13, 171, 64, 179, 180, 181, 182, 185, 81, 188, 35, 62, 166, 191, 199, 21, 19, 194, 208, 65, 69, 177, 197, 200, 212, 26, 25, 204, 205, 32, 33, 57, 50</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>208</td><td><code>78, 27, 86, 5, 101, 99, 123, 126, 138, 150, 68, 165, 29, 176, 41, 44, 61</code></td></tr><tr><td>Serving API</td><td>144</td><td><code>17, 96, 97, 122, 152, 211</code></td></tr><tr><td>Security &amp; Global Graph</td><td>26</td><td><code>100, 102</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>36</td><td><code>36, 23</code></td></tr><tr><td>Hermes Configyaml Resume</td><td>48</td><td><code>67</code></td></tr><tr><td>Hermes Profiles Foca</td><td>48</td><td><code>72</code></td></tr><tr><td>Hermes Configyaml Timeout</td><td>41</td><td><code>83</code></td></tr><tr><td>Hermes Foca Profiles</td><td>41</td><td><code>84</code></td></tr><tr><td>Tabby Configyaml Config</td><td>34</td><td><code>85</code></td></tr><tr><td>Posh Gbs Textompyaml</td><td>31</td><td><code>87</code></td></tr><tr><td>Other</td><td>827</td><td><code>88, 90, 91, 89, 92, 93, 94, 95, 98, 103, 104, 105, 106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 117, 118, 174, 178, 183, 184, 186, 34, 73, 119, 120, 121, 14, 15, 187, 189, 124, 127, 139, 151, 16, 125, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 190, 192, 20, 22, 153, 154, 155, 156, 157, 158, 159, 160, 193, 195, 24, 112, 161, 162, 163, 164, 167, 168, 169, 170, 172, 173, 196, 198, 209, 70, 71, 74, 75, 79, 30, 31, 37, 38, 175, 202, 203, 206, 207, 39, 40, 42, 43, 45, 46, 210, 47, 48, 49, 51, 52, 53, 55, 56, 58, 59, 60, 76</code></td></tr>
     </table>
   </div>
   <div class="card">
@@ -158,11 +158,11 @@ flowchart LR
   <div class="card">
     <h4>Graph Report Highlights</h4>
     <ul>
-      <li>2094 nodes · 2644 edges · 208 communities (164 shown, 44 thin omitted)</li>
-      <li>Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 184 edges (avg confidence: 0.64)</li>
+      <li>2138 nodes · 2678 edges · 213 communities (166 shown, 47 thin omitted)</li>
+      <li>Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 179 edges (avg confidence: 0.63)</li>
       <li>Token cost: 0 input · 0 output</li>
       <li>1. `hotkeys` - 100 edges</li>
-      <li>2. `cecho()` - 73 edges</li>
+      <li>2. `cecho()` - 69 edges</li>
       <li>3. `properties` - 44 edges</li>
     </ul>
   </div>
@@ -513,12 +513,12 @@ flowchart LR
 
 <!-- ====== 3. Graph Build ====== -->
 <h2 id="build-graph">3. Graph Build</h2>
-<p>Graph Build groups implementation around merge, opencode, configpy, moca, mostly in pi/pi-lens-config.json, pi/pi-permission-system.config.json, opencode/cli.json. This section covers 73 nodes and 104 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Graph Build groups implementation around merge, opencode, configpy, permission, mostly in pi/pi-lens-config.json, pi/pi-permission-system.config.json, opencode/cli.json. This section covers 89 nodes and 124 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Graph Build (73 nodes, 104 edges)
+    %% Section: Graph Build (89 nodes, 124 edges)
     subgraph build_graph_moca_merge_moca_config_py_13456729["moca/merge-moca-config.py"]
         moca_merge_moca_config_main_724f2d74("main()<br/><small>moca/merge-moca-config.py</small>")
         moca_merge_moca_config_085f19b6("merge-moca-config.py")
@@ -543,7 +543,7 @@ flowchart LR
         pi_merge_pi_config_main_b26365db("main()<br/><small>pi/merge-pi-config.py</small>")
         pi_merge_pi_config_025c2dc0("merge-pi-config.py")
         pi_merge_pi_config_key_857fc3e3("_key()<br/><small>pi/merge-pi-config.py</small>")
-        pi_merge_pi_config_strip_jsonc_97857f02("strip_jsonc()<br/><small>pi/merge-pi-config.py</small>")
+        pi_merge_pi_config_merge_6d35672f("merge()<br/><small>pi/merge-pi-config.py</small>")
     end
     moca_merge_moca_config_key_6b61c474 -->|calls| json_05d97e6e
     moca_merge_moca_config_main_724f2d74 -->|calls| json_05d97e6e
@@ -565,11 +565,11 @@ flowchart LR
     opencode_merge_opencode_config_merge_4b211ba2 -->|calls| opencode_merge_opencode_config_key_bf672abd
     pi_merge_pi_config_key_857fc3e3 -->|calls| json_05d97e6e
     pi_merge_pi_config_main_b26365db -->|calls| json_05d97e6e
-    pi_merge_pi_config_main_b26365db -->|calls| pi_merge_pi_config_strip_jsonc_97857f02
+    pi_merge_pi_config_main_b26365db -->|calls| pi_merge_pi_config_merge_6d35672f
     pi_merge_pi_config_main_b26365db -->|calls| time_714eea0f
     pi_merge_pi_config_main_b26365db -->|calls| shutil_74870859
     pi_merge_pi_config_main_b26365db -->|calls| os_999a3419
-    %% Omitted for readability: 55 nodes, 12 edges
+    %% Omitted for readability: 71 nodes, 14 edges
     class moca_merge_moca_config_main_724f2d74 function;
     class moca_merge_moca_config_085f19b6 module;
     class moca_merge_moca_config_key_6b61c474 function;
@@ -587,7 +587,7 @@ flowchart LR
     class pi_merge_pi_config_main_b26365db function;
     class pi_merge_pi_config_025c2dc0 module;
     class pi_merge_pi_config_key_857fc3e3 function;
-    class pi_merge_pi_config_strip_jsonc_97857f02 function;
+    class pi_merge_pi_config_merge_6d35672f function;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -686,7 +686,7 @@ flowchart LR
   <td><code>main()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>json</code><br><code>merge()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small><br><code>os</code><br>+3 more</td>
+  <td><code>json</code><br><code>merge()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small><br><code>os</code><br>+5 more</td>
   <td>main() node in pi/merge-pi-config.py.</td>
 </tr>
 <tr>
@@ -699,14 +699,22 @@ flowchart LR
 </tr>
 <tr>
   <td>12</td>
-  <td><code>strip_jsonc()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
+  <td><code>rotate_backups()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>main()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
-  <td>No direct outbound edge</td>
-  <td>strip_jsonc() node in pi/merge-pi-config.py.</td>
+  <td><code>glob</code><br><code>pathlib</code></td>
+  <td>rotate_backups() node in pi/merge-pi-config.py.</td>
 </tr>
 <tr>
   <td>13</td>
+  <td><code>type_changes()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>main()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small><br><code>type_changes()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
+  <td><code>type_changes()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
+  <td>type_changes() node in pi/merge-pi-config.py.</td>
+</tr>
+<tr>
+  <td>14</td>
   <td><code>merge-moca-config.py</code><br><small style="color:var(--muted)">moca/merge-moca-config.py</small></td>
   <td><span class="tag tag-class">Module</span></td>
   <td>External entry / no inbound edge</td>
@@ -714,7 +722,7 @@ flowchart LR
   <td>Module file in moca/merge-moca-config.py.</td>
 </tr>
 <tr>
-  <td>14</td>
+  <td>15</td>
   <td><code>merge-opencode-config.py</code><br><small style="color:var(--muted)">opencode/merge-opencode-config.py</small></td>
   <td><span class="tag tag-class">Module</span></td>
   <td>External entry / no inbound edge</td>
@@ -722,15 +730,15 @@ flowchart LR
   <td>Module file in opencode/merge-opencode-config.py.</td>
 </tr>
 <tr>
-  <td>15</td>
+  <td>16</td>
   <td><code>merge-pi-config.py</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
   <td><span class="tag tag-class">Module</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>json</code><br><code>os</code><br><code>shutil</code><br>+2 more</td>
+  <td><code>glob</code><br><code>json</code><br><code>os</code><br>+4 more</td>
   <td>Module file in pi/merge-pi-config.py.</td>
 </tr>
 <tr>
-  <td>16</td>
+  <td>17</td>
   <td><code>Merge a template moca config into an existing live config. Used by moca-…</code><br><small style="color:var(--muted)">moca/merge-moca-config.py</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -738,7 +746,7 @@ flowchart LR
   <td>Design note for Merge a template moca config into an existing live config. Used by moca-….</td>
 </tr>
 <tr>
-  <td>17</td>
+  <td>18</td>
   <td><code>Remove // and /* */ comments outside strings (state machine).</code><br><small style="color:var(--muted)">moca/merge-moca-config.py</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -746,7 +754,7 @@ flowchart LR
   <td>Design note for Remove // and /* */ comments outside strings (state machine)..</td>
 </tr>
 <tr>
-  <td>18</td>
+  <td>19</td>
   <td><code>Deep merge: live-only content kept; conflict winner depends on mode.</code><br><small style="color:var(--muted)">moca/merge-moca-config.py</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -754,7 +762,7 @@ flowchart LR
   <td>Design note for Deep merge: live-only content kept; conflict winner depends on mode..</td>
 </tr>
 <tr>
-  <td>19</td>
+  <td>20</td>
   <td><code>Merge a template opencode config into an existing live config. Used by…</code><br><small style="color:var(--muted)">opencode/merge-opencode-config.py</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -762,7 +770,7 @@ flowchart LR
   <td>Design note for Merge a template opencode config into an existing live config. Used by….</td>
 </tr>
 <tr>
-  <td>20</td>
+  <td>21</td>
   <td><code>Remove // and /* */ comments outside strings (state machine).</code><br><small style="color:var(--muted)">opencode/merge-opencode-config.py</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -770,7 +778,7 @@ flowchart LR
   <td>Design note for Remove // and /* */ comments outside strings (state machine)..</td>
 </tr>
 <tr>
-  <td>21</td>
+  <td>22</td>
   <td><code>Deep merge: live-only content kept; conflict winner depends on mode.</code><br><small style="color:var(--muted)">opencode/merge-opencode-config.py</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -778,7 +786,7 @@ flowchart LR
   <td>Design note for Deep merge: live-only content kept; conflict winner depends on mode..</td>
 </tr>
 <tr>
-  <td>22</td>
+  <td>23</td>
   <td><code>Merge a template pi config into an existing live config. Used by pi-setup.sh…</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -786,15 +794,23 @@ flowchart LR
   <td>Design note for Merge a template pi config into an existing live config. Used by pi-setup.sh….</td>
 </tr>
 <tr>
-  <td>23</td>
-  <td><code>Remove // and /* */ comments outside strings (state machine).</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
+  <td>24</td>
+  <td><code>Paths where the template replaces a live value of a different JSON type.</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>Design note for Remove // and /* */ comments outside strings (state machine)..</td>
+  <td>Design note for Paths where the template replaces a live value of a different JSON type..</td>
 </tr>
 <tr>
-  <td>24</td>
+  <td>25</td>
+  <td><code>Keep only the newest BACKUPS_TO_KEEP backups of live_path.</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Design note for Keep only the newest BACKUPS_TO_KEEP backups of live_path..</td>
+</tr>
+<tr>
+  <td>26</td>
   <td><code>Deep merge: live-only content kept; conflict winner depends on mode.</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
   <td><span class="tag tag-func">Concept</span></td>
   <td>External entry / no inbound edge</td>
@@ -802,7 +818,15 @@ flowchart LR
   <td>Design note for Deep merge: live-only content kept; conflict winner depends on mode..</td>
 </tr>
 <tr>
-  <td>25</td>
+  <td>27</td>
+  <td><code>glob</code><br><small style="color:var(--muted)"></small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>merge-pi-config.py</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small><br><code>rotate_backups()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
+  <td>No direct outbound edge</td>
+  <td>glob node in project.</td>
+</tr>
+<tr>
+  <td>28</td>
   <td><code>json</code><br><small style="color:var(--muted)"></small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>_key()</code><br><small style="color:var(--muted)">moca/merge-moca-config.py</small><br><code>_key()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small><br><code>_key()</code><br><small style="color:var(--muted)">opencode/merge-opencode-config.py</small><br>+6 more</td>
@@ -810,7 +834,7 @@ flowchart LR
   <td>json node in project.</td>
 </tr>
 <tr>
-  <td>26</td>
+  <td>29</td>
   <td><code>os</code><br><small style="color:var(--muted)"></small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>main()</code><br><small style="color:var(--muted)">opencode/merge-opencode-config.py</small><br><code>main()</code><br><small style="color:var(--muted)">moca/merge-moca-config.py</small><br><code>main()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small><br>+3 more</td>
@@ -818,36 +842,12 @@ flowchart LR
   <td>os node in project.</td>
 </tr>
 <tr>
-  <td>27</td>
-  <td><code>shutil</code><br><small style="color:var(--muted)"></small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>main()</code><br><small style="color:var(--muted)">opencode/merge-opencode-config.py</small><br><code>main()</code><br><small style="color:var(--muted)">moca/merge-moca-config.py</small><br><code>main()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small><br>+3 more</td>
-  <td>No direct outbound edge</td>
-  <td>shutil node in project.</td>
-</tr>
-<tr>
-  <td>28</td>
-  <td><code>sys</code><br><small style="color:var(--muted)"></small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>merge-moca-config.py</code><br><small style="color:var(--muted)">moca/merge-moca-config.py</small><br><code>merge-opencode-config.py</code><br><small style="color:var(--muted)">opencode/merge-opencode-config.py</small><br><code>merge-pi-config.py</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
-  <td>No direct outbound edge</td>
-  <td>sys node in project.</td>
-</tr>
-<tr>
-  <td>29</td>
-  <td><code>time</code><br><small style="color:var(--muted)"></small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>main()</code><br><small style="color:var(--muted)">opencode/merge-opencode-config.py</small><br><code>main()</code><br><small style="color:var(--muted)">moca/merge-moca-config.py</small><br><code>main()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small><br>+3 more</td>
-  <td>No direct outbound edge</td>
-  <td>time node in project.</td>
-</tr>
-<tr>
   <td>30</td>
-  <td><code>pi-lens-config.json</code><br><small style="color:var(--muted)">pi/pi-lens-config.json</small></td>
+  <td><code>pathlib</code><br><small style="color:var(--muted)"></small></td>
   <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
+  <td><code>main()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small><br><code>merge-pi-config.py</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small><br><code>rotate_backups()</code><br><small style="color:var(--muted)">pi/merge-pi-config.py</small></td>
   <td>No direct outbound edge</td>
-  <td>Reads, resolves, or persists project configuration.</td>
+  <td>pathlib node in project.</td>
 </tr>
 </table>
 
@@ -857,16 +857,17 @@ flowchart LR
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
       <tr><td><code>pi/pi-lens-config.json</code></td><td>18 nodes</td></tr>
-<tr><td><code>pi/pi-permission-system.config.json</code></td><td>14 nodes</td></tr>
+<tr><td><code>pi/pi-permission-system.config.json</code></td><td>18 nodes</td></tr>
 <tr><td><code>opencode/cli.json</code></td><td>12 nodes</td></tr>
+<tr><td><code>pi/merge-pi-config.py</code></td><td>10 nodes</td></tr>
 <tr><td><code>moca/merge-moca-config.py</code></td><td>8 nodes</td></tr>
 <tr><td><code>opencode/merge-opencode-config.py</code></td><td>8 nodes</td></tr>
-<tr><td><code>pi/merge-pi-config.py</code></td><td>8 nodes</td></tr>
+<tr><td><code>pi/settings.json</code></td><td>8 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x53, calls x27, imports x15, explains x9. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x65, calls x32, imports x17, explains x10. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -1021,12 +1022,12 @@ flowchart LR
 
 <!-- ====== 5. CLI & Skill Installers ====== -->
 <h2 id="cli-skills">5. CLI &amp; Skill Installers</h2>
-<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, opencode, tools, mostly in tools/.tools/git-authors-cleanup.sh, _scripts/core/_helpers.sh, .opencode/agents/dotfiles.md. This section covers 449 nodes and 779 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>CLI &amp; Skill Installers groups implementation around installsh, scripts, opencode, skills, mostly in tools/.tools/git-authors-cleanup.sh, _scripts/core/_helpers.sh, skills/dotnet-backend-expert/SKILL.md. This section covers 468 nodes and 787 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: CLI &amp; Skill Installers (449 nodes, 779 edges)
+    %% Section: CLI &amp; Skill Installers (468 nodes, 787 edges)
     subgraph cli_skills_tools_tools_git_authors_cleanup_sh_c88416ad["tools/.tools/git-authors-cleanup.sh"]
         tools_tools_git_authors_cleanup_sh_entry_8aa8acbb("git-authors-cleanup.sh script<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
         tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1("ensure_dependencies()<br/><small>tools/.tools/git-authors-cleanup.sh</small>")
@@ -1071,7 +1072,7 @@ flowchart LR
     tools_tools_git_authors_cleanup_sh_entry_8aa8acbb -->|calls| tools_tools_git_authors_cleanup_detect_repo_8d9029c0
     tools_tools_git_authors_cleanup_sh_entry_8aa8acbb -->|calls| tools_tools_git_authors_cleanup_detect_identity_fac1c1b3
     tools_tools_git_authors_cleanup_sh_entry_8aa8acbb -->|calls| tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1
-    %% Omitted for readability: 431 nodes, 4 edges
+    %% Omitted for readability: 450 nodes, 4 edges
     class tools_tools_git_authors_cleanup_sh_entry_8aa8acbb function;
     class tools_tools_git_authors_cleanup_ensure_dependenc_36230ac1 function;
     class tools_tools_git_authors_cleanup_run_rewrite_7f4a7e68 function;
@@ -1360,29 +1361,29 @@ flowchart LR
       <tr><th>File</th><th>Coverage</th></tr>
       <tr><td><code>tools/.tools/git-authors-cleanup.sh</code></td><td>45 nodes</td></tr>
 <tr><td><code>_scripts/core/_helpers.sh</code></td><td>24 nodes</td></tr>
+<tr><td><code>skills/dotnet-backend-expert/SKILL.md</code></td><td>17 nodes</td></tr>
 <tr><td><code>.opencode/agents/dotfiles.md</code></td><td>14 nodes</td></tr>
 <tr><td><code>opencode/AGENTS.md</code></td><td>12 nodes</td></tr>
 <tr><td><code>docs/moca.md</code></td><td>10 nodes</td></tr>
 <tr><td><code>skills/csharp-15/SKILL.md</code></td><td>9 nodes</td></tr>
 <tr><td><code>skills/csharp-15/SKILL.md</code></td><td>9 nodes</td></tr>
-<tr><td><code>csharp-15/references/memory-safety-preview.md</code></td><td>9 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: calls x273, contains x180, defines x97, references x49. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: calls x268, contains x210, defines x97, references x44. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
 
 <!-- ====== 6. Ingestion & Updates ====== -->
 <h2 id="ingest-cache-update">6. Ingestion &amp; Updates</h2>
-<p>Ingestion &amp; Updates groups implementation around posh, hermes, tools, config, mostly in .config/oh-my-posh/gbs-text.omp.yaml, tools/.tools/cache-clean.sh, .config/oh-my-posh/gbs.omp.yaml. This section covers 207 nodes and 331 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Ingestion &amp; Updates groups implementation around posh, hermes, tools, config, mostly in .config/oh-my-posh/gbs-text.omp.yaml, tools/.tools/cache-clean.sh, .config/oh-my-posh/gbs.omp.yaml. This section covers 208 nodes and 331 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Ingestion &amp; Updates (207 nodes, 331 edges)
+    %% Section: Ingestion &amp; Updates (208 nodes, 331 edges)
     tools_tools_cache_clean_sh_entry_739f6806("cache-clean.sh script<br/><small>tools/.tools/cache-clean.sh</small>")
     tools_tools_cache_clean_step_node_ca182165("step_node()<br/><small>tools/.tools/cache-clean.sh</small>")
     tools_tools_cache_clean_step_docker_d57e7c6b("step_docker()<br/><small>tools/.tools/cache-clean.sh</small>")
@@ -1425,7 +1426,7 @@ flowchart LR
     tools_tools_cache_clean_step_brew_4c841c9a -->|calls| tools_tools_cache_clean_have_b4e101b0
     tools_tools_cache_clean_step_brew_4c841c9a -->|calls| tools_tools_cache_clean_vlog_49fa4dd0
     tools_tools_cache_clean_step_brew_4c841c9a -->|calls| tools_tools_cache_clean_measure_3673c0d6
-    %% Omitted for readability: 189 nodes, 9 edges
+    %% Omitted for readability: 190 nodes, 9 edges
     class tools_tools_cache_clean_sh_entry_739f6806 function;
     class tools_tools_cache_clean_step_node_ca182165 function;
     class tools_tools_cache_clean_step_docker_d57e7c6b function;
@@ -1731,23 +1732,21 @@ flowchart LR
 
 <!-- ====== 7. Serving API ====== -->
 <h2 id="serve-api">7. Serving API</h2>
-<p>Serving API groups implementation around tabby, configyaml, config, hermes, mostly in .config/tabby/config.yaml, hermes/config.yaml, profiles/foca/config.yaml. This section covers 145 nodes and 139 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Serving API groups implementation around tabby, configyaml, config, hermes, mostly in .config/tabby/config.yaml, hermes/config.yaml, profiles/foca/config.yaml. This section covers 144 nodes and 138 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Serving API (145 nodes, 139 edges)
+    %% Section: Serving API (144 nodes, 138 edges)
     subgraph serve_api_hermes_config_yaml_e663c8ba["hermes/config.yaml"]
         hermes_config_delegation_c388d66b("delegation<br/><small>hermes/config.yaml</small>")
         hermes_config_auxiliary_approval_d480dd6b("approval<br/><small>hermes/config.yaml</small>")
         hermes_config_openrouter_94254717("openrouter<br/><small>hermes/config.yaml</small>")
-        hermes_config_auxiliary_6dc7d2fe("auxiliary<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_provider_572e45cf("provider<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_model_6bebf9fa("model<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_base_url_e69bad08("base_url<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_api_key_2b92a98c("api_key<br/><small>hermes/config.yaml</small>")
         hermes_config_approval_timeout_54253041("timeout<br/><small>hermes/config.yaml</small>")
-        hermes_config_openrouter_response_cache_5984f99a("response_cache<br/><small>hermes/config.yaml</small>")
     end
     subgraph serve_api_profiles_foca_config_yaml_ceebfa33["profiles/foca/config.yaml"]
         hermes_hermes_profiles_foca_config_delegation_c2a8a4df("delegation<br/><small>profiles/foca/config.yaml</small>")
@@ -1758,8 +1757,11 @@ flowchart LR
         hermes_hermes_profiles_foca_config_tool_search_s_da08985d("search_default_limit<br/><small>profiles/foca/config.yaml</small>")
         hermes_hermes_profiles_foca_config_tool_search_m_4859c0be("max_search_limit<br/><small>profiles/foca/config.yaml</small>")
     end
-    tabby_config_tabby_config_hotkeys_25af44b9("hotkeys<br/><small>.config/tabby/config.yaml</small>")
-    hermes_config_auxiliary_6dc7d2fe -->|contains| hermes_config_auxiliary_approval_d480dd6b
+    subgraph serve_api_config_tabby_config_yaml_82309306[".config/tabby/config.yaml"]
+        tabby_config_tabby_config_hotkeys_25af44b9("hotkeys<br/><small>.config/tabby/config.yaml</small>")
+        tabby_config_tabby_config_hotkeys_tab_2_00fbbea3("tab-2<br/><small>.config/tabby/config.yaml</small>")
+        tabby_config_tabby_config_hotkeys_tab_3_07223bb2("tab-3<br/><small>.config/tabby/config.yaml</small>")
+    end
     hermes_config_auxiliary_approval_d480dd6b -->|contains| hermes_config_approval_provider_572e45cf
     hermes_config_auxiliary_approval_d480dd6b -->|contains| hermes_config_approval_model_6bebf9fa
     hermes_config_auxiliary_approval_d480dd6b -->|contains| hermes_config_approval_base_url_e69bad08
@@ -1770,18 +1772,17 @@ flowchart LR
     hermes_hermes_profiles_foca_config_tools_tool_se_3a772e45 -->|contains| hermes_hermes_profiles_foca_config_tool_search_t_2d9b39db
     hermes_hermes_profiles_foca_config_tools_tool_se_3a772e45 -->|contains| hermes_hermes_profiles_foca_config_tool_search_s_da08985d
     hermes_hermes_profiles_foca_config_tools_tool_se_3a772e45 -->|contains| hermes_hermes_profiles_foca_config_tool_search_m_4859c0be
-    hermes_config_openrouter_94254717 -->|contains| hermes_config_openrouter_response_cache_5984f99a
-    %% Omitted for readability: 127 nodes, 0 edges
+    tabby_config_tabby_config_hotkeys_25af44b9 -->|contains| tabby_config_tabby_config_hotkeys_tab_2_00fbbea3
+    tabby_config_tabby_config_hotkeys_25af44b9 -->|contains| tabby_config_tabby_config_hotkeys_tab_3_07223bb2
+    %% Omitted for readability: 126 nodes, 0 edges
     class hermes_config_delegation_c388d66b function;
     class hermes_config_auxiliary_approval_d480dd6b function;
     class hermes_config_openrouter_94254717 api;
-    class hermes_config_auxiliary_6dc7d2fe function;
     class hermes_config_approval_provider_572e45cf function;
     class hermes_config_approval_model_6bebf9fa function;
     class hermes_config_approval_base_url_e69bad08 function;
     class hermes_config_approval_api_key_2b92a98c api;
     class hermes_config_approval_timeout_54253041 function;
-    class hermes_config_openrouter_response_cache_5984f99a function;
     class hermes_hermes_profiles_foca_config_delegation_c2a8a4df function;
     class hermes_hermes_profiles_foca_config_tools_tool_se_3a772e45 function;
     class hermes_hermes_profiles_foca_config_tools_42167891 function;
@@ -1790,6 +1791,8 @@ flowchart LR
     class hermes_hermes_profiles_foca_config_tool_search_s_da08985d function;
     class hermes_hermes_profiles_foca_config_tool_search_m_4859c0be function;
     class tabby_config_tabby_config_hotkeys_25af44b9 function;
+    class tabby_config_tabby_config_hotkeys_tab_2_00fbbea3 function;
+    class tabby_config_tabby_config_hotkeys_tab_3_07223bb2 function;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -2059,13 +2062,13 @@ flowchart LR
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
       <tr><td><code>.config/tabby/config.yaml</code></td><td>100 nodes</td></tr>
-<tr><td><code>hermes/config.yaml</code></td><td>25 nodes</td></tr>
+<tr><td><code>hermes/config.yaml</code></td><td>24 nodes</td></tr>
 <tr><td><code>profiles/foca/config.yaml</code></td><td>20 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x139. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x138. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -4776,25 +4779,25 @@ flowchart LR
 
 <!-- ====== 16. Other ====== -->
 <h2 id="other">16. Other</h2>
-<p>Other groups implementation around hermes, configyaml, foca, profiles, mostly in profiles/foca/config.yaml, hermes/config.yaml, .config/oh-my-posh/gbs.omp.yaml. This section covers 818 nodes and 776 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Other groups implementation around hermes, configyaml, foca, profiles, mostly in profiles/foca/config.yaml, hermes/config.yaml, .config/oh-my-posh/gbs.omp.yaml. This section covers 827 nodes and 793 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Other (818 nodes, 776 edges)
+    %% Section: Other (827 nodes, 793 edges)
+    subgraph other_scripts_wsl_setup_fedora_dev_sh_d2340b4f["_scripts/wsl-setup-fedora-dev.sh"]
+        scripts_wsl_setup_fedora_dev_sh_entry_7dbb36da("wsl-setup-fedora-dev.sh script<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+        scripts_wsl_setup_fedora_dev_stage_status_cb4b6d7d("stage_status()<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+        scripts_wsl_setup_fedora_dev_echo_warning_ecf0fa58("echo_warning()<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+        scripts_wsl_setup_fedora_dev_echo_error_8f7b3da0("echo_error()<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+        scripts_wsl_setup_fedora_dev_usage_9ec65e77("usage()<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
+    end
     subgraph other_setup_sh_bc2a115c["setup.sh"]
         setup_sh_entry_6a444dbb("setup.sh script<br/><small>setup.sh</small>")
         setup_select_packages_grid_0f0f5919("select_packages_grid()<br/><small>setup.sh</small>")
         setup_render_grid_8598b488("_render_grid()<br/><small>setup.sh</small>")
         setup_render_menu_eb4832f7("_render_menu()<br/><small>setup.sh</small>")
         setup_show_usage_1ff50c14("show_usage()<br/><small>setup.sh</small>")
-    end
-    subgraph other_win_tools_tools_Run_AIToolsUpdate_ps1_e9e3ff11["win-tools/.tools/Run-AIToolsUpdate.ps1"]
-        win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83("Invoke-RtkFromSourceUpdate()<br/><small>win-tools/.tools/Run-AIToolsUpdate.ps1</small>")
-        win_tools_tools_run_aitoolsupdate_get_rtkexepath_ef46a180("Get-RtkExePath()<br/><small>win-tools/.tools/Run-AIToolsUpdate.ps1</small>")
-        win_tools_tools_run_aitoolsupdate_test_rtkrunnin_8462ffee("Test-RtkRunning()<br/><small>win-tools/.tools/Run-AIToolsUpdate.ps1</small>")
-        win_tools_tools_run_aitoolsupdate_get_rtkversion_772e9b09("Get-RtkVersion()<br/><small>win-tools/.tools/Run-AIToolsUpdate.ps1</small>")
-        win_tools_tools_run_aitoolsupdate_get_latestrtkr_83887abf("Get-LatestRtkRelease()<br/><small>win-tools/.tools/Run-AIToolsUpdate.ps1</small>")
     end
     subgraph other_win_tools_tools_Run_LocalWinEnvSetup_ps1_ab0b5d4f["win-tools/.tools/Run-LocalWinEnvSetup.ps1"]
         win_tools_tools_run_localwinenvsetup_createalias_2e28bbae("CreateAlias()<br/><small>win-tools/.tools/Run-LocalWinEnvSetup.ps1</small>")
@@ -4803,9 +4806,13 @@ flowchart LR
         win_tools_tools_run_localwinenvsetup_readconfigf_dd3cf659("ReadConfigFile()<br/><small>win-tools/.tools/Run-LocalWinEnvSetup.ps1</small>")
     end
     nvim_config_nvim_init_3e625a8d("init.lua")
-    scripts_wsl_setup_fedora_dev_sh_entry_7dbb36da("wsl-setup-fedora-dev.sh script<br/><small>_scripts/wsl-setup-fedora-dev.sh</small>")
     nvim_config_nvim_lua_plugins_alpha_b15f93cb("alpha.lua")
-    nvim_config_nvim_lua_plugins_kickstart_12a8cae1("kickstart.lua")
+    nvim_config_nvim_lua_plugins_lsp_220be175("lsp.lua")
+    win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83("Invoke-RtkFromSourceUpdate()<br/><small>win-tools/.tools/Run-AIToolsUpdate.ps1</small>")
+    scripts_wsl_setup_fedora_dev_sh_entry_7dbb36da -->|calls| scripts_wsl_setup_fedora_dev_stage_status_cb4b6d7d
+    scripts_wsl_setup_fedora_dev_sh_entry_7dbb36da -->|calls| scripts_wsl_setup_fedora_dev_echo_warning_ecf0fa58
+    scripts_wsl_setup_fedora_dev_sh_entry_7dbb36da -->|calls| scripts_wsl_setup_fedora_dev_echo_error_8f7b3da0
+    scripts_wsl_setup_fedora_dev_sh_entry_7dbb36da -->|calls| scripts_wsl_setup_fedora_dev_usage_9ec65e77
     win_tools_tools_run_localwinenvsetup_createalias_2e28bbae -->|calls| win_tools_tools_run_localwinenvsetup_write_color_01ae34c5
     win_tools_tools_run_localwinenvsetup_exitwithmes_69ad2c63 -->|calls| win_tools_tools_run_localwinenvsetup_write_color_01ae34c5
     win_tools_tools_run_localwinenvsetup_readconfigf_dd3cf659 -->|calls| win_tools_tools_run_localwinenvsetup_exitwithmes_69ad2c63
@@ -4814,29 +4821,25 @@ flowchart LR
     setup_sh_entry_6a444dbb -->|calls| setup_render_menu_eb4832f7
     setup_sh_entry_6a444dbb -->|calls| setup_select_packages_grid_0f0f5919
     setup_sh_entry_6a444dbb -->|calls| setup_show_usage_1ff50c14
-    win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83 -->|calls| win_tools_tools_run_aitoolsupdate_get_rtkexepath_ef46a180
-    win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83 -->|calls| win_tools_tools_run_aitoolsupdate_test_rtkrunnin_8462ffee
-    win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83 -->|calls| win_tools_tools_run_aitoolsupdate_get_rtkversion_772e9b09
-    win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83 -->|calls| win_tools_tools_run_aitoolsupdate_get_latestrtkr_83887abf
-    %% Omitted for readability: 800 nodes, 0 edges
+    %% Omitted for readability: 809 nodes, 0 edges
+    class scripts_wsl_setup_fedora_dev_sh_entry_7dbb36da function;
+    class scripts_wsl_setup_fedora_dev_stage_status_cb4b6d7d function;
+    class scripts_wsl_setup_fedora_dev_echo_warning_ecf0fa58 function;
+    class scripts_wsl_setup_fedora_dev_echo_error_8f7b3da0 function;
+    class scripts_wsl_setup_fedora_dev_usage_9ec65e77 function;
     class setup_sh_entry_6a444dbb function;
     class setup_select_packages_grid_0f0f5919 function;
     class setup_render_grid_8598b488 function;
     class setup_render_menu_eb4832f7 function;
     class setup_show_usage_1ff50c14 function;
-    class win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83 function;
-    class win_tools_tools_run_aitoolsupdate_get_rtkexepath_ef46a180 function;
-    class win_tools_tools_run_aitoolsupdate_test_rtkrunnin_8462ffee function;
-    class win_tools_tools_run_aitoolsupdate_get_rtkversion_772e9b09 function;
-    class win_tools_tools_run_aitoolsupdate_get_latestrtkr_83887abf function;
     class win_tools_tools_run_localwinenvsetup_createalias_2e28bbae function;
     class win_tools_tools_run_localwinenvsetup_write_color_01ae34c5 function;
     class win_tools_tools_run_localwinenvsetup_exitwithmes_69ad2c63 function;
     class win_tools_tools_run_localwinenvsetup_readconfigf_dd3cf659 function;
     class nvim_config_nvim_init_3e625a8d function;
-    class scripts_wsl_setup_fedora_dev_sh_entry_7dbb36da function;
     class nvim_config_nvim_lua_plugins_alpha_b15f93cb function;
-    class nvim_config_nvim_lua_plugins_kickstart_12a8cae1 function;
+    class nvim_config_nvim_lua_plugins_lsp_220be175 function;
+    class win_tools_tools_run_aitoolsupdate_invoke_rtkfrom_9a76bc83 function;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -4860,7 +4863,7 @@ flowchart LR
 </tr>
 <tr>
   <td>1</td>
-  <td><code>foca/config.yaml</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>hermes/config.yaml</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
@@ -4868,206 +4871,198 @@ flowchart LR
 </tr>
 <tr>
   <td>2</td>
-  <td><code>command_allowlist</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>command_allowlist</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-cmd">Entry</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>command_allowlist node in profiles/foca/config.yaml.</td>
+  <td>command_allowlist node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>3</td>
-  <td><code>context</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>context</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>context node in profiles/foca/config.yaml.</td>
+  <td>context node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>4</td>
-  <td><code>engine</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>engine</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>engine node in profiles/foca/config.yaml.</td>
+  <td>engine node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>5</td>
-  <td><code>cron</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>cron</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>cron node in profiles/foca/config.yaml.</td>
+  <td>cron node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>6</td>
-  <td><code>wrap_response</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>wrap_response</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>wrap_response node in profiles/foca/config.yaml.</td>
+  <td>wrap_response node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>7</td>
-  <td><code>file_read_max_chars</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>file_read_max_chars</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>file_read_max_chars node in profiles/foca/config.yaml.</td>
+  <td>file_read_max_chars node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>8</td>
-  <td><code>goals</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>goals</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>goals node in profiles/foca/config.yaml.</td>
+  <td>goals node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>9</td>
-  <td><code>max_turns</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>max_turns</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>max_turns node in profiles/foca/config.yaml.</td>
+  <td>max_turns node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>10</td>
-  <td><code>hooks_auto_accept</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>hooks_auto_accept</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-hook">UI</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>hooks_auto_accept node in profiles/foca/config.yaml.</td>
+  <td>hooks_auto_accept node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>11</td>
-  <td><code>human_delay</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>plugins</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>human_delay node in profiles/foca/config.yaml.</td>
+  <td>plugins node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>12</td>
-  <td><code>max_ms</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>disabled</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>max_ms node in profiles/foca/config.yaml.</td>
+  <td>disabled node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>13</td>
-  <td><code>min_ms</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>enabled</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>min_ms node in profiles/foca/config.yaml.</td>
+  <td>enabled node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>14</td>
-  <td><code>mode</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>prefill_messages_file</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>mode node in profiles/foca/config.yaml.</td>
+  <td>prefill_messages_file node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>15</td>
-  <td><code>logging</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>privacy</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>logging node in profiles/foca/config.yaml.</td>
+  <td>privacy node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>16</td>
-  <td><code>level</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>redact_pii</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>level node in profiles/foca/config.yaml.</td>
+  <td>redact_pii node in hermes/config.yaml.</td>
 </tr>
 <tr>
   <td>17</td>
-  <td><code>plugins</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>plugins node in profiles/foca/config.yaml.</td>
-</tr>
-<tr>
-  <td>18</td>
-  <td><code>disabled</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>disabled node in profiles/foca/config.yaml.</td>
-</tr>
-<tr>
-  <td>19</td>
-  <td><code>enabled</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>enabled node in profiles/foca/config.yaml.</td>
-</tr>
-<tr>
-  <td>20</td>
-  <td><code>prefill_messages_file</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>prefill_messages_file node in profiles/foca/config.yaml.</td>
-</tr>
-<tr>
-  <td>21</td>
-  <td><code>privacy</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>privacy node in profiles/foca/config.yaml.</td>
-</tr>
-<tr>
-  <td>22</td>
-  <td><code>redact_pii</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>redact_pii node in profiles/foca/config.yaml.</td>
-</tr>
-<tr>
-  <td>23</td>
-  <td><code>prompt_caching</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><code>prompt_caching</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
   <td>Builds structured prompts for model calls.</td>
 </tr>
 <tr>
-  <td>24</td>
-  <td><code>cache_ttl</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td>18</td>
+  <td><code>cache_ttl</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
   <td>Caches analysis results or computes cache keys.</td>
 </tr>
 <tr>
-  <td>25</td>
-  <td><code>timezone</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td>19</td>
+  <td><code>timezone</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
-  <td>timezone node in profiles/foca/config.yaml.</td>
+  <td>timezone node in hermes/config.yaml.</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><code>toolsets</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>toolsets node in hermes/config.yaml.</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td><code>Foca profile Hermes config (config.yaml)</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Reads, resolves, or persists project configuration.</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td><code>Foca persona SOUL.md (foca profile)</code><br><small style="color:var(--muted)">profiles/foca/SOUL.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing Foca persona SOUL.md (foca profile).</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td><code>Mo persona SOUL.md (Hermes default profile)</code><br><small style="color:var(--muted)">hermes/.hermes/SOUL.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Documentation node describing Mo persona SOUL.md (Hermes default profile).</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td><code>Foca - senior software engineer &amp; architect persona</code><br><small style="color:var(--muted)">profiles/foca/SOUL.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Design note for Foca - senior software engineer &amp; architect persona.</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td><code>Mo - peer-level assistant &amp; Hermes maintainer persona</code><br><small style="color:var(--muted)">hermes/.hermes/SOUL.md</small></td>
+  <td><span class="tag tag-func">Concept</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Design note for Mo - peer-level assistant &amp; Hermes maintainer persona.</td>
 </tr>
 <tr>
   <td>26</td>
-  <td><code>toolsets</code><br><small style="color:var(--muted)">profiles/foca/config.yaml</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>toolsets node in profiles/foca/config.yaml.</td>
-</tr>
-<tr>
-  <td>27</td>
   <td><code>terminal</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -5075,7 +5070,7 @@ flowchart LR
   <td>terminal node in hermes/config.yaml.</td>
 </tr>
 <tr>
-  <td>28</td>
+  <td>27</td>
   <td><code>auto_source_bashrc</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -5083,7 +5078,7 @@ flowchart LR
   <td>auto_source_bashrc node in hermes/config.yaml.</td>
 </tr>
 <tr>
-  <td>29</td>
+  <td>28</td>
   <td><code>backend</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -5091,12 +5086,20 @@ flowchart LR
   <td>backend node in hermes/config.yaml.</td>
 </tr>
 <tr>
-  <td>30</td>
+  <td>29</td>
   <td><code>container_cpu</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
   <td>No direct outbound edge</td>
   <td>container_cpu node in hermes/config.yaml.</td>
+</tr>
+<tr>
+  <td>30</td>
+  <td><code>container_disk</code><br><small style="color:var(--muted)">hermes/config.yaml</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>container_disk node in hermes/config.yaml.</td>
 </tr>
 </table>
 
@@ -5106,7 +5109,7 @@ flowchart LR
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
       <tr><td><code>profiles/foca/config.yaml</code></td><td>292 nodes</td></tr>
-<tr><td><code>hermes/config.yaml</code></td><td>286 nodes</td></tr>
+<tr><td><code>hermes/config.yaml</code></td><td>287 nodes</td></tr>
 <tr><td><code>.config/oh-my-posh/gbs.omp.yaml</code></td><td>35 nodes</td></tr>
 <tr><td><code>moca/AGENTS.md</code></td><td>9 nodes</td></tr>
 <tr><td><code>csharp-15/references/memory-safety-preview.md</code></td><td>9 nodes</td></tr>
@@ -5117,7 +5120,7 @@ flowchart LR
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x715, calls x16, defines x15, imports x10. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x726, imports x16, calls x16, defines x15. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -5199,27 +5202,24 @@ flowchart LR
     </ul>
   </div>
   <div class="card">
-    <h4>dotnet-unit-testing Skill Chain (xUnit/NSubstitute tooling)</h4>
+    <h4>Setup-Wraps-Install Pattern</h4>
     <p><code>implement</code> — 6 participants</p>
     <ul>
-      <li><code>opencode_skills_dotnet_unit_testing_skill</code></li>
-      <li><code>pi_skills_dotnet_unit_testing_skill</code></li>
-      <li><code>opencode_agents_dotnet_unit_test_expert</code></li>
-      <li><code>pi_agents_dotnet_unit_test_expert</code></li>
-      <li><code>opencode_skills_dotnet_unit_testing_skill_arrange_act_assert</code></li>
+      <li><code>scripts_core_fastfetch_setup</code></li>
+      <li><code>scripts_core_fastfetch_install</code></li>
+      <li><code>scripts_core_git_setup</code></li>
+      <li><code>scripts_core_git_install</code></li>
+      <li><code>scripts_core_jetbrains_toolbox_setup</code></li>
       <li>... and 1 more</li>
     </ul>
   </div>
   <div class="card">
-    <h4>Pi Agent Set Ported from OpenCode Definitions</h4>
-    <p><code>form</code> — 12 participants</p>
+    <h4>Shell Prompt Tools with Nerd Fonts</h4>
+    <p><code>participate_in</code> — 3 participants</p>
     <ul>
-      <li><code>pi_agents_code_review</code></li>
-      <li><code>pi_agents_devops</code></li>
-      <li><code>pi_agents_dotnet_backend_expert</code></li>
-      <li><code>pi_agents_dotnet_unit_test_expert</code></li>
-      <li><code>pi_agents_expert</code></li>
-      <li>... and 7 more</li>
+      <li><code>scripts_core_starship_install</code></li>
+      <li><code>scripts_core_oh_my_posh_install</code></li>
+      <li><code>scripts_core_nerd_fonts_install</code></li>
     </ul>
   </div>
 </div>
@@ -5230,18 +5230,18 @@ flowchart LR
   <div class="card">
     <h4>Graph</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>Nodes</td><td>2094</td></tr>
-      <tr><td>Edges</td><td>2644</td></tr>
-      <tr><td>Hyperedges</td><td>16</td></tr>
-      <tr><td>Communities</td><td>208</td></tr>
+      <tr><td>Nodes</td><td>2138</td></tr>
+      <tr><td>Edges</td><td>2678</td></tr>
+      <tr><td>Hyperedges</td><td>13</td></tr>
+      <tr><td>Communities</td><td>213</td></tr>
       <tr><td>Documented Sections</td><td>15</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Edge Confidence</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>EXTRACTED</td><td>2460</td></tr>
-      <tr><td>INFERRED</td><td>184</td></tr>
+      <tr><td>EXTRACTED</td><td>2499</td></tr>
+      <tr><td>INFERRED</td><td>179</td></tr>
       <tr><td>AMBIGUOUS</td><td>0</td></tr>
     </table>
   </div>
@@ -5249,7 +5249,7 @@ flowchart LR
 
 <div style="text-align:center; padding:40px 0; color: var(--muted); font-size:0.9rem;">
   <p>.dotfiles — Architecture Documentation</p>
-  <p>Generated: 2026-11-12 22:58 UTC · graphify callflow-html</p>
+  <p>Generated: 2026-11-22 12:08 UTC · graphify callflow-html</p>
 </div>
 
 </div><!-- .container -->

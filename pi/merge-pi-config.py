@@ -20,60 +20,57 @@ Merge semantics:
   ${OPENCODE_API_KEY} placeholder).
 
 Notes:
-  - JSONC comments are stripped (they are documentation; the template keeps
-    them). The merged file is plain pretty-printed JSON, valid for pi.
+  - Pi reads these files with a strict JSON parser, so templates and live files
+    must be plain JSON (no comments, no trailing commas).
   - If the merge changes nothing, the live file is left byte-for-byte intact
-    (so its comments survive) and no backup is written.
-  - A timestamped .bak is written next to the live file before replacing it.
+    and no backup is written.
+  - A timestamped .bak is written next to the live file before replacing it;
+    only the newest 5 backups for that file are kept.
+  - A live key whose JSON type the template would change is listed on stderr,
+    because such a replacement silently rewrites config the user may own.
   - Credentials: pi keeps auth in auth.json, which this script never touches;
     any credential-like key inside the JSON itself survives via the object
     merge (live-only keys are kept).
 
 Usage: merge-pi-config.py [--live-wins] <template> <live>
 """
+import glob
 import json
 import os
+import pathlib
 import shutil
 import sys
 import time
 
-
-def strip_jsonc(text: str) -> str:
-    """Remove // and /* */ comments outside strings (state machine)."""
-    out, i, n = [], 0, len(text)
-    in_str, esc = False, False
-    while i < n:
-        c = text[i]
-        if in_str:
-            out.append(c)
-            if esc:
-                esc = False
-            elif c == "\\":
-                esc = True
-            elif c == '"':
-                in_str = False
-            i += 1
-            continue
-        if c == '"':
-            in_str = True
-            out.append(c)
-            i += 1
-        elif c == "/" and i + 1 < n and text[i + 1] == "/":
-            while i < n and text[i] != "\n":
-                i += 1
-        elif c == "/" and i + 1 < n and text[i + 1] == "*":
-            i += 2
-            while i + 1 < n and not (text[i] == "*" and text[i + 1] == "/"):
-                i += 1
-            i += 2
-        else:
-            out.append(c)
-            i += 1
-    return "".join(out)
+BACKUPS_TO_KEEP = 5
 
 
 def _key(k):
     return json.dumps(k, sort_keys=True)
+
+
+def type_changes(template, live, path=""):
+    """Paths where the template replaces a live value of a different JSON type."""
+    changes = []
+    if not isinstance(template, dict) or not isinstance(live, dict):
+        return changes
+    for k, tv in template.items():
+        if k not in live:
+            continue
+        lv = live[k]
+        if isinstance(tv, dict) and isinstance(lv, dict):
+            changes.extend(type_changes(tv, lv, f"{path}{k}."))
+        elif type(tv) is not type(lv):
+            changes.append(f"{path}{k} ({type(lv).__name__} -> {type(tv).__name__})")
+    return changes
+
+
+def rotate_backups(live_path):
+    """Keep only the newest BACKUPS_TO_KEEP backups of live_path."""
+    backups = glob.glob(f"{live_path}.bak.*")
+    backups.sort(key=lambda p: int(p.rsplit(".", 1)[1]))
+    for old in backups[:-BACKUPS_TO_KEEP]:
+        pathlib.Path(old).unlink(missing_ok=True)
 
 
 def merge(template, live, prefer_live=False):
@@ -112,35 +109,43 @@ def main():
 
     try:
         with open(tpl_path) as f:
-            template = json.loads(strip_jsonc(f.read()))
+            template = json.loads(f.read())
         with open(live_path) as f:
-            live = json.loads(strip_jsonc(f.read()))
+            live = json.loads(f.read())
     except (OSError, json.JSONDecodeError) as e:
         print(f"ERROR: cannot parse configs ({e}); live file left untouched", file=sys.stderr)
         return 1
 
+    if not isinstance(live, dict) or not isinstance(template, dict):
+        print("ERROR: a config is not a JSON object; aborting", file=sys.stderr)
+        return 1
+
     merged = merge(template, live, prefer_live)
 
-    # safety net: never drop a live-only top-level key
-    if not isinstance(live, dict):
-        print("ERROR: live config is not a JSON object; aborting", file=sys.stderr)
-        return 1
-    dropped = [k for k in live if k not in merged]
-    if dropped:
-        print(f"ERROR: merge would drop live keys {dropped}; aborting", file=sys.stderr)
-        return 1
+    if not prefer_live:
+        changed = type_changes(template, live)
+        if changed:
+            print("WARNING: template changes the type of live keys: "
+                  + ", ".join(changed), file=sys.stderr)
 
     if merged == live:
         print(f"no changes: {live_path} already has every template key")
         return 0
 
-    backup = f"{live_path}.bak.{int(time.time())}"
+    backup = f"{live_path}.bak.{int(time.time() * 1000)}"
     shutil.copyfile(live_path, backup)
+    rotate_backups(live_path)
 
     tmp = f"{live_path}.tmp.{os.getpid()}"
-    with open(tmp, "w") as f:
-        f.write(json.dumps(merged, indent=2) + "\n")
-    os.replace(tmp, live_path)
+    try:
+        with open(tmp, "w") as f:
+            f.write(json.dumps(merged, indent=2) + "\n")
+        os.replace(tmp, live_path)
+    except OSError as e:
+        pathlib.Path(tmp).unlink(missing_ok=True)
+        print(f"ERROR: cannot write {live_path} ({e}); live file keeps its old content",
+              file=sys.stderr)
+        return 1
 
     print(f"merged: {live_path} (backup: {os.path.basename(backup)})")
     return 0
