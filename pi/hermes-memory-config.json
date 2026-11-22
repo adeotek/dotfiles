@@ -1,6 +1,6 @@
 {
   "llmModelOverride": "opencode-go/qwen3.8-flash",
-  "llmFallbackModels": ["opencode-go/kimi-k2.7-code"],
+  "llmFallbackModels": ["opencode-go/deepseek-v4.1-flash", "opencode-go/kimi-k2.7-code"],
   "llmThinkingOverride": "off",
   "reviewRecentMessages": 40,
   "lazyInitialization": false,
