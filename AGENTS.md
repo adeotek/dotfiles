@@ -63,7 +63,7 @@ Not stowed — deployed imperatively by their respective setup scripts. Files ar
 - `agents/`, `skills/` — agent definitions (incl. `code-review`), skill files. Project-level plugins live in `.opencode/plugins/` (auto-loaded by opencode)
 
 **`pi/`** — deployed by `pi-setup.sh` into `~/.pi/agent/` (plus `~/.pi-lens/`):
-- `settings.json` → startup defaults (provider `opencode-go`, model `deepseek-v4.1-flash`, all built-in tools enabled, telemetry off); on re-run with the override prompt, the template is **merged** into the existing live config (see `pi/merge-pi-config.py`) — local tweaks and installed packages survive. Runtime state such as `lastChangelogVersion` is deliberately not in the template
+- `settings.json` → startup defaults (provider `opencode-go`, model `deepseek-v4.1-flash`, `defaultTools` = the seven built-ins `read`/`bash`/`edit`/`write`/`grep`/`find`/`ls` plus `+codemode` and `+tool_search`, telemetry off); on re-run with the override prompt, the template is **merged** into the existing live config (see `pi/merge-pi-config.py`) — local tweaks and installed packages survive. Runtime state such as `lastChangelogVersion` is deliberately not in the template
 - `models.json` → `opencode-go` provider credential only (`${OPENCODE_API_KEY}` from the environment, or `pi /login opencode-go`); on override it is merged with `--live-wins`, so a live `apiKey` is never replaced by the placeholder
 - `AGENTS.md`, `APPEND_SYSTEM.md` → global instructions for all pi sessions; seeded only if missing, and backed up (`.bak.<epoch>`) when replaced on an override
 - `pi-lens-config.json` → `~/.pi-lens/config.json`; merged on override like the other JSON configs
