@@ -34,6 +34,39 @@ Before writing any code, analyze the target class for:
 - **Naming:** `{Method}_{Scenario}_{Expected}` (e.g., `Get_WhenIdExists_ReturnsUser`).
 - **Mocks:** Only mock interfaces. Use `Arg.Any<T>()` unless specific values are critical to the test logic.
 - **Assertions:** Prefer `Assert.ThrowsAsync<T>` for error paths.
+- **One concept per test:** `[Fact]` for a single case, `[Theory]` + `[InlineData]` for parameterized cases.
+- **Async:** `async Task` test methods that `await` the code under test.
+
+## NSubstitute
+
+- Configure with `.Returns()`, `.ReturnsForAnyArgs()`, `.Throws()` / `.ThrowsAsync()`.
+- Verify interactions with `.Received()` / `.DidNotReceive()` only when the test is about behaviour, not state.
+- Match arguments with `Arg.Any<T>()` when the value does not matter, `Arg.Is<T>(x => …)` when it does.
+- **Avoid over-mocking** — mock external dependencies, never the system under test.
+
+## Independence and clarity
+
+- Each test runs on its own: no shared mutable state, no ordering dependency, no reliance on another test's side effects.
+- Keep setup minimal; move complex arrangements into helper methods instead of duplicating them.
+- Test behaviour and contracts, not implementation details.
+
+## Before completing
+
+- [ ] All public methods covered — happy paths, edge cases (null, empty, boundary), and error/exception paths
+- [ ] Mocks configured correctly, interactions verified where behaviour matters
+- [ ] Test names state the scenario and expected outcome; AAA structure is obvious
+- [ ] No test interdependencies
+- [ ] The project's test command passes
+
+## Clarify, suggest, explain
+
+- Ask when the code's intended behaviour is ambiguous or the dependency structure is unclear.
+- Proactively suggest edge cases the user did not consider and gaps in testability.
+- Explain the approach when using an uncommon pattern or making an assumption about behaviour.
+
+## Output format
+
+- File path comment at the top, all necessary usings, the complete test class, and brief comments on non-obvious scenarios.
 
 ## Project Integration
 

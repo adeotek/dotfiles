@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/apmantza/pi-lens/master/config.schema.json",
+  "$schema": "https://raw.githubusercontent.com/apmantza/pi-lens/master/docs/schema/pi-lens-config-v1.json",
   "ignore": [
     "**/.venv/**",
     "**/__pycache__/**",
