@@ -89,12 +89,45 @@ case $CURRENT_OS_ID in
 esac
 
 # Install TFLint
+# The upstream install_linux.sh was removed, so download the release archive instead:
+# https://github.com/terraform-linters/tflint#installation
 if ! command -v tflint &> /dev/null; then
   cecho "cyan" "Installing TFLint..."
+  case $CURRENT_ARCH in
+    x86_64)
+      TFLINT_ARCH="amd64"
+      ;;
+    aarch64|arm64)
+      TFLINT_ARCH="arm64"
+      ;;
+    armv6l|armv7l)
+      TFLINT_ARCH="arm"
+      ;;
+    i686|i386)
+      TFLINT_ARCH="386"
+      ;;
+    *)
+      TFLINT_ARCH=""
+      ;;
+  esac
+  if [[ -z "$TFLINT_ARCH" ]]; then
+    cecho "red" "[TFLint] Unsupported architecture: $CURRENT_ARCH"
+    return 1
+  fi
+  TFLINT_URL="https://github.com/terraform-linters/tflint/releases/latest/download/tflint_linux_${TFLINT_ARCH}.zip"
+  install_package "unzip" "command -v unzip"
   if [[ "$DRY_RUN" -ne "1" ]]; then
-    decho "magenta" "curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash"
-    curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+    TFLINT_ZIP="$(mktemp --suffix=.zip)"
+    decho "magenta" "curl -fsSL $TFLINT_URL -o $TFLINT_ZIP"
+    if curl -fsSL "$TFLINT_URL" -o "$TFLINT_ZIP" && sudo unzip -o "$TFLINT_ZIP" -d /usr/local/bin; then
+      cecho "green" "[TFLint] installation done."
+    else
+      cecho "red" "[TFLint] installation failed."
+      rm -f "$TFLINT_ZIP"
+      return 1
+    fi
+    rm -f "$TFLINT_ZIP"
   else
-    cecho "yellow" "DRY-RUN: curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash"
+    cecho "yellow" "DRY-RUN: curl -fsSL $TFLINT_URL -o <tmp>.zip && sudo unzip -o <tmp>.zip -d /usr/local/bin"
   fi
 fi
